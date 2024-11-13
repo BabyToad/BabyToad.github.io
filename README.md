@@ -1,39 +1,42 @@
-# BabyToad.github.io
-Steak knives and bagels
-## Welcome to my personal website!
+---
+layout: default
+title: BabyToad's Portfolio
+description: Personal website showcasing projects and skills
+---
+
+# Welcome to my Portfolio
 
 This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.
 
-### About Me
-I'm a passionate developer interested in creating meaningful software solutions. When I'm not coding, I enjoy [your interests/hobbies].
+{% include about.html %}
 
-### Projects
-Here are some of my notable projects:
+## Projects
+{% for project in site.projects %}
+  <div class="project">
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    <p><strong>Technologies:</strong> {{ project.technologies }}</p>
+    <a href="{{ project.url }}">View Project</a>
+  </div>
+{% endfor %}
 
-1. Project One
-   - Description of the project
-   - Technologies used
-   - [Link to project]
+## Skills
+{% include skills.html %}
 
-2. Project Two 
-   - Description of the project
-   - Technologies used
-   - [Link to project]
+## Contact
+{% include contact.html %}
 
-### Skills
-- Programming Languages: 
-- Frameworks & Tools:
-- Other Technical Skills:
-
-### Contact
-- GitHub: [Your GitHub username]
-- LinkedIn: [Your LinkedIn profile]
-- Email: [Your email]
-
-### Blog
-Check out my latest blog posts:
-- [Blog post title 1]
-- [Blog post title 2]
+## Latest Blog Posts
+<ul>
+  {% for post in site.posts limit:5 %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+    </li>
+  {% endfor %}
+</ul>
 
 ---
-© 2024 [Your Name]. All rights reserved.
+<footer>
+  <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
+</footer>
