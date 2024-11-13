@@ -1,42 +1,34 @@
----
-layout: default
-title: Steak Knives and Bagels
-description: Personal website showcasing projects and skills
----
+# Personal Website
 
-# Welcome to Steak Knives and Bagels
+This is the repository for my personal website, hosted at [babytoad.github.io](https://babytoad.github.io).
 
-This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.
+## About
 
-{% include about.html %}
+This website is built using Jekyll and GitHub Pages to showcase my projects, skills, and blog posts.
 
-## Projects
-{% for project in site.projects %}
-  <div class="project">
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.description }}</p>
-    <p><strong>Technologies:</strong> {{ project.technologies }}</p>
-    <a href="{{ project.url }}">View Project</a>
-  </div>
-{% endfor %}
+## Local Development
 
-## Skills
-{% include skills.html %}
+To run this site locally:
 
-## Contact
-{% include contact.html %}
+1. Install Jekyll and Bundler:
+   ```bash
+   gem install jekyll bundler
+   ```
 
-## Latest Blog Posts
-<ul>
-  {% for post in site.posts limit:5 %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-    </li>
-  {% endfor %}
-</ul>
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/babytoad/babytoad.github.io.git
+   cd babytoad.github.io
+   ```
 
----
-<footer>
-  <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
-</footer>
+3. Install dependencies:
+   ```bash
+   bundle install
+   ```
+
+4. Run the site locally:
+   ```bash
+   bundle exec jekyll serve
+   ```
+
+5. Visit `http://localhost:4000` in your browser
