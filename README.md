@@ -1,10 +1,10 @@
 ---
 layout: default
-title: BabyToad's Portfolio
+title: Steak Knives and Bagels
 description: Personal website showcasing projects and skills
 ---
 
-# Welcome to my Portfolio
+# Welcome to Steak Knives and Bagels
 
 This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.
 

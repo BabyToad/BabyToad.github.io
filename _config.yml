@@ -1,0 +1,13 @@
+title: Jonas Heinke
+email: heinke.jonas@gmail.com
+description: >- 
+  Personal website showcasing projects and skills
+baseurl: ""
+url: ""
+github_username: BabyToad
+linkedin_username: jonas-heinke
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed 
