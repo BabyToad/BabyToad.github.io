@@ -1,1 +1,27 @@
- 
+/* Basic styling */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+}
+
+.project {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.contact-links {
+  display: flex;
+  gap: 20px;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Add more styles as needed */ 
