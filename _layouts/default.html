@@ -72,37 +72,51 @@
     </button>
 
     <script>
-        // Theme toggle functionality
+        // Theme toggle functionality with smooth transition
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
         const icon = themeToggle.querySelector('i');
 
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Function to update theme with transition
+        function setTheme(theme) {
+            // Add transition class
+            document.body.classList.add('theme-transition');
+            
+            // Set the theme
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateIcon(theme);
+            
+            // Remove transition class after animation
+            setTimeout(() => {
+                document.body.classList.remove('theme-transition');
+            }, 300);
+        }
 
+        // Initial theme setup
+        setTheme(savedTheme);
+
+        // Theme toggle click handler
         themeToggle.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+            setTheme(newTheme);
         });
 
         function updateIcon(theme) {
             icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
 
-        // Check system preference on load
-        if (!localStorage.getItem('theme')) {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = prefersDark ? 'dark' : 'light';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            updateIcon(theme);
-        }
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
 
         // Footnotes handler
         document.addEventListener('DOMContentLoaded', () => {

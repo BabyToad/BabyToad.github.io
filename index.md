@@ -4,25 +4,27 @@ title: Steak Knives and Bagels
 description: Personal website showcasing projects and skills
 ---
 
-# Welcome to Steak Knives and Bagels
+<div class="main-content">
+    <h1>Welcome to Steak Knives and Bagels</h1>
 
-This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.
+    <p>This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.</p>
 
-{% include about.html %}
+    {% include about.html %}
 
-## Projects
-{% for project in site.projects %}
-  <div class="project">
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.description }}</p>
-    <p><strong>Technologies:</strong> {{ project.technologies }}</p>
-    <a href="{{ project.url }}">View Project</a>
-  </div>
-{% endfor %}
+    <section class="projects-section">
+        <h2>Projects</h2>
+        {% for project in site.projects %}
+            <div class="project">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <p><strong>Technologies:</strong> {{ project.technologies }}</p>
+                <a href="{{ project.url }}" class="project-link">View Project</a>
+            </div>
+        {% endfor %}
+    </section>
 
-## Contact
-<section id="contact" class="section">
-    <div class="container">
+    <section class="contact-section">
+        <h2>Contact</h2>
         <div class="contact-links">
             <a href="https://github.com/babytoad" class="social-link">
                 <i class="fab fa-github"></i> GitHub
@@ -34,20 +36,21 @@ This site showcases my projects, skills, and interests. Feel free to explore and
                 <i class="fab fa-discord"></i> Discord
             </a>
         </div>
-    </div>
-</section>
+    </section>
 
-## Latest Blog Posts
-<ul>
-  {% for post in site.posts limit:5 %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-    </li>
-  {% endfor %}
-</ul>
+    <section class="blog-section">
+        <h2>Latest Blog Posts</h2>
+        <ul class="post-list">
+            {% for post in site.posts limit:5 %}
+                <li>
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                    <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
 
----
-<footer>
-  <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
-</footer> 
+    <footer>
+        <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
+    </footer>
+</div> 
