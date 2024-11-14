@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<article class="essay">
+    <div class="metadata">
+        <p><strong>Status</strong>: {{ page.status }}</p>
+        <p><strong>Confidence</strong>: {{ page.confidence }}</p>
+        <p><strong>Tags</strong>: {% for tag in page.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+    </div>
+
+    {% if page.abstract %}
+    <div class="abstract">
+        <strong>Abstract:</strong> {{ page.abstract }}
+    </div>
+    {% endif %}
+
+    <nav class="toc" id="toc">
+        <!-- Generated dynamically by JavaScript -->
+    </nav>
+
+    <div class="content">
+        {{ content }}
+    </div>
+
+    <footer>
+        <p class="last-modified">Last modified: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+    </footer>
+</article>
+
+<script>
+    // Generate Table of Contents
+    document.addEventListener('DOMContentLoaded', () => {
+        const headings = document.querySelectorAll('h2, h3');
+        const toc = document.getElementById('toc');
+        const tocList = document.createElement('ul');
+
+        headings.forEach(heading => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            
+            // Create ID if none exists
+            if (!heading.id) {
+                heading.id = heading.textContent.toLowerCase().replace(/\s+/g, '-');
+            }
+            
+            a.href = '#' + heading.id;
+            a.textContent = heading.textContent;
+            a.style.paddingLeft = (heading.tagName === 'H3' ? '1rem' : '0');
+            
+            li.appendChild(a);
+            tocList.appendChild(li);
+        });
+
+        toc.appendChild(tocList);
+    });
+</script> 

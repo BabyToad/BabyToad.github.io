@@ -27,11 +27,25 @@
     --code-bg: #2d2d2d;
 }
 
+/* Typography improvements */
+:root {
+    /* Typography */
+    --font-serif: 'Merriweather', Georgia, serif;
+    --font-sans: 'Open Sans', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+    
+    /* Sizes */
+    --line-length: 70ch;
+    --sidenote-width: 20rem;
+}
+
 /* Base styles */
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
     color: var(--text-primary);
     background-color: var(--bg-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -349,4 +363,72 @@ footer {
     text-align: center;
     color: var(--text-secondary);
     border-top: 1px solid var(--border-color);
+}
+
+/* Sidenotes system */
+.sidenote {
+    float: right;
+    clear: right;
+    margin-right: calc(-1 * var(--sidenote-width) - 3rem);
+    width: var(--sidenote-width);
+    font-size: 0.9em;
+    line-height: 1.4;
+    vertical-align: baseline;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+/* Collapse sidenotes on mobile */
+@media (max-width: 1400px) {
+    .sidenote {
+        display: none;
+    }
+    .sidenote-toggle {
+        display: inline;
+    }
+}
+
+/* Link improvements */
+a[href^="http"]::after {
+    content: "↗";
+    color: var(--accent-color);
+    font-size: 0.8em;
+    margin-left: 0.2em;
+}
+
+/* Table of Contents */
+.toc {
+    position: fixed;
+    left: 1rem;
+    top: 5rem;
+    width: 15rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    font-size: 0.9em;
+    border-left: 2px solid var(--border-color);
+    padding-left: 1rem;
+}
+
+/* Metadata box */
+.metadata {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Last updated date */
+.last-modified {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-top: 2rem;
+}
+
+/* Abstract/summary box */
+.abstract {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    margin: 1rem 0 2rem 0;
+    border-left: 4px solid var(--accent-color);
 } 
