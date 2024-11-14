@@ -1,31 +1,38 @@
 ---
-layout: default
+layout: base
 ---
-<article class="essay">
-    <div class="metadata">
-        <p><strong>Status</strong>: {{ page.status }}</p>
-        <p><strong>Confidence</strong>: {{ page.confidence }}</p>
-        <p><strong>Tags</strong>: {% for tag in page.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
-    </div>
-
-    {% if page.abstract %}
-    <div class="abstract">
-        <strong>Abstract:</strong> {{ page.abstract }}
-    </div>
-    {% endif %}
-
+<div class="essay-container">
     <nav class="toc" id="toc">
+        <h3>Contents</h3>
         <!-- Generated dynamically by JavaScript -->
     </nav>
 
-    <div class="content">
-        {{ content }}
-    </div>
+    <article class="essay">
+        <div class="metadata">
+            <p><strong>Status</strong>: {{ page.status }}</p>
+            <p><strong>Confidence</strong>: {{ page.confidence }}</p>
+            <p><strong>Tags</strong>: {% for tag in page.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+        </div>
 
-    <footer>
-        <p class="last-modified">Last modified: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
-    </footer>
-</article>
+        {% if page.abstract %}
+        <div class="abstract">
+            <strong>Abstract:</strong> {{ page.abstract }}
+        </div>
+        {% endif %}
+
+        <div class="essay-content">
+            {{ content }}
+        </div>
+
+        <footer>
+            <p class="last-modified">Last modified: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+        </footer>
+    </article>
+
+    <div class="sidenotes">
+        <!-- Sidenotes will be moved here by JavaScript -->
+    </div>
+</div>
 
 <script>
     // Generate Table of Contents
