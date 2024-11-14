@@ -20,11 +20,22 @@ This site showcases my projects, skills, and interests. Feel free to explore and
   </div>
 {% endfor %}
 
-## Skills
-{% include skills.html %}
-
 ## Contact
-{% include contact.html %}
+<section id="contact" class="section">
+    <div class="container">
+        <div class="contact-links">
+            <a href="https://github.com/babytoad" class="social-link">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://linkedin.com/in/[your-profile]" class="social-link">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://discord.com/users/[your-discord-id]" class="social-link">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+        </div>
+    </div>
+</section>
 
 ## Latest Blog Posts
 <ul>
@@ -39,4 +50,4 @@ This site showcases my projects, skills, and interests. Feel free to explore and
 ---
 <footer>
   <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
-</footer> 
+</footer>
