@@ -390,7 +390,7 @@ footer {
 
 /* Link improvements */
 a[href^="http"]::after {
-    content: "↗";
+    content: "";
     color: var(--accent-color);
     font-size: 0.8em;
     margin-left: 0.2em;
@@ -431,4 +431,150 @@ a[href^="http"]::after {
     padding: 1.5rem;
     margin: 1rem 0 2rem 0;
     border-left: 4px solid var(--accent-color);
+}
+
+/* Quote box styling */
+.quotes-box {
+    position: relative;
+}
+
+.quote {
+    margin: 1rem 0;
+}
+
+blockquote {
+    margin: 0;
+    padding: 0;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 1rem;
+}
+
+blockquote p {
+    margin: 0;
+    font-style: italic;
+}
+
+.quote-author {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.quote-source {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+.refresh-quote {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.refresh-quote:hover {
+    transform: rotate(180deg);
+    color: var(--accent-color);
+}
+
+/* Animation for quote transitions */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.quote-fade {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Essay Layout */
+.essay-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) minmax(auto, 800px) minmax(200px, 1fr);
+    gap: 2rem;
+    padding: 2rem 20px;
+}
+
+.essay {
+    grid-column: 2;
+    font-family: var(--font-serif);
+    line-height: 1.7;
+}
+
+.toc {
+    grid-column: 1;
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.sidenotes {
+    grid-column: 3;
+}
+
+.metadata {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.abstract {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    margin: 1rem 0 2rem 0;
+    border-left: 4px solid var(--accent-color);
+}
+
+.essay-content {
+    font-size: 1.1rem;
+}
+
+.essay h1, .essay h2, .essay h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.essay p {
+    margin-bottom: 1.5rem;
+}
+
+.last-modified {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* Responsive essay layout */
+@media (max-width: 1200px) {
+    .essay-container {
+        grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .essay-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .essay {
+        grid-column: 1;
+    }
+    
+    .toc, .sidenotes {
+        display: none;
+    }
 } 

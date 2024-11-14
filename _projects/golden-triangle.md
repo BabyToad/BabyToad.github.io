@@ -3,7 +3,7 @@ layout: essay
 title: The Golden Triangle
 description: A Stars Without Number campaign setting
 status: in-progress
-confidence: likely
+confidence: speculative
 tags: [rpg, stars-without-number, worldbuilding, game-design]
 abstract: A comprehensive documentation of a Stars Without Number campaign setting, featuring three competing power blocs in a sector of historic decentralisation. This living document covers worldbuilding, house rules, and narrative design elements.
 last_modified_at: 2024-11-14
@@ -19,19 +19,11 @@ The name "Golden Triangle" refers both to the triangular power structure of the 
 
 ## Setting Overview
 
-The sector is defined by three dominant factions:
-- **The Mercantile Confederation**: A loose alliance of trading houses and merchant princes
-- **The Stellar Mandate**: A militaristic regime claiming succession from pre-Scream authority
-- **The Harmonious Assembly**: A techno-religious organization seeking to "correct" human development
 
 ## Project Components
 
 ### Worldbuilding
-- Detailed sector map with 20+ systems
-- Faction turn documentation and history
-- Cultural and technological distinctions between regions
-- Major NPCs and their relationships
-- Trade routes and economic systems
+
 
 ### House Rules
 - Modified ship combat system
