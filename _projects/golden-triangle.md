@@ -5,8 +5,8 @@ description: A Stars Without Number campaign setting
 status: in-progress
 confidence: likely
 tags: [rpg, stars-without-number, worldbuilding, game-design]
-abstract: A comprehensive documentation of a Stars Without Number campaign setting, featuring three competing power blocs in a sector recovering from catastrophic collapse. This living document covers worldbuilding, house rules, and narrative design elements.
-last_modified_at: 2024-03-14
+abstract: A comprehensive documentation of a Stars Without Number campaign setting, featuring three competing power blocs in a sector of historic decentralisation. This living document covers worldbuilding, house rules, and narrative design elements.
+last_modified_at: 2024-11-14
 ---
 
 # The Golden Triangle
