@@ -50,4 +50,4 @@ This site showcases my projects, skills, and interests. Feel free to explore and
 ---
 <footer>
   <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
-</footer>
+</footer> 
