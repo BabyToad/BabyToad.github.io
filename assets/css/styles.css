@@ -436,6 +436,7 @@ a[href^="http"]::after {
 /* Quote box styling */
 .quotes-box {
     position: relative;
+    padding: 1.5rem;
 }
 
 .quote {
@@ -452,6 +453,7 @@ blockquote {
 blockquote p {
     margin: 0;
     font-style: italic;
+    line-height: 1.6;
 }
 
 .quote-author {
@@ -577,4 +579,20 @@ blockquote p {
     .toc, .sidenotes {
         display: none;
     }
+}
+
+/* Add responsive images */
+.project-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* Add image gallery support */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
 } 
