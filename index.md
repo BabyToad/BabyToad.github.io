@@ -5,10 +5,6 @@ description: Personal website showcasing projects and skills
 ---
 
 <div class="main-content">
-    <h1>Welcome to Steak Knives and Bagels</h1>
-
-    <p>This site showcases my projects, skills, and interests. Feel free to explore and learn more about my work.</p>
-
     {% include about.html %}
 
     <section class="projects-section">
