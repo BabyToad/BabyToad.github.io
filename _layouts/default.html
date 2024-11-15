@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,141 +22,12 @@
     </nav>
 
     <div class="container">
-        <aside class="left-sidebar">
-            <div class="sidebar-section">
-                <h3>Quick Links</h3>
-                <ul class="blogroll">
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3>Latest Posts</h3>
-                <ul class="blogroll">
-                    {% for post in site.posts limit:5 %}
-                    <li>
-                        <a href="{{ post.url }}">{{ post.title }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </aside>
-
         <main class="main-content">
             {{ content }}
         </main>
-
-        <aside class="right-sidebar">
-            <div class="sidebar-section quotes-box" data-quotes='{{ site.data.quotes | jsonify | replace: "'", "'" }}'>
-                <h3>Random Quote</h3>
-                <div class="quote">
-                    <blockquote id="random-quote">
-                        <!-- Quote will be inserted here -->
-                    </blockquote>
-                </div>
-            </div>
-            
-            <div class="sidebar-section">
-                <h3>External Links</h3>
-                <ul class="blogroll">
-                    <li><a href="https://github.com/babytoad">GitHub</a></li>
-                    <li><a href="https://linkedin.com/in/[your-profile]">LinkedIn</a></li>
-                    <!-- Add more external links -->
-                </ul>
-            </div>
-        </aside>
     </div>
 
-    <button class="theme-toggle" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <script>
-        // Theme toggle functionality with smooth transition
-        const themeToggle = document.querySelector('.theme-toggle');
-        const html = document.documentElement;
-        const icon = themeToggle.querySelector('i');
-
-        // Check for saved theme preference or system preference
-        const savedTheme = localStorage.getItem('theme') || 
-                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        
-        // Function to update theme with transition
-        function setTheme(theme) {
-            // Add transition class
-            document.body.classList.add('theme-transition');
-            
-            // Set the theme
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            updateIcon(theme);
-            
-            // Remove transition class after animation
-            setTimeout(() => {
-                document.body.classList.remove('theme-transition');
-            }, 300);
-        }
-
-        // Initial theme setup
-        setTheme(savedTheme);
-
-        // Theme toggle click handler
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            setTheme(newTheme);
-        });
-
-        function updateIcon(theme) {
-            icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-        }
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                setTheme(e.matches ? 'dark' : 'light');
-            }
-        });
-
-        // Footnotes and Quotes handler
-        document.addEventListener('DOMContentLoaded', () => {
-            // Footnotes handling
-            const footnotes = document.querySelectorAll('.footnote-ref');
-            const footnotesContainer = document.querySelector('.right-sidebar .footnotes');
-            
-            footnotes.forEach(note => {
-                const footnoteText = note.getAttribute('data-note');
-                if (footnoteText) {
-                    const footnoteElement = document.createElement('p');
-                    footnoteElement.textContent = footnoteText;
-                    footnotesContainer.appendChild(footnoteElement);
-                }
-            });
-
-            const quotes = JSON.parse('{{ site.data.quotes | jsonify }}');
-            
-            const quoteElement = document.getElementById('random-quote');
-
-            function getRandomQuote() {
-                return quotes[Math.floor(Math.random() * quotes.length)];
-            }
-
-            function displayQuote(quote) {
-                quoteElement.innerHTML = `
-                    <p>${quote.text}</p>
-                    <span class="quote-author">— ${quote.author}</span>
-                    ${quote.source ? `<span class="quote-source"> ${quote.source}</span>` : ''}
-                `;
-                quoteElement.classList.remove('quote-fade');
-                void quoteElement.offsetWidth; // Trigger reflow
-            }
-
-            // Initial quote
-            displayQuote(getRandomQuote());
-        });
-    </script>
-    <script src="{{ '/assets/js/quotes.js' | relative_url }}"></script>
+    {% include theme-toggle.html %}
+    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 </body>
 </html> 
