@@ -50,15 +50,11 @@
 
         <aside class="right-sidebar">
             <div class="sidebar-section quotes-box">
-                <h3>Random Quote</h3>
                 <div class="quote">
                     <blockquote id="random-quote">
                         <!-- Quote will be inserted here -->
                     </blockquote>
                 </div>
-                <button class="refresh-quote" aria-label="Get new quote">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
             </div>
             
             <div class="sidebar-section">
@@ -123,8 +119,9 @@
             }
         });
 
-        // Footnotes handler
+        // Footnotes and Quotes handler
         document.addEventListener('DOMContentLoaded', () => {
+            // Footnotes handling
             const footnotes = document.querySelectorAll('.footnote-ref');
             const footnotesContainer = document.querySelector('.right-sidebar .footnotes');
             
@@ -136,26 +133,10 @@
                     footnotesContainer.appendChild(footnoteElement);
                 }
             });
-        });
 
-        // Quotes system
-        document.addEventListener('DOMContentLoaded', () => {
-            const quotes = [
-                {
-                    text: "Any sufficiently advanced technology is indistinguishable from magic.",
-                    author: "Arthur C. Clarke",
-                    source: "Profiles of the Future"
-                },
-                {
-                    text: "The map is not the territory.",
-                    author: "Alfred Korzybski",
-                    source: "Science and Sanity"
-                },
-                // ... more quotes from _data/quotes.yml
-            ];
+            const quotes = JSON.parse('{{ site.data.quotes | jsonify }}');
             
             const quoteElement = document.getElementById('random-quote');
-            const refreshButton = document.querySelector('.refresh-quote');
 
             function getRandomQuote() {
                 return quotes[Math.floor(Math.random() * quotes.length)];
@@ -165,7 +146,7 @@
                 quoteElement.innerHTML = `
                     <p>${quote.text}</p>
                     <span class="quote-author">— ${quote.author}</span>
-                    ${quote.source ? `<span class="quote-source">, ${quote.source}</span>` : ''}
+                    ${quote.source ? `<span class="quote-source"> ${quote.source}</span>` : ''}
                 `;
                 quoteElement.classList.remove('quote-fade');
                 void quoteElement.offsetWidth; // Trigger reflow
