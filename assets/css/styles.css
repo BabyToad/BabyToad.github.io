@@ -255,21 +255,20 @@ aside {
 /* Theme toggle button */
 .theme-toggle {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
-    padding: 12px;
-    border-radius: 50%;
-    background: var(--accent-color);
-    border: none;
-    color: var(--bg-primary);
+    padding: 8px;
+    border-radius: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
     cursor: pointer;
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: background-color 0.3s ease;
     z-index: 1000;
 }
 

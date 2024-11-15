@@ -11,10 +11,8 @@ description: Personal website showcasing projects and skills
         <h2>Projects</h2>
         {% for project in site.projects %}
             <div class="project">
-                <h3>{{ project.title }}</h3>
+                <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
                 <p>{{ project.description }}</p>
-                <p><strong>Technologies:</strong> {{ project.technologies }}</p>
-                <a href="{{ project.url }}" class="project-link">View Project</a>
             </div>
         {% endfor %}
     </section>
