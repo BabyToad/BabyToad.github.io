@@ -1,7 +1,7 @@
 ---
 layout: essay
 title: The Golden Triangle
-description: A Stars Without Number campaign setting
+description: A Stars Without Number campaign setting designed for great power struggle and privateering.
 status: in-progress
 confidence: speculative
 tags: [rpg, stars-without-number, worldbuilding, game-design]

@@ -1,0 +1,46 @@
+---
+layout: base
+---
+<div class="project-container">
+    <article class="project-content">
+        {% if page.status %}
+        <div class="project-status {{ page.status }}">{{ page.status }}</div>
+        {% endif %}
+        
+        <header class="project-header">
+            <h1>{{ page.title }}</h1>
+            {% if page.tags %}
+            <div class="project-tags">
+                {% for tag in page.tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </header>
+
+        {% if page.thumbnail and page.show_thumbnail != false %}
+        <img class="project-thumbnail" src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+        {% endif %}
+
+        <div class="project-links">
+            {% if page.demo_url %}
+            <a href="{{ page.demo_url }}" class="project-link demo" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            {% endif %}
+            {% if page.github_url and page.show_repo %}
+            <a href="{{ page.github_url }}" class="project-link github" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Repository
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="project-content">
+            {{ content }}
+        </div>
+
+        <footer class="project-footer">
+            <p class="last-modified">Last updated: {{ page.last_modified_at | date: "%B %d, %Y" }}</p>
+        </footer>
+    </article>
+</div> 

@@ -5,16 +5,35 @@ description: Personal website showcasing projects and skills
 ---
 
 <div class="main-content">
-    {% include about.html %}
-
+    <section class="intro-section">
+        <div class="container">
+            <p>This is the website of Jonas Heinke. I write about roleplaying games, making things, and rationality. My work focuses on using games and interactive experiences as a way to clarify my own thinking about how people make choices.</p>
+            
+            <p>Here you'll find my projects in both digital and tabletop game development, essays on game design theory and rationality, and occasional thoughts on other topics that catch my interest.</p>
+            
+            <p>Below you can explore my projects, read my latest blog posts, or get in touch. Feel free to browse around - the site is organized into clear sections to help you find what interests you most.</p>
+        </div>
+    </section>
+    
     <section class="projects-section">
         <h2>Projects</h2>
-        {% for project in site.projects %}
-            <div class="project">
-                <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
-                <p>{{ project.description }}</p>
+        <div class="projects-grid">
+            {% for project in site.projects %}
+            <div class="project-card">
+                <div class="project-card-content">
+                    <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+                    <p>{{ project.description }}</p>
+                    {% if project.tags %}
+                    <div class="project-card-tags">
+                        {% for tag in project.tags limit:3 %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </section>
 
     <section class="contact-section">
@@ -32,19 +51,7 @@ description: Personal website showcasing projects and skills
         </div>
     </section>
 
-    <section class="blog-section">
-        <h2>Latest Blog Posts</h2>
-        <ul class="post-list">
-            {% for post in site.posts limit:5 %}
-                <li>
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                    <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-
     <footer>
-        <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved.</p>
+        <p>© {{ 'now' | date: "%Y" }} {{ site.author }}. All rights reserved. That's boggle, baby.</p>
     </footer>
 </div> 
