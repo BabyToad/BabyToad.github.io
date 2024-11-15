@@ -49,7 +49,8 @@
         </main>
 
         <aside class="right-sidebar">
-            <div class="sidebar-section quotes-box">
+            <div class="sidebar-section quotes-box" data-quotes='{{ site.data.quotes | jsonify | replace: "'", "'" }}'>
+                <h3>Random Quote</h3>
                 <div class="quote">
                     <blockquote id="random-quote">
                         <!-- Quote will be inserted here -->
@@ -156,5 +157,6 @@
             displayQuote(getRandomQuote());
         });
     </script>
+    <script src="{{ '/assets/js/quotes.js' | relative_url }}"></script>
 </body>
 </html> 
