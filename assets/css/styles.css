@@ -216,8 +216,18 @@ aside {
 
 /* Projects */
 .project-container {
+    max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.project-content {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
 }
 
 .projects-grid {
@@ -697,31 +707,35 @@ blockquote p {
 
 /* Essay Layout */
 .essay-container {
-    max-width: 1600px;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(200px, 1fr) minmax(auto, 800px) minmax(200px, 1fr);
+    grid-template-columns: 250px minmax(auto, 900px) minmax(200px, 1fr);
     gap: 2rem;
-    padding: 2rem 20px;
+    margin: 0 auto;
+    padding: 2rem;
+    max-width: 1400px;
+}
+
+.toc {
+    position: sticky;
+    top: 2rem;
+    grid-column: 1;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
 }
 
 .essay {
     grid-column: 2;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
     font-family: var(--font-serif);
     line-height: 1.7;
 }
 
-.toc {
-    grid-column: 1;
-    position: sticky;
-    top: 5rem;
-    max-height: calc(100vh - 6rem);
-    overflow-y: auto;
-    padding-right: 1rem;
-}
-
 .sidenotes {
     grid-column: 3;
+    position: sticky;
+    top: 2rem;
 }
 
 .metadata {
@@ -925,4 +939,56 @@ blockquote p {
     color: var(--accent-color);
     position: absolute;
     left: 0;
+} 
+
+.essay-part {
+    margin: 0.5rem 0;
+    background: var(--bg-dark);
+    border-radius: 4px;
+}
+
+.essay-part-header {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    background: var(--bg-darker);
+    user-select: none;
+    display: flex;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+.essay-part-header:hover {
+    background: var(--bg-hover);
+}
+
+.expand-icon {
+    display: inline-block;
+    margin-right: 0.75rem;
+    transition: transform 0.2s;
+    color: var(--text-secondary);
+}
+
+.essay-part-content {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.essay-part-content p,
+.essay-part-content ul,
+.essay-part-content ol {
+    margin-left: 1.5rem;
+}
+
+.essay-part-content h3 {
+    margin-left: 0.5rem;
+}
+
+.essay-part-content h4 {
+    margin-left: 1rem;
+}
+
+/* Animation for content */
+.essay-part-content {
+    transition: all 0.3s ease-in-out;
 } 
