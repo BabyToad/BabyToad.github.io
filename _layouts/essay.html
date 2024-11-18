@@ -3,8 +3,18 @@ layout: base
 ---
 <div class="essay-container">
     <nav class="toc" id="toc">
-        <h3>Contents</h3>
-        <!-- Generated dynamically by JavaScript -->
+        <div class="toc-header">
+            <h3>Contents</h3>
+            <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
+        </div>
+        <ul>
+        {% for part in site.golden_triangle_parts %}
+            <li class="toc-item">
+                <a href="#part-{{ part.title | slugify }}">{{ part.title }}</a>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </li>
+        {% endfor %}
+        </ul>
     </nav>
 
     <article class="essay">
@@ -25,7 +35,9 @@ layout: base
         </div>
 
         <footer>
-            <p class="last-modified">Last modified: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+            {% if page.last_modified_at %}
+                <p class="last-modified">Last modified: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+            {% endif %}
         </footer>
     </article>
 
@@ -35,29 +47,102 @@ layout: base
 </div>
 
 <script>
-    // Generate Table of Contents
-    document.addEventListener('DOMContentLoaded', () => {
-        const headings = document.querySelectorAll('h2, h3');
-        const toc = document.getElementById('toc');
-        const tocList = document.createElement('ul');
-
-        headings.forEach(heading => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.essay-part');
+    const tocItems = document.querySelectorAll('.toc-item');
+    const totalProgress = document.getElementById('total-progress');
+    
+    function updateProgress() {
+        // Calculate total page progress
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight - windowHeight;
+        const scrolled = window.scrollY;
+        const totalPercentage = (scrolled / docHeight) * 100;
+        totalProgress.style.width = `${totalPercentage}%`;
+        
+        // Calculate individual section progress
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const content = section.querySelector('.essay-part-content');
+            const isExpanded = section.getAttribute('data-expanded') === 'true';
+            const progressBar = tocItems[index].querySelector('.progress-bar');
             
-            // Create ID if none exists
-            if (!heading.id) {
-                heading.id = heading.textContent.toLowerCase().replace(/\s+/g, '-');
+            if (!isExpanded) {
+                // Hide progress bar for collapsed sections
+                progressBar.style.opacity = '0';
+                return;
             }
             
-            a.href = '#' + heading.id;
-            a.textContent = heading.textContent;
-            a.style.paddingLeft = (heading.tagName === 'H3' ? '1rem' : '0');
+            const totalHeight = content.clientHeight;
+            const topOffset = rect.top;
+            let progress = 0;
             
-            li.appendChild(a);
-            tocList.appendChild(li);
+            if (topOffset < 0) {
+                progress = Math.min(100, (-topOffset / totalHeight) * 100);
+            } else if (topOffset < windowHeight) {
+                const visibleHeight = Math.min(totalHeight, windowHeight - topOffset);
+                progress = (visibleHeight / totalHeight) * 100;
+            }
+            
+            // Show progress bar only for sections in progress (between 1% and 99%)
+            if (progress > 0 && progress < 100) {
+                progressBar.style.opacity = '1';
+                progressBar.querySelector('.progress').style.width = `${progress}%`;
+            } else {
+                progressBar.style.opacity = '0';
+            }
         });
+    }
 
-        toc.appendChild(tocList);
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    
+    sections.forEach(section => {
+        const header = section.querySelector('.essay-part-header');
+        header.addEventListener('click', () => {
+            setTimeout(updateProgress, 100);
+        });
     });
-</script> 
+    
+    updateProgress();
+});
+</script>
+
+<style>
+.toc-header {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.toc-header h3 {
+    margin-bottom: 0.5rem;
+}
+
+.toc-item {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--border-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.2s ease;
+}
+
+/* Add this if you don't have an accent color defined */
+:root {
+    --accent-color: #4a9eff;
+}
+</style> 

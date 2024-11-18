@@ -1,14 +1,15 @@
 title: Steak Knives and Bagels
 author: Jonas Heinke
 description: Personal website showcasing projects and skills
-baseurl: ""  # Leave empty if this is your main GitHub Pages site
+baseurl: ""
 url: "https://babytoad.github.io"
 
 # Collections
 collections:
   projects:
     output: true
-    sort_by: last_modified_at
+  golden_triangle_parts:
+    output: false
 
 # Build settings
 markdown: kramdown
@@ -16,4 +17,3 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-last-modified-at
-  - jekyll-git-metadata

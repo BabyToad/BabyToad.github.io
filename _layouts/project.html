@@ -35,8 +35,8 @@ layout: base
             {% endif %}
         </div>
 
-        <div class="project-content">
-            {{ content }}
+        <div class="project-content markdown-content">
+            {{ content | markdownify }}
         </div>
 
         <footer class="project-footer">

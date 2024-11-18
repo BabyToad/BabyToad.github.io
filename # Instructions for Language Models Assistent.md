@@ -14,7 +14,11 @@ This document serves as a reference and context for language models like GPT-4, 
 - **Inspiration**: Emulate the simplicity, readability, and content-focused design of gwern.net.
 - **Customization Goal**: Integrate my unique style and personality to reflect my brand and creative vision.
 
----
+1. **Base Structure**
+   - Jekyll-based static site
+   - Dark theme with toggle functionality
+   - Responsive navigation
+   - Project collection system
 
 ## Design Principles
 
@@ -44,11 +48,15 @@ This document serves as a reference and context for language models like GPT-4, 
 
 ---
 
-## Technical Preferences
+## Technical Stack
 
-- **Static Site Generators**
-  - Consider using Jekyll, Hugo, or Eleventy for site generation.
-  - Prefer tools that support Markdown for content creation.
+- **Static Site Generator**: Jekyll
+- **Hosting**: GitHub Pages
+- **Key Plugins**:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-last-modified-at
+  - jekyll-git-metadata
 
 - **Technologies**
   - **HTML5** and **CSS3** for structure and styling.
@@ -59,7 +67,7 @@ This document serves as a reference and context for language models like GPT-4, 
   - Use **Git** for tracking changes and collaborating.
 
 - **Hosting**
-  - Plan to host the site on platforms like GitHub Pages or Netlify.
+  - Plan to host the site on platforms like GitHub Pages.
 
 - **Build Tools**
   - Utilize tools like Webpack or Gulp if necessary for asset compilation.
@@ -123,22 +131,6 @@ This document serves as a reference and context for language models like GPT-4, 
 
 ---
 
-## Example Queries
-
-- **Design Assistance**
-  - "How can I implement a responsive grid layout similar to gwern.net?"
-  - "What are some typography choices that enhance readability?"
-
-- **Technical Help**
-  - "I'm encountering a rendering issue in mobile view; can you help me troubleshoot?"
-
-- **Content Strategy**
-  - "What are effective ways to organize my portfolio section for better user engagement?"
-
-- **Optimization**
-  - "How can I improve my site's loading speed without compromising image quality?"
-
----
 
 ## Final Notes
 
