@@ -3,6 +3,8 @@ title: System Changes
 description: Modifications and additions to the base SWN rules
 ---
 ## Advancement
+Something that has always worked for sandbox games is pillar xp. I want to encourage players to interact with the sandbox but not prescribe a specific path.
+Players should be rewarded
 
 ### Pillar XP
 
