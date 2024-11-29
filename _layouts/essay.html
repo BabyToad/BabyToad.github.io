@@ -31,7 +31,20 @@ layout: base
         {% endif %}
 
         <div class="essay-content">
-            {{ content }}
+            {% for part in site.golden_triangle_parts %}
+            <div class="essay-part" data-expanded="true" id="part-{{ part.title | slugify }}">
+                <div class="essay-part-header">
+                    <span class="expand-icon">▼</span>
+                    {{ part.title }}
+                </div>
+                <div class="essay-part-content">
+                    {% capture part_content %}
+                    {{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}
+                    {% endcapture %}
+                    {{ part_content | markdownify }}
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <footer>
@@ -48,6 +61,24 @@ layout: base
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Document loaded');
+    
+    // Debug the raw HTML to see if sidenote spans exist
+    const essayContent = document.querySelector('.essay-content');
+    console.log('Essay content HTML:', essayContent.innerHTML);
+    
+    const parts = document.querySelectorAll('.essay-part');
+    console.log('Found parts:', parts.length);
+    
+    const sidenotesContainer = document.querySelector('.sidenotes');
+    console.log('Sidenotes container:', sidenotesContainer);
+    
+    const anchors = document.querySelectorAll('.sidenote-anchor');
+    console.log('Found sidenote anchors:', anchors.length);
+    if (anchors.length > 0) {
+        console.log('Anchor contents:', Array.from(anchors).map(a => a.textContent));
+    }
+    
     const sections = document.querySelectorAll('.essay-part');
     const tocItems = document.querySelectorAll('.toc-item');
     const totalProgress = document.getElementById('total-progress');
@@ -105,6 +136,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     updateProgress();
+
+    // Sidenotes handling
+    
+
+    // Process sidenotes when parts are expanded/collapsed
+    parts.forEach(part => {
+        const header = part.querySelector('.essay-part-header');
+        const content = part.querySelector('.essay-part-content');
+        const icon = part.querySelector('.expand-icon');
+        
+        header.addEventListener('click', () => {
+            const isExpanded = part.getAttribute('data-expanded') === 'true';
+            part.setAttribute('data-expanded', !isExpanded);
+            content.style.display = isExpanded ? 'none' : 'block';
+            icon.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0)';
+            
+            // Reprocess sidenotes after toggle
+            setTimeout(processSidenotes, 100);
+        });
+    });
 });
 </script>
 
@@ -145,4 +196,30 @@ document.addEventListener('DOMContentLoaded', () => {
 :root {
     --accent-color: #4a9eff;
 }
-</style> 
+
+.sidenote-anchor {
+    position: relative;
+}
+
+.sidenote-ref {
+    color: var(--accent-color);
+    font-size: 0.8em;
+    margin-left: 0.2em;
+    cursor: pointer;
+}
+
+.sidenote {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.sidenote sup {
+    color: var(--accent-color);
+    margin-right: 0.5em;
+}
+</style>
+
+<script src="{{ '/assets/js/sidenotes.js' | relative_url }}"></script>
+  
