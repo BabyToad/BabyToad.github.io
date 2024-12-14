@@ -2,7 +2,11 @@
 title: Overview
 description: An overview of the Golden Triangle campaign
 ---
-The Golden Triangle is a campaign setting built for running a science fiction sandbox campaign using the orignal Stars Without Number rules.
+# The Golden Triangle
+
+This is a living document compiling the Stars Without Number campaign setting and house rules I am using for my own gaming.
+Things get changed, added, and removed as I run the campaign. But at anytime this document should represent the current state of the campaign setting. 
+The document is intended to illustrate my design process and offer notes on why I made certain design decisions. Hopefully it will be useful to my future self and others.
 
 It represents the closest approximation to my ideal flavor of science fiction. Something that is of course always a moving target, depending on my personal whims and the whims of the players.
 But a few things are important to me:

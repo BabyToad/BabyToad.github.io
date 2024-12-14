@@ -2,6 +2,7 @@
 title: Factions
 description: Major power players in the Golden Triangle sector
 ---
+
 ### Acolytes of Brashkadesh
 
 *A collective that eschews individuality. Initiates adopt the same garb and the same name, in the pursuit of perfection at any cost.*

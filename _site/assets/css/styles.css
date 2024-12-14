@@ -994,22 +994,16 @@ blockquote p {
     background: none;
 }
 
-.essay-part-content p,
-.essay-part-content ul,
-.essay-part-content ol {
-    margin-left: 0;
-    margin-bottom: 1rem;
+.essay-part-content > p:first-child,
+.essay-part-content > .highlight:first-child,
+.essay-part-content > pre:first-child {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
-.essay-part-content h3,
-.essay-part-content h4 {
-    margin-left: 0;
-}
 
-/* Animation for content */
-.essay-part-content {
-    transition: all 0.3s ease-in-out;
-} 
 
 .sidenote-anchor {
     position: relative;
@@ -1095,4 +1089,29 @@ blockquote p {
 .essay-content {
     height: 100%;
     position: relative;
+}
+
+/* Override code block styling in essay parts */
+.essay-part-content .language-plaintext {
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.essay-part-content .highlight {
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.essay-part-content pre.highlight {
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.essay-part-content .highlight pre {
+    background: none;
+    padding: 0;
+    margin: 0;
 }

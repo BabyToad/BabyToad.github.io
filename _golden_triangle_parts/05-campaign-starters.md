@@ -2,6 +2,7 @@
 title: Starter Ships
 description: Ready-to-use campaign hooks and scenarios
 ---
+
 ### Golden Triangle Ships
 
 **The Red Horizon**  

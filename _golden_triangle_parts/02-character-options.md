@@ -2,6 +2,7 @@
 title: Character Options
 description: Additional character creation options and rules
 ---
+
 ### **Unique Backgrounds**
 
 #### **Min Daran Clansman**
