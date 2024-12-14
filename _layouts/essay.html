@@ -38,9 +38,7 @@ layout: base
                     {{ part.title }}
                 </div>
                 <div class="essay-part-content">
-                    {% capture part_content %}
-                    {{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}
-                    {% endcapture %}
+                    {%- capture part_content -%}{{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{%- endcapture -%}
                     {{ part_content | markdownify }}
                 </div>
             </div>

@@ -11,8 +11,6 @@ collections:
   golden_triangle_parts:
     output: false
 
-# Build settings
-markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
