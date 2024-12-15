@@ -5,11 +5,11 @@ title: About
 
 # About Me
 
-I'm a game developer with a passion for creating open dynamic systems. My work focuses on building games that teach you how to think, or at the very least, question your assumptions.
+I'm a game developer with a passion for creating open dynamic systems. My work focuses on building games that teach you how to think, or at the very least, teach you to question your assumptions.
 
 ## Background
 
-I graduated from the Macromedia University Leipzig with a Bachelor's degree in Game Design and Development. I'm now making serious games with my company [PlayInsight Studio](https://playinsightstudios.com/).
+Right now I'm making serious games with my company [PlayInsight Studio](https://playinsightstudios.com/).
 
 Beyond that, I've been designing and running roleplaying games for over 10 years, which occasionally results in essays on design theory and my own attempted contributions to the field.
 

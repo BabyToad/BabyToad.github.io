@@ -36,6 +36,38 @@ description: Personal website showcasing projects and skills
         </div>
     </section>
 
+    <section class="recent-posts-section">
+        <h2>Recent Posts</h2>
+        <div class="posts-grid">
+            {% assign recent_posts = site.rpg_blog | sort: 'date' | reverse | limit:3 %}
+            {% for post in recent_posts %}
+            <div class="post-card">
+                <div class="post-card-content">
+                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <div class="post-meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">
+                            {{ post.date | date: "%B %d, %Y" }}
+                        </time>
+                        {% if post.tags %}
+                        <div class="post-tags">
+                            {% for tag in post.tags limit:2 %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if post.excerpt %}
+                    <p class="post-excerpt">{{ post.excerpt }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="section-footer">
+            <a href="/rpg" class="view-all-link">View all posts →</a>
+        </div>
+    </section>
+
     <section class="contact-section">
         <h2>Contact</h2>
         <div class="contact-links">

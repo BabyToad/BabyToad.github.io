@@ -10,6 +10,9 @@ collections:
     output: true
   golden_triangle_parts:
     output: false
+  rpg_blog:
+    output: true
+    permalink: /rpg/:title/
 
 plugins:
   - jekyll-feed
