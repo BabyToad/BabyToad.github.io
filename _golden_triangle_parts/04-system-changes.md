@@ -19,21 +19,49 @@ When one of the Pillars occurred during the session, gain 500xp. Gain double the
 
 When you complete an objective, gain 2000-5000 xp.
 
-**Build an alliance with another faction.**
+**Examples:**
 
-**Acquire a genuine pretech artifact.**
+* Build an alliance with another faction (2000 XP)
+* Acquire a genuine pretech artifact (3000 XP)
+* Destroy a faction (4000 XP)
+* Create a faction (3000 XP)
+* Seize a Great Power prize (5000 XP)
+* Collect the Raiments of Night (4000 XP)
+* Open the Eye (5000 XP)
+* Establish a Colony (3000 XP)
 
-**Destroy a faction.**
+### Hit Dice Cap
 
-**Create a faction.**
+Inflated HP pools take away tension and quick combat. Allowing players to rely on stats instead of skill and planning.
 
-**Seize a Great Power prize.**
+Starting at 6th level players can instead of gaining an extra HD, choose from 3 options:
 
-**Collect the Raiments of Night**
+#### Option 1: Gain a Wise [[Can you tell I like the Burning Wheel?]]
+The character gains a Wise related to their experiences or background. A Wise is treated as a Level 1 Skill, granting +1 to related rolls.
 
-**Open the Eye**
+**Examples:**
+- **Warrior:** 5th Legion-wise, Dueling Customs-wise, Seven Holy Weapons-wise
+- **Expert:** Ridiculous Request-wise, Starport Scuttlebutt-wise, Opulent Excess-wise
+- **Psychic:** Eschatology-wise, Wayline Dynamics-wise, Insanity-wise
 
-**Establish a Colony**
+#### Option 2: Gain a Trait
+Traits are narrative tools that offer rerolls in specific contexts. A character can invoke their Trait once per session to gain a reroll on a failed Skill Check.
+
+**Examples:**
+- **Unheeded:**
+  - No one notices this character, or even remembers their name properly. Trait for avoiding attention or notice.
+- **I Know This Ship Like My Own Hands:**
+  - The spacer is a strange bloke, but they definitely know the ship. Trait for rerolling things related to fixing or finding things on the spacer's ship.
+- **Imperious Demeanor:**
+  - Use this trait to reroll social checks when dealing with anyone of lower station or rank.
+- **Incomprehensible Diagnosis:**
+  - Use this trait when trying to hide the true facts of a medical or technical diagnosis.
+- **Wise Aphorisms:**
+  - Use this for social skills if the player can come up with some appropriately sagacious dialogue to throw into play at the right moment.
+
+#### Option 3: Raise an Ability Score
+Gain +2 to any Ability Score or +1 to two Ability Scores (as per your original idea). Raising an Ability Score from 17 to 18 requires a +2.
+
 
 ### Trainer Fee
 
@@ -61,9 +89,7 @@ Weapon size grants a bonus to initiative.
 | High Ground | It's over |
 | Flanking | \+2 |
 
-## 
-
-## Space Combat
+## Space Combat [[Mostly lifted from Mothership RPG]]
 
 **Crisis Table**  
 Ships must roll on the crisis table when:
@@ -96,9 +122,9 @@ Ships must roll on the crisis table when:
 | 95-98 | Cockpit or bridge destroyed. Body saves to escape the room before it's destroyed. |
 | 99 | Fuel line. Ship destroyed in 1d10 turns. |
 
-## Stress and Panic
+## Stress and Panic [[Also mostly lifted from Mothership RPG]]
 
-### Stress
+### Stress 
 
 **How do I gain Stress?**  
 There is also a number of other ways to get stress such as:
@@ -124,7 +150,7 @@ Additionally circumstances that may reduce Stress:
 - Earning a deeds point.
 
 **What happens when I max out my Stress?**  
-Save against your Stress. If you fail, roll on the Panic table.
+Save against your Stress. If you fail, roll 2d10+Stress on the Panic table.
 
 | 2-3 | Laser Focus: Advantage on all rolls for the next 1d10 hours |
 | :---: | :---- |
