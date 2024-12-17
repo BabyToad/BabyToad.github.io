@@ -3,56 +3,85 @@ layout: post
 title: "The Lunar Liches of Selena-Resht"
 date: 2024-12-17
 tags: [swn, golden-triangle, lunar-liches]
-excerpt: "A deep dive into the mysterious undead rulers of Selena-Resht and their impact on The Golden Triangle sector."
-visibility: draft
+excerpt: "The fallen angels of Paradise who fled to Selena-Resht's moon, becoming the undead Asqai'elun in their desperate pursuit of lost immortality."
+visibility: public
 ---
 
-# The Lunar Liches of Selena-Resht
+In the beginning was Paradise, Janat al-Ardh, blessed be its name. Those who walked its gardens say you could feel eternity in every breath. The very atoms sang with immortality, a perfect realm where pretech engineering had achieved divinity. Its people were living starlight, their forms woven from the fundamental forces of creation itself.
 
-Janat al-Ardh is called paradise. You can feel it in the water. You can feel it in the earth. You can feel it in the air. A perfect Eden forged by pretech engineering and imbued with eternal grace. It's people shaped from the very fabric of the universe.
+But Paradise was not meant to last. When the Scream tore reality asunder and the great realms of humanity fell into darkness, Janat al-Ardh sealed itself away. The gates closed, the gardens turned inward, and paradise became a prison.
 
-The world changed since that golden age of humanity. The Scream sundered the great realms of man and Janat al-Ardh closed it's gates.
+Some could not bear the gilded cage. They whispered of destiny denied, of their divine right to rule creation. Were they not perfect? Were they not eternal? And so they left, ascending to the moon to raise an army of angels from the ashes of the past.
 
-Overtime some of paradises people came to be resentful of this seclusion. They sought to leave  and reclaim the great realms of yore. For after all, they were made perfect and eternal, and theirs was the rightful dominion over all of creation.
+Oh, what bitter revelation awaited them there! For when they had driven the mutant hordes from the ancient ruins, they discovered their perfect forms beginning to decay. Away from Paradise's grace, mortality crept into their bones like poison. In their rage they turned their armies back toward heaven's gates, but Paradise would not yield to its wayward children.
 
-They left for the moon to muster a great host of angels. Yet when they arrived and their armies had reclaimed the ancient ruins from mutant barbarians, they realized their folly. Removed from the grace of Janat al-Ardh, they were no longer eternal. Enraged at their mortality and flaw, they returned to make war on Janat al-Ardh. But they could not break into paradise again.
+Now they haunt the outer reaches, these fallen angels of Janat al-Ardh. Their laboratories pulse with forbidden energies as they chase the immortality they lost. Every golden age wonder they recover is twisted to serve their desperate crusade against death itself.
 
-Now they dwell in the outer system, determined to live forever and reclaim their place in heaven. The technological marvels of the golden age now used to prolong and cling to life at all cost.
-
-They call themselves Asqai’elun, it means the Drawn Shadows.
-
-Selene-Resht, the Moon
-The Gate, the dormant gate
-The Tears, shattered remains of the second moon
+They name themselves Asqai'elun - the Drawn Shadows. How fitting, that those who fled the light should embrace the dark.
 
 ## Orbital Liches
 
-- Geneticists who reside on the moon.
-- Formerly part of the paradise, now fallen from its grace.
-- Mortals sustained by unnatural, necromantic means after severing their connection to Janat al-Ardh.
-- Goal:
-	- conquest of Paradise
-	- to live forever
-	- to pursue knowledge and enlightenment no matter the prize
+The Orbital Liches, known as the Asqai'elun (The Drawn Shadows), are immortal geneticists and researchers who rule the moon of Selena-Resht. Originally citizens of Paradise (Janat al-Ardh), they left their home seeking to expand humanity's dominion across the stars. Upon leaving Paradise's influence, they lost their immortality and turned to necromantic technology to sustain their existence.
 
+### Key Characteristics
+- Advanced genetic engineering capabilities
+- Sustained by a combination of pretech and necromantic life support
+- Possess extensive knowledge of Golden Age technology
+- Rule from fortress-laboratories across Selena-Resht
 
-Cool shit:
+### Goals & Motivations
+1. Conquer Paradise and reclaim their "rightful" place
+2. Achieve true immortality through any means necessary 
+3. Advance their research without moral constraints
+4. Expand their influence across the sector
+
+## Places
+
+### Selena-Resht
+The hollow moon of Janat al-Ardh bleeds light like an infected wound. Ancient mining complexes honeycomb its surface, repurposed into vast necropoleis where the Liches conduct their endless experiments. Bleak citadels grow from Golden Age ruins like corpse flowers, their spires crowned with crackling energy fields that paint the eternal night in sickly colors.
+
+Below the surface, techno-warrens spiral downward for kilometers. Here, clone-servants shuffle through catacombs lined with stasis pods, while automated factories churn out spare parts for both machinery and flesh. The deeper you go, the more the architecture shifts from human design to something older, more alien.
+
+### The Gate
+A massive ring of black metal hangs in high orbit, its surface etched with mathematical formulas that hurt the eyes. This dormant jump gate once connected the system to humanity's greater realm, but now serves a darker purpose. The Liches use it for divination, forcing Way-creatures through its partially activated portal to read prophecies in their death throes.
+
+Some say the Gate whispers in the night, broadcasting messages in ancient codes that only the Liches can decipher. Others claim it's slowly awakening, responding to the necromantic energies that saturate the system. The Asqai'elun could probably restore it to function, but their gaze remains fixed on Paradise below, not the stars beyond.
+
+### The Tears of Selene
+The shattered remains of the second moon hang in space like frozen shrapnel. When the Asqai'elun made their first bid for Paradise, weapons beyond mortal understanding reduced an entire celestial body to glittering debris. Now these fragments host a thousand micro-habitats, each a potential treasure trove of Golden Age relics or death trap of ancient defense systems.
+
+Dustborn clans claim the larger fragments, building warren-cities in the ruins of orbital research stations. Their bodies, adapted for void survival, let them navigate the debris field without ships. Some fragments still carry active temporal distortions - unwary travelers might find themselves aged to dust or trapped in endless moment loops.
+
+### The Grey Gardens
+Vast hydroponic complexes that once fed the moon's population now produce something altogether different. Under dome after dome, modified flora grows in patterns that form living circuit boards. The air is thick with spores that carry data in their genetic code, while gardener-constructs tend to crops of crystalline fruits that store memories like data drives.
+
+The Gardens are neutral ground, maintained by all factions for their mutual benefit. Here, the Liches conduct trade and negotiate alliances, while their servants harvest the biotech components necessary for their continued existence. But the Gardens have their own agenda - some believe the entire complex has achieved a form of distributed consciousness, slowly executing plans centuries in the making.
+
+## Factions
+
+### The Clockmaker
+The Clockmaker was once Paradise's master of celestial calculations. Their fortress-laboratory, rises like a twisted astronomical clock from the lunar surface. Here, chronometric engines harvest temporal energy from dying stars, while temporal anomalies twist the corridors into impossible geometries. Their servants, the Clockwork Muezzin, call out the hours with voices that fracture time itself, their brass bodies inscribed with mathematical formulas that would drive mortals mad. The Clockmaker believes immortality lies in the manipulation of time's flow - not stopping it, but becoming its master.
+
+### The Flesh Court
+The Matriarch, who styles herself as Malika al-Ghul, rules from the Throne of Memories - a horrific construction of ossified experiences and crystallized neural patterns. Her court of Ghoul Knights maintain the pretense of Golden Age sophistication even as they feast on the flesh of the living, quoting ancient poetry while consuming their victims. They ride steeds engineered from extinct lunar beasts, their bones reinforced with pretech alloys and their minds linked to their riders through parasitic neural laces. The Caliphate seeks immortality through consumption - not just of flesh, but of memories, experiences, and the very essence of life itself.
+
+### The Mā' al-Ḥayāt Syndicate
+Named after the mythical Waters of Life, the Water Syndicate has transformed the ancient water reclamation systems into vast networks of preservation chambers. Their temples house countless glass tubes containing perfectly preserved specimens, each suspended in fluids reverse-engineered from Paradise's own regenerative technologies. Led by the Trinity of Thirst - three ancient scientists who have replaced their blood with living preservation fluid - the Syndicate believes true immortality lies in perfect stasis, a state between life and death where entropy itself is suspended.
+
+### Gene Witches of Lo-Jenje
+The Gene-Witches operate a thriving trade in clones and biological modifications. Their warren-labs contain vast vats of engineered tissue, capable of growing a perfect replica from the smallest DNA sample. They are lead by the ancient crone known as Mother Helix. For the right price, they offer everything from simple labor clones to exotic chimeric modifications. Their bodies are immortal, simply regrown if they perish.
+
+### The Bell Wardens
+A recent faction emerging from the grey spore clouds that hang over Selena-Resht. Their massive funeral bells, salvaged from Paradise's fallen temples, ring with psychic resonance that can shatter minds and reshape reality. The Bell Wardens emerged mysteriously from the perpetual grey spore clouds, their true nature unknown even to the other Liches. They are led by the enigmatic Dirges, whose forms are obscured by swirling spores except for the massive bells that seem to grow from their bodies like metallic tumors. Their fortresses are mobile carillons that drift through the clouds, the tolling of their bells causing reality to ripple and warp.
+The Wardens claim to hear voices in the bells' resonance - whispers from what they call the "Far Chime," an entity or force that may predate even the Golden Age. Their preservation seems tied to the spores themselves, which appear to crystallize time around them rather than the technological means used by other Liches. Some theorize they aren't truly Liches at all, but something that has merely assumed their shape.
+
+### Dustborn
+The Dustborn are the remnants of the humans gene-engineered for void travel. They are adapted for the life in orbitals, ships and space stations. After the Scream, they were left to fend for themselves on the moon. They now serve as the large lower class of the Lunar Liches.
+
+## Quick Ideas to add to the broth:
 - bone pipers, fused bodies playing orchestral piping sounds on their own bones
 - a guy just covered in wax candles
 - riding a floating snail palanquin
 - super fat, but with long spider limbs, towering above everyone
 - floating brains like cherubimb attached by cables
 - giganctic funeral bells ringing with balefull psychic bellows, hanging out of the grey cloud cover, actually dropping grey spore clouds as they ring
-
-## Factions
-
-The Clockmaker
-	chronomancer
-	clockwork augementics
-	
-Matriach of Ghouls
-	ghoul knights
-	
-The Moisture Guild
-	
-The Gene Labs of Lo-Jenje
