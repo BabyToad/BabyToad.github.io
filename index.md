@@ -5,17 +5,19 @@ description: Personal website showcasing projects and skills
 ---
 
 <section class="intro-section">
-    <p>This is the website of Jonas Heinke. I write about roleplaying games, making things, and rationality. My work focuses on using games and interactive experiences as a way to clarify my own thinking about how people make choices.</p>
+    <p>Welcome, I am Jonas and this is my website.</p>
+    <p>I write about roleplaying games, game design, and sometimes rationality. My work focuses on using games and interactive experiences as a way to clarify my own thinking about how people make choices.</p>
     
     <p>Here you'll find my projects in both digital and tabletop game development, essays on game design theory and rationality, and occasional thoughts on other topics that catch my interest.</p>
     
     <p>Below you can explore my projects, read my latest blog posts, or get in touch. Feel free to browse around - the site is organized into clear sections to help you find what interests you most.</p>
+    <p></p>
 </section>
 
 <section class="recent-posts-section">
     <h2>Recent Posts</h2>
     <div class="posts-grid">
-        {% assign recent_posts = site.blog | sort: 'date' | reverse | limit:3 %}
+        {% assign recent_posts = site.blog | where: "visibility", "public" | sort: 'date' | reverse | limit:3 %}
         {% if recent_posts.size > 0 %}
             {% for post in recent_posts %}
             <div class="post-card">

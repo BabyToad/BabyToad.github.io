@@ -7,9 +7,7 @@ title: About
 
 I'm a game developer with a passion for creating open dynamic systems. My work focuses on building games that teach you how to think, or at the very least, teach you to question your assumptions.
 
-## Background
-
-Right now I'm making serious games with my company [PlayInsight Studio](https://playinsightstudios.com/).
+Right now I'm helping people and companies make better use of information and education using game design principles: [PlayInsight Studio](https://playinsightstudios.com/).
 
 Beyond that, I've been designing and running roleplaying games for over 10 years, which occasionally results in essays on design theory and my own attempted contributions to the field.
 
