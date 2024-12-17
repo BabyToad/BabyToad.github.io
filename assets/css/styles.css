@@ -8,7 +8,8 @@
 /* Layout imports */
 @import 'layouts/grid.css';
 @import 'layouts/content.css';
-@import "layouts/rpg_post.css";
+@import "layouts/rpg_post.csswe";
+@import 'layouts/post.css';
 
 /* Component imports */
 @import 'components/navigation.css';  /* Match your actual filename */
@@ -16,7 +17,8 @@
 @import 'components/projects.css';
 @import 'components/forms.css';
 @import 'components/intro.css';
-@import 'components/posts.css';
+@import 'components/blog-index.css';
+@import 'components/toc.css';
 
 /* Base styles */
 body {
