@@ -1,18 +1,16 @@
 /* Base Typography */
 body {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    line-height: 1.7;
-    text-rendering: optimizeLegibility;
+    font-family: "Linux Libertine", Georgia, serif;
+    line-height: 1.6;
+    font-size: 16px;
+    color: var(--text-primary);
 }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
+    font-family: "Linux Libertine", Georgia, serif;
+    font-weight: 500;
     line-height: 1.3;
-    color: var(--text-primary);
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-md);
 }
 
 h1 {
@@ -129,4 +127,17 @@ small,
     h3 {
         font-size: 1.25rem;
     }
+} 
+
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 65ch; /* Optimal line length for readability */
+}
+
+/* Meta information styling */
+.meta-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
 } 

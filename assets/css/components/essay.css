@@ -1,34 +1,21 @@
 /* Essay Layout */
 .essay-container {
     display: grid;
-    grid-template-columns: var(--sidebar-width) minmax(auto, var(--content-width)) var(--sidenote-width);
+    grid-template-columns: minmax(200px, 1fr) minmax(600px, 800px) minmax(200px, 1fr);
     gap: var(--space-xl);
     margin: 0 auto;
     max-width: var(--container-max);
-    position: relative;
     padding: var(--space-lg);
 }
 
-/* Essay Content */
 .essay-content {
     grid-column: 2;
-    position: relative;
-    max-width: 100%;
-    font-size: 1.1rem;
+    width: 100%;
+    max-width: 800px;
+    line-height: 1.6;
 }
 
-.essay h1, 
-.essay h2, 
-.essay h3 {
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-md);
-}
-
-.essay p {
-    margin-bottom: var(--space-lg);
-}
-
-/* Metadata and Abstract */
+/* Essay Components */
 .metadata {
     background: var(--bg-secondary);
     padding: var(--space-md);
@@ -39,7 +26,7 @@
 .abstract {
     background: var(--bg-secondary);
     padding: var(--space-lg);
-    margin: var(--space-md) 0 var(--space-lg) 0;
+    margin: var(--space-md) 0;
     border-left: 4px solid var(--accent-color);
 }
 
@@ -51,18 +38,15 @@
     height: calc(100vh - var(--space-xl));
     overflow-y: auto;
     width: 100%;
-    min-height: 100%;
 }
 
 .sidenote {
-    position: absolute;
     font-size: 0.9em;
     color: var(--text-secondary);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-sm);
     line-height: 1.4;
-    width: calc(100% - var(--space-lg));
-    box-sizing: border-box;
+    margin-bottom: var(--space-md);
 }
 
 .sidenote-anchor {

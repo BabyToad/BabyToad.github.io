@@ -1,0 +1,29 @@
+/* Link styling similar to gwern.net */
+.content-link {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.content-link:hover {
+    border-bottom-color: var(--link-color);
+}
+
+/* Link list styling */
+.link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-list li {
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.link-list li::before {
+    content: "→";
+    margin-right: 0.5rem;
+    color: var(--text-secondary);
+} 
