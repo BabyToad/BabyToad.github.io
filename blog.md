@@ -11,8 +11,8 @@ description: Thoughts on game design, development, and other topics
     </header>
 
     <div class="blog-posts">
-        {% assign posts = site.blog | sort: 'date' | reverse %}
-        {% for post in posts %}
+        {% assign visible_posts = site.blog | where: "visibility", "public" | sort: 'date' | reverse %}
+        {% for post in visible_posts %}
         <article class="post-preview">
             <header>
                 <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
@@ -39,7 +39,7 @@ description: Thoughts on game design, development, and other topics
         {% endfor %}
     </div>
 
-    {% if posts.size == 0 %}
+    {% if visible_posts.size == 0 %}
     <div class="no-posts">
         <p>No blog posts yet. Check back soon!</p>
     </div>
