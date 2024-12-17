@@ -6,13 +6,16 @@ url: "https://babytoad.github.io"
 
 # Collections
 collections:
+  blog:
+    output: true
+    permalink: /blog/:title/
   projects:
     output: true
   golden_triangle_parts:
     output: false
-  rpg_blog:
+  essays:
     output: true
-    permalink: /rpg/:title/
+    permalink: /essays/:title/
 
 plugins:
   - jekyll-feed

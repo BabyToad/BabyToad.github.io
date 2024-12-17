@@ -12,36 +12,27 @@ description: Personal website showcasing projects and skills
     <p>Below you can explore my projects, read my latest blog posts, or get in touch. Feel free to browse around - the site is organized into clear sections to help you find what interests you most.</p>
 </section>
 
-
 <section class="recent-posts-section">
     <h2>Recent Posts</h2>
     <div class="posts-grid">
-        {% assign recent_posts = site.rpg_blog | sort: 'date' | reverse | limit:3 %}
-        {% for post in recent_posts %}
-        <div class="post-card">
-            <div class="post-card-content">
-                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                <div class="post-meta">
-                    <time datetime="{{ post.date | date_to_xmlschema }}">
+        {% assign recent_posts = site.blog | sort: 'date' | reverse | limit:3 %}
+        {% if recent_posts.size > 0 %}
+            {% for post in recent_posts %}
+            <div class="post-card">
+                <div class="post-card-content">
+                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
                         {{ post.date | date: "%B %d, %Y" }}
                     </time>
-                    {% if post.tags %}
-                    <div class="post-tags">
-                        {% for tag in post.tags limit:2 %}
-                        <span class="tag">{{ tag }}</span>
-                        {% endfor %}
-                    </div>
+                    {% if post.description %}
+                    <p>{{ post.description }}</p>
                     {% endif %}
                 </div>
-                {% if post.excerpt %}
-                <p class="post-excerpt">{{ post.excerpt }}</p>
-                {% endif %}
             </div>
-        </div>
-        {% endfor %}
-    </div>
-    <div class="section-footer">
-        <a href="/rpg" class="view-all-link">View all posts →</a>
+            {% endfor %}
+        {% else %}
+            <p>No blog posts yet.</p>
+        {% endif %}
     </div>
 </section>
 

@@ -1,5 +1,5 @@
 ---
-layout: rpg_post
+layout: post
 title: "The Lunar Liches of Selena-Resht"
 date: 2024-12-17
 tags: [swn, golden-triangle, lunar-liches]
