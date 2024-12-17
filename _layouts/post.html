@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate Table of Contents
     const toc = document.getElementById('toc');
     if (toc) {
-        const headings = document.querySelectorAll('.post-body h2, .post-body h3');
+        const headings = document.querySelectorAll('.post-body h2');
         const tocList = toc.querySelector('ul');
         
         headings.forEach(heading => {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             heading.id = id;
             
             const li = document.createElement('li');
-            li.className = `toc-item ${heading.tagName.toLowerCase()}`;
+            li.className = 'toc-item';
             li.innerHTML = `<a href="#${id}">${heading.textContent}</a>
                           <div class="progress-bar"><div class="progress"></div></div>`;
             tocList.appendChild(li);
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Update progress bars on scroll
 window.addEventListener('scroll', () => {
-    const headings = document.querySelectorAll('.post-body h2, .post-body h3');
+    const headings = document.querySelectorAll('.post-body h2');
     const tocItems = document.querySelectorAll('.toc-item');
     const totalProgress = document.getElementById('total-progress');
     
