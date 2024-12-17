@@ -158,7 +158,7 @@ description: Additional character creation options and rules
 
 *Guardians of both body and spirit, Sword Saints blend martial prowess with spiritual guidance. Their connection to nature and the divine makes them revered protectors of Palvaya's traditions and people.*
 
-* **Skills:** Combat/Zatoichi, Religion, Perception, Survival, Herbalism, Culture/Palvaya  
+* **Skills:** Combat/Zatoichi[[Blind swordsman is a awesome trope. And with psychic abilities in the setting, you can make them blind sword witches.]], Religion, Perception, Survival, Herbalism, Culture/Palvaya  
 * **Equipment:** Sanctified sword, herbalism kit, and a prayer wheel
 
 #### **Lazunan Drone Technician**
