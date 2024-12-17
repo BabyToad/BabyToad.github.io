@@ -3,7 +3,7 @@ layout: post
 title: "The Lunar Liches of Selena-Resht"
 date: 2024-12-17
 tags: [swn, golden-triangle, lunar-liches, monsters, undead, sci-fi]
-excerpt: "The fallen angels of Paradise who fled to Selena-Resht's moon, becoming the undead Asqai'elun in their desperate pursuit of lost immortality."
+description: "The fallen angels of Paradise who fled to Selena-Resht's moon, becoming the undead Asqai'elun in their desperate pursuit of lost immortality."
 visibility: public
 ---
 
