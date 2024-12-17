@@ -47,6 +47,7 @@
 .sidenotes {
     grid-column: 3;
     position: relative;
+    min-height: 100%;
 }
 
 .sidenote {
@@ -61,11 +62,19 @@
     transform: translateY(-50%);
 }
 
+.sidenote sup {
+    color: var(--accent-color);
+    margin-right: 0.5em;
+}
+
 .sidenote-anchor {
     color: var(--accent-color);
     cursor: help;
+    text-decoration: none;
+}
+
+.sidenote-anchor sup {
     font-size: 0.8em;
-    vertical-align: super;
 }
 
 /* Post Navigation */

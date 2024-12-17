@@ -73,12 +73,13 @@ The Gene-Witches operate a thriving trade in clones and biological modifications
 
 ### The Bell Wardens
 A recent faction emerging from the grey spore clouds that hang over Selena-Resht. Their massive funeral bells, salvaged from Paradise's fallen temples, ring with psychic resonance that can shatter minds and reshape reality. The Bell Wardens emerged mysteriously from the perpetual grey spore clouds, their true nature unknown even to the other Liches. They are led by the enigmatic Dirges, whose forms are obscured by swirling spores except for the massive bells that seem to grow from their bodies like metallic tumors. Their fortresses are mobile carillons that drift through the clouds, the tolling of their bells causing reality to ripple and warp.
-The Wardens claim to hear voices in the bells' resonance - whispers from what they call the "Far Chime," an entity or force that may predate even the Golden Age. Their preservation seems tied to the spores themselves, which appear to crystallize time around them rather than the technological means used by other Liches. Some theorize they aren't truly Liches at all, but something that has merely assumed their shape.
+The Wardens claim to hear voices in the bells' resonance - whispers from what they call the "Far Chime," an entity or force that may predate even the Golden Age. Their preservation seems tied to the spores themselves, which appear to crystallize time around them rather than the technological means used by other Liches. Some theorize they aren't truly Liches at all, but something that has merely assumed their shape.[[There is allways a bigger freako.]]
 
 ### Dustborn
-The Dustborn are the remnants of the humans gene-engineered for void travel. They are adapted for the life in orbitals, ships and space stations. After the Scream, they were left to fend for themselves on the moon. They now serve as the large lower class of the Lunar Liches.
+The Dustborn are the remnants of the humans gene-engineered for void travel. They are adapted for the life in orbitals, ships and space stations. They are small and thin with pallid greenish skin. They were adapted to go for long periods without food or water or even oxygen, when life support is low. So they are constantly hungry to store enough calories. [[They are basically space hobbits that have degenerated into goblins.]]
+They After the Scream, they were left to fend for themselves in the lower orbits. They now serve as the large lower class of the Lunar Liches.
 
-## From the idea pile
+## From the idea pile[[Let it stew for a while and you get a strong broth.]]
 - bone pipers, fused bodies playing orchestral piping sounds on their own bones
 - a guy just covered in wax candles
 - riding a floating snail palanquin
