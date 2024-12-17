@@ -3,7 +3,7 @@ layout: post
 title: "Lunar Liches Encounters"
 date: 2024-12-17
 description: "Some Lunar Liches stat blocks and encounters"
-tags: [tag1, tag2]
+tags: [monsters, encounters, lunar-liches, undead, sci-fi]
 toc: true
 visibility: public  # Options: public, private, draft
 --- 
