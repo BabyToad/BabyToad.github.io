@@ -134,26 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     updateProgress();
-
-    // Sidenotes handling
-    
-
-    // Process sidenotes when parts are expanded/collapsed
-    parts.forEach(part => {
-        const header = part.querySelector('.essay-part-header');
-        const content = part.querySelector('.essay-part-content');
-        const icon = part.querySelector('.expand-icon');
-        
-        header.addEventListener('click', () => {
-            const isExpanded = part.getAttribute('data-expanded') === 'true';
-            part.setAttribute('data-expanded', !isExpanded);
-            content.style.display = isExpanded ? 'none' : 'block';
-            icon.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0)';
-            
-            // Reprocess sidenotes after toggle
-            setTimeout(processSidenotes, 100);
-        });
-    });
 });
 </script>
 

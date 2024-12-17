@@ -8,6 +8,7 @@
 /* Layout imports */
 @import 'layouts/grid.css';
 @import 'layouts/content.css';
+@import "layouts/rpg_post.css";
 
 /* Component imports */
 @import 'components/navigation.css';  /* Match your actual filename */
