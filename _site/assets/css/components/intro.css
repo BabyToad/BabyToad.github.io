@@ -1,0 +1,17 @@
+.intro-section {
+    padding-top: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.intro-section p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.intro-section p:last-child {
+    margin-bottom: 0;
+} 
