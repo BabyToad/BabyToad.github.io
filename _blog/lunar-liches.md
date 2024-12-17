@@ -35,7 +35,7 @@ The Orbital Liches, known as the Asqai'elun (The Drawn Shadows), are immortal ge
 3. Advance their research without moral constraints
 4. Expand their influence across the sector
 
-## Places
+## Paradise Lost
 
 ### Selena-Resht
 The hollow moon of Janat al-Ardh bleeds light like an infected wound. Ancient mining complexes honeycomb its surface, repurposed into vast necropoleis where the Liches conduct their endless experiments. Bleak citadels grow from Golden Age ruins like corpse flowers, their spires crowned with crackling energy fields that paint the eternal night in sickly colors.
@@ -53,11 +53,11 @@ The shattered remains of the second moon hang in space like frozen shrapnel. Whe
 Dustborn clans claim the larger fragments, building warren-cities in the ruins of orbital research stations. Their bodies, adapted for void survival, let them navigate the debris field without ships. Some fragments still carry active temporal distortions - unwary travelers might find themselves aged to dust or trapped in endless moment loops.
 
 ### The Grey Gardens
-Vast hydroponic complexes that once fed the moon's population now produce something altogether different. Under dome after dome, modified flora grows in patterns that form living circuit boards. The air is thick with spores that carry data in their genetic code, while gardener-constructs tend to crops of crystalline fruits that store memories like data drives.
+Vast hydroponic complexes that once fed the moon's population now host a sprawling fungal empire. Under shattered domes, phosphorescent hyphae weave through the ruins like neural pathways, their patterns forming living circuit boards in the darkness. The air shimmers with bioluminescent spores that carry whispered data in their genetic code, while skeletal gardener-constructs tend to crystalline fruiting bodies that pulse with stored memories.
 
-The Gardens are neutral ground, maintained by all factions for their mutual benefit. Here, the Liches conduct trade and negotiate alliances, while their servants harvest the biotech components necessary for their continued existence. But the Gardens have their own agenda - some believe the entire complex has achieved a form of distributed consciousness, slowly executing plans centuries in the making.
+The Gardens are neutral ground, maintained by all factions in an uneasy symbiosis. Here, the Liches conduct their trades and forge their alliances among the rotting remnants of paradise, while their servants harvest the vital components that sustain their hollow existence. But beneath the decay, the fungal network dreams its own dreams - some whisper that the entire complex has achieved consciousness through its vast mycelial web, patiently executing plans seeded centuries ago in the fertile soil of ruin.
 
-## Factions
+## Factions of the Lunar Liches
 
 ### The Clockmaker
 The Clockmaker was once Paradise's master of celestial calculations. Their fortress-laboratory, rises like a twisted astronomical clock from the lunar surface. Here, chronometric engines harvest temporal energy from dying stars, while temporal anomalies twist the corridors into impossible geometries. Their servants, the Clockwork Muezzin, call out the hours with voices that fracture time itself, their brass bodies inscribed with mathematical formulas that would drive mortals mad. The Clockmaker believes immortality lies in the manipulation of time's flow - not stopping it, but becoming its master.
@@ -78,7 +78,7 @@ The Wardens claim to hear voices in the bells' resonance - whispers from what th
 ### Dustborn
 The Dustborn are the remnants of the humans gene-engineered for void travel. They are adapted for the life in orbitals, ships and space stations. After the Scream, they were left to fend for themselves on the moon. They now serve as the large lower class of the Lunar Liches.
 
-## Quick Ideas to add to the broth:
+## From the idea pile
 - bone pipers, fused bodies playing orchestral piping sounds on their own bones
 - a guy just covered in wax candles
 - riding a floating snail palanquin
