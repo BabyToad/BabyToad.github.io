@@ -17,5 +17,5 @@ Psychic powers are mystical. They defy all scientific inquirry. They are always 
 
 A high density of interesting, exotic, and adventurous locations is improbable. But it is fun. The same goes for cultural differences.
 
-No non-human intelligences. No aliens. No AI. 
+No non-human intelligences. No aliens. No general arteficial intelligences[[dont need the headache]]. 
 

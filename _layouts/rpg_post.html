@@ -1,7 +1,22 @@
 ---
-layout: default
+layout: base
 ---
 <div class="essay-container">
+    <nav class="toc" id="toc">
+        <div class="toc-header">
+            <h3>Contents</h3>
+            <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
+        </div>
+        <ul>
+            {% for heading in page.headings %}
+            <li class="toc-item">
+                <a href="#{{ heading.id }}">{{ heading.text }}</a>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
     <article class="essay-content">
         <header class="post-header">
             <h1>{{ page.title }}</h1>
@@ -49,3 +64,21 @@ layout: default
 </div>
 
 <script src="{{ '/assets/js/sidenotes.js' | relative_url }}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const toc = document.getElementById('toc');
+    const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+    const tocList = toc.querySelector('ul');
+
+    headings.forEach(heading => {
+        const id = heading.textContent.toLowerCase().replace(/\s+/g, '-');
+        heading.setAttribute('id', id);
+
+        const tocItem = document.createElement('li');
+        tocItem.classList.add('toc-item');
+        tocItem.innerHTML = `<a href="#${id}">${heading.textContent}</a>`;
+        tocList.appendChild(tocItem);
+    });
+});
+</script>
