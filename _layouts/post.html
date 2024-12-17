@@ -82,16 +82,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const anchors = document.querySelectorAll('.sidenote-anchor');
     
     anchors.forEach((anchor, index) => {
-        const content = anchor.textContent;
+        const noteNumber = index + 1;
+        
+        // Get original text
+        let originalText = anchor.getAttribute('data-original-text');
+        if (!originalText) {
+            originalText = anchor.textContent;
+            anchor.setAttribute('data-original-text', originalText);
+        }
+        
+        // Create and position the sidenote
         const sidenote = document.createElement('div');
         sidenote.className = 'sidenote';
-        sidenote.textContent = content;
-        sidenote.setAttribute('data-index', index + 1);
+        sidenote.innerHTML = `<sup>${noteNumber}</sup> ${originalText}`;
+        
+        // Position the sidenote at the same height as the anchor
+        const anchorPosition = anchor.getBoundingClientRect();
+        const containerPosition = sidenotes.getBoundingClientRect();
+        const topPosition = anchorPosition.top - containerPosition.top;
+        sidenote.style.top = `${topPosition}px`;
+        
         sidenotes.appendChild(sidenote);
         
-        // Replace anchor content with number
-        anchor.textContent = index + 1;
-        anchor.setAttribute('data-index', index + 1);
+        // Update the anchor with the number
+        anchor.innerHTML = `<sup>${noteNumber}</sup>`;
     });
 });
 
