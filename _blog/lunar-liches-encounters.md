@@ -60,7 +60,7 @@ The spores are also poisonous, and any creature that enters the cloud must save 
 ## Abomibale Spawn of the Carnival Perpetual
 The Carnival Perpetual is not a place of joy. Its performers are the cosmic rejects, the ones who understood the cruel joke of existence and couldn't bear to keep it to themselves. They don't seek to entertain—they seek to share their misery, to hold up a cracked mirror to those who dare face them. Each encounter is an exercise in second-hand embarrassment, a reminder that perhaps the real monsters are the ones who would strike down these pathetic creatures. Their attacks don't just harm the body; they force you to confront uncomfortable truths about yourself. In the Carnival Perpetual, everyone's a clown, even the heroes.[[I hecking love clowns. They are so brilliantly pathetic.]]
 
-## Bone Piper
+### Bone Piper
 **HD:** 1  
 **AC:** 12  
 **Attack:** +2 to hit, Bone Flute (1d6 sonic)  
