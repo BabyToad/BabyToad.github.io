@@ -63,7 +63,7 @@ description: Major power players in the Golden Triangle sector
 
 **Goal:** Restrict all interstellar trade to a single port of entry.
 
-### 12 Finger Guilds
+### 12 Finger Guilds[[These guys are the best. I owe them a full write up.]]
 
 *A powerful cartel of mining oligarchs hailing from Serambi, known for their ruthless control over precious mineral resources. They manipulate markets and governments with bribes and threats, ensuring their monopoly remains unchallenged.*
 
