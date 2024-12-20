@@ -84,13 +84,31 @@ pre code {
 
 /* Links */
 a {
-    color: var(--link-color);
+    color: var(--text-primary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    border-bottom: 1px dotted var(--text-primary);
+    transition: all 0.2s ease;
 }
 
 a:hover {
-    color: var(--link-hover);
+    border-bottom-style: none;
+}
+
+/* Exceptions for navigation and structural elements */
+.navbar a,
+.nav-links a,
+.site-title a,
+.toc a,
+.contents a {
+    border-bottom: none;
+}
+
+.navbar a:hover,
+.nav-links a:hover,
+.site-title a:hover,
+.toc a:hover,
+.contents a:hover {
+    border-bottom: none;
 }
 
 /* Small Text and Meta */

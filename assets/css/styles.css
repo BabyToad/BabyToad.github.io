@@ -19,6 +19,7 @@
 @import 'components/blog-index.css';
 @import 'components/toc.css';
 @import 'components/game-container.css';
+@import 'components/preview-popup.css';
 
 /* Base styles */
 body {
@@ -45,13 +46,4 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin-bottom: 1.5rem;
-}
-
-a {
-    color: var(--link-color);
-    text-decoration: underline;
-}
-
-a:hover {
-    color: var(--link-hover);
 }
