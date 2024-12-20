@@ -5,43 +5,32 @@ description: Thoughts on game design, development, and other topics
 ---
 
 <div class="content-container">
-    <header class="page-header">
-        <h1>Blog</h1>
-        <p class="subtitle">{{ page.description }}</p>
-    </header>
-
+    <h1>Newest</h1>
     <div class="blog-posts">
         {% assign visible_posts = site.blog | where: "visibility", "public" | sort: 'date' | reverse %}
         {% for post in visible_posts %}
-        <article class="post-preview">
-            <header>
-                <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-                <div class="post-meta">
-                    <time datetime="{{ post.date | date_to_xmlschema }}">
-                        {{ post.date | date: "%B %d, %Y" }}
-                    </time>
-                    {% if post.tags %}
-                    <div class="post-tags">
-                        {% for tag in post.tags %}
-                        <span class="tag">{{ tag }}</span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-            </header>
-            
-            {% if post.description %}
-            <p class="post-description">{{ post.description }}</p>
+        <div class="post-entry">
+            • <a href="{{ post.url }}" 
+                 data-preview="true"
+                 data-title="{{ post.title }}"
+                 data-date="{{ post.date | date: '%Y-%m-%d' }}"
+                 data-description="{{ post.description }}"
+                 data-tags="{{ post.tags | join: ', ' }}">
+                {{ post.title }}
+            </a>
+            {% if post.type == "review" %}
+            <span class="post-type">review</span>
             {% endif %}
-            
-            <a href="{{ post.url }}" class="read-more">Read more →</a>
-        </article>
+        </div>
         {% endfor %}
     </div>
+</div>
 
-    {% if visible_posts.size == 0 %}
-    <div class="no-posts">
-        <p>No blog posts yet. Check back soon!</p>
+<div class="preview-popup" id="preview-popup">
+    <div class="preview-header">
+        <h3 class="preview-title"></h3>
+        <time class="preview-date"></time>
     </div>
-    {% endif %}
+    <div class="preview-description"></div>
+    <div class="preview-tags"></div>
 </div> 
