@@ -18,6 +18,7 @@
 @import 'components/intro.css';
 @import 'components/blog-index.css';
 @import 'components/toc.css';
+@import 'components/game-container.css';
 
 /* Base styles */
 body {
