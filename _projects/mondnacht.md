@@ -26,7 +26,7 @@ last_modified_at: 2024-12-20
 
 ## About the Project
 
-Created in collaboration with Lukas Krieg and Leon Noel, _Mondnacht_ explores themes of romanticism and space exploration through an interactive narrative. The game transforms a classical German poem into a contemporary sci-fi experience, challenging players to discover new meanings in familiar verses.
+Created in collaboration with Lukas Krieg and Leon Noel Micheel, _Mondnacht_ explores themes of romanticism and space exploration through an interactive narrative. The game transforms a classical German poem into a contemporary sci-fi experience, challenging players to discover new meanings in familiar verses.
 
 ### Features
 - Interactive retelling of Eichendorff's "Mondnacht"
@@ -40,4 +40,7 @@ This experimental piece was developed during the first Naranauten Game Jam in ap
 ## Recognition
 First Place Winner - Naranauten Game Jam
 
+## Collaborators
+- **Lukas Krieg**
+- **Leon Noell Michel**
 
