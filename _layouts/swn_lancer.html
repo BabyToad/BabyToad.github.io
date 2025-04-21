@@ -1,0 +1,78 @@
+---
+layout: base
+---
+
+<div class="swn-lancer-container">
+    <header class="document-header">
+        <h1>{{ page.title }}</h1>
+        <div class="metadata">
+            <p><strong>Version</strong>: {{ page.version }}</p>
+            <p><strong>Last Updated</strong>: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+            <p><strong>Status</strong>: {{ page.status }}</p>
+            <p><strong>Confidence</strong>: {{ page.confidence }}</p>
+            <a href="{{ page.pdf_url }}" class="pdf-download">Download PDF</a>
+        </div>
+    </header>
+
+    <nav class="toc" id="toc">
+        <div class="toc-header">
+            <h3>Contents</h3>
+            <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
+        </div>
+        <ul>
+        {% for part in site.swn_lancer %}
+            {% unless part.title == page.title %}
+            <li class="toc-item">
+                <a href="#part-{{ part.title | slugify }}">{{ part.title }}</a>
+                <div class="progress-bar"><div class="progress"></div></div>
+            </li>
+            {% endunless %}
+        {% endfor %}
+        </ul>
+    </nav>
+
+    <article class="swn-lancer-content">
+        {% if page.abstract %}
+        <div class="abstract">
+            <strong>Abstract:</strong> {{ page.abstract }}
+        </div>
+        {% endif %}
+
+        <div class="rules-content">
+            <!-- Add the current page content first -->
+            <div class="rules-part" data-expanded="true">
+                <div class="rules-part-content">
+                    {{ content }}
+                </div>
+            </div>
+            
+            <!-- Then add the other parts -->
+            {% for part in site.swn_lancer %}
+                {% unless part.title == page.title %}
+                <div class="rules-part" data-expanded="true" id="part-{{ part.title | slugify }}">
+                    <div class="rules-part-header">
+                        <span class="expand-icon">▼</span>
+                        {{ part.title }}
+                    </div>
+                    <div class="rules-part-content">
+                        {%- capture part_content -%}{{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{%- endcapture -%}
+                        {{ part_content | markdownify }}
+                    </div>
+                </div>
+                {% endunless %}
+            {% endfor %}
+        </div>
+    </article>
+
+    <div class="sidenotes">
+        <!-- Sidenotes will be moved here by JavaScript -->
+    </div>
+</div>
+
+<script>
+// Keep existing JavaScript for TOC and sidenotes
+document.addEventListener('DOMContentLoaded', () => {
+    // Existing TOC and progress tracking code
+    // Existing sidenotes handling code
+});
+</script> 

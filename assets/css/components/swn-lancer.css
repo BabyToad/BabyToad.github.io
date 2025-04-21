@@ -1,0 +1,341 @@
+/* SWN Lancer specific styles */
+
+/* Container layout */
+.swn-lancer-container {
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Document header */
+.document-header {
+    grid-column: 1 / -1;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.metadata {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.pdf-download {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Stat blocks */
+.stat-block {
+    background: var(--background-alt);
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+.stat-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.stat-block-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.stat-block-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--background-alt);
+    border-radius: 3px;
+    font-size: 0.9em;
+    margin: 0 0.2rem;
+}
+
+/* Tables - SWN Style */
+.weapon-table,
+.fitting-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.weapon-table th,
+.fitting-table th {
+    background: var(--bg-secondary);
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-primary);
+}
+
+.weapon-table td,
+.fitting-table td {
+    padding: 0.875rem 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weapon-table tr:last-child td,
+.fitting-table tr:last-child td {
+    border-bottom: none;
+}
+
+.weapon-table tr:nth-child(even),
+.fitting-table tr:nth-child(even) {
+    background: var(--bg-secondary);
+}
+
+.weapon-table tr:hover,
+.fitting-table tr:hover {
+    background: var(--bg-hover);
+}
+
+/* Weapon table specific styles */
+.weapon-table td:nth-child(1) { /* Name */
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.weapon-table td:nth-child(2), /* Range */
+.weapon-table td:nth-child(3) { /* Damage */
+    font-family: var(--font-mono);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.weapon-table td:nth-child(4) { /* Type */
+    text-align: center;
+    font-weight: 500;
+}
+
+.weapon-table td:nth-child(5) { /* Tags */
+    color: var(--text-secondary);
+}
+
+/* Fitting table specific styles */
+.fitting-table td:nth-child(1) { /* Name */
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.fitting-table td:nth-child(2) { /* Effect */
+    color: var(--text-secondary);
+}
+
+.fitting-table td:nth-child(3), /* Power */
+.fitting-table td:nth-child(4) { /* Mass */
+    font-family: var(--font-mono);
+    text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .weapon-table,
+    .fitting-table {
+        font-size: 0.85em;
+    }
+
+    .weapon-table td,
+    .fitting-table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .weapon-table th,
+    .fitting-table th {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+/* Rules parts */
+.rules-part {
+    margin-bottom: 2rem;
+}
+
+.rules-part-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.expand-icon {
+    font-size: 0.8em;
+    transition: transform 0.2s ease;
+}
+
+.rules-part[data-expanded="false"] .expand-icon {
+    transform: rotate(-90deg);
+}
+
+.rules-part-content {
+    transition: max-height 0.3s ease;
+}
+
+.rules-part[data-expanded="false"] .rules-part-content {
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* Abstract */
+.abstract {
+    background: var(--background-alt);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .swn-lancer-container {
+        grid-template-columns: 200px 1fr;
+    }
+    
+    .sidenotes {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .swn-lancer-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .toc {
+        display: none;
+    }
+}
+
+/* Frame Table - Technical Spec Style */
+.frame-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 0.85em;
+    line-height: 1.5;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.frame-table th {
+    background: var(--bg-secondary);
+    padding: 1rem 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.frame-table td {
+    padding: 0.875rem 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.frame-table tr:last-child td {
+    border-bottom: none;
+}
+
+.frame-table tr:nth-child(even) {
+    background: var(--bg-secondary);
+}
+
+.frame-table tr:hover {
+    background: var(--bg-hover);
+}
+
+/* Frame table specific column styles */
+.frame-table td:first-child { /* Hull name */
+    text-align: left;
+    font-weight: 500;
+    color: var(--accent-color);
+    padding-left: 1rem;
+}
+
+.frame-table td:nth-child(2), /* Cost */
+.frame-table td:nth-child(3) { /* Maintenance */
+    font-family: var(--font-mono);
+    letter-spacing: -0.05em;
+}
+
+/* Stats columns */
+.frame-table td:nth-child(4), /* Speed */
+.frame-table td:nth-child(5), /* Armor */
+.frame-table td:nth-child(6), /* HP */
+.frame-table td:nth-child(7), /* AC */
+.frame-table td:nth-child(8), /* Power */
+.frame-table td:nth-child(9), /* Mass */
+.frame-table td:nth-child(10) { /* Hardpoints */
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+
+/* Special indicators (* and #) */
+.frame-table td sup {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 0.85em;
+}
+
+/* Class column */
+.frame-table td:last-child {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .frame-table {
+        font-size: 0.75em;
+    }
+
+    .frame-table th,
+    .frame-table td {
+        padding: 0.75rem 0.35rem;
+    }
+
+    .frame-table td:first-child {
+        padding-left: 0.5rem;
+    }
+} 
