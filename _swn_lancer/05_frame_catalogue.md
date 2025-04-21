@@ -8,39 +8,22 @@ order: 6
 ## Frames
 
 {: .frame-table}
-| Hull | Cost | Maint | Speed | Armor | HP | AC | Power | Mass | Hardpt | Class |
-|------|------|-------|--------|--------|-----|-----|--------|-------|---------|--------|
-| IPS‑N Tortuga | 600k | 1,000 | 3 | 15 | 40 | 16 | 20 | 12 | 2 | Light |
-| HORUS Goblin | 150k | 500 | 5 | 8# | 10* | 17 | 5 | 10 | 1 | Suit |
-| HORUS Gorgon | 1m | 2,000 | 4 | 15 | 50 | 14 | 20 | 40 | 3 | Heavy |
+| Hull | Speed | Armor | HP | AC | Hard Points | System Points | Class |
+|------|-------|--------|-----|-----|------------|--------------|--------|
+| IPS‑N Tortuga | 3 | 2 | 32 | 12 | 5 | 6 | Heavy |
+| HORUS Goblin | 5 | 0 | 24 | 18 | 1 | 8 | Suit |
+| HORUS Gorgon | 3 | 0 | 48 | 14 | 5 | 6 | Heavy |
+| CNS Qilin | 4 | 1 | 28 | 14 | 4 | 7 | Light | Benevolent Resonance – Allies within 3 gain +1 AC. 1/round you may redirect a hostile's reaction or overwatch attack to yourself. |
+| CNS Baihu | 3 | 2 | 36 | 12 | 5 | 6 | Heavy | Triumphant Roar – When you destroy or critically damage a target, all hostiles within 2 must save vs Mental or become Shaken (‑2 on attacks) for 1 round; you repair 4 HP. |
+| CNS Zhuque | 2 | 0 | 32 | 15 | 6 | 5 | Heavy | Gravity Stabilizers – Heavy/Loading weapons you fire ignore Inaccurate and automatically Brace (no action). If you move more than 2, the benefit is lost until your next turn. |
+| DM Chevalier | 4 | 1 | 30 | 13 | 4 | 6 | Medium | Cavalry Charge – 1/round, if you move 3+ before making a melee attack, gain +2 Accuracy and +4 damage on that attack. |
+| DM Casemate | 2 | 3 | 44 | 11 | 6 | 5 | Heavy | Fortified Bastion – Counts as hard cover for adjacent allies. 1/scene you may Brace as a free action; until your next turn all ranged damage to you is halved. |
+| DM Fusilier | 5 | 0 | 24 | 16 | 2 | 8 | Suit | Riposte – Once/round, when a melee attack misses you, make a free Sidearm or Melee attack against the attacker. |
+| NF Cid | 5 | 0 | 24 | 17 | 2 | 8 | Suit | Flux‑Veil – After Boosting you become Invisible and ignore engagement until end of turn. |
+| NF Cortes | 4 | 1 | 32 | 13 | 4 | 6 | Medium | Cibernetic Regen – 1/scene Quick—patch nanites, repairing 6 HP and clearing Impaired/Slowed. |
+| NF Tercio | 2 | 3 | 46 | 11 | 6 | 5 | Heavy | Phalanx Protocol – Adjacent allies gain hard cover. While you haven't moved this turn, ranged damage against you is halved. |
 
-** Pilots of suit‑class mechs may choose to take an attack’s damage on their own HP.*
+
+** Pilots of suit‑class mechs may choose to take an attack's damage on their own HP.*
 
 *# Suit‑class armor does not apply against Heavy‑class weapons. Light/Heavy mechs ignore non‑Heavy attacks.*
-
-## Example Mechs
-*Three example frames showcasing different combat roles and capabilities.*
-
-### Scout Frame
-*Light and fast, perfect for reconnaissance and hit-and-run tactics.*  
-HD 2 / AC 4 / Move 12m / DR 1 / Hard-Pts 2 / Power-Mass 4-4  
-BUILT-INS: Enhanced Sensors, Stealth Coating  
-MOUNTS:
-  • Main — Light Laser (E) 1d6
-  • Heavy — Missile Pod (P, Blast) 2d6
-
-### Brawler Frame
-*Tough and strong, built for close-quarters combat.*  
-HD 4 / AC 3 / Move 8m / DR 3 / Hard-Pts 3 / Power-Mass 6-6  
-BUILT-INS: Reinforced Structure, Combat Claws  
-MOUNTS:
-  • Main — Heavy Cannon (P, Brace, Piercing 1) 3d6
-  • Heavy — Plasma Blade (E) 2d6+2
-
-### Support Frame
-*Versatile and adaptable, providing battlefield control.*  
-HD 3 / AC 3 / Move 10m / DR 2 / Hard-Pts 1 / Power-Mass 5-5  
-BUILT-INS: Repair Systems, Shield Generator (+2 DR vs. E)  
-MOUNTS:
-  • Main — Disruptor Beam (X, Hex) 1d6
-  • Heavy — Support Cannon (P, Rapid) 2d6 

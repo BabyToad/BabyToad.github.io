@@ -21,3 +21,6 @@ order: 2
 - Listed as a single number (e.g., DR 3)
 - Base DR applies to all damage types
 - Fittings may provide bonus DR vs. specific types
+
+### Infantry and Mech Scale
+Infantry deals only half damage against mechs, and mechs deal double damage against infantry.
