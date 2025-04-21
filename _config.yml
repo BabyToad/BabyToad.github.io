@@ -16,6 +16,9 @@ collections:
   essays:
     output: true
     permalink: /essays/:title/
+  swn_lancer:
+    output: true
+    permalink: /swn-lancer/:title/
 
 plugins:
   - jekyll-feed
