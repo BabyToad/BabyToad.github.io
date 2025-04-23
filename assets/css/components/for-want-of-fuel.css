@@ -1,13 +1,17 @@
-/* SWN Lancer specific styles */
+/* For Want Of Fuel specific styles */
 
 /* Container layout */
-.swn-lancer-container {
+.for-want-of-fuel-container {
     display: grid;
     grid-template-columns: 250px 1fr 250px;
     gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    color: var(--text-primary);
 }
 
 /* Document header */
@@ -200,6 +204,7 @@
 
 .rules-part-content {
     transition: max-height 0.3s ease;
+    padding: 0.5rem 0;
 }
 
 .rules-part[data-expanded="false"] .rules-part-content {
@@ -209,16 +214,18 @@
 
 /* Abstract */
 .abstract {
-    background: var(--background-alt);
-    padding: 1rem;
+    background: var(--bg-secondary);
+    padding: 1.5rem;
     border-radius: 4px;
-    margin-bottom: 2rem;
-    font-style: italic;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
 }
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .swn-lancer-container {
+    .for-want-of-fuel-container {
         grid-template-columns: 200px 1fr;
     }
     
@@ -228,7 +235,7 @@
 }
 
 @media (max-width: 768px) {
-    .swn-lancer-container {
+    .for-want-of-fuel-container {
         grid-template-columns: 1fr;
     }
     
@@ -855,5 +862,250 @@
 
     .stat-group {
         padding: 0.5rem;
+    }
+}
+
+/* Basic Tables */
+.mechanics-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    background: var(--bg-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
+}
+
+.mechanics-table th {
+    background: var(--bg-secondary);
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-primary);
+}
+
+.mechanics-table td {
+    padding: 1rem 1.25rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mechanics-table tr:last-child td {
+    border-bottom: none;
+}
+
+.mechanics-table tr:nth-child(even) {
+    background: var(--bg-secondary);
+}
+
+.mechanics-table tr:hover {
+    background: var(--bg-hover);
+}
+
+/* Specific column styles for mechanics tables */
+.mechanics-table td:first-child { /* First column (usually numbers or fuel) */
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    width: 60px;
+}
+
+.mechanics-table td:nth-child(2) { /* Title column */
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.mechanics-table td:nth-child(3) { /* Description column */
+    color: var(--text-secondary);
+}
+
+/* Mobile adjustments for mechanics tables */
+@media (max-width: 768px) {
+    .mechanics-table {
+        font-size: 0.95rem;
+    }
+
+    .mechanics-table th,
+    .mechanics-table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .mechanics-table td:first-child {
+        width: 40px;
+    }
+}
+
+/* Typography Improvements */
+.for-want-of-fuel-container h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin: 2.5rem 0 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.for-want-of-fuel-container h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+    margin: 2rem 0 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    border-bottom: 1px dotted var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.for-want-of-fuel-container h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 1.75rem 0 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.for-want-of-fuel-container h4 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin: 1.5rem 0 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Paragraphs and Text */
+.for-want-of-fuel-container p {
+    margin-bottom: 1.5rem;
+    max-width: 70ch;
+}
+
+.for-want-of-fuel-container li {
+    margin-bottom: 0.75rem;
+    max-width: 65ch;
+}
+
+/* Blockquotes */
+.for-want-of-fuel-container blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-left: 4px solid var(--accent-color);
+    background: var(--bg-secondary);
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.for-want-of-fuel-container blockquote p {
+    margin: 0;
+}
+
+/* Lists */
+.for-want-of-fuel-container ul,
+.for-want-of-fuel-container ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+/* Code and Technical Text */
+.for-want-of-fuel-container code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    background: var(--bg-secondary);
+    border-radius: 3px;
+    color: var(--accent-color);
+}
+
+/* Mobile Typography Adjustments */
+@media (max-width: 768px) {
+    .for-want-of-fuel-container {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .for-want-of-fuel-container h1 {
+        font-size: 2rem;
+        margin: 2rem 0 1.25rem;
+    }
+
+    .for-want-of-fuel-container h2 {
+        font-size: 1.75rem;
+        margin: 1.75rem 0 1rem;
+    }
+
+    .for-want-of-fuel-container h3 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 1rem;
+    }
+
+    .for-want-of-fuel-container h4 {
+        font-size: 1.2rem;
+        margin: 1.25rem 0 1rem;
+    }
+
+    .mechanics-table {
+        font-size: 0.95rem;
+    }
+}
+
+/* Embedded Content */
+.for-want-of-fuel-container iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    margin: 2rem auto;
+    display: block;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Media Inspiration Section */
+.for-want-of-fuel-container h1 + h2 {
+    margin-top: 3rem;
+}
+
+/* Target the main list items */
+.for-want-of-fuel-container h2 + ul > li,
+.for-want-of-fuel-container h2 + ul > li > strong {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--border-color);
+    display: block;
+}
+
+/* Target the nested list items */
+.for-want-of-fuel-container h2 + ul > li > ul > li {
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+    border-left: none;
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    list-style-type: '- ';
+}
+
+/* Remove default list styling */
+.for-want-of-fuel-container h2 + ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.for-want-of-fuel-container h2 + ul > li > ul {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+/* Mobile adjustments for embedded content */
+@media (max-width: 768px) {
+    .for-want-of-fuel-container iframe {
+        height: 200px;
     }
 } 
