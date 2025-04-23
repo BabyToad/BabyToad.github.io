@@ -320,5 +320,180 @@
       }
     ],
     "hard_points": 1
+  },
+  "xiaguang_disintegrator": {
+    "name": "Xiaguang Disintegrator",
+    "category": "Ranged",
+    "stats": {
+      "range": 10,
+      "damage": "2d10",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Overkill"
+      }
+    ],
+    "special": "Damage dice are exploding",
+    "hard_points": 3
+  },
+  "harmony_gauntlets": {
+    "name": "Harmony Gauntlets",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d12+4",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Melee"
+      }
+    ],
+    "special": "On a hit you may give one ally +2 to their next attack against this your target",
+    "hard_points": 2
+  },
+  "meridian_pulse_cannon": {
+    "name": "Meridian Pulse Cannon",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "1d6+6",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Blast",
+        "value": 2
+      },
+      {
+        "name": "Smart"
+      },
+      {
+        "name": "Loading"
+      }
+    ],
+    "special": "Ignores soft cover",
+    "hard_points": 3
+  },
+  "fusil_de_ligne_volley_rifle": {
+    "name": "Fusil‑de‑Ligne Volley Rifle",
+    "category": "Ranged",
+    "stats": {
+      "range": 12,
+      "damage": "1d12+2",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Accurate"
+      },
+      {
+        "name": "Loading"
+      },
+      {
+        "name": "Brace"
+      }
+    ],
+    "hard_points": 2
+  },
+  "rampart_boarding_halberd": {
+    "name": "Rampart Boarding Halberd",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d12+6",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Reach",
+        "value": 2
+      }
+    ],
+    "special": "On a crit, push the target 1 and may immediately step into their space",
+    "hard_points": 3
+  },
+  "oriflamme_incinerator": {
+    "name": "Oriflamme Incinerator",
+    "category": "Ranged",
+    "stats": {
+      "range": 4,
+      "damage": "2d6+4",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Cone"
+      },
+      {
+        "name": "Limited",
+        "value": 3
+      }
+    ],
+    "special": "Burning: targets failing a Physical save take 1d6 Burn at start of their turn for 2 rounds",
+    "hard_points": 2
+  },
+  "photonic_ray_cannon": {
+    "name": "Photonic Ray Cannon",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "2d12+4",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "AP"
+      },
+      {
+        "name": "Accurate"
+      },
+      {
+        "name": "Loading"
+      },
+      {
+        "name": "Overheat",
+        "value": 2
+      }
+    ],
+    "special": "You take 2 HP damage firing this weapon",
+    "hard_points": 3
+  },
+  "galvanic_rifle": {
+    "name": "Galvanic Rifle",
+    "category": "Ranged",
+    "stats": {
+      "range": 10,
+      "damage": "1d10",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Burn"
+      }
+    ],
+    "special": "Targets hit take 1d6 Burn for 2 rounds (save ends)",
+    "hard_points": 2
+  },
+  "grav_torsion_howitzer": {
+    "name": "Grav Torsion Howitzer",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "1d12+6",
+      "damage_type": "X"
+    },
+    "tags": [
+      {
+        "name": "Blast",
+        "value": 2
+      },
+      {
+        "name": "Loading"
+      }
+    ],
+    "special": "All creatures in Blast failing the save are pulled 1 toward the center",
+    "hard_points": 3
   }
 } 
