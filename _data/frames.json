@@ -1,0 +1,180 @@
+{
+  "gms_everest": {
+    "name": "GMS Everest",
+    "manufacturer": "GMS",
+    "class": "Light",
+    "stats": {
+      "speed": 4,
+      "armor": 0,
+      "hp": 40,
+      "ac": 14,
+      "hard_points": 6,
+      "system_points": 6
+    }
+  },
+  "ips_n_tortuga": {
+    "name": "IPS‑N Tortuga",
+    "manufacturer": "IPS‑N",
+    "class": "Heavy",
+    "stats": {
+      "speed": 3,
+      "armor": 4,
+      "hp": 32,
+      "ac": 12,
+      "hard_points": 5,
+      "system_points": 6
+    }
+  },
+  "horus_goblin": {
+    "name": "HORUS Goblin",
+    "manufacturer": "HORUS",
+    "class": "Suit",
+    "stats": {
+      "speed": 5,
+      "armor": 0,
+      "hp": 24,
+      "ac": 18,
+      "hard_points": 1,
+      "system_points": 8
+    }
+  },
+  "horus_gorgon": {
+    "name": "HORUS Gorgon",
+    "manufacturer": "HORUS",
+    "class": "Heavy",
+    "stats": {
+      "speed": 3,
+      "armor": 0,
+      "hp": 48,
+      "ac": 14,
+      "hard_points": 5,
+      "system_points": 6
+    }
+  },
+  "cns_qilin": {
+    "name": "CNS Qilin",
+    "manufacturer": "CNS",
+    "class": "Light",
+    "stats": {
+      "speed": 4,
+      "armor": 1,
+      "hp": 28,
+      "ac": 14,
+      "hard_points": 4,
+      "system_points": 7
+    },
+    "special": "Benevolent Resonance – Allies within 3 gain +1 AC. 1/round you may redirect a hostile's reaction or overwatch attack to yourself."
+  },
+  "cns_baihu": {
+    "name": "CNS Baihu",
+    "manufacturer": "CNS",
+    "class": "Heavy",
+    "stats": {
+      "speed": 3,
+      "armor": 2,
+      "hp": 36,
+      "ac": 12,
+      "hard_points": 5,
+      "system_points": 6
+    },
+    "special": "Triumphant Roar – When you destroy or critically damage a target, all hostiles within 2 must save vs Mental or become Shaken (‑2 on attacks) for 1 round; you repair 4 HP."
+  },
+  "cns_zhuque": {
+    "name": "CNS Zhuque",
+    "manufacturer": "CNS",
+    "class": "Heavy",
+    "stats": {
+      "speed": 2,
+      "armor": 0,
+      "hp": 32,
+      "ac": 15,
+      "hard_points": 6,
+      "system_points": 5
+    },
+    "special": "Gravity Stabilizers – Heavy/Loading weapons you fire ignore Inaccurate and automatically Brace (no action). If you move more than 2, the benefit is lost until your next turn."
+  },
+  "dm_chevalier": {
+    "name": "DM Chevalier",
+    "manufacturer": "DM",
+    "class": "Medium",
+    "stats": {
+      "speed": 4,
+      "armor": 1,
+      "hp": 30,
+      "ac": 13,
+      "hard_points": 4,
+      "system_points": 6
+    },
+    "special": "Cavalry Charge – 1/round, if you move 3+ before making a melee attack, gain +2 Accuracy and +4 damage on that attack."
+  },
+  "dm_casemate": {
+    "name": "DM Casemate",
+    "manufacturer": "DM",
+    "class": "Heavy",
+    "stats": {
+      "speed": 2,
+      "armor": 3,
+      "hp": 44,
+      "ac": 11,
+      "hard_points": 6,
+      "system_points": 5
+    },
+    "special": "Fortified Bastion – Counts as hard cover for adjacent allies. 1/scene you may Brace as a free action; until your next turn all ranged damage to you is halved."
+  },
+  "dm_fusilier": {
+    "name": "DM Fusilier",
+    "manufacturer": "DM",
+    "class": "Suit",
+    "stats": {
+      "speed": 5,
+      "armor": 0,
+      "hp": 24,
+      "ac": 16,
+      "hard_points": 2,
+      "system_points": 8
+    },
+    "special": "Riposte – Once/round, when a melee attack misses you, make a free Sidearm or Melee attack against the attacker."
+  },
+  "nf_cid": {
+    "name": "NF Cid",
+    "manufacturer": "NF",
+    "class": "Suit",
+    "stats": {
+      "speed": 5,
+      "armor": 0,
+      "hp": 24,
+      "ac": 17,
+      "hard_points": 2,
+      "system_points": 8
+    },
+    "special": "Flux‑Veil – After Boosting you become Invisible and ignore engagement until end of turn."
+  },
+  "nf_cortes": {
+    "name": "NF Cortes",
+    "manufacturer": "NF",
+    "class": "Medium",
+    "stats": {
+      "speed": 4,
+      "armor": 1,
+      "hp": 32,
+      "ac": 13,
+      "hard_points": 4,
+      "system_points": 6
+    },
+    "special": "Cibernetic Regen – 1/scene Quick—patch nanites, repairing 6 HP and clearing Impaired/Slowed."
+  },
+  "nf_tercio": {
+    "name": "NF Tercio",
+    "manufacturer": "NF",
+    "class": "Heavy",
+    "stats": {
+      "speed": 2,
+      "armor": 3,
+      "hp": 46,
+      "ac": 11,
+      "hard_points": 6,
+      "system_points": 5
+    },
+    "special": "Phalanx Protocol – Adjacent allies gain hard cover. While you haven't moved this turn, ranged damage against you is halved."
+  }
+} 

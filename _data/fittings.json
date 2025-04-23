@@ -1,0 +1,74 @@
+{
+  "personalizations": {
+    "name": "Personalizations",
+    "category": "General",
+    "effect": "+4 HP, cosmetic customization",
+    "system_points": 1
+  },
+  "custom_paint": {
+    "name": "Custom Paint Job",
+    "category": "General",
+    "effect": "When you are reduced to 0 HP, roll a d6. On a 6, you are only reduced to 1 HP.",
+    "system_points": 1
+  },
+  "smoke_charges": {
+    "name": "Smoke Charges",
+    "category": "Tactical",
+    "effect": "Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides soft cover to anyone inside it. Lasts for 2 rounds. Can be set as mine. Limited 3.",
+    "system_points": 1
+  },
+  "he_charges": {
+    "name": "HE Charges",
+    "category": "Tactical",
+    "effect": "Deploy a high explosive charge at a location within range 5. The charge detonates dealing 2d6 P damage in a 1-range radius. Targets must save vs Evasion to take half. Can be set as mine. Limited 3.",
+    "system_points": 1
+  },
+  "jump_jets": {
+    "name": "Jump Jet System",
+    "category": "Mobility",
+    "effect": "You can fly while moving, however you start falling when you stop or the end of your turn.",
+    "system_points": 2
+  },
+  "deployable_cover": {
+    "name": "Deployable Cover",
+    "category": "Tactical",
+    "effect": "Deploy a 2 hardened barriers (Size 1). The barrier provides hard cover and has 10 HP.",
+    "system_points": 1
+  },
+  "nhp_assistant": {
+    "name": "NHP Assistant",
+    "category": "Systems",
+    "effect": "An integrated NHP that assists you and can follow basic instructs when operating the mech independantly.",
+    "system_points": 2
+  },
+  "flight_system": {
+    "name": "Flight System",
+    "category": "Mobility",
+    "effect": "You can fly. You take Class+1 HP damage each turn when flying.",
+    "system_points": 2
+  },
+  "manipulators": {
+    "name": "Manipulators",
+    "category": "Utility",
+    "effect": "Advanced articulated hands that can perform delicate operations. You can interact with objects designed for human use and make fine manipulations that would normally be impossible for a mech.",
+    "system_points": 1
+  },
+  "turret_drone": {
+    "name": "Turret Drone",
+    "category": "Combat",
+    "effect": "Deploy a turret drone within range 10 that attacks deals +6 damage to any target you hit within the drones range of 10. The drone has 5 HP, AC 12.",
+    "system_points": 2
+  },
+  "ammo_feeder": {
+    "name": "Ammo Feeder",
+    "category": "Combat",
+    "effect": "Once per scene, you can reload a Loading weapon as a free action.",
+    "system_points": 1
+  },
+  "stabilizers": {
+    "name": "Stabilizers",
+    "category": "Combat",
+    "effect": "You can fire Brace weapons and move, but take -2 to Hit.",
+    "system_points": 1
+  }
+} 
