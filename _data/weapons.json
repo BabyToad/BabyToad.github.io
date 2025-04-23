@@ -1,0 +1,324 @@
+{
+  "chain_axe": {
+    "name": "Chain Axe",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Shock",
+        "value": 2
+      }
+    ],
+    "special": "Always does at least 2 damage",
+    "hard_points": 2
+  },
+  "segment_knife": {
+    "name": "Segment Knife",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d6+2",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Overkill"
+      }
+    ],
+    "special": "Damage dice are exploding",
+    "hard_points": 1
+  },
+  "deck_sweeper": {
+    "name": "Deck-sweeper Automatic Shotgun",
+    "category": "Ranged",
+    "stats": {
+      "range": 3,
+      "damage": "2d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Threat"
+      },
+      {
+        "name": "Inaccurate"
+      }
+    ],
+    "special": "Threatens attacks of opportunity",
+    "hard_points": 2
+  },
+  "daisy_cutter": {
+    "name": "Daisy Cutter",
+    "category": "Ranged",
+    "stats": {
+      "range": 7,
+      "damage": "3d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Cone"
+      },
+      {
+        "name": "Limited",
+        "value": 2
+      }
+    ],
+    "special": "Cone AoE; Limited Uses",
+    "hard_points": 3
+  },
+  "catalytic_hammer": {
+    "name": "Catalytic Hammer",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d6+10",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Loading"
+      }
+    ],
+    "special": "Targets must save against Physical or be stunned for one round. Requires an Action to reload",
+    "hard_points": 2
+  },
+  "ew_suite": {
+    "name": "EW Suite",
+    "category": "Systems",
+    "stats": {
+      "range": 10,
+      "damage": "1d6",
+      "damage_type": "X"
+    },
+    "tags": [
+      {
+        "name": "Smart"
+      },
+      {
+        "name": "Hex"
+      }
+    ],
+    "special": "Smart weapons attack using guided systems. Save against Tech for half damage. On a fail the target is hexxed and also gets -4 on their next attack",
+    "hard_points": 2
+  },
+  "nexus_hunter": {
+    "name": "Nexus (Hunter Killer)",
+    "category": "Systems",
+    "stats": {
+      "range": 10,
+      "damage": "1d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Smart"
+      }
+    ],
+    "special": "Smart weapons attack using guided systems. Save against Tech for half damage",
+    "hard_points": 2
+  },
+  "ghoul_nexus": {
+    "name": "Ghoul Nexus",
+    "category": "Systems",
+    "stats": {
+      "range": 10,
+      "damage": "1d6+4",
+      "damage_type": ["P", "E", "X"]
+    },
+    "tags": [
+      {
+        "name": "Smart"
+      }
+    ],
+    "special": "Smart weapons attack using guided systems. Save against Tech for half damage",
+    "hard_points": 2
+  },
+  "vorpal_gun": {
+    "name": "Vorpal Gun",
+    "category": "Ranged",
+    "stats": {
+      "range": 5,
+      "damage": "2d12",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "Vigil"
+      }
+    ],
+    "special": "Once per turn you can immediatly attack a hostile that attacked one of your allies",
+    "hard_points": 2
+  },
+  "heavy_machine_gun": {
+    "name": "Heavy Machine Gun",
+    "category": "Ranged",
+    "stats": {
+      "range": 8,
+      "damage": "2d12+8",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Inaccurate"
+      },
+      {
+        "name": "Suppressive"
+      },
+      {
+        "name": "Brace"
+      }
+    ],
+    "special": "Can suppress a 2-range cone",
+    "hard_points": 2
+  },
+  "mortar": {
+    "name": "Mortar",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "1d12+2",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Blast",
+        "value": 1
+      },
+      {
+        "name": "Inaccurate"
+      },
+      {
+        "name": "Arcing"
+      }
+    ],
+    "special": "10m AoE",
+    "hard_points": 2
+  },
+  "howitzer": {
+    "name": "Howitzer",
+    "category": "Ranged",
+    "stats": {
+      "range": 20,
+      "damage": "2d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Blast",
+        "value": 2
+      },
+      {
+        "name": "Inaccurate"
+      },
+      {
+        "name": "Loading"
+      },
+      {
+        "name": "Brace"
+      },
+      {
+        "name": "Arcing"
+      }
+    ],
+    "special": "20m AoE. Does not require line of sight",
+    "hard_points": 3
+  },
+  "assault_rifle": {
+    "name": "Assault Rifle",
+    "category": "Ranged",
+    "stats": {
+      "range": 10,
+      "damage": "1d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Shock",
+        "value": 2
+      }
+    ],
+    "special": "Always does at least 2 damage",
+    "hard_points": 2
+  },
+  "thermal_rifle": {
+    "name": "Thermal Rifle",
+    "category": "Ranged",
+    "stats": {
+      "range": 5,
+      "damage": "1d6+4",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "AP"
+      }
+    ],
+    "special": "Ignores Armor",
+    "hard_points": 2
+  },
+  "anti_material_rifle": {
+    "name": "Anti-material Rifle",
+    "category": "Ranged",
+    "stats": {
+      "range": 20,
+      "damage": "2d12",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "AP"
+      },
+      {
+        "name": "Loading"
+      },
+      {
+        "name": "Accurate"
+      },
+      {
+        "name": "Brace"
+      }
+    ],
+    "special": "You cannot fire and move in the same turn",
+    "hard_points": 3
+  },
+  "heavy_charged_blade": {
+    "name": "Heavy Charged Blade",
+    "category": "Melee",
+    "stats": {
+      "range": "Melee",
+      "damage": "1d12+6",
+      "damage_type": "E"
+    },
+    "tags": [
+      {
+        "name": "AP"
+      }
+    ],
+    "special": "Ignores Armor",
+    "hard_points": 3
+  },
+  "missile_rack": {
+    "name": "Missile Rack",
+    "category": "Ranged",
+    "stats": {
+      "range": 10,
+      "damage": "1d6+2",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Blast",
+        "value": 1
+      },
+      {
+        "name": "Loading"
+      }
+    ],
+    "hard_points": 1
+  }
+} 
