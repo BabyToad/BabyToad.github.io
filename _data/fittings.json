@@ -71,4 +71,29 @@
     "effect": "You can fire Brace weapons and move, but take -2 to Hit.",
     "system_points": 1
   }
-} 
+  ,
+  "siege_ram": {
+    "name": "Siege Ram",
+    "category": "Combat",
+    "effect": "+4 damage when charging into objects or frames. 20 AP P damage against objects.",
+    "system_points": 2
+  },
+  "hyper_dense_armor": {
+    "name": "Hyper Dense Armor",
+    "category": "Defense",
+    "effect": "Halves all damage from ranged attacks beyond range 3. Halves all damage on your range attacks beyond range 3.",
+    "system_points": 3
+  },
+  "horus_puppetmaster": {
+    "name": "HORUS Puppetmaster",
+    "category": "Systems",
+    "effect": "As an Action you can move (4) a drone and deal 4 E Damage to a adjacent enemy. This includes enemy drones.",
+    "system_points": 2
+  },
+  "sentinel_drone": {
+    "name": "Sentinel Drone",
+    "category": "Combat",
+    "effect": "Deploy a sentinel drone within range 10 that deals 6 P Damage to any hostile within 2 Range making an attack. The drone has 5 HP, AC 12.",
+    "system_points": 3
+  }
+}
