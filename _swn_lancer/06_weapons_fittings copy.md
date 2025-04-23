@@ -13,17 +13,23 @@ order: 6
 | Name | Range | Damage | Type | Tags | Special | Hard Points |
 |------|-------|--------|------|------|---------|------------|
 | Chain Axe | Melee | d12 | P | Shock 2 | Always does at least 2 damage | 2 |
+| Segment Knife | Melee | d6+2 | E | Overkill | Damage dice are exploding. | 1 |
 | Deck-sweeper Automatic Shotgun | 3 | 2d12 | P | Threat, Inaccurate | Threatens attacks of opportunity | 2 |
 | Daisy Cutter | 7 | 3d12 | P | Cone, Limited 2 | Cone AoE; Limited Uses. | 3 |
 | Catalytic Hammer | Melee | d6+10 | P | Loading | Targets must save against Physical or be stunned for one round. Requires an Action to reload | 2 |
-| Ghoul Nexus | 10 | d6+4 | X | Smart | Smart weapons attack using guided systems. Save against Tech for half damage. | 2 |
+| EW Suite | 10 | d6 | X | Smart, Hex | Smart weapons attack using guided systems. Save against Tech for half damage. On a fail the target is hexxed and also gets -4 on their next attack. 
+| Nexus (Hunter Killer) | 10 | d12 | P | Smart | Smart weapons attack using guided systems. Save against Tech for half damage. | 2 |
+| Ghoul Nexus | 10 | d6+4 | P/E/X | Smart | Smart weapons attack using guided systems. Save against Tech for half damage. | 2 |
 | Vorpal Gun | 5 | 2d12 | E | Vigil | Once per turn you can immediatly attack a hostile that attacked one of your allies.  | 2 |
-| Mortar | 15 | d12+2 | P | Blast 1, Inaccurate | 10m AoE | 2 |
+| Heavy Machine Gun | 8 | 2d12+8 | P | Innacurate, Suppressive, Brace | Can suppress a 2-range cone. | 2 |
+| Mortar | 15 | d12+2 | P | Blast 1, Inaccurate, Arcing | 10m AoE | 2 |
+| Howitzer | 20 | 2d12 | P | Blast 2, Innacurate, Loading, Brace, Arcing | 20m AoE. Does not require line of sight. | 3 |
 | Assault Rifle | 10 | d12 | P | Shock 2 | Always does at least 2 damage | 2 |
+| Thermal Rifle | 5 | d6+4 | E | AP | Ignores Armor. | 2 |
 | Anti-material Rifle | 20 | 2d12 | P | AP, Loading, Accurate, Brace | You cannot fire and move in the same turn. | 3 |
 | Heavy Charged Blade | Melee | d12+6 | E | AP | Ignores Armor | 3 |
 | Missile Rack | 10 | d6+2 | P | Blast 1, Loading | ... | 1 |
-| Xiaguang Disintegrator | 10 | 2d12 | E | AP, Overkill | Damage dice are exploding. | 3 |
+| Xiaguang Disintegrator | 10 | 2d10 | E | Overkill | Damage dice are exploding. | 3 |
 | Harmony Gauntlets | Melee | d12 + 4 | P  | Melee | On a hit you may give one ally +2 to their next attack against this your target. | 2 |
 | Meridian Pulse Cannon | 15 | d6 + 6 | E | Blast 2, Smart, Loading | Ignores soft cover. | 3 |
 | Fusil‑de‑Ligne Volley Rifle | 12 | d12 + 2 | P | Accurate, Loading, Brace | 2 |
@@ -42,11 +48,22 @@ order: 6
 {: .fitting-table}
 | Name | Effect | System Points |
 |------|--------|--------------|
+| Custom Paint Job | When you are reduced to 0 HP, roll a d6. On a 6, you are only reduced to 1 HP. | 1 |
+| Personalizations | +4 HP, cosmetic customization | 1 |
+| Smoke Charges | Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides soft cover to anyone inside it. Lasts for 2 rounds. Can be set as mine. Limited 3. | 2 |
+| HE Charges | Deploy a high explosive charge at a location within range 5. The charge detonates dealing 2d6 P damage in a 1-range radius. Targets must save vs Evsaion to take half. Can be set as mine. Limited 3. | 2 |
+| Deployable Cover | Deploy a 2 hardened barriers (Size 1). The barrier provides hard cover and has 10 HP. | 2 |
+| Jump Jet System | You can fly while moving, however you start falling when you stop or the end of your turn. | 2 |
+| Flight System | You can fly. You take Class+1 HP damge each turn when flying. | 3 |
+| NHP Assistant Unit | An integrated NHP that assists you and can follow basic instructs when operating the mech independantly. | 2 |
+| Manipulators | Advanced articulated limbs that allow for fine manipulation of objects. You can interact with complex machinery and perform delicate tasks that would normally require human-sized hands. | 1 |
+| Stabilizers | You can fire Brace weapons and move, but take -2 to Hit. | 2 |
+| Ammo Feeder | Once per scene, you can reload a Loading weapon as a free action. | 2 |
 | Siege Ram | +4 damage when charging into objects or frames. 20 AP P damage against objects. | 2 |
 | Hyper Dense Armor | Halves all damage from ranged attacks beyond range 3. Halves all damage on your range attacks beyond range 3. | 3 |
-| Personalizations | +4 HP, cosmetic customization | 1 |
 | HORUS Puppetmaster | As an Action you can move (4) a drone and deal 4 E Damage to a adjacent enemy. This includes enemy drones. | 2 |
-| Sentinel Drone | A sentinel drone deals 6 P Damage to any hostile within 2 Range making an attack. | 3 |
+| Sentinel Drone | Deploy a sentinel drone within range 10 that deals 6 P Damage to any hostile within 2 Range making an attack. The drone has 5 HP, AC 12. | 3 |
+| Turret Drone | Deploy a a turret drone within range 10 that attacks deals +6 damage to any target you hit within the drones range of 10. The drone has 5 HP, AC 12. | 2 |
 |  OSIRIS-Class NHP | **Hurl Into the Duat** <br> You channel your target's systems through an unknown extradimensional space and unleash an incredibly powerful system attack. The target saves against Tech. On a fail, they take 4 heat and you inflict an additional effect as follows: the first time the target fails the save, you inflict the First Gate on your target; each subsequent failed save (by any target) increases the level of the effect that you inflict (e.g. your second use inflicts the Second Gate, your third inflicts the Third Gate, etc.) until you inflict the Fourth Gate, after which the effect resets to the First Gate. Your progress persists between scenes but resets if you rest or perform a Full Repair. <br> **First Gate:** You control your target's standard move next turn. <br> **Second Gate:** Your target becomes Slowed and Impaired until the end of their next turn.<br> **Third Gate:** Your target becomes Stunned until the end of their next turn.<br> **Fourth Gate:** Your target changes allegiance temporarily, becoming an allied character until the end of their next turn. They treat your allied characters and hostile characters as their own and are treated as an allied NPC for activation and turn order. This effect ends immediately if you or any allied character damages, inflicts heat upon, or attacks (including Grapple and Ram) your target, or forces them to make a save. This action may only be used 1/round | 2 |
 |  Scylla-Class NHP | **Unleash Scylla** <br> You enter an overwatch stance until your next turn. Twice you may make an attack against a hostile that attacks an ally within range 3 or interacts with a object in range of your choosing. The hostiles are aware what target was chosen.| 3 |
 | Throughbolt Rounds | Allows a weapons to pierce up to 2 range before impacting. Pierced objects take 4 AP damage. | 2 |

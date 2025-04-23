@@ -1,13 +1,13 @@
 ---
 layout: swn_lancer
-title: SWN Lancer QuickStart Rules
+title: SWN Lancer Play Test Rules
 version: 0.3
-status: Draft
+status: Draft, Playtesting
 confidence: Medium
 abstract: A streamlined set of rules for running Stars Without Number compatible mech combat scenes, focusing on quick play and minimal tracking.
 ---
 
-# SWN Lancer Quick Start Rules
+# SWN Lancer Play Test Rule
 
 This document provides a streamlined set of rules for running Stars Without Number compatible mech combat scenes.
 
@@ -30,7 +30,6 @@ The following sections contain the complete rules for running mech combat in you
 3. **100% SWN Compatibility**
    - 2d6 skill checks
    - d20 attack rolls against target AC
-   - Vehicle HD system
 
 4. **All Info at Point-of-Use**
    - Tags and special rules in weapon/fit lines
