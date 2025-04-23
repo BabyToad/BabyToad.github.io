@@ -10,7 +10,8 @@ order: 6
 {: .frame-table}
 | Hull | Speed | Armor | HP | AC | Hard Points | System Points | Class |
 |------|-------|--------|-----|-----|------------|--------------|--------|
-| IPS‑N Tortuga | 3 | 2 | 32 | 12 | 5 | 6 | Heavy |
+| GMS Everest | 4 | 0 | 40 | 14 | 6 | 6 | Light |  |
+| IPS‑N Tortuga | 3 | 4 | 32 | 12 | 5 | 6 | Heavy |
 | HORUS Goblin | 5 | 0 | 24 | 18 | 1 | 8 | Suit |
 | HORUS Gorgon | 3 | 0 | 48 | 14 | 5 | 6 | Heavy |
 | CNS Qilin | 4 | 1 | 28 | 14 | 4 | 7 | Light | Benevolent Resonance – Allies within 3 gain +1 AC. 1/round you may redirect a hostile's reaction or overwatch attack to yourself. |
