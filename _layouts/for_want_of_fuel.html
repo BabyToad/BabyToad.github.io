@@ -2,7 +2,7 @@
 layout: base
 ---
 
-<div class="swn-lancer-container">
+<div class="for-want-of-fuel-container">
     <header class="document-header">
         <h1>{{ page.title }}</h1>
         <div class="metadata">
@@ -20,7 +20,7 @@ layout: base
             <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
         </div>
         <ul>
-        {% for part in site.swn_lancer %}
+        {% for part in site.for_want_of_fuel %}
             {% unless part.title == page.title %}
             <li class="toc-item">
                 <a href="#part-{{ part.title | slugify }}">{{ part.title }}</a>
@@ -31,7 +31,7 @@ layout: base
         </ul>
     </nav>
 
-    <article class="swn-lancer-content">
+    <article class="for-want-of-fuel-content">
         {% if page.abstract %}
         <div class="abstract">
             <strong>Abstract:</strong> {{ page.abstract }}
@@ -47,7 +47,7 @@ layout: base
             </div>
             
             <!-- Then add the other parts -->
-            {% for part in site.swn_lancer %}
+            {% for part in site.for_want_of_fuel %}
                 {% unless part.title == page.title %}
                 <div class="rules-part" data-expanded="true" id="part-{{ part.title | slugify }}">
                     <div class="rules-part-header">

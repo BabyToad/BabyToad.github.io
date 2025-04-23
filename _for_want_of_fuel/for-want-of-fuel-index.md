@@ -1,17 +1,17 @@
 ---
-layout: swn_lancer
-title: SWN Lancer Play Test Rules
-version: 0.3
+layout: for_want_of_fuel
+title: For Want Of Fuel Play Test
+version: 0.4
 status: Draft, Playtesting
 confidence: Medium
-abstract: A streamlined set of rules for running Stars Without Number compatible mech combat scenes, focusing on quick play and minimal tracking.
+abstract: A streamlined set of playtest rules for running Stars Without Number compatible mech combat scenes, focusing on quick play and minimal tracking.
 ---
 
-# SWN Lancer Play Test Rule
+# Playtest
 
 This document provides a streamlined set of rules for running Stars Without Number compatible mech combat scenes.
 
-## Design Notes
+## For Want Of Fuel
 
 The following sections contain the complete rules for running mech combat in your Stars Without Number game. The design notes below explain the reasoning behind key decisions.
 

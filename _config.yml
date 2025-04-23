@@ -16,9 +16,9 @@ collections:
   essays:
     output: true
     permalink: /essays/:title/
-  swn_lancer:
+  for_want_of_fuel:
     output: true
-    permalink: /swn-lancer/:title/
+    permalink: /for-want-of-fuel/:title/
 
 plugins:
   - jekyll-feed
