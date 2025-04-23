@@ -95,5 +95,77 @@
     "category": "Combat",
     "effect": "Deploy a sentinel drone within range 10 that deals 6 P Damage to any hostile within 2 Range making an attack. The drone has 5 HP, AC 12.",
     "system_points": 3
+  }  ,
+  "throughbolt_rounds": {
+    "name": "Throughbolt Rounds",
+    "category": "Combat",
+    "effect": "Allows a weapons to pierce up to 2 range before impacting. Pierced objects take 4 AP damage.",
+    "system_points": 2
+  },
+  "heraldic_aegis_projector": {
+    "name": "Heraldic Aegis Projector",
+    "category": "Defense",
+    "effect": "When an ally within 1 is hit by a attack you may intercept, taking the damage instead and reducing it by 4.",
+    "system_points": 3
+  },
+  "gendarme_charge_propulsor": {
+    "name": "Gendarme Charge Propulsor",
+    "category": "Combat",
+    "effect": "When you move 3+ in a straight line and end adjacent to a hostile, that target takes 4 P damage and is knocked 1. If you mount a melee weapon you may then make a free melee attack.",
+    "system_points": 2
+  },
+  "chivalric_banner_uplink": {
+    "name": "Chivalric Banner Uplink",
+    "category": "Support",
+    "effect": "Allies within your Sensor range gain +2 on saves. You can Rally, allowing allies within range 5 to reroll failed morale and giving them +2 on their next attack.",
+    "system_points": 2
+  },
+  "exocortex_combat_link": {
+    "name": "Exocortex Combat Link",
+    "category": "Combat",
+    "effect": "+1 Accuracy with Smart or Accurate weapons. Quick, 1/scene: Lock‑On a target in Sensors.",
+    "system_points": 2
+  },
+  "bio_furnace_redliners": {
+    "name": "Bio‑Furnace Redliners",
+    "category": "Combat",
+    "effect": "Gain +2 Speed and +2 damage on all melee attacks, take 4 E AP damage while using it.",
+    "system_points": 3
+  },
+  "repulsor_grav_mantle": {
+    "name": "Repulsor Grav Mantle",
+    "category": "Defense",
+    "effect": "When hit by a Blast/Cone attack, halve that damage and may move 1 in any direction.",
+    "system_points": 2
+  },
+  "osiris_class_nhp": {
+    "name": "OSIRIS-Class NHP",
+    "category": "Systems",
+    "effect": "Hurl Into the Duat: You channel your target's systems through an unknown extradimensional space and unleash an incredibly powerful system attack. The target saves against Tech. On a fail, they take 4 heat and you inflict an additional effect as follows: the first time the target fails the save, you inflict the First Gate on your target; each subsequent failed save (by any target) increases the level of the effect that you inflict (e.g. your second use inflicts the Second Gate, your third inflicts the Third Gate, etc.) until you inflict the Fourth Gate, after which the effect resets to the First Gate. Your progress persists between scenes but resets if you rest or perform a Full Repair. First Gate: You control your target's standard move next turn. Second Gate: Your target becomes Slowed and Impaired until the end of their next turn. Third Gate: Your target becomes Stunned until the end of their next turn. Fourth Gate: Your target changes allegiance temporarily, becoming an allied character until the end of their next turn. They treat your allied characters and hostile characters as their own and are treated as an allied NPC for activation and turn order. This effect ends immediately if you or any allied character damages, inflicts heat upon, or attacks (including Grapple and Ram) your target, or forces them to make a save. This action may only be used 1/round",
+    "system_points": 2
+  },
+  "scylla_class_nhp": {
+    "name": "Scylla-Class NHP",
+    "category": "Systems",
+    "effect": "Unleash Scylla: You enter an overwatch stance until your next turn. Twice you may make an attack against a hostile that attacks an ally within range 3 or interacts with a object in range of your choosing. The hostiles are aware what target was chosen.",
+    "system_points": 3
+  },
+  "horos_system_upgrade_i": {
+    "name": "H0R_OS System Upgrade I",
+    "category": "Systems",
+    "effect": "Puppet System: Your target moves its maximum Speed in a direction of your choice. They can be moved into hazardous areas and other obstacles, but are still affected by difficult terrain, obstructions, and so on. This movement is involuntary, but provokes reactions and Engagement as normal and doesn't count as Knockback, pushing, or pulling. Eject Power Cores: Your target becomes Jammed until the end of their next turn as you temporarily disrupt their systems, ejecting ammo magazines and cooling rods. Characters adjacent to your target take 4 energy damage. This can only be used 1/scene on each character.",
+    "system_points": 2
+  },
+  "horos_system_upgrade_ii": {
+    "name": "H0R_OS System Upgrade II",
+    "category": "Systems",
+    "effect": "Construct Other: Ideal Image: You create a data construct in a free adjacent space – a Size 2 object that can look like almost anything and that appears real to all systems. The construct provides hard cover, blocks line of sight, and has Immunity to all damage. Characters treat it as an obstruction and so cannot voluntarily move into it; however, if a character attempts to stand on it or is involuntarily moved into its area, it dissipates and is immediately destroyed. It lasts for the rest of the scene, or until destroyed by an adjacent character with a successful Systems skill check as a full action. If you create a second construct, the previous one disappears. Construct Other: False Idol: Choose a free space within Sensors and a target – either yourself or an allied character within Sensors. You create a false idol – an illusory decoy of your target – in the chosen space. Before attempting to take any hostile actions against your target, characters with line of sight to the false idol must make a Tech save. On a failure, they don't lose the action, but cannot target the original character and believe the false idol is real instead until the end of their next turn. The false idol is the same Size as your target, can benefit from cover, and has AC 10, and 1 HP. It disappears if it takes heat or damage, or at the end of the scene. If you create a second idol, the previous one disappears.",
+    "system_points": 2
+  },
+  "horos_system_upgrade_iii": {
+    "name": "H0R_OS System Upgrade III",
+    "category": "Systems",
+    "effect": "Dimensional Emblems: You create three Size 1 data constructs in free spaces adjacent to your target, but not adjacent to each other. When a character passes through one of the constructs, they take 2 heat and the construct disappears. They last for the rest of the scene or until either they are destroyed, you take this action again, or you delete them as a free action. A construct can be destroyed by an adjacent character with a successful Systems skill check as a action. Celestial Shackles: Mark a space your target currently occupies. If they leave the affected space, once at any point during your turn, you may take a free action to teleport them back to that space, or as close as possible, ending this effect. An affected character can attempt to succeed on a Systems save as a action to end the effect, otherwise it lasts until the end of the scene.",
+    "system_points": 2
   }
 }
