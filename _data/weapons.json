@@ -10,10 +10,10 @@
     "tags": [
       {
         "name": "Shock",
-        "value": 2
+        "value": 4
       }
     ],
-    "special": "Always does at least 2 damage",
+    "special": "Always does at least 4 damage",
     "hard_points": 2
   },
   "segment_knife": {
@@ -239,10 +239,10 @@
     "tags": [
       {
         "name": "Shock",
-        "value": 2
+        "value": 4
       }
     ],
-    "special": "Always does at least 2 damage",
+    "special": "Always does at least 4 damage",
     "hard_points": 2
   },
   "thermal_rifle": {
