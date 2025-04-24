@@ -29,6 +29,12 @@
     "effect": "You can fly while moving, however you start falling when you stop or the end of your turn.",
     "system_points": 2
   },
+  "eva_system": {
+    "name": "EVA System",
+    "category": "Mobility",
+    "effect": "You can operate in vacuum, underwater, and extreme environments without penalty. Provides life support for the pilot.",
+    "system_points": 1
+  },
   "deployable_cover": {
     "name": "Deployable Cover",
     "category": "Tactical",
