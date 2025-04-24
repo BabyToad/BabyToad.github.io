@@ -22,7 +22,7 @@ Every mission, sortie or expedition earns you something.
 
 >"The fire dies when the blood runs dry. The land takes what it is owed."
 
-You must pay tribute to the land to maintain your mech and yourselves. Pay 1 Cred per Tier.
+You must pay tribute to the land to maintain your mech and yourselves. Pay 1 Cred per Tier +1.
 This is not about money or glory. This is about staying alive long enough to kill again.
 
 ## Downtime
@@ -89,13 +89,13 @@ Alter your path. Change your code. Take on a new scar.
 Award **1 XP per line fulfilled** at the end of each session. Players should justify briefly. GM has final call.
 
 **Mercy Breaks You**
-	If you showed mercy and things became worse because of it, gain XP.
+If you showed mercy and things became worse because of it, gain XP.
 **Blood Honors You**
-	If you killed a named foe or many innocents, gain XP.
+If you killed a named foe or many innocents, gain XP.
 **Hunger Commands You**
-	If you diminished yourself for fuel, warmth, or survival, gain XP.
+If you diminished yourself for fuel, warmth, or survival, gain XP.
  **God Rides the Horizon**
-	If you witnessed, provoked, or embodied something sublime and brutal, gain XP.
+If you witnessed, provoked, or embodied something sublime and brutal, gain XP.
 
 ### Scars of the Long Night
 Every Sortie comes with a **scar**. Either roll or choose one. These shape worldbuilding, add flavor, and weight to your violence.
