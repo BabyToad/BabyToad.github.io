@@ -88,13 +88,13 @@ Alter your path. Change your code. Take on a new scar.
 ## The Reward Of Blood
 Award **1 XP per line fulfilled** at the end of each session. Players should justify briefly. GM has final call.
 
-**Mercy Breaks You**
+**Mercy Breaks You** <br>
 If you showed mercy and things became worse because of it, gain XP.
-**Blood Honors You**
+**Blood Honors You** <br>
 If you killed a named foe or many innocents, gain XP.
-**Hunger Commands You**
+**Hunger Commands You** <br>
 If you diminished yourself for fuel, warmth, or survival, gain XP.
- **God Rides the Horizon**
+ **God Rides the Horizon** <br>
 If you witnessed, provoked, or embodied something sublime and brutal, gain XP.
 
 ### Scars of the Long Night

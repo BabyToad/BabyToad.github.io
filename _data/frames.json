@@ -45,7 +45,7 @@
     "manufacturer": "HORUS",
     "class": "Medium",
     "stats": {
-      "speed": 3,
+      "speed": 4,
       "armor": 0,
       "hp": 48,
       "ac": 12,
