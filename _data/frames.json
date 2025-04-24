@@ -15,7 +15,7 @@
   "ips_n_tortuga": {
     "name": "IPS‑N Tortuga",
     "manufacturer": "IPS‑N",
-    "class": "Heavy",
+    "class": "Medium",
     "stats": {
       "speed": 3,
       "armor": 4,
@@ -24,7 +24,7 @@
       "hard_points": 5,
       "system_points": 6
     },
-    "special": "Your frame counts as hard cover. Once per encounter, as a reaction, you can hunker down to gain resistance to damage until your next turn."
+    "special": "WATCHDOG Co-Pilot - All your ranged weapons gain Threat 3. And you may make attacks of opportunity against targets entering your threat zone."
   },
   "horus_goblin": {
     "name": "HORUS Goblin",
@@ -34,7 +34,7 @@
       "speed": 5,
       "armor": 0,
       "hp": 24,
-      "ac": 16,
+      "ac": 14,
       "hard_points": 2,
       "system_points": 8
     },
@@ -43,7 +43,7 @@
   "horus_gorgon": {
     "name": "HORUS Gorgon",
     "manufacturer": "HORUS",
-    "class": "Heavy",
+    "class": "Medium",
     "stats": {
       "speed": 3,
       "armor": 0,
@@ -51,7 +51,8 @@
       "ac": 12,
       "hard_points": 5,
       "system_points": 6
-    }
+    },
+    "special": "Extrude Basilisk - As an action you project a horrifying basilisk, a visual data-pattern that is incredibly harmful to NHPs and electronic systems, and hard to look at even for humans. Hostile characters must succeed on a Tech save before attacking you or any allied characters within range 3. On a failure, they become Stunned until the end of their next turn. Each character can only be Stunned by this effect once."
   },
   "cns_qilin": {
     "name": "CNS Qilin",
@@ -59,18 +60,18 @@
     "class": "Light",
     "stats": {
       "speed": 4,
-      "armor": 1,
+      "armor": 2,
       "hp": 28,
-      "ac": 12,
+      "ac": 14,
       "hard_points": 4,
       "system_points": 7
     },
-    "special": "Benevolent Resonance – Allies within 3 gain +1 AC. 1/round you may redirect a hostile's reaction or overwatch attack to yourself."
+    "special": "Benevolent Resonance – Allies within 3 gain +1 AC. Once per turn you may redirect a hostile's attack to yourself."
   },
   "cns_baihu": {
     "name": "CNS Baihu",
     "manufacturer": "CNS",
-    "class": "Heavy",
+    "class": "Medium",
     "stats": {
       "speed": 3,
       "armor": 2,
@@ -79,7 +80,7 @@
       "hard_points": 5,
       "system_points": 6
     },
-    "special": "Triumphant Roar – When you destroy or critically damage a target, all hostiles within 2 must save vs Mental or become Shaken (‑2 on attacks) for 1 round; you repair 4 HP."
+    "special": "Triumphant Roar – When you destroy or crit a target, all hostiles within 10 must save vs Mental or become take -2 to hit for 1 round."
   },
   "cns_zhuque": {
     "name": "CNS Zhuque",
@@ -87,27 +88,27 @@
     "class": "Heavy",
     "stats": {
       "speed": 2,
-      "armor": 0,
-      "hp": 32,
-      "ac": 13,
-      "hard_points": 6,
+      "armor": 2,
+      "hp": 36,
+      "ac": 10,
+      "hard_points": 7,
       "system_points": 5
     },
-    "special": "Gravity Stabilizers – Heavy/Loading weapons you fire ignore Inaccurate and automatically Brace (no action). If you move more than 2, the benefit is lost until your next turn."
+    "special": "Gravity Stabilizers – Weapons you fire ignore Brace."
   },
   "dm_chevalier": {
     "name": "DM Chevalier",
     "manufacturer": "DM",
     "class": "Medium",
     "stats": {
-      "speed": 4,
-      "armor": 1,
-      "hp": 30,
-      "ac": 11,
+      "speed": 5,
+      "armor": 2,
+      "hp": 32,
+      "ac": 12,
       "hard_points": 4,
       "system_points": 6
     },
-    "special": "Cavalry Charge – 1/round, if you move 3+ before making a melee attack, gain +2 Accuracy and +4 damage on that attack."
+    "special": "Cavalry Charge – If you move 3+ before making a melee attack, gain +4 to hit and +4 damage on that attack."
   },
   "dm_casemate": {
     "name": "DM Casemate",
@@ -115,27 +116,27 @@
     "class": "Heavy",
     "stats": {
       "speed": 2,
-      "armor": 3,
+      "armor": 4,
       "hp": 44,
-      "ac": 9,
-      "hard_points": 6,
+      "ac": 8,
+      "hard_points": 7,
       "system_points": 5
     },
-    "special": "Fortified Bastion – Counts as hard cover for adjacent allies. 1/scene you may Brace as a free action; until your next turn all ranged damage to you is halved."
+    "special": "Fortified Bastion – As a reaction, half all damage against you until your next turn. You lose your Action on that next turn."
   },
-  "dm_fusilier": {
-    "name": "DM Fusilier",
+  "dm_paladin": {
+    "name": "DM Paladin",
     "manufacturer": "DM",
-    "class": "Suit",
+    "class": "Light",
     "stats": {
-      "speed": 5,
-      "armor": 0,
-      "hp": 24,
-      "ac": 14,
-      "hard_points": 2,
-      "system_points": 8
+      "speed": 4,
+      "armor": 2,
+      "hp": 30,
+      "ac": 12,
+      "hard_points": 4,
+      "system_points": 6
     },
-    "special": "Riposte – Once/round, when a melee attack misses you, make a free Sidearm or Melee attack against the attacker."
+    "special": "Riposte – When a melee attack misses you, make a Melee attack against the attacker."
   },
   "nf_cid": {
     "name": "NF Cid",
@@ -145,11 +146,11 @@
       "speed": 5,
       "armor": 0,
       "hp": 24,
-      "ac": 15,
+      "ac": 14,
       "hard_points": 2,
       "system_points": 8
     },
-    "special": "Flux‑Veil – After Boosting you become Invisible and ignore engagement until end of turn."
+    "special": "Flux‑Veil – When you move, you become Invisible and ignore engagement until the start of your next turn."
   },
   "nf_cortes": {
     "name": "NF Cortes",
@@ -157,13 +158,13 @@
     "class": "Medium",
     "stats": {
       "speed": 4,
-      "armor": 1,
+      "armor": 0,
       "hp": 32,
-      "ac": 11,
-      "hard_points": 4,
+      "ac": 10,
+      "hard_points": 5,
       "system_points": 6
     },
-    "special": "Cibernetic Regen – 1/scene Quick—patch nanites, repairing 6 HP and clearing Impaired/Slowed."
+    "special": "Energy-Matter Regeneration – Recover 1 HP of Overheat damage per round."
   },
   "nf_tercio": {
     "name": "NF Tercio",
@@ -171,13 +172,13 @@
     "class": "Heavy",
     "stats": {
       "speed": 2,
-      "armor": 3,
+      "armor": 4,
       "hp": 46,
-      "ac": 9,
+      "ac": 8,
       "hard_points": 6,
       "system_points": 5
     },
-    "special": "Phalanx Protocol – Adjacent allies gain hard cover. While you haven't moved this turn, ranged damage against you is halved."
+    "special": "Phalanx Protocol – If you haven't moved this turn, gain resistance to all damage until the end of your next turn."
   },
   "ssc_swallowtail": {
     "name": "SSC Swallowtail",
@@ -187,7 +188,7 @@
       "speed": 6,
       "armor": 0,
       "hp": 24,
-      "ac": 12,
+      "ac": 14,
       "hard_points": 4,
       "system_points": 6
     },
@@ -201,7 +202,7 @@
       "speed": 5,
       "armor": 0,
       "hp": 32,
-      "ac": 12,
+      "ac": 14,
       "hard_points": 5,
       "system_points": 6
     },
