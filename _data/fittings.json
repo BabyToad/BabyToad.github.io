@@ -55,7 +55,7 @@
   },
   "turret_drone": {
     "name": "Turret Drone",
-    "category": "Combat",
+    "category": "Drone",
     "effect": "Deploy a turret drone within range 10 that attacks deals +6 damage to any target you hit within the drones range of 10. The drone has 5 HP, AC 12.",
     "system_points": 2
   },
@@ -92,7 +92,7 @@
   },
   "sentinel_drone": {
     "name": "Sentinel Drone",
-    "category": "Combat",
+    "category": "Drone",
     "effect": "Deploy a sentinel drone within range 10 that deals 6 P Damage to any hostile within 2 Range making an attack. The drone has 5 HP, AC 12.",
     "system_points": 3
   }  ,
@@ -166,6 +166,42 @@
     "name": "H0R_OS System Upgrade III",
     "category": "Systems",
     "effect": "Dimensional Emblems: You create three Size 1 data constructs in free spaces adjacent to your target, but not adjacent to each other. When a character passes through one of the constructs, they take 2 heat and the construct disappears. They last for the rest of the scene or until either they are destroyed, you take this action again, or you delete them as a free action. A construct can be destroyed by an adjacent character with a successful Systems skill check as a action. Celestial Shackles: Mark a space your target currently occupies. If they leave the affected space, once at any point during your turn, you may take a free action to teleport them back to that space, or as close as possible, ending this effect. An affected character can attempt to succeed on a Systems save as a action to end the effect, otherwise it lasts until the end of the scene.",
+    "system_points": 2
+  },
+  "lotus_projector": {
+    "name": "Lotus Projector",
+    "category": "Drones",
+    "effect": "Deploy a stealthed stationary scout drone within range 20. The drone relays visual and sensor data back to you, detecting stealthed, invisible, and camouflaged targets. The drone is invisible to sensors and camouflaged, has 1 HP.",
+    "system_points": 2
+  },
+  "marker_light": {
+    "name": "Marker Light",
+    "category": "Tactical",
+    "effect": "As an Action mark a target within sensor range. The target loses soft cover benefits, and the first attack made against it is a critical hit. At the end of your next turn, they save against Tech to end the effect.",
+    "system_points": 2
+  },
+  "retractable_profile": {
+    "name": "Retractable Profile",
+    "category": "Defense",
+    "effect": "At the start of your turn, you can fold your mech's external components into a compact configuration. While active you cannot attack, half your speed, gain ranged attacks against you are at -2 to hit and you gain +1 to Stealth. You can deactivate this as at the beginning of your turn.",
+    "system_points": 1
+  },
+  "high_stress_mag_clamps": {
+    "name": "High-Stress Mag Clamps",
+    "category": "Mobility",
+    "effect": "You treat all solid surfaces as flat ground for the purposes of movement; you can move across them normally instead of climbing, although you begin to fall if you are knocked Prone.",
+    "system_points": 1
+  },
+  "tracking_bug": {
+    "name": "Tracking Bug",
+    "category": "Tactical",
+    "effect": "As an action, target a character within Sensors. They must make a Tech save. On a failure, you know their exact location, HP, and Speed for the duration. They can't Hide and you ignore their Invisible status.",
+    "system_points": 2
+  },
+  "core_siphon": {
+    "name": "Core Siphon",
+    "category": "Combat",
+    "effect": "You can siphon energy from your frame's critical systems to gain bonus to hit to your attack. For each +1 bonus to hit, the attack gains Overheat 1.",
     "system_points": 2
   }
 }

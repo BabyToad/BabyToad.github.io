@@ -173,7 +173,7 @@
         "name": "Brace"
       }
     ],
-    "special": "Can suppress a 2-range cone",
+    "special": "Suppressive fire makes your weapon Loading. The cone is 2 in every direction at its max range.",
     "hard_points": 2
   },
   "mortar": {
@@ -495,5 +495,46 @@
     ],
     "special": "All creatures in Blast failing the save are pulled 1 toward the center",
     "hard_points": 3
+  },
+  "oracle_lmg_1": {
+    "name": "Oracle LMG-1",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "2d6",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Accurate"
+      },
+      {
+        "name": "Arcing"
+      }
+    ],
+    "special": "Accurate weapons get +2 to hit.",
+    "hard_points": 1
+  },
+  "vulture_dmr": {
+    "name": "Vulture DMR",
+    "category": "Ranged",
+    "stats": {
+      "range": 15,
+      "damage": "1d12+2",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Accurate"
+      },
+      {
+        "name": "Overkill"
+      },
+      {
+        "name": "Overheat 1"
+      }
+    ],
+    "special": "Accurate weapons get +2 to hit. Damage dice are exploding. You take 1 HP damage when firing this weapon.",
+    "hard_points": 2
   }
 } 
