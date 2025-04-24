@@ -209,5 +209,24 @@
     "category": "Combat",
     "effect": "You can siphon energy from your frame's critical systems to gain bonus to hit to your attack. For each +1 bonus to hit, the attack gains Overheat 1.",
     "system_points": 2
+  },
+  "ghostweave": {
+    "name": "SSC Ghostweave",
+    "category": "Core Bonus",
+    "effect": "During your turn, you are Invisible. If you take no actions on your turn other than your standard move, Hide, and Boost, you remain Invisible until the start of your next turn. You immediately cease to be Invisible when you take a reaction.",
+    "system_points": 0
+  }
+  ,
+  "horus_lesson_of_the_held_image": {
+    "name": "HORUS Lesson of the Held Image",
+    "category": "Core Bonus",
+    "effect": "As a reaction at the start of any allied character’s turn, you may give them +2 to hit against any character within line of sight and Sensors.",
+    "system_points": 0
+  },
+  "sloped_plating": {
+    "name": "Sloped Plating",
+    "category": "Core Bonus",
+    "effect": "You gain +2 Armor.",
+    "system_points": 0
   }
 }

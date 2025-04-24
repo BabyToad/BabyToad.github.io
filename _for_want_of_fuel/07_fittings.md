@@ -155,4 +155,25 @@ order: 7
         {% endif %}
         {% endfor %}
     </div>
+</div>
+
+<div class="fitting-category">
+    <h3>Core Bonus Fittings</h3>
+    <div class="fitting-list">
+        <div class="fitting-item-row fitting-header">
+            <div>Name</div>
+            <div>Effect</div>
+            <div>SP</div>
+        </div>
+        {% for fitting in fittings %}
+        {%- assign f = fitting[1] -%}
+        {% if f.category == "Core Bonus" %}
+        <div class="fitting-item-row">
+            <div class="fitting-name" data-label="Name">{{ f.name }}</div>
+            <div class="fitting-effect" data-label="Effect">{{ f.effect }}</div>
+            <div class="fitting-sp" data-label="SP">{{ f.system_points }}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div> 
