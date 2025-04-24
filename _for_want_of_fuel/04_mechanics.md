@@ -89,13 +89,13 @@ Alter your path. Change your code. Take on a new scar.
 Award **1 XP per line fulfilled** at the end of each session. Players should justify briefly. GM has final call.
 
 **Mercy Breaks You** <br>
-If you showed mercy and things became worse because of it, gain XP.
+If you showed mercy and things became worse because of it, gain XP. <br>
 **Blood Honors You** <br>
-If you killed a named foe or many innocents, gain XP.
+If you killed a named foe or many innocents, gain XP. <br>
 **Hunger Commands You** <br>
-If you diminished yourself for fuel, warmth, or survival, gain XP.
+If you diminished yourself for fuel, warmth, or survival, gain XP. <br>
  **God Rides the Horizon** <br>
-If you witnessed, provoked, or embodied something sublime and brutal, gain XP.
+If you witnessed, provoked, or embodied something sublime and brutal, gain XP. <br>
 
 ### Scars of the Long Night
 Every Sortie comes with a **scar**. Either roll or choose one. These shape worldbuilding, add flavor, and weight to your violence.
