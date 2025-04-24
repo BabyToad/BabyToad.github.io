@@ -106,6 +106,22 @@
     "special": "Smart weapons attack using guided systems. Save against Tech for half damage. On a fail the target is hexxed and also gets -4 on their next attack",
     "hard_points": 2
   },
+  "nexus_light": {
+    "name": "Nexus (Light)",
+    "category": "Systems",
+    "stats": {
+      "range": 10,
+      "damage": "d6",
+      "damage_type": "P"
+    },
+    "tags": [
+      {
+        "name": "Smart"
+      }
+    ],
+    "special": "Smart weapons attack using guided systems. Save against Tech for half damage",
+    "hard_points": 1
+  },
   "nexus_hunter": {
     "name": "Nexus (Hunter Killer)",
     "category": "Systems",
