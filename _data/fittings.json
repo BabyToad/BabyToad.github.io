@@ -170,7 +170,7 @@
   },
   "lotus_projector": {
     "name": "Lotus Projector",
-    "category": "Drones",
+    "category": "Drone",
     "effect": "Deploy a stealthed stationary scout drone within range 20. The drone relays visual and sensor data back to you, detecting stealthed, invisible, and camouflaged targets. The drone is invisible to sensors and camouflaged, has 1 HP.",
     "system_points": 2
   },

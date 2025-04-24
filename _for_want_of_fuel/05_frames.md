@@ -40,7 +40,7 @@ order: 5
                         <span class="stat-value">{{ f.stats.armor }}</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">HP</span>
+                        <span class="stat-label">Hit Points</span>
                         <span class="stat-value">{{ f.stats.hp }}</span>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ order: 5
                         <span class="stat-value">{{ f.stats.armor }}</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">HP</span>
+                        <span class="stat-label">Hit Points</span>
                         <span class="stat-value">{{ f.stats.hp }}</span>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ order: 5
                         <span class="stat-value">{{ f.stats.armor }}</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">HP</span>
+                        <span class="stat-label">Hit Points</span>
                         <span class="stat-value">{{ f.stats.hp }}</span>
                     </div>
                 </div>
@@ -208,7 +208,7 @@ order: 5
                         <span class="stat-value">{{ f.stats.armor }}</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-label">HP</span>
+                        <span class="stat-label">Hit Points</span>
                         <span class="stat-value">{{ f.stats.hp }}</span>
                     </div>
                 </div>
