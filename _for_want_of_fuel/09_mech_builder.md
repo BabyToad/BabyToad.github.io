@@ -526,150 +526,11 @@ function initializeTagSystem() {
         return;
     }
 
-    // Create popup element
-    function createPopup() {
-        console.log('Creating popup element...');
-        const popup = document.createElement('div');
-        popup.className = 'tag-popup';
-        
-        popup.innerHTML = `
-            <div class="tag-popup-header">
-                <div class="tag-popup-title"></div>
-                <button class="tag-popup-close">×</button>
-            </div>
-            <div class="tag-popup-content"></div>
-            <div class="tag-popup-example"></div>
-        `;
-        
-        document.body.appendChild(popup);
-        return popup;
-    }
-
-    // Show popup with tag info
-    function showTagPopup(tagId, value, event, sticky = false, element = null) {
-        console.log('Showing popup for tag:', tagId, 'value:', value, 'sticky:', sticky);
-        
-        // Create new popup
-        const popup = createPopup();
-        
-        // Find tag info
-        let tagInfo = null;
-        for (const category of Object.values(tags.weapon_tags)) {
-            if (category[tagId]) {
-                tagInfo = category[tagId];
-                break;
-            }
-        }
-        if (!tagInfo) {
-            for (const category of Object.values(tags.fitting_tags)) {
-                if (category[tagId]) {
-                    tagInfo = category[tagId];
-                    break;
-                }
-            }
-        }
-
-        if (!tagInfo) {
-            console.warn('No tag info found for:', tagId);
-            popup.remove();
-            return null;
-        }
-
-        // Update popup content
-        popup.querySelector('.tag-popup-title').textContent = 
-            value ? `${tagInfo.name} ${value}` : tagInfo.name;
-        popup.querySelector('.tag-popup-content').textContent = tagInfo.description;
-        popup.querySelector('.tag-popup-example').textContent = tagInfo.example;
-
-        // Position popup
-        const rect = event.target.getBoundingClientRect();
-        const popupWidth = 300;
-        const popupHeight = 200;
-        let left = rect.left;
-        let top = rect.bottom + 10;
-
-        // Adjust position if it would go off screen
-        if (left + popupWidth > window.innerWidth) {
-            left = window.innerWidth - popupWidth - 10;
-        }
-        if (top + popupHeight > window.innerHeight) {
-            top = rect.top - popupHeight - 10;
-        }
-
-        popup.style.left = `${left}px`;
-        popup.style.top = `${top}px`;
-        popup.classList.add('visible');
-        
-        if (sticky) {
-            popup.classList.add('sticky');
-            if (element) {
-                element.dataset.popupId = popup.id = `popup-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-            }
-        }
-
-        // Add event listeners
-        const closeBtn = popup.querySelector('.tag-popup-close');
-        closeBtn.onclick = () => {
-            popup.remove();
-            if (element) {
-                delete element.dataset.popupId;
-            }
-        };
-
-        // Add double-click handler to close popup
-        const header = popup.querySelector('.tag-popup-header');
-        header.addEventListener('dblclick', () => {
-            popup.remove();
-            if (element) {
-                delete element.dataset.popupId;
-            }
-        });
-
-        // Make popup draggable when sticky
-        if (sticky) {
-            const header = popup.querySelector('.tag-popup-header');
-            let isDragging = false;
-            let startX, startY, initialLeft, initialTop;
-            let lastClickTime = 0;
-
-            header.addEventListener('mousedown', (e) => {
-                if (!popup.classList.contains('sticky')) return;
-                
-                // Check for double click
-                const currentTime = Date.now();
-                if (currentTime - lastClickTime < 300) {
-                    // Double click detected
-                    popup.remove();
-                    if (element) {
-                        delete element.dataset.popupId;
-                    }
-                    return;
-                }
-                lastClickTime = currentTime;
-
-                isDragging = true;
-                startX = e.clientX;
-                startY = e.clientY;
-                initialLeft = popup.offsetLeft;
-                initialTop = popup.offsetTop;
-            });
-
-            document.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                
-                const dx = e.clientX - startX;
-                const dy = e.clientY - startY;
-                
-                popup.style.left = `${initialLeft + dx}px`;
-                popup.style.top = `${initialTop + dy}px`;
-            });
-
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
-        }
-
-        return popup;
+    // Import showTagPopup from the layout file
+    const layoutScript = document.querySelector('script[src*="for_want_of_fuel.html"]');
+    if (!layoutScript) {
+        console.error('Could not find layout script');
+        return;
     }
 
     // Process tag elements
@@ -678,7 +539,20 @@ function initializeTagSystem() {
         const tagElements = document.querySelectorAll('.tag-highlight');
         console.log('Found tag elements:', tagElements.length);
         
-        tagElements.forEach((element, index) => {
+        // Keep track of processed elements to prevent duplicate listeners
+        const processedElements = new WeakSet();
+        
+        // Keep track of active popups globally
+        const activePopups = new WeakMap();
+        
+        tagElements.forEach((element) => {
+            // Skip if we've already processed this element
+            if (processedElements.has(element)) {
+                console.log('Skipping already processed element');
+                return;
+            }
+            processedElements.add(element);
+
             const tagId = element.dataset.tag;
             const value = element.dataset.value;
             
@@ -687,59 +561,46 @@ function initializeTagSystem() {
                 return;
             }
 
-            let hoverTimer = null;
-            let currentPopup = null;
-            let lastClickTime = 0;
+            let hoverTimeout = null;
 
-            // Add hover effect
+            // Tag hover behavior with debounce
             element.addEventListener('mouseenter', (e) => {
                 console.log('Tag mouseenter:', tagId);
-                element.classList.add('hovering');
                 
-                // Remove any existing non-sticky popup for this element
-                if (currentPopup && !currentPopup.classList.contains('sticky')) {
-                    currentPopup.remove();
+                // Clear any existing timeout
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
                 }
                 
-                // Create new popup if we don't have a sticky one
-                if (!element.dataset.popupId) {
-                    currentPopup = showTagPopup(tagId, value, e, false, element);
-                }
-                
-                // Start timer for sticky behavior
-                hoverTimer = setTimeout(() => {
-                    element.classList.remove('hovering');
-                    // Remove the temporary popup if it exists
-                    if (currentPopup) {
-                        currentPopup.remove();
+                // Debounce the popup creation
+                hoverTimeout = setTimeout(() => {
+                    // Check if we already have a popup for this element
+                    if (!activePopups.has(element)) {
+                        const popup = window.showTagPopup(tagId, value, e, false, element);
+                        if (popup) {
+                            activePopups.set(element, popup);
+                        }
                     }
-                    // Create a new sticky popup
-                    currentPopup = showTagPopup(tagId, value, e, true, element);
-                }, 1000);
+                }, 50); // Small delay to prevent rapid creation
             });
 
+            // Tag leave behavior
             element.addEventListener('mouseleave', () => {
                 console.log('Tag mouseleave:', tagId);
-                element.classList.remove('hovering');
-                if (hoverTimer) {
-                    clearTimeout(hoverTimer);
-                    hoverTimer = null;
+                
+                // Clear the hover timeout
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = null;
                 }
-                // Only remove popup if it's not sticky
-                if (currentPopup && !currentPopup.classList.contains('sticky')) {
-                    currentPopup.remove();
-                }
-            });
-
-            // Add double-click handler to close popup
-            element.addEventListener('dblclick', (e) => {
-                e.preventDefault();
-                if (element.dataset.popupId) {
-                    const popup = document.getElementById(element.dataset.popupId);
-                    if (popup) {
-                        popup.remove();
-                        delete element.dataset.popupId;
-                    }
+                
+                // Get the current popup
+                const popup = activePopups.get(element);
+                
+                // If popup isn't sticky, remove it
+                if (popup && !popup.classList.contains('sticky')) {
+                    popup.remove();
+                    activePopups.delete(element);
                 }
             });
 
@@ -747,14 +608,6 @@ function initializeTagSystem() {
             element.addEventListener('click', (e) => {
                 console.log('Tag click:', tagId);
                 e.preventDefault();
-
-                // Check for double click
-                const currentTime = Date.now();
-                if (currentTime - lastClickTime < 300) {
-                    // Double click handled by dblclick event
-                    return;
-                }
-                lastClickTime = currentTime;
 
                 // Find the glossary section
                 const glossarySection = document.querySelector('#part-tag-glossary');
@@ -1265,6 +1118,22 @@ function handleSharedMech() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content Loaded');
     
+    // Wait for the layout script to load
+    const checkTagSystem = setInterval(() => {
+        if (window.tagSystem) {
+            clearInterval(checkTagSystem);
+            initializeTagSystem();
+        }
+    }, 100);
+
+    function initializeTagSystem() {
+        // Process tag syntax in content
+        const content = document.querySelector('.content');
+        if (content) {
+            window.tagSystem.processTagSyntax(content);
+        }
+    }
+
     // Wait a short moment to ensure Jekyll template processing is complete
     setTimeout(() => {
         console.log('Initializing mech builder...');

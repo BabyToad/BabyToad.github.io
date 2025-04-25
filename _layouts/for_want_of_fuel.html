@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Make tag system functions available globally
+    window.tagSystem = {
+        tags,
+        createPopup,
+        showTagPopup,
+        processTagSyntax,
+        processTags
+    };
+
     // Process tag syntax in content
     function processTagSyntax() {
         const content = document.querySelectorAll('.rules-part-content');
@@ -107,6 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Keep track of active popups globally
+    const activePopups = new WeakMap();
+
     // Create popup element
     function createPopup() {
         console.log('Creating popup element...');
@@ -116,23 +128,184 @@ document.addEventListener('DOMContentLoaded', () => {
         popup.innerHTML = `
             <div class="tag-popup-header">
                 <div class="tag-popup-title"></div>
-                <button class="tag-popup-close">×</button>
+                <div class="tag-popup-controls">
+                    <button class="tag-popup-pin" title="Pin popup">
+                        <svg viewBox="0 0 24 24" width="14" height="14">
+                            <path fill="currentColor" d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
+                        </svg>
+                    </button>
+                    <button class="tag-popup-close" title="Close">
+                        <svg viewBox="0 0 24 24" width="14" height="14">
+                            <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
             <div class="tag-popup-content"></div>
             <div class="tag-popup-example"></div>
         `;
         
+        // Ensure popup is above other elements and can receive mouse events
+        popup.style.zIndex = '1000';
+        popup.style.pointerEvents = 'auto';
+        
         document.body.appendChild(popup);
+
+        // Add styles for the new minimal controls
+        const style = document.createElement('style');
+        style.textContent = `
+            .tag-popup-controls {
+                display: flex;
+                gap: 4px;
+                align-items: center;
+            }
+
+            .tag-popup-pin,
+            .tag-popup-close {
+                background: none;
+                border: none;
+                padding: 4px;
+                color: #666;
+                cursor: pointer;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+            }
+
+            .tag-popup-pin:hover,
+            .tag-popup-close:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+            }
+
+            .tag-popup.sticky .tag-popup-pin {
+                color: #6a9ec7;
+                background: rgba(106, 158, 199, 0.1);
+            }
+
+            .tag-popup-close:hover {
+                color: #ff4444;
+                background: rgba(255, 68, 68, 0.1);
+            }
+        `;
+        document.head.appendChild(style);
+
         return popup;
+    }
+
+    // Process tag elements
+    function processTags() {
+        console.log('Processing tags...');
+        const tagElements = document.querySelectorAll('.tag-highlight');
+        
+        // Keep track of processed elements to prevent duplicate listeners
+        const processedElements = new WeakSet();
+        
+        tagElements.forEach((element) => {
+            // Skip if we've already processed this element
+            if (processedElements.has(element)) {
+                console.log('Skipping already processed element');
+                return;
+            }
+            processedElements.add(element);
+
+            const tagId = element.dataset.tag;
+            const value = element.dataset.value;
+            
+            if (!tagId) {
+                console.warn('No tag ID found for element:', element);
+                return;
+            }
+
+            let hoverTimeout = null;
+
+            // Tag hover behavior with debounce
+            element.addEventListener('mouseenter', (e) => {
+                console.log('Tag mouseenter:', tagId);
+                
+                // Clear any existing timeout
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
+                }
+                
+                // Debounce the popup creation
+                hoverTimeout = setTimeout(() => {
+                    // Check if we already have a popup for this element
+                    if (!activePopups.has(element)) {
+                        const popup = showTagPopup(tagId, value, e, false, element);
+                        if (popup) {
+                            activePopups.set(element, popup);
+                            
+                            // Add mouseenter listener to popup
+                            popup.addEventListener('mouseenter', () => {
+                                console.log('Popup mouseenter - popup:', popup);
+                                // Clear any pending hide timeout
+                                if (hoverTimeout) {
+                                    clearTimeout(hoverTimeout);
+                                    hoverTimeout = null;
+                                }
+                            });
+                            
+                            // Add mouseleave listener to popup
+                            popup.addEventListener('mouseleave', () => {
+                                console.log('Popup mouseleave - popup:', popup);
+                                // Only remove if not sticky
+                                if (!popup.classList.contains('sticky')) {
+                                    // Add a small delay before removing
+                                    setTimeout(() => {
+                                        if (!popup.matches(':hover')) {
+                                            popup.remove();
+                                            activePopups.delete(element);
+                                        }
+                                    }, 100);
+                                }
+                            });
+                        }
+                    }
+                }, 50); // Small delay to prevent rapid creation
+            });
+
+            // Tag leave behavior
+            element.addEventListener('mouseleave', () => {
+                console.log('Tag mouseleave:', tagId);
+                
+                // Clear the hover timeout
+                if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
+                    hoverTimeout = null;
+                }
+                
+                // Get the current popup
+                const popup = activePopups.get(element);
+                
+                // If popup exists and isn't sticky
+                if (popup && !popup.classList.contains('sticky')) {
+                    // Add a small delay before checking if we should remove
+                    hoverTimeout = setTimeout(() => {
+                        // Check if mouse is over either the tag or the popup
+                        if (!element.matches(':hover') && !popup.matches(':hover')) {
+                            popup.remove();
+                            activePopups.delete(element);
+                        }
+                    }, 200); // Increased delay to give more time to move to popup
+                }
+            });
+        });
     }
 
     // Show popup with tag info
     function showTagPopup(tagId, value, event, sticky = false, element = null) {
-        console.log('Showing popup for tag:', tagId, 'value:', value, 'sticky:', sticky);
+        console.log('Creating popup for tag:', tagId, 'sticky:', sticky);
         
-        // Create new popup
-        const popup = createPopup();
-        
+        // If there's an existing popup for this element, remove it first
+        if (element && activePopups.has(element)) {
+            const existingPopup = activePopups.get(element);
+            existingPopup.remove();
+            activePopups.delete(element);
+        }
+
         // Find tag info
         let tagInfo = null;
         for (const category of Object.values(tags.weapon_tags)) {
@@ -152,10 +325,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!tagInfo) {
             console.warn('No tag info found for:', tagId);
-            popup.remove();
             return null;
         }
 
+        // Create new popup
+        const popup = createPopup();
+        
         // Update popup content
         popup.querySelector('.tag-popup-title').textContent = 
             value ? `${tagInfo.name} ${value}` : tagInfo.name;
@@ -183,50 +358,60 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (sticky) {
             popup.classList.add('sticky');
-            if (element) {
-                element.dataset.popupId = popup.id = `popup-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-            }
         }
 
         // Add event listeners
         const closeBtn = popup.querySelector('.tag-popup-close');
         closeBtn.onclick = () => {
+            console.log('Close button clicked');
             popup.remove();
             if (element) {
-                delete element.dataset.popupId;
+                activePopups.delete(element);
             }
         };
 
-        // Add double-click handler to close popup
+        // Add pin button functionality
+        const pinBtn = popup.querySelector('.tag-popup-pin');
         const header = popup.querySelector('.tag-popup-header');
-        header.addEventListener('dblclick', () => {
-            popup.remove();
-            if (element) {
-                delete element.dataset.popupId;
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+        let lastClickTime = 0;
+
+        const setPopupPinned = (pinned) => {
+            if (pinned) {
+                popup.classList.add('sticky');
+                pinBtn.querySelector('svg').innerHTML = '<path fill="currentColor" d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />';
+                pinBtn.title = 'Unpin popup';
+            } else {
+                popup.classList.remove('sticky');
+                pinBtn.querySelector('svg').innerHTML = '<path fill="currentColor" d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />';
+                pinBtn.title = 'Pin popup';
             }
-        });
+        };
 
-        // Make popup draggable when sticky
-        if (sticky) {
-            const header = popup.querySelector('.tag-popup-header');
-            let isDragging = false;
-            let startX, startY, initialLeft, initialTop;
-            let lastClickTime = 0;
-
+        const setupDragHandlers = () => {
             header.addEventListener('mousedown', (e) => {
-                if (!popup.classList.contains('sticky')) return;
-                
+                // Ignore if clicking the pin or close button
+                if (e.target.closest('.tag-popup-pin, .tag-popup-close')) {
+                    return;
+                }
+
                 // Check for double click
                 const currentTime = Date.now();
                 if (currentTime - lastClickTime < 300) {
-                    // Double click detected
                     popup.remove();
                     if (element) {
-                        delete element.dataset.popupId;
+                        activePopups.delete(element);
                     }
                     return;
                 }
                 lastClickTime = currentTime;
+
+                // Auto-pin when starting to drag
+                if (!popup.classList.contains('sticky')) {
+                    console.log('Auto-pinning popup on drag start');
+                    setPopupPinned(true);
+                }
 
                 isDragging = true;
                 startX = e.clientX;
@@ -234,125 +419,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 initialLeft = popup.offsetLeft;
                 initialTop = popup.offsetTop;
             });
+        };
 
-            document.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                
-                const dx = e.clientX - startX;
-                const dy = e.clientY - startY;
-                
-                popup.style.left = `${initialLeft + dx}px`;
-                popup.style.top = `${initialTop + dy}px`;
-            });
+        // Set up document-level mouse handlers
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            
+            popup.style.left = `${initialLeft + dx}px`;
+            popup.style.top = `${initialTop + dy}px`;
+        });
 
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
-        }
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        pinBtn.onclick = (e) => {
+            e.stopPropagation(); // Prevent the header's mousedown from triggering
+            console.log('Pin button clicked');
+            setPopupPinned(!popup.classList.contains('sticky'));
+        };
+
+        // Initial setup of drag handlers
+        setupDragHandlers();
 
         return popup;
-    }
-
-    // Process tag elements
-    function processTags() {
-        console.log('Processing tag elements...');
-        const tagElements = document.querySelectorAll('.tag-highlight');
-        console.log('Found tag elements:', tagElements.length);
-        
-        tagElements.forEach((element, index) => {
-            const tagId = element.dataset.tag;
-            const value = element.dataset.value;
-            
-            if (!tagId) {
-                console.warn('No tag ID found for element:', element);
-                return;
-            }
-
-            let hoverTimer = null;
-            let currentPopup = null;
-            let lastClickTime = 0;
-
-            // Add hover effect
-            element.addEventListener('mouseenter', (e) => {
-                console.log('Tag mouseenter:', tagId);
-                element.classList.add('hovering');
-                
-                // Remove any existing non-sticky popup for this element
-                if (currentPopup && !currentPopup.classList.contains('sticky')) {
-                    currentPopup.remove();
-                }
-                
-                // Create new popup if we don't have a sticky one
-                if (!element.dataset.popupId) {
-                    currentPopup = showTagPopup(tagId, value, e, false, element);
-                }
-                
-                // Start timer for sticky behavior
-                hoverTimer = setTimeout(() => {
-                    element.classList.remove('hovering');
-                    // Remove the temporary popup if it exists
-                    if (currentPopup) {
-                        currentPopup.remove();
-                    }
-                    // Create a new sticky popup
-                    currentPopup = showTagPopup(tagId, value, e, true, element);
-                }, 1000);
-            });
-
-            element.addEventListener('mouseleave', () => {
-                console.log('Tag mouseleave:', tagId);
-                element.classList.remove('hovering');
-                if (hoverTimer) {
-                    clearTimeout(hoverTimer);
-                    hoverTimer = null;
-                }
-                // Only remove popup if it's not sticky
-                if (currentPopup && !currentPopup.classList.contains('sticky')) {
-                    currentPopup.remove();
-                }
-            });
-
-            // Add double-click handler to close popup
-            element.addEventListener('dblclick', (e) => {
-                e.preventDefault();
-                if (element.dataset.popupId) {
-                    const popup = document.getElementById(element.dataset.popupId);
-                    if (popup) {
-                        popup.remove();
-                        delete element.dataset.popupId;
-                    }
-                }
-            });
-
-            // Handle click for glossary navigation
-            element.addEventListener('click', (e) => {
-                console.log('Tag click:', tagId);
-                e.preventDefault();
-
-                // Check for double click
-                const currentTime = Date.now();
-                if (currentTime - lastClickTime < 300) {
-                    // Double click handled by dblclick event
-                    return;
-                }
-                lastClickTime = currentTime;
-
-                // Find the glossary section
-                const glossarySection = document.querySelector('#part-tag-glossary');
-                if (glossarySection) {
-                    // Scroll to glossary
-                    glossarySection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Highlight the specific tag in the glossary
-                    const tagEntry = glossarySection.querySelector(`#tag-${tagId}`);
-                    if (tagEntry) {
-                        tagEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        tagEntry.classList.add('highlight');
-                        setTimeout(() => tagEntry.classList.remove('highlight'), 2000);
-                    }
-                }
-            });
-        });
     }
 
     // Initialize tag system
