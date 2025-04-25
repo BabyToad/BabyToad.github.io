@@ -21,6 +21,15 @@ order: 9
         </div>
 
         <div class="control-section">
+            <h3>Save/Load</h3>
+            <div class="save-load-buttons">
+                <button id="export-btn" class="builder-btn">Export Build</button>
+                <button id="import-btn" class="builder-btn">Import Build</button>
+                <input type="file" id="import-input" accept=".json" style="display: none;">
+            </div>
+        </div>
+
+        <div class="control-section">
             <h3>Weapons</h3>
             <div class="resource-counter">
                 <span>Hard Points: </span>
@@ -97,6 +106,11 @@ order: 9
                 <div class="section-header">Fittings</div>
                 <div id="preview-fittings"></div>
             </div>
+
+            <div class="mech-section" id="preview-special-section">
+                <div class="section-header">Special</div>
+                <div id="preview-special"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -134,6 +148,7 @@ function updatePreview() {
         document.getElementById('preview-ac').textContent = '-';
         document.getElementById('preview-hardpoints').textContent = '-';
         document.getElementById('preview-systempoints').textContent = '-';
+        document.getElementById('preview-special').textContent = '-';
         return;
     }
 
@@ -146,6 +161,7 @@ function updatePreview() {
     document.getElementById('preview-ac').textContent = frame.stats.ac;
     document.getElementById('preview-hardpoints').textContent = frame.stats.hard_points;
     document.getElementById('preview-systempoints').textContent = frame.stats.system_points;
+    document.getElementById('preview-special').textContent = frame.special || '-';
 
     // Update weapons preview
     const weaponsContainer = document.getElementById('preview-weapons');
@@ -255,6 +271,76 @@ document.getElementById('weapon-select').addEventListener('change', (e) => {
 document.getElementById('fitting-select').addEventListener('change', (e) => {
     addFitting(e.target.value);
 });
+
+// Add these new functions for import/export
+function exportMech() {
+    const mechData = {
+        frame: currentMech.frame,
+        weapons: currentMech.weapons,
+        fittings: currentMech.fittings
+    };
+    
+    const blob = new Blob([JSON.stringify(mechData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mech-build-${frames[currentMech.frame].name.toLowerCase().replace(/\s+/g, '-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function importMech(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const mechData = JSON.parse(e.target.result);
+            
+            // Validate the imported data
+            if (!mechData.frame || !frames[mechData.frame]) {
+                alert('Invalid mech build: Frame not found');
+                return;
+            }
+            
+            // Reset current mech
+            currentMech = {
+                frame: mechData.frame,
+                weapons: mechData.weapons || [],
+                fittings: mechData.fittings || []
+            };
+            
+            // Update UI
+            document.getElementById('frame-select').value = mechData.frame;
+            updateWeaponList();
+            updateFittingList();
+            updateResourceCounters();
+            updatePreview();
+            
+        } catch (error) {
+            alert('Error importing mech build: ' + error.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+// Add event listeners for the new buttons
+document.getElementById('export-btn').addEventListener('click', () => {
+    if (!currentMech.frame) {
+        alert('Please select a frame first');
+        return;
+    }
+    exportMech();
+});
+
+document.getElementById('import-btn').addEventListener('click', () => {
+    document.getElementById('import-input').click();
+});
+
+document.getElementById('import-input').addEventListener('change', importMech);
 </script>
 
 <style>
@@ -350,6 +436,28 @@ document.getElementById('fitting-select').addEventListener('change', (e) => {
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #333;
+}
+
+.save-load-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.builder-btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: #252525;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.builder-btn:hover {
+    background: #333;
 }
 
 @media (max-width: 768px) {
