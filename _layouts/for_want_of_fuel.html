@@ -47,7 +47,8 @@ layout: base
             </div>
             
             <!-- Then add the other parts -->
-            {% for part in site.for_want_of_fuel %}
+            {% assign sorted_parts = site.for_want_of_fuel | sort: "order" %}
+            {% for part in sorted_parts %}
                 {% unless part.title == page.title %}
                 <div class="rules-part" data-expanded="true" id="part-{{ part.title | slugify }}">
                     <div class="rules-part-header">
@@ -55,8 +56,7 @@ layout: base
                         {{ part.title }}
                     </div>
                     <div class="rules-part-content">
-                        {%- capture part_content -%}{{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{%- endcapture -%}
-                        {{ part_content | markdownify }}
+                        {{ part.content }}
                     </div>
                 </div>
                 {% endunless %}
@@ -69,10 +69,294 @@ layout: base
     </div>
 </div>
 
+<div id="tag-data" data-tags="{{ site.data.tags | jsonify | replace: '"', '&quot;' }}" style="display: none;"></div>
+
 <script>
-// Keep existing JavaScript for TOC and sidenotes
 document.addEventListener('DOMContentLoaded', () => {
-    // Existing TOC and progress tracking code
-    // Existing sidenotes handling code
+    // Debug logging
+    console.log('Tag system initializing...');
+    
+    // Tag System
+    const tagDataElement = document.getElementById('tag-data');
+    if (!tagDataElement) {
+        console.error('Tag data element not found!');
+        return;
+    }
+    
+    let tags;
+    try {
+        const rawData = tagDataElement.dataset.tags.replace(/&quot;/g, '"');
+        tags = JSON.parse(rawData);
+        console.log('Loaded tag data:', tags);
+    } catch (e) {
+        console.error('Failed to parse tag data:', e);
+        console.error('Raw data:', tagDataElement.dataset.tags);
+        return;
+    }
+
+    // Process tag syntax in content
+    function processTagSyntax() {
+        const content = document.querySelectorAll('.rules-part-content');
+        content.forEach(element => {
+            element.innerHTML = element.innerHTML.replace(
+                /\[\[tag:([a-zA-Z_]+)(?:\s+(\d+))?\]\]/g,
+                (match, tag, value) => {
+                    return `<span class="tag-highlight" data-tag="${tag}" ${value ? `data-value="${value}"` : ''}>${tag}${value ? ' ' + value : ''}</span>`;
+                }
+            );
+        });
+    }
+
+    // Create popup element
+    function createPopup() {
+        console.log('Creating popup element...');
+        const popup = document.createElement('div');
+        popup.className = 'tag-popup';
+        
+        popup.innerHTML = `
+            <div class="tag-popup-header">
+                <div class="tag-popup-title"></div>
+                <button class="tag-popup-close">×</button>
+            </div>
+            <div class="tag-popup-content"></div>
+            <div class="tag-popup-example"></div>
+        `;
+        
+        document.body.appendChild(popup);
+        return popup;
+    }
+
+    // Show popup with tag info
+    function showTagPopup(tagId, value, event, sticky = false, element = null) {
+        console.log('Showing popup for tag:', tagId, 'value:', value, 'sticky:', sticky);
+        
+        // Create new popup
+        const popup = createPopup();
+        
+        // Find tag info
+        let tagInfo = null;
+        for (const category of Object.values(tags.weapon_tags)) {
+            if (category[tagId]) {
+                tagInfo = category[tagId];
+                break;
+            }
+        }
+        if (!tagInfo) {
+            for (const category of Object.values(tags.fitting_tags)) {
+                if (category[tagId]) {
+                    tagInfo = category[tagId];
+                    break;
+                }
+            }
+        }
+
+        if (!tagInfo) {
+            console.warn('No tag info found for:', tagId);
+            popup.remove();
+            return null;
+        }
+
+        // Update popup content
+        popup.querySelector('.tag-popup-title').textContent = 
+            value ? `${tagInfo.name} ${value}` : tagInfo.name;
+        popup.querySelector('.tag-popup-content').textContent = tagInfo.description;
+        popup.querySelector('.tag-popup-example').textContent = tagInfo.example;
+
+        // Position popup
+        const rect = event.target.getBoundingClientRect();
+        const popupWidth = 300;
+        const popupHeight = 200;
+        let left = rect.left;
+        let top = rect.bottom + 10;
+
+        // Adjust position if it would go off screen
+        if (left + popupWidth > window.innerWidth) {
+            left = window.innerWidth - popupWidth - 10;
+        }
+        if (top + popupHeight > window.innerHeight) {
+            top = rect.top - popupHeight - 10;
+        }
+
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+        popup.classList.add('visible');
+        
+        if (sticky) {
+            popup.classList.add('sticky');
+            if (element) {
+                element.dataset.popupId = popup.id = `popup-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            }
+        }
+
+        // Add event listeners
+        const closeBtn = popup.querySelector('.tag-popup-close');
+        closeBtn.onclick = () => {
+            popup.remove();
+            if (element) {
+                delete element.dataset.popupId;
+            }
+        };
+
+        // Add double-click handler to close popup
+        const header = popup.querySelector('.tag-popup-header');
+        header.addEventListener('dblclick', () => {
+            popup.remove();
+            if (element) {
+                delete element.dataset.popupId;
+            }
+        });
+
+        // Make popup draggable when sticky
+        if (sticky) {
+            const header = popup.querySelector('.tag-popup-header');
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+            let lastClickTime = 0;
+
+            header.addEventListener('mousedown', (e) => {
+                if (!popup.classList.contains('sticky')) return;
+                
+                // Check for double click
+                const currentTime = Date.now();
+                if (currentTime - lastClickTime < 300) {
+                    // Double click detected
+                    popup.remove();
+                    if (element) {
+                        delete element.dataset.popupId;
+                    }
+                    return;
+                }
+                lastClickTime = currentTime;
+
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                initialLeft = popup.offsetLeft;
+                initialTop = popup.offsetTop;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                
+                popup.style.left = `${initialLeft + dx}px`;
+                popup.style.top = `${initialTop + dy}px`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        }
+
+        return popup;
+    }
+
+    // Process tag elements
+    function processTags() {
+        console.log('Processing tag elements...');
+        const tagElements = document.querySelectorAll('.tag-highlight');
+        console.log('Found tag elements:', tagElements.length);
+        
+        tagElements.forEach((element, index) => {
+            const tagId = element.dataset.tag;
+            const value = element.dataset.value;
+            
+            if (!tagId) {
+                console.warn('No tag ID found for element:', element);
+                return;
+            }
+
+            let hoverTimer = null;
+            let currentPopup = null;
+            let lastClickTime = 0;
+
+            // Add hover effect
+            element.addEventListener('mouseenter', (e) => {
+                console.log('Tag mouseenter:', tagId);
+                element.classList.add('hovering');
+                
+                // Remove any existing non-sticky popup for this element
+                if (currentPopup && !currentPopup.classList.contains('sticky')) {
+                    currentPopup.remove();
+                }
+                
+                // Create new popup if we don't have a sticky one
+                if (!element.dataset.popupId) {
+                    currentPopup = showTagPopup(tagId, value, e, false, element);
+                }
+                
+                // Start timer for sticky behavior
+                hoverTimer = setTimeout(() => {
+                    element.classList.remove('hovering');
+                    // Remove the temporary popup if it exists
+                    if (currentPopup) {
+                        currentPopup.remove();
+                    }
+                    // Create a new sticky popup
+                    currentPopup = showTagPopup(tagId, value, e, true, element);
+                }, 1000);
+            });
+
+            element.addEventListener('mouseleave', () => {
+                console.log('Tag mouseleave:', tagId);
+                element.classList.remove('hovering');
+                if (hoverTimer) {
+                    clearTimeout(hoverTimer);
+                    hoverTimer = null;
+                }
+                // Only remove popup if it's not sticky
+                if (currentPopup && !currentPopup.classList.contains('sticky')) {
+                    currentPopup.remove();
+                }
+            });
+
+            // Add double-click handler to close popup
+            element.addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                if (element.dataset.popupId) {
+                    const popup = document.getElementById(element.dataset.popupId);
+                    if (popup) {
+                        popup.remove();
+                        delete element.dataset.popupId;
+                    }
+                }
+            });
+
+            // Handle click for glossary navigation
+            element.addEventListener('click', (e) => {
+                console.log('Tag click:', tagId);
+                e.preventDefault();
+
+                // Check for double click
+                const currentTime = Date.now();
+                if (currentTime - lastClickTime < 300) {
+                    // Double click handled by dblclick event
+                    return;
+                }
+                lastClickTime = currentTime;
+
+                // Find the glossary section
+                const glossarySection = document.querySelector('#part-tag-glossary');
+                if (glossarySection) {
+                    // Scroll to glossary
+                    glossarySection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Highlight the specific tag in the glossary
+                    const tagEntry = glossarySection.querySelector(`#tag-${tagId}`);
+                    if (tagEntry) {
+                        tagEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        tagEntry.classList.add('highlight');
+                        setTimeout(() => tagEntry.classList.remove('highlight'), 2000);
+                    }
+                }
+            });
+        });
+    }
+
+    // Initialize tag system
+    processTagSyntax();
+    processTags();
 });
 </script> 

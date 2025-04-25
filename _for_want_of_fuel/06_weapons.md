@@ -32,7 +32,7 @@ order: 6
             <div class="weapon-type" data-label="Type">{{ w.stats.damage_type | join: "/" }}</div>
             <div class="weapon-tags" data-label="Tags">
                 {% for tag in w.tags %}
-                <span class="weapon-tag">{% if tag.value %}{{ tag.name }} {{ tag.value }}{% else %}{{ tag.name }}{% endif %}</span>
+                <span class="tag-highlight" data-tag="{{ tag.name | downcase }}" {% if tag.value %}data-value="{{ tag.value }}"{% endif %}>{{ tag.name }}{% if tag.value %} {{ tag.value }}{% endif %}</span>
                 {% endfor %}
             </div>
             <div class="weapon-special" data-label="Special">{{ w.special }}</div>
@@ -65,7 +65,7 @@ order: 6
             <div class="weapon-type" data-label="Type">{{ w.stats.damage_type | join: "/" }}</div>
             <div class="weapon-tags" data-label="Tags">
                 {% for tag in w.tags %}
-                <span class="weapon-tag">{% if tag.value %}{{ tag.name }} {{ tag.value }}{% else %}{{ tag.name }}{% endif %}</span>
+                <span class="tag-highlight" data-tag="{{ tag.name | downcase }}" {% if tag.value %}data-value="{{ tag.value }}"{% endif %}>{{ tag.name }}{% if tag.value %} {{ tag.value }}{% endif %}</span>
                 {% endfor %}
             </div>
             <div class="weapon-special" data-label="Special">{{ w.special }}</div>
@@ -98,7 +98,7 @@ order: 6
             <div class="weapon-type" data-label="Type">{{ w.stats.damage_type | join: "/" }}</div>
             <div class="weapon-tags" data-label="Tags">
                 {% for tag in w.tags %}
-                <span class="weapon-tag">{% if tag.value %}{{ tag.name }} {{ tag.value }}{% else %}{{ tag.name }}{% endif %}</span>
+                <span class="tag-highlight" data-tag="{{ tag.name | downcase }}" {% if tag.value %}data-value="{{ tag.value }}"{% endif %}>{{ tag.name }}{% if tag.value %} {{ tag.value }}{% endif %}</span>
                 {% endfor %}
             </div>
             <div class="weapon-special" data-label="Special">{{ w.special }}</div>

@@ -1,0 +1,175 @@
+{
+  "weapon_tags": {
+    "combat": {
+      "ap": {
+        "name": "AP (Armor Piercing)",
+        "description": "This weapon ignores the target's Armor rating when calculating damage. This makes it particularly effective against heavily armored targets.",
+        "example": "A weapon with AP will deal full damage even if the target has high Armor"
+      },
+      "accurate": {
+        "name": "Accurate",
+        "description": "This weapon is particularly precise and well-balanced, granting a +2 bonus to hit when making attack rolls.",
+        "example": "A weapon with Accurate makes it easier to hit targets"
+      },
+      "brace": {
+        "name": "Brace",
+        "description": "This weapon requires a stable firing position. You cannot move and fire this weapon in the same turn unless you have Stabilizers fitted to your mech.",
+        "example": "Brace weapons require careful positioning for optimal use"
+      },
+      "inaccurate": {
+        "name": "Inaccurate",
+        "description": "This weapon is difficult to aim precisely, imposing a -2 penalty to hit when making attack rolls.",
+        "example": "Inaccurate weapons are harder to hit with but often make up for it in other ways"
+      },
+      "loading": {
+        "name": "Loading",
+        "description": "This weapon requires an Action to reload after firing. You cannot fire it again until it has been reloaded.",
+        "example": "Loading weapons require careful management of your actions"
+      },
+      "overkill": {
+        "name": "Overkill",
+        "description": "When rolling damage for this weapon, if you roll the maximum value on any die, you may reroll that die and add the new result to the total damage.",
+        "example": "Overkill weapons can deal massive damage on lucky rolls"
+      },
+      "reach": {
+        "name": "Reach",
+        "description": "This weapon can attack targets up to the specified range away. The number after Reach indicates the maximum range in range units.",
+        "example": "Reach 3 means the weapon can hit targets up to 3 range units away"
+      },
+      "shock": {
+        "name": "Shock",
+        "description": "When you hit with this weapon, the target must make a save vs Physical or become Stunned until the end of their next turn. The save DC is equal to the shock value.",
+        "example": "Shock 4 means DC 14 save"
+      },
+      "smart": {
+        "name": "Smart",
+        "description": "This weapon has advanced targeting systems. When it hits, the target must make a save vs Tech or take only half damage.",
+        "example": "Smart weapons are particularly effective against electronic systems"
+      },
+      "suppressive": {
+        "name": "Suppressive",
+        "description": "This weapon can suppress a 2-range cone, forcing targets in the area to take cover or risk being hit.",
+        "example": "Suppressive weapons are excellent for controlling enemy movement"
+      },
+      "threat": {
+        "name": "Threat",
+        "description": "This weapon can be used to make attacks of opportunity against targets that move within its range.",
+        "example": "Threat weapons can punish enemies for moving carelessly"
+      },
+      "vigil": {
+        "name": "Vigil",
+        "description": "Once per turn, you can immediately attack a hostile that attacked an ally within your weapon's range.",
+        "example": "Vigil weapons allow you to protect your allies"
+      }
+    },
+    "area_effect": {
+      "blast": {
+        "name": "Blast",
+        "description": "This weapon deals damage in an area. The number after Blast indicates the radius in range units. All targets in the area must save vs Evasion or take full damage.",
+        "example": "Blast 2 means 2 range radius"
+      },
+      "cone": {
+        "name": "Cone",
+        "description": "This weapon creates a cone-shaped area of effect, affecting all targets within the cone's area.",
+        "example": "Cone weapons are excellent for hitting multiple targets in a specific direction"
+      },
+      "arcing": {
+        "name": "Arcing",
+        "description": "This weapon does not require line of sight to its target, allowing it to hit targets behind cover or around corners.",
+        "example": "Arcing weapons can hit targets that would normally be protected by cover"
+      }
+    },
+    "special_effect": {
+      "burn": {
+        "name": "Burn",
+        "description": "This weapon sets targets on fire. On a hit, the target takes ongoing burn damage at the start of their turn until they take an action to put out the flames.",
+        "example": "Burn weapons can deal damage over time"
+      },
+      "hex": {
+        "name": "Hex",
+        "description": "When this weapon hits, the target must make a save vs Tech. On a failure, they become hexxed and suffer a -4 penalty on their next attack.",
+        "example": "Hex weapons can significantly reduce enemy effectiveness"
+      },
+      "limited": {
+        "name": "Limited",
+        "description": "This weapon can only be used a certain number of times per scene. The number after Limited indicates how many uses remain.",
+        "example": "Limited 3 means the weapon can be used three times per scene"
+      },
+      "overheat": {
+        "name": "Overheat",
+        "description": "When this weapon is fired, the user takes damage equal to the overheat value. This represents the strain on the mech's systems.",
+        "example": "Overheat 2 means the mech takes 2 HP damage when firing"
+      }
+    }
+  },
+  "fitting_tags": {
+    "combat": {
+      "quick": {
+        "name": "Quick",
+        "description": "This fitting can be used as a free action, allowing you to use it without spending your main action.",
+        "example": "Quick fittings are excellent for tactical flexibility"
+      },
+      "limited": {
+        "name": "Limited",
+        "description": "This fitting can only be used a certain number of times per scene. The number after Limited indicates how many uses remain.",
+        "example": "Limited 3 means the fitting can be used three times per scene"
+      }
+    },
+    "movement": {
+      "flight": {
+        "name": "Flight",
+        "description": "This fitting allows the mech to fly. While flying, the mech can move in any direction and ignore terrain obstacles.",
+        "example": "Flight fittings provide excellent mobility"
+      },
+      "jump": {
+        "name": "Jump",
+        "description": "This fitting allows the mech to make jumping or limited flying movements, with specific limitations on duration or height.",
+        "example": "Jump fittings provide tactical mobility options"
+      }
+    },
+    "support": {
+      "hard_cover": {
+        "name": "Hard Cover",
+        "description": "This fitting provides hard cover to adjacent allies, giving them a significant defensive bonus.",
+        "example": "Hard Cover fittings are excellent for protecting allies"
+      },
+      "soft_cover": {
+        "name": "Soft Cover",
+        "description": "This fitting provides soft cover to allies within its area of effect, giving them a moderate defensive bonus.",
+        "example": "Soft Cover fittings can protect multiple allies"
+      },
+      "immunity": {
+        "name": "Immunity",
+        "description": "This fitting makes the mech immune to all damage types, providing complete protection against attacks.",
+        "example": "Immunity fittings provide ultimate protection"
+      },
+      "size": {
+        "name": "Size",
+        "description": "This fitting affects the mech's size. The number after Size indicates how many spaces the mech takes up.",
+        "example": "Size 2 means the mech takes up two spaces"
+      }
+    },
+    "system": {
+      "tech": {
+        "name": "Tech",
+        "description": "This system requires targets to make a save vs Tech to resist its effects.",
+        "example": "Tech systems are particularly effective against electronic systems"
+      },
+      "physical": {
+        "name": "Physical",
+        "description": "This system requires targets to make a save vs Physical to resist its effects.",
+        "example": "Physical systems affect the target's physical capabilities"
+      },
+      "evasion": {
+        "name": "Evasion",
+        "description": "This system requires targets to make a save vs Evasion to resist its effects.",
+        "example": "Evasion systems test the target's ability to dodge or avoid effects"
+      },
+      "mental": {
+        "name": "Mental",
+        "description": "This system requires targets to make a save vs Mental to resist its effects.",
+        "example": "Mental systems affect the target's mental state or willpower"
+      }
+    }
+  }
+} 
