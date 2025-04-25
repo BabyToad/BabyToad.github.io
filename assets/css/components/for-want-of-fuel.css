@@ -352,7 +352,7 @@
     background: #1a1a1a;
     border: 1px solid #333;
     border-radius: 6px;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     padding: 0;
     color: #ccc;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -363,29 +363,29 @@
     justify-content: space-between;
     align-items: center;
     background: #252525;
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid #333;
     border-radius: 6px 6px 0 0;
 }
 
 .mech-name {
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 .frame-type {
     color: #888;
-    font-size: 0.9em;
+    font-size: 0.85em;
     text-transform: uppercase;
 }
 
 .mech-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
     background: #1d1d1d;
 }
 
@@ -393,13 +393,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.25rem;
     border-bottom: 1px solid #333;
 }
 
 .stat-label {
-    color: #6a9ec7;  /* Light blue for labels */
-    font-size: 0.9em;
+    color: #6a9ec7;
+    font-size: 0.85em;
 }
 
 .stat-value {
@@ -409,74 +409,76 @@
 }
 
 .mech-section {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1rem;
     border-top: 1px solid #333;
 }
 
 .section-header {
     color: #6a9ec7;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
 }
 
 .weapon-item, .fitting-item {
     background: #252525;
     border-radius: 4px;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .item-name {
     color: #fff;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.95em;
 }
 
 .item-stats {
     color: #888;
-    font-size: 0.9em;
-    line-height: 1.4;
+    font-size: 0.85em;
+    line-height: 1.3;
 }
 
 /* Weapon specific styles */
 .weapon-stats {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
 }
 
 .weapon-stat {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.35rem;
 }
 
 .weapon-stat-label {
     color: #6a9ec7;
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .weapon-stat-value {
     color: #fff;
     font-family: var(--font-mono);
+    font-size: 0.9em;
 }
 
 /* Tags */
 .tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
 }
 
 .mech-tag {
     background: #333;
     color: #ccc;
-    padding: 0.2rem 0.5rem;
+    padding: 0.15rem 0.35rem;
     border-radius: 3px;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 /* Mobile adjustments */
@@ -559,27 +561,19 @@
     gap: 0.4rem;
 }
 
-.weapon-tag {
-    background: #2a2a2a;
-    color: #6a9ec7;
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
+.weapon-tags .tag-highlight {
     font-size: 0.85em;
-    border: 1px solid #444;
-    font-family: var(--font-system);
+    margin: 0;
+    background: rgba(106, 158, 199, 0.1);
 }
 
-.weapon-special {
-    color: #888;
-    font-size: 0.9em;
-    font-family: var(--font-system);
-    line-height: 1.4;
+.weapon-tags .tag-highlight:hover {
+    transform: translateY(-1px);
 }
 
-.weapon-hardpoints {
-    color: #6a9ec7;
-    text-align: center;
-    font-weight: 500;
+/* Ensure popups appear above the table */
+.tag-popup {
+    z-index: 1000;
 }
 
 /* Compact view for mobile */
@@ -597,7 +591,6 @@
     .weapon-item-row > * {
         position: relative;
         padding-left: 100px;
-        text-align: left;
     }
 
     .weapon-item-row > *::before {
@@ -617,6 +610,7 @@
     }
 
     .weapon-tags {
+        padding-left: 0;
         margin: 0.5rem 0;
     }
 }
@@ -943,42 +937,41 @@
 }
 
 /* Typography Improvements */
-.for-want-of-fuel-container h1 {
+.document-header h1 {
     font-size: 2.5rem;
     line-height: 1.2;
-    margin: 2.5rem 0 1.5rem;
+    margin: 0 0 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--text-primary);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-.for-want-of-fuel-container h2 {
+.for-want-of-fuel-container .rules-part-content h1,
+.for-want-of-fuel-container .rules-part-content h1.highlight {
     font-size: 2rem;
     line-height: 1.3;
-    margin: 2rem 0 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
-    border-bottom: 1px dotted var(--border-color);
-    padding-bottom: 0.5rem;
-}
-
-.for-want-of-fuel-container h3 {
-    font-size: 1.5rem;
-    line-height: 1.4;
-    margin: 1.75rem 0 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.for-want-of-fuel-container h4 {
-    font-size: 1.25rem;
-    line-height: 1.4;
     margin: 1.5rem 0 1rem;
     font-weight: 600;
     color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    background: none;
+    font-style: normal;
+}
+
+/* Mobile Typography Adjustments */
+@media (max-width: 768px) {
+    .document-header h1 {
+        font-size: 2rem;
+        margin: 0 0 1rem;
+    }
+
+    .for-want-of-fuel-container .rules-part-content h1 {
+        font-size: 1.75rem;
+        margin: 1.25rem 0 1rem;
+    }
 }
 
 /* Paragraphs and Text */
@@ -1108,4 +1101,248 @@
     .for-want-of-fuel-container iframe {
         height: 200px;
     }
+}
+
+/* Tag System */
+.tag-highlight {
+    color: #6a9ec7;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    background: rgba(106, 158, 199, 0.1);
+    border: 1px solid rgba(106, 158, 199, 0.2);
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin: 0 0.1rem;
+    position: relative;
+}
+
+.tag-highlight:hover {
+    color: #8ab7e0;
+    background: rgba(106, 158, 199, 0.2);
+    border-color: rgba(106, 158, 199, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tag-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #6a9ec7;
+    transition: width 1s linear;
+    opacity: 0;
+}
+
+.tag-highlight.hovering::after {
+    opacity: 1;
+    width: 100%;
+}
+
+.tag-popup {
+    position: fixed;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1rem;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    color: #ccc;
+    font-size: 0.9em;
+    line-height: 1.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
+}
+
+.tag-popup.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tag-popup.sticky {
+    cursor: move;
+    pointer-events: all;
+}
+
+.tag-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+    cursor: move;
+}
+
+.tag-popup-title {
+    color: #6a9ec7;
+    font-weight: bold;
+    font-size: 1.1em;
+    user-select: none;
+    flex: 1;
+}
+
+.tag-popup-close {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.8em;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.15s ease;
+    opacity: 0;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+}
+
+.tag-popup.sticky .tag-popup-close {
+    opacity: 0.6;
+}
+
+.tag-popup-close:hover {
+    opacity: 1;
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.tag-popup-content {
+    margin-bottom: 0.5rem;
+    color: #ddd;
+}
+
+.tag-popup-example {
+    font-style: italic;
+    color: #888;
+    padding-top: 0.5rem;
+    border-top: 1px solid #333;
+    font-size: 0.9em;
+}
+
+/* Glossary highlighting */
+#part-tag-glossary .highlight {
+    background: rgba(106, 158, 199, 0.2);
+    transition: background 0.5s ease;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+#part-tag-glossary .highlight::before {
+    content: '→';
+    color: #6a9ec7;
+    margin-right: 0.5rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .tag-popup {
+        width: 90%;
+        max-width: 300px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(5px);
+    }
+
+    .tag-popup.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Tag Glossary */
+.tag-category {
+    margin: 2rem 0;
+}
+
+.tag-category h3 {
+    color: #6a9ec7;
+    font-size: 1.2em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #333;
+}
+
+.tag-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.tag-entry {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.tag-entry:target {
+    background: #252525;
+    border-color: #6a9ec7;
+}
+
+.tag-name {
+    color: #6a9ec7;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 0.5rem;
+}
+
+.tag-description {
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.tag-example {
+    color: #888;
+    font-size: 0.9em;
+    padding-top: 0.75rem;
+    border-top: 1px solid #333;
+}
+
+.tag-example em {
+    color: #6a9ec7;
+    font-style: normal;
+    margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .tag-list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .tag-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Override syntax highlighting styles */
+.for-want-of-fuel-container pre.highlight {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.for-want-of-fuel-container .highlight {
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-size: inherit;
+    line-height: inherit;
 } 
