@@ -28,3 +28,11 @@ plugins:
 sass:
   sass_dir: assets/css
   style: compressed
+
+exclude:
+  - docs/
+  - README.md
+  - LICENSE
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock

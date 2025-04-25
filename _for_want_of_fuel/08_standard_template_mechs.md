@@ -58,7 +58,7 @@ order: 8
                     <span class="weapon-stat-value">1d12 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Shock 4</span>
+                    [[tag:shock 4]]
                 </div>
             </div>
         </div>
@@ -74,8 +74,7 @@ order: 8
                     <span class="weapon-stat-value">1d6+2 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Blast 1</span>
-                    <span class="mech-tag">Loading</span>
+                    [[tag:blast 1]] [[tag:loading]]
                 </div>
             </div>
         </div>
@@ -91,7 +90,7 @@ order: 8
                     <span class="weapon-stat-value">1d12 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Shock 4</span>
+                    [[tag:shock 4]]
                 </div>
             </div>
         </div>
@@ -109,11 +108,11 @@ order: 8
         </div>
         <div class="fitting-item">
             <div class="item-name">Smoke Charges</div>
-            <div class="item-stats">Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides soft cover to anyone inside it. Lasts for 2 rounds. Can be set as mine. Limited 3.</div>
+            <div class="item-stats">Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides [[tag:soft_cover]] to anyone inside it. Lasts for 2 rounds. Can be set as mine. [[tag:limited 3]].</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">HE Charges</div>
-            <div class="item-stats">Deploy a high explosive charge at a location within range 5. The charge detonates dealing 2d6 P damage in a 1-range radius. Targets must save vs Evasion to take half. Can be set as mine. Limited 3.</div>
+            <div class="item-stats">Deploy a high explosive charge at a location within range 5. The charge detonates dealing 2d6 P damage in a 1-range radius. Targets must save vs [[tag:evasion]] to take half. Can be set as mine. [[tag:limited 3]].</div>
         </div>
     </div>
 </div>
@@ -169,10 +168,7 @@ order: 8
                     <span class="weapon-stat-value">2d12 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">AP</span>
-                    <span class="mech-tag">Loading</span>
-                    <span class="mech-tag">Accurate</span>
-                    <span class="mech-tag">Brace</span>
+                    [[tag:ap]] [[tag:loading]] [[tag:accurate]] [[tag:brace]]
                 </div>
             </div>
         </div>
@@ -188,7 +184,7 @@ order: 8
                     <span class="weapon-stat-value">d6+4 E</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">AP</span>
+                    [[tag:ap]]
                 </div>
             </div>
         </div>
@@ -204,7 +200,7 @@ order: 8
                     <span class="weapon-stat-value">d6+2 E</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Overkill</span>
+                    [[tag:overkill]]
                 </div>
             </div>
         </div>
@@ -214,15 +210,15 @@ order: 8
         <div class="section-header">Fittings</div>
         <div class="fitting-item">
             <div class="item-name">Jump Jet System</div>
-            <div class="item-stats">You can fly while moving, however you start falling when you stop or the end of your turn.</div>
+            <div class="item-stats">You can fly while moving, however you start falling when you stop or the end of your turn. [[tag:jump]]</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Smoke Charges</div>
-            <div class="item-stats">Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides soft cover to anyone inside it. Lasts for 2 rounds. Can be set as mine. Limited 3.</div>
+            <div class="item-stats">Deploy a cloud of dense smoke in a 2-range radius up to range 5. The smoke blocks line of sight and provides [[tag:soft_cover]] to anyone inside it. Lasts for 2 rounds. Can be set as mine. [[tag:limited 3]].</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Deployable Cover</div>
-            <div class="item-stats">Deploy a 2 hardened barriers (Size 1). The barrier provides hard cover and has 10 HP.</div>
+            <div class="item-stats">Deploy a 2 hardened barriers (Size 1). The barrier provides [[tag:hard_cover]] and has 10 HP.</div>
         </div>
     </div>
 </div>
@@ -278,8 +274,7 @@ order: 8
                     <span class="weapon-stat-value">2d6 X</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Smart</span>
-                    <span class="mech-tag">Accurate</span>
+                    [[tag:smart]] [[tag:accurate]]
                 </div>
             </div>
         </div>
@@ -295,8 +290,7 @@ order: 8
                     <span class="weapon-stat-value">d6 X</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Smart</span>
-                    <span class="mech-tag">Hex</span>
+                    [[tag:smart]] [[tag:hex]]
                 </div>
             </div>
         </div>
@@ -312,11 +306,7 @@ order: 8
                     <span class="weapon-stat-value">2d12 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Blast 2</span>
-                    <span class="mech-tag">Inaccurate</span>
-                    <span class="mech-tag">Loading</span>
-                    <span class="mech-tag">Brace</span>
-                    <span class="mech-tag">Arcing</span>
+                    [[tag:blast 2]] [[tag:inaccurate]] [[tag:loading]] [[tag:brace]] [[tag:arcing]]
                 </div>
             </div>
         </div>
@@ -326,11 +316,11 @@ order: 8
         <div class="section-header">Fittings</div>
         <div class="fitting-item">
             <div class="item-name">NHP Assistant</div>
-            <div class="item-stats">An integrated NHP that assists you and can follow basic instructs when operating the mech independantly.</div>
+            <div class="item-stats">An integrated NHP that assists you and can follow basic instructs when operating the mech independantly. [[tag:tech]]</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Flight System</div>
-            <div class="item-stats">You can fly. You take Class+1 HP damage each turn when flying.</div>
+            <div class="item-stats">You can fly. You take Class+1 HP damage each turn when flying. [[tag:flight]]</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Personalizations</div>
@@ -394,9 +384,7 @@ order: 8
                     <span class="weapon-stat-value">2d12+8 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Brace</span>
-                    <span class="mech-tag">Inaccurate</span>
-                    <span class="mech-tag">Suppressive</span>
+                    [[tag:brace]] [[tag:inaccurate]] [[tag:suppressive]]
                 </div>
             </div>
         </div>
@@ -412,8 +400,7 @@ order: 8
                     <span class="weapon-stat-value">1d6+2 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Blast 1</span>
-                    <span class="mech-tag">Loading</span>
+                    [[tag:blast 1]] [[tag:loading]]
                 </div>
             </div>
         </div>
@@ -429,9 +416,7 @@ order: 8
                     <span class="weapon-stat-value">d12+2 P</span>
                 </span>
                 <div class="tag-list">
-                    <span class="mech-tag">Blast 1</span>
-                    <span class="mech-tag">Inaccurate</span>
-                    <span class="mech-tag">Arcing</span>
+                    [[tag:blast 1]] [[tag:inaccurate]] [[tag:arcing]]
                 </div>
             </div>
         </div>
@@ -441,15 +426,15 @@ order: 8
         <div class="section-header">Fittings</div>
         <div class="fitting-item">
             <div class="item-name">Turret Drone</div>
-            <div class="item-stats">Deploy a turret drone within range 10 that attacks deals +6 damage to any target you hit within the drones range of 10. The drone has 5 HP, AC 12.</div>
+            <div class="item-stats">Deploy a turret drone within range 10 that attacks deals +6 damage to any target you hit within the drones range of 10. The drone has 5 HP, AC 12. [[tag:tech]]</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Ammo Feeder</div>
-            <div class="item-stats">Once per scene, you can reload a Loading weapon as a free action.</div>
+            <div class="item-stats">Once per scene, you can reload a [[tag:loading]] weapon as a [[tag:quick]] action.</div>
         </div>
         <div class="fitting-item">
             <div class="item-name">Stabilizers</div>
-            <div class="item-stats">You can fire Brace weapons and move, but take -2 to Hit.</div>
+            <div class="item-stats">You can fire [[tag:brace]] weapons and move, but take -2 to Hit.</div>
         </div>
     </div>
 </div>
