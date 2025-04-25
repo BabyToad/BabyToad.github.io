@@ -42,24 +42,36 @@ Tags are written in content using the following syntax:
 
 ### 1. Interactive Tooltips
 - Hover over tag to show tooltip
-- Tooltips show name, description, and example
-- 1-second hover makes tooltip sticky
-- Progress bar indicates hover duration
-- Sticky tooltips can be:
-  - Dragged to reposition
+- Tooltips display name, description, and example usage
+- Mouse movement between tag and tooltip is smooth with no flickering
+- Tooltips can be:
+  - Dragged to reposition (automatically pins when dragging starts)
+  - Pinned/unpinned via pin button
   - Closed via close button
   - Closed via double-click on header
 
-### 2. Glossary Integration
+### 2. Popup Management
+- Clean, minimal UI with SVG icons
+- Smooth transitions and hover effects
+- Visual feedback for interactions:
+  - Pin button highlights when popup is pinned
+  - Hover effects on controls
+  - Subtle animations for state changes
+- Multiple popups can be open simultaneously
+- Proper cleanup when popups are closed
+
+### 3. Popup States
+- **Temporary**: Shows while hovering over tag
+- **Transitioning**: Brief delay when moving mouse to popup
+- **Pinned**: Stays visible after:
+  - Clicking pin button
+  - Starting to drag popup
+- **Closed**: Removes popup and cleans up references
+
+### 4. Glossary Integration
 - Clicking tags scrolls to glossary entry
 - Glossary entries highlight when navigated to
 - Bidirectional navigation between usage and definition
-
-### 3. Visual Feedback
-- Hover effects on tags
-- Progress bar for sticky behavior
-- Highlight animation in glossary
-- Drag handles for sticky tooltips
 
 ## CSS Classes
 
@@ -73,57 +85,41 @@ Tags are written in content using the following syntax:
 ```css
 .tag-popup              // Base popup container
 .tag-popup.visible      // Visible state
-.tag-popup.sticky       // Sticky state
-.tag-popup-header       // Tooltip header
+.tag-popup.sticky       // Pinned state
+.tag-popup-header       // Draggable header
 .tag-popup-title        // Tag name
 .tag-popup-content      // Description
 .tag-popup-example      // Usage example
+.tag-popup-controls     // Control buttons container
+.tag-popup-pin          // Pin/unpin button
+.tag-popup-close        // Close button
 ```
 
 ## JavaScript Components
 
-### 1. Initialization
+### 1. State Management
+- Global `activePopups` WeakMap tracks popup-to-element relationships
+- Proper cleanup on popup removal
+- Debounced event handlers for smooth interactions
+
+### 2. Event Handling
 ```javascript
-document.addEventListener('DOMContentLoaded', () => {
-    processTagSyntax();  // Convert syntax to elements
-    processTags();       // Set up interactions
-});
+// Tag events
+mouseenter: Show popup with delay
+mouseleave: Hide unpinned popup with delay
+
+// Popup events
+mouseenter: Keep popup visible
+mouseleave: Hide if not pinned
+mousedown: Start drag (auto-pins)
+mousemove: Update position while dragging
+mouseup: End drag
+
+// Control events
+pin click: Toggle pinned state
+close click: Remove popup
+header double-click: Close popup
 ```
-
-### 2. Tag Processing
-- `processTagSyntax()`: Converts [[tag:x]] syntax to HTML elements
-- `processTags()`: Sets up event listeners for all tag elements
-- `createPopup()`: Generates tooltip DOM structure
-- `showTagPopup()`: Displays and positions tooltip
-
-## Event Handling
-
-### Mouse Events
-- `mouseenter`: Show tooltip
-- `mouseleave`: Hide non-sticky tooltip
-- `click`: Navigate to glossary
-- `dblclick`: Close sticky tooltip
-
-### Tooltip Dragging
-- `mousedown`: Start drag
-- `mousemove`: Update position
-- `mouseup`: End drag
-
-## Maintenance
-
-### Adding New Tags
-1. Add tag definition to `_data/tags.json`
-2. Use [[tag:new_tag]] syntax in content
-3. Tags are automatically processed
-
-### Modifying Tag Behavior
-- Edit CSS in `assets/css/components/for-want-of-fuel.css`
-- Modify JavaScript in layout file for interaction changes
-
-### Common Issues
-1. **Tag Not Found**: Check tag ID in `tags.json`
-2. **Tooltip Positioning**: Adjust position calculation in `showTagPopup()`
-3. **Mobile Display**: Check media queries in CSS
 
 ## Best Practices
 
@@ -134,18 +130,22 @@ document.addEventListener('DOMContentLoaded', () => {
 4. Use tags sparingly for clarity
 
 ### Performance
-- Tags are processed on page load
-- Tooltips are created/destroyed as needed
-- Sticky tooltips persist until manually closed
+- Popups are created on demand
+- Event listeners are properly cleaned up
+- Smooth animations with minimal reflows
+- Efficient state tracking with WeakMap
 
 ### Accessibility
-- Tags are keyboard navigable
-- Color contrast meets WCAG standards
-- Tooltips include semantic markup
+- Keyboard-friendly controls
+- Clear visual feedback
+- Descriptive tooltips on controls
+- High contrast text and icons
 
 ## Future Improvements
-1. Keyboard navigation for tooltips
+1. Keyboard navigation for popups
 2. Touch device optimizations
 3. Tag categories in glossary
 4. Search/filter functionality
-5. Tag usage analytics 
+5. Tag usage analytics
+6. Position memory for pinned popups
+7. Popup stacking order management 

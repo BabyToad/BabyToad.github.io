@@ -501,134 +501,104 @@ const frames = {{ site.data.frames | jsonify }};
 const weapons = {{ site.data.weapons | jsonify }};
 const fittings = {{ site.data.fittings | jsonify }};
 
-// Get tag system functions from layout
-let tagSystem;
-
-function initializeTagSystem() {
-    // Debug logging
-    console.log('Initializing tag system for mech builder...');
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded');
     
-    // Tag System
-    const tagDataElement = document.getElementById('tag-data');
-    if (!tagDataElement) {
-        console.error('Tag data element not found!');
-        return;
-    }
-    
-    let tags;
-    try {
-        const rawData = tagDataElement.dataset.tags.replace(/&quot;/g, '"');
-        tags = JSON.parse(rawData);
-        console.log('Loaded tag data:', tags);
-    } catch (e) {
-        console.error('Failed to parse tag data:', e);
-        console.error('Raw data:', tagDataElement.dataset.tags);
-        return;
-    }
-
-    // Import showTagPopup from the layout file
-    const layoutScript = document.querySelector('script[src*="for_want_of_fuel.html"]');
-    if (!layoutScript) {
-        console.error('Could not find layout script');
-        return;
-    }
-
-    // Process tag elements
-    function processTags() {
-        console.log('Processing tag elements...');
-        const tagElements = document.querySelectorAll('.tag-highlight');
-        console.log('Found tag elements:', tagElements.length);
+    // Initialize mutation observer for tag processing
+    const tagObserver = new MutationObserver((mutations) => {
+        let shouldProcessTags = false;
         
-        // Keep track of processed elements to prevent duplicate listeners
-        const processedElements = new WeakSet();
-        
-        // Keep track of active popups globally
-        const activePopups = new WeakMap();
-        
-        tagElements.forEach((element) => {
-            // Skip if we've already processed this element
-            if (processedElements.has(element)) {
-                console.log('Skipping already processed element');
-                return;
-            }
-            processedElements.add(element);
-
-            const tagId = element.dataset.tag;
-            const value = element.dataset.value;
-            
-            if (!tagId) {
-                console.warn('No tag ID found for element:', element);
-                return;
-            }
-
-            let hoverTimeout = null;
-
-            // Tag hover behavior with debounce
-            element.addEventListener('mouseenter', (e) => {
-                console.log('Tag mouseenter:', tagId);
-                
-                // Clear any existing timeout
-                if (hoverTimeout) {
-                    clearTimeout(hoverTimeout);
-                }
-                
-                // Debounce the popup creation
-                hoverTimeout = setTimeout(() => {
-                    // Check if we already have a popup for this element
-                    if (!activePopups.has(element)) {
-                        const popup = window.showTagPopup(tagId, value, e, false, element);
-                        if (popup) {
-                            activePopups.set(element, popup);
-                        }
-                    }
-                }, 50); // Small delay to prevent rapid creation
-            });
-
-            // Tag leave behavior
-            element.addEventListener('mouseleave', () => {
-                console.log('Tag mouseleave:', tagId);
-                
-                // Clear the hover timeout
-                if (hoverTimeout) {
-                    clearTimeout(hoverTimeout);
-                    hoverTimeout = null;
-                }
-                
-                // Get the current popup
-                const popup = activePopups.get(element);
-                
-                // If popup isn't sticky, remove it
-                if (popup && !popup.classList.contains('sticky')) {
-                    popup.remove();
-                    activePopups.delete(element);
-                }
-            });
-
-            // Handle click for glossary navigation
-            element.addEventListener('click', (e) => {
-                console.log('Tag click:', tagId);
-                e.preventDefault();
-
-                // Find the glossary section
-                const glossarySection = document.querySelector('#part-tag-glossary');
-                if (glossarySection) {
-                    // Scroll to glossary
-                    glossarySection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Highlight the specific tag in the glossary
-                    const tagEntry = glossarySection.querySelector(`#tag-${tagId}`);
-                    if (tagEntry) {
-                        tagEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        tagEntry.classList.add('highlight');
-                        setTimeout(() => tagEntry.classList.remove('highlight'), 2000);
-                    }
+        mutations.forEach((mutation) => {
+            // Check if any added nodes contain potential tags
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1 && // Element node
+                    (node.classList.contains('weapon-item') || 
+                     node.classList.contains('fitting-item') ||
+                     node.querySelector('.tag-highlight'))) {
+                    shouldProcessTags = true;
                 }
             });
         });
+        
+        if (shouldProcessTags && window.tagSystem) {
+            console.log('Processing tags for new content...');
+            window.tagSystem.processTags();
+        }
+    });
+
+    // Configure the observer
+    const observerConfig = {
+        childList: true,
+        subtree: true,
+        characterData: false,
+        attributes: false
+    };
+
+    // Start observing the mech builder content
+    const mechBuilder = document.querySelector('.mech-builder');
+    if (mechBuilder) {
+        tagObserver.observe(mechBuilder, observerConfig);
+        console.log('Tag observer initialized for mech builder');
     }
 
-    return { processTags };
-}
+    // Wait for the layout script to load
+    const checkTagSystem = setInterval(() => {
+        if (window.tagSystem) {
+            clearInterval(checkTagSystem);
+            initializeMechBuilder();
+        }
+    }, 100);
+
+    function initializeMechBuilder() {
+        console.log('Initializing mech builder...');
+        
+        const frameSelect = document.getElementById('frame-select');
+        const weaponSelect = document.getElementById('weapon-select');
+        const fittingSelect = document.getElementById('fitting-select');
+        
+        if (!frameSelect || !weaponSelect || !fittingSelect) {
+            console.error('Could not find all required select elements:');
+            console.log('Frame select:', frameSelect);
+            console.log('Weapon select:', weaponSelect);
+            console.log('Fitting select:', fittingSelect);
+            return;
+        }
+        
+        // Log available data
+        console.log('Available frames:', Object.keys(frames).length);
+        console.log('Available weapons:', Object.keys(weapons).length);
+        console.log('Available fittings:', Object.keys(fittings).length);
+        
+        // Set up event listeners
+        frameSelect.addEventListener('change', (event) => {
+            console.log('Frame selected:', event.target.value);
+            handleFrameChange(event);
+        });
+        
+        weaponSelect.addEventListener('change', (event) => {
+            console.log('Weapon selected:', event.target.value);
+            handleWeaponAdd(event);
+        });
+        
+        fittingSelect.addEventListener('change', (event) => {
+            console.log('Fitting selected:', event.target.value);
+            handleFittingAdd(event);
+        });
+        
+        // Initialize display
+        updatePreview();
+        updateResourceDisplay();
+        
+        // Initialize mech library
+        updateMechLibrary();
+        
+        // Check for shared mech
+        handleSharedMech();
+        
+        console.log('Mech builder initialized successfully');
+    }
+});
 
 // Simple state management
 let currentMech = {
@@ -732,11 +702,18 @@ function addWeaponSlot(weaponId) {
     const weapon = weapons[weaponId];
     const slot = document.createElement('div');
     slot.className = 'slot-item';
+    
+    // Create tags HTML using the same format as weapons.md
+    const tagHtml = weapon.tags ? weapon.tags.map(tag => 
+        `<span class="tag-highlight" data-tag="${tag.name.toLowerCase()}" ${tag.value ? `data-value="${tag.value}"` : ''}>${tag.name}${tag.value ? ' ' + tag.value : ''}</span>`
+    ).join('') : '';
+
     slot.innerHTML = `
         <div class="slot-info">
             <div class="slot-name">${weapon.name}</div>
             <div class="slot-stats">
                 ${weapon.stats.range} Range | ${weapon.stats.damage} ${weapon.stats.damage_type} | ${weapon.hard_points} HP
+                ${tagHtml ? `<div class="tag-list">${tagHtml}</div>` : ''}
             </div>
         </div>
         <button class="slot-remove" onclick="removeWeapon(${currentMech.weapons.length - 1})">×</button>
@@ -767,17 +744,29 @@ function updateWeaponSlots() {
         const weapon = weapons[weaponId];
         const slot = document.createElement('div');
         slot.className = 'slot-item';
+        
+        // Create tags HTML using the same format as weapons.md
+        const tagHtml = weapon.tags ? weapon.tags.map(tag => 
+            `<span class="tag-highlight" data-tag="${tag.name.toLowerCase()}" ${tag.value ? `data-value="${tag.value}"` : ''}>${tag.name}${tag.value ? ' ' + tag.value : ''}</span>`
+        ).join('') : '';
+
         slot.innerHTML = `
             <div class="slot-info">
                 <div class="slot-name">${weapon.name}</div>
                 <div class="slot-stats">
                     ${weapon.stats.range} Range | ${weapon.stats.damage} ${weapon.stats.damage_type} | ${weapon.hard_points} HP
+                    ${tagHtml ? `<div class="tag-list">${tagHtml}</div>` : ''}
                 </div>
             </div>
             <button class="slot-remove" onclick="removeWeapon(${index})">×</button>
         `;
         container.appendChild(slot);
     });
+
+    // Process tags for the new content
+    if (window.tagSystem) {
+        window.tagSystem.processTags();
+    }
 }
 
 function updateFittingSlots() {
@@ -787,17 +776,29 @@ function updateFittingSlots() {
         const fitting = fittings[fittingId];
         const slot = document.createElement('div');
         slot.className = 'slot-item';
+        
+        // Create tags HTML if the fitting has tags
+        const tagHtml = fitting.tags ? fitting.tags.map(tag => 
+            `<span class="tag-highlight" data-tag="${tag.name.toLowerCase()}" ${tag.value ? `data-value="${tag.value}"` : ''}>${tag.name}${tag.value ? ' ' + tag.value : ''}</span>`
+        ).join('') : '';
+
         slot.innerHTML = `
             <div class="slot-info">
                 <div class="slot-name">${fitting.name}</div>
                 <div class="slot-stats">
                     ${fitting.category} | ${fitting.system_points} SP
+                    ${tagHtml ? `<div class="tag-list">${tagHtml}</div>` : ''}
                 </div>
             </div>
             <button class="slot-remove" onclick="removeFitting(${index})">×</button>
         `;
         container.appendChild(slot);
     });
+
+    // Process tags for the new content
+    if (window.tagSystem) {
+        window.tagSystem.processTags();
+    }
 }
 
 function updatePreview() {
@@ -812,7 +813,7 @@ function updatePreview() {
     document.getElementById('card-ac').textContent = frame ? frame.stats.ac : '-';
     document.getElementById('card-special').textContent = frame ? (frame.special || 'None') : '-';
 
-    // Update weapons with proper tag rendering
+    // Update weapons with tag syntax
     const weaponsContainer = document.getElementById('card-weapons');
     weaponsContainer.innerHTML = '';
     currentMech.weapons.forEach(weaponId => {
@@ -820,7 +821,7 @@ function updatePreview() {
         const weaponEl = document.createElement('div');
         weaponEl.className = 'weapon-item';
         
-        // Create tags using the same format as 06_weapons.md
+        // Create tags HTML using the same format as weapons.md
         const tagHtml = weapon.tags ? weapon.tags.map(tag => 
             `<span class="tag-highlight" data-tag="${tag.name.toLowerCase()}" ${tag.value ? `data-value="${tag.value}"` : ''}>${tag.name}${tag.value ? ' ' + tag.value : ''}</span>`
         ).join('') : '';
@@ -842,16 +843,25 @@ function updatePreview() {
         const fitting = fittings[fittingId];
         const fittingEl = document.createElement('div');
         fittingEl.className = 'fitting-item';
+        
+        // Create tags HTML if the fitting has tags
+        const tagHtml = fitting.tags ? fitting.tags.map(tag => 
+            `<span class="tag-highlight" data-tag="${tag.name.toLowerCase()}" ${tag.value ? `data-value="${tag.value}"` : ''}>${tag.name}${tag.value ? ' ' + tag.value : ''}</span>`
+        ).join('') : '';
+
         fittingEl.innerHTML = `
             <div class="item-name">${fitting.name}</div>
-            <div class="item-stats">${fitting.effect}</div>
+            <div class="item-stats">
+                ${fitting.effect}
+                ${tagHtml ? `<div class="tag-list">${tagHtml}</div>` : ''}
+            </div>
         `;
         fittingsContainer.appendChild(fittingEl);
     });
 
-    // Process tags after updating the preview
-    if (tagSystem) {
-        tagSystem.processTags();
+    // Process tags for the new content
+    if (window.tagSystem) {
+        window.tagSystem.processTags();
     }
 }
 
@@ -1113,78 +1123,4 @@ function handleSharedMech() {
         history.pushState('', document.title, window.location.pathname);
     }
 }
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM Content Loaded');
-    
-    // Wait for the layout script to load
-    const checkTagSystem = setInterval(() => {
-        if (window.tagSystem) {
-            clearInterval(checkTagSystem);
-            initializeTagSystem();
-        }
-    }, 100);
-
-    function initializeTagSystem() {
-        // Process tag syntax in content
-        const content = document.querySelector('.content');
-        if (content) {
-            window.tagSystem.processTagSyntax(content);
-        }
-    }
-
-    // Wait a short moment to ensure Jekyll template processing is complete
-    setTimeout(() => {
-        console.log('Initializing mech builder...');
-        
-        const frameSelect = document.getElementById('frame-select');
-        const weaponSelect = document.getElementById('weapon-select');
-        const fittingSelect = document.getElementById('fitting-select');
-        
-        if (!frameSelect || !weaponSelect || !fittingSelect) {
-            console.error('Could not find all required select elements:');
-            console.log('Frame select:', frameSelect);
-            console.log('Weapon select:', weaponSelect);
-            console.log('Fitting select:', fittingSelect);
-            return;
-        }
-        
-        // Initialize tag system
-        tagSystem = initializeTagSystem();
-        
-        // Log available data
-        console.log('Available frames:', Object.keys(frames).length);
-        console.log('Available weapons:', Object.keys(weapons).length);
-        console.log('Available fittings:', Object.keys(fittings).length);
-        
-        // Set up event listeners
-        frameSelect.addEventListener('change', (event) => {
-            console.log('Frame selected:', event.target.value);
-            handleFrameChange(event);
-        });
-        
-        weaponSelect.addEventListener('change', (event) => {
-            console.log('Weapon selected:', event.target.value);
-            handleWeaponAdd(event);
-        });
-        
-        fittingSelect.addEventListener('change', (event) => {
-            console.log('Fitting selected:', event.target.value);
-            handleFittingAdd(event);
-        });
-        
-        // Initialize display
-        updatePreview();
-        updateResourceDisplay();
-        
-        // Initialize mech library
-        updateMechLibrary();
-        
-        // Check for shared mech
-        handleSharedMech();
-        
-        console.log('Mech builder initialized successfully');
-    }, 100);
-});
 </script> 
