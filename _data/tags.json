@@ -13,8 +13,8 @@
       },
       "brace": {
         "name": "Brace",
-        "description": "This weapon requires a stable firing position. You cannot move and fire this weapon in the same turn unless you have Stabilizers fitted to your mech.",
-        "example": "Brace weapons require careful positioning for optimal use"
+        "description": "This weapon requires a stable firing position. You cannot move and fire this weapon in the same turn.",
+        "example": "Brace weapons require careful positioning for optimal use."
       },
       "inaccurate": {
         "name": "Inaccurate",
@@ -33,28 +33,28 @@
       },
       "reach": {
         "name": "Reach",
-        "description": "This weapon can attack targets up to the specified range away. The number after Reach indicates the maximum range in range units.",
+        "description": "This melee weapon can attack targets up to the specified range away. The number after Reach indicates the maximum range in range units.",
         "example": "Reach 3 means the weapon can hit targets up to 3 range units away"
       },
       "shock": {
         "name": "Shock",
-        "description": "When you hit with this weapon, the target must make a save vs Physical or become Stunned until the end of their next turn. The save DC is equal to the shock value.",
-        "example": "Shock 4 means DC 14 save"
+        "description": "This weapon deals damage even on a miss. The number after Shock indicates how much damage the target takes even if the attack misses. Additionally, Shock X sets the minimum damage of the weapon equal to the Shock value.",
+        "example": "Shock 4 means the target takes 4 damage even if you miss, and successful hits deal at least 4 damage"
       },
       "smart": {
         "name": "Smart",
-        "description": "This weapon has advanced targeting systems. When it hits, the target must make a save vs Tech or take only half damage.",
-        "example": "Smart weapons are particularly effective against electronic systems"
+        "description": "This weapon has advanced targeting systems that automatically hit the target. The target must make a save vs Tech to take only half damage.",
+        "example": "Smart weapons always hit their target, though targets may reduce damage with a successful save"
       },
       "suppressive": {
         "name": "Suppressive",
-        "description": "This weapon can suppress a 2-range cone, forcing targets in the area to take cover or risk being hit.",
-        "example": "Suppressive weapons are excellent for controlling enemy movement"
+        "description": "This weapon can be fired to suppress a cone-shaped area starting from the weapon's location. You automatically hit all targets that are not in cover, dealing half damage. Targets can save vs Evasion to take no damage. Half cover grants +4 to the save.",
+        "example": "Suppressive weapons automatically hit exposed targets and force enemies to take cover"
       },
       "threat": {
         "name": "Threat",
-        "description": "This weapon can be used to make attacks of opportunity against targets that move within its range.",
-        "example": "Threat weapons can punish enemies for moving carelessly"
+        "description": "This weapon can be used to make attacks of opportunity against targets that move within its range, or leave it. The number after Threat indicates the range in range units.",
+        "example": "Threat 3 means the weapon can make an attack of opportunity against targets up to 3 range units away"
       },
       "vigil": {
         "name": "Vigil",
@@ -65,8 +65,8 @@
     "area_effect": {
       "blast": {
         "name": "Blast",
-        "description": "This weapon deals damage in an area. The number after Blast indicates the radius in range units. All targets in the area must save vs Evasion or take full damage.",
-        "example": "Blast 2 means 2 range radius"
+        "description": "This weapon deals damage in an area. The number after Blast indicates the radius in range units. Blast weapons always attack AC 10. All targets in the area must save vs Evasion for half damage. If you miss your attack roll, the blast lands in a random direction d6 range units from the target.",
+        "example": "Blast 2 means the explosion affects all targets within a 2 range unit radius from the point of impact, forcing them to save vs Evasion for half damage"
       },
       "cone": {
         "name": "Cone",
@@ -75,15 +75,15 @@
       },
       "arcing": {
         "name": "Arcing",
-        "description": "This weapon does not require line of sight to its target, allowing it to hit targets behind cover or around corners.",
+        "description": "This weapon does not require line of sight to its target, allowing it to hit targets behind cover or around corners. Cover bonuses still apply.",
         "example": "Arcing weapons can hit targets that would normally be protected by cover"
       }
     },
     "special_effect": {
       "burn": {
         "name": "Burn",
-        "description": "This weapon sets targets on fire. On a hit, the target takes ongoing burn damage at the start of their turn until they take an action to put out the flames.",
-        "example": "Burn weapons can deal damage over time"
+        "description": "This weapon sets targets on fire. On a hit, the target takes ongoing burn damage at the start of their turn. At the end of their turn, they must make a save or the effect continues. Alternatively, they can use an action to end the burning effect.",
+        "example": "Burn weapons deal damage over time until the target saves or uses an action to extinguish the flames"
       },
       "hex": {
         "name": "Hex",
@@ -92,8 +92,8 @@
       },
       "limited": {
         "name": "Limited",
-        "description": "This weapon can only be used a certain number of times per scene. The number after Limited indicates how many uses remain.",
-        "example": "Limited 3 means the weapon can be used three times per scene"
+        "description": "This weapon can only be used a certain number of times before restocking it. The number after Limited indicates how many uses remain.",
+        "example": "Limited 3 means the weapon can be used three times before needing to be restocked"
       },
       "overheat": {
         "name": "Overheat",

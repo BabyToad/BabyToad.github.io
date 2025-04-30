@@ -136,6 +136,57 @@
     margin-bottom: var(--space-xs);
 }
 
+/* Table Styles */
+.post-body table {
+    border-collapse: collapse;
+    margin: var(--space-lg) 0;
+    width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.post-body th {
+    font-weight: 600;
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 2px solid var(--border-color);
+    background: var(--bg-primary);
+}
+
+.post-body td {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.post-body tr:nth-child(even) {
+    background: var(--bg-primary);
+}
+
+.post-body table code {
+    background: var(--bg-primary);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+}
+
+/* Math in tables */
+.post-body td .katex {
+    font-size: 0.95em;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+    .post-body table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .post-container {
