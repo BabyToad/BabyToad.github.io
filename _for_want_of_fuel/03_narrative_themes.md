@@ -1,6 +1,7 @@
 ---
 layout: for_want_of_fuel
 title: Narrative Themes
+order: 3
 ---
 
 ## Narrative Themes

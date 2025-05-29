@@ -1,6 +1,7 @@
 ---
 layout: for_want_of_fuel
 title: Mechanics
+order: 4
 ---
 
 # Mechanics
@@ -54,6 +55,27 @@ Scout unknown terrain or send rumors into the wastes.
 - Ask 1 question about faction movements, convoy paths, hidden threats
 - Mark 1 Stress—news is costly.
 > _The land speaks in wind and ash and silence. Listen or die._
+
+#### **Try To Help**
+Fixes a local problem but failure creates a bigger one.
+
+#### **Walk Among Them**
+Try to connect with civilians on human terms.
+
+Roll Culture
+10+: Build genuine connection, reduce Dependency, gain local ally
+7-9: Awkward but meaningful interaction, learn something important
+6-: Your presence intimidates or alienates, increase Fear
+
+#### **Send Word**
+Try to maintain connections to distant places/people.
+- Costly and often brings bad news.
+- Provides intel and emotional anchoring.
+
+#### **Report In**
+Deal with Authorities.
+- They make demands, but you gain favor.
+- Ignoring them has consequences, but obeying them often conflicts with local needs
 
 #### **Wager the Self**
 Choose one ritual below. Roll 2d6 (optionally modified by a stat like Resolve or Guts).
