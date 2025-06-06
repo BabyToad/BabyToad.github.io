@@ -5,7 +5,7 @@ version: 0.4
 status: Draft, Playtesting
 confidence: Medium
 abstract: A streamlined set of playtest rules for running Stars Without Number compatible mech combat scenes, focusing on quick play and minimal tracking.
-permalink: /for-want-of-fuel/
+order: 0
 ---
 
 # Playtest

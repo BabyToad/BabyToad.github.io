@@ -5,21 +5,6 @@ order: 10
 
 # Referee Quick Cues
 
-*Quick reference for running engaging mech combat scenes.*
-
-## Encounter Design
-
-### Budget Guidelines
-- **Easy**: Total HD = Party HD
-- **Medium**: Total HD = 1.5 × Party HD
-- **Hard**: Total HD = 2 × Party HD
-- **Deadly**: Total HD = 3 × Party HD
-
-### Environmental Factors
-- **Cover**: Abundant (50%+ coverage)
-- **Terrain**: Mix of open and confined spaces
-- **Objectives**: Add time pressure or secondary goals
-
 ## Combat Tips
 
 ### Using Cover
@@ -46,3 +31,15 @@ order: 10
 - Cover: Soft +2 AC/ Hard +4 AC
 - Flanking: +2 to hit
 - High Ground: It's over.
+
+## Problems That Can't Be Blown Up
+
+| d6 | Human-Scale Problem | Why Violence Fails | What They Really Need |
+|----|--------------------|--------------------|----------------------|
+| 1 | Crop Disease | You can't shoot germs | Agricultural knowledge, medicine |
+| 2 | Trade Dispute | Both sides have legitimate claims | Mediation, compromise |
+| 3 | Religious Schism | Violence makes martyrs | Understanding, patience |
+| 4 | Missing Caravan | Already dead or lost | Investigation, tracking |
+| 5 | Corrupt Leader | Killing them creates power vacuum | Political solution, evidence |
+| 6 | Broken Infrastructure | Mechs are too big/clumsy | Engineering, manual labor |
+{: .mechanics-table}

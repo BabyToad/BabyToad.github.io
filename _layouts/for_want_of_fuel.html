@@ -20,7 +20,8 @@ layout: base
             <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
         </div>
         <ul>
-        {% for part in site.for_want_of_fuel %}
+        {% assign sorted_parts = site.for_want_of_fuel | sort: "order" %}
+        {% for part in sorted_parts %}
             {% unless part.title == page.title %}
             <li class="toc-item">
                 <a href="#part-{{ part.title | slugify }}">{{ part.title }}</a>
