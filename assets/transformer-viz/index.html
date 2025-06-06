@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer Token Transformations - Live Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 3em;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .token-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .token-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 120px;
+            box-shadow: 0 4px 8px rgba(255,107,53,0.2);
+        }
+        
+        .token-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255,107,53,0.3);
+        }
+        
+        .token-btn.active {
+            background: #d14820;
+            transform: scale(1.05);
+        }
+        
+        .demo-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .layer-demo {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+            justify-content: center;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .layer-label {
+            background: #ff6b35;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.3em;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(255,107,53,0.2);
+        }
+        
+        .current-token {
+            background: #333;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.4em;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .arrow {
+            font-size: 2.5em;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+        
+        .vector-display {
+            display: flex;
+            gap: 2px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #f0f0f0;
+            min-width: 400px;
+            min-height: 80px;
+            align-items: end;
+        }
+        
+        .vector-bar {
+            width: 10px;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            min-height: 8px;
+        }
+        
+        .positive { background: #ff6b35; }
+        .negative { background: #666; }
+        .neutral { background: #ddd; }
+        
+        .concept-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            justify-content: center;
+            min-height: 40px;
+        }
+        
+        .concept-tag {
+            background: rgba(255,107,53,0.1);
+            color: #d14820;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 1em;
+            font-weight: 500;
+            border: 1px solid rgba(255,107,53,0.3);
+        }
+        
+        .key-insights {
+            background: rgba(255,107,53,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+            border-left: 5px solid #ff6b35;
+        }
+        
+        .key-insights h3 {
+            color: #d14820;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .key-insights p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .dimension-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-bar {
+            width: 20px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .comparison-mode {
+            margin-top: 40px;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .comparison-item {
+            text-align: center;
+        }
+        
+        .large-token {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 1200px) {
+            .layer-demo {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+                font-size: 2em;
+            }
+            
+            .side-by-side {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How Learned Transformations Shape Meaning</h1>
+        <p class="subtitle">Watch how the same neural transformations produce different semantic patterns</p>
+        
+        <div class="token-buttons">
+            <button class="token-btn active" onclick="showToken('cat')" id="btn-cat">CAT</button>
+            <button class="token-btn" onclick="showToken('dog')" id="btn-dog">DOG</button>
+            <button class="token-btn" onclick="showToken('lion')" id="btn-lion">LION</button>
+            <button class="token-btn" onclick="showToken('car')" id="btn-car">CAR</button>
+        </div>
+        
+        <div class="dimension-legend">
+            <div class="legend-item">
+                <div class="legend-bar positive"></div>
+                <span>Activated Features</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar negative"></div>
+                <span>Suppressed Features</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-bar neutral"></div>
+                <span>Neutral</span>
+            </div>
+        </div>
+        
+        <div class="demo-flow">
+            <!-- Layer 5 - Mid-level concepts -->
+            <div class="layer-demo">
+                <div class="layer-label">Layer 5</div>
+                <div class="current-token" id="token5">CAT</div>
+                <div class="arrow">→</div>
+                <div class="vector-display" id="layer5"></div>
+                <div class="concept-tags" id="labels5"></div>
+            </div>
+            
+            <!-- Layer 12 - High-level concepts -->
+            <div class="layer-demo">
+                <div class="layer-label">Layer 12</div>
+                <div class="current-token" id="token12">CAT</div>
+                <div class="arrow">→</div>
+                <div class="vector-display" id="layer12"></div>
+                <div class="concept-tags" id="labels12"></div>
+            </div>
+            
+            <!-- Layer 20 - Abstract concepts -->
+            <div class="layer-demo">
+                <div class="layer-label">Layer 20</div>
+                <div class="current-token" id="token20">CAT</div>
+                <div class="arrow">→</div>
+                <div class="vector-display" id="layer20"></div>
+                <div class="concept-tags" id="labels20"></div>
+            </div>
+        </div>
+        
+        <div class="comparison-mode">
+            <div class="comparison-title">Compare Similar vs Different Concepts</div>
+            <div class="side-by-side">
+                <div class="comparison-item">
+                    <div class="large-token">🐱 CAT vs LION 🦁</div>
+                    <p>Both activate <strong style="color: #ff6b35;">feline dimensions</strong><br>
+                    Differ in domestication patterns</p>
+                </div>
+                <div class="comparison-item">
+                    <div class="large-token">🐱 CAT vs CAR 🚗</div>
+                    <p>Completely different patterns<br>
+                    <strong style="color: #ff6b35;">Living vs manufactured</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="key-insights">
+            <h3>🎯 Key Takeaways</h3>
+            <p><strong>Fixed learned transformations:</strong> The trained model applies the same weight matrices to every input. "CAT" always produces this pattern.</p>
+            <p><strong>Emergent semantic clustering:</strong> Similar concepts (CAT/LION) activate similar dimensions without explicit programming.</p>
+            <p><strong>Hierarchical abstraction:</strong> Each layer builds more abstract representations - from syntax to semantics to complex concepts.</p>
+            <p><strong>Distributed meaning:</strong> "Feline-ness" isn't stored in one place - it's a pattern across many dimensions that emerges from training on billions of examples.</p>
+        </div>
+    </div>
+
+    <script>
+        // Optimized vector generation for live demo
+        function generateVector(layer, token) {
+            const size = 50; // Increased for better visibility
+            const vector = [];
+            
+            // Define semantic dimensions for clear patterns
+            const dimensions = {
+                feline: [8, 9, 10, 11, 12],
+                canine: [3, 4, 5, 6],
+                animal: [15, 16, 17, 18, 19, 20],
+                domesticated: [25, 26, 27],
+                wild: [28, 29, 30],
+                vehicle: [0, 1, 2],
+                manufactured: [35, 36, 37, 38],
+                living: [40, 41, 42, 43]
+            };
+            
+            // Initialize all neutral
+            for (let i = 0; i < size; i++) {
+                vector[i] = (Math.random() - 0.5) * 0.4;
+            }
+            
+            // Apply token-specific patterns
+            if (token === 'cat') {
+                if (layer >= 5) {
+                    dimensions.living.forEach(i => vector[i] = 0.7 + Math.random() * 0.5);
+                }
+                if (layer >= 12) {
+                    dimensions.animal.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                    dimensions.canine.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+                if (layer >= 20) {
+                    dimensions.feline.forEach(i => vector[i] = 0.9 + Math.random() * 0.3);
+                    dimensions.domesticated.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                    dimensions.vehicle.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.manufactured.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+            } else if (token === 'dog') {
+                if (layer >= 5) {
+                    dimensions.living.forEach(i => vector[i] = 0.7 + Math.random() * 0.5);
+                }
+                if (layer >= 12) {
+                    dimensions.animal.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                    dimensions.feline.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+                if (layer >= 20) {
+                    dimensions.canine.forEach(i => vector[i] = 0.9 + Math.random() * 0.3);
+                    dimensions.domesticated.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                    dimensions.vehicle.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.manufactured.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+            } else if (token === 'lion') {
+                if (layer >= 5) {
+                    dimensions.living.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                }
+                if (layer >= 12) {
+                    dimensions.animal.forEach(i => vector[i] = 0.9 + Math.random() * 0.3);
+                    dimensions.canine.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+                if (layer >= 20) {
+                    dimensions.feline.forEach(i => vector[i] = 0.95 + Math.random() * 0.2);
+                    dimensions.wild.forEach(i => vector[i] = 0.9 + Math.random() * 0.3);
+                    dimensions.domesticated.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                    dimensions.vehicle.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.manufactured.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+            } else if (token === 'car') {
+                if (layer >= 5) {
+                    dimensions.manufactured.forEach(i => vector[i] = 0.7 + Math.random() * 0.5);
+                    dimensions.living.forEach(i => vector[i] = -0.8 - Math.random() * 0.4);
+                }
+                if (layer >= 12) {
+                    dimensions.vehicle.forEach(i => vector[i] = 0.8 + Math.random() * 0.4);
+                    dimensions.animal.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                }
+                if (layer >= 20) {
+                    dimensions.vehicle.forEach(i => vector[i] = 0.95 + Math.random() * 0.2);
+                    dimensions.manufactured.forEach(i => vector[i] = 0.9 + Math.random() * 0.3);
+                    dimensions.feline.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.canine.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.animal.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                    dimensions.living.forEach(i => vector[i] = -0.9 - Math.random() * 0.3);
+                }
+            }
+            
+            return vector;
+        }
+        
+        function renderVector(containerId, values) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            values.forEach((value, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'vector-bar';
+                bar.style.height = `${Math.abs(value) * 40 + 8}px`;
+                
+                if (value > 0.5) bar.classList.add('positive');
+                else if (value < -0.5) bar.classList.add('negative');
+                else bar.classList.add('neutral');
+                
+                container.appendChild(bar);
+            });
+        }
+        
+        // Pre-generate all vectors for smooth switching
+        const allVectors = {};
+        ['cat', 'dog', 'lion', 'car'].forEach(token => {
+            allVectors[token] = {
+                5: generateVector(5, token),
+                12: generateVector(12, token),
+                20: generateVector(20, token)
+            };
+        });
+        
+        const labels = {
+            cat: {
+                5: ['Living Thing', 'Concrete Noun'],
+                12: ['Animal', 'Predator', 'Mammal'],
+                20: ['Feline', 'Domesticated', 'Pet', 'Carnivore']
+            },
+            dog: {
+                5: ['Living Thing', 'Concrete Noun'],
+                12: ['Animal', 'Predator', 'Mammal'],
+                20: ['Canine', 'Domesticated', 'Pack Animal', 'Loyal']
+            },
+            lion: {
+                5: ['Living Thing', 'Concrete Noun'],
+                12: ['Animal', 'Predator', 'Mammal'],
+                20: ['Feline', 'Wild', 'Apex Predator', 'Majestic']
+            },
+            car: {
+                5: ['Object', 'Concrete Noun'],
+                12: ['Vehicle', 'Manufactured', 'Tool'],
+                20: ['Automobile', 'Transportation', 'Machine', 'Technology']
+            }
+        };
+        
+        function updateLabels(token) {
+            [5, 12, 20].forEach(layer => {
+                const container = document.getElementById(`labels${layer}`);
+                container.innerHTML = '';
+                labels[token][layer].forEach(label => {
+                    const tag = document.createElement('div');
+                    tag.className = 'concept-tag';
+                    tag.textContent = label;
+                    container.appendChild(tag);
+                });
+            });
+        }
+        
+        function showToken(token) {
+            // Update button states
+            document.querySelectorAll('.token-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${token}`).classList.add('active');
+            
+            // Update token displays
+            ['token5', 'token12', 'token20'].forEach(id => {
+                document.getElementById(id).textContent = token.toUpperCase();
+            });
+            
+            // Update vectors with smooth transition
+            [5, 12, 20].forEach(layer => {
+                renderVector(`layer${layer}`, allVectors[token][layer]);
+            });
+            
+            // Update labels
+            updateLabels(token);
+        }
+        
+        // Initialize
+        showToken('cat');
+        
+        // Keyboard shortcuts for live presentation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '1') showToken('cat');
+            if (e.key === '2') showToken('dog');
+            if (e.key === '3') showToken('lion');
+            if (e.key === '4') showToken('car');
+        });
+    </script>
+</body>
+</html>
