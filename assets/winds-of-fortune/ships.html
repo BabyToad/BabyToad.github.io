@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shattered Isles Ship Registry</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:wght@400;600&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Crimson Text', serif;
+        background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+        color: #d4c5a0;
+        min-height: 100vh;
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
+    }
+    
+    .parchment {
+        max-width: 1200px;
+        margin: 20px auto;
+        background: #f4f1e8;
+        background-image: 
+            radial-gradient(circle at 25% 25%, #e8dcc0 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, #d4c5a0 0%, transparent 50%);
+        color: #2c1810;
+        border-radius: 8px;
+        box-shadow: 
+            0 0 30px rgba(0,0,0,0.5),
+            inset 0 0 120px rgba(139, 69, 19, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .parchment::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 48px,
+            rgba(139, 69, 19, 0.03) 50px
+        );
+        pointer-events: none;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+        color: #f4f1e8;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(255,255,255,0.05) 1deg,
+            transparent 2deg
+        );
+        animation: rotate 60s linear infinite;
+        pointer-events: none;
+    }
+    
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .title {
+        font-family: 'Cinzel', serif;
+        font-size: 2.5em;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+        font-style: italic;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .content {
+        padding: 40px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .filters {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .filter-group label {
+        font-weight: 600;
+        color: #8b4513;
+    }
+    
+    select, input {
+        padding: 8px 12px;
+        border: 2px solid #8b4513;
+        border-radius: 4px;
+        background: #f9f6f0;
+        color: #2c1810;
+        font-family: 'Crimson Text', serif;
+        font-size: 16px;
+    }
+    
+    select:focus, input:focus {
+        outline: none;
+        border-color: #a0522d;
+        box-shadow: 0 0 8px rgba(160, 82, 45, 0.3);
+    }
+    
+    .ship-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    }
+    
+    .ship-card {
+        background: #f9f6f0;
+        border: 2px solid #d4c5a0;
+        border-radius: 8px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .ship-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(139, 69, 19, 0.1),
+            transparent
+        );
+        transition: left 0.6s ease;
+    }
+    
+    .ship-card:hover {
+        border-color: #8b4513;
+        box-shadow: 0 5px 20px rgba(139, 69, 19, 0.2);
+        transform: translateY(-2px);
+    }
+    
+    .ship-card:hover::before {
+        left: 100%;
+    }
+    
+    .ship-name {
+        font-family: 'Cinzel', serif;
+        font-size: 1.4em;
+        font-weight: 600;
+        color: #8b4513;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ship-cost {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: #8b4513;
+        color: #f4f1e8;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 0.9em;
+    }
+    
+    .ship-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px dotted #d4c5a0;
+    }
+    
+    .stat-label {
+        font-weight: 600;
+        color: #6b3410;
+    }
+    
+    .stat-value {
+        color: #2c1810;
+    }
+    
+    .workshop-badge {
+        display: inline-block;
+        background: #228b22;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-size: 0.8em;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+    
+    .ship-description {
+        font-style: italic;
+        color: #5d4037;
+        margin-top: 15px;
+        line-height: 1.4;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .legend {
+        margin-top: 40px;
+        padding: 25px;
+        background: #f0ede0;
+        border-radius: 8px;
+        border: 1px solid #d4c5a0;
+    }
+    
+    .legend h3 {
+        font-family: 'Cinzel', serif;
+        color: #8b4513;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+    }
+    
+    .legend-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .legend-section {
+        background: #f9f6f0;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #e0d7c0;
+    }
+    
+    .legend-section h4 {
+        color: #6b3410;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+    }
+    
+    .legend-section ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .legend-section li {
+        padding: 3px 0;
+        font-size: 0.95em;
+        color: #2c1810;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    @media (max-width: 768px) {
+        .ship-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .filter-group {
+            justify-content: space-between;
+        }
+        
+        .title {
+            font-size: 2em;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="parchment">
+        <div class="header">
+            <h1 class="title">Ship Registry of the Shattered Isles</h1>
+            <p class="subtitle">A Captain's Guide to Maritime Vessels</p>
+        </div>
+    <div class="content">
+        <div class="filters">
+            <div class="filter-group">
+                <label for="costFilter">Max Cost:</label>
+                <input type="range" id="costFilter" min="10" max="120" value="120" step="5">
+                <span id="costDisplay">120 rps</span>
+            </div>
+            
+            <div class="filter-group">
+                <label for="workshopFilter">Workshop:</label>
+                <select id="workshopFilter">
+                    <option value="all">All Ships</option>
+                    <option value="yes">Workshop Capable</option>
+                    <option value="no">No Workshop</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="draftFilter">Draft:</label>
+                <select id="draftFilter">
+                    <option value="all">All Drafts</option>
+                    <option value="Shallow">Shallow</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Deep">Deep</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="speedFilter">Speed:</label>
+                <select id="speedFilter">
+                    <option value="all">All Speeds</option>
+                    <option value="Very Fast">Very Fast</option>
+                    <option value="Fast">Fast</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Slow">Slow</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="ship-grid" id="shipGrid">
+            <!-- Ships will be populated by JavaScript -->
+        </div>
+        
+        <div class="legend">
+            <h3>Reference Guide</h3>
+            <div class="legend-grid">
+                <div class="legend-section">
+                    <h4>Draft Depth</h4>
+                    <ul>
+                        <li><strong>Shallow:</strong> Hidden coves, rivers, beaches</li>
+                        <li><strong>Medium:</strong> Most ports, some restrictions</li>
+                        <li><strong>Deep:</strong> Major harbors only</li>
+                    </ul>
+                </div>
+                
+                <div class="legend-section">
+                    <h4>Speed Categories</h4>
+                    <ul>
+                        <li><strong>Very Fast:</strong> Outrun most trouble</li>
+                        <li><strong>Fast:</strong> Good for chase/escape</li>
+                        <li><strong>Moderate:</strong> Reliable travel</li>
+                        <li><strong>Slow:</strong> Vulnerable but stable</li>
+                    </ul>
+                </div>
+                
+                <div class="legend-section">
+                    <h4>Armament Scale</h4>
+                    <ul>
+                        <li><strong>Light/None:</strong> Swivel guns, small arms</li>
+                        <li><strong>Medium:</strong> Respectable broadside</li>
+                        <li><strong>Heavy:</strong> Serious firepower</li>
+                        <li><strong>Very Heavy:</strong> Ship-of-the-line</li>
+                    </ul>
+                </div>
+                
+                <div class="legend-section">
+                    <h4>Workshop Notes</h4>
+                    <ul>
+                        <li><strong>Best:</strong> Junk, Fluyt, Galleon, Carrack</li>
+                        <li><strong>Good:</strong> Brigantine, Caravel, Xebec</li>
+                        <li><strong>Possible:</strong> Galley, Sloop-of-War</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ships = [
+        {
+            name: "Longboat",
+            cost: 10,
+            length: "20-30 ft",
+            crew: "8-12",
+            draft: "Shallow",
+            cargo: "Minimal",
+            speed: "Fast",
+            armament: "Light/None",
+            workshop: false,
+            description: "The smuggler's friend. Shallow draft, fast in calm waters, easily beached. Perfect for discrete cargo runs between nearby islands."
+        },
+        {
+            name: "Pinnace",
+            cost: 12,
+            length: "30-40 ft",
+            crew: "12-15",
+            draft: "Shallow",
+            cargo: "Small",
+            speed: "Fast",
+            armament: "Light",
+            workshop: false,
+            description: "The messenger's mount. Single-masted with oars for backup. Favored by couriers and spies who need speed without attention."
+        },
+        {
+            name: "Junk",
+            cost: 15,
+            length: "60-80 ft",
+            crew: "20-25",
+            draft: "Medium",
+            cargo: "Good",
+            speed: "Moderate",
+            armament: "Light-Med",
+            workshop: true,
+            description: "The exotic outsider. Foreign design with compartmentalized hull perfect for workshops. Seaworthy but marks you as foreign."
+        },
+        {
+            name: "Felucca",
+            cost: 30,
+            length: "50-60 ft",
+            crew: "15-20",
+            draft: "Shallow",
+            cargo: "Moderate",
+            speed: "Fast",
+            armament: "Light",
+            workshop: false,
+            description: "The honest trader's choice. Lateen-rigged for excellent upwind sailing. Common enough to blend in anywhere."
+        },
+        {
+            name: "Brigantine",
+            cost: 35,
+            length: "70-80 ft",
+            crew: "25-30",
+            draft: "Medium",
+            cargo: "Good",
+            speed: "Fast",
+            armament: "Medium",
+            workshop: true,
+            description: "The versatile workhorse. Fast enough to outrun trouble, large enough for decent cargo. Perfect for flexible captains."
+        },
+        {
+            name: "Xebec",
+            cost: 40,
+            length: "80-90 ft",
+            crew: "35-45",
+            draft: "Shallow",
+            cargo: "Moderate",
+            speed: "Very Fast",
+            armament: "Medium",
+            workshop: true,
+            description: "The corsair's blade. Built for hit-and-run tactics. Favored by those who engage in 'aggressive negotiations.'"
+        },
+        {
+            name: "Galley",
+            cost: 45,
+            length: "100-130 ft",
+            crew: "120-200",
+            draft: "Shallow",
+            cargo: "Limited",
+            speed: "Moderate",
+            armament: "Medium-Heavy",
+            workshop: true,
+            description: "The ancient terror. Oar-powered for reliable speed regardless of wind. Necromancer kings favor these—undead don't tire."
+        },
+        {
+            name: "Sloop-of-War",
+            cost: 55,
+            length: "90-110 ft",
+            crew: "80-125",
+            draft: "Medium",
+            cargo: "Limited",
+            speed: "Fast",
+            armament: "Heavy",
+            workshop: true,
+            description: "The naval enforcer. Single-masted warship, fast and well-armed. Available to captains with clean records and connections."
+        },
+        {
+            name: "Carrack",
+            cost: 60,
+            length: "120-150 ft",
+            crew: "60-80",
+            draft: "Deep",
+            cargo: "Massive",
+            speed: "Slow",
+            armament: "Heavy",
+            workshop: true,
+            description: "The fortress of the seas. High castles and massive cargo hold. The Bank of Incardine's debt collectors favor these."
+        },
+        {
+            name: "Caravel",
+            cost: 75,
+            length: "80-100 ft",
+            crew: "30-40",
+            draft: "Medium",
+            cargo: "Good",
+            speed: "Moderate",
+            armament: "Medium",
+            workshop: true,
+            description: "The explorer's dream. Three-masted vessel excellent for long voyages. The ship that opened the Shattered Isles to trade."
+        },
+        {
+            name: "Fluyt",
+            cost: 85,
+            length: "100-120 ft",
+            crew: "25-35",
+            draft: "Medium",
+            cargo: "Massive",
+            speed: "Slow",
+            armament: "Light",
+            workshop: true,
+            description: "The merchant prince's investment. Optimized for cargo over speed. Lower crew costs but vulnerable to pirates."
+        },
+        {
+            name: "Galleon",
+            cost: 120,
+            length: "150-180 ft",
+            crew: "80-120",
+            draft: "Deep",
+            cargo: "Massive",
+            speed: "Moderate",
+            armament: "Very Heavy",
+            workshop: true,
+            description: "The colonial backbone. Purpose-built for trans-oceanic trade and warfare. Commands respect wherever it sails."
+        }
+    ];
+
+    function createShipCard(ship) {
+        const workshopBadge = ship.workshop ? '<span class="workshop-badge">Workshop</span>' : '';
+        
+        return `
+            <div class="ship-card" data-cost="${ship.cost}" data-workshop="${ship.workshop}" data-draft="${ship.draft}" data-speed="${ship.speed}">
+                <div class="ship-cost">${ship.cost} rps</div>
+                <h3 class="ship-name">${ship.name}${workshopBadge}</h3>
+                <div class="ship-stats">
+                    <div class="stat">
+                        <span class="stat-label">Length:</span>
+                        <span class="stat-value">${ship.length}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Crew:</span>
+                        <span class="stat-value">${ship.crew}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Draft:</span>
+                        <span class="stat-value">${ship.draft}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Cargo:</span>
+                        <span class="stat-value">${ship.cargo}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Speed:</span>
+                        <span class="stat-value">${ship.speed}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Armament:</span>
+                        <span class="stat-value">${ship.armament}</span>
+                    </div>
+                </div>
+                <div class="ship-description">${ship.description}</div>
+            </div>
+        `;
+    }
+
+    function renderShips() {
+        const shipGrid = document.getElementById('shipGrid');
+        shipGrid.innerHTML = ships.map(createShipCard).join('');
+    }
+
+    function filterShips() {
+        const costFilter = parseInt(document.getElementById('costFilter').value);
+        const workshopFilter = document.getElementById('workshopFilter').value;
+        const draftFilter = document.getElementById('draftFilter').value;
+        const speedFilter = document.getElementById('speedFilter').value;
+        
+        const shipCards = document.querySelectorAll('.ship-card');
+        
+        shipCards.forEach(card => {
+            const cost = parseInt(card.dataset.cost);
+            const workshop = card.dataset.workshop === 'true';
+            const draft = card.dataset.draft;
+            const speed = card.dataset.speed;
+            
+            let show = true;
+            
+            if (cost > costFilter) show = false;
+            if (workshopFilter === 'yes' && !workshop) show = false;
+            if (workshopFilter === 'no' && workshop) show = false;
+            if (draftFilter !== 'all' && draft !== draftFilter) show = false;
+            if (speedFilter !== 'all' && speed !== speedFilter) show = false;
+            
+            card.style.display = show ? 'block' : 'none';
+        });
+    }
+
+    // Initialize
+    renderShips();
+
+    // Event listeners
+    document.getElementById('costFilter').addEventListener('input', function() {
+        document.getElementById('costDisplay').textContent = this.value + ' rps';
+        filterShips();
+    });
+
+    document.getElementById('workshopFilter').addEventListener('change', filterShips);
+    document.getElementById('draftFilter').addEventListener('change', filterShips);
+    document.getElementById('speedFilter').addEventListener('change', filterShips);
+</script>
+</body>
+</html>
