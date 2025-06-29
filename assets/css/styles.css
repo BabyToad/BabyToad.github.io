@@ -21,6 +21,7 @@
 @import 'components/game-container.css';
 @import 'components/preview-popup.css';
 @import 'components/for-want-of-fuel.css';  /* For Want Of Fuel styles */
+@import 'components/rpg-notetaker-bench.css';  /* RPG Notetaker Bench styles */
 
 /* Base styles */
 body {
