@@ -88,10 +88,7 @@ Each model was tasked with converting the raw transcript into organized session 
   </div>
 </div>
 
-<div class="rpg-content-viewer" id="rpg-content-viewer">
-  <button class="maximize-btn" id="maximize-btn" title="Maximize" onclick="toggleMaximize()">
-    <span id="maximize-icon">⛶</span>
-  </button>
+<div class="rpg-content-viewer">
   <iframe id="content-frame" src="/assets/rpg_notetaker_bench/display.html?file=original" width="100%" frameborder="0"></iframe>
 </div>
 
@@ -132,22 +129,6 @@ function showModel(modelId) {
   };
   
   document.getElementById('content-frame').src = `/assets/rpg_notetaker_bench/display.html?file=${fileMap[modelId]}`;
-}
-
-function toggleMaximize() {
-  const viewer = document.getElementById('rpg-content-viewer');
-  const btn = document.getElementById('maximize-btn');
-  const icon = document.getElementById('maximize-icon');
-  viewer.classList.toggle('maximized');
-  if (viewer.classList.contains('maximized')) {
-    icon.textContent = '🗗';
-    btn.title = 'Restore';
-    document.body.style.overflow = 'hidden';
-  } else {
-    icon.textContent = '⛶';
-    btn.title = 'Maximize';
-    document.body.style.overflow = '';
-  }
 }
 </script>
 
