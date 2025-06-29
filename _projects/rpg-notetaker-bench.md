@@ -92,20 +92,6 @@ Each model was tasked with converting the raw transcript into organized session 
   <iframe id="content-frame" src="/assets/rpg_notetaker_bench/display.html?file=original" width="100%" frameborder="0"></iframe>
 </div>
 
-## Analysis Points
-
-The different models showcase varying approaches to:
-
-- **Information Density:** From concise summaries to comprehensive breakdowns
-- **Organization:** Scene-by-scene vs. thematic vs. chronological
-- **Detail Level:** Mechanical precision vs. narrative focus
-- **Future Planning:** Session prep notes and forward-looking content
-- **Character Tracking:** NPC ledgers and relationship mapping
-- **Format Innovation:** Use of tables, headers, and visual organization
-
-## Technical Details
-
-This benchmark demonstrates the evolution of AI models in understanding context, maintaining consistency, and organizing complex narrative information from unstructured conversational data.
 
 <script>
 function showModel(modelId) {
