@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Notetaker Display</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --code-bg: #f5f5f5;
+            --highlight-color: #0066cc;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #404040;
+            --code-bg: #2d2d2d;
+            --highlight-color: #4d9fff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 2rem auto 2rem auto;
+            background: var(--code-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid #d32f2f;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--highlight-color);
+            margin-top: 2.2rem;
+            margin-bottom: 1.1rem;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+        }
+        
+        pre {
+            background: var(--code-bg);
+            padding: 1.2rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            font-size: 1.05rem;
+        }
+        
+        code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 1.02em;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--highlight-color);
+            margin: 1.5rem 0;
+            padding: 0.7rem 1.2rem;
+            background: var(--code-bg);
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.7rem;
+            text-align: left;
+        }
+        
+        th {
+            background: var(--code-bg);
+            font-weight: bold;
+        }
+        
+        .timestamp {
+            color: #aaa;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            font-size: 1.05em;
+        }
+        
+        .session-header {
+            border: 2px solid var(--highlight-color);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            background: var(--code-bg);
+        }
+        
+        .scene-divider {
+            border-top: 2px solid var(--border-color);
+            margin: 2rem 0;
+            padding-top: 1rem;
+        }
+        
+        .model-metadata {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.7rem 1rem;
+            font-size: 1em;
+            margin-bottom: 1.2rem;
+        }
+        
+        ul, ol {
+            padding-left: 2.2rem;
+        }
+        
+        li {
+            margin-bottom: 0.4rem;
+        }
+        
+        strong {
+            color: var(--highlight-color);
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                max-width: 98vw;
+                padding: 1.2rem 0.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 0.5rem 0.2rem;
+            }
+            h1 { font-size: 1.3rem; }
+            h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content" class="loading">Loading...</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Configure marked options
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // File mapping
+        const fileMap = {
+            'original': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc.md',
+            'gpt_4.1': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_gpt_4.1.md',
+            'gpt_4o': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_gpt_4o.md',
+            'gpt_4o_mini': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_gpt_4o_mini.md',
+            'o1_mini': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_o1_mini.md',
+            'o3_mini': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_o3_mini.md',
+            'o4_mini': 'Dicing With Death-8b0b5732-4fed-4c1d-841d-1d9efb6c5acc_o4_mini.md'
+        };
+
+        // Get file parameter from URL
+        function getFileParam() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('file') || 'original';
+        }
+
+        // Load and display file content
+        async function loadFile(fileKey) {
+            const contentDiv = document.getElementById('content');
+            const filename = fileMap[fileKey];
+            
+            if (!filename) {
+                contentDiv.innerHTML = '<div class="error">File not found</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`./${filename}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const text = await response.text();
+                
+                // Process the markdown
+                let processedText = text;
+                
+                // Add special formatting for timestamps in original transcript
+                if (fileKey === 'original') {
+                    processedText = processedText.replace(/\*\*\[(\d{2}:\d{2})\]\*\*/g, 
+                        '<div class="timestamp">[$1]</div>');
+                }
+                
+                // Convert markdown to HTML
+                const html = marked.parse(processedText);
+                contentDiv.innerHTML = html;
+                
+                // Add metadata for processed files
+                if (fileKey !== 'original') {
+                    addModelMetadata(fileKey, text.length, text.split('\n').length);
+                }
+                
+            } catch (error) {
+                contentDiv.innerHTML = `<div class="error">Error loading file: ${error.message}</div>`;
+            }
+        }
+
+        function addModelMetadata(fileKey, size, lines) {
+            const contentDiv = document.getElementById('content');
+            const metadata = document.createElement('div');
+            metadata.className = 'model-metadata';
+            metadata.innerHTML = `
+                <strong>Processing Info:</strong> 
+                ${Math.round(size/1024 * 10)/10}KB, ${lines} lines | 
+                Model: ${fileKey.replace(/_/g, '-').toUpperCase()}
+            `;
+            contentDiv.insertBefore(metadata, contentDiv.firstChild);
+        }
+
+        // Theme detection from parent
+        function detectTheme() {
+            try {
+                const parentTheme = window.parent.document.documentElement.getAttribute('data-theme');
+                if (parentTheme) {
+                    document.documentElement.setAttribute('data-theme', parentTheme);
+                }
+            } catch (e) {
+                // Cross-origin restrictions - use default theme
+            }
+        }
+
+        // Initialize
+        detectTheme();
+        loadFile(getFileParam());
+        
+        // Listen for theme changes
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'theme-change') {
+                document.documentElement.setAttribute('data-theme', event.data.theme);
+            }
+        });
+    </script>
+</body>
+</html> 
