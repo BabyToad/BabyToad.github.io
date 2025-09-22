@@ -4,13 +4,45 @@ classes: wide-content rpg-bench-page
 title: "RPG Notetaker Bench"
 description: "Comparing AI models' ability to process and organize RPG session transcripts"
 date: 2025-01-11
-tags: [AI, RPG, Benchmarking, D&D]
+tags: [AI, RPG, Benchmarking, D&D, AudioToLogs, LLM]
 permalink: /projects/rpg-notetaker-bench/
 ---
 
 # RPG Notetaker Bench
 
 A comprehensive comparison of how different AI models process and organize tabletop RPG session transcripts. This benchmark analyzes a 2.5-hour D&D session transcript processed by six different AI models, comparing their approaches to note-taking, organization, and information extraction.
+
+**Source Project:** This benchmark is the result of experiments conducted as part of the [AudioToLogs project](https://github.com/BabyToad/AudioToLogs) - a web-based audio transcription application that converts RPG session recordings into well-formatted markdown logs using OpenAI's Whisper API and various LLM models for post-processing.
+
+## Methodology
+
+This benchmark was created as part of developing AudioToLogs' **modular LLM pipeline** for generating GM notes from session transcripts. The system uses a three-stage approach:
+
+1. **Stage 1 (Summarization):** Chunks the transcript and generates bullet points using mid-tier models
+2. **Stage 2 (Reconciliation):** Merges summaries using more capable models with full context
+3. **Stage 3 (Polishing):** Final prose formatting using high-tier models
+
+To evaluate different model combinations and approaches, the same 2.5-hour transcript was processed using six different AI models with varying prompts and processing strategies. Each model was given the task of converting the raw transcript into organized session notes, allowing for direct comparison of their approaches to note-taking, organization, and information extraction.
+
+**Technical Details:**
+- **Original Source:** 115MB MP3 recording processed through OpenAI Whisper API
+- **Transcript Size:** 116KB, 5,522 lines of raw transcription
+- **Processing:** Each model was given the complete transcript and asked to produce organized notes
+- **Cost Tracking:** Each processing run included cost estimation and token usage analysis
+
+## About AudioToLogs
+
+AudioToLogs is a comprehensive web application designed to streamline the process of converting RPG session recordings into useful campaign notes. The project features:
+
+- **Audio Processing:** Drag-and-drop interface supporting multiple audio formats (MP3, WAV, M4A, WEBM)
+- **Transcription:** High-quality transcription using OpenAI's Whisper API with automatic chunking for large files
+- **AI-Powered Note Generation:** Modular LLM pipeline that processes transcripts into organized GM notes
+- **Cost Management:** Built-in budget controls and cost tracking for API usage
+- **Campaign Management:** Support for session metadata, participant tracking, and campaign organization
+
+The modular LLM pipeline was specifically designed to balance cost efficiency with quality output, using different model tiers for different processing stages. This benchmark represents the experimental phase of that development, testing various model combinations to optimize the note-generation process.
+
+**Repository:** [github.com/BabyToad/AudioToLogs](https://github.com/BabyToad/AudioToLogs)
 
 ## The Session: "Dicing With Death #225"
 
@@ -23,7 +55,7 @@ A comprehensive comparison of how different AI models process and organize table
 
 ## AI Model Comparison
 
-Each model was tasked with converting the raw transcript into organized session notes. Click through the different versions to see how each AI approached the task:
+Each model was tasked with converting the raw transcript into organized session notes as part of the AudioToLogs pipeline development. These results represent experimental runs using different model configurations to evaluate their effectiveness for RPG session note generation. Click through the different versions to see how each AI approached the task:
 
 <div class="rpg-bench-navigator">
   <div class="model-tabs">

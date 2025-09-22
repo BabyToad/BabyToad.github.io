@@ -1,0 +1,11 @@
+{
+  "scenes": [
+    "ben",
+    "joel",
+    "jonas",
+    "pati",
+    "nathanael"
+  ],
+  "defaultScene": "jonas",
+  "version": "1.0"
+} 

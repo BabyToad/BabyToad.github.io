@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isometric Game Engine Demo</title>
+    <link rel="stylesheet" href="styles/game-ui.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #2c3e50;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .game-container-wrapper {
+            border: 2px solid #34495e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        #game-container {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container-wrapper">
+        <div id="game-container" class="iso-game-container" data-scene="jonas"></div>
+    </div>
+    
+    <script>
+        // Configuration for the demo
+        window.ISO_Game_Config = {
+            assetsPath: '.',  // Current directory - should create relative paths
+            width: 800,
+            height: 600,
+            tileSize: 32,
+            debug: true,
+            cacheScenes: true,
+            defaultScene: 'jonas'
+        };
+        
+    </script>
+    
+    <script src="iso-game-engine.js"></script>
+</body>
+</html>

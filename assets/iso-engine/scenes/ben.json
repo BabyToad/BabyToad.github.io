@@ -1,0 +1,535 @@
+{
+  "name": "ben",
+  "width": 800,
+  "height": 600,
+  "tileSize": 32,
+  "checkerboardBackground": {
+    "enabled": true,
+    "layers": [
+      {
+        "enabled": true,
+        "color1": "#b3c6e0",
+        "color2": "#e3eaf4",
+        "cellSize": 32,
+        "scrollSpeed": { "x": 5, "y": 0 },
+        "opacity": 0.7,
+        "parallaxFactor": 0.08
+      },
+      {
+        "enabled": true,
+        "color1": "#5a7ca7",
+        "color2": "#a3b8d8",
+        "cellSize": 8,
+        "scrollSpeed": { "x": 0, "y": 12 },
+        "opacity": 0.35,
+        "parallaxFactor": 0.15
+      }
+    ]
+  },
+  "connections": [
+    {
+      "elementId": "arrow-to-joel",
+      "targetScene": "joel",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "elementId": "arrow-to-pati",
+      "targetScene": "pati",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    }
+  ],
+  "spawnPoints": {
+    "default": {
+      "x": 8,
+      "y": 0
+    },
+    "fromDoor": {
+      "x": 2,
+      "y": 2
+    }
+  },
+  "initialCameraTile": {
+    "x": 8,
+    "y": 0
+  },
+  "initialZoom": 0.7,
+  "cameraBounds": {
+    "centerTile": {
+      "x": 8,
+      "y": 0
+    },
+    "halfSize": {
+      "x": 20,
+      "y": 20
+    }
+  },
+  "elements": [
+
+
+
+{
+      "id": "bg-40-27",
+      "type": "background",
+      "x": 40,
+      "y": 27,
+      "zIndex": -1,
+      "properties": {
+        "sprite": "WS_environment_wip_clean.png",
+        "blur": 200
+      }
+    },
+
+
+
+       {
+      "id": "arrow-to-joel",
+      "type": "object",
+      "x": 32,
+      "y": 11,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-joel",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_joel_r_59.png",
+        "dialog": "This arrow leads to Joels room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    {
+      "id": "arrow-to-pati",
+      "type": "object",
+      "x": 24,
+      "y": 19,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-pati",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_pati_l_95.png",
+        "dialog": "This arrow leads to Patis room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    
+
+
+
+    {
+      "id": "floor-large-0-0",
+      "type": "floor",
+      "x": 28,
+      "y": 15,
+    
+      "properties": {
+        "sprite": "Ben_WS_floor_77.png"
+      }
+    },
+    {
+      "id": "wall-rechts-0-0",
+      "type": "wall",
+      "x": 24,
+      "y": 5,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Ben_WS_Wand_rechts_25.png"
+      }
+    },
+    {
+      "id": "wall-links-0-0",
+      "type": "wall",
+      "x": 18,
+      "y": 11,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Ben_WS_Wand_links_52.png"
+      }
+    },
+    {
+      "id": "frame-77",
+      "type": "object",
+      "x": 28,
+      "y": 15,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Ben_WS_frame_77.png"
+      }
+    },
+    {
+      "id": "bookshelf-25",
+      "type": "object",
+      "x": 24,
+      "y": 5,
+      "zIndex": 3,
+      "properties": {
+        "sprite": "Ben_WS_Schrank_Bücher_25.png"
+      }
+    },
+    {
+      "id": "desk-55",
+      "type": "object",
+      "x": 20,
+      "y": 7,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Ben_WS_Schreibtisch_33.png"
+      }
+    },
+    {
+      "id": "carpet-55",
+      "type": "object",
+      "x": 24,
+      "y": 11,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Ben_WS_Teppich_55.png"
+      }
+    },
+    {
+      "id": "akkustikpanel-l-20",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "zIndex": 2,
+      "properties": { "sprite": "Ben_WS_Akkustikpanel_l_20.png" }
+    },
+    {
+      "id": "akkustikpanel-r-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "zIndex": 2,
+      "properties": { "sprite": "Ben_WS_Akkustikpanel_r_01.png" }
+    },
+    {
+      "id": "artbooks-l-0-2",
+      "type": "object",
+      "x": 10,
+      "y": 1,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Artbooks_l_0-2.png",
+        "dialog": "Artbooks from favorite games and movies. Reference goldmine!"
+      },
+      "sfx": {
+        "click": "interact_light_weight.mp3"
+      }
+    },
+    {
+      "id": "artbooks-r-61",
+      "type": "object",
+      "x": 12,
+      "y": -5,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Artbooks_r_61.png" }
+    },
+    {
+      "id": "controller--1-1",
+      "type": "object",
+      "x": 12,
+      "y": -1,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Controller_-1-1.png",
+        "dialog": "For playtesting and, let's be honest, a bit of procrastination."
+      },
+      "sfx": {
+        "click": "controller.mp3"
+      }
+    },
+    {
+      "id": "figur-cl4ptr4p--12",
+      "type": "object",
+      "x": 18,
+      "y": -1,
+      "zIndex": 4,
+      "properties": { "sprite": "Ben_WS_Figur_CL4PTR4P_-12.png" }
+    },
+    {
+      "id": "figur-scrappy--31",
+      "type": "object",
+      "x": 16,
+      "y": -5,
+      "zIndex": 5,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Figur_Scrappy_-31.png",
+        "dialog": "Beep boop! I'm Scrappy, the friendly toaster robot! I may be small, but I'm full of courage and ready for adventure! My creator says I have a heart of gold... well, actually it's more like a circuit board of copper, but you get the idea!"
+      }
+    },
+    {
+      "id": "grafiktablet-00",
+      "type": "object",
+      "x": 14,
+      "y": 1,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Grafiktablet_00.png" }
+    },
+    {
+      "id": "halterungen--11",
+      "type": "object",
+      "x": 16,
+      "y": -1,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Halterungen_-11.png" }
+    },
+    {
+      "id": "headset--1-2",
+      "type": "object",
+      "x": 10,
+      "y": -1,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Heaset_-1-2.png" }
+    },
+    {
+      "id": "mousepad-20",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Mousepad_20.png",
+        "dialog": "A smooth surface for pixel-perfect precision."
+      }
+    },
+    {
+      "id": "pc-41",
+      "type": "object",
+      "x": 16,
+      "y": 9,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_PC_41.png",
+        "dialog": "A beast of a machine, ready for rendering, compiling, and the occasional indie game jam."
+      },
+      "sfx": {
+        "click": "pc.mp3"
+      }
+    },
+    {
+      "id": "pflanze01--14",
+      "type": "object",
+      "x": 22,
+      "y": -1,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Pflanze01_-14.png",
+        "dialog": "A little green friend to keep the air fresh and the mind calm."
+      },
+      "sfx": {
+        "click": "brunch_scene.mp3"
+      }
+    },
+    {
+      "id": "pflanze02-61",
+      "type": "object",
+      "x": 16,
+      "y": 13,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Pflanze02_61.png" }
+    },
+    {
+      "id": "scrappy-lampe-violett-40",
+      "type": "object",
+      "x": 14,
+      "y": -7,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Scrappy_lampe_violett_-40.png",
+        "dialog": "Let there be light! Essential for those late-night creative bursts.",
+        "blur": 0
+      },
+      "sfx": {
+        "click": "interact_heavy_weight.mp3"
+      }
+    },
+    {
+      "id": "tablet-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Tablet_01.png",
+        "dialog": "Perfect for sketching out new character concepts and UI mockups."
+      }
+    },
+    {
+      "id": "tischaufsatz-20",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "zIndex": 3,
+      "properties": { "sprite": "Ben_WS_Tischaufsatz_20.png" }
+    },
+    {
+      "id": "wandregal-links-1-2",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Ben_WS_Wandregal_links_1-2.png"
+      }
+    },
+    {
+      "id": "wandregal-rechts-21",
+      "type": "object",
+      "x": 16,
+      "y": -3,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Ben_WS_Wandregal_rechts_-21.png"
+      }
+    },
+    {
+      "id": "chair-44",
+      "type": "object",
+      "x": 22,
+      "y": 9,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_chair_44.png",
+        "dialog": "The command center. Ergonomic, but still not immune to crunch time."
+      },
+      "sfx": {
+        "click": "chair.mp3"
+      }
+    },
+    {
+      "id": "bildschirme-1-1",
+      "type": "object",
+      "x": 12,
+      "y": 3,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Bildschirme_1-1.png",
+        "dialog": "Multi-monitor setup for code, art, and memes—simultaneously."
+      },
+      "sfx": {
+        "click": "monitors.mp3"
+      }
+    },
+{
+      "id": "zettel-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Ben_WS_Zettel_01.png",
+        "dialog": "What is he planning?"
+      },
+      "sfx": {
+        "click": "snapshots.mp3"
+      }
+    },
+{
+      "id": "Fotos--10",
+      "type": "object",
+      "x": 14,
+      "y": -1,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Fotowand_-10.png"
+      }
+    },
+{
+      "id": "pflanze03--31",
+      "type": "object",
+      "x": 12,
+      "y": -5,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Pflanze03_-3-1.png"
+      }
+    },
+{
+      "id": "switch--31",
+      "type": "object",
+      "x": 20,
+      "y": -1,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Switch_-13.png"
+      }
+    },
+{
+      "id": "books02--30",
+      "type": "object",
+      "x": 14,
+      "y": -5,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Bücher02_-30.png"
+      }
+    },
+{
+      "id": "poster--6-2",
+      "type": "object",
+      "x": 10,
+      "y": -11,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Poster_-6-2.png"
+      }
+    },
+{
+      "id": "shadow-55",
+      "type": "object",
+      "x": 24,
+      "y": 11,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Schatten_55.png"
+      }
+    },
+{
+      "id": "light-66",
+      "type": "object",
+      "x": 26,
+      "y": 13,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Ben_WS_Lichtkegel_66.png"
+      }
+    }
+
+
+
+
+
+ 
+  ],
+  "characters": [],
+  "interactables": []
+} 

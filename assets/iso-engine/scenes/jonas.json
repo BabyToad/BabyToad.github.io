@@ -1,0 +1,703 @@
+{
+  "name": "jonas",
+  "width": 800,
+  "height": 600,
+  "tileSize": 32,
+  "checkerboardBackground": {
+    "enabled": true,
+    "layers": [
+      {
+        "enabled": true,
+        "color1": "#556b2f",
+        "color2": "#43cd80",
+        "cellSize": 32,
+        "scrollSpeed": { "x": -3, "y": 0 },
+        "opacity": 0.7,
+        "parallaxFactor": 0.08
+      },
+      {
+        "enabled": true,
+        "color1": "#006400",
+        "color2": "#2e8b57",
+        "cellSize": 8,
+        "scrollSpeed": { "x": 0, "y": -8 },
+        "opacity": 0.35,
+        "parallaxFactor": 0.15
+      }
+    ]
+  },
+  "connections": [
+    {
+      "elementId": "arrow-to-nathanael",
+      "targetScene": "nathanael",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 25,
+        "y": 12
+      } 
+    },
+    {
+      "elementId": "arrow-to-joel",
+      "targetScene": "joel",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 25,
+        "y": 12
+      }
+    }
+  ],
+  "spawnPoints": {
+    "default": {
+      "x": 8,
+      "y": 0
+    },
+    "fromMainDoor": {
+      "x": 15,
+      "y": 15
+    }
+  },
+  "initialCameraTile": {
+    "x": 16,
+    "y": 4
+  },
+  "initialZoom": 0.8,
+  "cameraBounds": {
+    "centerTile": {
+      "x": 16,
+      "y": 4
+    },
+    "halfSize": {
+      "x": 20,
+      "y": 20
+    }
+  },
+  "elements": [
+  {
+      "id": "arrow-to-nathanael",
+      "type": "object",
+      "x": 32,
+      "y": 11,
+      "width": 32,
+      "height": 64,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-nathanael",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_clean_r_59.png",
+        "dialog": "This arrow leads to Nathanaels room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    {
+      "id": "arrow-to-joel",
+      "type": "object",
+      "x": 24,
+      "y": 19,
+      "width": 32,
+      "height": 64,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-joel",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_joel_l_95.png",
+        "dialog": "This arrow leads to Joel room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      } 
+    },
+
+
+  {
+      "id": "floor-large-77",
+      "type": "floor",
+      "x": 26,
+      "y": 13,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Jonas_WS_parkett_66.png"
+      }
+    },
+  {
+      "id": "wall-rechts-23",
+      "type": "wall",
+      "x": 20,
+      "y": 5,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Jonas_WS_wand_r_23.png"
+      }
+    },
+  {
+      "id": "wall-links-42",
+      "type": "wall",
+      "x": 18,
+      "y": 7,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Jonas_WS_wand_l_32.png"
+      }
+    },
+  {
+      "id": "frame-77",
+      "type": "wall",
+      "x": 26,
+      "y": 13,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Jonas_WS_frame_66.png"
+      }
+  },
+  {
+      "id": "chair-43",
+      "type": "object",
+      "x": 20,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Schreibtischsessel_43.png"
+      }
+  },
+  
+
+  
+ {
+      "id": "table-42",
+      "type": "object",
+      "x": 18,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Stehtisch_42.png"
+      }
+    },
+{
+      "id": "sidetable-1813",
+      "type": "object",
+      "x": 18,
+      "y": 13,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Beistelltisch_1813.png"
+      }
+    },
+{
+      "id": "tetris-32",
+      "type": "object",
+      "x": 18,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_TetrisRegal_32.png"
+      }
+    },
+{
+      "id": "whiteboard--12",
+      "type": "object",
+      "x": 18,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_WhiteboardLEER_-12.png"
+      }
+    },
+{
+      "id": "whiteboardtext--12",
+      "type": "object",
+      "x": 18,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_WhiteboardTEXT_-12.png"
+      }
+    },
+{
+      "id": "hammertime--3-2",
+      "type": "object",
+      "x": 10,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Jonas_WS_Hammerbild_-3-2.png",
+        "dialog": "A DIY puzzle: the tools are trapped in the art. Hanging your next idea requires dismantling the last."
+      },
+      "sfx": {
+        "click": "interact_light_weight.mp3"
+      },
+      "triggers": {
+        "click": [
+          {
+            "action": "shakeCamera",
+            "params": {
+              "intensity": 5,
+              "duration": 300
+            }
+          },
+          {
+            "action": "displayMessage",
+            "params": {
+              "text": "🔨 The art shakes with creative energy!",
+              "duration": 2000,
+              "position": "top"
+            }
+          }
+        ]
+      }
+    },
+{
+      "id": "pc-11",
+      "type": "object",
+      "x": 16,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_PCgeschnitten_11.png"
+      }
+    },
+{
+      "id": "trash-15",
+      "type": "object",
+      "x": 24,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Papierkorb_15.png"
+      }
+    },
+{
+      "id": "globe-40",
+      "type": "object",
+      "x": 14,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Miniglobus_40.png"
+      }
+    },
+{
+      "id": "desktops-145",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Bildschirme_145.png"
+      }
+    },
+{
+      "id": "lights-out-0-2",
+      "type": "object",
+      "x": 10,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_SchreibtischbeleuchtungAUS_0-2.png"
+      }
+    },
+{
+      "id": "light-right-on-0-2",
+      "type": "object",
+      "x": 12,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_SchreibtischbeleuchtungAN-RE_0-1.png"
+      }
+    },
+{
+      "id": "light-left-on-1-2",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_SchreibtischbeleuchtungAN-LI_1-2.png"
+      }
+    },
+{
+      "id": "plattenspieler-35",
+      "type": "object",
+      "x": 24,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 6,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Plattenspieler_35.png"
+      }
+    },
+{
+      "id": "platten-56",
+      "type": "object",
+      "x": 26,
+      "y": 11,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Platten_56.png"
+      }
+    },
+{
+      "id": "burning wheel-1801",
+      "type": "object",
+      "x": 18,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Jonas_WS_BurningWheelBooks_1801.png",
+        "dialog": "'The Burning Wheel' Like the Silmarillion and Dark Souls had a tabletop baby."
+      },
+      "sfx": {
+        "click": "bt_speakers.mp3"
+      }
+    },
+{
+      "id": "roleplay-12",
+      "type": "object",
+      "x": 18,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Rollenspiele_12.png"
+      }
+    },
+{
+      "id": "sachbücher01-51",
+      "type": "object",
+      "x": 16,
+      "y": 11,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher01_51.png"
+      }
+    },
+{
+      "id": "sachbücher02-1-2",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher02_1-2.png"
+      }
+    },
+{
+      "id": "sachbücher03-0-2",
+      "type": "object",
+      "x": 10,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher03_0-2.png"
+      }
+    },
+{
+      "id": "sachbücher04--1-1",
+      "type": "object",
+      "x": 12,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher04_-1-1.png"
+      }
+    },
+{
+      "id": "sachbücher05--1-1",
+      "type": "object",
+      "x": 12,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher05_-1-1.png"
+      }
+    },
+{
+      "id": "sachbücher06-00",
+      "type": "object",
+      "x": 14,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Sachbuecher06_00.png"
+      }
+    },
+{
+      "id": "bagel-141",
+      "type": "object",
+      "x": 14,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Jonas_WS_Bagel_14-1.png",
+        "dialog": "If Tarantino directed a brunch scene."
+      },
+      "sfx": {
+        "click": "brunch_scene.mp3"
+      },
+      "triggers": {
+        "click": [
+          {
+            "action": "playSFX",
+            "params": {
+              "track": "brunch_scene.mp3",
+              "volume": 0.8
+            }
+          },
+          {
+            "action": "displayMessage",
+            "params": {
+              "text": "🥯 'Royale with Cheese' energy intensifies...",
+              "duration": 2500,
+              "position": "bottom"
+            }
+          }
+         
+        ]
+      }
+    },
+{
+      "id": "bagelbag-141",
+      "type": "object",
+      "x": 14,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Bagelbag_14-1.png"
+      }
+    },
+{
+      "id": "bagelknife-141",
+      "type": "object",
+      "x": 14,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Steakknife_-10.png"
+      }
+    },
+{
+      "id": "efeu-127",
+      "type": "object",
+      "x": 12,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Efeutute03_127.png"
+      }
+    },
+{
+      "id": "plant--2-2",
+      "type": "object",
+      "x": 10,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Gruenpflanze_-2-2.png"
+      }
+    },
+{
+      "id": "coffee-41",
+      "type": "object",
+      "x": 16,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": true,
+      "properties": {
+        "sprite": "Jonas_WS_Kaffee_41.png",
+        "dialog": "Fuel for thought, warmth for the hands, chaos for the heart."
+      },
+      "sfx": {
+        "click": "coffee.mp3"
+      },
+      "triggers": {
+        "click": [
+          {
+            "action": "panTo",
+            "params": {
+              "x": 16,
+              "y": 9,
+              "duration": 1000
+            }
+          },
+          {
+            "action": "zoomTo",
+            "params": {
+              "zoom": 2.0,
+              "duration": 800
+            }
+          },
+          {
+            "action": "showDialog",
+            "params": {
+              "text": "☕ *sip* The caffeine flows through you, sharpening your focus!",
+              "duration": 3000
+            }
+          }
+        ]
+      }
+    },
+{
+      "id": "keyboard-20",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Keyboard03_20.png"
+      }
+    },
+{
+      "id": "mic-30",
+      "type": "object",
+      "x": 14,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_MikrofonmitArm_30.png"
+      }
+    },
+{
+      "id": "mouse-10",
+      "type": "object",
+      "x": 14,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_MouseundMousepad_10.png"
+      }
+    },
+{
+      "id": "tablet-41",
+      "type": "object",
+      "x": 16,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Tablett_41.png"
+      }
+    },
+
+    {
+      "id": "kommode-46",
+      "type": "object",
+      "x": 26,
+      "y": 9,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Jonas_WS_Tetriskommode_46.png",
+        "dialog": "--"
+      }
+    }
+  ]
+} 
