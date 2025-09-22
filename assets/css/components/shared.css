@@ -1,0 +1,82 @@
+/* Shared Components */
+/* Used across blog posts, essays, and FWOF layouts */
+
+/* Metadata Component */
+.metadata {
+    background: var(--bg-secondary);
+    padding: var(--space-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Post-specific metadata (for blog posts) */
+.post-metadata {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: var(--space-md);
+}
+
+/* Document metadata (for FWOF) with larger gaps */
+.document-metadata {
+    gap: var(--space-xl);
+}
+
+/* Abstract Component */
+.abstract {
+    background: var(--bg-secondary);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+    margin: var(--space-md) 0 var(--space-xl) 0;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--text-secondary);
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Document Header Component */
+.document-header {
+    grid-column: 1 / -1;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.document-header h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+/* Special Links */
+.pdf-download {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.pdf-download:hover {
+    background: var(--accent-color-hover, var(--accent-color));
+    opacity: 0.9;
+}
+
+/* Last Modified */
+.last-modified {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: base
 title: Steak Knives and Bagels
 description: Personal website showcasing projects and skills
 ---

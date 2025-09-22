@@ -21,4 +21,11 @@
     
     /* Container Settings */
     --container-padding: var(--space-md);
+
+    /* Border Radius */
+    --border-radius: 6px;
+    --border-radius-sm: 4px;
+
+    /* Colors */
+    --accent-color: #4a9eff;
 }

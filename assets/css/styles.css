@@ -9,9 +9,11 @@
 @import 'layouts/grid.css';
 @import 'layouts/content.css';
 @import 'layouts/post.css';
+@import 'layouts/rpg_post.css';
 
 /* Component imports */
-@import 'components/navigation.css';  /* Match your actual filename */
+@import 'components/shared.css';
+@import 'components/navigation.css';
 @import 'components/essay.css';
 @import 'components/projects.css';
 @import 'components/forms.css';
@@ -20,8 +22,10 @@
 @import 'components/toc.css';
 @import 'components/game-container.css';
 @import 'components/preview-popup.css';
-@import 'components/for-want-of-fuel.css';  /* For Want Of Fuel styles */
-@import 'components/rpg-notetaker-bench.css';  /* RPG Notetaker Bench styles */
+@import 'components/contact.css';
+@import 'components/links.css';
+@import 'components/for-want-of-fuel.css';
+@import 'components/rpg-notetaker-bench.css';
 
 /* Base styles */
 body {

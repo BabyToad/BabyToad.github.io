@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: base
 title: Projects
+use_container: false
 ---
 
 <div class="main-content">
