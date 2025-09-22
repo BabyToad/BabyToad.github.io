@@ -5,13 +5,11 @@ description: Personal website showcasing projects and skills
 ---
 
 <section class="intro-section">
-    <p>Welcome, I am Jonas and this is my website.</p>
-    <p>I write about roleplaying games, game design, and sometimes rationality. My work focuses on using games and interactive experiences as a way to clarify my own thinking about how people make choices.</p>
+    <p>I am Jonas and this is my website.</p>
+    <p>I write about roleplaying games, game design, AI, and sometimes rationality.</p>
     
-    <p>Here you'll find my projects in both digital and tabletop game development, essays on game design theory and rationality, and occasional thoughts on other topics that catch my interest.</p>
+    <p>This page hosts my projects, essays, and occasional thoughts on other topics that catch my interest.</p>
     
-    <p>Below you can explore my projects, read my latest blog posts, or get in touch. Feel free to browse around - the site is organized into clear sections to help you find what interests you most.</p>
-    <p></p>
 </section>
 
 <section class="recent-posts-section">
