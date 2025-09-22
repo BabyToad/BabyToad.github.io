@@ -8,15 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
     {% seo %}
-    <!-- KaTeX CSS -->
+
+    <!-- Conditional KaTeX loading -->
+    {% if page.math or layout.math %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    {% endif %}
 </head>
 <body>
     {% include header.html %}
 
+    {% if page.use_container != false and layout.use_container != false %}
+    <main class="content-container">
+        {{ content }}
+    </main>
+    {% else %}
     {{ content }}
+    {% endif %}
 
-    <!-- KaTeX JS -->
+    <!-- Conditional KaTeX JS loading -->
+    {% if page.math or layout.math %}
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
     <script>
@@ -31,5 +41,30 @@
             });
         });
     </script>
+    {% endif %}
+
+    <!-- Conditional script loading -->
+    {% if page.toc or layout.toc %}
+    <script src="{{ '/assets/js/components/toc.js' | relative_url }}"></script>
+    {% endif %}
+
+    {% if page.sidenotes or layout.sidenotes %}
+    <script src="{{ '/assets/js/sidenotes.js' | relative_url }}"></script>
+    {% endif %}
+
+    {% if page.preview_popup or layout.preview_popup %}
+    <script src="{{ '/assets/js/preview-popup.js' | relative_url }}"></script>
+    {% endif %}
+
+    {% if page.quotes or layout.quotes %}
+    <script src="{{ '/assets/js/quotes.js' | relative_url }}"></script>
+    {% endif %}
+
+    {% if page.theme_toggle or layout.theme_toggle %}
+    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+    {% endif %}
+
+    <!-- Navigation JavaScript (always loaded for mobile menu) -->
+    <script src="{{ '/assets/js/components/navigation.js' | relative_url }}"></script>
 </body>
 </html> 

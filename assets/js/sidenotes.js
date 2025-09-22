@@ -1,84 +1,182 @@
-document.addEventListener('DOMContentLoaded', () => {
-    function processSidenotes() {
-        const sidenotesContainer = document.querySelector('.sidenotes');
-        const anchors = document.querySelectorAll('.essay-content .sidenote-anchor');
-        
-        if (!sidenotesContainer || !anchors.length) return;
-        
-        console.log('Processing sidenotes:', anchors.length);
-        sidenotesContainer.innerHTML = '';
-        
-        anchors.forEach((anchor, index) => {
+/**
+ * Sidenotes Component
+ * Processes sidenote anchors and creates positioned sidenotes
+ */
+class Sidenotes {
+    constructor(options = {}) {
+        this.options = {
+            sidenotesSelector: '.sidenotes',
+            anchorSelector: '.sidenote-anchor',
+            contentSelectors: ['.essay-content', '.post-body', '.project-content'],
+            sidenoteClass: 'sidenote',
+            referenceClass: 'sidenote-ref',
+            expandablePartSelector: '.essay-part',
+            expandHeaderSelector: '.essay-part-header',
+            expandContentSelector: '.essay-part-content',
+            expandIconSelector: '.expand-icon',
+            debug: false,
+            ...options
+        };
+
+        this.sidenotesContainer = document.querySelector(this.options.sidenotesSelector);
+        this.anchors = [];
+        this.sidenotes = [];
+
+        if (this.sidenotesContainer) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.findAnchors();
+        this.setupExpansionHandlers();
+        this.processSidenotes();
+        this.setupResizeHandler();
+    }
+
+    findAnchors() {
+        // Find anchors in any of the specified content areas
+        this.anchors = [];
+        this.options.contentSelectors.forEach(selector => {
+            const content = document.querySelector(selector);
+            if (content) {
+                const anchorsInContent = content.querySelectorAll(this.options.anchorSelector);
+                this.anchors.push(...anchorsInContent);
+            }
+        });
+
+        if (this.options.debug) {
+            console.log('Found sidenote anchors:', this.anchors.length);
+        }
+    }
+
+    processSidenotes() {
+        if (!this.sidenotesContainer || this.anchors.length === 0) return;
+
+        // Clear existing sidenotes
+        this.sidenotesContainer.innerHTML = '';
+        this.sidenotes = [];
+
+        this.anchors.forEach((anchor, index) => {
             const noteNumber = index + 1;
-            
-            // Get original text, either from data attribute or current content
+
+            // Get original text
             let originalText = anchor.getAttribute('data-original-text');
             if (!originalText) {
-                originalText = anchor.textContent;
-                // Store original text for future reference
+                originalText = anchor.textContent.trim();
                 anchor.setAttribute('data-original-text', originalText);
             }
-            
-            console.log(`Processing note ${noteNumber}:`, originalText);
-            
-            // Find the parent essay part
-            const parentPart = anchor.closest('.essay-part');
-            const isPartExpanded = parentPart?.getAttribute('data-expanded') === 'true';
-            
-            // Create and position the sidenote
-            const sidenote = document.createElement('div');
-            sidenote.className = 'sidenote';
-            sidenote.innerHTML = `<sup>${noteNumber}</sup> ${originalText}`;
-            
-            // Only position and show if parent part is expanded
-            if (isPartExpanded) {
-                const anchorPosition = anchor.getBoundingClientRect();
-                const containerPosition = sidenotesContainer.getBoundingClientRect();
-                const topPosition = anchorPosition.top - containerPosition.top;
-                
-                console.log(`Note ${noteNumber} at position:`, topPosition);
-                sidenote.style.top = `${topPosition}px`;
-                sidenote.style.display = 'block';
-            } else {
-                sidenote.style.display = 'none';
+
+            if (this.options.debug) {
+                console.log(`Processing note ${noteNumber}:`, originalText);
             }
-            
-            sidenotesContainer.appendChild(sidenote);
-            
-            // Clear anchor text and add only the reference number
-            const referenceNumber = document.createElement('sup');
-            referenceNumber.className = 'sidenote-ref';
-            referenceNumber.textContent = noteNumber;
-            anchor.textContent = ''; // Clear the text
-            anchor.appendChild(referenceNumber);
+
+            // Check if this anchor is in an expandable part
+            const parentPart = anchor.closest(this.options.expandablePartSelector);
+            const isVisible = !parentPart || parentPart.getAttribute('data-expanded') === 'true';
+
+            // Create sidenote
+            const sidenote = this.createSidenote(noteNumber, originalText, isVisible);
+            this.sidenotesContainer.appendChild(sidenote);
+            this.sidenotes.push(sidenote);
+
+            // Update anchor
+            this.updateAnchor(anchor, noteNumber);
+
+            // Position sidenote if visible
+            if (isVisible) {
+                this.positionSidenote(anchor, sidenote);
+            }
         });
     }
 
-    // Handle section expansion/collapse
-    document.querySelectorAll('.essay-part-header').forEach(header => {
-        const part = header.closest('.essay-part');
-        const content = part.querySelector('.essay-part-content');
-        const icon = part.querySelector('.expand-icon');
-        
-        header.addEventListener('click', () => {
-            const isExpanded = part.getAttribute('data-expanded') === 'true';
-            part.setAttribute('data-expanded', !isExpanded);
-            content.style.display = isExpanded ? 'none' : 'block';
-            icon.style.transform = isExpanded ? 'rotate(-90deg)' : 'rotate(0)';
-            
-            // Wait for collapse animation to complete
-            setTimeout(processSidenotes, 300);
+    createSidenote(number, text, isVisible) {
+        const sidenote = document.createElement('div');
+        sidenote.className = this.options.sidenoteClass;
+        sidenote.innerHTML = `<sup>${number}</sup> ${text}`;
+        sidenote.style.display = isVisible ? 'block' : 'none';
+        return sidenote;
+    }
+
+    updateAnchor(anchor, number) {
+        // Clear anchor content and add reference number
+        const reference = document.createElement('sup');
+        reference.className = this.options.referenceClass;
+        reference.textContent = number;
+
+        anchor.textContent = '';
+        anchor.appendChild(reference);
+    }
+
+    positionSidenote(anchor, sidenote) {
+        // Use requestAnimationFrame for better positioning accuracy
+        requestAnimationFrame(() => {
+            const anchorRect = anchor.getBoundingClientRect();
+            const containerRect = this.sidenotesContainer.getBoundingClientRect();
+            const topPosition = anchorRect.top - containerRect.top + window.scrollY;
+
+            sidenote.style.top = `${Math.max(0, topPosition)}px`;
+
+            if (this.options.debug) {
+                console.log(`Positioned sidenote at ${topPosition}px`);
+            }
         });
-    });
+    }
 
-    // Initial processing
-    setTimeout(processSidenotes, 100);
+    setupExpansionHandlers() {
+        const headers = document.querySelectorAll(this.options.expandHeaderSelector);
 
-    // Reprocess on resize
-    window.addEventListener('resize', () => {
-        setTimeout(processSidenotes, 100);
-    });
-    
-    // Make function available globally if needed
-    window.processSidenotes = processSidenotes;
-}); 
+        headers.forEach(header => {
+            const part = header.closest(this.options.expandablePartSelector);
+            const content = part?.querySelector(this.options.expandContentSelector);
+            const icon = part?.querySelector(this.options.expandIconSelector);
+
+            if (!part || !content) return;
+
+            header.addEventListener('click', () => {
+                const isExpanded = part.getAttribute('data-expanded') === 'true';
+                const newState = !isExpanded;
+
+                part.setAttribute('data-expanded', newState);
+                content.style.display = newState ? 'block' : 'none';
+
+                if (icon) {
+                    icon.style.transform = newState ? 'rotate(0)' : 'rotate(-90deg)';
+                }
+
+                // Reprocess sidenotes after animation
+                setTimeout(() => this.processSidenotes(), 300);
+            });
+        });
+    }
+
+    setupResizeHandler() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.processSidenotes();
+            }, 100);
+        });
+    }
+
+    // Public method to refresh sidenotes
+    refresh() {
+        this.findAnchors();
+        this.processSidenotes();
+    }
+}
+
+// Auto-initialize on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if sidenotes container exists
+    if (document.querySelector('.sidenotes')) {
+        // Delay initialization to ensure content is fully rendered
+        setTimeout(() => {
+            window.sidenotesInstance = new Sidenotes();
+        }, 100);
+    }
+});
+
+// Export for manual initialization
+window.Sidenotes = Sidenotes; 

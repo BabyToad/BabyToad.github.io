@@ -1,7 +1,10 @@
 ---
 layout: base
+toc: true
+sidenotes: true
+use_container: false
 ---
-<div class="essay-container">
+<div class="content-container essay-layout">
     <nav class="toc" id="toc">
         <div class="toc-header">
             <h3>Contents</h3>
@@ -32,15 +35,9 @@ layout: base
 
         <div class="essay-content">
             {% for part in site.golden_triangle_parts %}
-            <div class="essay-part" data-expanded="true" id="part-{{ part.title | slugify }}">
-                <div class="essay-part-header">
-                    <span class="expand-icon">▼</span>
-                    {{ part.title }}
-                </div>
-                <div class="essay-part-content">
-                    {%- capture part_content -%}{{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{%- endcapture -%}
-                    {{ part_content | markdownify }}
-                </div>
+            <div class="essay-part" id="part-{{ part.title | slugify }}">
+                {%- capture part_content -%}{{ part.content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{%- endcapture -%}
+                {{ part_content | markdownify }}
             </div>
             {% endfor %}
         </div>
@@ -57,147 +54,5 @@ layout: base
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Document loaded');
-    
-    // Debug the raw HTML to see if sidenote spans exist
-    const essayContent = document.querySelector('.essay-content');
-    console.log('Essay content HTML:', essayContent.innerHTML);
-    
-    const parts = document.querySelectorAll('.essay-part');
-    console.log('Found parts:', parts.length);
-    
-    const sidenotesContainer = document.querySelector('.sidenotes');
-    console.log('Sidenotes container:', sidenotesContainer);
-    
-    const anchors = document.querySelectorAll('.sidenote-anchor');
-    console.log('Found sidenote anchors:', anchors.length);
-    if (anchors.length > 0) {
-        console.log('Anchor contents:', Array.from(anchors).map(a => a.textContent));
-    }
-    
-    const sections = document.querySelectorAll('.essay-part');
-    const tocItems = document.querySelectorAll('.toc-item');
-    const totalProgress = document.getElementById('total-progress');
-    
-    function updateProgress() {
-        // Calculate total page progress
-        const windowHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - windowHeight;
-        const scrolled = window.scrollY;
-        const totalPercentage = (scrolled / docHeight) * 100;
-        totalProgress.style.width = `${totalPercentage}%`;
-        
-        // Calculate individual section progress
-        sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            const content = section.querySelector('.essay-part-content');
-            const isExpanded = section.getAttribute('data-expanded') === 'true';
-            const progressBar = tocItems[index].querySelector('.progress-bar');
-            
-            if (!isExpanded) {
-                // Hide progress bar for collapsed sections
-                progressBar.style.opacity = '0';
-                return;
-            }
-            
-            const totalHeight = content.clientHeight;
-            const topOffset = rect.top;
-            let progress = 0;
-            
-            if (topOffset < 0) {
-                progress = Math.min(100, (-topOffset / totalHeight) * 100);
-            } else if (topOffset < windowHeight) {
-                const visibleHeight = Math.min(totalHeight, windowHeight - topOffset);
-                progress = (visibleHeight / totalHeight) * 100;
-            }
-            
-            // Show progress bar only for sections in progress (between 1% and 99%)
-            if (progress > 0 && progress < 100) {
-                progressBar.style.opacity = '1';
-                progressBar.querySelector('.progress').style.width = `${progress}%`;
-            } else {
-                progressBar.style.opacity = '0';
-            }
-        });
-    }
 
-    window.addEventListener('scroll', updateProgress);
-    window.addEventListener('resize', updateProgress);
-    
-    sections.forEach(section => {
-        const header = section.querySelector('.essay-part-header');
-        header.addEventListener('click', () => {
-            setTimeout(updateProgress, 100);
-        });
-    });
-    
-    updateProgress();
-});
-</script>
-
-<style>
-.toc-header {
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.toc-header h3 {
-    margin-bottom: 0.5rem;
-}
-
-.toc-item {
-    position: relative;
-    margin-bottom: 0.5rem;
-}
-
-.progress-bar {
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 2px;
-    background: var(--border-color);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.progress {
-    width: 0;
-    height: 100%;
-    background: var(--accent-color);
-    transition: width 0.2s ease;
-}
-
-/* Add this if you don't have an accent color defined */
-:root {
-    --accent-color: #4a9eff;
-}
-
-.sidenote-anchor {
-    position: relative;
-}
-
-.sidenote-ref {
-    color: var(--accent-color);
-    font-size: 0.8em;
-    margin-left: 0.2em;
-    cursor: pointer;
-}
-
-.sidenote {
-    font-size: 0.9em;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
-}
-
-.sidenote sup {
-    color: var(--accent-color);
-    margin-right: 0.5em;
-}
-</style>
-
-<script src="{{ '/assets/js/sidenotes.js' | relative_url }}"></script>
   

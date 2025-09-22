@@ -38,4 +38,32 @@ yarn-error.log*
 # Local development files
 .ruby-version
 .ruby-gemset
-Gemfile.lock 
+
+# Ruby coverage and testing
+coverage/
+*.rbc
+*.gem
+InstalledFiles
+
+# Modern editor configurations
+.cursor/
+*.code-workspace
+.devcontainer/
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Testing output
+.nyc_output/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# Claude Code files (if you want to ignore them)
+# CLAUDE.md 

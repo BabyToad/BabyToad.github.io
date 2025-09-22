@@ -5,6 +5,7 @@ date: 2025-04-30
 description: "A deep dive into the mathematics and psychology behind critical hit systems in Lancer and D&D 5e, exploring their design implications and impact on gameplay."
 tags: [game-design, lancer, dnd, mechanics, analysis]
 toc: true
+math: true
 visibility: public  # Options: public, private, draft
 
 ---

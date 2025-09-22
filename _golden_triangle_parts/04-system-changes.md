@@ -122,9 +122,9 @@ Ships must roll on the crisis table when:
 | 95-98 | Cockpit or bridge destroyed. Body saves to escape the room before it's destroyed. |
 | 99 | Fuel line. Ship destroyed in 1d10 turns. |
 
-## Stress and Panic [[Also mostly lifted from Mothership RPG]]
+## Stress and Panic 
 
-### Stress 
+### Stress [[Also mostly lifted from Mothership RPG]]
 
 **How do I gain Stress?**  
 There is also a number of other ways to get stress such as:

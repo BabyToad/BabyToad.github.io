@@ -1,48 +1,45 @@
 /* For Want Of Fuel specific styles */
 
 /* Container layout */
-.for-want-of-fuel-container {
+.content-container.fuel-layout {
     display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 2rem;
-    max-width: 1400px;
+    grid-template-columns: minmax(200px, 1fr) minmax(700px, 900px) minmax(200px, 1fr);
+    gap: var(--space-xl);
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 2rem;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    letter-spacing: 0.01em;
+    padding: var(--space-lg);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     color: var(--text-primary);
 }
 
-/* Document header */
-.document-header {
-    grid-column: 1 / -1;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--border-color);
+/* Document header - base styling in shared.css */
+
+/* Content positioning */
+.for-want-of-fuel-content {
+    grid-column: 2;
+    width: 100%;
+    max-width: 900px;
+    line-height: var(--line-height-base);
 }
 
-.metadata {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+/* Sidenotes positioning */
+.sidenotes {
+    grid-column: 3;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
 }
 
-.pdf-download {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
+/* Metadata and PDF download - base styling in shared.css */
 
 /* Stat blocks */
 .stat-block {
-    background: var(--background-alt);
-    padding: 1rem;
-    border-radius: 4px;
-    margin: 1rem 0;
+    background: var(--bg-secondary);
+    padding: var(--space-md);
+    border-radius: var(--border-radius);
+    margin: var(--space-md) 0;
 }
 
 .stat-block-header {
@@ -181,66 +178,49 @@
 
 /* Rules parts */
 .rules-part {
-    margin-bottom: 2rem;
+    margin: var(--space-lg) 0;
 }
 
-.rules-part-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1.2em;
-    font-weight: bold;
+.rules-part h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-sm);
 }
 
-.expand-icon {
-    font-size: 0.8em;
-    transition: transform 0.2s ease;
-}
-
-.rules-part[data-expanded="false"] .expand-icon {
-    transform: rotate(-90deg);
-}
-
-.rules-part-content {
-    transition: max-height 0.3s ease;
-    padding: 0.5rem 0;
-}
-
-.rules-part[data-expanded="false"] .rules-part-content {
-    max-height: 0;
-    overflow: hidden;
-}
-
-/* Abstract */
-.abstract {
-    background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: 4px;
-    margin-bottom: 2.5rem;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-}
+/* Abstract - base styling in shared.css */
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .for-want-of-fuel-container {
-        grid-template-columns: 200px 1fr;
+    .content-container.fuel-layout {
+        grid-template-columns: minmax(200px, 250px) minmax(auto, 700px);
+        gap: var(--space-lg);
     }
-    
+
     .sidenotes {
         display: none;
     }
 }
 
-@media (max-width: 768px) {
-    .for-want-of-fuel-container {
+@media (max-width: 900px) {
+    .content-container.fuel-layout {
         grid-template-columns: 1fr;
+        padding: var(--space-md);
     }
-    
+
+    .for-want-of-fuel-content {
+        grid-column: 1;
+    }
+
     .toc {
-        display: none;
+        position: static;
+        height: auto;
+        margin-bottom: var(--space-lg);
+        padding: var(--space-md);
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
     }
 }
 
@@ -948,8 +928,8 @@
     padding-bottom: 0;
 }
 
-.for-want-of-fuel-container .rules-part-content h1,
-.for-want-of-fuel-container .rules-part-content h1.highlight {
+.content-container.fuel-layout .rules-part-content h1,
+.content-container.fuel-layout .rules-part-content h1.highlight {
     font-size: 2rem;
     line-height: 1.3;
     margin: 1.5rem 0 1rem;
@@ -968,25 +948,25 @@
         margin: 0 0 1rem;
     }
 
-    .for-want-of-fuel-container .rules-part-content h1 {
+    .content-container.fuel-layout .rules-part-content h1 {
         font-size: 1.75rem;
         margin: 1.25rem 0 1rem;
     }
 }
 
 /* Paragraphs and Text */
-.for-want-of-fuel-container p {
+.content-container.fuel-layout p {
     margin-bottom: 1.5rem;
     max-width: 70ch;
 }
 
-.for-want-of-fuel-container li {
+.content-container.fuel-layout li {
     margin-bottom: 0.75rem;
     max-width: 65ch;
 }
 
 /* Blockquotes */
-.for-want-of-fuel-container blockquote {
+.content-container.fuel-layout blockquote {
     margin: 2rem 0;
     padding: 1.5rem;
     border-left: 4px solid var(--accent-color);
@@ -995,19 +975,19 @@
     color: var(--text-secondary);
 }
 
-.for-want-of-fuel-container blockquote p {
+.content-container.fuel-layout blockquote p {
     margin: 0;
 }
 
 /* Lists */
-.for-want-of-fuel-container ul,
-.for-want-of-fuel-container ol {
+.content-container.fuel-layout ul,
+.content-container.fuel-layout ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
 }
 
 /* Code and Technical Text */
-.for-want-of-fuel-container code {
+.content-container.fuel-layout code {
     font-family: var(--font-mono);
     font-size: 0.9em;
     padding: 0.2em 0.4em;
@@ -1018,27 +998,27 @@
 
 /* Mobile Typography Adjustments */
 @media (max-width: 768px) {
-    .for-want-of-fuel-container {
+    .content-container.fuel-layout {
         font-size: 1rem;
         line-height: 1.6;
     }
 
-    .for-want-of-fuel-container h1 {
+    .content-container.fuel-layout h1 {
         font-size: 2rem;
         margin: 2rem 0 1.25rem;
     }
 
-    .for-want-of-fuel-container h2 {
+    .content-container.fuel-layout h2 {
         font-size: 1.75rem;
         margin: 1.75rem 0 1rem;
     }
 
-    .for-want-of-fuel-container h3 {
+    .content-container.fuel-layout h3 {
         font-size: 1.4rem;
         margin: 1.5rem 0 1rem;
     }
 
-    .for-want-of-fuel-container h4 {
+    .content-container.fuel-layout h4 {
         font-size: 1.2rem;
         margin: 1.25rem 0 1rem;
     }
@@ -1049,7 +1029,7 @@
 }
 
 /* Embedded Content */
-.for-want-of-fuel-container iframe {
+.content-container.fuel-layout iframe {
     width: 100%;
     max-width: 560px;
     height: 315px;
@@ -1061,13 +1041,13 @@
 }
 
 /* Media Inspiration Section */
-.for-want-of-fuel-container h1 + h2 {
+.content-container.fuel-layout h1 + h2 {
     margin-top: 3rem;
 }
 
 /* Target the main list items */
-.for-want-of-fuel-container h2 + ul > li,
-.for-want-of-fuel-container h2 + ul > li > strong {
+.content-container.fuel-layout h2 + ul > li,
+.content-container.fuel-layout h2 + ul > li > strong {
     margin-bottom: 2rem;
     padding-left: 1.5rem;
     border-left: 2px solid var(--border-color);
@@ -1075,7 +1055,7 @@
 }
 
 /* Target the nested list items */
-.for-want-of-fuel-container h2 + ul > li > ul > li {
+.content-container.fuel-layout h2 + ul > li > ul > li {
     margin-bottom: 0.5rem;
     padding-left: 0;
     border-left: none;
@@ -1085,12 +1065,12 @@
 }
 
 /* Remove default list styling */
-.for-want-of-fuel-container h2 + ul {
+.content-container.fuel-layout h2 + ul {
     list-style: none;
     padding-left: 0;
 }
 
-.for-want-of-fuel-container h2 + ul > li > ul {
+.content-container.fuel-layout h2 + ul > li > ul {
     margin-top: 0.5rem;
     padding-left: 1rem;
     list-style: none;
@@ -1098,7 +1078,7 @@
 
 /* Mobile adjustments for embedded content */
 @media (max-width: 768px) {
-    .for-want-of-fuel-container iframe {
+    .content-container.fuel-layout iframe {
         height: 200px;
     }
 }
@@ -1329,7 +1309,7 @@
 }
 
 /* Override syntax highlighting styles */
-.for-want-of-fuel-container pre.highlight {
+.content-container.fuel-layout pre.highlight {
     background: none;
     padding: 0;
     margin: 0;
@@ -1338,7 +1318,7 @@
     line-height: inherit;
 }
 
-.for-want-of-fuel-container .highlight {
+.content-container.fuel-layout .highlight {
     background: none;
     padding: 0;
     margin: 0;

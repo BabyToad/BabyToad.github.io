@@ -1,8 +1,4 @@
-.content-container {
-    max-width: 650px;
-    margin: 0 auto;
-    padding: var(--space-xl) var(--space-lg);
-}
+/* Blog index uses standard content container width from content.css */
 
 h1 {
     font-size: 1.5rem;
@@ -71,4 +67,48 @@ h1 {
 .preview-tags {
     font-size: 0.8rem;
     color: var(--text-secondary);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .content-container {
+        max-width: 100%;
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    h1 {
+        font-size: 1.3rem;
+        margin-bottom: var(--space-lg);
+    }
+
+    .post-entry {
+        margin-bottom: var(--space-sm);
+        padding: var(--space-xs) 0;
+    }
+
+    .preview-popup {
+        max-width: 90vw;
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: var(--space-sm);
+    }
+
+    .preview-title {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-container {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    .preview-popup {
+        font-size: 0.85rem;
+        padding: var(--space-xs);
+    }
 } 

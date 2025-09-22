@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: base
 title: Contact
+use_container: false
 ---
 
 <div class="main-content">        

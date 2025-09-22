@@ -1,9 +1,12 @@
 ---
 layout: base
+toc: true
+sidenotes: true
+use_container: false
 ---
-<div class="post-container">
+<div class="content-container post-layout">
     {% if page.toc != false %}
-    <nav class="toc" id="toc">
+    <nav class="toc" id="toc" data-headings="h2">
         <div class="toc-header">
             <h3>Contents</h3>
             <div class="progress-bar"><div class="progress" id="total-progress"></div></div>
@@ -57,79 +60,4 @@ layout: base
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Generate Table of Contents
-    const toc = document.getElementById('toc');
-    if (toc) {
-        const headings = document.querySelectorAll('.post-body h2');
-        const tocList = toc.querySelector('ul');
-        
-        headings.forEach(heading => {
-            const id = heading.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            heading.id = id;
-            
-            const li = document.createElement('li');
-            li.className = 'toc-item';
-            li.innerHTML = `<a href="#${id}">${heading.textContent}</a>
-                          <div class="progress-bar"><div class="progress"></div></div>`;
-            tocList.appendChild(li);
-        });
-    }
-
-    // Process Sidenotes
-    const sidenotes = document.querySelector('.sidenotes');
-    const anchors = document.querySelectorAll('.sidenote-anchor');
-    
-    anchors.forEach((anchor, index) => {
-        const noteNumber = index + 1;
-        
-        // Get original text
-        let originalText = anchor.getAttribute('data-original-text');
-        if (!originalText) {
-            originalText = anchor.textContent;
-            anchor.setAttribute('data-original-text', originalText);
-        }
-        
-        // Create and position the sidenote
-        const sidenote = document.createElement('div');
-        sidenote.className = 'sidenote';
-        sidenote.innerHTML = `<sup>${noteNumber}</sup> ${originalText}`;
-        
-        // Position the sidenote at the same height as the anchor
-        const anchorPosition = anchor.getBoundingClientRect();
-        const containerPosition = sidenotes.getBoundingClientRect();
-        const topPosition = anchorPosition.top - containerPosition.top;
-        sidenote.style.top = `${topPosition}px`;
-        
-        sidenotes.appendChild(sidenote);
-        
-        // Update the anchor with the number
-        anchor.innerHTML = `<sup>${noteNumber}</sup>`;
-    });
-});
-
-// Update progress bars on scroll
-window.addEventListener('scroll', () => {
-    const headings = document.querySelectorAll('.post-body h2');
-    const tocItems = document.querySelectorAll('.toc-item');
-    const totalProgress = document.getElementById('total-progress');
-    
-    // Calculate total scroll progress
-    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    totalProgress.style.width = `${scrollPercent}%`;
-    
-    // Update individual section progress
-    headings.forEach((heading, index) => {
-        if (index < headings.length - 1) {
-            const nextHeading = headings[index + 1];
-            const progress = Math.max(0, Math.min(1, 
-                (window.scrollY - heading.offsetTop) / 
-                (nextHeading.offsetTop - heading.offsetTop)
-            )) * 100;
-            
-            tocItems[index].querySelector('.progress').style.width = `${progress}%`;
-        }
-    });
-});
-</script> 
+ 

@@ -8,12 +8,26 @@
     flex-direction: column;
 }
 
+/* Mobile: inline TOC at top of content */
+@media (max-width: 900px) {
+    .toc {
+        position: static;
+        height: auto;
+        margin-bottom: var(--space-lg);
+        padding: var(--space-md);
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+    }
+}
+
 /* Fixed Header */
 .toc-header {
     background: var(--bg-primary);
     padding-bottom: var(--space-sm);
     border-bottom: 1px solid var(--border-color);
     margin-bottom: var(--space-md);
+    position: relative;
 }
 
 .toc-header h3 {
@@ -27,6 +41,14 @@
     margin: 0;
     overflow-y: auto;
     flex-grow: 1;
+}
+
+/* Mobile: simpler list layout */
+@media (max-width: 900px) {
+    .toc ul {
+        overflow-y: visible;
+        max-height: none;
+    }
 }
 
 /* Scrollbar Styling */
@@ -51,15 +73,115 @@
 /* TOC Items */
 .toc-item {
     margin-bottom: var(--space-sm);
+    position: relative;
 }
 
-.toc-item a {
+.toc-item a, .toc-link {
     color: var(--text-secondary);
     text-decoration: none;
     display: block;
     padding: var(--space-xs) 0;
+    transition: color 0.2s ease;
 }
 
-.toc-item a:hover {
+/* Visual hierarchy for heading levels */
+.toc-item[data-level="h2"] a,
+.toc-item[data-level="h2"] .toc-link {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.toc-item[data-level="h3"] a,
+.toc-item[data-level="h3"] .toc-link {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.toc-item[data-level="h4"] a,
+.toc-item[data-level="h4"] .toc-link {
+    font-size: 0.85em;
+    font-weight: 300;
+    color: var(--text-tertiary);
+}
+
+.toc-item a:hover, .toc-link:hover {
     color: var(--accent-color);
+}
+
+/* Active section highlighting */
+.toc-item.active a, .toc-item.active .toc-link {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* Mobile: simpler item styling */
+@media (max-width: 900px) {
+    .toc-item {
+        margin-bottom: var(--space-xs);
+    }
+
+    .toc-item a, .toc-link {
+        padding: var(--space-xs);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .toc-item a:hover, .toc-link:hover {
+        background: var(--bg-primary);
+    }
+}
+
+/* Progress bars */
+.progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--border-color);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.2s ease;
+}
+
+/* Mobile: hide individual progress bars, keep total progress */
+@media (max-width: 900px) {
+    .toc-item .progress-bar {
+        display: none;
+    }
+
+    .toc-header .progress-bar {
+        display: block;
+    }
+}
+
+/* Sidenote styles */
+.sidenote-anchor {
+    position: relative;
+}
+
+.sidenote-ref {
+    color: var(--accent-color);
+    font-size: 0.8em;
+    margin-left: 0.2em;
+    cursor: pointer;
+}
+
+.sidenote {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.sidenote sup {
+    color: var(--accent-color);
+    margin-right: 0.5em;
 } 

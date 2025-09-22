@@ -1,4 +1,4 @@
-.post-container {
+.content-container.post-layout {
     display: grid;
     grid-template-columns: minmax(200px, 1fr) minmax(700px, 900px) minmax(200px, 1fr);
     gap: var(--space-xl);
@@ -77,23 +77,32 @@
     font-size: 0.8em;
 }
 
+/* Post Footer */
+.post-footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+}
+
 /* Post Navigation */
 .post-navigation {
     display: flex;
     justify-content: space-between;
-    margin-top: var(--space-xl);
-    padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-color);
+    gap: var(--space-md);
 }
 
 .post-navigation a {
     color: var(--text-secondary);
     text-decoration: none;
     max-width: 45%;
+    padding: var(--space-sm);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
 }
 
 .post-navigation a:hover {
     color: var(--accent-color);
+    background: var(--bg-secondary);
 }
 
 .post-navigation .prev {
@@ -103,6 +112,33 @@
 .post-navigation .next {
     margin-left: auto;
     text-align: right;
+}
+
+/* Mobile responsive post navigation */
+@media (max-width: 768px) {
+    .post-footer {
+        margin-top: var(--space-lg);
+        padding-top: var(--space-md);
+    }
+
+    .post-navigation {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .post-navigation a {
+        max-width: 100%;
+        text-align: center;
+        padding: var(--space-md);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .post-navigation .prev,
+    .post-navigation .next {
+        margin: 0;
+        text-align: center;
+    }
 }
 
 /* Post Content Styles */
@@ -189,7 +225,7 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .post-container {
+    .content-container.post-layout {
         grid-template-columns: minmax(200px, 250px) minmax(auto, 700px);
         gap: var(--space-lg);
     }
@@ -204,7 +240,7 @@
 }
 
 @media (max-width: 900px) {
-    .post-container {
+    .content-container.post-layout {
         grid-template-columns: 1fr;
         padding: var(--space-md);
     }
