@@ -15,7 +15,6 @@
 @import 'components/shared.css';
 @import 'components/navigation.css';
 @import 'components/essay.css';
-@import 'components/projects.css';
 @import 'components/forms.css';
 @import 'components/intro.css';
 @import 'components/blog-index.css';
@@ -26,6 +25,7 @@
 @import 'components/links.css';
 @import 'components/for-want-of-fuel.css';
 @import 'components/rpg-notetaker-bench.css';
+@import 'components/projects.css';
 
 /* Base styles */
 body {

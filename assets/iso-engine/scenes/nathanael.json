@@ -1,0 +1,425 @@
+{
+  "name": "nathanael",
+  "width": 800,
+  "height": 600,
+  "tileSize": 32,
+  "checkerboardBackground": {
+    "enabled": true,
+    "layers": [
+      {
+        "enabled": true,
+        "color1": "#ffa500",
+        "color2": "#ffdab9",
+        "cellSize": 32,
+        "scrollSpeed": { "x": 5, "y": 0 },
+        "opacity": 0.7,
+        "parallaxFactor": 0.08
+      },
+      {
+        "enabled": true,
+        "color1": "#ff7f00",
+        "color2": "#ffe4c4",
+        "cellSize": 8,
+        "scrollSpeed": { "x": 0, "y": 12 },
+        "opacity": 0.35,
+        "parallaxFactor": 0.15
+      }
+    ]
+  },
+  "connections": [
+    {
+      "elementId": "arrow-to-jonas",
+      "targetScene": "jonas",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "elementId": "arrow-to-pati",
+      "targetScene": "pati",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    }
+
+  ],
+  "spawnPoints": {
+    "default": {
+      "x": 8,
+      "y": 0
+    },
+    "fromDoor": {
+      "x": 24,
+      "y": 11
+    }
+  },
+  "initialCameraTile": {
+    "x": 20,
+    "y": 6
+  },
+  "initialZoom": 0.9,
+  "cameraBounds": {
+    "centerTile": {
+      "x": 20,
+      "y": 6
+    },
+    "halfSize": {
+      "x": 20,
+      "y": 20
+    }
+  },
+  "elements": [  
+
+
+      {
+      "id": "arrow-to-jonas",
+      "type": "object",
+      "x": 24,
+      "y": 19,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-jonas",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_jonas_l_95.png",
+        "dialog": "This arrow leads to Jonas room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      } 
+    },
+    {
+      "id": "arrow-to-pati",
+      "type": "object",
+      "x": 32,
+      "y": 12,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-pati",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_pati_r_59.png",
+        "dialog": "This arrow leads to Bens room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      } 
+    },
+    {
+      "id": "floor-large-2815",
+      "type": "floor",
+      "x": 28,
+      "y": 15,
+
+      "properties": {
+        "sprite": "Nathanael_WS_floor_28 15.png"
+      }
+    },
+    {
+      "id": "wall-links-1811",
+      "type": "wall",
+      "x": 18,
+      "y": 11,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Nathanael_WS_wand_l_18 11.png"
+      }
+    },
+    {
+      "id": "wall-rechts-245",
+      "type": "wall",
+      "x": 24,
+      "y": 5,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Nathanael_WS_wand_r_24 5.png"
+      }
+    },
+    {
+      "id": "frame-2815",
+      "type": "object",
+      "x": 28,
+      "y": 15,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Nathanael_WS_frame_28 15.png"
+      }
+    },
+    {
+      "id": "panels-links-149",
+      "type": "object",
+      "x": 14,
+      "y": 9,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Nathanael_WS_panele_l_14 9.png",
+        "dialog": "These panels are used to control the sound. They are very heavy.",
+        "content": {
+          "type": "quest",
+          "id": "discover-nathanael-workspace",
+          "action": "update",
+          "data": {
+            "objectiveId": "explore-setup",
+            "completed": true
+          }
+        }
+      },
+      
+      "sfx": 
+      {
+        "click": "interact_heavy_weight.mp3"
+      }
+
+    
+    },
+    {
+      "id": "panels-rechts-221",
+      "type": "object",
+      "x": 22,
+      "y": 1,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Nathanael_WS_panele_r_22 1.png"
+      }
+    },
+    {
+      "id": "guitar-18-1",
+      "type": "object",
+      "x": 18,
+      "y": -1,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Nathanael_gitarre_18 -1.png"
+      }
+    },
+    {
+      "id": "box-r-185",
+      "type": "object",
+      "x": 18,
+      "y": 5,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Nathanael_WS_box_r_18 5.png",
+        "dialog": "a box"
+      }
+    },
+{
+      "id": "box-l-1813",
+      "type": "object",
+      "x": 18,
+      "y": 13,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Nathanael_WS_box_l_18 13.png",
+        "dialog": "a box"
+      }
+    },
+{
+      "id": "desktop-145",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "zIndex": 5,
+      "interactable": true,
+      "properties": {
+        "sprite": "Nathanael_WS_bildschirm_14 5.png",
+        "dialog": "This is were the magic is happen.",
+        "content": {
+          "type": "quest",
+          "id": "discover-nathanael-workspace",
+          "action": "update",
+          "autoOpen": true,
+          "data": {
+            "title": "Discover Nathanael's Workspace",
+            "description": "You've found Nathanael's computer setup. This is where he creates digital magic!",
+            "category": "exploration",
+            "tags": ["workspace", "technology", "nathanael"],
+            "objectives": [
+              {
+                "id": "find-computer",
+                "description": "Find Nathanael's computer",
+                "completed": true
+              },
+              {
+                "id": "explore-setup",
+                "description": "Explore the workspace setup",
+                "completed": false
+              }
+            ]
+          }
+        }
+      }
+    },
+{
+      "id": "absorber-1811",
+      "type": "object",
+      "x": 18,
+      "y": 11,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Nathanael_WS_absorber_18 11.png",
+        "dialog": "They are used for precision in hearing."
+      },
+      "sfx": 
+      {
+        "click": "interact_heavy_weight.mp3"
+      }
+    },
+{
+      "id": "couch-265",
+      "type": "object",
+      "x": 26,
+      "y": 5,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_couchwpillows_26 5.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "table-03",
+      "type": "object",
+      "x": 20,
+      "y": 11,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_tisch_20 11.png",
+        "dialog": ""
+      }
+    },
+{
+      "id": "aufsatz-145",
+      "type": "object",
+      "x": 14,
+      "y": 5,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_tischaufsatz_14 5.png",
+        "dialog": "--"
+      }
+    },    
+{
+      "id": "piano-2514",
+      "type": "object",
+      "x": 25,
+      "y": 14,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_piano_25 14.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "minipiano-165",
+      "type": "object",
+      "x": 16,
+      "y": 5,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_midikeyboard_16 5.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "fader-red-147",
+      "type": "object",
+      "x": 14,
+      "y": 7,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_roterfader_14 7.png",
+        "dialog": "--"
+      }
+    },    
+{
+      "id": "lamp-263",
+      "type": "object",
+      "x": 26,
+      "y": 4,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_lamp_26 3.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "chair-229",
+      "type": "object",
+      "x": 22,
+      "y": 9,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_chair_22 9.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "steckdosen-1714",
+      "type": "object",
+      "x": 17,
+      "y": 14,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_steckdosenleiste_17 14.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "cable-2114",
+      "type": "object",
+      "x": 21,
+      "y": 14,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_kabel_21 14.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "pc-1811",
+      "type": "object",
+      "x": 18,
+      "y": 11,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_pc_18 11.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "painting-103",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Nathanael_WS_painting_10 3.png",
+        "dialog": "--"
+      }
+    }
+
+  
+  ],
+  "characters": [],
+  "interactables": []
+} 

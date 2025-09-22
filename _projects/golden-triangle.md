@@ -1,10 +1,11 @@
 ---
 layout: essay
 title: The Golden Triangle
-description: A Stars Without Number campaign setting
+description: A Stars Without Number campaign setting for Trade, Privateering and a New Age of Sail
 status: in-progress
 confidence: medium
 tags: [rpg, stars-without-number, worldbuilding, game-design, campaign-setting, swn] 
+thumbnail: /assets/images/projects/GoldenTriangle_Thumb.png
 abstract: A comprehensive documentation of a Stars Without Number campaign setting.
 ---
 {% for part in site.golden_triangle_parts %}

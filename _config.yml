@@ -18,7 +18,7 @@ collections:
     permalink: /essays/:title/
   for_want_of_fuel:
     output: true
-    permalink: /for-want-of-fuel/:title/
+    permalink: /for-want-of-fuel/:name/
 
 plugins:
   - jekyll-feed

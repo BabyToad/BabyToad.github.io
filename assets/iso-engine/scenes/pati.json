@@ -1,0 +1,934 @@
+{
+  "name": "pati",
+  "width": 800,
+  "height": 600,
+  "tileSize": 32,
+  "checkerboardBackground": {
+    "enabled": true,
+    "layers": [
+      {
+        "enabled": true,
+        "color1": "#ba55d3",
+        "color2": "#eeaeee",
+        "cellSize": 32,
+        "scrollSpeed": { "x": -3, "y": 0 },
+        "opacity": 0.7,
+        "parallaxFactor": 0.08
+      },
+      {
+        "enabled": true,
+        "color1": "#68228b",
+        "color2": "#c9a089",
+        "cellSize": 8,
+        "scrollSpeed": { "x": 0, "y": -8 },
+        "opacity": 0.35,
+        "parallaxFactor": 0.15
+      }
+    ]
+  },
+  "connections": [
+    {
+      "elementId": "arrow-to-ben",
+      "targetScene": "ben",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 25,
+        "y": 12
+      }
+    },
+    {
+      "elementId": "arrow-to-nathanael",
+      "targetScene": "jonas",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 25,
+        "y": 12
+      }
+    }
+
+  ],
+  "spawnPoints": {
+    "default": {
+      "x": 8,
+      "y": 0
+    },
+    "fromMainDoor": {
+      "x": 15,
+      "y": 15
+    }
+  },
+  "initialCameraTile": {
+    "x": 16,
+    "y": 4
+  },
+  "initialZoom": 0.8,
+  "cameraBounds": {
+    "centerTile": {
+      "x": 16,
+      "y": 4
+    },
+    "halfSize": {
+      "x": 20,
+      "y": 20
+    }
+  },
+  "elements": [
+  {
+      "id": "arrow-to-ben",
+      "type": "object",
+      "x": 32,
+      "y": 11,
+      "width": 32,
+      "height": 64,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-ben",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_ben_r_59.png",
+        "dialog": "Return to Bens room?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    {
+      "id": "arrow-to-nathanael",
+      "type": "object",
+      "x": 24,
+      "y": 19,
+      "width": 32,
+      "height": 64,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-nathanael",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_clean_l_95.png",
+        "dialog": "This arrow leads to Jonas room. Would you like to enter??"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+
+  {
+      "id": "floor-large-77",
+      "type": "floor",
+      "x": 26,
+      "y": 13,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Pati_WS_Parkettboden_66.png"
+      }
+    },
+  {
+      "id": "wall-rechts-24",
+      "type": "wall",
+      "x": 22,
+      "y": 5,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Pati_WS_Regalwandf_24.png"
+      }
+    },
+  {
+      "id": "wall-links-42",
+      "type": "wall",
+      "x": 18,
+      "y": 9,
+      "width": 64,
+      "height": 64,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Pati_WS_Fensterwand_42.png"
+      }
+    },
+  {
+      "id": "frame-77",
+      "type": "wall",
+      "x": 28,
+      "y": 15,
+      "width": 64,
+      "height": 64,
+      "zIndex": -1,
+      "properties": {
+        "sprite": "Pati_WS_Frame_77.png"
+      }
+    },
+  {
+      "id": "chair-22",
+      "type": "object",
+      "x": 18,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Schreibtischstuhl_22.png"
+      }
+    },
+{
+      "id": "chair-kitchen-34",
+      "type": "object",
+      "x": 22,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Kuechenstuhl_34.png"
+      }
+    },
+  {
+      "id": "vorhang-0-3",
+      "type": "object",
+      "x": 8,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Vorhangleiste_0-3.png"
+      }
+    },
+  {
+      "id": "tisch01-23",
+      "type": "object",
+      "x": 20,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 1,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Tisch01_leer_23.png"
+      }
+    },
+  {
+      "id": "tisch02-35",
+      "type": "object",
+      "x": 24,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Tisch02_leer_35.png"
+      }
+    },
+{
+      "id": "ablage-1-1",
+      "type": "object",
+      "x": 12,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Ablage1-1.png"
+      }
+    },
+{
+      "id": "aloe-1-1",
+      "type": "object",
+      "x": 12,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Aloe_Vera_1-1.png"
+      }
+    },
+{
+      "id": "baybyplant-2-2",
+      "type": "object",
+      "x": 10,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Babypflanzen_2-2.png"
+      }
+    },
+{
+      "id": "beistelltisch-55",
+      "type": "object",
+      "x": 24,
+      "y": 11,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Beistelltisch_55.png"
+      }
+    },
+{
+      "id": "desktop03-13",
+      "type": "object",
+      "x": 20,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Bildschirm03_13.png"
+      }
+    },
+{
+      "id": "desktops01-2-00",
+      "type": "object",
+      "x": 14,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Mouse_Bildschirm01-02_00.png"
+      }
+    },
+{
+      "id": "bonsai-1-1",
+      "type": "object",
+      "x": 12,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Bonsai_1-1.png"
+      }
+    },
+{
+      "id": "bogenhanf-2-1",
+      "type": "object",
+      "x": 12,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Bogenhanf02_2-1.png"
+      }
+    },
+{
+      "id": "geldbaum01-23",
+      "type": "object",
+      "x": 20,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Geldbaum01_23.png"
+      }
+    },
+{
+      "id": "geldbaum02-1-2",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Geldbaum02_1-2.png"
+      }
+    },
+{
+      "id": "Board01-2-1",
+      "type": "object",
+      "x": 12,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Regal01_leer_-2-1.png"
+      }
+    },
+{
+      "id": "Board02--30",
+      "type": "object",
+      "x": 14,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Regal02_leer_-30.png"
+      }
+    },
+{
+      "id": "Board03--22",
+      "type": "object",
+      "x": 18,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Regal03_leer_-22.png"
+      }
+    },
+{
+      "id": "pinnwand--20",
+      "type": "object",
+      "x": 14,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Pinnwand_-20.png"
+      }
+    },
+{
+      "id": "books01--30",
+      "type": "object",
+      "x": 14,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Buecher01.png"
+      }
+    },
+{
+      "id": "books02--22",
+      "type": "object",
+      "x": 18,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Buecher02_-22.png"
+      }
+    },
+{
+      "id": "books03--32",
+      "type": "object",
+      "x": 18,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Buecher03_-32.png"
+      }
+    },
+{
+      "id": "flowers--3-2",
+      "type": "object",
+      "x": 10,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Blumenstrauss_-3-2.png"
+      }
+    },
+{
+      "id": "efeu--20",
+      "type": "object",
+      "x": 14,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Efeutute01_-20.png"
+      }
+    },
+{
+      "id": "groudon--3-2",
+      "type": "object",
+      "x": 10,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Groudon_Bild_-3-2.png"
+      }
+    },
+{
+      "id": "picture--3-1",
+      "type": "object",
+      "x": 12,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Gruenes_Bild-3-1.png"
+      }
+    },
+{
+      "id": "greenplant01--3-1",
+      "type": "object",
+      "x": 12,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Gruenpflanze01-3-1.png"
+      }
+    },
+{
+      "id": "greenplant02--3-1",
+      "type": "object",
+      "x": 12,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Gruenpflanze02-3-1.png"
+      }
+    },
+{
+      "id": "elefant--21",
+      "type": "object",
+      "x": 16,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Holzelefant_pins_-21.png"
+      }
+    },
+{
+      "id": "jbl--2-1",
+      "type": "object",
+      "x": 12,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 5,
+      "interactable": true,
+      "properties": {
+        "sprite": "Pati_WS_JBL_Box-2-1.png",
+        "dialog": "It doesn't play songs — it casts spells."
+      },
+      "sfx": {
+        "click": "bt_speakers.mp3"
+      }
+    },
+{
+      "id": "pc02-03",
+      "type": "object",
+      "x": 20,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_PC02_03.png"
+      }
+    },
+{
+      "id": "mousepad01-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Mouse_Mousepad01_01.png"
+      }
+    },
+{
+      "id": "mousepad02-12",
+      "type": "object",
+      "x": 18,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Mouse_Mousepad02_12.png"
+      }
+    },
+{
+      "id": "schneidmatte-00",
+      "type": "object",
+      "x": 14,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Schneidematte_00.png"
+      }
+    },
+{
+      "id": "physio-64",
+      "type": "object",
+      "x": 22,
+      "y": 13,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Pati_WS_Physiostuff_64.png",
+        "dialog": "Master Yoda would say: stretch before stress, you must."
+      },
+      "sfx": {
+        "click": "yoda_mat.mp3"
+      }
+    },
+{
+      "id": "keyboard01-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Mouse_Tastatur01_01.png"
+      }
+    },
+{
+      "id": "keyboard02-13",
+      "type": "object",
+      "x": 20,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Tastatur02_13.png"
+      }
+    },
+{
+      "id": "coffee-02",
+      "type": "object",
+      "x": 18,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Kaffeetasse_02.png"
+      }
+    },
+{
+      "id": "headset01-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Kopfhoerer01_01.png"
+      }
+    },
+{
+      "id": "headset02-01",
+      "type": "object",
+      "x": 18,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Kopfhoerer02_22.png"
+      }
+    },
+{
+      "id": "stuff-32",
+      "type": "object",
+      "x": 18,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Kram_32.png"
+      }
+    },
+{
+      "id": "medal--20",
+      "type": "object",
+      "x": 14,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Medaillen-20.png"
+      }
+    },
+{
+      "id": "medibooks-33",
+      "type": "object",
+      "x": 20,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_MedBuecher_33.png"
+      }
+    },
+{
+      "id": "penbox--11",
+      "type": "object",
+      "x": 16,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Mouse_Stiftebox_-11.png"
+      }
+    },
+{
+      "id": "ordner--3-2",
+      "type": "object",
+      "x": 10,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Ordner-3-2.png"
+      }
+    },
+{
+      "id": "glassplants--3-2",
+      "type": "object",
+      "x": 10,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Pflanzenglaeser-3-2.png"
+      }
+    },
+{
+      "id": "picturegiants--23",
+      "type": "object",
+      "x": 20,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Riesen_Bild_-23.png"
+      }
+    },
+{
+      "id": "pictures--32",
+      "type": "object",
+      "x": 18,
+      "y": -5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Vogel+Aquana_Bild_-32.png"
+      }
+    },
+{
+      "id": "picturesketches--14",
+      "type": "object",
+      "x": 22,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Sketches-14.png"
+      }
+    },
+{
+      "id": "backpack-41",
+      "type": "object",
+      "x": 16,
+      "y": 9,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Rucksack_41.png"
+      }
+    },
+{
+      "id": "lamp01-14",
+      "type": "object",
+      "x": 22,
+      "y": 3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Stehlampe_14.png"
+      }
+    },
+{
+      "id": "lamp02-23",
+      "type": "object",
+      "x": 20,
+      "y": 5,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Tischlampe_Pinsel_23.png"
+      }
+    },
+{
+      "id": "lily-3-1",
+      "type": "object",
+      "x": 12,
+      "y": 7,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Strahlenlilie_3-1.png"
+      }
+    },
+{
+      "id": "tablet-00",
+      "type": "object",
+      "x": 14,
+      "y": 1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 2,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Tablet_00.png"
+      }
+    },
+{
+      "id": "horn--21",
+      "type": "object",
+      "x": 16,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Pati_WS_Trinkhorn_-21.png",
+        "dialog": "A drinking Horn. For those who drink to remember, not to forget."
+      }
+    },
+{
+      "id": "bottle--11",
+      "type": "object",
+      "x": 16,
+      "y": -1,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Pati_WS_Wasserflasche_-11.png",
+        "dialog": "Stay sharp, stay fast, stay full — one sip at a time. Always stay hydrated!"
+      },
+      "sfx": {
+        "click": "drinking_bottle.mp3"
+      }
+    },
+{
+      "id": "cubeglass--22",
+      "type": "object",
+      "x": 18,
+      "y": -3,
+      "width": 32,
+      "height": 32,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Pati_WS_Wuerfelglas_-22.png"
+      }
+    },
+    {
+      "id": "couch--37",
+      "type": "object",
+      "x": 28,
+      "y": 7,
+      "zIndex": 5,
+      "interactable": true,
+      "properties": {
+        "sprite": "Pati_WS_Couch_37.png",
+        "dialog": "An invitation to sit, to speak, or to say nothing at all. Hmm...looks empty. Time for a break!"
+      },
+      "sfx":
+      {
+        "click": "sitting_down.mp3"
+      }
+    }
+  ]
+} 

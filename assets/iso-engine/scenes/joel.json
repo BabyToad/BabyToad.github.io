@@ -1,0 +1,348 @@
+{
+  "name": "joel",
+  "width": 800,
+  "height": 600,
+  "tileSize": 32,
+  "checkerboardBackground": {
+    "enabled": true,
+    "layers": [
+      {
+        "enabled": true,
+        "color1": "#ffa500",
+        "color2": "#ffdab9",
+        "cellSize": 32,
+        "scrollSpeed": { "x": 5, "y": 0 },
+        "opacity": 0.7,
+        "parallaxFactor": 0.08
+      },
+      {
+        "enabled": true,
+        "color1": "#ff7f00",
+        "color2": "#ffe4c4",
+        "cellSize": 8,
+        "scrollSpeed": { "x": 0, "y": 12 },
+        "opacity": 0.35,
+        "parallaxFactor": 0.15
+      }
+    ]
+  },
+  "connections": [
+    {
+      "elementId": "arrow-to-jonas",
+      "targetScene": "jonas",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "elementId": "arrow-to-ben",
+      "targetScene": "ben",
+      "transitionType": "fade",
+      "spawnPoint": {
+        "x": 15,
+        "y": 15
+      }
+    }
+
+  ],
+  "spawnPoints": {
+    "default": {
+      "x": 8,
+      "y": 0
+    },
+    "fromDoor": {
+      "x": 24,
+      "y": 11
+    }
+  },
+  "initialCameraTile": {
+    "x": 20,
+    "y": 6
+  },
+  "initialZoom": 0.9,
+  "cameraBounds": {
+    "centerTile": {
+      "x": 20,
+      "y": 6
+    },
+    "halfSize": {
+      "x": 20,
+      "y": 20
+    }
+  },
+  "elements": [  
+
+
+      {
+      "id": "arrow-to-jonas",
+      "type": "object",
+      "x": 32,
+      "y": 11,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-jonas",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_jonas_r_59.png",
+        "dialog": "This arrow leads to Jonas room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    {
+      "id": "arrow-to-ben",
+      "type": "object",
+      "x": 24,
+      "y": 19,
+      "zIndex": 3,
+      "isConnectionTrigger": true,
+      "connectionId": "arrow-to-ben",
+      "interactable": true,
+      "properties": {
+        "sprite": "WS_arrow_ben_l_95.png",
+        "dialog": "This arrow leads to Bens room. Would you like to enter?"
+      },
+      "sfx": {
+        "click": "open_door.mp3"
+      }
+    },
+    {
+      "id": "floor-large-66",
+      "type": "floor",
+      "x": 26,
+      "y": 13,
+    
+      "properties": {
+        "sprite": "Joel_WS_floor_66.png"
+      }
+    },
+    {
+      "id": "wall-rechts-24",
+      "type": "wall",
+      "x": 22,
+      "y": 5,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Joel_WS_wand_r_24.png"
+      }
+    },
+    {
+      "id": "wall-links-42",
+      "type": "wall",
+      "x": 18,
+      "y": 9,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Joel_WS_wand_l_42.png"
+      }
+    },
+    {
+      "id": "frame-66",
+      "type": "object",
+      "x": 26,
+      "y": 13,
+      "zIndex": 0,
+      "properties": {
+        "sprite": "Joel_WS_frame_66.png"
+      }
+    },
+{
+      "id": "korrektur-77",
+      "type": "object",
+      "x": 16,
+      "y": 3,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Joel_WS_Korrektur_11.png"
+      }
+    },
+
+    {
+      "id": "desk-53",
+      "type": "object",
+      "x": 20,
+      "y": 11,
+      "zIndex": 2,
+      "properties": {
+        "sprite": "Joel_WS_tisch_53.png"
+      }
+    },
+    {
+      "id": "carpet-54",
+      "type": "object",
+      "x": 22,
+      "y": 11,
+      "zIndex": 1,
+      "properties": {
+        "sprite": "Joel_WS_teppich_54.png"
+      }
+    },
+    {
+      "id": "figur-scrappy-01",
+      "type": "object",
+      "x": 16,
+      "y": 1,
+      "zIndex": 4,
+      "interactable": true,
+      "properties": {
+        "sprite": "Joel_WS_scrappy_01.png",
+        "dialog": "R2-D2's awkward little brother — with crumbs in the circuits and a heart of gold."
+      }
+    },
+{
+      "id": "vitrine-23",
+      "type": "object",
+      "x": 20,
+      "y": 5,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Joel_WS_vitrine_23.png",
+        "dialog": "Wow, impressive collection of cameras! Say cheese like it's 1985 — or 2025. We don't judge."
+      },
+      "sfx": {
+        "click": "interact_heavy_weight.mp3"
+      }
+    },
+{
+      "id": "desktops-30",
+      "type": "object",
+      "x": 14,
+      "y": 7,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Joel_WS_desktops_30.png",
+        "dialog": "Not just a desktop — it's home base for everything we build."
+      },
+      "sfx": {
+        "click": "monitors.mp3"
+      }
+    },
+{
+      "id": "polaroids-1-2",
+      "type": "object",
+      "x": 10,
+      "y": 3,
+      "zIndex": 2,
+      "interactable": true,
+      "properties": {
+        "sprite": "Joel_WS_polaroids_1-2.png",
+        "dialog": "Snapshots of a world stuck between nostalgia and now."
+      },
+      "sfx": {
+        "click": "snapshots.mp3"
+      }
+    },
+{
+      "id": "bigplant-25",
+      "type": "object",
+      "x": 24,
+      "y": 5,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_big plant_25.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "bike-03",
+      "type": "object",
+      "x": 20,
+      "y": 1,
+      "zIndex": 3,
+      "interactable": true,
+      "properties": {
+        "sprite": "Joel_WS_bike_03.png",
+        "dialog": "John Wick wouldn't ride it — but only because it's too fast."
+      },
+      "sfx": {
+        "click": "bike.mp3"
+      }
+    },
+{
+      "id": "catbasket-45",
+      "type": "object",
+      "x": 24,
+      "y": 9,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_catbasket_45.png",
+        "dialog": "--"
+      }
+    },    
+{
+      "id": "cat-45",
+      "type": "object",
+      "x": 24,
+      "y": 9,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_cat_45.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "mousepad-31",
+      "type": "object",
+      "x": 16,
+      "y": 7,
+      "zIndex": 3,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_mousepad_31.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "keyboard-mouse-30",
+      "type": "object",
+      "x": 14,
+      "y": 7,
+      "zIndex": 5,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_keyboard_mouse_30.png",
+        "dialog": "--"
+      }
+    },    
+{
+      "id": "cup-10",
+      "type": "object",
+      "x": 14,
+      "y": 3,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_cup _10.png",
+        "dialog": "--"
+      }
+    },
+{
+      "id": "chair-43",
+      "type": "object",
+      "x": 20,
+      "y": 9,
+      "zIndex": 4,
+      "interactable": false,
+      "properties": {
+        "sprite": "Joel_WS_chair_43.png",
+        "dialog": "--"
+      }
+    }
+
+
+
+
+
+  
+  ],
+  "characters": [],
+  "interactables": []
+} 
