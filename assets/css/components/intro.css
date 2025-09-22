@@ -1,7 +1,5 @@
 .intro-section {
-    padding-top: 4rem;
-    max-width: var(--content-width);
-    margin: 0 auto;
+    padding-top: 2rem;
     text-align: left;
     line-height: 1.6;
 }
