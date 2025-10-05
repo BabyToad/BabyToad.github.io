@@ -5,7 +5,7 @@ description: A deck builder with roguelike and pack opening elements where you p
 status: completed
 version: 1.0.0
 tags: [game-dev, typescript, deck-builder, roguelike, web-game, game-jam]
-thumbnail: /assets/images/projects/council_decides_thumb.png
+thumbnail: /assets/images/projects/council_decides.png
 show_thumbnail: false
 demo_url: /assets/games/council-decides/
 github_url: https://github.com/BabyToad/council_decides
