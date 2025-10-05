@@ -1,49 +1,40 @@
 ---
 layout: project
-title: Council Decides
-description: A Balatro-style card game where you play as an amateur super villain presenting schemes to the League of Ultimate Evil.
-status: in-progress
-version: 0.0.0
-tags: [game-dev, typescript, card-game, balatro, web-game, game-jam]
+title: Evil (The) Gathering
+description: A deck builder with roguelike and pack opening elements where you plot evil schemes for the Council members.
+status: completed
+version: 1.0.0
+tags: [game-dev, typescript, deck-builder, roguelike, web-game, game-jam]
 thumbnail: /assets/images/projects/council_decides_thumb.png
 show_thumbnail: false
 demo_url: /assets/games/council-decides/
 github_url: https://github.com/BabyToad/council_decides
 show_repo: true
-last_modified_at: 2024-12-22
+last_modified_at: 2025-10-05
 ---
 
-# Council Decides
+# Evil (The) Gathering
 
-A Balatro-style card game where you play as an amateur super villain presenting schemes to the League of Ultimate Evil. This is a work in progress entry for the [Doppelter Questpresso Game Jam](https://itch.io/jam/doppelter-questpresso).
+A deck builder with roguelike and pack opening elements. As an intern in the DespicableWe Inc., you are tasked with plotting evil schemes for the Council members. For this, you'll have a wide range of card types at your disposal. Each card has an Evil Value (called "EP" for "Evil Points") as well as a unique card effect. In order to assemble the ultimate plan, you'll have to combine your cards in clever ways to activate combos that can give EXORBITANT amounts of points. But beware: every 5 turns a quota has to be met in order to progress. If you fail, you're out. But if you surpass your given quota, a nice bonus waits for you, which you can spend for card packs, containing more – maybe even Legendary – new cards for your deck.
 
-## Game Concept
+Can you master the art of evilness and become the ultimate criminal?
 
-You are an amateur super villain who must present schemes to the council (League of Ultimate Evil) by playing combinations of cards to achieve target scores each round. The game combines strategic card play with progressive difficulty as you work your way up the villain hierarchy.
+## Game Features
 
-## Card Types
-
-- **Henchman** - Buff each other, work well with gear
-- **Location** - Buff all cards of a specific type  
-- **Crime** - Core scoring cards for your schemes
-- **Gear** - Buff henchmen (e.g., Goon + Baseball Bat synergy)
-
-## Gameplay
-
-- Start with 7 cards in hand
-- Play up to 3 cards per turn
-- Achieve target score to win the round
-- Cards synergize for bonus points
-- Target scores increase each round
-- Keep unplayed cards, discard played ones
+- **Deck Building** - Collect and manage cards with unique effects
+- **Roguelike Elements** - Progressive difficulty with strategic decision-making
+- **Pack Opening** - Unlock new cards through pack purchases
+- **Combo System** - Chain card effects for massive point multipliers
+- **Quota System** - Meet targets every 5 turns or face elimination
+- **Legendary Cards** - Rare and powerful cards to discover
 
 ## Technical Features
 
 - Component-based architecture with TypeScript
 - Responsive design for all screen sizes
-- Card synergy system with visual feedback
-- Progressive difficulty with increasing targets
-- Modern UI with glassmorphism effects
+- Advanced card synergy system with visual feedback
+- Pack opening animations and cutscenes
+- Modern UI with comic book aesthetic
 - Mobile-optimized touch interface
 
 ## Tech Stack
@@ -66,7 +57,7 @@ Experience the game directly in your browser:
         height="600" 
         frameborder="0"
         style="border: 1px solid #ddd; border-radius: 8px; max-width: 100%;"
-        title="Council Decides Game">
+        title="Evil (The) Gathering Game">
     </iframe>
     <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
         <a href="/assets/games/council-decides/" target="_blank">Open Game in New Tab</a>
@@ -75,5 +66,47 @@ Experience the game directly in your browser:
 
 ## Game Jam Entry
 
-This project was created for the [Doppelter Questpresso Game Jam](https://itch.io/jam/doppelter-questpresso), a week-long game development event hosted by Questpresso and the University of Leipzig. The jam focuses on collaborative game development with workshops and a relaxed atmosphere for learning and creating games.
+This project was created during the "Doppelter Questpresso" Game Jam by the InfoFSR Leipzig under the topic "The Council decides". The jam focuses on collaborative game development with workshops and a relaxed atmosphere for learning and creating games.
+
+## Credits
+
+**Development Team:**
+- **Jonas Heinke** – Programming and Systems-Design
+- **Leon Noel Micheel** – Writing, Card- and Systems-Design
+
+**Additional Credits:**
+- **Emilia Weigelt** – Character-Design and Art
+- **Marjan Blan** (unsplash.com) – Crumpled paper graphic for the Itch.io page
+
+## Development Tools
+
+The game includes several powerful development and analysis tools:
+
+### Card Synergy Visualizer
+An interactive node graph that visualizes the complex relationships between cards. Built with D3.js, it shows:
+- **Interactive Network Graph** - Visual representation of card synergies and effects
+- **Filtering System** - Filter by color, type, and tags to explore specific card relationships
+- **Card Details** - Click any card to see detailed information and its connections
+- **Real-time Analysis** - Shows how many cards each card buffs and receives buffs from
+
+### Developer Tools Panel
+Built-in debugging tools accessible in-game (press backtick ` to toggle):
+- **Currency Manipulation** - Add/remove currency for testing
+- **Deck Management** - Add/remove cards, modify deck composition
+- **Game State Control** - Skip turns, modify quotas, trigger events
+- **Card Database Browser** - Browse all cards with search and filtering
+
+### Static Card Testing
+- **Card Data Export** - Automated script to export card database for analysis
+- **Synergy Analysis** - Comprehensive testing of card interactions and effects
+- **Balance Testing** - Tools to verify card power levels and game balance
+
+#### Interactive Tools
+- **[Card Synergy Visualizer](/assets/games/council-decides/card-synergy-visualizer.html)** - Interactive D3.js node graph showing card relationships and synergies
+- **[Card Synergy Report](/assets/games/council-decides/card-synergy-report.html)** - Comprehensive analysis of card balance, connectivity, and design recommendations
+
+## Special Features
+
+- **Softy Mode**: If you aren't evil enough, you can enter softy mode by hitting `SHIFT+CTRL+D`
+- **Comic Book Aesthetic**: Inspired by Silver Age comic book styling
 

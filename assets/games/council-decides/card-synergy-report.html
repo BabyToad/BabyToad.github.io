@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Synergy Analysis Report - Evil (The) Gathering</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888;
+            --accent: #4a9eff;
+            --accent-hover: #5ba8ff;
+            --border: #404040;
+            --shadow: rgba(0,0,0,0.3);
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .container {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 1px solid var(--border);
+        }
+        h1 {
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: var(--text-primary);
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        h3 {
+            color: var(--text-primary);
+            margin-top: 25px;
+        }
+        h4 {
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--bg-tertiary);
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        tr:nth-child(even) {
+            background-color: var(--bg-secondary);
+        }
+        .status-ok {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .status-warning {
+            color: var(--warning);
+            font-weight: bold;
+        }
+        .status-error {
+            color: var(--error);
+            font-weight: bold;
+        }
+        .card-list {
+            background: var(--bg-tertiary);
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        .summary-stats {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent);
+        }
+        .recommendations {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid var(--warning);
+        }
+        .graph-export {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+        details {
+            margin: 15px 0;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+        pre {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid var(--border);
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+        .example-banner {
+            background: linear-gradient(135deg, var(--warning), #ff6b35);
+            color: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(255, 152, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/assets/games/council-decides/" class="back-link">← Back to Game</a>
+        
+        <div class="example-banner">
+            📊 Example Report - This demonstrates the static testing tool's output
+        </div>
+        
+        <h1>Card Synergy Analysis Report</h1>
+        
+        <div class="summary-stats">
+            <strong>Generated:</strong> 2025-10-05T10:49:34.872Z<br>
+            <strong>Total Cards:</strong> 42<br>
+            <strong>Total Synergy Edges:</strong> 37
+        </div>
+
+        <h2><span class="emoji">🎨</span> Color Coverage</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Color</th>
+                    <th>Cards of Color</th>
+                    <th>Cards Buffing Color</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>city</strong></td>
+                    <td>19</td>
+                    <td>2</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>science</strong></td>
+                    <td>12</td>
+                    <td>2</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>nature</strong></td>
+                    <td>7</td>
+                    <td>1</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>occult</strong></td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>chaos</strong></td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Color Details</h3>
+
+        <h4>city</h4>
+        <div class="card-list">
+            <strong>Cards of this color (19):</strong> Goon, Specialist, The Mastermind, Lazy Goon, The Loner, Hideout, Heist, Infiltration, Baseball Bat, Weapon, Tool, Getaway Vehicle, Big Gun, Criminally Good Speech, Robbery, Plant a Bomb, 6th Grand Theft Auto, Overly Motivated Goon, City Centre
+        </div>
+        <div class="card-list">
+            <strong>Cards buffing this color (2):</strong> City Centre
+        </div>
+
+        <h4>science</h4>
+        <div class="card-list">
+            <strong>Cards of this color (12):</strong> Mad Scientist, Weapon Researcher, Rogue AI, Cybernetic Goon, Research Lab, The Secret Lab, Sinister Particle Accelerator, Tech Equipment, Failed Experiment, Science Equipment, Plagiarize, REALLY Deep Pockets
+        </div>
+        <div class="card-list">
+            <strong>Cards buffing this color (2):</strong> Sinister Particle Accelerator, Science Equipment
+        </div>
+
+        <h4>nature</h4>
+        <div class="card-list">
+            <strong>Cards of this color (7):</strong> Wolf, Stray Cat, Bear, Pack Alpha, The Wilderness, Eco-Terrorism, Unleash the Animals in the Zoo
+        </div>
+        <div class="card-list">
+            <strong>Cards buffing this color (1):</strong> The Wilderness
+        </div>
+
+        <h4>occult</h4>
+        <div class="card-list">
+            <strong>Cards of this color (1):</strong> Mysterious Fortune Teller
+        </div>
+        <div class="card-list">
+            <strong>Cards buffing this color (0):</strong> None
+        </div>
+
+        <h4>chaos</h4>
+        <div class="card-list">
+            <strong>Cards of this color (3):</strong> Sabotage, Terror Attack, Grenade
+        </div>
+        <div class="card-list">
+            <strong>Cards buffing this color (0):</strong> None
+        </div>
+
+        <h2><span class="emoji">🏷️</span> Tag Coverage</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Cards with Tag</th>
+                    <th>Cards Buffing Tag</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>goon</strong></td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>specialist</strong></td>
+                    <td>5</td>
+                    <td>2</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>animal</strong></td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>heist</strong></td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>sabotage</strong></td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>infiltration</strong></td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>terror</strong></td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>weapon</strong></td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>tool</strong></td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>vehicle</strong></td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>tech</strong></td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2><span class="emoji">📦</span> Type Coverage</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Cards of Type</th>
+                    <th>Cards Buffing Type</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>henchman</strong></td>
+                    <td>16</td>
+                    <td>2</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>crime</strong></td>
+                    <td>11</td>
+                    <td>3</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+                <tr>
+                    <td><strong>location</strong></td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td><span class="status-warning">⚠️ No buffs</span></td>
+                </tr>
+                <tr>
+                    <td><strong>gear</strong></td>
+                    <td>9</td>
+                    <td>2</td>
+                    <td><span class="status-ok">✅</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2><span class="emoji">🔍</span> Card Connectivity Analysis</h2>
+
+        <h3>Isolated Cards (No synergies in or out)</h3>
+        <div class="summary-stats">
+            <strong>Count:</strong> 0<br>
+            <span class="status-ok">✅ All cards have at least one synergy!</span>
+        </div>
+
+        <h3>One-Way Producers (Only buff others, never buffed)</h3>
+        <div class="summary-stats">
+            <strong>Count:</strong> 0
+        </div>
+
+        <h3>One-Way Consumers (Only get buffed, never buff others)</h3>
+        <div class="summary-stats">
+            <strong>Count:</strong> 7
+            <ul>
+                <li><strong>Bear</strong> ← Buffed by 4 sources</li>
+                <li><strong>Mysterious Fortune Teller</strong> ← Buffed by 2 sources</li>
+                <li><strong>Infiltration</strong> ← Buffed by 4 sources</li>
+                <li><strong>Tool</strong> ← Buffed by 3 sources</li>
+                <li><strong>Failed Experiment</strong> ← Buffed by 5 sources</li>
+                <li><strong>Big Gun</strong> ← Buffed by 3 sources</li>
+                <li><strong>Unleash the Animals in the Zoo</strong> ← Buffed by 4 sources</li>
+            </ul>
+        </div>
+
+        <h2><span class="emoji">📊</span> Top Connected Cards</h2>
+
+        <h3>Most Buffed Cards (Top 10)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Card</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Incoming Buffs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>The Mastermind</td><td>henchman</td><td>city</td><td>8</td></tr>
+                <tr><td>Goon</td><td>henchman</td><td>city</td><td>7</td></tr>
+                <tr><td>Lazy Goon</td><td>henchman</td><td>city</td><td>7</td></tr>
+                <tr><td>The Loner</td><td>henchman</td><td>city</td><td>7</td></tr>
+                <tr><td>Cybernetic Goon</td><td>henchman</td><td>science</td><td>7</td></tr>
+                <tr><td>Specialist</td><td>henchman</td><td>city</td><td>6</td></tr>
+                <tr><td>Weapon Researcher</td><td>henchman</td><td>science</td><td>6</td></tr>
+                <tr><td>Overly Motivated Goon</td><td>henchman</td><td>city</td><td>6</td></tr>
+                <tr><td>Wolf</td><td>henchman</td><td>nature</td><td>5</td></tr>
+                <tr><td>Mad Scientist</td><td>henchman</td><td>science</td><td>5</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Cards That Buff Most (Top 10)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Card</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Cards Buffed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>City Centre</td><td>location</td><td>city</td><td>30</td></tr>
+                <tr><td>Hideout</td><td>location</td><td>city</td><td>16</td></tr>
+                <tr><td>Science Equipment</td><td>gear</td><td>science</td><td>16</td></tr>
+                <tr><td>Sinister Particle Accelerator</td><td>location</td><td>science</td><td>12</td></tr>
+                <tr><td>Getaway Vehicle</td><td>gear</td><td>city</td><td>11</td></tr>
+                <tr><td>Overly Motivated Goon</td><td>henchman</td><td>city</td><td>11</td></tr>
+                <tr><td>Mad Scientist</td><td>henchman</td><td>science</td><td>9</td></tr>
+                <tr><td>Plagiarize</td><td>crime</td><td>science</td><td>9</td></tr>
+                <tr><td>The Wilderness</td><td>location</td><td>nature</td><td>7</td></tr>
+                <tr><td>Weapon</td><td>gear</td><td>city</td><td>6</td></tr>
+            </tbody>
+        </table>
+
+        <h2><span class="emoji">💡</span> Design Recommendations</h2>
+
+        <div class="recommendations">
+            <p><span class="emoji">🎨</span> <strong>occult</strong> has 1 cards but no cards that buff this color. Consider adding color-specific buffs.</p>
+            
+            <p><span class="emoji">🎨</span> <strong>chaos</strong> has 3 cards but no cards that buff this color. Consider adding color-specific buffs.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>heist</strong> tag appears on 4 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>sabotage</strong> tag appears on 2 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>infiltration</strong> tag appears on 2 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>terror</strong> tag appears on 3 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>weapon</strong> tag appears on 4 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>tool</strong> tag appears on 1 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+            
+            <p><span class="emoji">🏷️</span> <strong>vehicle</strong> tag appears on 1 cards but has no dedicated buffs. Consider adding tag-specific synergies.</p>
+        </div>
+
+        <h2><span class="emoji">🕸️</span> Graph Data Export</h2>
+
+        <div class="graph-export">
+            <strong>Node Count:</strong> 42<br>
+            <strong>Edge Count:</strong> 37<br>
+            <strong>Average Connections per Card:</strong> 4.17
+        </div>
+
+        <details>
+            <summary>Click to view DOT format graph (for Graphviz)</summary>
+            <pre>digraph CardSynergies {
+  rankdir=LR;
+  node [shape=box];
+
+  "Goon" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Specialist" [fillcolor="#808080", style=filled, fontcolor=white];
+  "The Mastermind" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Wolf" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Mad Scientist" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Weapon Researcher" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Lazy Goon" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Stray Cat" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "The Loner" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Bear" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Pack Alpha" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Rogue AI" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Cybernetic Goon" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Mysterious Fortune Teller" [fillcolor="#9C27B0", style=filled, fontcolor=white];
+  "Hideout" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Research Lab" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "The Secret Lab" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "The Wilderness" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Sinister Particle Accelerator" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Heist" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Sabotage" [fillcolor="#FF0000", style=filled, fontcolor=white];
+  "Infiltration" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Terror Attack" [fillcolor="#FF0000", style=filled, fontcolor=white];
+  "Eco-Terrorism" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Baseball Bat" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Weapon" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Tool" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Getaway Vehicle" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Tech Equipment" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Failed Experiment" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Big Gun" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Grenade" [fillcolor="#FF0000", style=filled, fontcolor=white];
+  "Science Equipment" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "Criminally Good Speech" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Robbery" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Plant a Bomb" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Plagiarize" [fillcolor="#0066FF", style=filled, fontcolor=white];
+  "6th Grand Theft Auto" [fillcolor="#808080", style=filled, fontcolor=white];
+  "Unleash the Animals in the Zoo" [fillcolor="#00E676", style=filled, fontcolor=white];
+  "Overly Motivated Goon" [fillcolor="#808080", style=filled, fontcolor=white];
+  "City Centre" [fillcolor="#808080", style=filled, fontcolor=white];
+  "REALLY Deep Pockets" [fillcolor="#0066FF", style=filled, fontcolor=white];
+
+  "Goon" -> "Goon" [label="henchman_network"];
+  "Specialist" -> "Specialist" [label="henchman_network"];
+  "The Mastermind" -> "The Mastermind" [label="henchman_network"];
+  "The Mastermind" -> "The Mastermind" [label="strategic_planning"];
+  "Wolf" -> "Wolf" [label="pack_mentality"];
+  "Mad Scientist" -> "Baseball Bat" [label="gear_amplifier"];
+  "Mad Scientist" -> "Weapon" [label="gear_amplifier"];
+  "Mad Scientist" -> "Tool" [label="gear_amplifier"];
+  "Mad Scientist" -> "Getaway Vehicle" [label="gear_amplifier"];
+  "Mad Scientist" -> "Tech Equipment" [label="gear_amplifier"];
+  "Mad Scientist" -> "Big Gun" [label="gear_amplifier"];
+  "Mad Scientist" -> "Grenade" [label="gear_amplifier"];
+  "Mad Scientist" -> "Science Equipment" [label="gear_amplifier"];
+  "Mad Scientist" -> "REALLY Deep Pockets" [label="gear_amplifier"];
+  "Weapon Researcher" -> "Weapon Researcher" [label="weapon_researcher"];
+  "Lazy Goon" -> "Lazy Goon" [label="lazy_goon_persist"];
+  "Stray Cat" -> "Stray Cat" [label="stray_cat_draw"];
+  "The Loner" -> "The Loner" [label="the_loner_debuff"];
+  "Pack Alpha" -> "Wolf" [label="animal_pack"];
+  "Pack Alpha" -> "Stray Cat" [label="animal_pack"];
+  "Pack Alpha" -> "Bear" [label="animal_pack"];
+  "Pack Alpha" -> "Pack Alpha" [label="animal_pack"];
+  "Rogue AI" -> "Specialist" [label="rogue_ai_learning"];
+  "Rogue AI" -> "Mad Scientist" [label="rogue_ai_learning"];
+  "Rogue AI" -> "Weapon Researcher" [label="rogue_ai_learning"];
+  "Rogue AI" -> "Rogue AI" [label="rogue_ai_learning"];
+  "Rogue AI" -> "Failed Experiment" [label="rogue_ai_learning"];
+  "Cybernetic Goon" -> "Cybernetic Goon" [label="henchman_network"];
+  "Hideout" -> "Goon" [label="strategic_location"];
+  "Hideout" -> "Specialist" [label="strategic_location"];
+  "Hideout" -> "The Mastermind" [label="strategic_location"];
+  "Hideout" -> "Wolf" [label="strategic_location"];
+  "Hideout" -> "Mad Scientist" [label="strategic_location"];
+  "Hideout" -> "Weapon Researcher" [label="strategic_location"];
+  "Hideout" -> "Lazy Goon" [label="strategic_location"];
+  "Hideout" -> "Stray Cat" [label="strategic_location"];
+  "Hideout" -> "The Loner" [label="strategic_location"];
+  "Hideout" -> "Bear" [label="strategic_location"];
+  "Hideout" -> "Pack Alpha" [label="strategic_location"];
+  "Hideout" -> "Rogue AI" [label="strategic_location"];
+  "Hideout" -> "Cybernetic Goon" [label="strategic_location"];
+  "Hideout" -> "Mysterious Fortune Teller" [label="strategic_location"];
+  "Hideout" -> "Failed Experiment" [label="strategic_location"];
+  "Hideout" -> "Overly Motivated Goon" [label="strategic_location"];
+  "Research Lab" -> "Tech Equipment" [label="high_tech_lab"];
+  "Research Lab" -> "Science Equipment" [label="high_tech_lab"];
+  "The Secret Lab" -> "The Secret Lab" [label="secret_lab_draw"];
+  "The Wilderness" -> "Wolf" [label="wilderness_multiplier"];
+  "The Wilderness" -> "Stray Cat" [label="wilderness_multiplier"];
+  "The Wilderness" -> "Bear" [label="wilderness_multiplier"];
+  "The Wilderness" -> "Pack Alpha" [label="wilderness_multiplier"];
+  "The Wilderness" -> "The Wilderness" [label="wilderness_multiplier"];
+  "The Wilderness" -> "Eco-Terrorism" [label="wilderness_multiplier"];
+  "The Wilderness" -> "Unleash the Animals in the Zoo" [label="wilderness_multiplier"];
+  "Sinister Particle Accelerator" -> "Mad Scientist" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Weapon Researcher" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Rogue AI" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Cybernetic Goon" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Research Lab" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "The Secret Lab" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Sinister Particle Accelerator" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Tech Equipment" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Failed Experiment" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Science Equipment" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "Plagiarize" [label="particle_accelerator"];
+  "Sinister Particle Accelerator" -> "REALLY Deep Pockets" [label="particle_accelerator"];
+  "Heist" -> "Heist" [label="perfect_target"];
+  "Sabotage" -> "Sabotage" [label="equipped_saboteur"];
+  "Terror Attack" -> "Terror Attack" [label="finishing_move"];
+  "Eco-Terrorism" -> "Eco-Terrorism" [label="eco_terror_boost"];
+  "Baseball Bat" -> "Baseball Bat" [label="baseball_bat_city_boost"];
+  "Weapon" -> "Goon" [label="armed_goons"];
+  "Weapon" -> "The Mastermind" [label="armed_goons"];
+  "Weapon" -> "Lazy Goon" [label="armed_goons"];
+  "Weapon" -> "The Loner" [label="armed_goons"];
+  "Weapon" -> "Cybernetic Goon" [label="armed_goons"];
+  "Weapon" -> "Overly Motivated Goon" [label="armed_goons"];
+  "Getaway Vehicle" -> "Heist" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Sabotage" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Infiltration" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Terror Attack" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Eco-Terrorism" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Criminally Good Speech" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Robbery" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Plant a Bomb" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Plagiarize" [label="quick_getaway"];
+  "Getaway Vehicle" -> "6th Grand Theft Auto" [label="quick_getaway"];
+  "Getaway Vehicle" -> "Unleash the Animals in the Zoo" [label="quick_getaway"];
+  "Tech Equipment" -> "Specialist" [label="cyber_enhanced"];
+  "Tech Equipment" -> "Mad Scientist" [label="cyber_enhanced"];
+  "Tech Equipment" -> "Weapon Researcher" [label="cyber_enhanced"];
+  "Tech Equipment" -> "Rogue AI" [label="cyber_enhanced"];
+  "Tech Equipment" -> "Failed Experiment" [label="cyber_enhanced"];
+  "Grenade" -> "Goon" [label="grenade_debuff"];
+  "Grenade" -> "The Mastermind" [label="grenade_debuff"];
+  "Grenade" -> "Lazy Goon" [label="grenade_debuff"];
+  "Grenade" -> "The Loner" [label="grenade_debuff"];
+  "Grenade" -> "Cybernetic Goon" [label="grenade_debuff"];
+  "Grenade" -> "Overly Motivated Goon" [label="grenade_debuff"];
+  "Science Equipment" -> "Goon" [label="science_equipment"];
+  "Science Equipment" -> "Specialist" [label="science_equipment"];
+  "Science Equipment" -> "The Mastermind" [label="science_equipment"];
+  "Science Equipment" -> "Wolf" [label="science_equipment"];
+  "Science Equipment" -> "Mad Scientist" [label="science_equipment"];
+  "Science Equipment" -> "Weapon Researcher" [label="science_equipment"];
+  "Science Equipment" -> "Lazy Goon" [label="science_equipment"];
+  "Science Equipment" -> "Stray Cat" [label="science_equipment"];
+  "Science Equipment" -> "The Loner" [label="science_equipment"];
+  "Science Equipment" -> "Bear" [label="science_equipment"];
+  "Science Equipment" -> "Pack Alpha" [label="science_equipment"];
+  "Science Equipment" -> "Rogue AI" [label="science_equipment"];
+  "Science Equipment" -> "Cybernetic Goon" [label="science_equipment"];
+  "Science Equipment" -> "Mysterious Fortune Teller" [label="science_equipment"];
+  "Science Equipment" -> "Failed Experiment" [label="science_equipment"];
+  "Science Equipment" -> "Overly Motivated Goon" [label="science_equipment"];
+  "Criminally Good Speech" -> "Goon" [label="criminal_speech"];
+  "Criminally Good Speech" -> "The Mastermind" [label="criminal_speech"];
+  "Criminally Good Speech" -> "Lazy Goon" [label="criminal_speech"];
+  "Criminally Good Speech" -> "The Loner" [label="criminal_speech"];
+  "Criminally Good Speech" -> "Cybernetic Goon" [label="criminal_speech"];
+  "Criminally Good Speech" -> "Overly Motivated Goon" [label="criminal_speech"];
+  "Robbery" -> "Robbery" [label="robbery_draw"];
+  "Plant a Bomb" -> "Plant a Bomb" [label="plant_a_bomb"];
+  "Plagiarize" -> "Baseball Bat" [label="plagiarize_double"];
+  "Plagiarize" -> "Weapon" [label="plagiarize_double"];
+  "Plagiarize" -> "Tool" [label="plagiarize_double"];
+  "Plagiarize" -> "Getaway Vehicle" [label="plagiarize_double"];
+  "Plagiarize" -> "Tech Equipment" [label="plagiarize_double"];
+  "Plagiarize" -> "Big Gun" [label="plagiarize_double"];
+  "Plagiarize" -> "Grenade" [label="plagiarize_double"];
+  "Plagiarize" -> "Science Equipment" [label="plagiarize_double"];
+  "Plagiarize" -> "REALLY Deep Pockets" [label="plagiarize_double"];
+  "6th Grand Theft Auto" -> "6th Grand Theft Auto" [label="sixth_gta"];
+  "Overly Motivated Goon" -> "Heist" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Sabotage" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Infiltration" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Terror Attack" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Eco-Terrorism" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Criminally Good Speech" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Robbery" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Plant a Bomb" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Plagiarize" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "6th Grand Theft Auto" [label="overly_motivated"];
+  "Overly Motivated Goon" -> "Unleash the Animals in the Zoo" [label="overly_motivated"];
+  "City Centre" -> "Goon" [label="city_centre_goons"];
+  "City Centre" -> "Specialist" [label="city_centre_goons"];
+  "City Centre" -> "The Mastermind" [label="city_centre_goons"];
+  "City Centre" -> "Lazy Goon" [label="city_centre_goons"];
+  "City Centre" -> "The Loner" [label="city_centre_goons"];
+  "City Centre" -> "Hideout" [label="city_centre_goons"];
+  "City Centre" -> "Heist" [label="city_centre_goons"];
+  "City Centre" -> "Infiltration" [label="city_centre_goons"];
+  "City Centre" -> "Baseball Bat" [label="city_centre_goons"];
+  "City Centre" -> "Weapon" [label="city_centre_goons"];
+  "City Centre" -> "Tool" [label="city_centre_goons"];
+  "City Centre" -> "Getaway Vehicle" [label="city_centre_goons"];
+  "City Centre" -> "Big Gun" [label="city_centre_goons"];
+  "City Centre" -> "Criminally Good Speech" [label="city_centre_goons"];
+  "City Centre" -> "Robbery" [label="city_centre_goons"];
+  "City Centre" -> "Plant a Bomb" [label="city_centre_goons"];
+  "City Centre" -> "6th Grand Theft Auto" [label="city_centre_goons"];
+  "City Centre" -> "Overly Motivated Goon" [label="city_centre_goons"];
+  "City Centre" -> "City Centre" [label="city_centre_goons"];
+  "City Centre" -> "Heist" [label="city_centre_crimes"];
+  "City Centre" -> "Sabotage" [label="city_centre_crimes"];
+  "City Centre" -> "Infiltration" [label="city_centre_crimes"];
+  "City Centre" -> "Terror Attack" [label="city_centre_crimes"];
+  "City Centre" -> "Eco-Terrorism" [label="city_centre_crimes"];
+  "City Centre" -> "Criminally Good Speech" [label="city_centre_crimes"];
+  "City Centre" -> "Robbery" [label="city_centre_crimes"];
+  "City Centre" -> "Plant a Bomb" [label="city_centre_crimes"];
+  "City Centre" -> "Plagiarize" [label="city_centre_crimes"];
+  "City Centre" -> "6th Grand Theft Auto" [label="city_centre_crimes"];
+  "City Centre" -> "Unleash the Animals in the Zoo" [label="city_centre_crimes"];
+  "REALLY Deep Pockets" -> "REALLY Deep Pockets" [label="deep_pockets_hand_scaling"];
+}</pre>
+        </details>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--border);">
+        
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9em;">
+            <em>This example report was generated automatically by CardSynergyAnalysis.test.ts</em>
+        </p>
+    </div>
+</body>
+</html>
