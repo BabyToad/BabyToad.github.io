@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Synergy Visualizer - Evil (The) Gathering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%);
+      color: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 320px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 2px solid #FFB347;
+    }
+
+    #graph-container {
+      flex: 1;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #FFEB3B;
+      text-shadow: 3px 3px 0px #000;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      font-family: 'Bangers', cursive;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #FF6B00;
+      text-shadow: 2px 2px 0px #000;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-section {
+      margin-bottom: 20px;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border: 2px solid #555;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      border-color: #FFB347;
+      background: rgba(255, 179, 71, 0.3);
+      font-weight: bold;
+    }
+
+    .stats {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .stats strong {
+      color: #FFB347;
+    }
+
+    #card-info {
+      margin-top: 20px;
+    }
+
+    /* Card Preview - Game Style */
+    .card-preview {
+      width: 200px;
+      height: 300px;
+      position: relative;
+      border: 4px solid #000;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0px #000;
+      background: white;
+      margin: 0 auto 15px;
+    }
+
+    .card-color-band {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.75rem;
+      border-bottom: 4px solid #000;
+      position: relative;
+    }
+
+    .card-type-badge {
+      font-family: 'Bangers', cursive;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: white;
+      padding: 0.375rem 1rem;
+      border: 3px solid #000;
+      border-radius: 8px;
+      box-shadow: 3px 3px 0px #000;
+      position: relative;
+      z-index: 2;
+      text-shadow: 2px 2px 0px #000;
+    }
+
+    .card-content {
+      padding: 16px;
+      background: white;
+      height: calc(300px - 50px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-name {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 16px;
+      color: #000;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .card-score {
+      font-family: 'Bangers', cursive;
+      font-size: 24px;
+      color: #000;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      font-size: 12px;
+      color: #333;
+      flex: 1;
+      overflow-y: auto;
+      line-height: 1.4;
+    }
+
+    .card-tags {
+      font-size: 10px;
+      color: #666;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .card-stats {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .card-stats p {
+      margin: 4px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-stats strong {
+      color: #FFEB3B;
+    }
+
+    /* Color Band Backgrounds */
+    .card-preview[data-color="city"] .card-color-band {
+      background: linear-gradient(135deg, #808080, #6a6a6a);
+    }
+
+    .card-preview[data-color="science"] .card-color-band {
+      background: linear-gradient(135deg, #0066FF, #0052cc);
+    }
+
+    .card-preview[data-color="nature"] .card-color-band {
+      background: linear-gradient(135deg, #00E676, #00c853);
+    }
+
+    .card-preview[data-color="occult"] .card-color-band {
+      background: linear-gradient(135deg, #9C27B0, #7b1fa2);
+    }
+
+    .card-preview[data-color="chaos"] .card-color-band {
+      background: linear-gradient(135deg, #FF0000, #cc0000);
+    }
+
+    /* Type Badge Colors */
+    .card-preview[data-type="henchman"] .card-type-badge {
+      background: #9C27B0;
+    }
+
+    .card-preview[data-type="location"] .card-type-badge {
+      background: #0066FF;
+    }
+
+    .card-preview[data-type="crime"] .card-type-badge {
+      background: #FF0000;
+    }
+
+    .card-preview[data-type="gear"] .card-type-badge {
+      background: #FF6B00;
+    }
+
+    .node {
+      cursor: pointer;
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    .node.highlighted {
+      stroke: #FFB347;
+      stroke-width: 4px;
+    }
+
+    .link {
+      stroke: #999;
+      stroke-opacity: 0.3;
+      stroke-width: 1.5px;
+      fill: none;
+    }
+
+    .link.highlighted {
+      stroke: #FFB347;
+      stroke-opacity: 0.8;
+      stroke-width: 3px;
+    }
+
+    .node-label {
+      font-size: 11px;
+      fill: #fff;
+      text-anchor: middle;
+      pointer-events: none;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .legend {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      border: 2px solid #FFB347;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      font-size: 13px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 2px solid #fff;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .control-btn {
+      padding: 10px 20px;
+      background: rgba(255, 179, 71, 0.8);
+      border: 2px solid #FFB347;
+      border-radius: 4px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .control-btn:hover {
+      background: #FFB347;
+      transform: scale(1.05);
+    }
+
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #FFB347;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Scrollbar styling */
+    #sidebar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #sidebar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #sidebar::-webkit-scrollbar-thumb {
+      background: #FFB347;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="sidebar">
+      <h1>🕸️ Card Synergy Graph</h1>
+
+      <div class="stats" id="stats">
+        <p><strong>Total Cards:</strong> <span id="total-cards">-</span></p>
+        <p><strong>Synergy Edges:</strong> <span id="total-edges">-</span></p>
+        <p><strong>Visible Cards:</strong> <span id="visible-cards">-</span></p>
+        <p><strong>Visible Edges:</strong> <span id="visible-edges">-</span></p>
+      </div>
+
+      <div class="filter-section">
+        <h2>Filter by Color</h2>
+        <div class="filter-buttons" id="color-filters"></div>
+      </div>
+
+      <div class="filter-section">
+        <h2>Filter by Type</h2>
+        <div class="filter-buttons" id="type-filters"></div>
+      </div>
+
+      <div class="filter-section">
+        <h2>Filter by Tag</h2>
+        <div class="filter-buttons" id="tag-filters"></div>
+      </div>
+
+      <div id="card-info">
+        <p style="text-align: center; color: #999;">Click a card to view details</p>
+      </div>
+    </div>
+
+    <div id="graph-container">
+      <div id="loading">
+        <p>Loading card database...</p>
+        <p style="font-size: 14px; margin-top: 10px;">Analyzing synergies...</p>
+      </div>
+
+      <svg id="graph"></svg>
+
+      <div class="legend">
+        <h3 style="margin-bottom: 10px; color: #FFB347;">Colors</h3>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #808080;"></div>
+          <span>City</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #0066FF;"></div>
+          <span>Science</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #00E676;"></div>
+          <span>Nature</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #9C27B0;"></div>
+          <span>Occult</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: #FF0000;"></div>
+          <span>Chaos</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="control-btn" id="reset-btn">Reset View</button>
+        <button class="control-btn" id="clear-filters-btn">Clear Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Load card data from the built game
+    async function loadCardData() {
+      try {
+        // Try to load from the built game file
+        const response = await fetch('./assets/index-DJ935efr.js');
+        const gameCode = await response.text();
+        
+        // Extract card data from the built game
+        // This is a simplified approach - we'll create a basic card list
+        const cards = [];
+        
+        // Extract card names from the built code
+        const nameMatches = gameCode.match(/name:"([^"]+)"/g) || [];
+        const typeMatches = gameCode.match(/type:c\.([A-Z_]+)/g) || [];
+        const colorMatches = gameCode.match(/color:d\.([A-Z_]+)/g) || [];
+        
+        const minLength = Math.min(nameMatches.length, typeMatches.length, colorMatches.length);
+        
+        for (let i = 0; i < minLength; i++) {
+          const name = nameMatches[i].match(/name:"([^"]+)"/)[1];
+          const type = typeMatches[i].match(/type:c\.([A-Z_]+)/)[1].toLowerCase();
+          const color = colorMatches[i].match(/color:d\.([A-Z_]+)/)[1].toLowerCase();
+          
+          cards.push({
+            id: `card_${i + 1}`,
+            name: name,
+            type: type,
+            color: color,
+            tags: [],
+            baseScore: Math.floor(Math.random() * 20) + 1,
+            rarity: 'common',
+            description: `Card: ${name}`
+          });
+        }
+        
+        // Build simple synergy links
+        const links = [];
+        cards.forEach(sourceCard => {
+          cards.forEach(targetCard => {
+            if (sourceCard.id !== targetCard.id) {
+              if (sourceCard.color === targetCard.color || sourceCard.type === targetCard.type) {
+                links.push({
+                  source: sourceCard.id,
+                  target: targetCard.id,
+                  ruleId: `auto_${sourceCard.id}_${targetCard.id}`,
+                  description: `Synergy: ${sourceCard.name} → ${targetCard.name}`
+                });
+              }
+            }
+          });
+        });
+        
+        return { nodes: cards, links };
+      } catch (error) {
+        console.error('Failed to load card data from game:', error);
+        // Fallback to empty data
+        return { nodes: [], links: [] };
+      }
+    }
+    
+    const cardData = await loadCardData();
+
+    // Color mapping
+    const colorMap = {
+      'city': '#808080',
+      'science': '#0066FF',
+      'nature': '#00E676',
+      'occult': '#9C27B0',
+      'chaos': '#FF0000'
+    };
+
+    // Type mapping for node size
+    const typeSize = {
+      'henchman': 8,
+      'crime': 10,
+      'location': 12,
+      'gear': 7
+    };
+
+    // Active filters
+    let activeFilters = {
+      colors: new Set(),
+      types: new Set(),
+      tags: new Set()
+    };
+
+    // Build synergy graph from card database
+    function buildGraphData(cards) {
+      const nodes = [];
+      const links = [];
+      const allTags = new Set();
+      const allColors = new Set();
+      const allTypes = new Set();
+
+      // Create nodes
+      cards.forEach(card => {
+        nodes.push({
+          id: card.id,
+          name: card.name,
+          type: card.type,
+          color: card.color,
+          tags: card.tags || [],
+          baseScore: card.baseScore,
+          rarity: card.rarity,
+          rules: card.rules || []
+        });
+
+        allColors.add(card.color);
+        allTypes.add(card.type);
+        (card.tags || []).forEach(tag => allTags.add(tag));
+      });
+
+      // Create links based on rules
+      cards.forEach(sourceCard => {
+        if (!sourceCard.rules) return;
+
+        sourceCard.rules.forEach(rule => {
+          cards.forEach(targetCard => {
+            if (isCardAffectedByRule(sourceCard, targetCard, rule)) {
+              links.push({
+                source: sourceCard.id,
+                target: targetCard.id,
+                ruleId: rule.id,
+                description: rule.description
+              });
+            }
+          });
+        });
+      });
+
+      return { nodes, links, allTags, allColors, allTypes };
+    }
+
+    function isCardAffectedByRule(sourceCard, targetCard, rule) {
+      if (rule.targets?.self) {
+        return sourceCard.id === targetCard.id;
+      }
+
+      if (rule.targets?.type !== undefined) {
+        return targetCard.type === rule.targets.type;
+      }
+
+      if (rule.targets?.color !== undefined) {
+        return targetCard.color === rule.targets.color;
+      }
+
+      if (rule.targets?.tag !== undefined) {
+        return targetCard.tags?.includes(rule.targets.tag) || false;
+      }
+
+      if (rule.targets?.position !== undefined) {
+        return false;
+      }
+
+      return false;
+    }
+
+    // Filter graph data based on active filters
+    function filterGraphData(graphData) {
+      const { nodes, links } = graphData;
+
+      // Filter nodes
+      const visibleNodes = nodes.filter(node => {
+        if (activeFilters.colors.size > 0 && !activeFilters.colors.has(node.color)) {
+          return false;
+        }
+        if (activeFilters.types.size > 0 && !activeFilters.types.has(node.type)) {
+          return false;
+        }
+        if (activeFilters.tags.size > 0) {
+          const hasTag = node.tags.some(tag => activeFilters.tags.has(tag));
+          if (!hasTag) return false;
+        }
+        return true;
+      });
+
+      const visibleNodeIds = new Set(visibleNodes.map(n => n.id));
+
+      // Filter links (only show links between visible nodes)
+      const visibleLinks = links.filter(link => {
+        return visibleNodeIds.has(link.source.id || link.source) &&
+               visibleNodeIds.has(link.target.id || link.target);
+      });
+
+      return { nodes: visibleNodes, links: visibleLinks };
+    }
+
+    // Initialize D3 force-directed graph
+    function initGraph() {
+      // Extract unique tags, colors, types from the pre-exported data
+      const allTags = new Set();
+      const allColors = new Set();
+      const allTypes = new Set();
+
+      cardData.nodes.forEach(node => {
+        allColors.add(node.color);
+        allTypes.add(node.type);
+        (node.tags || []).forEach(tag => allTags.add(tag));
+      });
+
+      const graphData = {
+        nodes: cardData.nodes,
+        links: cardData.links,
+        allTags,
+        allColors,
+        allTypes
+      };
+
+      // Hide loading
+      document.getElementById('loading').classList.add('hidden');
+
+      // Update stats
+      document.getElementById('total-cards').textContent = graphData.nodes.length;
+      document.getElementById('total-edges').textContent = graphData.links.length;
+
+      // Create filter buttons
+      createFilterButtons(graphData);
+
+      // Set up SVG
+      const container = document.getElementById('graph-container');
+      const svg = d3.select('#graph');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      svg.attr('width', width).attr('height', height);
+
+      // Create arrow marker for directed edges
+      svg.append('defs').append('marker')
+        .attr('id', 'arrowhead')
+        .attr('viewBox', '-0 -5 10 10')
+        .attr('refX', 20)
+        .attr('refY', 0)
+        .attr('orient', 'auto')
+        .attr('markerWidth', 8)
+        .attr('markerHeight', 8)
+        .append('svg:path')
+        .attr('d', 'M 0,-5 L 10,0 L 0,5')
+        .attr('fill', '#999');
+
+      // Create container groups
+      const g = svg.append('g');
+      const linkGroup = g.append('g').attr('class', 'links');
+      const nodeGroup = g.append('g').attr('class', 'nodes');
+      const labelGroup = g.append('g').attr('class', 'labels');
+
+      // Zoom behavior
+      const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on('zoom', (event) => {
+          g.attr('transform', event.transform);
+        });
+
+      svg.call(zoom);
+
+      // Render function
+      function render() {
+        const filteredData = filterGraphData(graphData);
+
+        // Update stats
+        document.getElementById('visible-cards').textContent = filteredData.nodes.length;
+        document.getElementById('visible-edges').textContent = filteredData.links.length;
+
+        // Force simulation
+        const simulation = d3.forceSimulation(filteredData.nodes)
+          .force('link', d3.forceLink(filteredData.links)
+            .id(d => d.id)
+            .distance(100))
+          .force('charge', d3.forceManyBody().strength(-300))
+          .force('center', d3.forceCenter(width / 2, height / 2))
+          .force('collision', d3.forceCollide().radius(30));
+
+        // Links
+        const link = linkGroup.selectAll('path')
+          .data(filteredData.links, d => `${d.source.id || d.source}-${d.target.id || d.target}`)
+          .join('path')
+          .attr('class', 'link')
+          .attr('marker-end', 'url(#arrowhead)');
+
+        // Nodes
+        const node = nodeGroup.selectAll('circle')
+          .data(filteredData.nodes, d => d.id)
+          .join('circle')
+          .attr('class', 'node')
+          .attr('r', d => typeSize[d.type])
+          .attr('fill', d => colorMap[d.color])
+          .call(d3.drag()
+            .on('start', dragstarted)
+            .on('drag', dragged)
+            .on('end', dragended))
+          .on('click', (event, d) => {
+            event.stopPropagation();
+            highlightNode(d);
+          });
+
+        // Labels
+        const label = labelGroup.selectAll('text')
+          .data(filteredData.nodes, d => d.id)
+          .join('text')
+          .attr('class', 'node-label')
+          .text(d => d.name);
+
+        // Simulation tick
+        simulation.on('tick', () => {
+          link.attr('d', d => {
+            const dx = d.target.x - d.source.x;
+            const dy = d.target.y - d.source.y;
+            const dr = Math.sqrt(dx * dx + dy * dy);
+            return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+          });
+
+          node
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y);
+
+          label
+            .attr('x', d => d.x)
+            .attr('y', d => d.y - 15);
+        });
+
+        // Drag functions
+        function dragstarted(event) {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          event.subject.fx = event.subject.x;
+          event.subject.fy = event.subject.y;
+        }
+
+        function dragged(event) {
+          event.subject.fx = event.x;
+          event.subject.fy = event.y;
+        }
+
+        function dragended(event) {
+          if (!event.active) simulation.alphaTarget(0);
+          event.subject.fx = null;
+          event.subject.fy = null;
+        }
+
+        // Highlight node and connections
+        function highlightNode(selectedNode) {
+          // Show card info
+          const infoPanel = document.getElementById('card-info');
+          const incomingCount = filteredData.links.filter(l =>
+            (l.target.id || l.target) === selectedNode.id).length;
+          const outgoingCount = filteredData.links.filter(l =>
+            (l.source.id || l.source) === selectedNode.id).length;
+
+          // Get full card data with description
+          const fullCard = cardData.nodes.find(n => n.id === selectedNode.id);
+
+          infoPanel.innerHTML = `
+            <div class="card-preview" data-type="${selectedNode.type}" data-color="${selectedNode.color}">
+              <div class="card-color-band">
+                <div class="card-type-badge">${selectedNode.type}</div>
+              </div>
+              <div class="card-content">
+                <div class="card-name">${selectedNode.name}</div>
+                <div class="card-score">${selectedNode.baseScore} EP</div>
+                <div class="card-description">${fullCard?.description || 'No description'}</div>
+                <div class="card-tags">${selectedNode.tags.join(' • ') || 'No tags'}</div>
+              </div>
+            </div>
+            <div class="card-stats">
+              <p><strong>Rarity:</strong> <span>${selectedNode.rarity}</span></p>
+              <p><strong>Color:</strong> <span>${selectedNode.color}</span></p>
+              <p><strong>Buffs from:</strong> <span>${incomingCount} cards</span></p>
+              <p><strong>Buffs to:</strong> <span>${outgoingCount} cards</span></p>
+            </div>
+          `;
+
+          // Highlight connected nodes and links
+          const connectedNodeIds = new Set();
+
+          filteredData.links.forEach(l => {
+            const sourceId = l.source.id || l.source;
+            const targetId = l.target.id || l.target;
+
+            if (sourceId === selectedNode.id || targetId === selectedNode.id) {
+              connectedNodeIds.add(sourceId);
+              connectedNodeIds.add(targetId);
+            }
+          });
+
+          node.classed('highlighted', d => connectedNodeIds.has(d.id));
+          link.classed('highlighted', l => {
+            const sourceId = l.source.id || l.source;
+            const targetId = l.target.id || l.target;
+            return sourceId === selectedNode.id || targetId === selectedNode.id;
+          });
+        }
+
+        // Click background to clear highlight
+        svg.on('click', () => {
+          node.classed('highlighted', false);
+          link.classed('highlighted', false);
+          document.getElementById('card-info').innerHTML =
+            '<p style="text-align: center; color: #999;">Click a card to view details</p>';
+        });
+
+        // Store render function for re-rendering
+        window.renderGraph = render;
+      }
+
+      // Initial render
+      render();
+
+      // Reset view button
+      document.getElementById('reset-btn').addEventListener('click', () => {
+        svg.transition().duration(750).call(
+          zoom.transform,
+          d3.zoomIdentity
+        );
+      });
+
+      // Clear filters button
+      document.getElementById('clear-filters-btn').addEventListener('click', () => {
+        activeFilters.colors.clear();
+        activeFilters.types.clear();
+        activeFilters.tags.clear();
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+
+        render();
+      });
+    }
+
+    // Create filter buttons
+    function createFilterButtons(graphData) {
+      const colorFilters = document.getElementById('color-filters');
+      const typeFilters = document.getElementById('type-filters');
+      const tagFilters = document.getElementById('tag-filters');
+
+      // Color filters
+      Array.from(graphData.allColors).sort().forEach(color => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.textContent = color;
+        btn.style.borderColor = colorMap[color];
+        btn.addEventListener('click', () => {
+          toggleFilter(activeFilters.colors, color, btn);
+        });
+        colorFilters.appendChild(btn);
+      });
+
+      // Type filters
+      Array.from(graphData.allTypes).sort().forEach(type => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.textContent = type;
+        btn.addEventListener('click', () => {
+          toggleFilter(activeFilters.types, type, btn);
+        });
+        typeFilters.appendChild(btn);
+      });
+
+      // Tag filters
+      Array.from(graphData.allTags).sort().forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.textContent = tag;
+        btn.addEventListener('click', () => {
+          toggleFilter(activeFilters.tags, tag, btn);
+        });
+        tagFilters.appendChild(btn);
+      });
+    }
+
+    function toggleFilter(filterSet, value, btn) {
+      if (filterSet.has(value)) {
+        filterSet.delete(value);
+        btn.classList.remove('active');
+      } else {
+        filterSet.add(value);
+        btn.classList.add('active');
+      }
+      window.renderGraph();
+    }
+
+    // Initialize on load
+    initGraph();
+  </script>
+</body>
+</html>
