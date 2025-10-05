@@ -19,6 +19,24 @@ A deck builder with roguelike and pack opening elements. As an intern in the Des
 
 Can you master the art of evilness and become the ultimate criminal?
 
+## Play the Game
+
+Experience the game directly in your browser:
+
+<div class="demo-container" style="margin: 2rem 0; text-align: center;">
+    <iframe 
+        src="/assets/games/council-decides/" 
+        width="800" 
+        height="600" 
+        frameborder="0"
+        style="border: 1px solid #ddd; border-radius: 8px; max-width: 100%;"
+        title="Evil (The) Gathering Game">
+    </iframe>
+    <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+        <a href="/assets/games/council-decides/" target="_blank">Open Game in New Tab</a>
+    </p>
+</div>
+
 ## Game Features
 
 - **Deck Building** - Collect and manage cards with unique effects
@@ -46,23 +64,7 @@ Can you master the art of evilness and become the ultimate criminal?
 - **Responsive Grid/Flexbox** - Adaptive layouts
 - **Vitest** - Testing framework
 
-## Play the Game
 
-Experience the game directly in your browser:
-
-<div class="demo-container" style="margin: 2rem 0; text-align: center;">
-    <iframe 
-        src="/assets/games/council-decides/" 
-        width="800" 
-        height="600" 
-        frameborder="0"
-        style="border: 1px solid #ddd; border-radius: 8px; max-width: 100%;"
-        title="Evil (The) Gathering Game">
-    </iframe>
-    <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
-        <a href="/assets/games/council-decides/" target="_blank">Open Game in New Tab</a>
-    </p>
-</div>
 
 ## Game Jam Entry
 
