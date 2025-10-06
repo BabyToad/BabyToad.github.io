@@ -13,7 +13,7 @@ tags:
   - Optimization
   - tkinter
   - Excel Integration
-last_modified_at: 2024-10-06
+last_modified_at: 2025-10-06
 github_url: https://github.com/babytoad/clown_orga
 show_repo: true
 ---
