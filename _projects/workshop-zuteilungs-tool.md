@@ -24,12 +24,16 @@ A desktop application for optimal student-to-workshop assignment using mathemati
 
 ## Download
 
-Ready-to-use executable for Windows:
+Ready-to-use executable and example file:
 
 <div class="project-cta">
-  <a href="/assets/downloads/Workshop-Tool.exe" class="project-cta-link" download>
-    <i class="fas fa-download"></i>
-    Download Workshop-Tool.exe (30MB)
+  <a href="https://drive.google.com/file/d/1zuYqVlzOxiYqPUP7WMG1wuO45WzN6oOG/view?usp=sharing" class="project-cta-link" target="_blank">
+    <i class="fab fa-google-drive"></i>
+    Download from Google Drive (140MB)
+  </a>
+  <a href="/assets/downloads/example_students.xlsx" class="project-cta-link" download>
+    <i class="fas fa-file-excel"></i>
+    Download Example Excel File for Input
   </a>
 </div>
 
