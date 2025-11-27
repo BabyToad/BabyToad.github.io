@@ -60,9 +60,8 @@
     <script src="{{ '/assets/js/quotes.js' | relative_url }}"></script>
     {% endif %}
 
-    {% if page.theme_toggle or layout.theme_toggle %}
+    <!-- Theme toggle JavaScript (always loaded for theme toggle button in navigation) -->
     <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-    {% endif %}
 
     <!-- Navigation JavaScript (always loaded for mobile menu) -->
     <script src="{{ '/assets/js/components/navigation.js' | relative_url }}"></script>
