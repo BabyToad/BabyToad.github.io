@@ -80,3 +80,53 @@
     color: var(--text-secondary);
     font-size: 0.9em;
 }
+
+/* Thought Section (Homepage) */
+.thought-section {
+    margin: var(--space-xl) 0;
+}
+
+.thought-box {
+    position: relative;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-color);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+}
+
+.thought-box blockquote {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.thought-box blockquote p {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.thought-box cite {
+    display: block;
+    margin-top: var(--space-sm);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: normal;
+}
+
+.refresh-thought {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: var(--space-xs);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.refresh-thought:hover {
+    opacity: 1;
+}

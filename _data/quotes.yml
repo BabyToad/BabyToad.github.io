@@ -1,26 +1,39 @@
+# Personal quips
 - text: "That's boggle, baby!"
-  author: "Me"
+  type: personal
 
+- text: "Infinite content makes me infinitely content."
+  type: personal
+  context: "Discord, 2024"
+
+# Collected quotes
 - text: "The map is not the territory."
   author: "Alfred Korzybski"
   source: "Science and Sanity"
+  type: collected
 
 - text: "Specialization is for insects."
   author: "Robert A. Heinlein"
   source: "Time Enough for Love"
+  type: collected
 
 - text: "The future is already here – it's just not evenly distributed."
   author: "William Gibson"
+  type: collected
 
 - text: "A beginning is a very delicate time."
   author: "Frank Herbert"
   source: "Dune"
+  type: collected
 
 - text: "To iterate is human, to recurse divine."
   author: "Peter Deutsch"
+  type: collected
 
 - text: "In theory, there is no difference between theory and practice. In practice, there is."
-  author: "Yogi Berra" 
+  author: "Yogi Berra"
+  type: collected
 
 - text: "I notice I am confused."
-  author: "Elezier Yudkowsky"
+  author: "Eliezer Yudkowsky"
+  type: collected

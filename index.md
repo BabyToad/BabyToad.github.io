@@ -12,6 +12,37 @@ description: Personal website showcasing projects and skills
     
 </section>
 
+{% assign latest_thought = site.thoughts | sort: 'date' | reverse | first %}
+{% if latest_thought %}
+<section class="latest-thought-section">
+    <h2>Latest Thought</h2>
+    <article class="latest-thought">
+        <div class="latest-thought-content">
+            {{ latest_thought.content }}
+        </div>
+        {% if latest_thought.image %}
+        <figure class="latest-thought-image">
+            <img src="{{ latest_thought.image }}" alt="{{ latest_thought.image_alt | default: '' }}" loading="lazy">
+        </figure>
+        {% endif %}
+        {% if latest_thought.sources %}
+        <div class="thought-sources">
+            {% for source in latest_thought.sources %}
+            <a href="{{ source.url }}" target="_blank" rel="noopener">{{ source.title }}</a>{% unless forloop.last %} · {% endunless %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <footer class="latest-thought-meta">
+            <time datetime="{{ latest_thought.date | date_to_xmlschema }}">
+                {{ latest_thought.date | date: "%B %d, %Y" }}
+                {% if latest_thought.context %} · {{ latest_thought.context }}{% endif %}
+            </time>
+            <a href="/thoughts/" class="all-thoughts-link">All thoughts &rarr;</a>
+        </footer>
+    </article>
+</section>
+{% endif %}
+
 <section class="recent-posts-section">
     <h2>Recent Posts</h2>
     <div class="posts-grid">
