@@ -1,0 +1,270 @@
+/* Thoughts / Microblog Styles */
+
+/* Timeline Page */
+.thoughts-timeline {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.thoughts-header {
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.thoughts-header h1 {
+    margin-bottom: var(--space-sm);
+}
+
+.thoughts-intro {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Thought Cards */
+.thoughts-feed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.thought-card {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease;
+}
+
+.thought-card:hover {
+    border-color: var(--accent-color);
+}
+
+.thought-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.thought-card-header time {
+    font-weight: 500;
+}
+
+.thought-context {
+    color: var(--text-tertiary, var(--text-secondary));
+    opacity: 0.7;
+}
+
+.thought-context::before {
+    content: "·";
+    margin-right: var(--space-sm);
+}
+
+.thought-card-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.thought-card-content p {
+    margin: 0;
+}
+
+.thought-card-content p + p {
+    margin-top: var(--space-sm);
+}
+
+/* Images in thoughts */
+.thought-card-image {
+    margin: var(--space-md) 0 0 0;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.thought-card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Sources */
+.thought-sources {
+    margin-top: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.thought-sources .sources-label {
+    margin-right: var(--space-xs);
+}
+
+.thought-sources a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.thought-sources a:hover {
+    text-decoration: underline;
+}
+
+.thought-card-footer {
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.thought-permalink {
+    color: var(--text-secondary);
+    opacity: 0.5;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+}
+
+.thought-permalink:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+/* Single Thought Page */
+.thought-single {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+}
+
+.thought-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.thought-content {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.thought-content p {
+    margin: 0;
+}
+
+.thought-image {
+    margin: var(--space-lg) 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.thought-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.thought-image figcaption {
+    padding: var(--space-sm);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.thought-footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: var(--accent-color);
+}
+
+/* Homepage Latest Thought */
+.latest-thought-section {
+    margin: var(--space-xl) 0;
+}
+
+.latest-thought-section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+}
+
+.latest-thought {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-color);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+}
+
+.latest-thought-content {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+}
+
+.latest-thought-content p {
+    margin: 0;
+}
+
+.latest-thought-image {
+    margin: var(--space-md) 0;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.latest-thought-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+}
+
+.latest-thought-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.latest-thought-meta time {
+    opacity: 0.8;
+}
+
+.all-thoughts-link {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.all-thoughts-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .thoughts-timeline,
+    .thought-single {
+        padding: var(--space-md);
+    }
+
+    .thought-card-content,
+    .thought-content {
+        font-size: 1rem;
+    }
+}

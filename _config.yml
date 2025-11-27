@@ -19,6 +19,9 @@ collections:
   for_want_of_fuel:
     output: true
     permalink: /for-want-of-fuel/:name/
+  thoughts:
+    output: true
+    permalink: /thoughts/:title/
 
 plugins:
   - jekyll-feed
