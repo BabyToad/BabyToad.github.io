@@ -7,9 +7,8 @@ description: Personal website showcasing projects and skills
 <section class="intro-section">
     <p>I am Jonas and this is my website.</p>
     <p>I write about roleplaying games, game design, AI, and sometimes rationality.</p>
-    
     <p>This page hosts my projects, essays, and occasional thoughts on other topics that catch my interest.</p>
-    
+    <p>I work at <a href="https://playinsightstudios.com/">PlayInsight Studios</a> and help run <a href="https://www.proludens.com/">Pro Ludens</a>.</p>
 </section>
 
 {% assign latest_thought = site.thoughts | sort: 'date' | reverse | first %}
