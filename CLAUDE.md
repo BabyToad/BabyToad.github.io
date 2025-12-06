@@ -60,8 +60,9 @@ touch "_projects/project-name.md"
 - **CSS Custom Properties**: Extensive use of CSS variables for theming and consistency
 
 ### Data Files
-Game design data stored in `_data/`:
-- **tags.json**: Comprehensive weapon and fitting tag definitions for RPG mechanics
+Data stored in `_data/`:
+- **tags.json**: Weapon and fitting tag definitions for RPG mechanics
+- **flashcards.json**: Spaced repetition flashcards (see `docs/flashcard-format.md`)
 
 ### Key Features
 - **Conditional Resource Loading**: JavaScript and CSS loaded only when needed based on layout flags
@@ -73,6 +74,7 @@ Game design data stored in `_data/`:
 - **RPG Content**: Specialized layouts and data structures for tabletop RPG content
 - **Tag System**: Interactive tag highlighting with popup definitions
 - **Interactive Games**: Support for embedded HTML5 games in projects
+- **Spaced Repetition**: Flashcard system at `/learn` using FSRS algorithm
 
 ### JavaScript Architecture
 - **Modular Components**: Class-based JavaScript components (TableOfContents, Sidenotes)
