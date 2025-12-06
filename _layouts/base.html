@@ -56,6 +56,10 @@
     <script src="{{ '/assets/js/preview-popup.js' | relative_url }}"></script>
     {% endif %}
 
+    {% if page.srs or layout.srs %}
+    <script type="module" src="{{ '/assets/js/srs/main.js' | relative_url }}"></script>
+    {% endif %}
+
     <!-- Theme toggle JavaScript (always loaded for theme toggle button in navigation) -->
     <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 

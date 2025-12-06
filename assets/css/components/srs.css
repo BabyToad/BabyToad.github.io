@@ -1,0 +1,460 @@
+/**
+ * SRS (Spaced Repetition System) Styles
+ * Styles for the learn page review interface
+ */
+
+/* --- Container --- */
+.srs-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header --- */
+.srs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.srs-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: var(--font-sans);
+}
+
+.srs-progress {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.srs-due-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.srs-streak {
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.srs-streak i {
+    color: var(--accent-color);
+}
+
+/* --- Filters --- */
+.srs-filters {
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.srs-filters label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.srs-filters select {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--background);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.srs-filters select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* --- Card Area --- */
+.srs-card-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.srs-card {
+    width: 100%;
+    background: var(--background-alt);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.srs-card.flipped {
+    /* Optional: add flip animation */
+}
+
+.srs-card-front {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+}
+
+.srs-card-back {
+    font-size: 1rem;
+    line-height: 1.6;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* --- Card Type Styling --- */
+.srs-term {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.srs-definition {
+    font-style: italic;
+}
+
+.srs-cloze-blank {
+    display: inline-block;
+    min-width: 80px;
+    padding: 2px 8px;
+    margin: 0 2px;
+    background: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.srs-cloze-answer {
+    color: var(--accent-color);
+    font-weight: 600;
+    background: rgba(74, 158, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+/* --- Show Answer Button --- */
+.srs-show-answer {
+    margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 1rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.srs-show-answer:hover {
+    background: color-mix(in srgb, var(--accent-color) 85%, black);
+}
+
+.srs-show-answer:active {
+    transform: scale(0.98);
+}
+
+/* --- Rating Buttons --- */
+.srs-rating-buttons {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+    width: 100%;
+    max-width: 500px;
+}
+
+.srs-rating-buttons button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-sm) var(--space-xs);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.srs-btn-label {
+    font-weight: 600;
+}
+
+.srs-interval-hint {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.srs-btn-again {
+    background: var(--background);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.srs-btn-again:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-tertiary);
+}
+
+.srs-btn-hard {
+    background: var(--background);
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.srs-btn-hard:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-tertiary);
+}
+
+.srs-btn-good {
+    background: var(--background);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.srs-btn-good:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-color);
+}
+
+.srs-btn-easy {
+    background: var(--background);
+    color: var(--accent-color);
+    border-color: var(--border-color);
+}
+
+.srs-btn-easy:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-color);
+}
+
+/* --- Empty State --- */
+.srs-empty {
+    text-align: center;
+    padding: var(--space-xl);
+    display: none;
+}
+
+.srs-empty-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: var(--space-md);
+    opacity: 0.8;
+}
+
+.srs-empty-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+.srs-next-due {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* --- Stats Panel --- */
+.srs-stats {
+    margin-top: auto;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.srs-stats-toggle {
+    width: 100%;
+    padding: var(--space-sm);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    transition: all 0.2s ease;
+}
+
+.srs-stats-toggle:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.srs-stats-panel {
+    display: none;
+    padding: var(--space-md) 0;
+}
+
+.srs-stats-panel.visible {
+    display: block;
+}
+
+.srs-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.srs-stat {
+    text-align: center;
+    padding: var(--space-sm);
+    background: var(--bg-hover);
+    border-radius: var(--radius-sm);
+}
+
+.srs-stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.srs-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.srs-stats-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.srs-reset-progress {
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-tertiary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.srs-reset-progress:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-tertiary);
+    color: var(--text-secondary);
+}
+
+/* --- Keyboard Hints --- */
+.srs-keyboard-hint {
+    position: fixed;
+    bottom: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    background: var(--background);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.srs-keyboard-hint kbd {
+    display: inline-block;
+    padding: 2px 6px;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+/* --- Loading and Error States --- */
+.srs-loading {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.srs-loading::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: srs-spin 0.8s linear infinite;
+}
+
+@keyframes srs-spin {
+    to { transform: rotate(360deg); }
+}
+
+.srs-error {
+    color: var(--text-secondary);
+}
+
+.srs-retry-btn {
+    display: inline-block;
+    margin-top: var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.srs-retry-btn:hover {
+    background: color-mix(in srgb, var(--accent-color) 85%, black);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .srs-container {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .srs-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .srs-rating-buttons {
+        flex-wrap: wrap;
+    }
+
+    .srs-rating-buttons button {
+        flex: 1 1 45%;
+    }
+
+    .srs-keyboard-hint {
+        display: none;
+    }
+
+    .srs-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .srs-rating-buttons button {
+        flex: 1 1 100%;
+    }
+}
