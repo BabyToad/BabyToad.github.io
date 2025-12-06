@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "cards": [
+    {
+      "id": "intro-001",
+      "type": "basic",
+      "front": "What is spaced repetition?",
+      "back": "A learning technique that uses increasing intervals between reviews to optimize long-term retention. Based on the forgetting curve research by Ebbinghaus.",
+      "tags": ["meta", "learning"],
+      "source": "Initial setup",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-002",
+      "type": "cloze",
+      "text": "The FSRS algorithm tracks three variables: {{stability}}, {{difficulty}}, and {{retrievability}}.",
+      "tags": ["meta", "fsrs"],
+      "source": "Initial setup",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-003",
+      "type": "cloze",
+      "text": "{{Stability}} measures how slowly you forget - the higher it is, the longer until your next review.",
+      "tags": ["meta", "fsrs"],
+      "source": "Initial setup",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-004",
+      "type": "cloze",
+      "text": "{{Retrievability}} is the probability of successfully recalling a card at any given moment.",
+      "tags": ["meta", "fsrs"],
+      "source": "Initial setup",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-005",
+      "type": "reversible",
+      "term": "Minimum Information Principle",
+      "definition": "The idea that flashcards should test one simple fact each - simpler cards are easier to remember",
+      "tags": ["meta", "learning", "card-design"],
+      "source": "Wozniak's 20 Rules",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-006",
+      "type": "basic",
+      "front": "Why should you avoid flashcards that ask for lists?",
+      "back": "Lists are hard to remember because you have to recall multiple items in order. Better to break each item into its own card with context.",
+      "tags": ["meta", "learning", "card-design"],
+      "source": "Wozniak's 20 Rules",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "intro-007",
+      "type": "cloze",
+      "text": "Cloze deletion cards use {{blanks}} that you fill in, which is more effective than simple Q&A for many facts.",
+      "tags": ["meta", "card-design"],
+      "source": "Initial setup",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "latin-001",
+      "type": "reversible",
+      "term": "amo, amas, amat",
+      "definition": "I love, you love, he/she loves (present active indicative of amare)",
+      "tags": ["latin", "verbs", "conjugation"],
+      "source": "Example card",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "philosophy-001",
+      "type": "reversible",
+      "term": "Epistemology",
+      "definition": "The branch of philosophy concerned with knowledge - what we can know and how we know it",
+      "tags": ["philosophy", "vocabulary"],
+      "source": "Example card",
+      "created": "2025-12-06"
+    },
+    {
+      "id": "cs-001",
+      "type": "basic",
+      "front": "What is the time complexity of binary search?",
+      "back": "O(log n) - each step halves the search space",
+      "tags": ["cs", "algorithms", "complexity"],
+      "source": "Example card",
+      "created": "2025-12-06"
+    }
+  ]
+}
