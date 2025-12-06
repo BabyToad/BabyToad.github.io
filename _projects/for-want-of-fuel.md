@@ -2,7 +2,7 @@
 layout: project
 title: For Want Of Fuel
 description: A streamlined set of playtest rules for running Stars Without Number compatible mech combat scenes, focusing on quick play and minimal tracking.
-status: Draft, Playtesting
+status: in-progress
 version: 0.4
 confidence: Medium
 tags:

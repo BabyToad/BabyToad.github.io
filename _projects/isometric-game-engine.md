@@ -2,7 +2,7 @@
 layout: project
 title: Isometric Game Engine
 description: A TypeScript-based isometric game engine with centralized configuration management and comprehensive development tools.
-status: WIP
+status: in-progress
 version: 0.5.1
 confidence: medium
 tags:

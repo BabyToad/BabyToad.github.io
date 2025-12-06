@@ -3,6 +3,7 @@ layout: base
 title: Blog
 description: Thoughts on game design, development, and other topics
 use_container: false
+preview_popup: true
 ---
 
 <div class="content-container">

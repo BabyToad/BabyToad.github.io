@@ -2,8 +2,11 @@
 :root[data-theme="light"] {
     --bg-primary: #f9f9f9;
     --bg-secondary: #f3f3f3;
+    --bg-hover: #e8e8e8;
+    --background-alt: #eeeeee;
     --text-primary: #222222;
     --text-secondary: #555555;
+    --text-tertiary: #777777;
     --accent-color: #2c3e50;
     --border-color: #e0e0e0;
     --navbar-bg: #f9f9f9;
@@ -17,8 +20,11 @@
 :root[data-theme="dark"] {
     --bg-primary: #1a1a1a;
     --bg-secondary: #242424;
+    --bg-hover: #2a2a2a;
+    --background-alt: #1e1e1e;
     --text-primary: #d4d4d4;
     --text-secondary: #a0a0a0;
+    --text-tertiary: #707070;
     --accent-color: #81a2be;
     --border-color: #333333;
     --navbar-bg: #1a1a1a;
