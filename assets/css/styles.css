@@ -9,7 +9,6 @@
 @import 'layouts/grid.css';
 @import 'layouts/content.css';
 @import 'layouts/post.css';
-@import 'layouts/rpg_post.css';
 
 /* Component imports */
 @import 'components/shared.css';

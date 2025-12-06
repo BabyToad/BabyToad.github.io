@@ -44,13 +44,12 @@ touch "_projects/project-name.md"
 - **post.html**: Blog posts with table of contents and sidenotes support
 - **project.html**: Project showcases with metadata and links
 - **essay.html**: Long-form content with expandable sections and sidenotes
-- **rpg_post.html**: RPG-specific posts with specialized formatting
 - **for_want_of_fuel.html**: Game documentation with navigation and tag system
-- **part.html**, **radio.html**, **redirect.html**: Specialized layouts for specific content
+- **radio.html**, **redirect.html**: Specialized layouts for specific content
 
 ### CSS Organization
 - **base/**: Core styles (reset, typography, themes, variables, utilities, accessibility)
-- **layouts/**: Grid system, content areas, post layouts (grid.css, content.css, post.css, rpg_post.css)
+- **layouts/**: Grid system, content areas, post layouts (grid.css, content.css, post.css)
 - **components/**: Reusable UI elements (navigation, forms, toc, preview-popup, essay, projects, etc.)
 - **styles.css**: Main stylesheet that imports all others in proper cascade order
 
@@ -63,10 +62,6 @@ touch "_projects/project-name.md"
 ### Data Files
 Game design data stored in `_data/`:
 - **tags.json**: Comprehensive weapon and fitting tag definitions for RPG mechanics
-- **weapons.json**: Game weapon specifications
-- **frames.json**: Mech frame definitions
-- **fittings.json**: Equipment and upgrade definitions
-- **quotes.yml**: Site quotes and content snippets
 
 ### Key Features
 - **Conditional Resource Loading**: JavaScript and CSS loaded only when needed based on layout flags

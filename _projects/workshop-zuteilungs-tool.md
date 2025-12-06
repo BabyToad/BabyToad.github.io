@@ -2,7 +2,7 @@
 layout: project
 title: Workshop-Zuteilungs-Tool
 description: A desktop application for optimal student-to-workshop assignment using mathematical optimization algorithms.
-status: Complete
+status: completed
 version: 1.0.0
 confidence: High-ish
 tags:

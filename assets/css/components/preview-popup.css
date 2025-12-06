@@ -57,3 +57,24 @@
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .preview-popup {
+        max-width: 90vw;
+        max-height: 70vh;
+        overflow-y: auto;
+        padding: var(--space-sm);
+    }
+
+    .preview-title {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .preview-popup {
+        font-size: 0.85rem;
+        padding: var(--space-xs);
+    }
+}

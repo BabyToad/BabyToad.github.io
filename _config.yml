@@ -13,9 +13,6 @@ collections:
     output: true
   golden_triangle_parts:
     output: false
-  essays:
-    output: true
-    permalink: /essays/:title/
   for_want_of_fuel:
     output: true
     permalink: /for-want-of-fuel/:name/

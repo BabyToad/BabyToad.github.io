@@ -10,10 +10,6 @@ class Sidenotes {
             contentSelectors: ['.essay-content', '.post-body', '.project-content'],
             sidenoteClass: 'sidenote',
             referenceClass: 'sidenote-ref',
-            expandablePartSelector: '.essay-part',
-            expandHeaderSelector: '.essay-part-header',
-            expandContentSelector: '.essay-part-content',
-            expandIconSelector: '.expand-icon',
             debug: false,
             ...options
         };
@@ -29,7 +25,6 @@ class Sidenotes {
 
     init() {
         this.findAnchors();
-        this.setupExpansionHandlers();
         this.processSidenotes();
         this.setupResizeHandler();
     }
@@ -71,30 +66,23 @@ class Sidenotes {
                 console.log(`Processing note ${noteNumber}:`, originalText);
             }
 
-            // Check if this anchor is in an expandable part
-            const parentPart = anchor.closest(this.options.expandablePartSelector);
-            const isVisible = !parentPart || parentPart.getAttribute('data-expanded') === 'true';
-
             // Create sidenote
-            const sidenote = this.createSidenote(noteNumber, originalText, isVisible);
+            const sidenote = this.createSidenote(noteNumber, originalText);
             this.sidenotesContainer.appendChild(sidenote);
             this.sidenotes.push(sidenote);
 
             // Update anchor
             this.updateAnchor(anchor, noteNumber);
 
-            // Position sidenote if visible
-            if (isVisible) {
-                this.positionSidenote(anchor, sidenote);
-            }
+            // Position sidenote
+            this.positionSidenote(anchor, sidenote);
         });
     }
 
-    createSidenote(number, text, isVisible) {
+    createSidenote(number, text) {
         const sidenote = document.createElement('div');
         sidenote.className = this.options.sidenoteClass;
         sidenote.innerHTML = `<sup>${number}</sup> ${text}`;
-        sidenote.style.display = isVisible ? 'block' : 'none';
         return sidenote;
     }
 
@@ -120,33 +108,6 @@ class Sidenotes {
             if (this.options.debug) {
                 console.log(`Positioned sidenote at ${topPosition}px`);
             }
-        });
-    }
-
-    setupExpansionHandlers() {
-        const headers = document.querySelectorAll(this.options.expandHeaderSelector);
-
-        headers.forEach(header => {
-            const part = header.closest(this.options.expandablePartSelector);
-            const content = part?.querySelector(this.options.expandContentSelector);
-            const icon = part?.querySelector(this.options.expandIconSelector);
-
-            if (!part || !content) return;
-
-            header.addEventListener('click', () => {
-                const isExpanded = part.getAttribute('data-expanded') === 'true';
-                const newState = !isExpanded;
-
-                part.setAttribute('data-expanded', newState);
-                content.style.display = newState ? 'block' : 'none';
-
-                if (icon) {
-                    icon.style.transform = newState ? 'rotate(0)' : 'rotate(-90deg)';
-                }
-
-                // Reprocess sidenotes after animation
-                setTimeout(() => this.processSidenotes(), 300);
-            });
         });
     }
 
