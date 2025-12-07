@@ -5,6 +5,24 @@
 
 import { Rating, getSchedulingOptions, formatInterval, getTimeUntilNextDue } from './fsrs.js';
 
+/**
+ * Render KaTeX math in an element if KaTeX is available
+ * @param {HTMLElement} element - Element to render math in
+ */
+function renderMath(element) {
+    if (typeof renderMathInElement === 'function') {
+        renderMathInElement(element, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "\\(", right: "\\)", display: false}
+            ],
+            throwOnError: false
+        });
+    }
+}
+
 // DOM element references
 let elements = {};
 
@@ -113,12 +131,14 @@ export function showCard(cardData, fsrsCard) {
     // Render front
     if (elements.cardFront) {
         elements.cardFront.innerHTML = cardData.front;
+        renderMath(elements.cardFront);
     }
 
     // Render back (hidden initially)
     if (elements.cardBack) {
         elements.cardBack.innerHTML = cardData.back;
         elements.cardBack.style.display = 'none';
+        renderMath(elements.cardBack);
     }
 
     // Show "Show Answer" button, hide rating buttons
