@@ -82,7 +82,7 @@
       "id": "cs-001",
       "type": "basic",
       "front": "What is the time complexity of binary search?",
-      "back": "O(log n) - each step halves the search space",
+      "back": "$O(\\log n)$ - each step halves the search space",
       "tags": ["cs", "algorithms", "complexity"],
       "source": "Example card",
       "created": "2025-12-06"
@@ -91,7 +91,7 @@
     {
       "id": "econ-micro-001",
       "type": "cloze",
-      "text": "{{Price elasticity of demand}} measures how much quantity demanded changes in response to a price change: %ΔQd / %ΔP.",
+      "text": "{{Price elasticity of demand}} measures how much quantity demanded changes in response to a price change: $\\frac{\\%\\Delta Q_d}{\\%\\Delta P}$.",
       "tags": ["econ", "micro", "elasticity"],
       "source": "Microeconomics fundamentals",
       "created": "2025-12-07"
@@ -99,7 +99,7 @@
     {
       "id": "econ-micro-002",
       "type": "basic",
-      "front": "What does it mean when demand is 'elastic' (|E| > 1)?",
+      "front": "What does it mean when demand is 'elastic' ($|E| > 1$)?",
       "back": "Quantity demanded changes more than proportionally to price. A 1% price increase causes >1% drop in quantity. Total revenue falls when price rises.",
       "tags": ["econ", "micro", "elasticity"],
       "source": "Microeconomics fundamentals",
@@ -141,8 +141,8 @@
     {
       "id": "econ-micro-007",
       "type": "basic",
-      "front": "Why does a monopolist produce where MR = MC rather than where P = MC?",
-      "back": "The monopolist faces a downward-sloping demand curve, so selling one more unit requires lowering the price on ALL units. MR < P because of this price effect. Producing where P = MC would mean MR < MC on the last unit - a loss.",
+      "front": "Why does a monopolist produce where $MR = MC$ rather than where $P = MC$?",
+      "back": "The monopolist faces a downward-sloping demand curve, so selling one more unit requires lowering the price on ALL units. $MR < P$ because of this price effect. Producing where $P = MC$ would mean $MR < MC$ on the last unit - a loss.",
       "tags": ["econ", "micro", "market-structures"],
       "source": "Microeconomics fundamentals",
       "created": "2025-12-07"
@@ -151,7 +151,7 @@
       "id": "econ-micro-008",
       "type": "reversible",
       "term": "Allocative efficiency",
-      "definition": "Achieved when P = MC; resources go to their highest-valued uses and total surplus is maximized",
+      "definition": "Achieved when $P = MC$; resources go to their highest-valued uses and total surplus is maximized",
       "tags": ["econ", "micro", "efficiency"],
       "source": "Microeconomics fundamentals",
       "created": "2025-12-07"
@@ -185,7 +185,7 @@
     {
       "id": "econ-micro-012",
       "type": "cloze",
-      "text": "In the long run, firms in perfect competition earn {{zero economic profit}} because positive profits attract entry until P = ATC.",
+      "text": "In the long run, firms in perfect competition earn {{zero economic profit}} because positive profits attract entry until $P = ATC$.",
       "tags": ["econ", "micro", "market-structures"],
       "source": "Microeconomics fundamentals",
       "created": "2025-12-07"
@@ -202,7 +202,7 @@
     {
       "id": "econ-micro-014",
       "type": "cloze",
-      "text": "At the optimal consumption bundle, {{MRS = price ratio}} (Px/Py), meaning the rate you're willing to trade equals the rate the market allows.",
+      "text": "At the optimal consumption bundle, {{$MRS = \\frac{P_x}{P_y}$}}, meaning the rate you're willing to trade equals the rate the market allows.",
       "tags": ["econ", "micro", "consumer-theory", "advanced"],
       "source": "Intermediate microeconomics",
       "created": "2025-12-07"
@@ -211,7 +211,7 @@
     {
       "id": "econ-macro-001",
       "type": "cloze",
-      "text": "GDP can be calculated three ways: {{expenditure}} (C+I+G+NX), {{income}} (wages+rent+interest+profit), and {{production}} (sum of value added).",
+      "text": "GDP can be calculated three ways: {{expenditure}} ($C + I + G + NX$), {{income}} (wages+rent+interest+profit), and {{production}} (sum of value added).",
       "tags": ["econ", "macro", "gdp"],
       "source": "Macroeconomics fundamentals",
       "created": "2025-12-07"
@@ -220,7 +220,7 @@
       "id": "econ-macro-002",
       "type": "basic",
       "front": "What's the difference between real and nominal GDP?",
-      "back": "Nominal GDP uses current prices; real GDP uses constant base-year prices. Real GDP removes inflation to show actual output changes. Real = Nominal / Price Level × 100.",
+      "back": "Nominal GDP uses current prices; real GDP uses constant base-year prices. Real GDP removes inflation to show actual output changes. $\\text{Real} = \\frac{\\text{Nominal}}{\\text{Price Level}} \\times 100$.",
       "tags": ["econ", "macro", "gdp"],
       "source": "Macroeconomics fundamentals",
       "created": "2025-12-07"
@@ -229,7 +229,7 @@
       "id": "econ-macro-003",
       "type": "reversible",
       "term": "GDP deflator",
-      "definition": "(Nominal GDP / Real GDP) × 100; measures the price level of all domestically produced goods, unlike CPI which measures a fixed consumer basket",
+      "definition": "$\\frac{\\text{Nominal GDP}}{\\text{Real GDP}} \\times 100$; measures the price level of all domestically produced goods, unlike CPI which measures a fixed consumer basket",
       "tags": ["econ", "macro", "inflation"],
       "source": "Macroeconomics fundamentals",
       "created": "2025-12-07"
@@ -262,7 +262,7 @@
     {
       "id": "econ-macro-007",
       "type": "cloze",
-      "text": "The {{money multiplier}} is 1/reserve ratio - it shows how much the money supply can expand from an initial deposit through fractional reserve banking.",
+      "text": "The {{money multiplier}} is $\\frac{1}{r}$ (where $r$ is the reserve ratio) - it shows how much the money supply can expand from an initial deposit through fractional reserve banking.",
       "tags": ["econ", "macro", "monetary-policy"],
       "source": "Macroeconomics fundamentals",
       "created": "2025-12-07"
@@ -305,7 +305,7 @@
     {
       "id": "econ-macro-012",
       "type": "cloze",
-      "text": "{{Okun's Law}} states that for every 1% unemployment rises above the natural rate, GDP falls about 2% below potential.",
+      "text": "{{Okun's Law}} states that for every $1\\%$ unemployment rises above the natural rate, GDP falls about $2\\%$ below potential.",
       "tags": ["econ", "macro", "unemployment", "advanced"],
       "source": "Intermediate macroeconomics",
       "created": "2025-12-07"
@@ -406,7 +406,7 @@
       "id": "econ-behavioral-001",
       "type": "reversible",
       "term": "Loss aversion",
-      "definition": "Losses loom larger than gains - people feel a loss about 2x as strongly as an equivalent gain, leading to risk-aversion for gains but risk-seeking to avoid losses",
+      "definition": "Losses loom larger than gains - people feel a loss about $2\\times$ as strongly as an equivalent gain, leading to risk-aversion for gains but risk-seeking to avoid losses",
       "tags": ["econ", "behavioral", "advanced"],
       "source": "Behavioral economics",
       "created": "2025-12-07"
