@@ -86,6 +86,418 @@
       "tags": ["cs", "algorithms", "complexity"],
       "source": "Example card",
       "created": "2025-12-06"
+    },
+
+    {
+      "id": "econ-micro-001",
+      "type": "cloze",
+      "text": "{{Price elasticity of demand}} measures how much quantity demanded changes in response to a price change: %ΔQd / %ΔP.",
+      "tags": ["econ", "micro", "elasticity"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-002",
+      "type": "basic",
+      "front": "What does it mean when demand is 'elastic' (|E| > 1)?",
+      "back": "Quantity demanded changes more than proportionally to price. A 1% price increase causes >1% drop in quantity. Total revenue falls when price rises.",
+      "tags": ["econ", "micro", "elasticity"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-003",
+      "type": "cloze",
+      "text": "The {{midpoint method}} for elasticity uses the average of start and end values as the base, giving the same elasticity regardless of direction.",
+      "tags": ["econ", "micro", "elasticity"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-004",
+      "type": "reversible",
+      "term": "Cross-price elasticity of demand",
+      "definition": "Measures how quantity demanded of good A changes when the price of good B changes. Positive = substitutes, negative = complements.",
+      "tags": ["econ", "micro", "elasticity"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-005",
+      "type": "cloze",
+      "text": "{{Consumer surplus}} is the area below the demand curve and above the market price - it represents the benefit buyers get from paying less than their maximum willingness to pay.",
+      "tags": ["econ", "micro", "welfare"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-006",
+      "type": "cloze",
+      "text": "{{Deadweight loss}} is the reduction in total surplus that results from a market distortion like a tax, price control, or monopoly.",
+      "tags": ["econ", "micro", "welfare"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-007",
+      "type": "basic",
+      "front": "Why does a monopolist produce where MR = MC rather than where P = MC?",
+      "back": "The monopolist faces a downward-sloping demand curve, so selling one more unit requires lowering the price on ALL units. MR < P because of this price effect. Producing where P = MC would mean MR < MC on the last unit - a loss.",
+      "tags": ["econ", "micro", "market-structures"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-008",
+      "type": "reversible",
+      "term": "Allocative efficiency",
+      "definition": "Achieved when P = MC; resources go to their highest-valued uses and total surplus is maximized",
+      "tags": ["econ", "micro", "efficiency"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-009",
+      "type": "cloze",
+      "text": "A {{Pigouvian tax}} corrects a negative externality by taxing the activity equal to the marginal external cost, making private cost equal social cost.",
+      "tags": ["econ", "micro", "externalities"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-010",
+      "type": "reversible",
+      "term": "Coase Theorem",
+      "definition": "If property rights are well-defined and transaction costs are zero, private bargaining will reach an efficient outcome regardless of initial allocation",
+      "tags": ["econ", "micro", "externalities", "advanced"],
+      "source": "Intermediate microeconomics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-011",
+      "type": "basic",
+      "front": "What are the four conditions for perfect competition?",
+      "back": "1) Many buyers and sellers (no market power), 2) Homogeneous products, 3) Free entry and exit, 4) Perfect information",
+      "tags": ["econ", "micro", "market-structures"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-012",
+      "type": "cloze",
+      "text": "In the long run, firms in perfect competition earn {{zero economic profit}} because positive profits attract entry until P = ATC.",
+      "tags": ["econ", "micro", "market-structures"],
+      "source": "Microeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-013",
+      "type": "reversible",
+      "term": "Marginal rate of substitution (MRS)",
+      "definition": "The rate at which a consumer is willing to trade one good for another while maintaining the same utility; equals the slope of the indifference curve",
+      "tags": ["econ", "micro", "consumer-theory", "advanced"],
+      "source": "Intermediate microeconomics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-micro-014",
+      "type": "cloze",
+      "text": "At the optimal consumption bundle, {{MRS = price ratio}} (Px/Py), meaning the rate you're willing to trade equals the rate the market allows.",
+      "tags": ["econ", "micro", "consumer-theory", "advanced"],
+      "source": "Intermediate microeconomics",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-macro-001",
+      "type": "cloze",
+      "text": "GDP can be calculated three ways: {{expenditure}} (C+I+G+NX), {{income}} (wages+rent+interest+profit), and {{production}} (sum of value added).",
+      "tags": ["econ", "macro", "gdp"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-002",
+      "type": "basic",
+      "front": "What's the difference between real and nominal GDP?",
+      "back": "Nominal GDP uses current prices; real GDP uses constant base-year prices. Real GDP removes inflation to show actual output changes. Real = Nominal / Price Level × 100.",
+      "tags": ["econ", "macro", "gdp"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-003",
+      "type": "reversible",
+      "term": "GDP deflator",
+      "definition": "(Nominal GDP / Real GDP) × 100; measures the price level of all domestically produced goods, unlike CPI which measures a fixed consumer basket",
+      "tags": ["econ", "macro", "inflation"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-004",
+      "type": "cloze",
+      "text": "The three types of unemployment are {{frictional}} (job search), {{structural}} (skills mismatch), and {{cyclical}} (due to recessions).",
+      "tags": ["econ", "macro", "unemployment"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-005",
+      "type": "cloze",
+      "text": "The {{natural rate of unemployment}} is frictional + structural unemployment - the rate when the economy is at potential output with no cyclical unemployment.",
+      "tags": ["econ", "macro", "unemployment"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-006",
+      "type": "basic",
+      "front": "What are the three main tools of monetary policy?",
+      "back": "1) Open market operations (buying/selling government bonds), 2) Discount rate (rate charged to banks borrowing from central bank), 3) Reserve requirements (fraction of deposits banks must hold)",
+      "tags": ["econ", "macro", "monetary-policy"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-007",
+      "type": "cloze",
+      "text": "The {{money multiplier}} is 1/reserve ratio - it shows how much the money supply can expand from an initial deposit through fractional reserve banking.",
+      "tags": ["econ", "macro", "monetary-policy"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-008",
+      "type": "reversible",
+      "term": "Crowding out",
+      "definition": "When government borrowing raises interest rates, reducing private investment; limits the effectiveness of fiscal stimulus",
+      "tags": ["econ", "macro", "fiscal-policy"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-009",
+      "type": "cloze",
+      "text": "The {{Phillips curve}} shows an inverse relationship between unemployment and inflation in the short run - lower unemployment comes with higher inflation.",
+      "tags": ["econ", "macro", "phillips-curve"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-010",
+      "type": "basic",
+      "front": "Why is the long-run Phillips curve vertical?",
+      "back": "In the long run, expected inflation adjusts to actual inflation. Any unemployment below the natural rate causes accelerating inflation as expectations keep rising. The economy returns to the natural rate regardless of inflation level.",
+      "tags": ["econ", "macro", "phillips-curve", "advanced"],
+      "source": "Intermediate macroeconomics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-011",
+      "type": "reversible",
+      "term": "Stagflation",
+      "definition": "Simultaneous high inflation and high unemployment, typically caused by a negative supply shock; contradicts simple Phillips curve trade-off",
+      "tags": ["econ", "macro", "phillips-curve"],
+      "source": "Macroeconomics fundamentals",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-macro-012",
+      "type": "cloze",
+      "text": "{{Okun's Law}} states that for every 1% unemployment rises above the natural rate, GDP falls about 2% below potential.",
+      "tags": ["econ", "macro", "unemployment", "advanced"],
+      "source": "Intermediate macroeconomics",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-game-001",
+      "type": "reversible",
+      "term": "Nash equilibrium",
+      "definition": "A strategy profile where no player can improve their payoff by unilaterally changing their strategy, given what others are doing",
+      "tags": ["econ", "game-theory", "advanced"],
+      "source": "Game theory",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-game-002",
+      "type": "basic",
+      "front": "Why is the Prisoner's Dilemma outcome inefficient?",
+      "back": "Both players defect (Nash equilibrium) even though mutual cooperation gives higher payoffs to both. Individual rationality leads to collective irrationality because each player's dominant strategy is to defect.",
+      "tags": ["econ", "game-theory", "advanced"],
+      "source": "Game theory",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-game-003",
+      "type": "reversible",
+      "term": "Dominant strategy",
+      "definition": "A strategy that gives a higher payoff than any alternative regardless of what other players do",
+      "tags": ["econ", "game-theory", "advanced"],
+      "source": "Game theory",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-game-004",
+      "type": "cloze",
+      "text": "In a {{repeated game}}, cooperation can be sustained because players can punish defection in future rounds, unlike one-shot games.",
+      "tags": ["econ", "game-theory", "advanced"],
+      "source": "Game theory",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-info-001",
+      "type": "reversible",
+      "term": "Adverse selection",
+      "definition": "Pre-contract information asymmetry where the uninformed party gets stuck with bad deals (e.g., only sick people buy insurance, only lemons get sold)",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-info-002",
+      "type": "reversible",
+      "term": "Moral hazard",
+      "definition": "Post-contract behavior change because one party bears less risk; the insured take more risks, employees shirk when unmonitored",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-info-003",
+      "type": "basic",
+      "front": "What's the difference between adverse selection and moral hazard?",
+      "back": "Timing: Adverse selection is hidden information BEFORE a transaction (who you're dealing with). Moral hazard is hidden action AFTER a transaction (what they do once the deal is made).",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-info-004",
+      "type": "reversible",
+      "term": "Signaling",
+      "definition": "When the informed party takes costly action to credibly reveal their type (e.g., education signals ability, warranties signal quality)",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-info-005",
+      "type": "reversible",
+      "term": "Screening",
+      "definition": "When the uninformed party designs a menu of options to make the informed party reveal their type through self-selection",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-info-006",
+      "type": "reversible",
+      "term": "Principal-agent problem",
+      "definition": "When one party (principal) delegates to another (agent) whose interests differ; the principal can't perfectly monitor the agent's effort",
+      "tags": ["econ", "information", "advanced"],
+      "source": "Information economics",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-behavioral-001",
+      "type": "reversible",
+      "term": "Loss aversion",
+      "definition": "Losses loom larger than gains - people feel a loss about 2x as strongly as an equivalent gain, leading to risk-aversion for gains but risk-seeking to avoid losses",
+      "tags": ["econ", "behavioral", "advanced"],
+      "source": "Behavioral economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-behavioral-002",
+      "type": "reversible",
+      "term": "Hyperbolic discounting",
+      "definition": "People discount the near future more steeply than the far future, leading to time-inconsistent preferences (preferring $100 today over $110 tomorrow, but $110 in 31 days over $100 in 30 days)",
+      "tags": ["econ", "behavioral", "advanced"],
+      "source": "Behavioral economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-behavioral-003",
+      "type": "reversible",
+      "term": "Anchoring",
+      "definition": "Initial information disproportionately influences judgment even when irrelevant; people adjust insufficiently from the anchor",
+      "tags": ["econ", "behavioral", "advanced"],
+      "source": "Behavioral economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-behavioral-004",
+      "type": "cloze",
+      "text": "{{Nudges}} are choice architecture interventions that steer behavior while preserving freedom of choice, like making good options the default.",
+      "tags": ["econ", "behavioral", "advanced"],
+      "source": "Behavioral economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-behavioral-005",
+      "type": "reversible",
+      "term": "Endowment effect",
+      "definition": "People value things more once they own them; willingness to accept (WTA) exceeds willingness to pay (WTP) for the same item",
+      "tags": ["econ", "behavioral", "advanced"],
+      "source": "Behavioral economics",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-trade-001",
+      "type": "basic",
+      "front": "What's the difference between absolute and comparative advantage?",
+      "back": "Absolute advantage: producing more output with the same inputs. Comparative advantage: lower opportunity cost. Trade is based on comparative advantage - even if one country is better at everything, both gain by specializing in their lowest opportunity cost good.",
+      "tags": ["econ", "trade", "advanced"],
+      "source": "International economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-trade-002",
+      "type": "cloze",
+      "text": "The {{terms of trade}} must fall between the two countries' opportunity costs for both to gain from trade.",
+      "tags": ["econ", "trade", "advanced"],
+      "source": "International economics",
+      "created": "2025-12-07"
+    },
+
+    {
+      "id": "econ-welfare-001",
+      "type": "reversible",
+      "term": "Pareto efficiency",
+      "definition": "An allocation where no one can be made better off without making someone else worse off; all gains from trade have been exhausted",
+      "tags": ["econ", "welfare", "advanced"],
+      "source": "Welfare economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-welfare-002",
+      "type": "cloze",
+      "text": "The {{First Welfare Theorem}} states that competitive equilibrium is Pareto efficient (under standard assumptions).",
+      "tags": ["econ", "welfare", "advanced"],
+      "source": "Welfare economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-welfare-003",
+      "type": "cloze",
+      "text": "The {{Second Welfare Theorem}} states that any Pareto efficient allocation can be achieved as a competitive equilibrium with appropriate lump-sum transfers.",
+      "tags": ["econ", "welfare", "advanced"],
+      "source": "Welfare economics",
+      "created": "2025-12-07"
+    },
+    {
+      "id": "econ-welfare-004",
+      "type": "reversible",
+      "term": "Arrow's Impossibility Theorem",
+      "definition": "No voting system can satisfy all fairness criteria (transitivity, unanimity, independence of irrelevant alternatives, non-dictatorship) simultaneously",
+      "tags": ["econ", "welfare", "social-choice", "advanced"],
+      "source": "Social choice theory",
+      "created": "2025-12-07"
     }
   ]
 }
