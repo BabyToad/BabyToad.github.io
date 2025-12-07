@@ -4,6 +4,7 @@ title: Learn
 description: Spaced repetition review system for long-term retention
 use_container: false
 srs: true
+math: true
 ---
 
 <div class="srs-container">

@@ -57,6 +57,26 @@ Cards are stored in `_data/flashcards.json`.
 4. **Use reversible** - For vocabulary and terms
 5. **Add context** - Enough to disambiguate, but keep concise
 
+## Math Support
+
+Cards support KaTeX for mathematical notation:
+- Inline math: `$E = mc^2$` renders as *E = mc²*
+- Display math: `$$\int_0^1 x^2 dx$$` renders centered on its own line
+- Works in front, back, text, term, and definition fields
+
+Example:
+```json
+{
+  "id": "math-001",
+  "type": "basic",
+  "front": "What is the quadratic formula?",
+  "back": "$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$",
+  "tags": ["math"],
+  "source": "Algebra",
+  "created": "2025-12-07"
+}
+```
+
 ## ID Convention
 
 Use descriptive IDs: `topic-subtopic-NNN`
