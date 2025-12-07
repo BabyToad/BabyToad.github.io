@@ -90,7 +90,10 @@ Use descriptive IDs: `topic-subtopic-NNN`
 - `latin`, `greek` - Classical languages
 - `philosophy`, `vocabulary` - Philosophy terms
 - `cs`, `algorithms`, `complexity` - Computer science
-- `history`, `econ` - History and economics
+- `econ`, `micro`, `macro` - Economics fundamentals
+- `game-theory`, `behavioral`, `information` - Advanced economics
+- `welfare`, `trade` - Welfare and international economics
+- `advanced` - Intermediate/advanced level concepts
 
 Check existing cards in `_data/flashcards.json` for consistent tagging.
 
