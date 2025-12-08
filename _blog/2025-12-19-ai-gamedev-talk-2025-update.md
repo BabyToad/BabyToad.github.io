@@ -5,7 +5,7 @@ date: 2025-12-19
 description: "Updated talk on practical AI for game development, featuring new models, refined insights, and an interactive presentation format"
 tags: [ai, game-dev, talks, mundane-utility, tools, education]
 toc: true
-visibility: public
+visibility: private
 ---
 
 I'm returning to my alma mater today to give an updated version of my [AI for Game Developers talk](/blog/ai-for-game-dev-talk-archive) from earlier this year. Six months in AI is a lifetime - we've gone from GPT-4 to GPT-5.1, Claude Opus to Opus 4.5, and Gemini 2.0 to Gemini 3 Pro. More importantly, my understanding of how to *work with* these tools has evolved significantly.
