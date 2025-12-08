@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Game Developers: 2025 Update | Jonas Heinke</title>
+    <meta name="description" content="Interactive presentation on practical AI applications for game development, covering how AI works, scaling laws, and mundane utility.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Presentation Container -->
+    <div class="presentation">
+
+        <!-- ============================================ -->
+        <!-- SECTION 0: OPENING                          -->
+        <!-- ============================================ -->
+
+        <!-- Slide 1: Title -->
+        <section class="slide active" data-slide="1" data-section="opening">
+            <div class="slide-content">
+                <h1 class="title-large">AI for Game Developers</h1>
+                <p class="subtitle">2025 Update</p>
+                <div class="meta">
+                    <p>Jonas Heinke</p>
+                    <p>December 19, 2025</p>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Welcome! This is an update to my Nerdicon talk from June.
+                Focus: how AI actually works, why it keeps improving, and practical utility.
+            </div>
+        </section>
+
+        <!-- Slide 2: About & Context -->
+        <section class="slide" data-slide="2" data-section="opening">
+            <div class="slide-content">
+                <h2>Who Am I & Why This Talk?</h2>
+                <ul class="big-list">
+                    <li>Indie game developer using AI in production daily</li>
+                    <li>Gave this talk at Nerdicon mid-2025</li>
+                    <li>AI moves fast - 6 months = lifetime of change</li>
+                    <li>Goal: Help you understand AI, not just use it blindly</li>
+                </ul>
+            </div>
+            <div class="presenter-notes">
+                Establish credibility. Emphasize the speed of change.
+                This isn't about hype - it's about understanding what's happening and why.
+            </div>
+        </section>
+
+        <!-- Slide 3: Agenda -->
+        <section class="slide" data-slide="3" data-section="opening">
+            <div class="slide-content">
+                <h2>What We'll Cover</h2>
+                <div class="agenda">
+                    <div class="agenda-item">
+                        <span class="number">1</span>
+                        <span class="text">Foundation: How AI Actually Works</span>
+                    </div>
+                    <div class="agenda-item">
+                        <span class="number">2</span>
+                        <span class="text">Straight Lines: Scaling Laws & Forecasts</span>
+                    </div>
+                    <div class="agenda-item">
+                        <span class="number">3</span>
+                        <span class="text">Theory of Mind: How to Work with AI</span>
+                    </div>
+                    <div class="agenda-item">
+                        <span class="number">4</span>
+                        <span class="text">Mundane Utility: Practical Applications</span>
+                    </div>
+                    <div class="agenda-item">
+                        <span class="number">5</span>
+                        <span class="text">Broader Context: Ethics & Considerations</span>
+                    </div>
+                    <div class="agenda-item">
+                        <span class="number">6</span>
+                        <span class="text">Call to Action: What to Do Next</span>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Structure: Foundation → Why it improves → How to use it → What to do with it → Ethics → Action.
+                About 45-60 minutes + Q&A.
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 1: FOUNDATION                       -->
+        <!-- How AI Actually Works                       -->
+        <!-- ============================================ -->
+
+        <!-- Slide 4: Section Title - Foundation -->
+        <section class="slide" data-slide="4" data-section="foundation">
+            <div class="slide-content">
+                <h1 class="section-title">Foundation</h1>
+                <p class="section-subtitle">How AI Actually Works</p>
+            </div>
+            <div class="presenter-notes">
+                Section 1: The technical foundation. Not too deep, but enough to understand.
+                Goal: Demystify the "black box" - it's prediction, not magic.
+            </div>
+        </section>
+
+        <!-- Slide 5: Bird's Eye View -->
+        <section class="slide" data-slide="5" data-section="foundation">
+            <div class="slide-content">
+                <h2>A Bird's-Eye View of Machine Learning</h2>
+                <div class="diagram-box">
+                    <div class="ml-flow">
+                        <div class="flow-row">
+                            <span class="flow-item">compute</span>
+                            <span class="flow-item">data</span>
+                            <span class="flow-item">hyperparameters</span>
+                            <span class="flow-item">architecture</span>
+                            <span class="flow-item">loss</span>
+                            <span class="flow-item">human preferences</span>
+                        </div>
+                        <div class="flow-arrows">↓ ↓ ↓ ↓ ↓ ↓</div>
+                        <div class="flow-row">
+                            <span class="flow-item highlight">pretraining</span>
+                            <span class="flow-spacer"></span>
+                            <span class="flow-item">reward model</span>
+                        </div>
+                        <div class="flow-arrows">↓ ↘ ↙</div>
+                        <div class="flow-row center">
+                            <span class="flow-item highlight">post-training</span>
+                        </div>
+                        <div class="flow-arrows">↓</div>
+                        <div class="flow-row center">
+                            <span class="flow-item">weights ≈ model</span>
+                            <span class="flow-item">+ query</span>
+                            <span class="flow-item">+ hyperparameters</span>
+                        </div>
+                        <div class="flow-arrows">↓</div>
+                        <div class="flow-row center">
+                            <span class="flow-item highlight">inference</span>
+                        </div>
+                        <div class="flow-arrows">↓</div>
+                        <div class="flow-row center">
+                            <span class="flow-item">activations → output</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="source">Adapted from "The Scaling Era" (Stripe Press, 2025)</p>
+            </div>
+            <div class="presenter-notes">
+                This is the whole picture. Don't worry about understanding everything.
+                Key phases: Pretraining (learn from data) → Post-training (make it useful) → Inference (answer questions)
+            </div>
+        </section>
+
+        <!-- Slide 6: Key Terminology -->
+        <section class="slide" data-slide="6" data-section="foundation">
+            <div class="slide-content">
+                <h2>Key Terms You Need to Know</h2>
+                <div class="term-grid">
+                    <div class="term">
+                        <h3>Parameter / Weight</h3>
+                        <p>A number the model adjusts during training. More parameters = more capacity to learn patterns. GPT-4 has ~1 trillion.</p>
+                    </div>
+                    <div class="term">
+                        <h3>Token</h3>
+                        <p>The basic unit of text (~1 word). Models process and generate text token by token.</p>
+                    </div>
+                    <div class="term">
+                        <h3>Loss</h3>
+                        <p>How wrong the model's predictions are. Training = minimizing loss. Lower loss = better predictions.</p>
+                    </div>
+                    <div class="term">
+                        <h3>Transformer</h3>
+                        <p>The architecture behind modern AI. Uses "attention" to figure out which parts of input matter most.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Just enough vocabulary to follow the conversation.
+                Parameters = capacity. Tokens = units. Loss = error. Transformer = architecture.
+            </div>
+        </section>
+
+        <!-- Slide 7: What is a Transformer? -->
+        <section class="slide" data-slide="7" data-section="foundation">
+            <div class="slide-content">
+                <h2>What is a Transformer?</h2>
+                <p class="lead">A neural network architecture that processes sequences using attention</p>
+                <div class="concept-list">
+                    <div class="concept">
+                        <h3>Attention Mechanism</h3>
+                        <p>"Which words in this sentence matter for understanding this word?"</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Parallel Processing</h3>
+                        <p>Processes entire sequences at once, not word-by-word. Very fast on GPUs.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Layers of Refinement</h3>
+                        <p>Each layer builds more abstract understanding. Early layers: grammar. Later layers: meaning.</p>
+                    </div>
+                </div>
+                <p class="callout">👉 <a href="/transformer-viz" target="_blank">See it in action: Interactive Transformer Demo</a></p>
+            </div>
+            <div class="presenter-notes">
+                Don't get lost in the weeds. Key insight: attention lets the model focus on what matters.
+                Link to your interactive visualization for the curious.
+            </div>
+        </section>
+
+        <!-- Slide 8: The Training Process -->
+        <section class="slide" data-slide="8" data-section="foundation">
+            <div class="slide-content">
+                <h2>How Models Learn</h2>
+                <div class="training-phases">
+                    <div class="phase">
+                        <h3>1. Pretraining</h3>
+                        <p>Learn from vast amounts of text by predicting the next word</p>
+                        <p class="detail">"Given 'The cat sat on the ___', predict 'mat'"</p>
+                        <p class="detail">Trillions of examples. Learns grammar, facts, reasoning patterns.</p>
+                    </div>
+                    <div class="phase">
+                        <h3>2. Post-training (RLHF)</h3>
+                        <p>Fine-tune with human feedback to be helpful, harmless, honest</p>
+                        <p class="detail">Humans rate responses. Model learns what humans prefer.</p>
+                    </div>
+                    <div class="phase">
+                        <h3>3. Inference</h3>
+                        <p>You ask a question, model generates response token by token</p>
+                        <p class="detail">Each token is a prediction: "What word should come next?"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Pretraining = raw capability from data. Post-training = make it useful/safe.
+                Key insight: It's all prediction. Not understanding, not thinking - prediction at massive scale.
+            </div>
+        </section>
+
+        <!-- Slide 9: The Core Insight -->
+        <section class="slide" data-slide="9" data-section="foundation">
+            <div class="slide-content">
+                <h2>The Core Insight</h2>
+                <div class="key-insight">
+                    <p class="insight-text">"AI is a prediction engine trained on human-generated data"</p>
+                </div>
+                <ul class="big-list">
+                    <li>Not magic, not consciousness, not understanding</li>
+                    <li>Pattern matching at unprecedented scale</li>
+                    <li>It predicts what a helpful response would look like</li>
+                    <li>The prediction is often very good because it's seen similar patterns millions of times</li>
+                </ul>
+                <p class="callout">This is why context matters so much: better context → better predictions</p>
+            </div>
+            <div class="presenter-notes">
+                This demystifies AI. It's not thinking - it's predicting.
+                But prediction at this scale can look remarkably like thinking.
+                Frame for the rest of the talk: how do we use prediction engines well?
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 2: STRAIGHT LINES ON A GRAPH        -->
+        <!-- Scaling Laws & Forecasts                    -->
+        <!-- ============================================ -->
+
+        <!-- Slide 10: Section Title - Scaling -->
+        <section class="slide" data-slide="10" data-section="scaling">
+            <div class="slide-content">
+                <h1 class="section-title">Straight Lines on a Graph</h1>
+                <p class="section-subtitle">Scaling Laws & Forecasts</p>
+            </div>
+            <div class="presenter-notes">
+                Section 2: Why AI keeps getting better. This is the most important section for understanding the future.
+                The scaling laws are the key insight that separates informed observers from everyone else.
+            </div>
+        </section>
+
+        <!-- Slide 11: The Scaling Discovery -->
+        <section class="slide" data-slide="11" data-section="scaling">
+            <div class="slide-content">
+                <h2>The Discovery That Changed Everything</h2>
+                <div class="quote-box">
+                    <blockquote>"The more compute and data you put in, the more intelligence you get out. This effect is so clear and so important that I call the period since 2016 the scaling era of AI."</blockquote>
+                    <p class="attribution">— Dwarkesh Patel, "The Scaling Era"</p>
+                </div>
+                <ul class="big-list">
+                    <li>2017: Researchers discover scaling laws</li>
+                    <li>2020: GPT-3 validates them at massive scale</li>
+                    <li>2023-2025: $100M+ training runs become normal</li>
+                </ul>
+                <p class="lead">Bigger models trained on more data = predictably better performance</p>
+            </div>
+            <div class="presenter-notes">
+                This is THE insight. Everything else follows from this.
+                Scaling laws let you predict performance before training. That's why labs invest billions.
+            </div>
+        </section>
+
+        <!-- Slide 12: The Scaling Curve -->
+        <section class="slide" data-slide="12" data-section="scaling">
+            <div class="slide-content">
+                <h2>The Scaling Curve</h2>
+                <div class="scaling-visual">
+                    <div class="axis-labels">
+                        <span class="y-label">Loss (error) ↓</span>
+                        <span class="x-label">Training Compute (FLOPs) →</span>
+                    </div>
+                    <div class="curve-description">
+                        <p class="lead">As compute increases 100,000x, loss decreases smoothly and predictably</p>
+                        <ul>
+                            <li>10<sup>17</sup> FLOPs: Basic pattern matching</li>
+                            <li>10<sup>19</sup> FLOPs: Coherent text generation</li>
+                            <li>10<sup>21</sup> FLOPs: Complex reasoning</li>
+                            <li>10<sup>23</sup> FLOPs: Multi-step problem solving</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="source">Based on Hoffmann et al., "Training Compute-Optimal Large Language Models" (2022)</p>
+            </div>
+            <div class="presenter-notes">
+                The curve is a power law - straight line on a log-log plot.
+                This predictability is remarkable. It's why we can forecast AI progress.
+                Key: we're still climbing this curve. No sign of plateau yet.
+            </div>
+        </section>
+
+        <!-- Slide 13: The Zen Koan -->
+        <section class="slide" data-slide="13" data-section="scaling">
+            <div class="slide-content">
+                <h2>"The Models Just Want to Learn"</h2>
+                <div class="quote-box">
+                    <blockquote>"One of the first things Ilya Sutskever said to me was, 'Look. The models just want to learn. You have to understand this.' It was a bit like a Zen koan. I listened to this and I became enlightened."</blockquote>
+                    <p class="attribution">— Dario Amodei, CEO of Anthropic</p>
+                </div>
+                <ul class="big-list">
+                    <li>Give models more data → they learn more patterns</li>
+                    <li>Give models more parameters → they can represent more knowledge</li>
+                    <li>Give models more compute → they can do both</li>
+                </ul>
+                <p class="callout">The architecture matters less than the scale. This was shocking to AI researchers.</p>
+            </div>
+            <div class="presenter-notes">
+                Ilya Sutskever was OpenAI's chief scientist. This quote captures the essence of the scaling era.
+                The models aren't clever - they're just trained at massive scale. And it works.
+            </div>
+        </section>
+
+        <!-- Slide 14: Costs Falling -->
+        <section class="slide" data-slide="14" data-section="scaling">
+            <div class="slide-content">
+                <h2>Costs Are Falling Fast</h2>
+                <div class="stat-highlight">
+                    <p class="stat-number">50x / year</p>
+                    <p class="stat-label">Median price decline for equivalent performance</p>
+                </div>
+                <ul class="big-list">
+                    <li>GPT-3.5 equivalent: 280x cheaper (Nov 2022 → Oct 2024)</li>
+                    <li>Range: 9x to 900x decline per year depending on task</li>
+                    <li>What cost $100 in 2023 costs $2 today</li>
+                </ul>
+                <p class="lead">Implication: Things that are "too expensive" today will be cheap in 12-18 months</p>
+                <p class="source">Source: Epoch AI, Stanford AI Index 2025</p>
+            </div>
+            <div class="presenter-notes">
+                This is the economic engine. Capabilities go up, costs go down.
+                Plan your projects with this trajectory in mind.
+            </div>
+        </section>
+
+        <!-- Slide 15: Capabilities Growing -->
+        <section class="slide" data-slide="15" data-section="scaling">
+            <div class="slide-content">
+                <h2>Capabilities Growing Exponentially</h2>
+                <div class="stat-highlight">
+                    <p class="stat-number">2x every 7 months</p>
+                    <p class="stat-label">Task length AI agents can complete autonomously</p>
+                </div>
+                <div class="capability-timeline">
+                    <div class="cap-item"><span class="year">2019</span> Simple Q&A, basic text</div>
+                    <div class="cap-item"><span class="year">2022</span> Write code snippets, explain concepts</div>
+                    <div class="cap-item"><span class="year">2023</span> Complex reasoning, multi-step tasks</div>
+                    <div class="cap-item"><span class="year">2024</span> Build entire features, use tools</div>
+                    <div class="cap-item"><span class="year">2025</span> Multi-hour autonomous tasks with planning</div>
+                </div>
+                <p class="source">Source: METR, "Measuring AI Ability to Complete Long Tasks" (2025)</p>
+            </div>
+            <div class="presenter-notes">
+                6 years of measured data. This is the most important chart for understanding AI progress.
+                From chatbot to coworker in 6 years. And the trend continues.
+            </div>
+        </section>
+
+        <!-- Slide 16: The Frontier Timeline -->
+        <section class="slide" data-slide="16" data-section="scaling">
+            <div class="slide-content">
+                <h2>The Frontier Moves Fast</h2>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="date">Mar 2023</span><span class="event">GPT-4</span></div>
+                    <div class="timeline-item"><span class="date">Mar 2024</span><span class="event">Claude 3 Opus</span></div>
+                    <div class="timeline-item"><span class="date">Sep 2024</span><span class="event">o1 (reasoning models)</span></div>
+                    <div class="timeline-item"><span class="date">Dec 2024</span><span class="event">Gemini 2.0</span></div>
+                    <div class="timeline-item"><span class="date">Aug 2025</span><span class="event">GPT-5</span></div>
+                    <div class="timeline-item"><span class="date">Nov 2025</span><span class="event">GPT-5.1, Claude Opus 4.5</span></div>
+                    <div class="timeline-item highlight"><span class="date">Dec 2025</span><span class="event">Gemini 3 Pro</span></div>
+                </div>
+                <p class="callout">Major releases every 2-4 months. Year-old knowledge is outdated.</p>
+            </div>
+            <div class="presenter-notes">
+                The pace is relentless. "I tried ChatGPT a year ago" is like saying "I tried the internet in 1995."
+                This is why staying current matters - and why personal benchmarking is important.
+            </div>
+        </section>
+
+        <!-- Slide 17: What This Means -->
+        <section class="slide" data-slide="17" data-section="scaling">
+            <div class="slide-content">
+                <h2>What This Means for You</h2>
+                <div class="implications">
+                    <div class="implication">
+                        <h3>Use Frontier Models</h3>
+                        <p>$20/month for Claude Pro or ChatGPT Plus. The capability gap is massive.</p>
+                    </div>
+                    <div class="implication">
+                        <h3>Current Capabilities are the Worst They'll Ever Be</h3>
+                        <p>What's hard today will be easy in 12 months. Plan accordingly.</p>
+                    </div>
+                    <div class="implication">
+                        <h3>Prioritize: Capability > Speed > Cost</h3>
+                        <p>Your time is worth more than the cost difference between models.</p>
+                    </div>
+                </div>
+                <p class="lead">The trend is your friend. Bet on continued improvement.</p>
+            </div>
+            <div class="presenter-notes">
+                Practical takeaways from the scaling section.
+                Students might cheap out - DON'T. $20/month is nothing vs the value you get.
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 3: THEORY OF MIND                   -->
+        <!-- How to Work with AI                         -->
+        <!-- ============================================ -->
+
+        <!-- Slide 18: Section Title - Theory of Mind -->
+        <section class="slide" data-slide="18" data-section="theory">
+            <div class="slide-content">
+                <h1 class="section-title">Theory of Mind</h1>
+                <p class="section-subtitle">How to Work with AI</p>
+            </div>
+            <div class="presenter-notes">
+                Section 3: Mental models for working with AI effectively.
+                This is where we go from "what is AI" to "how do I use it well."
+            </div>
+        </section>
+
+        <!-- Slide 19: Communication is the Bottleneck -->
+        <section class="slide" data-slide="19" data-section="theory">
+            <div class="slide-content">
+                <h2>Communication is the New Bottleneck</h2>
+                <div class="key-insight">
+                    <p class="insight-text">With frontier models, output quality is limited by your communication clarity, not the model's capability</p>
+                </div>
+                <div class="comparison">
+                    <div class="before">
+                        <p class="label">Old Problem (2023)</p>
+                        <p>"The model didn't understand"</p>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="after">
+                        <p class="label">New Reality (2025)</p>
+                        <p>"I didn't communicate clearly"</p>
+                    </div>
+                </div>
+                <p class="callout">Better software engineering skills → Better AI output (because you can articulate what you want)</p>
+            </div>
+            <div class="presenter-notes">
+                THE key insight for working with modern AI.
+                The bottleneck shifted. I rarely do more QA with AI than with human collaborators now.
+            </div>
+        </section>
+
+        <!-- Slide 20: AI as Peer -->
+        <section class="slide" data-slide="20" data-section="theory">
+            <div class="slide-content">
+                <h2>AI as Peer / Collaborator</h2>
+                <div class="metaphor">
+                    <p class="lead">Treat AI like a brilliant colleague having their first day at your studio</p>
+                </div>
+                <div class="split-content">
+                    <div class="left">
+                        <h3>They know:</h3>
+                        <ul>
+                            <li>General software engineering</li>
+                            <li>Common patterns & best practices</li>
+                            <li>How things usually work</li>
+                            <li>Thousands of similar implementations</li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <h3>They don't know:</h3>
+                        <ul>
+                            <li>Your specific codebase</li>
+                            <li>Your design constraints</li>
+                            <li>Your project context</li>
+                            <li>Why you made certain decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                The "first day" metaphor is powerful. They're smart but lack context.
+                You provide context, they provide expertise. It's a collaboration.
+            </div>
+        </section>
+
+        <!-- Slide 21: Ask What the Model Would Do -->
+        <section class="slide" data-slide="21" data-section="theory">
+            <div class="slide-content">
+                <h2>Ask What the Model Would Do</h2>
+                <div class="example-prompt">
+                    <p class="prompt-label">Instead of:</p>
+                    <blockquote>"Implement inventory system using these 5 data structures I specified"</blockquote>
+                    <p class="prompt-label">Try:</p>
+                    <blockquote>"I need an inventory system for my roguelike. You've probably seen hundreds of implementations - what would you do here and why?"</blockquote>
+                </div>
+                <p class="lead">Then: Verify assumptions, correct misconceptions, iterate</p>
+                <ul class="big-list">
+                    <li>Models have seen thousands of implementations</li>
+                    <li>They might suggest patterns you haven't considered</li>
+                    <li>You can always override when they're missing context</li>
+                </ul>
+            </div>
+            <div class="presenter-notes">
+                This is incredibly powerful. Leverage their expertise.
+                Don't just command - consult. Then evaluate and iterate.
+            </div>
+        </section>
+
+        <!-- Slide 22: Adopt Ambition -->
+        <section class="slide" data-slide="22" data-section="theory">
+            <div class="slide-content">
+                <h2>Adopt Ambition & Agency</h2>
+                <div class="mindset-shift">
+                    <p class="lead">"It would be useful if we could do X.<br>AI, how can we do X?"</p>
+                </div>
+                <ul class="big-list">
+                    <li>Many "impossible" tasks are actually scriptable</li>
+                    <li>AI can often tell you HOW if you ask</li>
+                    <li>Don't self-limit based on what you think is possible</li>
+                </ul>
+                <div class="example">
+                    <p class="example-label">Real example:</p>
+                    <p>"I want to batch-convert 200 Unity prefabs to Godot scenes"</p>
+                    <p class="result">→ Model writes parser, converter, and validator in 15 minutes</p>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Remove mental barriers. Students often think "that would take weeks" - try asking AI first.
+                The cost of asking is near-zero. The upside can be enormous.
+            </div>
+        </section>
+
+        <!-- Slide 23: Keep Your Brain On -->
+        <section class="slide" data-slide="23" data-section="theory">
+            <div class="slide-content">
+                <h2>Keep Your Brain On</h2>
+                <div class="warning-box">
+                    <p class="lead">AI is a collaborator, not a replacement for thinking</p>
+                </div>
+                <ul class="big-list">
+                    <li><strong>Verify</strong>: Check AI's assumptions against your context</li>
+                    <li><strong>Understand</strong>: Don't ship code you can't explain</li>
+                    <li><strong>Iterate</strong>: First output is rarely final output</li>
+                    <li><strong>Own it</strong>: You're responsible for the result, not the AI</li>
+                </ul>
+                <p class="callout">AI amplifies your capabilities. Make sure you have capabilities worth amplifying.</p>
+            </div>
+            <div class="presenter-notes">
+                Critical balance. AI makes you powerful, but you need to steer.
+                Don't abdicate thinking. The skill is in knowing what to ask and evaluating responses.
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 4: MUNDANE UTILITY                  -->
+        <!-- Practical Applications                      -->
+        <!-- ============================================ -->
+
+        <!-- Slide 24: Section Title - Mundane Utility -->
+        <section class="slide" data-slide="24" data-section="utility">
+            <div class="slide-content">
+                <h1 class="section-title">Mundane Utility</h1>
+                <p class="section-subtitle">Practical Applications for Game Dev</p>
+            </div>
+            <div class="presenter-notes">
+                Section 4: The boring but useful stuff. This is where AI actually helps today.
+                Not AGI fantasies - real productivity gains.
+            </div>
+        </section>
+
+        <!-- Slide 25: Content Generation -->
+        <section class="slide" data-slide="25" data-section="utility">
+            <div class="slide-content">
+                <h2>Content Generation</h2>
+                <div class="use-cases">
+                    <div class="use-case">
+                        <h3>Text Content</h3>
+                        <ul>
+                            <li>Item descriptions & tooltips</li>
+                            <li>NPC dialogue variations</li>
+                            <li>Lore snippets & flavor text</li>
+                            <li>Tutorial messages</li>
+                        </ul>
+                    </div>
+                    <div class="use-case">
+                        <h3>Localization</h3>
+                        <ul>
+                            <li>Quick translation drafts</li>
+                            <li>10 languages for €1-2 each</li>
+                            <li>Human review still needed</li>
+                            <li>But 90% of work automated</li>
+                        </ul>
+                    </div>
+                    <div class="use-case">
+                        <h3>Validation</h3>
+                        <ul>
+                            <li>Check tone consistency</li>
+                            <li>Match your game's voice</li>
+                            <li>Flag out-of-character lines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Start with obvious wins. Text content is the low-hanging fruit.
+                Localization cost drop is dramatic - a game-changer for indie devs.
+            </div>
+        </section>
+
+        <!-- Slide 26: Code & Technical -->
+        <section class="slide" data-slide="26" data-section="utility">
+            <div class="slide-content">
+                <h2>Code & Technical Tasks</h2>
+                <div class="tool-showcase">
+                    <div class="tool">
+                        <h3>GitHub Copilot ($10/mo)</h3>
+                        <p>Code completion. Up to 2x faster for routine tasks.</p>
+                    </div>
+                    <div class="tool">
+                        <h3>Claude Code / Cursor ($20/mo)</h3>
+                        <p>Full-feature implementation with project context.</p>
+                    </div>
+                </div>
+                <ul class="big-list">
+                    <li><strong>Documentation</strong>: Auto-generate API docs, code comments</li>
+                    <li><strong>Bug discovery</strong>: "Generate 50 edge cases for this feature"</li>
+                    <li><strong>Refactoring</strong>: "Extract this into a reusable component"</li>
+                    <li><strong>Conversion</strong>: Transform between formats, languages, frameworks</li>
+                </ul>
+            </div>
+            <div class="presenter-notes">
+                Copilot = autocomplete on steroids. Claude Code = full features, multi-file changes.
+                Both worth the money for professional work.
+            </div>
+        </section>
+
+        <!-- Slide 27: Design & Analysis -->
+        <section class="slide" data-slide="27" data-section="utility">
+            <div class="slide-content">
+                <h2>Design & Analysis</h2>
+                <div class="case-study">
+                    <h3>Case Study: Lancer RPG Balance Testing</h3>
+                    <p class="lead">Analyzing weapon balance across 200+ combinations</p>
+                    <div class="process">
+                        <div class="step"><span class="step-num">1</span><p>Fed AI the weapon stats & combat rules</p></div>
+                        <div class="step"><span class="step-num">2</span><p>Simulated 1000 combat scenarios</p></div>
+                        <div class="step"><span class="step-num">3</span><p>Generated statistical analysis</p></div>
+                        <div class="step"><span class="step-num">4</span><p>Identified outliers needing playtesting</p></div>
+                    </div>
+                    <p class="result">Found 3 overpowered combos in minutes instead of weeks of playtesting</p>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Concrete example from real work. This is powerful stuff.
+                Simulate thousands of playtests in minutes. Then validate with real playtesting.
+            </div>
+        </section>
+
+        <!-- Slide 28: Production & Accessibility -->
+        <section class="slide" data-slide="28" data-section="utility">
+            <div class="slide-content">
+                <h2>Production & Accessibility</h2>
+                <div class="split-content">
+                    <div class="left">
+                        <h3>Production Efficiency</h3>
+                        <ul>
+                            <li>Asset organization & batch processing</li>
+                            <li>Placeholder assets (Meshy AI, DALL-E)</li>
+                            <li>Animation prototypes (DeepMotion)</li>
+                            <li>Marketing copy & devlogs</li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <h3>Accessibility Wins</h3>
+                        <ul>
+                            <li>Alt text generation for UI</li>
+                            <li>Audio description scripts</li>
+                            <li>Subtitle generation</li>
+                            <li>Colorblind validation</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="callout">Accessibility used to be expensive → Now it's cheap and easy. Larger audience + better design.</p>
+            </div>
+            <div class="presenter-notes">
+                AI removes the cost barrier for accessibility. That's ethically AND financially good.
+                Production efficiency: AI handles tedious bulk, you add the polish.
+            </div>
+        </section>
+
+        <!-- Slide 29: Real Example -->
+        <section class="slide" data-slide="29" data-section="utility">
+            <div class="slide-content">
+                <h2>Real Example: For Want of Fuel</h2>
+                <div class="project-example">
+                    <p class="lead">My Lancer RPG campaign supplement - AI helped with:</p>
+                    <ul class="big-list">
+                        <li><strong>Mech Builder Tool</strong>: Claude Code built the entire interactive calculator</li>
+                        <li><strong>Tag System</strong>: Auto-generated definitions from rulebook PDFs</li>
+                        <li><strong>Balance Testing</strong>: Simulated 1000+ combat scenarios</li>
+                        <li><strong>Data Conversion</strong>: Messy spreadsheets → clean JSON</li>
+                    </ul>
+                    <p class="time-saved">Estimated time saved: <strong>40+ hours</strong> on a side project</p>
+                    <p class="result">Project actually got done instead of languishing forever</p>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Concrete example from YOUR work. Makes it real for students.
+                40 hours saved = the difference between shipping and not shipping.
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 5: BROADER CONTEXT                  -->
+        <!-- Ethics & Considerations                     -->
+        <!-- ============================================ -->
+
+        <!-- Slide 30: Section Title - Context -->
+        <section class="slide" data-slide="30" data-section="context">
+            <div class="slide-content">
+                <h1 class="section-title">Broader Context</h1>
+                <p class="section-subtitle">Ethics & Considerations</p>
+            </div>
+            <div class="presenter-notes">
+                Section 5: Brief coverage of ethics and broader context.
+                Goal: Help them think clearly, not tell them what to think.
+            </div>
+        </section>
+
+        <!-- Slide 31: Clear Thinking -->
+        <section class="slide" data-slide="31" data-section="context">
+            <div class="slide-content">
+                <h2>Clear Thinking, Not Prescriptions</h2>
+                <div class="philosophy">
+                    <p class="lead">My role: Help you think clearly about tradeoffs</p>
+                    <p>Not: Tell you what to believe</p>
+                </div>
+                <div class="principle-box">
+                    <h3>Approach:</h3>
+                    <ul class="big-list">
+                        <li>Present multiple perspectives fairly</li>
+                        <li>Explain arguments for and against</li>
+                        <li>Give you tools to make informed decisions</li>
+                        <li>Trust you to form your own position</li>
+                    </ul>
+                </div>
+                <p class="callout">You'll have to defend your choices in your career. Think them through now.</p>
+            </div>
+            <div class="presenter-notes">
+                Set expectations: no preaching. You're adults, you can think.
+                But you SHOULD think about this - not just follow the crowd in either direction.
+            </div>
+        </section>
+
+        <!-- Slide 32: AI Art Perspectives -->
+        <section class="slide" data-slide="32" data-section="context">
+            <div class="slide-content">
+                <h2>AI Art: Multiple Perspectives</h2>
+                <div class="perspectives">
+                    <div class="perspective">
+                        <h3>Concerns:</h3>
+                        <ul>
+                            <li>Trained on artists' work without compensation</li>
+                            <li>Threatens artist livelihoods</li>
+                            <li>Copyright questions unresolved</li>
+                            <li>Devalues creative labor</li>
+                        </ul>
+                    </div>
+                    <div class="perspective">
+                        <h3>Arguments for:</h3>
+                        <ul>
+                            <li>Democratizes creative tools</li>
+                            <li>Artists can use it to work faster</li>
+                            <li>Fair use / transformative work precedent</li>
+                            <li>Enables new forms of expression</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="question">What's YOUR position? Can you defend it with clear reasoning?</p>
+            </div>
+            <div class="presenter-notes">
+                Both sides have legitimate arguments. Don't pick for them.
+                Key question: can they articulate WHY they believe what they believe?
+            </div>
+        </section>
+
+        <!-- Slide 33: Portfolio Guidance -->
+        <section class="slide" data-slide="33" data-section="context">
+            <div class="slide-content">
+                <h2>Portfolio Guidance: Honesty</h2>
+                <div class="guidance">
+                    <h3>How to present AI-assisted work:</h3>
+                    <ul class="big-list">
+                        <li><strong>Be honest</strong>: Disclose AI use where significant</li>
+                        <li><strong>Explain your role</strong>: "I designed X, AI implemented Y, I integrated Z"</li>
+                        <li><strong>Highlight your contributions</strong>: What did YOU bring that AI couldn't?</li>
+                    </ul>
+                </div>
+                <div class="examples">
+                    <div class="good">
+                        <p class="label">Good:</p>
+                        <p>"Built procedural generation system using AI-assisted implementation. Designed algorithms, AI wrote boilerplate, I optimized performance."</p>
+                    </div>
+                    <div class="bad">
+                        <p class="label">Avoid:</p>
+                        <p>"Built complex procedural generation system" (with no mention AI did the implementation)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                CRITICAL for job seekers. Employers will ask. Don't get caught lying.
+                Your thinking/design is valuable even if AI wrote the code.
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECTION 6: CALL TO ACTION                   -->
+        <!-- What to Do Next                             -->
+        <!-- ============================================ -->
+
+        <!-- Slide 34: Section Title - Action -->
+        <section class="slide" data-slide="34" data-section="action">
+            <div class="slide-content">
+                <h1 class="section-title">Call to Action</h1>
+                <p class="section-subtitle">What to Do Next</p>
+            </div>
+            <div class="presenter-notes">
+                Section 6: Concrete takeaways. What should they actually DO?
+                Personal benchmarking is the centerpiece.
+            </div>
+        </section>
+
+        <!-- Slide 35: Personal Benchmarking -->
+        <section class="slide" data-slide="35" data-section="action">
+            <div class="slide-content">
+                <h2>Stay Current: Personal Benchmarking</h2>
+                <p class="lead">Pick a benchmark task YOU can evaluate</p>
+                <div class="benchmark-process">
+                    <div class="step"><span class="step-num">1</span><p><strong>Choose a task</strong> in your domain<br><em>e.g., "generate 10 balanced weapon stats"</em></p></div>
+                    <div class="step"><span class="step-num">2</span><p><strong>Test periodically</strong> (every 3-6 months)<br><em>Run same task with latest models</em></p></div>
+                    <div class="step"><span class="step-num">3</span><p><strong>Evaluate quality</strong><br><em>You're the expert - judge the output</em></p></div>
+                    <div class="step"><span class="step-num">4</span><p><strong>Adjust usage</strong><br><em>Expand AI use as capabilities improve</em></p></div>
+                </div>
+                <p class="callout">Don't rely on hype or lab benchmarks. Test what matters to YOUR work.</p>
+            </div>
+            <div class="presenter-notes">
+                This is the most actionable takeaway. Personal benchmark = stay calibrated to reality.
+                Generic benchmarks don't tell you if AI helps YOUR specific tasks.
+            </div>
+        </section>
+
+        <!-- Slide 36: Five Takeaways -->
+        <section class="slide" data-slide="36" data-section="action">
+            <div class="slide-content">
+                <h2>Five Concrete Takeaways</h2>
+                <div class="actions">
+                    <div class="action">
+                        <span class="action-num">1</span>
+                        <div class="action-content">
+                            <h3>Use the dang thing</h3>
+                            <p>Experiment. Build intuition. Get hands-on.</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <span class="action-num">2</span>
+                        <div class="action-content">
+                            <h3>Maintain your benchmark</h3>
+                            <p>Track capability growth in YOUR domain.</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <span class="action-num">3</span>
+                        <div class="action-content">
+                            <h3>Stay current</h3>
+                            <p>Models update every 2-4 months. Year-old knowledge is outdated.</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <span class="action-num">4</span>
+                        <div class="action-content">
+                            <h3>Think clearly</h3>
+                            <p>Form your own positions on ethics, usage, disclosure.</p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <span class="action-num">5</span>
+                        <div class="action-content">
+                            <h3>Adopt ambition</h3>
+                            <p>"It would be useful if X. AI, how can we do X?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                End with actionable items. These are things they can start today.
+            </div>
+        </section>
+
+        <!-- Slide 37: Resources -->
+        <section class="slide" data-slide="37" data-section="action">
+            <div class="slide-content">
+                <h2>Resources</h2>
+                <div class="resources">
+                    <div class="resource-category">
+                        <h3>This Talk</h3>
+                        <ul>
+                            <li><a href="/blog/ai-gamedev-talk-2025-update">Full talk write-up</a></li>
+                            <li><a href="/transformer-viz">Interactive Transformer Demo</a></li>
+                            <li><a href="/blog/ai-for-game-dev-talk-archive">Original talk archive</a></li>
+                        </ul>
+                    </div>
+                    <div class="resource-category">
+                        <h3>Tools ($20/mo each)</h3>
+                        <ul>
+                            <li><a href="https://claude.ai">Claude Pro</a> (Anthropic)</li>
+                            <li><a href="https://openai.com">ChatGPT Plus</a> (OpenAI)</li>
+                            <li><a href="https://github.com/features/copilot">GitHub Copilot</a> ($10/mo)</li>
+                        </ul>
+                    </div>
+                    <div class="resource-category">
+                        <h3>Learning</h3>
+                        <ul>
+                            <li><a href="https://www.oneusefulthing.org">One Useful Thing</a> (Ethan Mollick)</li>
+                            <li><a href="https://epoch.ai">Epoch AI</a> (Data & research)</li>
+                            <li><a href="https://press.stripe.com">The Scaling Era</a> (Stripe Press)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Point to resources for further learning.
+                The Scaling Era zine is excellent - free PDF from Stripe Press.
+            </div>
+        </section>
+
+        <!-- Slide 38: Q&A -->
+        <section class="slide" data-slide="38" data-section="action">
+            <div class="slide-content">
+                <div class="qa-slide">
+                    <h1>Questions?</h1>
+                    <div class="contact">
+                        <p>Jonas Heinke</p>
+                        <p><a href="mailto:heinke.jonas@googlemail.com">heinke.jonas@googlemail.com</a></p>
+                        <p><a href="https://playinsightstudios.com">playinsightstudios.com</a></p>
+                    </div>
+                    <p class="thanks">Thank you!</p>
+                </div>
+            </div>
+            <div class="presenter-notes">
+                Open for Q&A. Common questions:
+                - "Which model?" → Start with Claude Pro or ChatGPT Plus
+                - "Is this ethical?" → Here are perspectives, you decide
+                - "Will AI replace devs?" → It'll transform work, not eliminate it
+            </div>
+        </section>
+
+    </div>
+
+    <!-- UI Controls -->
+    <div class="presentation-ui">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="slide-counter">
+            <span class="current">1</span> / <span class="total">38</span>
+        </div>
+        <div class="controls-hint">
+            Arrow keys to navigate • F for fullscreen • P for presenter mode
+        </div>
+    </div>
+
+    <!-- Presenter Mode (hidden by default) -->
+    <div class="presenter-mode" style="display: none;">
+        <div class="presenter-current">
+            <div class="presenter-slide-container"></div>
+        </div>
+        <div class="presenter-sidebar">
+            <div class="presenter-timer">
+                <div class="timer-display">00:00</div>
+                <button class="timer-control">Start</button>
+            </div>
+            <div class="presenter-next">
+                <h3>Next Slide:</h3>
+                <div class="presenter-next-preview"></div>
+            </div>
+            <div class="presenter-notes-display">
+                <h3>Notes:</h3>
+                <div class="notes-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="slides.js"></script>
+</body>
+</html>
