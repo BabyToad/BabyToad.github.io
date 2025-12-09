@@ -142,8 +142,17 @@ body {
     overflow: hidden; /* No scrolling - content must fit */
 }
 
-.presenter-notes {
-    display: none;
+/* Slide details - hidden by default, shown in detail mode */
+.slide-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+    background: var(--bg-surface);
+    border-top: 2px solid var(--border-medium);
+    border-radius: 0 0 8px 8px;
+    padding: 0 var(--s4);
+    margin-top: 0;
 }
 
 /* ===============
@@ -546,6 +555,232 @@ a:hover {
     width: var(--s4);
 }
 
+/* Two-column ML flow diagram (accurate version) */
+.ml-flow-two-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s1);
+    width: 100%;
+}
+
+.flow-inputs {
+    display: flex;
+    justify-content: center;
+    gap: var(--s4);
+    width: 100%;
+}
+
+.flow-input-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s1);
+    justify-content: center;
+}
+
+.flow-input-group.left {
+    flex: 2;
+    justify-content: flex-end;
+}
+
+.flow-input-group.right {
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.flow-arrows-split {
+    display: flex;
+    justify-content: center;
+    gap: var(--s5);
+    width: 100%;
+    font-size: var(--text-body);
+    color: var(--text-tertiary);
+}
+
+.flow-arrows-split .arrow-group {
+    text-align: center;
+}
+
+.flow-arrows-split .arrow-group.left {
+    flex: 2;
+    text-align: right;
+    padding-right: var(--s3);
+}
+
+.flow-arrows-split .arrow-group.right {
+    flex: 1;
+    text-align: left;
+    padding-left: var(--s3);
+}
+
+.flow-parallel {
+    display: flex;
+    justify-content: center;
+    gap: var(--s5);
+    width: 100%;
+}
+
+.flow-arrows-converge {
+    font-size: var(--text-body);
+    color: var(--text-tertiary);
+    text-align: center;
+    letter-spacing: 1em;
+}
+
+/* SVG Diagram - Typography focused */
+.svg-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: var(--s3) 0;
+}
+
+.svg-diagram svg {
+    max-width: 100%;
+    height: auto;
+    max-height: 58vh;
+}
+
+/* Attention diagram for transformer slide */
+.attention-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.attention-diagram svg {
+    max-width: 100%;
+    height: auto;
+    max-height: 280px;
+}
+
+/* Phase labels - the key steps */
+.svg-diagram .label-phase {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 700;
+    fill: var(--text-primary);
+    text-anchor: middle;
+    letter-spacing: 0.05em;
+}
+
+/* Medium labels - secondary elements */
+.svg-diagram .label-medium {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    fill: var(--text-secondary);
+    text-anchor: middle;
+}
+
+/* Small labels - inputs, parameters */
+.svg-diagram .label-small {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    fill: var(--text-secondary);
+    text-anchor: middle;
+}
+
+/* Description text under phases */
+.svg-diagram .label-desc {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-style: italic;
+    fill: var(--text-tertiary);
+    text-anchor: middle;
+}
+
+/* Arrow lines */
+.svg-diagram .arrow-line {
+    stroke: var(--text-tertiary);
+    stroke-width: 1.5;
+    fill: none;
+}
+
+/* Phase boxes - key stages with emphasis */
+.svg-diagram .phase-box {
+    fill: none;
+    stroke: var(--text-primary);
+    stroke-width: 2;
+}
+
+/* Secondary boxes - supporting elements */
+.svg-diagram .secondary-box {
+    fill: none;
+    stroke: var(--border-medium);
+    stroke-width: 1;
+}
+
+/* Interactive hover elements */
+.svg-diagram .hoverable {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.svg-diagram .hoverable:hover {
+    opacity: 0.8;
+}
+
+.svg-diagram .hoverable:hover .phase-box,
+.svg-diagram .hoverable:hover .secondary-box {
+    stroke-width: 3;
+    stroke: var(--accent);
+}
+
+.svg-diagram .hoverable:hover .label-phase,
+.svg-diagram .hoverable:hover .label-medium {
+    fill: var(--accent);
+}
+
+/* Invisible hit area for small text */
+.svg-diagram .hover-target {
+    fill: transparent;
+    stroke: none;
+}
+
+.svg-diagram .hoverable:hover .hover-target {
+    fill: var(--accent-light);
+}
+
+/* Diagram tooltip */
+.svg-diagram {
+    position: relative;
+}
+
+.diagram-tooltip {
+    position: absolute;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: 8px;
+    padding: var(--s2) var(--s3);
+    box-shadow: var(--shadow-lg);
+    max-width: 350px;
+    font-size: var(--text-small);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    white-space: pre-line;
+}
+
+.diagram-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.diagram-tooltip strong {
+    display: block;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: var(--s1);
+}
+
 /* ===============
    Term Grid (Terminology slide)
    =============== */
@@ -603,6 +838,55 @@ a:hover {
 .concept p {
     font-size: var(--text-small);
     color: var(--text-secondary);
+}
+
+/* Compact variant for split layouts */
+.concept-list.compact {
+    gap: var(--s1);
+    margin: var(--s2) 0;
+}
+
+.concept-list.compact .concept {
+    padding: var(--s1) var(--s2);
+}
+
+.concept-list.compact .concept h3 {
+    font-size: var(--text-small);
+    margin-bottom: 0.25rem;
+}
+
+.concept-list.compact .concept p {
+    font-size: var(--text-tiny);
+}
+
+.callout-small {
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    margin-top: var(--s2);
+    font-style: italic;
+}
+
+/* ==============
+   Big Quote
+   ============== */
+
+.big-quote {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    color: var(--text-primary);
+    margin: var(--s3) 0 var(--s4) 0;
+    line-height: var(--lh-tight);
+}
+
+/* ==============
+   Big List Large
+   ============== */
+
+.big-list.large li {
+    font-size: var(--text-title);
+    padding-left: var(--s4);
 }
 
 /* ===============
@@ -740,6 +1024,110 @@ a:hover {
     position: absolute;
     left: 0;
     color: var(--text-tertiary);
+}
+
+/* Scaling Chart */
+.scaling-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.scaling-svg {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.scaling-img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.scaling-dimensions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+}
+
+.scaling-dim {
+    background: var(--bg-surface);
+    border-left: 4px solid var(--text-tertiary);
+    padding: var(--s2) var(--s3);
+    border-radius: 0 6px 6px 0;
+}
+
+.scaling-dim strong {
+    display: block;
+    font-size: var(--text-body);
+    margin-bottom: var(--s1);
+}
+
+.scaling-dim p {
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.scaling-explanation {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+}
+
+.scaling-point {
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.scaling-point:last-child {
+    border-bottom: none;
+}
+
+.scaling-point strong {
+    display: block;
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    margin-bottom: var(--s1);
+}
+
+.scaling-point p {
+    font-size: var(--text-body);
+    margin: 0;
+}
+
+.scaling-point.subtle {
+    padding-top: var(--s3);
+    border-bottom: none;
+}
+
+.scaling-point.subtle p {
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* METR Chart */
+.metr-chart-container {
+    display: flex;
+    justify-content: center;
+    margin: var(--s2) 0;
+}
+
+.metr-chart {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+}
+
+.metr-chart-img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 8px;
 }
 
 /* ===============
@@ -1597,114 +1985,104 @@ blockquote {
 }
 
 /* ===============
-   Presenter Mode
+   Detail Mode
    =============== */
 
-.presenter-mode {
-    position: fixed;
-    inset: 0;
-    background: var(--bg-muted);
-    z-index: 1000;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: var(--s3);
-    padding: var(--s3);
-}
-
-.presenter-current {
-    background: var(--bg-surface);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.presenter-slide-container {
-    transform: scale(0.7);
-    transform-origin: top left;
-}
-
-.presenter-sidebar {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    gap: var(--s3);
-}
-
-.presenter-timer {
-    background: var(--bg-surface);
-    padding: var(--s3);
-    border-radius: 8px;
-    box-shadow: var(--shadow-sm);
-}
-
-.timer-display {
-    font-size: var(--text-large);
-    font-family: var(--font-mono);
-    text-align: center;
-    color: var(--positive);
-    margin-bottom: var(--s2);
-}
-
-.timer-control {
-    width: 100%;
-    padding: var(--s2);
-    background: var(--text-primary);
-    color: var(--bg-surface);
-    border: none;
-    border-radius: 6px;
-    font-size: var(--text-small);
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-}
-
-.timer-control:hover {
-    opacity: 0.85;
-}
-
-.presenter-next {
-    background: var(--bg-surface);
-    padding: var(--s3);
-    border-radius: 8px;
-    box-shadow: var(--shadow-sm);
-}
-
-.presenter-next h3 {
-    font-size: var(--text-small);
-    margin-bottom: var(--s2);
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-.presenter-next-preview {
-    background: var(--bg-muted);
-    border-radius: 6px;
-    min-height: 100px;
-    display: grid;
-    place-items: center;
-    color: var(--text-tertiary);
-    font-size: var(--text-tiny);
-    padding: var(--s2);
-}
-
-.presenter-notes-display {
-    background: var(--bg-surface);
-    padding: var(--s3);
-    border-radius: 8px;
-    box-shadow: var(--shadow-sm);
+/* Show details when detail mode is active */
+body.detail-mode-active .slide-details {
+    max-height: 400px;
+    opacity: 1;
+    padding: var(--s3) var(--s4);
+    margin-top: var(--s3);
     overflow-y: auto;
 }
 
-.presenter-notes-display h3 {
-    font-size: var(--text-small);
-    margin-bottom: var(--s2);
-    color: var(--text-secondary);
-    font-weight: 600;
+/* Adjust slide layout when details are visible */
+body.detail-mode-active .slide {
+    align-items: flex-start;
+    padding-top: var(--s3);
 }
 
-.notes-content {
-    font-size: var(--text-tiny);
-    line-height: var(--lh-relaxed);
+body.detail-mode-active .slide-content {
+    max-height: calc(100vh - var(--s5) * 2 - 250px);
+    overflow-y: auto;
+}
+
+/* Detail sections */
+.detail-section {
+    margin-bottom: var(--s3);
+}
+
+.detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.detail-section h4 {
+    font-size: var(--text-small);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: var(--text-secondary);
+    margin-bottom: var(--s2);
+    padding-bottom: var(--s1);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.detail-section p {
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    line-height: var(--lh-relaxed);
+}
+
+.detail-section ul {
+    list-style: none;
+    display: grid;
+    gap: var(--s1);
+    padding: 0;
+    margin: 0;
+}
+
+.detail-section li {
+    font-size: var(--text-small);
+    padding-left: var(--s3);
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.detail-section li::before {
+    content: '\2192';
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+}
+
+.detail-section a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.detail-section a:hover {
+    text-decoration: underline;
+}
+
+/* Detail mode indicator */
+.detail-mode-indicator {
+    position: fixed;
+    top: var(--s2);
+    right: var(--s3);
+    font-size: var(--text-tiny);
+    color: var(--text-tertiary);
+    background: var(--bg-surface);
+    padding: var(--s1) var(--s2);
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+}
+
+body.detail-mode-active .detail-mode-indicator {
+    opacity: 1;
 }
 
 /* ===============
