@@ -8,10 +8,7 @@ class Presentation {
         this.slides = Array.from(document.querySelectorAll('.slide'));
         this.currentIndex = 0;
         this.totalSlides = this.slides.length;
-        this.presenterMode = false;
-        this.timer = null;
-        this.timerStartTime = null;
-        this.timerInterval = null;
+        this.detailMode = false;
 
         this.init();
     }
@@ -22,9 +19,8 @@ class Presentation {
         this.updateUI();
         this.setupProgressiveReveals();
         this.loadFromURL();
-
-        // Add touch support for mobile
         this.setupTouchNavigation();
+        this.restoreDetailMode();
     }
 
     setupKeyboardNavigation() {
@@ -66,16 +62,17 @@ class Presentation {
                     this.toggleFullscreen();
                     break;
 
-                case 'p':
-                case 'P':
-                    e.preventDefault();
-                    this.togglePresenterMode();
-                    break;
+                // Detail mode disabled for now - uncomment when ready
+                // case 'd':
+                // case 'D':
+                // case 'p':
+                // case 'P':
+                //     e.preventDefault();
+                //     this.toggleDetailMode();
+                //     break;
 
                 case 'Escape':
-                    if (this.presenterMode) {
-                        this.togglePresenterMode();
-                    }
+                    // Reserved for future detail mode
                     break;
             }
 
@@ -229,10 +226,6 @@ class Presentation {
         if (updateURL) {
             this.updateURL(index);
         }
-
-        if (this.presenterMode) {
-            this.updatePresenterMode();
-        }
     }
 
     updateUI() {
@@ -262,82 +255,16 @@ class Presentation {
         }
     }
 
-    togglePresenterMode() {
-        this.presenterMode = !this.presenterMode;
-        const presenterElement = document.querySelector('.presenter-mode');
-        const presentationUI = document.querySelector('.presentation-ui');
-
-        if (this.presenterMode) {
-            // Enter presenter mode
-            presenterElement.style.display = 'grid';
-            presentationUI.style.display = 'none';
-            this.updatePresenterMode();
-            this.setupPresenterTimer();
-        } else {
-            // Exit presenter mode
-            presenterElement.style.display = 'none';
-            presentationUI.style.display = 'block';
-            this.stopPresenterTimer();
-        }
+    toggleDetailMode() {
+        this.detailMode = !this.detailMode;
+        document.body.classList.toggle('detail-mode-active', this.detailMode);
+        sessionStorage.setItem('detailMode', this.detailMode ? 'active' : 'inactive');
     }
 
-    updatePresenterMode() {
-        // Clone current slide to presenter view
-        const currentSlide = this.slides[this.currentIndex].cloneNode(true);
-        currentSlide.classList.add('active');
-        const container = document.querySelector('.presenter-slide-container');
-        container.innerHTML = '';
-        container.appendChild(currentSlide);
-
-        // Show next slide preview
-        const nextPreview = document.querySelector('.presenter-next-preview');
-        if (this.currentIndex < this.totalSlides - 1) {
-            const nextSlide = this.slides[this.currentIndex + 1];
-            const nextTitle = nextSlide.querySelector('h1, h2')?.textContent || 'Next slide';
-            nextPreview.innerHTML = `<p>${nextTitle}</p>`;
-        } else {
-            nextPreview.innerHTML = '<p>End of presentation</p>';
-        }
-
-        // Show presenter notes
-        const notes = this.slides[this.currentIndex].querySelector('.presenter-notes');
-        const notesContent = document.querySelector('.notes-content');
-        if (notes && notesContent) {
-            notesContent.textContent = notes.textContent.trim();
-        } else if (notesContent) {
-            notesContent.textContent = 'No notes for this slide.';
-        }
-    }
-
-    setupPresenterTimer() {
-        const timerControl = document.querySelector('.timer-control');
-        const timerDisplay = document.querySelector('.timer-display');
-
-        if (!timerControl || !timerDisplay) return;
-
-        timerControl.onclick = () => {
-            if (this.timerInterval) {
-                // Stop timer
-                this.stopPresenterTimer();
-                timerControl.textContent = 'Start';
-            } else {
-                // Start timer
-                this.timerStartTime = Date.now();
-                this.timerInterval = setInterval(() => {
-                    const elapsed = Date.now() - this.timerStartTime;
-                    const minutes = Math.floor(elapsed / 60000);
-                    const seconds = Math.floor((elapsed % 60000) / 1000);
-                    timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                }, 1000);
-                timerControl.textContent = 'Stop';
-            }
-        };
-    }
-
-    stopPresenterTimer() {
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-            this.timerInterval = null;
+    restoreDetailMode() {
+        if (sessionStorage.getItem('detailMode') === 'active') {
+            this.detailMode = true;
+            document.body.classList.add('detail-mode-active');
         }
     }
 }
@@ -367,3 +294,88 @@ window.addEventListener('beforeprint', () => {
         slide.style.position = 'relative';
     });
 });
+
+// ===================================
+// Diagram Tooltips
+// ===================================
+
+class DiagramTooltips {
+    constructor() {
+        this.tooltip = document.getElementById('diagram-tooltip');
+        if (!this.tooltip) return;
+
+        this.hoverables = document.querySelectorAll('.svg-diagram .hoverable');
+        this.init();
+    }
+
+    init() {
+        this.hoverables.forEach(element => {
+            element.addEventListener('mouseenter', (e) => this.showTooltip(e));
+            element.addEventListener('mouseleave', () => this.hideTooltip());
+            element.addEventListener('mousemove', (e) => this.moveTooltip(e));
+        });
+    }
+
+    showTooltip(e) {
+        const target = e.currentTarget;
+        const tooltipText = target.getAttribute('data-tooltip');
+
+        if (!tooltipText) return;
+
+        // Format the tooltip content - first line becomes the title
+        const lines = tooltipText.split('\n');
+        let html = '';
+
+        if (lines[0].includes(':')) {
+            // First line has a title (e.g., "PRETRAINING: description")
+            const [title, ...rest] = lines[0].split(':');
+            html = `<strong>${title}</strong>${rest.join(':').trim()}`;
+            if (lines.length > 1) {
+                html += '\n' + lines.slice(1).join('\n');
+            }
+        } else {
+            html = tooltipText;
+        }
+
+        this.tooltip.innerHTML = html;
+        this.tooltip.classList.add('visible');
+        this.moveTooltip(e);
+    }
+
+    hideTooltip() {
+        this.tooltip.classList.remove('visible');
+    }
+
+    moveTooltip(e) {
+        const svgDiagram = e.currentTarget.closest('.svg-diagram');
+        const rect = svgDiagram.getBoundingClientRect();
+
+        // Position tooltip relative to the svg-diagram container
+        let x = e.clientX - rect.left + 15;
+        let y = e.clientY - rect.top + 15;
+
+        // Prevent tooltip from going off-screen right
+        const tooltipWidth = this.tooltip.offsetWidth;
+        if (x + tooltipWidth > rect.width) {
+            x = e.clientX - rect.left - tooltipWidth - 15;
+        }
+
+        // Prevent tooltip from going off-screen bottom
+        const tooltipHeight = this.tooltip.offsetHeight;
+        if (y + tooltipHeight > rect.height) {
+            y = e.clientY - rect.top - tooltipHeight - 15;
+        }
+
+        this.tooltip.style.left = `${x}px`;
+        this.tooltip.style.top = `${y}px`;
+    }
+}
+
+// Initialize tooltips when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new DiagramTooltips();
+    });
+} else {
+    new DiagramTooltips();
+}
