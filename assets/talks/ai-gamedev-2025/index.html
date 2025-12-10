@@ -35,19 +35,13 @@
 
         <!-- Slide 2: About & Context -->
         <section class="slide" data-slide="2" data-section="opening">
-            <div class="slide-content">
-                <h2>Who Am I & Why This Talk?</h2>
-                <ul class="big-list">
-                    <li>Indie game developer using AI in production daily</li>
-                    <li>Gave this talk at Nerdicon mid-2025</li>
-                    <li>AI moves fast - 6 months = lifetime of change</li>
-                    <li>Goal: Help you understand AI, not just use it blindly</li>
-                </ul>
+            <div class="slide-content text-only">
+                <img src="wildeford-tweet.png" alt="Tweet by @peterwildeford about being a member of the 'computers can now think' community" class="tweet-img">
             </div>
             <div class="slide-details">
                 <div class="detail-section detail-notes">
                     <h4>Notes</h4>
-                    <p>Establish credibility. Emphasize the speed of change. This isn't about hype - it's about understanding what's happening and why.</p>
+                    <p>This quote captures my stance perfectly. I'm here because I think this matters.</p>
                 </div>
             </div>
         </section>
@@ -612,7 +606,7 @@
                 <h2>Skate to Where the Puck Will Be</h2>
                 <div class="quote-box">
                     <blockquote>"I skate to where the puck is going to be, not where it has been."</blockquote>
-                    <p class="attribution">— Wayne Gretzky</p>
+                    <p class="attribution">— Wayne Gretzky, ice hockey legend</p>
                 </div>
                 <div class="implications">
                     <div class="implication">
@@ -647,6 +641,7 @@
             <div class="slide-content">
                 <h1 class="section-title">Theory of Mind</h1>
                 <p class="section-subtitle">How to Work with AI</p>
+                <p class="footnote">* Theory of Mind: the ability to model another agent's mental states — what they know, believe, and intend</p>
             </div>
             <div class="slide-details">
                 Section 3: Mental models for working with AI effectively.
@@ -688,23 +683,12 @@
             </div>
         </section>
 
-        <!-- Slide 19: Communication is the Bottleneck -->
+        <!-- Slide 19: Stupid Questions beget Stupid Answers -->
         <section class="slide" data-slide="19" data-section="theory">
             <div class="slide-content">
-                <h2>Communication is the New Bottleneck</h2>
+                <h2>Stupid Questions beget Stupid Answers</h2>
                 <div class="key-insight">
-                    <p class="insight-text">Output quality is limited by your communication clarity, not the model's capability</p>
-                </div>
-                <div class="comparison">
-                    <div class="before">
-                        <p class="label">Old Problem (2023)</p>
-                        <p>"The model didn't understand"</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="after">
-                        <p class="label">New Reality (2025)</p>
-                        <p>"I didn't communicate clearly"</p>
-                    </div>
+                    <p class="insight-text">You can only get what you ask for. Knowing what to ask is the hard part.</p>
                 </div>
                 <ul class="big-list">
                     <li><strong>Game design:</strong> Knowing patterns (risk/reward, progression curves, feedback loops) → can articulate what you want</li>
@@ -731,9 +715,9 @@
                 </div>
                 <p class="lead">Then: Verify assumptions, correct misconceptions, iterate</p>
                 <ul class="big-list">
-                    <li>Models have seen thousands of implementations</li>
-                    <li>They might suggest patterns you haven't considered</li>
-                    <li>You can always override when they're missing context</li>
+                    <li>Allow/encourage uncertainty: "express confidence as probabilities"</li>
+                    <li>Edit, re-edit, triple re-edit your prompt before giving up</li>
+                    <li>Go meta: "What prompt would you write for this? Then answer that" — reveals what the model thinks you meant</li>
                 </ul>
             </div>
             <div class="slide-details">
@@ -742,32 +726,8 @@
             </div>
         </section>
 
-        <!-- Slide 21: Adopt Ambition -->
+        <!-- Slide 21: Keep Your Brain On -->
         <section class="slide" data-slide="21" data-section="theory">
-            <div class="slide-content">
-                <h2>Adopt Ambition & Agency</h2>
-                <div class="mindset-shift">
-                    <p class="lead">"It would be useful if we could do X.<br>AI, how can we do X?"</p>
-                </div>
-                <ul class="big-list">
-                    <li>Many "impossible" tasks are actually scriptable</li>
-                    <li>AI can often tell you HOW if you ask</li>
-                    <li>Don't self-limit based on what you think is possible</li>
-                </ul>
-                <div class="example">
-                    <p class="example-label">Real example:</p>
-                    <p>"I want to batch-convert 200 Unity prefabs to Godot scenes"</p>
-                    <p class="result">→ Model writes parser, converter, and validator in 15 minutes</p>
-                </div>
-            </div>
-            <div class="slide-details">
-                Remove mental barriers. Students often think "that would take weeks" - try asking AI first.
-                The cost of asking is near-zero. The upside can be enormous.
-            </div>
-        </section>
-
-        <!-- Slide 22: Keep Your Brain On -->
-        <section class="slide" data-slide="22" data-section="theory">
             <div class="slide-content">
                 <h2>Keep Your Brain On</h2>
                 <div class="warning-box">
@@ -792,8 +752,8 @@
         <!-- Practical Applications                      -->
         <!-- ============================================ -->
 
-        <!-- Slide 23: Section Title - Mundane Utility -->
-        <section class="slide" data-slide="23" data-section="utility">
+        <!-- Slide 22: Section Title - Mundane Utility -->
+        <section class="slide" data-slide="22" data-section="utility">
             <div class="slide-content">
                 <h1 class="section-title">Mundane Utility</h1>
                 <p class="section-subtitle">Practical Applications for Game Dev</p>
@@ -804,145 +764,385 @@
             </div>
         </section>
 
-        <!-- Slide 24: Content Generation -->
+        <!-- Slide 23: Content Generation Pattern -->
+        <section class="slide" data-slide="23" data-section="utility">
+            <div class="slide-content">
+                <h2>Content Generation: A Useful Pattern</h2>
+                <div class="constraint-diagram">
+                    <div class="constraint-side unconstrained">
+                        <div class="constraint-input">
+                            <span class="input-label">"Write item descriptions"</span>
+                        </div>
+                        <div class="constraint-arrow">→</div>
+                        <div class="solution-space chaotic">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                        <p class="constraint-label">Anything goes</p>
+                    </div>
+                    <div class="constraint-side constrained">
+                        <div class="constraint-input">
+                            <span class="input-label">Spec: voice, format, examples</span>
+                        </div>
+                        <div class="constraint-arrow">→</div>
+                        <div class="solution-space focused">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                        </div>
+                        <p class="constraint-label">What you actually want</p>
+                    </div>
+                </div>
+                <div class="key-insight">
+                    <p class="insight-text">Style Guide → Clear Target.</p>
+                </div>
+                <p class="callout">This might be familiar to those who have written a GDD or style guide.</p>
+            </div>
+            <div class="slide-details">
+                The core pattern: encode your constraints (style, format, examples) as reusable context.
+                Works with any model - Claude Skills, GPT Custom Instructions, system prompts, etc.
+            </div>
+        </section>
+
+        <!-- Slide 24: Text Content -->
         <section class="slide" data-slide="24" data-section="utility">
             <div class="slide-content">
-                <h2>Content Generation</h2>
-                <div class="use-cases">
-                    <div class="use-case">
-                        <h3>Text Content</h3>
-                        <ul>
-                            <li>Item descriptions & tooltips</li>
-                            <li>NPC dialogue variations</li>
-                            <li>Lore snippets & flavor text</li>
-                            <li>Tutorial messages</li>
-                        </ul>
-                    </div>
-                    <div class="use-case">
-                        <h3>Localization</h3>
-                        <ul>
-                            <li>Quick translation drafts</li>
-                            <li>10 languages for €1-2 each</li>
-                            <li>Human review still needed</li>
-                            <li>But 90% of work automated</li>
-                        </ul>
-                    </div>
-                    <div class="use-case">
-                        <h3>Validation</h3>
-                        <ul>
-                            <li>Check tone consistency</li>
-                            <li>Match your game's voice</li>
-                            <li>Flag out-of-character lines</li>
-                        </ul>
-                    </div>
+                <h2>Text Content</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Style Guide.</p>
                 </div>
+                <div class="code-example">
+                    <pre><code># item-descriptions/SKILL.md
+name: item-descriptions
+description: Generate item descriptions for our roguelike
+
+## Voice & Tone
+- Terse, punchy. Max 15 words.
+- Dark humor okay, never campy.
+- Reference mechanics, not just flavor.
+
+## Examples
+✓ "Rusted blade. Still sharp. Previous owner wasn't."
+✗ "A mystical sword imbued with ancient power!"</code></pre>
+                </div>
+                <p class="callout">Write once, use forever. Works for validation too.</p>
             </div>
             <div class="slide-details">
-                Start with obvious wins. Text content is the low-hanging fruit.
-                Localization cost drop is dramatic - a game-changer for indie devs.
+                This is the difference between "write me some dialogue" and actually useful output.
+                Claude calls these "Skills" - reusable instruction sets that become AI context.
             </div>
         </section>
 
-        <!-- Slide 25: Code & Technical -->
+        <!-- Slide 25: Frontend Design -->
         <section class="slide" data-slide="25" data-section="utility">
             <div class="slide-content">
-                <h2>Code & Technical Tasks</h2>
-                <div class="tool-showcase">
-                    <div class="tool">
-                        <h3>GitHub Copilot ($10/mo)</h3>
-                        <p>Code completion. Up to 2x faster for routine tasks.</p>
+                <h2>Frontend Design</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Style Guide.</p>
+                </div>
+                <div class="design-demo">
+                    <div class="code-example">
+                        <pre><code>## Win95 Aesthetic
+- Beveled borders: #fff/#808080
+- System gray: #c0c0c0
+- Selection: navy inverted
+
+## Typography
+- Monospace, uppercase
+- Tabular nums for stats
+- [H]otkey hints in status</code></pre>
                     </div>
-                    <div class="tool">
-                        <h3>Claude Code / Cursor ($20/mo)</h3>
-                        <p>Full-feature implementation with project context.</p>
+                    <div class="design-preview">
+                        <div class="retro-ui">
+                            <div class="retro-window">
+                                <div class="retro-titlebar">
+                                    <span class="retro-title">INVENTORY.EXE</span>
+                                    <div class="retro-controls">
+                                        <span class="retro-btn-min">_</span>
+                                        <span class="retro-btn-close">X</span>
+                                    </div>
+                                </div>
+                                <div class="retro-content">
+                                    <table class="retro-table">
+                                        <tr class="selected">
+                                            <td class="col-id">01</td>
+                                            <td class="col-name">RUSTED BLADE</td>
+                                            <td class="col-stat">+12</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-id">02</td>
+                                            <td class="col-name">IRON SHIELD</td>
+                                            <td class="col-stat">+08</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-id">03</td>
+                                            <td class="col-name">HEALTH VIAL</td>
+                                            <td class="col-stat">x03</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="retro-statusbar">
+                                    <span>WEIGHT: 24/100</span>
+                                    <span class="retro-hotkey">[E]QUIP [D]ROP</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <ul class="big-list">
-                    <li><strong>Documentation</strong>: Auto-generate API docs, code comments</li>
-                    <li><strong>Bug discovery</strong>: "Generate 50 edge cases for this feature"</li>
-                    <li><strong>Refactoring</strong>: "Extract this into a reusable component"</li>
-                    <li><strong>Conversion</strong>: Transform between formats, languages, frameworks</li>
-                </ul>
+                <p class="callout">Feed it your existing CSS. It learns your patterns.</p>
             </div>
             <div class="slide-details">
-                Copilot = autocomplete on steroids. Claude Code = full features, multi-file changes.
-                Both worth the money for professional work.
+                Frontend is where this really shines. Give Claude your design system
+                and it produces consistent components that actually match your game.
             </div>
         </section>
 
-        <!-- Slide 26: Design & Analysis -->
+        <!-- Slide 26: Code & Technical -->
         <section class="slide" data-slide="26" data-section="utility">
             <div class="slide-content">
-                <h2>Design & Analysis</h2>
-                <div class="case-study">
-                    <h3>Case Study: Lancer RPG Balance Testing</h3>
-                    <p class="lead">Analyzing weapon balance across 200+ combinations</p>
-                    <div class="process">
-                        <div class="step"><span class="step-num">1</span><p>Fed AI the weapon stats & combat rules</p></div>
-                        <div class="step"><span class="step-num">2</span><p>Simulated 1000 combat scenarios</p></div>
-                        <div class="step"><span class="step-num">3</span><p>Generated statistical analysis</p></div>
-                        <div class="step"><span class="step-num">4</span><p>Identified outliers needing playtesting</p></div>
-                    </div>
-                    <p class="result">Found 3 overpowered combos in minutes instead of weeks of playtesting</p>
+                <h2>Code & Technical Tasks</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Use Cursor, Claude Code, or Codex. It's worth paying for.</p>
                 </div>
+                <ul class="big-list">
+                    <li><strong>Auto-documentation</strong>: Generate API docs, code comments, READMEs</li>
+                    <li><strong>Unit tests</strong>: "Write tests for this module" — then iterate</li>
+                    <li><strong>Balance testing</strong>: Automated simulations, statistical analysis</li>
+                    <li><strong>Refactors</strong>: Multi-file changes with project context</li>
+                    <li><strong>Code reviews</strong>: "Review this PR for bugs and style issues"</li>
+                </ul>
+                <p class="callout">Every best practice you already use (TDD, CI/CD, code review) works with these tools. You'd be a fool not to.</p>
             </div>
             <div class="slide-details">
-                Concrete example from real work. This is powerful stuff.
-                Simulate thousands of playtests in minutes. Then validate with real playtesting.
+                These tools pay for themselves in hours, not weeks.
+                The key is having full project context — that's what Claude Code and Cursor provide.
             </div>
         </section>
 
-        <!-- Slide 27: Production & Accessibility -->
+        <!-- Slide 27: Design & Analysis -->
         <section class="slide" data-slide="27" data-section="utility">
             <div class="slide-content">
-                <h2>Production & Accessibility</h2>
-                <div class="split-content">
-                    <div class="left">
-                        <h3>Production Efficiency</h3>
-                        <ul>
-                            <li>Asset organization & batch processing</li>
-                            <li>Placeholder assets (Meshy AI, DALL-E)</li>
-                            <li>Animation prototypes (DeepMotion)</li>
-                            <li>Marketing copy & devlogs</li>
-                        </ul>
-                    </div>
-                    <div class="right">
-                        <h3>Accessibility Wins</h3>
-                        <ul>
-                            <li>Alt text generation for UI</li>
-                            <li>Audio description scripts</li>
-                            <li>Subtitle generation</li>
-                            <li>Colorblind validation</li>
-                        </ul>
-                    </div>
+                <h2>Design & Analysis</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Unit tests for game design.</p>
                 </div>
-                <p class="callout">Accessibility used to be expensive → Now it's cheap and easy. Larger audience + better design.</p>
+                <ul class="big-list">
+                    <li><strong>Run simulations</strong>: "Simulate 1000 fights between these two builds"</li>
+                    <li><strong>Model assumptions</strong>: "If players upgrade weapons 20% faster, what breaks?"</li>
+                    <li><strong>Test quickly</strong>: Minutes instead of weeks of playtesting</li>
+                    <li><strong>Find outliers</strong>: Statistical analysis surfaces the edge cases</li>
+                </ul>
+                <p class="callout">Then validate with real playtesting. AI finds where to look.</p>
             </div>
             <div class="slide-details">
-                AI removes the cost barrier for accessibility. That's ethically AND financially good.
-                Production efficiency: AI handles tedious bulk, you add the polish.
+                Same pattern as code: write a test, run it fast, iterate.
+                Simulate thousands of playtests in minutes. Real playtesting validates.
             </div>
         </section>
 
-        <!-- Slide 28: Real Example -->
+        <!-- Slide 28: Something > Nothing -->
         <section class="slide" data-slide="28" data-section="utility">
             <div class="slide-content">
-                <h2>Real Example: For Want of Fuel</h2>
-                <div class="project-example">
-                    <p class="lead">My Lancer RPG campaign supplement - AI helped with:</p>
-                    <ul class="big-list">
-                        <li><strong>Mech Builder Tool</strong>: Claude Code built the entire interactive calculator</li>
-                        <li><strong>Tag System</strong>: Auto-generated definitions from rulebook PDFs</li>
-                        <li><strong>Balance Testing</strong>: Simulated 1000+ combat scenarios</li>
-                        <li><strong>Data Conversion</strong>: Messy spreadsheets → clean JSON</li>
-                    </ul>
-                    <p class="time-saved">Estimated time saved: <strong>40+ hours</strong> on a side project</p>
-                    <p class="result">Project actually got done instead of languishing forever</p>
+                <h2>Something > Nothing</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Don't let perfect be the enemy of good.</p>
                 </div>
+                <ul class="big-list">
+                    <li><strong>Accessibility</strong>: AI-generated alt text beats no alt text</li>
+                    <li><strong>Documentation</strong>: Auto-generated docs beat undocumented code</li>
+                    <li><strong>Localization</strong>: Machine translation beats English-only</li>
+                    <li><strong>Subtitles</strong>: Auto-captions beat no captions</li>
+                </ul>
+                <p class="callout">If you can pay for perfect, please do. But "good enough" unlocks things you'd otherwise skip entirely.</p>
             </div>
             <div class="slide-details">
-                Concrete example from YOUR work. Makes it real for students.
-                40 hours saved = the difference between shipping and not shipping.
+                The cost barrier used to mean these things didn't happen at all.
+                AI makes "good enough" nearly free. That changes the calculus.
+            </div>
+        </section>
+
+        <!-- Slide 29: Real Example - Unity Integration -->
+        <section class="slide" data-slide="29" data-section="utility">
+            <div class="slide-content">
+                <h2>Real Example: Unity Integration</h2>
+                <div class="split-content file-tree-demo">
+                    <div class="left">
+                        <div class="file-tree">
+                            <pre><code>.claude/
+├── settings.local.json
+├── agents/
+│   └── documentation-audit.md
+├── commands/
+│   └── doc-audit.md
+├── skills/
+│   ├── changelog-updater/
+│   └── documentation-updater/
+└── hooks/
+    └── changelog-reminder.sh</code></pre>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <ul class="compact-list">
+                            <li><strong>CLAUDE.md</strong>: Project context, conventions, anti-patterns</li>
+                            <li><strong>Skills</strong>: Reusable tasks (changelog, docs)</li>
+                            <li><strong>Hooks</strong>: Post-commit reminders</li>
+                            <li><strong>Agents</strong>: Deep audits when needed</li>
+                            <li><strong>Commands</strong>: Quick slash commands</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="callout">CLAUDE.md alone saves hours of repeated explanations per session.</p>
+            </div>
+            <div class="slide-details">
+                Show the folder structure on screen. This is a real production Unity project.
+                The integration is a system, not one-off prompts.
+            </div>
+        </section>
+
+        <!-- Slide 30: Implementation Flow -->
+        <section class="slide" data-slide="30" data-section="utility">
+            <div class="slide-content">
+                <h2>What This Looks Like</h2>
+                <div class="svg-diagram">
+                    <svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="flow-arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#888"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Row 1: User Request -->
+                        <g class="hoverable" data-tooltip="Your natural language request. No special syntax needed.">
+                            <rect x="300" y="10" width="200" height="45" rx="6" class="flow-box user-box"/>
+                            <text x="400" y="38" class="label-flow">"Add inventory system"</text>
+                        </g>
+
+                        <!-- Arrow down -->
+                        <line x1="400" y1="55" x2="400" y2="75" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Row 2: CLAUDE.md -->
+                        <g class="hoverable" data-tooltip="CLAUDE.md: Project instructions at repo root. Contains architecture decisions, naming conventions, anti-patterns. Claude reads this automatically every session.">
+                            <rect x="300" y="80" width="200" height="45" rx="6" class="flow-box config-box"/>
+                            <text x="400" y="108" class="label-flow">CLAUDE.md</text>
+                        </g>
+                        <text x="510" y="108" class="label-annotation">← project context</text>
+
+                        <!-- Arrow down -->
+                        <line x1="400" y1="125" x2="400" y2="145" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Row 3: Claude Implements -->
+                        <g class="hoverable" data-tooltip="Claude writes code following your project's patterns. Uses correct Input System, namespaces, folder structure—without you having to explain.">
+                            <rect x="300" y="150" width="200" height="45" rx="6" class="flow-box claude-box"/>
+                            <text x="400" y="178" class="label-flow">Claude implements</text>
+                        </g>
+                        <text x="510" y="178" class="label-annotation">← follows conventions</text>
+
+                        <!-- Arrow down -->
+                        <line x1="400" y1="195" x2="400" y2="215" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Row 4: Git Commit -->
+                        <g class="hoverable" data-tooltip="You commit the changes. This triggers any configured hooks.">
+                            <rect x="300" y="220" width="200" height="45" rx="6" class="flow-box git-box"/>
+                            <text x="400" y="248" class="label-flow">git commit</text>
+                        </g>
+
+                        <!-- Arrow down splitting to two -->
+                        <line x1="400" y1="265" x2="400" y2="285" stroke="#888" stroke-width="2"/>
+                        <line x1="400" y1="285" x2="200" y2="285" stroke="#888" stroke-width="2"/>
+                        <line x1="400" y1="285" x2="600" y2="285" stroke="#888" stroke-width="2"/>
+                        <line x1="200" y1="285" x2="200" y2="305" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+                        <line x1="600" y1="285" x2="600" y2="305" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Left branch: Hook -->
+                        <g class="hoverable" data-tooltip="changelog-reminder.sh: A shell script in .claude/hooks/ that runs after every git commit. Prints a reminder to the terminal.">
+                            <rect x="100" y="310" width="200" height="40" rx="4" class="flow-box hook-box"/>
+                            <text x="200" y="335" class="label-flow-small">changelog-reminder.sh</text>
+                        </g>
+                        <text x="100" y="300" class="label-annotation">Hook</text>
+
+                        <!-- Arrow down from hook -->
+                        <line x1="200" y1="350" x2="200" y2="375" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Hook output -->
+                        <g class="hoverable" data-tooltip="The hook prints this reminder in your terminal after each commit, prompting you to invoke the changelog skill.">
+                            <rect x="100" y="380" width="200" height="35" rx="4" class="flow-box output-box"/>
+                            <text x="200" y="402" class="label-output">"Update changelog?"</text>
+                        </g>
+
+                        <!-- Right branch: Skills -->
+                        <text x="500" y="300" class="label-annotation">Skills</text>
+
+                        <!-- Two skill boxes side by side -->
+                        <g class="hoverable" data-tooltip="changelog-updater skill: Reads recent commits, updates CHANGELOG.md following Keep a Changelog format. Adds entries under [Unreleased] with proper categorization (Added, Changed, Fixed).">
+                            <rect x="500" y="310" width="95" height="40" rx="4" class="flow-box skill-box"/>
+                            <text x="547" y="335" class="label-flow-small">changelog</text>
+                        </g>
+
+                        <g class="hoverable" data-tooltip="documentation-updater skill: Detects new components, adds entries to project wiki. Includes description, usage examples, and links to related systems.">
+                            <rect x="605" y="310" width="95" height="40" rx="4" class="flow-box skill-box"/>
+                            <text x="652" y="335" class="label-flow-small">wiki</text>
+                        </g>
+
+                        <!-- Arrows down from skills -->
+                        <line x1="547" y1="350" x2="547" y2="375" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+                        <line x1="652" y1="350" x2="652" y2="375" stroke="#888" stroke-width="2" marker-end="url(#flow-arrow)"/>
+
+                        <!-- Skill outputs -->
+                        <g class="hoverable" data-tooltip="CHANGELOG.md updated with new entry: '- Added: Inventory system with drag-and-drop support'">
+                            <rect x="500" y="380" width="95" height="35" rx="4" class="flow-box output-box"/>
+                            <text x="547" y="402" class="label-output">CHANGELOG</text>
+                        </g>
+
+                        <g class="hoverable" data-tooltip="Wiki entry created: InventoryController - description, dependencies, usage examples, links to UI components.">
+                            <rect x="605" y="380" width="95" height="35" rx="4" class="flow-box output-box"/>
+                            <text x="652" y="402" class="label-output">Wiki entry</text>
+                        </g>
+
+                        <!-- Labels for sections -->
+                        <text x="200" y="440" class="label-section">Terminal reminder</text>
+                        <text x="600" y="440" class="label-section">Auto-updated files</text>
+                    </svg>
+                </div>
+                <p class="callout">One sentence gets code that already follows your project's rules.</p>
+            </div>
+            <div class="slide-details">
+                Hover over each box for details. The key: Claude reads CLAUDE.md automatically,
+                so it knows your conventions before you ask anything.
+            </div>
+        </section>
+
+        <!-- Slide 31: AI Documentation -->
+        <section class="slide" data-slide="31" data-section="utility">
+            <div class="slide-content">
+                <h2>AI Documentation: An Implementation</h2>
+                <div class="key-insight">
+                    <p class="insight-text">Daily updates + periodic audits = sustainable docs.</p>
+                </div>
+                <div class="two-layer-system">
+                    <div class="layer">
+                        <h3>Daily: Skill</h3>
+                        <p>Incremental updates</p>
+                        <ul class="compact-list">
+                            <li>Add new components to wiki</li>
+                            <li>Update paths after refactors</li>
+                            <li>Low overhead per change</li>
+                        </ul>
+                    </div>
+                    <div class="layer-divider">+</div>
+                    <div class="layer">
+                        <h3>Periodic: Audit Agent</h3>
+                        <p>Catch accumulated drift</p>
+                        <ul class="compact-list">
+                            <li>Read code, compare to docs</li>
+                            <li>Regenerate stale sections</li>
+                            <li>Run monthly or before releases</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="callout">Neither alone is complete. Skill handles daily work, audit catches what slipped through.</p>
+            </div>
+            <div class="slide-details">
+                Problem: documentation drifts from code over time.
+                Solution: two-layer system - cheap daily updates, expensive periodic validation.
             </div>
         </section>
 
@@ -951,8 +1151,8 @@
         <!-- Ethics & Considerations                     -->
         <!-- ============================================ -->
 
-        <!-- Slide 29: Section Title - Context -->
-        <section class="slide" data-slide="29" data-section="context">
+        <!-- Slide 32: Section Title - Context -->
+        <section class="slide" data-slide="32" data-section="context">
             <div class="slide-content">
                 <h1 class="section-title">Broader Context</h1>
                 <p class="section-subtitle">Ethics & Considerations</p>
@@ -963,8 +1163,8 @@
             </div>
         </section>
 
-        <!-- Slide 30: Clear Thinking -->
-        <section class="slide" data-slide="30" data-section="context">
+        <!-- Slide 32: Clear Thinking -->
+        <section class="slide" data-slide="33" data-section="context">
             <div class="slide-content">
                 <h2>Clear Thinking, Not Prescriptions</h2>
                 <div class="philosophy">
@@ -988,8 +1188,8 @@
             </div>
         </section>
 
-        <!-- Slide 31: AI Art Perspectives -->
-        <section class="slide" data-slide="31" data-section="context">
+        <!-- Slide 33: AI Art Perspectives -->
+        <section class="slide" data-slide="34" data-section="context">
             <div class="slide-content">
                 <h2>AI Art: Multiple Perspectives</h2>
                 <div class="perspectives">
@@ -1020,8 +1220,8 @@
             </div>
         </section>
 
-        <!-- Slide 32: Portfolio Guidance -->
-        <section class="slide" data-slide="32" data-section="context">
+        <!-- Slide 34: Portfolio Guidance -->
+        <section class="slide" data-slide="35" data-section="context">
             <div class="slide-content">
                 <h2>Portfolio Guidance: Honesty</h2>
                 <div class="guidance">
@@ -1054,8 +1254,8 @@
         <!-- What to Do Next                             -->
         <!-- ============================================ -->
 
-        <!-- Slide 33: Section Title - Action -->
-        <section class="slide" data-slide="33" data-section="action">
+        <!-- Slide 35: Section Title - Action -->
+        <section class="slide" data-slide="36" data-section="action">
             <div class="slide-content">
                 <h1 class="section-title">Call to Action</h1>
                 <p class="section-subtitle">What to Do Next</p>
@@ -1066,8 +1266,32 @@
             </div>
         </section>
 
-        <!-- Slide 34: Personal Benchmarking -->
-        <section class="slide" data-slide="34" data-section="action">
+        <!-- Slide 36: Adopt Ambition -->
+        <section class="slide" data-slide="37" data-section="action">
+            <div class="slide-content">
+                <h2>Adopt Ambition & Agency</h2>
+                <div class="mindset-shift">
+                    <p class="lead">"It would be useful if we could do X.<br>AI, how can we do X?"</p>
+                </div>
+                <ul class="big-list">
+                    <li>Many "impossible" tasks are actually scriptable</li>
+                    <li>AI can often tell you HOW if you ask</li>
+                    <li>Don't self-limit based on what you think is possible</li>
+                </ul>
+                <div class="example">
+                    <p class="example-label">Real example:</p>
+                    <p>"I want to batch-convert 200 Unity prefabs to Godot scenes"</p>
+                    <p class="result">→ Model writes parser, converter, and validator in 15 minutes</p>
+                </div>
+            </div>
+            <div class="slide-details">
+                Remove mental barriers. Students often think "that would take weeks" - try asking AI first.
+                The cost of asking is near-zero. The upside can be enormous.
+            </div>
+        </section>
+
+        <!-- Slide 37: Personal Benchmarking -->
+        <section class="slide" data-slide="38" data-section="action">
             <div class="slide-content">
                 <h2>Stay Current: Personal Benchmarking</h2>
                 <p class="lead">Pick a benchmark task YOU can evaluate</p>
@@ -1085,8 +1309,8 @@
             </div>
         </section>
 
-        <!-- Slide 35: Five Takeaways -->
-        <section class="slide" data-slide="35" data-section="action">
+        <!-- Slide 38: Five Takeaways -->
+        <section class="slide" data-slide="39" data-section="action">
             <div class="slide-content">
                 <h2>Five Concrete Takeaways</h2>
                 <div class="actions">
@@ -1132,8 +1356,8 @@
             </div>
         </section>
 
-        <!-- Slide 36: Resources -->
-        <section class="slide" data-slide="36" data-section="action">
+        <!-- Slide 39: Resources -->
+        <section class="slide" data-slide="40" data-section="action">
             <div class="slide-content">
                 <h2>Resources</h2>
                 <div class="resources">
@@ -1169,8 +1393,8 @@
             </div>
         </section>
 
-        <!-- Slide 37: Q&A -->
-        <section class="slide" data-slide="37" data-section="action">
+        <!-- Slide 40: Q&A -->
+        <section class="slide" data-slide="41" data-section="action">
             <div class="slide-content">
                 <div class="qa-slide">
                     <h1>Questions?</h1>
