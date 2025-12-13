@@ -27,7 +27,7 @@ last_modified_at: 2024-12-13
 ## How to Play
 
 **Controls:**
-- **Arrow Keys**: Move
+- **Arrow Keys / WASD**: Move
 - **Space**: Start game / Confirm
 - **Escape**: Zoom out to parent world
 
