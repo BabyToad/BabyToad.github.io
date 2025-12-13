@@ -7,7 +7,7 @@ tags: [game-dev, godot, puzzle, game-jam]
 show_thumbnail: false
 demo_url: "/assets/games/schneekugel/schneekugel-godot.html"
 show_repo: false
-last_modified_at: 2024-12-13
+last_modified_at: 2025-12-13
 ---
 
 # Schneekugel (Snow Globe World)
