@@ -900,17 +900,61 @@ description: Generate item descriptions for our roguelike
         <section class="slide" data-slide="26" data-section="utility">
             <div class="slide-content">
                 <h2>Code & Technical Tasks</h2>
-                <div class="key-insight">
-                    <p class="insight-text">Use Cursor, Claude Code, or Codex. It's worth paying for.</p>
+                <p class="lead">Use Cursor, Claude Code, or Codex. It's worth paying for.</p>
+                <div class="task-cards">
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h12l4 4v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4z"/>
+                            <path d="M8 10h8M8 14h8M8 18h5"/>
+                        </svg>
+                        <h3>Documentation</h3>
+                        <p>API docs, comments, READMEs</p>
+                    </div>
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M8 12l3 3 5-6"/>
+                        </svg>
+                        <h3>Unit Tests</h3>
+                        <p>Generate, then iterate</p>
+                    </div>
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                        <h3>Balance Testing</h3>
+                        <p>Simulations & statistics</p>
+                    </div>
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 12a8 8 0 0 1 8-8"/>
+                            <path d="M20 12a8 8 0 0 1-8 8"/>
+                            <path d="M12 4l-2-2m2 2l2-2M12 20l-2 2m2-2l2 2"/>
+                        </svg>
+                        <h3>Refactors</h3>
+                        <p>Multi-file with context</p>
+                    </div>
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M2 12c2-4 5.5-7 10-7s8 3 10 7c-2 4-5.5 7-10 7s-8-3-10-7z"/>
+                        </svg>
+                        <h3>Code Review</h3>
+                        <p>Bugs & style issues</p>
+                    </div>
+                    <div class="task-card">
+                        <svg class="task-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="8" cy="8" r="4"/>
+                            <path d="M4 8h8M8 4v8"/>
+                            <path d="M14 14l6 6M14 20l6-6"/>
+                        </svg>
+                        <h3>Debugging</h3>
+                        <p>Stack traces & fixes</p>
+                    </div>
                 </div>
-                <ul class="big-list">
-                    <li><strong>Auto-documentation</strong>: Generate API docs, code comments, READMEs</li>
-                    <li><strong>Unit tests</strong>: "Write tests for this module" — then iterate</li>
-                    <li><strong>Balance testing</strong>: Automated simulations, statistical analysis</li>
-                    <li><strong>Refactors</strong>: Multi-file changes with project context</li>
-                    <li><strong>Code reviews</strong>: "Review this PR for bugs and style issues"</li>
-                </ul>
-                <p class="callout">Every best practice you already use (TDD, CI/CD, code review) works with these tools. You'd be a fool not to.</p>
+                <p class="callout">Every best practice you already use (TDD, CI/CD, code review) works with these tools.</p>
             </div>
             <div class="slide-details">
                 These tools pay for themselves in hours, not weeks.
@@ -922,15 +966,40 @@ description: Generate item descriptions for our roguelike
         <section class="slide" data-slide="27" data-section="utility">
             <div class="slide-content">
                 <h2>Design & Analysis</h2>
-                <div class="key-insight">
-                    <p class="insight-text">Unit tests for game design.</p>
+                <p class="lead">Unit tests for game design.</p>
+                <div class="design-loop">
+                    <div class="loop-step">
+                        <span class="loop-num">1</span>
+                        <div class="loop-content">
+                            <h3>Hypothesis</h3>
+                            <p>"Two-handers should beat sword+shield in DPS"</p>
+                        </div>
+                    </div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">
+                        <span class="loop-num">2</span>
+                        <div class="loop-content">
+                            <h3>Simulate</h3>
+                            <p>1000 fights, varied builds, edge cases</p>
+                        </div>
+                    </div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step">
+                        <span class="loop-num">3</span>
+                        <div class="loop-content">
+                            <h3>Analyze</h3>
+                            <p>Statistical outliers, failure modes</p>
+                        </div>
+                    </div>
+                    <div class="loop-arrow">→</div>
+                    <div class="loop-step loop-step-final">
+                        <span class="loop-num">4</span>
+                        <div class="loop-content">
+                            <h3>Iterate</h3>
+                            <p>Tweak values, re-test in minutes</p>
+                        </div>
+                    </div>
                 </div>
-                <ul class="big-list">
-                    <li><strong>Run simulations</strong>: "Simulate 1000 fights between these two builds"</li>
-                    <li><strong>Model assumptions</strong>: "If players upgrade weapons 20% faster, what breaks?"</li>
-                    <li><strong>Test quickly</strong>: Minutes instead of weeks of playtesting</li>
-                    <li><strong>Find outliers</strong>: Statistical analysis surfaces the edge cases</li>
-                </ul>
                 <p class="callout">Then validate with real playtesting. AI finds where to look.</p>
             </div>
             <div class="slide-details">
@@ -939,20 +1008,23 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 28: Something > Nothing -->
+        <!-- Slide 28: Tasks that need Infinite Patience -->
         <section class="slide" data-slide="28" data-section="utility">
             <div class="slide-content">
-                <h2>Something > Nothing</h2>
-                <div class="key-insight">
-                    <p class="insight-text">Don't let perfect be the enemy of good.</p>
+                <div class="bold-statement">
+                    <h2>Tasks that need Infinite Patience</h2>
+                    <p class="statement-tagline">AI doesn't get bored, frustrated, or sloppy at 2am.</p>
                 </div>
-                <ul class="big-list">
-                    <li><strong>Accessibility</strong>: AI-generated alt text beats no alt text</li>
-                    <li><strong>Documentation</strong>: Auto-generated docs beat undocumented code</li>
-                    <li><strong>Localization</strong>: Machine translation beats English-only</li>
-                    <li><strong>Subtitles</strong>: Auto-captions beat no captions</li>
-                </ul>
-                <p class="callout">If you can pay for perfect, please do. But "good enough" unlocks things you'd otherwise skip entirely.</p>
+                <div class="patience-examples">
+                    <span class="patience-item">Alt text for every image</span>
+                    <span class="patience-divider">·</span>
+                    <span class="patience-item">Docs for every function</span>
+                    <span class="patience-divider">·</span>
+                    <span class="patience-item">Translations for every string</span>
+                    <span class="patience-divider">·</span>
+                    <span class="patience-item">Captions for every video</span>
+                </div>
+                <p class="statement-footer">Something > Nothing. Good enough beats skipped entirely.</p>
             </div>
             <div class="slide-details">
                 The cost barrier used to mean these things didn't happen at all.

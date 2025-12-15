@@ -46,7 +46,9 @@
       "Bash(_drafts/YYYY-MM-DD-post-template.md )",
       "Bash(_data/weapons.json )",
       "Bash(_data/frames.json )",
-      "Bash(_data/fittings.json)"
+      "Bash(_data/fittings.json)",
+      "Bash(pkill:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
