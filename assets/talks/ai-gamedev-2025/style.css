@@ -2778,6 +2778,167 @@ body.detail-mode-active .detail-mode-indicator {
 }
 
 /* ===============
+   Task Cards (Slide 26)
+   =============== */
+
+.task-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s2);
+    margin: var(--s3) 0;
+}
+
+.task-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: var(--s2);
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-sm);
+}
+
+.task-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--text-tertiary);
+    margin-bottom: var(--s1);
+    transition: color 0.2s ease;
+}
+
+.task-card:hover .task-icon {
+    color: var(--text-secondary);
+}
+
+.task-card h3 {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin-bottom: var(--s1);
+}
+
+.task-card p {
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ===============
+   Design Loop (Slide 27)
+   =============== */
+
+.design-loop {
+    display: flex;
+    align-items: stretch;
+    gap: var(--s1);
+    margin: var(--s3) 0;
+}
+
+.loop-step {
+    flex: 1;
+    display: flex;
+    gap: var(--s2);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: var(--s2);
+}
+
+.loop-step-final {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.loop-num {
+    font-size: var(--text-title);
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--text-tertiary);
+    line-height: 1;
+}
+
+.loop-step-final .loop-num {
+    color: var(--accent);
+}
+
+.loop-content h3 {
+    font-size: var(--text-body);
+    font-weight: 600;
+    margin-bottom: var(--s1);
+}
+
+.loop-content p {
+    font-size: var(--text-small);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.loop-arrow {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-title);
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+}
+
+/* ===============
+   Bold Statement (Slide 28)
+   =============== */
+
+.bold-statement {
+    text-align: center;
+    padding: var(--s5) var(--s4);
+    margin-bottom: var(--s4);
+}
+
+.bold-statement h2 {
+    font-size: var(--text-huge);
+    font-weight: 700;
+    margin-bottom: var(--s3);
+}
+
+.statement-tagline {
+    font-size: var(--text-title);
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 0;
+}
+
+.patience-examples {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--s2);
+    padding: var(--s3);
+    background: var(--bg-muted);
+    border-radius: 8px;
+    margin-bottom: var(--s4);
+}
+
+.patience-item {
+    font-size: var(--text-body);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.patience-divider {
+    color: var(--text-tertiary);
+    font-weight: 300;
+}
+
+.statement-footer {
+    text-align: center;
+    font-size: var(--text-body);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ===============
    Responsive
    =============== */
 
@@ -2801,6 +2962,32 @@ body.detail-mode-active .detail-mode-indicator {
     .resources,
     .context-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Task cards responsive */
+    .task-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Design loop responsive */
+    .design-loop {
+        flex-direction: column;
+    }
+
+    .loop-arrow {
+        transform: rotate(90deg);
+        justify-content: center;
+        padding: var(--s1) 0;
+    }
+
+    /* Patience examples responsive */
+    .patience-examples {
+        flex-direction: column;
+        gap: var(--s1);
+    }
+
+    .patience-divider {
+        display: none;
     }
 }
 
