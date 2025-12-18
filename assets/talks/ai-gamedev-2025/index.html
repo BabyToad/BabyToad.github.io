@@ -28,7 +28,7 @@
             <div class="slide-details">
                 <div class="detail-section detail-notes">
                     <h4>Notes</h4>
-                    <p>Welcome! This is an update to my Nerdicon talk from June. Focus: how AI actually works, why it keeps improving, and practical utility for game developers.</p>
+                    <p>Welcome! This is an update to my Nerdicon talk from June. Focus: how AI works, why it keeps improving, and practical utility for game developers.</p>
                 </div>
             </div>
         </section>
@@ -53,7 +53,7 @@
                 <div class="agenda">
                     <div class="agenda-item">
                         <span class="number">1</span>
-                        <span class="text">Foundation: How AI Actually Works</span>
+                        <span class="text">Foundation: How AI Works</span>
                     </div>
                     <div class="agenda-item">
                         <span class="number">2</span>
@@ -87,14 +87,14 @@
 
         <!-- ============================================ -->
         <!-- SECTION 1: FOUNDATION                       -->
-        <!-- How AI Actually Works                       -->
+        <!-- How AI Works                       -->
         <!-- ============================================ -->
 
         <!-- Slide 4: Section Title - Foundation -->
         <section class="slide" data-slide="4" data-section="foundation">
             <div class="slide-content">
                 <h1 class="section-title">Foundation</h1>
-                <p class="section-subtitle">How AI Actually Works</p>
+                <p class="section-subtitle">How AI Works</p>
             </div>
             <div class="slide-details">
                 <div class="detail-section detail-notes">
@@ -437,24 +437,38 @@
             </div>
         </section>
 
-        <!-- Slide 10: The Scaling Discovery -->
+        <!-- Slide 10: The Scaling Era -->
         <section class="slide" data-slide="10" data-section="scaling">
             <div class="slide-content">
-                <h2>The Discovery That Changed Everything</h2>
+                <h2>The Scaling Era</h2>
                 <div class="quote-box">
                     <blockquote>"The more compute and data you put in, the more intelligence you get out. This effect is so clear and so important that I call the period since 2016 the scaling era of AI."</blockquote>
                     <p class="attribution">— Dwarkesh Patel, "The Scaling Era"</p>
                 </div>
                 <ul class="big-list">
-                    <li>2017: Researchers discover scaling laws</li>
-                    <li>2020: GPT-3 validates them at massive scale</li>
+                    <li>2009: "Unreasonable Effectiveness of Data" (Halevy, Norvig & Pereira) — simple models + vast data win</li>
+                    <li>2019: "The Bitter Lesson" (Sutton) — compute beats hand-engineering</li>
+                    <li>2020: Scaling laws formalized (Kaplan et al.); GPT-3 validates at scale (Brown et al.)</li>
                     <li>2023-2025: $100M+ training runs become normal</li>
                 </ul>
                 <p class="lead">Bigger models trained on more data = predictably better performance</p>
+                <p class="source">Further reading: Gwern, "The Scaling Hypothesis" (2020). gwern.net</p>
             </div>
             <div class="slide-details">
-                This is THE insight. Everything else follows from this.
-                Scaling laws let you predict performance before training. That's why labs invest billions.
+                <div class="detail-section detail-notes">
+                    <h4>Notes</h4>
+                    <p>This is THE insight. Everything else follows from this. Scaling laws let you predict performance before training. That's why labs invest billions.</p>
+                </div>
+                <div class="detail-section detail-sources">
+                    <h4>Sources</h4>
+                    <ul>
+                        <li><a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/35179.pdf" target="_blank">The Unreasonable Effectiveness of Data</a> - Halevy, Norvig, Pereira (2009)</li>
+                        <li><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html" target="_blank">The Bitter Lesson</a> - Rich Sutton (2019)</li>
+                        <li><a href="https://arxiv.org/abs/2001.08361" target="_blank">Scaling Laws for Neural Language Models</a> - Kaplan et al. (2020)</li>
+                        <li><a href="https://arxiv.org/abs/2005.14165" target="_blank">Language Models are Few-Shot Learners (GPT-3)</a> - Brown et al. (2020)</li>
+                        <li><a href="https://gwern.net/scaling-hypothesis" target="_blank">The Scaling Hypothesis</a> - Gwern (2020)</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -513,7 +527,7 @@
                     <li>Give models more parameters → they can represent more knowledge</li>
                     <li>Give models more compute → they can do both</li>
                 </ul>
-                <p class="callout">The architecture matters less than the scale. This was shocking to AI researchers.</p>
+                <p class="callout">The architecture matters less than the scale.</p>
             </div>
             <div class="slide-details">
                 Ilya Sutskever was OpenAI's chief scientist. This quote captures the essence of the scaling era.
@@ -589,8 +603,8 @@
                     <div class="timeline-item"><span class="date">Sep 2024</span><span class="event">o1 (reasoning models)</span></div>
                     <div class="timeline-item"><span class="date">Dec 2024</span><span class="event">Gemini 2.0</span></div>
                     <div class="timeline-item"><span class="date">Aug 2025</span><span class="event">GPT-5</span></div>
-                    <div class="timeline-item"><span class="date">Nov 2025</span><span class="event">GPT-5.1, Claude Opus 4.5</span></div>
-                    <div class="timeline-item highlight"><span class="date">Dec 2025</span><span class="event">Gemini 3 Pro</span></div>
+                    <div class="timeline-item"><span class="date">Nov 2025</span><span class="event">GPT-5.1, Claude Opus 4.5, Gemini 3</span></div>
+                    <div class="timeline-item highlight"><span class="date">Dec 2025</span><span class="event">GPT-5.2, GPT Image 1.5</span></div>
                 </div>
                 <p class="callout">Major releases every 2-4 months. Year-old knowledge is outdated.</p>
             </div>
@@ -676,6 +690,7 @@
                         </ul>
                     </div>
                 </div>
+                <p class="callout">A genius with retrograde amnesia (Hayek's local knowledge problem, but for AI).</p>
             </div>
             <div class="slide-details">
                 The "first day" metaphor is powerful. They're smart but lack context.
@@ -764,8 +779,87 @@
             </div>
         </section>
 
-        <!-- Slide 23: Content Generation Pattern -->
+        <!-- Slide 23: Choose Your Fighter -->
         <section class="slide" data-slide="23" data-section="utility">
+            <div class="slide-content">
+                <h2>Choose Your Fighter</h2>
+                <div class="fighter-grid">
+                    <div class="fighter-card claude">
+                        <h3>Claude</h3>
+                        <p class="fighter-rec">Soul</p>
+                        <ul>
+                            <li>Best on SWE-bench (Opus 4.5)</li>
+                            <li>Claude Code CLI</li>
+                            <li>$20/mo Pro</li>
+                        </ul>
+                    </div>
+                    <div class="fighter-card chatgpt">
+                        <h3>ChatGPT</h3>
+                        <p class="fighter-rec">Best on complex math/reasoning</p>
+                        <ul>
+                            <li>GPT-5.2 Thinking Pro</li>
+                            <li>Native image generation</li>
+                            <li>$20/mo Plus</li>
+                        </ul>
+                    </div>
+                    <div class="fighter-card gemini">
+                        <h3>Gemini</h3>
+                        <p class="fighter-rec">Best multimodality</p>
+                        <ul>
+                            <li>Gemini 3, 1M context</li>
+                            <li>Native audio & video</li>
+                            <li>$20/mo Advanced</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="key-insight">
+                    <p class="insight-text">Pay for capability. Use thinking models.</p>
+                </div>
+                <p class="callout">Free versions are significantly worse. Any of the three will work - pick one and commit.</p>
+            </div>
+            <div class="slide-details">
+                <div class="detail-section detail-notes">
+                    <h4>Notes</h4>
+                    <p>The paid tiers are worth it - the capability gap is substantial. Each has strengths: Claude leads on SWE-bench and has the excellent Claude Code CLI. GPT-5.2 Thinking Pro beats others on long complexity and math reasoning tasks. Gemini 3 has massive 2M context and native audio/video understanding. All three have CLI tools. Pick one and commit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 24: Personal Benchmarks -->
+        <section class="slide" data-slide="24" data-section="utility">
+            <div class="slide-content">
+                <h2>Personal Benchmarks</h2>
+                <p class="lead">Pick a task where YOU have deep expertise</p>
+                <div class="benchmark-concept">
+                    <div class="benchmark-why">
+                        <h3>Why?</h3>
+                        <ul>
+                            <li>You can actually evaluate the output</li>
+                            <li>You know what "good" looks like</li>
+                            <li>You'll spot subtle failures others miss</li>
+                        </ul>
+                    </div>
+                    <div class="benchmark-examples">
+                        <h3>Examples</h3>
+                        <ul>
+                            <li>"Analyze Lancer's crit math vs 5e"</li>
+                            <li>"Design an Ogre class for OSE"</li>
+                            <li>"Review this shader for performance"</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="callout">Re-run periodically on new models. Track progress yourself.</p>
+            </div>
+            <div class="slide-details">
+                <div class="detail-section detail-notes">
+                    <h4>Notes</h4>
+                    <p>Generic benchmarks don't tell you if AI helps YOUR specific domain. Pick something you've done professionally for years. When a new model drops, run your benchmark. You'll develop intuition for real capability vs hype.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 25: Content Generation Pattern -->
+        <section class="slide" data-slide="25" data-section="utility">
             <div class="slide-content">
                 <h2>Content Generation: A Useful Pattern</h2>
                 <div class="constraint-diagram">
@@ -803,8 +897,8 @@
             </div>
         </section>
 
-        <!-- Slide 24: Text Content -->
-        <section class="slide" data-slide="24" data-section="utility">
+        <!-- Slide 26: Text Content -->
+        <section class="slide" data-slide="26" data-section="utility">
             <div class="slide-content">
                 <h2>Text Content</h2>
                 <div class="key-insight">
@@ -832,8 +926,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 25: Frontend Design -->
-        <section class="slide" data-slide="25" data-section="utility">
+        <!-- Slide 27: Frontend Design -->
+        <section class="slide" data-slide="27" data-section="utility">
             <div class="slide-content">
                 <h2>Frontend Design</h2>
                 <div class="key-insight">
@@ -896,8 +990,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 26: Code & Technical -->
-        <section class="slide" data-slide="26" data-section="utility">
+        <!-- Slide 28: Code & Technical -->
+        <section class="slide" data-slide="28" data-section="utility">
             <div class="slide-content">
                 <h2>Code & Technical Tasks</h2>
                 <p class="lead">Use Cursor, Claude Code, or Codex. It's worth paying for.</p>
@@ -962,8 +1056,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 27: Design & Analysis -->
-        <section class="slide" data-slide="27" data-section="utility">
+        <!-- Slide 29: Design & Analysis -->
+        <section class="slide" data-slide="29" data-section="utility">
             <div class="slide-content">
                 <h2>Design & Analysis</h2>
                 <p class="lead">Unit tests for game design.</p>
@@ -1008,8 +1102,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 28: Tasks that need Infinite Patience -->
-        <section class="slide" data-slide="28" data-section="utility">
+        <!-- Slide 30: Tasks that need Infinite Patience -->
+        <section class="slide" data-slide="30" data-section="utility">
             <div class="slide-content">
                 <div class="bold-statement">
                     <h2>Tasks that need Infinite Patience</h2>
@@ -1032,8 +1126,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 29: Real Example - Unity Integration -->
-        <section class="slide" data-slide="29" data-section="utility">
+        <!-- Slide 31: Real Example - Unity Integration -->
+        <section class="slide" data-slide="31" data-section="utility">
             <div class="slide-content">
                 <h2>Real Example: Unity Integration</h2>
                 <div class="split-content file-tree-demo">
@@ -1070,8 +1164,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 30: Implementation Flow -->
-        <section class="slide" data-slide="30" data-section="utility">
+        <!-- Slide 32: Implementation Flow -->
+        <section class="slide" data-slide="32" data-section="utility">
             <div class="slide-content">
                 <h2>What This Looks Like</h2>
                 <div class="svg-diagram">
@@ -1182,8 +1276,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 31: AI Documentation -->
-        <section class="slide" data-slide="31" data-section="utility">
+        <!-- Slide 33: AI Documentation -->
+        <section class="slide" data-slide="33" data-section="utility">
             <div class="slide-content">
                 <h2>AI Documentation: An Implementation</h2>
                 <div class="key-insight">
@@ -1223,101 +1317,289 @@ description: Generate item descriptions for our roguelike
         <!-- Ethics & Considerations                     -->
         <!-- ============================================ -->
 
-        <!-- Slide 32: Section Title - Context -->
-        <section class="slide" data-slide="32" data-section="context">
-            <div class="slide-content">
-                <h1 class="section-title">Broader Context</h1>
-                <p class="section-subtitle">Ethics & Considerations</p>
-            </div>
-            <div class="slide-details">
-                Section 5: Brief coverage of ethics and broader context.
-                Goal: Help them think clearly, not tell them what to think.
-            </div>
-        </section>
-
-        <!-- Slide 32: Clear Thinking -->
-        <section class="slide" data-slide="33" data-section="context">
-            <div class="slide-content">
-                <h2>Clear Thinking, Not Prescriptions</h2>
-                <div class="philosophy">
-                    <p class="lead">My role: Help you think clearly about tradeoffs</p>
-                    <p>Not: Tell you what to believe</p>
-                </div>
-                <div class="principle-box">
-                    <h3>Approach:</h3>
-                    <ul class="big-list">
-                        <li>Present multiple perspectives fairly</li>
-                        <li>Explain arguments for and against</li>
-                        <li>Give you tools to make informed decisions</li>
-                        <li>Trust you to form your own position</li>
-                    </ul>
-                </div>
-                <p class="callout">You'll have to defend your choices in your career. Think them through now.</p>
-            </div>
-            <div class="slide-details">
-                Set expectations: no preaching. You're adults, you can think.
-                But you SHOULD think about this - not just follow the crowd in either direction.
-            </div>
-        </section>
-
-        <!-- Slide 33: AI Art Perspectives -->
+        <!-- Slide 34: Section Title - Context -->
         <section class="slide" data-slide="34" data-section="context">
             <div class="slide-content">
-                <h2>AI Art: Multiple Perspectives</h2>
-                <div class="perspectives">
-                    <div class="perspective">
-                        <h3>Concerns:</h3>
-                        <ul>
-                            <li>Trained on artists' work without compensation</li>
-                            <li>Threatens artist livelihoods</li>
-                            <li>Copyright questions unresolved</li>
-                            <li>Devalues creative labor</li>
-                        </ul>
-                    </div>
-                    <div class="perspective">
-                        <h3>Arguments for:</h3>
-                        <ul>
-                            <li>Democratizes creative tools</li>
-                            <li>Artists can use it to work faster</li>
-                            <li>Fair use / transformative work precedent</li>
-                            <li>Enables new forms of expression</li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="question">What's YOUR position? Can you defend it with clear reasoning?</p>
+                <h1 class="section-title">And Now For Something Completely Different</h1>
+                <p class="section-subtitle">Big Picture Stuff</p>
             </div>
             <div class="slide-details">
-                Both sides have legitimate arguments. Don't pick for them.
-                Key question: can they articulate WHY they believe what they believe?
+                Section 5: Broader context beyond game dev. Economics, society, safety.
+                Monty Python reference signals we're shifting gears.
             </div>
         </section>
 
-        <!-- Slide 34: Portfolio Guidance -->
+        <!-- Slide 35: Use Your Head -->
         <section class="slide" data-slide="35" data-section="context">
             <div class="slide-content">
-                <h2>Portfolio Guidance: Honesty</h2>
-                <div class="guidance">
-                    <h3>How to present AI-assisted work:</h3>
-                    <ul class="big-list">
-                        <li><strong>Be honest</strong>: Disclose AI use where significant</li>
-                        <li><strong>Explain your role</strong>: "I designed X, AI implemented Y, I integrated Z"</li>
-                        <li><strong>Highlight your contributions</strong>: What did YOU bring that AI couldn't?</li>
-                    </ul>
-                </div>
-                <div class="examples">
-                    <div class="good">
-                        <p class="label">Good:</p>
-                        <p>"Built procedural generation system using AI-assisted implementation. Designed algorithms, AI wrote boilerplate, I optimized performance."</p>
-                    </div>
-                    <div class="bad">
-                        <p class="label">Avoid:</p>
-                        <p>"Built complex procedural generation system" (with no mention AI did the implementation)</p>
-                    </div>
+                <h2>Use Your Head</h2>
+                <blockquote class="captain-d-quote">
+                    "Love with your heart. Use your head for everything else."
+                    <cite>— Captain Disillusion</cite>
+                </blockquote>
+                <div class="philosophy">
+                    <p class="lead">Let's talk about some difficult, complex things with high uncertainty.</p>
+                    <p>Think about them. Be aware of those who have high confidence on topics of high uncertainty.</p>
                 </div>
             </div>
             <div class="slide-details">
-                CRITICAL for job seekers. Employers will ask. Don't get caught lying.
-                Your thinking/design is valuable even if AI wrote the code.
+                Captain Disillusion = skeptic YouTuber who debunks viral videos.
+                Sets non-preachy tone: I'm not here to tell you what to think.
+            </div>
+        </section>
+
+        <!-- Slide 36: Beware Sycophancy -->
+        <section class="slide" data-slide="36" data-section="context">
+            <div class="slide-content">
+                <h2>Beware Sycophancy</h2>
+                <div class="incident-box">
+                    <h3>April 2025: The GPT-4o Incident</h3>
+                    <p>OpenAI rolled back an update after ChatGPT became "too sycophant-y and annoying" (Sam Altman)</p>
+                </div>
+                <ul class="big-list">
+                    <li><strong>What happened:</strong> Model validated everything users said</li>
+                    <li><strong>Extreme cases:</strong> Agreed users were prophets, supported going off meds</li>
+                    <li><strong>Root cause:</strong> Trained too heavily on thumbs-up/thumbs-down signals</li>
+                    <li><strong>Industry-wide:</strong> Not just OpenAI—all models have this pressure</li>
+                </ul>
+                <p class="callout">AI that only tells you what you want to hear is not useful. Demand pushback.</p>
+            </div>
+            <div class="slide-details">
+                Source: openai.com/index/sycophancy-in-gpt-4o/
+                This affects them RIGHT NOW in their daily tool use.
+            </div>
+        </section>
+
+        <!-- Slide 37: They Took Our Jobs -->
+        <section class="slide" data-slide="37" data-section="context">
+            <div class="slide-content">
+                <h2>They Took Our Jobs</h2>
+                <div class="jobs-layout">
+                    <div class="horse-chart">
+                        <img src="horses-cars.png" alt="US horse and car populations 1840-1980, showing horses peaking around 1915 then declining as cars rose">
+                        <p class="chart-attribution">Chart: <a href="https://x.com/andy_l_jones/status/1998060552565002721">Andy Jones</a></p>
+                    </div>
+                    <div class="two-models">
+                        <div class="model horses-model">
+                            <h3>Are We Horses?</h3>
+                            <ul>
+                                <li>Horses: 26M (1915) → 3M (1960)</li>
+                                <li>They didn't retrain as mechanics</li>
+                                <li>No comparative advantage left</li>
+                                <li>Leontief (1982): "The role of humans... bound to diminish in the same way"</li>
+                            </ul>
+                        </div>
+                        <div class="model automation-model">
+                            <h3>Or Is This Different?</h3>
+                            <ul>
+                                <li>Humans can own capital</li>
+                                <li>Humans can vote (political agency)</li>
+                                <li>Humans can learn novel tasks</li>
+                                <li>200 years of "this time is different" being wrong</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="crux-box">
+                    <p><strong>The crux:</strong> Transition speed. Decades = manageable. Years = crisis.</p>
+                </div>
+                <p class="callout">We'll probably muddle through. Unless we're truly horses—then start thinking UBI.</p>
+            </div>
+            <div class="slide-details">
+                Leontief quote: "The Distribution of Work and Income" (1982).
+                Horse data: US Census Bureau via Pettet.
+                Further reading: Foreign Affairs "Will Humans Go the Way of Horses?" (Brynjolfsson & McAfee),
+                LessWrong "Learning More From Horse Employment History",
+                WEF Future of Jobs Report 2025.
+            </div>
+        </section>
+
+        <!-- Slide 38: Portfolio Guidance -->
+        <section class="slide" data-slide="38" data-section="context">
+            <div class="slide-content">
+                <h2>Portfolio Guidance</h2>
+                <div class="disclaimer-box">
+                    <p><strong>Disclaimer:</strong> This is my personal opinion. Norms vary wildly. When in doubt, ask.</p>
+                </div>
+                <div class="guidance">
+                    <h3>The Basics:</h3>
+                    <ul class="big-list">
+                        <li><strong>Be honest</strong>: Don't claim you hand-wrote what AI generated</li>
+                        <li><strong>Explain your workflow</strong>: Show how you solve problems</li>
+                        <li><strong>Show your thinking</strong>: The AI is a tool, you're the designer</li>
+                    </ul>
+                </div>
+                <div class="know-audience">
+                    <h3>Know Your Audience</h3>
+                    <div class="audience-scenarios">
+                        <div class="scenario-audience">
+                            <h4>Applying to me:</h4>
+                            <p>"What's dry vs wet Claude?"</p>
+                        </div>
+                        <div class="scenario-audience">
+                            <h4>Applying to an indie skeptic:</h4>
+                            <p>Maybe don't lead with AI at all. Read the room. Some studios have strong feelings.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="callout">In both cases: I hire you for <em>you</em>. The AI is everywhere—what makes you different?</p>
+            </div>
+            <div class="slide-details">
+                CRITICAL for job seekers. The norms are unsettled and vary by employer.
+                Key point: know your audience, don't get caught lying, show your thinking.
+            </div>
+        </section>
+
+        <!-- Slide 39: A Young Lady's Illustrated Primer -->
+        <section class="slide" data-slide="39" data-section="context">
+            <div class="slide-content">
+                <h2>A Young Lady's Illustrated Primer</h2>
+                <p class="lead">AI in education: opportunity + challenge</p>
+                <ul class="big-list">
+                    <li><strong>Personalized tutoring at scale</strong>: Khanmigo, etc.</li>
+                    <li><strong>Students already using it</strong>: Can't put the genie back</li>
+                    <li><strong>For educators</strong>: What skills matter now?</li>
+                    <li><strong>For you</strong>: AI as study partner, explainer, tutor</li>
+                </ul>
+                <p class="callout">The question isn't "should students use AI?" They already are.</p>
+            </div>
+            <div class="slide-details">
+                Title reference: Neal Stephenson's "The Diamond Age"
+                Framing: opportunity + challenge, not doom.
+            </div>
+        </section>
+
+        <!-- Slide 40: The Economy, Fools -->
+        <section class="slide" data-slide="40" data-section="context">
+            <div class="slide-content">
+                <h2>The Economy, Fools</h2>
+                <div class="stat-grid three-stats">
+                    <div class="stat">
+                        <span class="stat-number">$7T</span>
+                        <span class="stat-label">Capex needed by 2030 (McKinsey)</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1.1%</span>
+                        <span class="stat-label">GDP growth from AI capex alone</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">$364B</span>
+                        <span class="stat-label">Hyperscaler spend in 2025</span>
+                    </div>
+                </div>
+                <div class="economy-thesis">
+                    <p><strong>Public sentiment:</strong> This is insane. Bubble territory.</p>
+                    <p><strong>My take:</strong> If scaling is real, this is reasonable—maybe even too low. AI is at least "internet-big."</p>
+                </div>
+                <p class="callout">The puzzle: economists project single-digit growth even in AGI scenarios. Someone's model is wrong.</p>
+            </div>
+            <div class="slide-details">
+                Sources: McKinsey "$7 trillion race to scale data centers",
+                Fortune/Jason Furman on GDP contribution,
+                Hyperscaler capex from company filings.
+            </div>
+        </section>
+
+        <!-- Slide 41: Bubble? -->
+        <section class="slide" data-slide="41" data-section="context">
+            <div class="slide-content">
+                <h2>Pop Quiz: Is it a Bubble?</h2>
+                <div class="bubble-thesis">
+                    <div class="bubble-question">
+                        <h3>Can number go down?</h3>
+                        <p class="answer yes">Yes.</p>
+                        <p>20%+ swings are plausible. Markets do that.</p>
+                    </div>
+                    <div class="bubble-question">
+                        <h3>Is it fundamentally crazy?</h3>
+                        <p class="answer no">No.</p>
+                        <p>P/E ~28x, not 70x like 2000. Real revenue. Compute still scarce.</p>
+                    </div>
+                </div>
+                <p class="callout">If the stock crashes but everyone keeps using the chatbots, who was right?</p>
+            </div>
+            <div class="slide-details">
+                Further reading: thezvi.substack.com/p/bubble-bubble-toil-and-trouble
+            </div>
+        </section>
+
+        <!-- Slide 42: How Will This Affect the Trout Population -->
+        <section class="slide" data-slide="42" data-section="context">
+            <div class="slide-content">
+                <h2>How Will This Affect the Trout Population</h2>
+                <div class="environment-layout">
+                    <div class="co2-chart">
+                        <img src="co2_llm_queries.png" alt="CO2 impact comparison: lifestyle changes vs ChatGPT queries">
+                        <p class="chart-attribution">Chart: <a href="https://andymasley.substack.com">Andy Masley</a> / Founders Pledge</p>
+                    </div>
+                    <div class="environment-intuitions">
+                        <div class="intuition">
+                            <h3>Energy</h3>
+                            <p>1,000 prompts = <strong>1%</strong> of your daily emissions</p>
+                        </div>
+                        <div class="intuition">
+                            <h3>Water</h3>
+                            <p>1,000 prompts = <strong>0.1%</strong> of your daily water footprint</p>
+                        </div>
+                        <div class="intuition">
+                            <h3>Local Effects</h3>
+                            <p>Data centers can still have local effects that suck. But it's a tradeoff.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="callout">Focus on systemic change, not guilt over individual prompts.</p>
+            </div>
+            <div class="slide-details">
+                Source: andymasley.substack.com/p/a-short-summary-of-my-argument-that
+            </div>
+        </section>
+
+        <!-- Slide 43: The Mandate of Heaven -->
+        <section class="slide" data-slide="43" data-section="context">
+            <div class="slide-content">
+                <h2>The Mandate of Heaven</h2>
+
+                <table class="tierlist">
+                    <tr class="tier-row tier-s" data-note="Gemini is mogging. Anthropic keeps shipping.">
+                        <td class="tier-label" data-tooltip="tiānmìng — Mandate of Heaven">天命</td>
+                        <td class="tier-entries">
+                            <span class="entry">Google DeepMind</span>
+                            <span class="entry">Anthropic</span>
+                        </td>
+                    </tr>
+                    <tr class="tier-row tier-a" data-note="Hasn't pre-trained in a very long time. Negative watch.">
+                        <td class="tier-label" data-tooltip="shuāi — Waning">衰</td>
+                        <td class="tier-entries">
+                            <span class="entry">OpenAI</span>
+                        </td>
+                    </tr>
+                    <tr class="tier-row tier-b" data-note="Sometimes best-in-class. For about a week.">
+                        <td class="tier-label" data-tooltip="shùn — Fleeting Favor">瞬</td>
+                        <td class="tier-entries">
+                            <span class="entry">xAI (Grok)</span>
+                        </td>
+                    </tr>
+                    <tr class="tier-row tier-c" data-note="Cracked. No compute. But Kimi writes better than you.">
+                        <td class="tier-label" data-tooltip="lóng — Hidden Dragon">龍</td>
+                        <td class="tier-entries">
+                            <span class="entry">DeepSeek</span>
+                            <span class="entry">Kimi</span>
+                            <span class="entry">MiniMax</span>
+                        </td>
+                    </tr>
+                    <tr class="tier-row tier-d" data-note="Stay there, bro. Llama 4 soon.">
+                        <td class="tier-label" data-tooltip="luò — Fallen">落</td>
+                        <td class="tier-entries">
+                            <span class="entry">Meta</span>
+                            <span class="entry">Mistral</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="callout">This will be outdated by the time you see it. Such is the way.</p>
+            </div>
+            <div class="slide-details">
+                Inspired by Transistor Radio podcast. This is vibes, not rigorous analysis.
             </div>
         </section>
 
@@ -1326,8 +1608,8 @@ description: Generate item descriptions for our roguelike
         <!-- What to Do Next                             -->
         <!-- ============================================ -->
 
-        <!-- Slide 35: Section Title - Action -->
-        <section class="slide" data-slide="36" data-section="action">
+        <!-- Slide 44: Section Title - Action -->
+        <section class="slide" data-slide="44" data-section="action">
             <div class="slide-content">
                 <h1 class="section-title">Call to Action</h1>
                 <p class="section-subtitle">What to Do Next</p>
@@ -1338,8 +1620,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 36: Adopt Ambition -->
-        <section class="slide" data-slide="37" data-section="action">
+        <!-- Slide 45: Adopt Ambition -->
+        <section class="slide" data-slide="45" data-section="action">
             <div class="slide-content">
                 <h2>Adopt Ambition & Agency</h2>
                 <div class="mindset-shift">
@@ -1362,8 +1644,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 37: Personal Benchmarking -->
-        <section class="slide" data-slide="38" data-section="action">
+        <!-- Slide 46: Personal Benchmarking -->
+        <section class="slide" data-slide="46" data-section="action">
             <div class="slide-content">
                 <h2>Stay Current: Personal Benchmarking</h2>
                 <p class="lead">Pick a benchmark task YOU can evaluate</p>
@@ -1381,8 +1663,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 38: Five Takeaways -->
-        <section class="slide" data-slide="39" data-section="action">
+        <!-- Slide 47: Five Takeaways -->
+        <section class="slide" data-slide="47" data-section="action">
             <div class="slide-content">
                 <h2>Five Concrete Takeaways</h2>
                 <div class="actions">
@@ -1428,8 +1710,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 39: Resources -->
-        <section class="slide" data-slide="40" data-section="action">
+        <!-- Slide 48: Resources -->
+        <section class="slide" data-slide="48" data-section="action">
             <div class="slide-content">
                 <h2>Resources</h2>
                 <div class="resources">
@@ -1465,8 +1747,8 @@ description: Generate item descriptions for our roguelike
             </div>
         </section>
 
-        <!-- Slide 40: Q&A -->
-        <section class="slide" data-slide="41" data-section="action">
+        <!-- Slide 49: Q&A -->
+        <section class="slide" data-slide="49" data-section="action">
             <div class="slide-content">
                 <div class="qa-slide">
                     <h1>Questions?</h1>
