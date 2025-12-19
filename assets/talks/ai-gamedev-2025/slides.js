@@ -21,10 +21,192 @@ class Presentation {
         this.loadFromURL();
         this.setupTouchNavigation();
         this.restoreDetailMode();
+        this.buildSlideIndex();
+        this.setupQuickNav();
+    }
+
+    // ===================================
+    // Quick Navigation (Ctrl+O)
+    // ===================================
+
+    buildSlideIndex() {
+        this.slideIndex = this.slides.map((slide, i) => {
+            const num = slide.dataset.slide || (i + 1).toString();
+            const section = slide.dataset.section || '';
+            const h2 = slide.querySelector('h2, .section-title, h1');
+            const title = h2 ? h2.textContent.trim() : '';
+            return { index: i, num, section, title };
+        });
+    }
+
+    setupQuickNav() {
+        this.quickNav = document.getElementById('quick-nav');
+        this.quickNavInput = this.quickNav?.querySelector('.quick-nav-input');
+        this.quickNavResults = this.quickNav?.querySelector('.quick-nav-results');
+        this.quickNavOpen = false;
+        this.quickNavSelectedIndex = 0;
+        this.quickNavFiltered = [];
+
+        if (!this.quickNav) return;
+
+        // Input filtering
+        this.quickNavInput.addEventListener('input', (e) => {
+            this.filterQuickNav(e.target.value);
+        });
+
+        // Backdrop click to close
+        this.quickNav.querySelector('.quick-nav-backdrop').addEventListener('click', () => {
+            this.closeQuickNav();
+        });
+
+        // Results click
+        this.quickNavResults.addEventListener('click', (e) => {
+            const item = e.target.closest('.quick-nav-item');
+            if (item) {
+                const index = parseInt(item.dataset.index);
+                this.goToSlide(index);
+                this.closeQuickNav();
+            }
+        });
+    }
+
+    openQuickNav() {
+        if (!this.quickNav) return;
+
+        this.quickNavOpen = true;
+        this.quickNav.classList.add('visible');
+        this.quickNavInput.value = '';
+        this.quickNavSelectedIndex = 0;
+        this.filterQuickNav('');
+
+        // Focus after transition
+        setTimeout(() => {
+            this.quickNavInput.focus();
+        }, 50);
+    }
+
+    closeQuickNav() {
+        if (!this.quickNav) return;
+
+        this.quickNavOpen = false;
+        this.quickNav.classList.remove('visible');
+        this.quickNavInput.blur();
+    }
+
+    filterQuickNav(query) {
+        const q = query.toLowerCase().trim();
+
+        // Filter slides
+        this.quickNavFiltered = this.slideIndex.filter(slide => {
+            if (!q) return true;
+            return slide.num.includes(q) ||
+                   slide.section.toLowerCase().includes(q) ||
+                   slide.title.toLowerCase().includes(q);
+        });
+
+        // Reset selection
+        this.quickNavSelectedIndex = 0;
+
+        // Render results
+        this.renderQuickNavResults();
+    }
+
+    renderQuickNavResults() {
+        if (this.quickNavFiltered.length === 0) {
+            this.quickNavResults.innerHTML = '<div class="quick-nav-empty">No matching slides</div>';
+            return;
+        }
+
+        this.quickNavResults.innerHTML = this.quickNavFiltered.map((slide, i) => {
+            const isCurrent = slide.index === this.currentIndex;
+            const isSelected = i === this.quickNavSelectedIndex;
+            const classes = ['quick-nav-item'];
+            if (isCurrent) classes.push('current');
+            if (isSelected) classes.push('selected');
+
+            return `
+                <div class="${classes.join(' ')}" data-index="${slide.index}">
+                    <span class="slide-num">${slide.num}</span>
+                    <span class="slide-section">${slide.section}</span>
+                    <span class="slide-title">${slide.title || '(untitled)'}</span>
+                </div>
+            `;
+        }).join('');
+
+        // Scroll selected into view
+        this.scrollSelectedIntoView();
+    }
+
+    scrollSelectedIntoView() {
+        const selected = this.quickNavResults.querySelector('.quick-nav-item.selected');
+        if (selected) {
+            selected.scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    selectQuickNavItem(direction) {
+        const maxIndex = this.quickNavFiltered.length - 1;
+        if (maxIndex < 0) return;
+
+        if (direction === 'up') {
+            this.quickNavSelectedIndex = this.quickNavSelectedIndex > 0
+                ? this.quickNavSelectedIndex - 1
+                : maxIndex;
+        } else {
+            this.quickNavSelectedIndex = this.quickNavSelectedIndex < maxIndex
+                ? this.quickNavSelectedIndex + 1
+                : 0;
+        }
+
+        this.renderQuickNavResults();
+    }
+
+    navigateToSelected() {
+        if (this.quickNavFiltered.length === 0) return;
+
+        const selected = this.quickNavFiltered[this.quickNavSelectedIndex];
+        if (selected) {
+            this.goToSlide(selected.index);
+            this.closeQuickNav();
+        }
     }
 
     setupKeyboardNavigation() {
         document.addEventListener('keydown', (e) => {
+            // Quick Nav keyboard handling (works even in input)
+            if (this.quickNavOpen) {
+                switch(e.key) {
+                    case 'Escape':
+                        e.preventDefault();
+                        this.closeQuickNav();
+                        return;
+
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        this.selectQuickNavItem('up');
+                        return;
+
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        this.selectQuickNavItem('down');
+                        return;
+
+                    case 'Enter':
+                        e.preventDefault();
+                        this.navigateToSelected();
+                        return;
+                }
+                // Allow typing in the input
+                return;
+            }
+
+            // Ctrl+O to open quick nav
+            if ((e.key === 'o' || e.key === 'O') && e.ctrlKey) {
+                e.preventDefault();
+                this.openQuickNav();
+                return;
+            }
+
             // Ignore if typing in input/textarea
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
                 return;
@@ -76,13 +258,12 @@ class Presentation {
                     break;
             }
 
-            // Number keys for direct navigation
+            // Number keys for percentage-based navigation (Ctrl+0 = 0%, Ctrl+5 = 50%, etc.)
             if (e.key >= '0' && e.key <= '9' && e.ctrlKey) {
                 e.preventDefault();
-                const slideNum = parseInt(e.key);
-                if (slideNum > 0 && slideNum <= this.totalSlides) {
-                    this.goToSlide(slideNum - 1);
-                }
+                const percent = parseInt(e.key) / 10;
+                const targetIndex = Math.floor(percent * (this.totalSlides - 1));
+                this.goToSlide(targetIndex);
             }
         });
     }
