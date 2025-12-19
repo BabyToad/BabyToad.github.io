@@ -72,11 +72,11 @@
                     </div>
                     <div class="agenda-item">
                         <span class="number">5</span>
-                        <span class="text">Something Completely Different: Big Picture Stuff</span>
+                        <span class="text">Something Completely Different</span>
                     </div>
                     <div class="agenda-item">
                         <span class="number">6</span>
-                        <span class="text">Solstice: What to do about this ...</span>
+                        <span class="text">Solstice</span>
                     </div>
                 </div>
             </div>
@@ -1438,7 +1438,6 @@ description: Generate item descriptions for our roguelike
         <section class="slide" data-slide="37" data-section="context">
             <div class="slide-content">
                 <h1 class="section-title">And Now For Something Completely Different</h1>
-                <p class="section-subtitle">Big Picture Stuff</p>
             </div>
             <div class="slide-details">
                 Section 5: Broader context beyond game dev. Economics, society, safety.
@@ -1639,24 +1638,38 @@ description: Generate item descriptions for our roguelike
         <!-- Slide 41: Bubble? -->
         <section class="slide" data-slide="44" data-section="context">
             <div class="slide-content">
-                <h2>Pop Quiz: Is it a Bubble?</h2>
-                <div class="bubble-thesis">
-                    <div class="bubble-question">
-                        <h3>Can number go down?</h3>
-                        <p class="answer yes">Yes.</p>
-                        <p>20%+ swings are plausible. Markets do that.</p>
+                <div class="bubble-layout">
+                    <div class="bubble-thesis">
+                        <div class="bubble-question">
+                            <h3>Can number go down?</h3>
+                            <p class="answer yes">Yes.</p>
+                            <p>20%+ swings are plausible. Markets do that.</p>
+                        </div>
+                        <div class="bubble-question">
+                            <h3>Is it fundamentally crazy?</h3>
+                            <p class="answer no">No. (yet.)</p>
+                            <p>Language Models Offer Mundane Utility.</p>
+                        </div>
                     </div>
-                    <div class="bubble-question">
-                        <h3>Is it fundamentally crazy?</h3>
-                        <p class="answer no">No. (yet.)</p>
-                        <p>P/E ~28x, not 70x like 2000. Real revenue. Compute still scarce.</p>
+                    <div class="bubble-chart">
+                        <h3 class="chart-label">The Picks & Shovels</h3>
+                        <img src="pe-ratios-bubbles.png" alt="P/E ratios comparison: Oct 2025 AI stocks (20-30x) vs Tech Bubble 2000 (70-140x) vs Japan Bubble 1989">
+                        <p class="chart-attribution">Chart: Financial Times / Goldman Sachs (via <a href="https://x.com/StefanFSchubert/status/2000183944801611947" target="_blank">@StefanFSchubert</a>)</p>
                     </div>
                 </div>
-                <p class="callout">If the stock crashes but everyone keeps using the chatbots, who was right?</p>
-                <p class="callout">None of this is investment advice. If it were so easy to call, why aren't you rich?</p>
             </div>
             <div class="slide-details">
-                Further reading: thezvi.substack.com/p/bubble-bubble-toil-and-trouble
+                <div class="detail-section detail-notes">
+                    <h4>Notes</h4>
+                    <p>The chart shows 24-month forward P/E ratios. Current AI giants (NVIDIA ~28x, Microsoft ~28x) are elevated but nowhere near Cisco at 100x or Industrial Bank of Japan at 140x during their respective bubbles.</p>
+                </div>
+                <div class="detail-section detail-sources">
+                    <h4>Sources</h4>
+                    <ul>
+                        <li><a href="https://thezvi.substack.com/p/bubble-bubble-toil-and-trouble" target="_blank">Bubble, Bubble, Toil and Trouble</a> — Zvi Mowshowitz</li>
+                        <li>Goldman Sachs Equity Strategy: "Not a bubble... yet" — Peter Oppenheimer (2025)</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -1732,7 +1745,6 @@ description: Generate item descriptions for our roguelike
         <section class="slide slide-dark" data-slide="47" data-section="action">
             <div class="slide-content">
                 <h1 class="section-title">Solstice</h1>
-                <p class="section-subtitle">What to do about this ...</p>
             </div>
             <div class="slide-details">
                 Section 6: Concrete takeaways. What should they actually DO?
@@ -1797,26 +1809,25 @@ description: Generate item descriptions for our roguelike
                         </ul>
                     </div>
                     <div class="resource-category">
-                        <h3>Tools ($20/mo each)</h3>
+                        <h3>Learning</h3>
                         <ul>
-                            <li><a href="https://claude.ai">Claude Pro</a> (Anthropic)</li>
-                            <li><a href="https://openai.com">ChatGPT Plus</a> (OpenAI)</li>
-                            <li><a href="https://github.com/features/copilot">GitHub Copilot</a> ($10/mo)</li>
+                            <li><a href="https://www.dwarkeshpatel.com">Dwarkesh Patel</a> (Podcast)</li>
+                            <li><a href="https://thezvi.substack.com">Zvi Mowshowitz</a> (AI analysis)</li>
+                            <li><a href="https://ai-2027.com">AI 2027</a> (Scenario planning)</li>
+                            <li><a href="https://www.lesswrong.com">LessWrong</a> (Rationality & AI)</li>
+                            <li><a href="https://metr.org">METR</a> (Evals research)</li>
+                            <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview">Anthropic Docs</a> (Prompting)</li>
                         </ul>
                     </div>
                     <div class="resource-category">
-                        <h3>Learning</h3>
-                        <ul>
-                            <li><a href="https://www.oneusefulthing.org">One Useful Thing</a> (Ethan Mollick)</li>
-                            <li><a href="https://epoch.ai">Epoch AI</a> (Data & research)</li>
-                            <li><a href="https://press.stripe.com">The Scaling Era</a> (Stripe Press)</li>
-                        </ul>
+                        <h3>Try Claude Code</h3>
+                        <p class="gift-offer">I have <strong>3 guest passes</strong> for 7 days of Claude Pro access. Come find me after the talk!</p>
                     </div>
                 </div>
             </div>
             <div class="slide-details">
                 Point to resources for further learning.
-                The Scaling Era zine is excellent - free PDF from Stripe Press.
+                Guest passes: Max subscribers get 3 via /passes command. 7-day Claude Pro access, requires credit card to claim.
             </div>
         </section>
 
@@ -1975,7 +1986,16 @@ description: Generate item descriptions for our roguelike
             <span class="current">1</span> / <span class="total">52</span>
         </div>
         <div class="controls-hint">
-            Arrow keys to navigate • F for fullscreen
+            Arrow keys to navigate • F for fullscreen • Ctrl+O to jump
+        </div>
+    </div>
+
+    <!-- Quick Navigation (Ctrl+O) -->
+    <div id="quick-nav" class="quick-nav">
+        <div class="quick-nav-backdrop"></div>
+        <div class="quick-nav-modal">
+            <input type="text" class="quick-nav-input" placeholder="Go to slide... (type number or title)">
+            <div class="quick-nav-results"></div>
         </div>
     </div>
 
