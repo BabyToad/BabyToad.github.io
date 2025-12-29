@@ -7,6 +7,9 @@ tags: [chrome-extension, obsidian, productivity, javascript, claude-code]
 thumbnail: /assets/images/projects/obsidian-archive-logo.png
 repo: https://github.com/BabyToad/obsidian-archive
 last_modified_at: 2025-12-29
+show_repo: true
+
+
 ---
 
 # Obsidian Archive
