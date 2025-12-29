@@ -5,7 +5,7 @@ description: A Chrome extension to archive web pages to your Obsidian vault with
 status: released
 tags: [chrome-extension, obsidian, productivity, javascript, claude-code]
 thumbnail: /assets/images/projects/obsidian-archive-logo.png
-show_repo: false
+repo: https://github.com/BabyToad/obsidian-archive
 last_modified_at: 2025-12-29
 ---
 
