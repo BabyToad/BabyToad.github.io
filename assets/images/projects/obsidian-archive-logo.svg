@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Obsidian gem shape - fills the space -->
+  <path d="M256 16 L480 160 L480 384 L256 496 L32 384 L32 160 Z"
+        fill="#7c3aed"/>
+
+  <!-- Gem facets for depth -->
+  <path d="M256 16 L256 256 L32 160 Z" fill="#8b5cf6"/>
+  <path d="M256 16 L480 160 L256 256 Z" fill="#a78bfa"/>
+  <path d="M256 256 L480 384 L256 496 Z" fill="#5b21b6"/>
+  <path d="M256 256 L256 496 L32 384 Z" fill="#6d28d9"/>
+
+  <!-- Download arrow -->
+  <g fill="#ffffff">
+    <!-- Arrow shaft -->
+    <rect x="208" y="112" width="96" height="160" rx="12"/>
+    <!-- Arrow head -->
+    <polygon points="256,408 136,264 208,264 208,272 304,272 304,264 376,264"/>
+    <!-- Base tray -->
+    <rect x="128" y="432" width="256" height="32" rx="16"/>
+  </g>
+</svg>
