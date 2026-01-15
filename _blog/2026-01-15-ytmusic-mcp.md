@@ -50,8 +50,9 @@ Claude Code <-> MCP Server (stdio) <-> WebSocket (port 8766) <-> Chrome Extensio
 ```
 
 ### Components
+
 | Component | Tech | Lines |
-|-----------|------|-------|
+| --- | --- | --- |
 | Chrome extension content script | JavaScript | 730 |
 | MCP server | TypeScript | 334 |
 | WebSocket bridge | TypeScript | 240 |
