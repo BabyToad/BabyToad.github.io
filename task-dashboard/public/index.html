@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+      <div class="login-container">
+        <h1>Tasks</h1>
+        <form id="login-form">
+          <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+          <button type="submit">Login</button>
+        </form>
+        <p id="login-error" class="error"></p>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-screen" class="screen hidden">
+      <header>
+        <h1>Tasks</h1>
+        <div class="header-actions">
+          <button id="refresh-btn" title="Refresh">↻</button>
+          <button id="edit-btn" title="Edit">✎</button>
+          <button id="logout-btn" title="Logout">⏻</button>
+        </div>
+      </header>
+
+      <!-- Quick Add -->
+      <form id="quick-add-form">
+        <input type="text" id="quick-add-input" placeholder="Add task to inbox..." autocomplete="off">
+        <button type="submit">+</button>
+      </form>
+
+      <!-- Task List View -->
+      <main id="task-view">
+        <div id="tasks-content"></div>
+      </main>
+
+      <!-- Edit View -->
+      <main id="edit-view" class="hidden">
+        <textarea id="edit-textarea"></textarea>
+        <div class="edit-actions">
+          <button id="save-btn">Save</button>
+          <button id="cancel-btn" class="secondary">Cancel</button>
+        </div>
+      </main>
+
+      <footer>
+        <span id="last-updated"></span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
