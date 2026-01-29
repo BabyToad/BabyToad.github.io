@@ -1,0 +1,22 @@
+name = "task-dashboard"
+main = "src/worker.ts"
+compatibility_date = "2024-01-01"
+
+# KV namespace for storing tasks
+[[kv_namespaces]]
+binding = "TASKS_KV"
+id = "cedb025f9e694e8dbcc66f0d6e349857"
+
+# Static assets (served automatically, worker handles API)
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Custom domain
+routes = [
+  { pattern = "tasks.allknivesnobagel.com", custom_domain = true }
+]
+
+# Environment variables (set via wrangler secret)
+# PASSWORD_HASH - bcrypt hash of your password
+# JWT_SECRET - random string for signing tokens
