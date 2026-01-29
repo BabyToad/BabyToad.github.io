@@ -20,7 +20,7 @@ import crypto from "crypto";
 // Config - update these or set via environment variables
 const CONFIG = {
   localPath: process.env.TASKS_PATH || "C:\\Users\\heink\\Documents\\Exocortex\\Tasks.md",
-  workerUrl: process.env.WORKER_URL || "https://task-dashboard.heinke-jonas.workers.dev",
+  workerUrl: process.env.WORKER_URL || "https://tasks.allknivesnobagel.com",
   password: process.env.TASKS_PASSWORD || "GinCQGizke1Vg1Bm",
   syncInterval: parseInt(process.env.SYNC_INTERVAL || "300000", 10), // 5 minutes
 };
