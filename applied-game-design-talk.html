@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Design & Development from a Practical Perspective</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<style>
+/* ============================================================
+   BRUTALIST TYPE — the text is the design
+   ============================================================ */
+
+:root {
+  --ink: #0E0D06;
+  --paper: #FFF7F2;
+  --accent: #EB7623;
+  --muted: rgba(14,13,6,0.65);
+  --dim: rgba(14,13,6,0.45);
+}
+
+/* --- Reset theme --- */
+.reveal.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.reveal.reveal .slides { text-align: left; }
+
+.reveal.reveal .slides section {
+  padding: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* --- Type scale --- */
+.reveal.reveal h1,
+.reveal.reveal h2,
+.reveal.reveal h3 {
+  font-family: 'Poppins', Arial, sans-serif;
+  text-transform: none;
+  text-shadow: none;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  line-height: 1.0;
+}
+
+/* The big statement — fills the slide */
+.reveal.reveal .mega {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.6em;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.reveal.reveal .mega .a { color: var(--accent); }
+
+/* Section label — orange, enormous */
+.reveal.reveal .section-label {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 3.2em;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+
+/* Content heading */
+.reveal.reveal h2 {
+  font-weight: 900;
+  font-size: 2.4em;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4em;
+}
+
+.reveal.reveal h3 {
+  font-weight: 700;
+  font-size: 1.4em;
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
+
+/* Body — readable from the back */
+.reveal.reveal p {
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 0.4em 0;
+  max-width: 80%;
+}
+
+.reveal.reveal .sub {
+  font-size: 0.7em;
+  color: var(--dim);
+  margin-top: 0.8em;
+}
+
+/* --- Lists --- */
+.reveal.reveal ul,
+.reveal.reveal ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reveal.reveal li {
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 0.15em 0;
+  padding-left: 0;
+}
+
+.reveal.reveal li strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Numbered items */
+.reveal.reveal .numbered {
+  counter-reset: n;
+}
+
+.reveal.reveal .numbered li {
+  padding-left: 1.8em;
+  position: relative;
+}
+
+.reveal.reveal .numbered li::before {
+  content: counter(n, decimal-leading-zero);
+  counter-increment: n;
+  position: absolute;
+  left: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+/* --- Title slide --- */
+.reveal.reveal .title-slide {
+  text-align: left;
+  justify-content: flex-end;
+  padding-bottom: 80px;
+}
+
+.reveal.reveal .title-slide h1 {
+  font-weight: 900;
+  font-size: 3em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.15em;
+}
+
+.reveal.reveal .title-slide .subtitle {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2em;
+}
+
+.reveal.reveal .title-slide .meta {
+  font-size: 0.5em;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+/* --- End slide --- */
+.reveal.reveal .end-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+
+.reveal.reveal .end-slide .mega,
+.reveal.reveal .end-slide p,
+.reveal.reveal .end-slide .sub {
+  text-align: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* --- VS layout --- */
+.reveal.reveal .vs {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+}
+
+.reveal.reveal .vs .dead {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.2em;
+  letter-spacing: -0.03em;
+  color: var(--dim);
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.reveal.reveal .vs .arrow {
+  font-size: 1.2em;
+  color: var(--dim);
+  margin: 0 0.1em;
+}
+
+.reveal.reveal .vs .alive {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.6em;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* --- Controls --- */
+.reveal.reveal .controls button { color: var(--accent); }
+.reveal.reveal .progress { color: var(--accent); height: 3px; }
+.reveal.reveal .slide-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: var(--dim);
+  background: none;
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ==================== TITLE ==================== -->
+<section class="title-slide" data-background-color="#FFF7F2">
+  <h1>Game Design<br>&amp; Development.</h1>
+  <div class="subtitle">from a practical perspective</div>
+  <div class="meta">
+    Jonas Heinke<br>
+    Applied Game Design Course<br>
+    Otto von Guericke University Magdeburg<br>
+    03.03.2026
+  </div>
+</section>
+
+<!-- ==================== THIS IS ME ==================== -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">this is me.</div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Jonas.</h2>
+  <p>I make games.</p>
+  <ul style="margin-top:0.3em;">
+    <li><strong>PlayInsight Studios</strong> &mdash; serious games &amp; interactive learning</li>
+    <li><strong>ProLudens</strong> &mdash; a collective that studies games for education</li>
+  </ul>
+</section>
+
+<!-- ==================== GAME DESIGN BASICS ==================== -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">game design<br>basics.</div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    You are creating an<br>
+    <span class="a">experience</span> in the<br>
+    minds of players.
+  </div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    They are driving<br>
+    but you are building<br>
+    the <span class="a">road</span>. And the <span class="a">car</span>.
+  </div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Ludo-narrative<br>harmony.</h2>
+  <p>
+    What the game <em>says</em> and what the game <em>does</em>
+    should be the same thing.
+  </p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    &ldquo;A game is a series of<br>
+    <span class="a">interesting choices</span>.&rdquo;
+  </div>
+  <div class="sub">&mdash; Sid Meier</div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h3>Three questions.</h3>
+  <ol class="numbered">
+    <li>What is your game <strong>about</strong>?</li>
+    <li>How is it <strong>about that</strong>?</li>
+    <li>How do you <strong>reward the player</strong> for doing that?</li>
+  </ol>
+  <p style="margin-top:1em;">If you can't answer all three, your design has a gap.</p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    <span class="a">Incentives</span><br>
+    matter.
+  </div>
+  <p style="margin-top:0.5em;">
+    Players will always find the optimal path.<br>
+    Make sure it's the path you want them on.
+  </p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Rules of three.</h2>
+  <ol class="numbered">
+    <li><strong>Comprehension.</strong> Players need three exposures before it clicks.</li>
+    <li><strong>Choice.</strong> Three options is a decision. Two is a dilemma. One is none.</li>
+    <li><strong>Design.</strong> Three stats. Three resources. Three paths.</li>
+  </ol>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    Do <span class="a">one thing</span><br>
+    well.
+  </div>
+  <p style="margin-top:0.5em;">
+    The game that does one thing brilliantly beats<br>
+    the game that does five things adequately.
+  </p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Juice.</h2>
+  <p>Maximum output from minimum input.</p>
+  <p>
+    Screen shake. Sound. Particles. Bounce. Weight.<br>
+    The <em>feeling</em> that the world reacts to you.
+  </p>
+  <p>A juicy game feels alive. A dry game feels like a spreadsheet.</p>
+</section>
+
+<!-- ==================== SHIPPING ==================== -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">shipping.</div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="vs">
+    <span class="dead">big &amp; broken</span>
+    <span class="arrow">&rarr;</span>
+    <span class="alive">small &amp; done</span>
+  </div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    Almost every clever<br>
+    idea can work.<br><br>
+    It's <span class="a">90%<br>implementation</span>.
+  </div>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Beware<br>the 80/20.</h2>
+  <p>
+    The last 20% of the work takes 80% of the time.
+  </p>
+  <p>Plan for it. Or better yet &mdash; cut scope so you never get there.</p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    Reduce<br>
+    <span class="a">complexity</span>.
+  </div>
+  <p style="margin-top:0.5em;">
+    Every feature you add is a feature you have to<br>
+    design, build, test, balance, and explain.
+  </p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <h2>Playtesting.</h2>
+  <p>
+    Your game isn't what you designed.<br>
+    It's what players <em>experience</em>.
+  </p>
+  <p>Test early. Test ugly. Test often.</p>
+</section>
+
+<section data-background-color="#FFF7F2">
+  <div class="mega" style="font-size:2.2em;">
+    <span class="a">Believe</span> your players<br>
+    about their issues.<br><br>
+    Be skeptical<br>
+    of their <span class="a">solutions</span>.
+  </div>
+</section>
+
+<!-- ==================== Q&A ==================== -->
+<section class="end-slide" data-background-color="#FFF7F2">
+  <div class="mega"><span class="a">Q&amp;A</span></div>
+  <p style="margin-top:0.5em;">What are you working on?<br>Let's scope it together.</p>
+  <div class="sub">Jonas Heinke &middot; jonas@playinsightstudios.com</div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  progress: true,
+  controls: true,
+  controlsTutorial: false,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  width: 1280,
+  height: 720,
+  margin: 0.04,
+  center: false,
+});
+</script>
+</body>
+</html>
