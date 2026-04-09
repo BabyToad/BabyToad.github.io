@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Macromedia SS26 — Lecture Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --bg: #0b0d10; --surface: #15181c; --surface-2: #1d2128;
+      --ink: #f2efe8; --ink-dim: #b9b6ad; --muted: #6b7078;
+      --accent: #ff6b35; --rule: #2a2f37;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "IBM Plex Sans", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page { max-width: 1100px; margin: 0 auto; padding: 80px 40px 120px; }
+
+    .header { margin-bottom: 64px; }
+    .header__eyebrow {
+      font-family: var(--font-mono); font-size: 13px; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .header__eyebrow::before {
+      content: ""; display: inline-block; width: 32px; height: 2px; background: var(--accent);
+    }
+    .header__title {
+      font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px);
+      font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; margin: 0;
+    }
+    .header__sub {
+      font-size: 20px; color: var(--ink-dim); font-weight: 300; margin-top: 16px; max-width: 600px;
+    }
+
+    .courses { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 48px; }
+
+    .course { }
+    .course__title {
+      font-family: var(--font-display); font-weight: 700; font-size: 36px;
+      letter-spacing: -0.02em; margin: 0 0 4px 0;
+    }
+    .course__title a { color: var(--ink); }
+    .course__title a:hover { color: var(--accent); text-decoration: none; }
+    .course__sub {
+      font-family: var(--font-mono); font-size: 14px; color: var(--muted);
+      letter-spacing: 0.06em; margin-bottom: 24px;
+    }
+
+    .units { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+    .unit {
+      display: grid; grid-template-columns: 48px 1fr auto; align-items: center;
+      gap: 12px; padding: 12px 16px; border-radius: 6px;
+      transition: background 150ms;
+    }
+    .unit:hover { background: var(--surface); }
+    .unit__num {
+      font-family: var(--font-mono); font-size: 14px; color: var(--muted);
+      font-weight: 500;
+    }
+    .unit__title {
+      font-family: var(--font-body); font-size: 18px; color: var(--ink); font-weight: 400;
+    }
+    .unit__title a { color: var(--ink); }
+    .unit__title a:hover { color: var(--accent); text-decoration: none; }
+    .unit__meta {
+      font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--rule);
+      font-family: var(--font-mono); font-size: 13px; color: var(--muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 40px 20px 80px; }
+      .courses { grid-template-columns: 1fr; }
+      .unit { grid-template-columns: 40px 1fr; }
+      .unit__meta { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="header__eyebrow">Macromedia University &middot; Summer 2026</div>
+      <h1 class="header__title">Lecture Slides</h1>
+      <p class="header__sub">Two courses in the BA Game Design program. Slides are interactive &mdash; use arrow keys to navigate, T to toggle light/dark, ? for help.</p>
+    </div>
+
+    <div class="courses">
+
+      <div class="course">
+        <h2 class="course__title"><a href="gen/">Game Engines & Scripting</a></h2>
+        <div class="course__sub">Unity · C# · Build with the box</div>
+        <ol class="units">
+
+          <li class="unit">
+            <div class="unit__num">01</div>
+            <div class="unit__title"><a href="gen/?unit=01">What engines do</a></div>
+            <div class="unit__meta">10 slides</div>
+          </li>
+
+
+        </ol>
+      </div>
+
+      <div class="course">
+        <h2 class="course__title"><a href="gpg/">Game Programmierung</a></h2>
+        <div class="course__sub">Python · PyGame · Build the box</div>
+        <ol class="units">
+
+          <li class="unit">
+            <div class="unit__num">01</div>
+            <div class="unit__title"><a href="gpg/?unit=01">Opening the box</a></div>
+            <div class="unit__meta">20 slides</div>
+          </li>
+
+
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <span>Jonas Heinke &middot; <a href="https://allknivesnobagel.com">allknivesnobagel.com</a></span>
+      <span>Built with a custom slide system &middot; No frameworks harmed</span>
+    </div>
+  </div>
+</body>
+</html>
