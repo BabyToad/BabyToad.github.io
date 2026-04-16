@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" font-family="'Inter', 'Segoe UI', system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="600" height="800" fill="#f5f0e8"/>
+
+  <!-- Tiny game scene at top -->
+  <g transform="translate(300, 60)">
+    <!-- Ground -->
+    <rect x="-120" y="20" width="240" height="8" rx="2" fill="#8b7355"/>
+    <!-- Character -->
+    <rect x="-8" y="-10" width="16" height="30" rx="3" fill="#ff6b35"/>
+    <circle cx="0" cy="-18" r="8" fill="#ff6b35"/>
+    <!-- Tree -->
+    <rect x="50" y="-5" width="6" height="25" fill="#8b7355"/>
+    <circle cx="53" cy="-15" r="18" fill="#7a9e7e"/>
+    <!-- Enemy -->
+    <rect x="-70" y="0" width="14" height="20" rx="2" fill="#c44040"/>
+    <!-- Bullet -->
+    <circle cx="-30" cy="5" r="3" fill="#f0c674"/>
+    <!-- Label -->
+    <text x="0" y="55" text-anchor="middle" font-size="11" fill="#8b7355" font-weight="600" letter-spacing="0.1em">YOUR GAME</text>
+  </g>
+
+  <!-- Connector arrow -->
+  <path d="M300 125 L300 155" stroke="#c4b8a4" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="295,153 300,163 305,153" fill="#c4b8a4"/>
+
+  <!-- Engine layers - wider as they go down (pyramid/stack) -->
+
+  <!-- Layer 1: Scripting -->
+  <g transform="translate(300, 185)">
+    <rect x="-130" y="0" width="260" height="52" rx="6" fill="#ff6b35"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#fff" font-weight="700" letter-spacing="0.05em">SCRIPTING</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.75)">C# — your code lives here</text>
+  </g>
+
+  <!-- Layer 2: Game Loop -->
+  <g transform="translate(300, 250)">
+    <rect x="-150" y="0" width="300" height="52" rx="6" fill="#c97b3a"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#fff" font-weight="700" letter-spacing="0.05em">GAME LOOP</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.75)">input → update → render → repeat</text>
+  </g>
+
+  <!-- Layer 3: Rendering -->
+  <g transform="translate(300, 315)">
+    <rect x="-170" y="0" width="340" height="52" rx="6" fill="#7fd1c8"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="700" letter-spacing="0.05em">RENDERING</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(26,26,26,0.6)">meshes, shaders, lighting, cameras</text>
+  </g>
+
+  <!-- Layer 4: Physics -->
+  <g transform="translate(300, 380)">
+    <rect x="-190" y="0" width="380" height="52" rx="6" fill="#98c379"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="700" letter-spacing="0.05em">PHYSICS</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(26,26,26,0.6)">rigidbodies, colliders, raycasts</text>
+  </g>
+
+  <!-- Layer 5: Audio -->
+  <g transform="translate(300, 445)">
+    <rect x="-210" y="0" width="420" height="52" rx="6" fill="#c390d4"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="700" letter-spacing="0.05em">AUDIO</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(26,26,26,0.6)">mixing, spatialization, streaming</text>
+  </g>
+
+  <!-- Layer 6: Input -->
+  <g transform="translate(300, 510)">
+    <rect x="-230" y="0" width="460" height="52" rx="6" fill="#6fb3d2"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#1a1a1a" font-weight="700" letter-spacing="0.05em">INPUT</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(26,26,26,0.6)">keyboard, mouse, gamepad, touch</text>
+  </g>
+
+  <!-- Layer 7: Asset Pipeline -->
+  <g transform="translate(300, 575)">
+    <rect x="-250" y="0" width="500" height="52" rx="6" fill="#5a6577"/>
+    <text x="0" y="22" text-anchor="middle" font-size="13" fill="#fff" font-weight="700" letter-spacing="0.05em">ASSET PIPELINE</text>
+    <text x="0" y="39" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.7)">import, compress, package, build</text>
+  </g>
+
+  <!-- Platform bar at bottom -->
+  <g transform="translate(300, 650)">
+    <rect x="-260" y="0" width="520" height="36" rx="4" fill="#2c2c2c"/>
+    <text x="0" y="23" text-anchor="middle" font-size="11" fill="#888" font-weight="600" letter-spacing="0.15em">WINDOWS · MAC · WEB · MOBILE · CONSOLE</text>
+  </g>
+
+  <!-- Side bracket: "The Engine" -->
+  <g transform="translate(48, 185)">
+    <line x1="0" y1="0" x2="0" y2="442" stroke="#c4b8a4" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="8" y2="0" stroke="#c4b8a4" stroke-width="1.5"/>
+    <line x1="0" y1="442" x2="8" y2="442" stroke="#c4b8a4" stroke-width="1.5"/>
+    <text x="-8" y="225" text-anchor="middle" font-size="11" fill="#8b7355" font-weight="600" letter-spacing="0.1em" transform="rotate(-90, -8, 225)">THE ENGINE</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="300" y="730" text-anchor="middle" font-size="12" fill="#8b7355" font-style="italic">A game engine, cut away.</text>
+</svg>
