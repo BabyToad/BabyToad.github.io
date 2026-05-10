@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Du kannst einfach Dinge tun; Gründe. — Jonas Heinke</title>
+<meta name="description" content="Vortrag bei Press A to Learn, Macromedia Leipzig, 10.05.2026. Games Start-Up in Mitteldeutschland gründen.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400;1,900&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Fraunces:opsz,wght,SOFT@9..144,400,30;9..144,500,30;9..144,700,30;9..144,400..900,30&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<style>
+/* ============================================================
+   DU KANNST EINFACH DINGE TUN
+   Brutalist type. Warm paper. Burgundy ink for the verbs of doing.
+   ============================================================ */
+
+:root {
+  --ink:    #0E0D06;
+  --paper:  #FFF7F2;
+  --accent: #B5322B;     /* deep red — Bauhaus, classical, weighty */
+  --accent-deep: #7A1F1A;
+  --muted:  rgba(14,13,6,0.65);
+  --dim:    rgba(14,13,6,0.45);
+  --hairline: rgba(14,13,6,0.15);
+}
+
+/* --- Reset reveal theme --- */
+.reveal.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.reveal.reveal .slides { text-align: left; }
+
+.reveal.reveal .slides section {
+  padding: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* --- Type --- */
+.reveal.reveal h1,
+.reveal.reveal h2,
+.reveal.reveal h3 {
+  font-family: 'Poppins', Arial, sans-serif;
+  text-transform: none;
+  text-shadow: none;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  line-height: 1.0;
+}
+
+/* The big statement — fills the slide */
+.reveal.reveal .mega {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.6em;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.reveal.reveal .mega .a { color: var(--accent); }
+
+/* The refrain — set in serif, italic, the heart of the talk */
+.reveal.reveal .refrain {
+  font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 2.5em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+
+.reveal.reveal .refrain .a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Section label — accent, enormous */
+.reveal.reveal .section-label {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 3.2em;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+
+.reveal.reveal .section-label .punkt {
+  color: var(--ink);
+}
+
+/* Section sub */
+.reveal.reveal .section-sub {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--muted);
+  margin-top: 0.8em;
+  letter-spacing: 0;
+}
+
+/* Content heading */
+.reveal.reveal h2 {
+  font-weight: 900;
+  font-size: 2.4em;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4em;
+}
+
+.reveal.reveal h3 {
+  font-weight: 700;
+  font-size: 1.4em;
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
+
+/* Body */
+.reveal.reveal p {
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 0.4em 0;
+  max-width: 80%;
+}
+
+.reveal.reveal .sub {
+  font-size: 0.7em;
+  color: var(--dim);
+  margin-top: 0.8em;
+}
+
+/* --- Lists --- */
+.reveal.reveal ul,
+.reveal.reveal ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reveal.reveal li {
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 0.15em 0;
+}
+
+.reveal.reveal li strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* --- Numbered reason slides --- */
+.reveal.reveal .reason {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.reveal.reveal .reason .num {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal.reveal .reason .num::before {
+  content: "Nº ";
+  color: var(--dim);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.reveal.reveal .reason .statement {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.4em;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  max-width: 100%;
+}
+
+.reveal.reveal .reason .statement em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* --- "Tun" slides — verbs, deeds, things-you-can-do --- */
+.reveal.reveal .deed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.reveal.reveal .deed .marker {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.reveal.reveal .deed .verb {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 3em;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.reveal.reveal .deed .gloss {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--muted);
+  margin-top: 0.6em;
+  max-width: 70%;
+}
+
+/* --- Title slide --- */
+.reveal.reveal .title-slide {
+  text-align: left;
+  justify-content: flex-end;
+  padding-bottom: 80px;
+}
+
+.reveal.reveal .title-slide h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.4em;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.18em;
+}
+
+.reveal.reveal .title-slide .titel-zwei {
+  color: var(--accent);
+}
+
+.reveal.reveal .title-slide .subtitle {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 0.85em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2.2em;
+  max-width: 100%;
+}
+
+.reveal.reveal .title-slide .meta {
+  font-size: 0.5em;
+  color: var(--dim);
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.reveal.reveal .title-slide .meta strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* --- Quote / aphorism slide --- */
+.reveal.reveal .aphorism {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.6em;
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  max-width: 90%;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+}
+
+.reveal.reveal .aphorism .attr {
+  display: block;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-size: 0.55em;
+  color: var(--dim);
+  margin-top: 1.2em;
+  letter-spacing: 0.04em;
+}
+
+/* --- End slide --- */
+.reveal.reveal .end-slide {
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px;
+}
+
+.reveal.reveal .end-slide .mega { font-size: 3.4em; }
+
+/* --- Hairline rule --- */
+.reveal.reveal .rule {
+  width: 80px;
+  height: 2px;
+  background: var(--accent);
+  margin: 0.3em 0 0.8em 0;
+}
+
+/* --- Reveal controls --- */
+.reveal.reveal .controls button { color: var(--accent); }
+.reveal.reveal .progress { color: var(--accent); height: 3px; }
+.reveal.reveal .slide-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: var(--dim);
+  background: none;
+}
+
+/* --- Print / PDF --- */
+@media print {
+  body { background: var(--paper); }
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================
+     I. EXORDIUM — Eintritt
+     ============================================================ -->
+
+<!-- Slide 1: Title -->
+<section class="title-slide" data-background-color="#FFF7F2">
+  <h1>Du kannst<br>einfach Dinge tun<span class="titel-zwei">;</span><br><span class="titel-zwei">Gründe.</span></h1>
+  <div class="subtitle">Games Start-Up in Mitteldeutschland gründen.</div>
+  <div class="meta">
+    <strong>Jonas Heinke</strong><br>
+    Press A to Learn &middot; Macromedia Leipzig<br>
+    10.05.2026
+  </div>
+  <aside class="notes">
+    Hallo. Mein Vortrag heißt: "Du kannst einfach Dinge tun; Gründe."
+    Untertitel: Games Start-Up in Mitteldeutschland gründen.
+    Eine Stunde, am Ende ein bisschen Q&amp;A.
+  </aside>
+</section>
+
+<!-- Slide 2: About -->
+<section data-background-color="#FFF7F2">
+  <h2>Jonas.</h2>
+  <p>Ich mache Spiele.</p>
+  <ul style="margin-top:0.4em;">
+    <li><strong>PlayInsight Studios</strong> &mdash; serious games &amp; interaktives Lernen</li>
+    <li><strong>ProLudens</strong> &mdash; ein Verein der Spiele für Bildung erforscht</li>
+    <li><strong>Macromedia Leipzig</strong> &mdash; Lehrbeauftragter, Game Design</li>
+  </ul>
+  <aside class="notes">
+    Kurz: Wer ich bin. PlayInsight ist mein Studio, ProLudens der Verein,
+    und ich unterrichte hier auch.
+  </aside>
+</section>
+
+<!-- ============================================================
+     II. NARRATIO — wie ich hier gelandet bin
+     ============================================================ -->
+
+<!-- Slide 3: Section divider — narratio -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">wie ich hier<br>gelandet bin<span class="punkt">.</span></div>
+  <aside class="notes">
+    Die kurze Version meines Wegs. Damit ihr versteht, woher das Argument kommt.
+  </aside>
+</section>
+
+<!-- Slide 4: The realization -->
+<section data-background-color="#FFF7F2">
+  <div class="refrain">
+    &bdquo;Ich wusste in meinem Herzen,<br>
+    dass ich <span class="a">Spiele entwickeln</span><br>
+    möchte.&ldquo;
+  </div>
+  <aside class="notes">
+    Irgendwann ist mir aufgegangen — ich wusste in meinem Herzen — dass ich Spiele machen will.
+    Nicht abstrakt. Nicht weil ich gerne spiele. Sondern weil:
+    Wenn ich Spiele designe, dann spielen andere sie und haben Spaß.
+    Auf eine triviale Art und Weise habe ich mit meiner Hand etwas der Welt hinzugefügt,
+    das jemand anderen bereichert. Etwas, von dem ich weiß, dass die Welt besser ist.
+  </aside>
+</section>
+
+<!-- Slide 5: 3 days later -->
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    Drei Tage später<br>
+    hatte ich mich an der<br>
+    <span class="a">Macromedia</span> beworben.
+  </div>
+  <aside class="notes">
+    Ich habe mir überlegt, was ich brauche, um Vollzeit Spiele zu entwickeln.
+    Habe gedacht: Ohne Abschluss nimmt mich niemand.
+    Drei Tage später war die Bewerbung raus.
+    Keine Marktanalyse. Kein Zehnjahresplan. Drei Tage.
+  </aside>
+</section>
+
+<!-- Slide 6: Since then... (with reveal) -->
+<section data-background-color="#FFF7F2">
+  <div class="mega">
+    Und seitdem<br>
+    <span class="fragment fade-in">habe ich einfach<br><span class="a">Dinge getan</span>.</span>
+  </div>
+  <aside class="notes">
+    Und seitdem ... [Pause] ... habe ich einfach Dinge getan.
+    Studio gegründet. Förderungen geholt. Verein mitgegründet.
+    Konferenzen organisiert. Diesen Vortrag heute.
+    Nichts davon war geplant. Nichts davon hatte einen Businessplan vor dem Anfang.
+    Es lag einfach an, also habe ich es gemacht.
+  </aside>
+</section>
+
+<!-- ============================================================
+     III. PROPOSITIO — die These, klar gestellt
+     ============================================================ -->
+
+<!-- Slide 7: The thesis bare -->
+<section data-background-color="#FFF7F2">
+  <div class="refrain" style="font-size: 3em;">
+    <span class="a">Du kannst</span><br>
+    <span class="a">einfach</span><br>
+    <span class="a">Dinge tun.</span>
+  </div>
+  <aside class="notes">
+    Das ist die These des Vortrags. Ein Satz.
+    Klingt erstmal banal. Vielleicht trivial. Vielleicht sogar dumm.
+    Ich werde euch jetzt zehn Gründe nennen, warum das nicht trivial ist.
+    Und am Ende komme ich darauf zurück — und dann meint dieser Satz etwas anderes.
+  </aside>
+</section>
+
+<!-- ============================================================
+     IV. CONFIRMATIO — 10 Gründe
+     ============================================================ -->
+
+<!-- Slide 8: Section divider — 10 Gründe -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">10 Gründe<span class="punkt">.</span></div>
+</section>
+
+<!-- Slide 9: Reason 01 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">01</div>
+    <div class="rule"></div>
+    <div class="statement">Es ist <em>nicht verboten</em>.</div>
+  </div>
+  <aside class="notes">
+    Das Erste und Wichtigste.
+    Es gibt fast nichts auf der Welt, das ihr machen wollt, das wirklich verboten ist.
+    Ein Studio gründen — nicht verboten.
+    Eine Konferenz organisieren — nicht verboten.
+    Jemand Berühmtes anschreiben — nicht verboten.
+    Ihr braucht keine Erlaubnis. Ihr lebt nicht in einem Spiel mit Permission Gates.
+  </aside>
+</section>
+
+<!-- Slide 10: Reason 02 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">02</div>
+    <div class="rule"></div>
+    <div class="statement">Es gibt niemanden<br><em>außer dir selbst</em>.</div>
+  </div>
+  <aside class="notes">
+    Ihr wartet vielleicht darauf, dass jemand kommt und sagt: jetzt darfst du.
+    Es kommt niemand. Es gibt keinen Erwachsenen mehr im Raum.
+    Ihr seid der Erwachsene im Raum.
+    Wenn ihr es nicht macht, macht es niemand.
+  </aside>
+</section>
+
+<!-- Slide 11: Reason 03 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">03</div>
+    <div class="rule"></div>
+    <div class="statement">Coole Dinge passieren <em>nur</em>,<br>wenn du sie tust.</div>
+  </div>
+  <aside class="notes">
+    Jedes coole Ding, das je passiert ist, ist passiert, weil jemand es getan hat.
+    Die Bands, die Spiele, die Filme, die Konferenzen — alle haben irgendwann angefangen.
+    Wenn ihr wollt, dass etwas existiert, müsst ihr es tun.
+    Niemand wird es für euch tun.
+  </aside>
+</section>
+
+<!-- Slide 12: Reason 04 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">04</div>
+    <div class="rule"></div>
+    <div class="statement"><em>Hard Mode</em>.</div>
+  </div>
+  <aside class="notes">
+    Ihr seid Designstudent:innen 2026 in Mitteldeutschland. Das ist Hard Mode.
+    Wenig Risikokapital. Kleine Szene. Wenig etablierte Pfade.
+    Aber: Hard Mode bedeutet auch — wenig Konkurrenz. Hohe Sichtbarkeit.
+    Jeder, der hier was schafft, fällt sofort auf.
+    In Berlin oder LA wärt ihr eine:r von zehntausend. Hier seid ihr eine:r von zehn.
+  </aside>
+</section>
+
+<!-- Slide 13: Reason 05 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">05</div>
+    <div class="rule"></div>
+    <div class="statement"><em>Shots on Goal</em>.</div>
+  </div>
+  <aside class="notes">
+    Tausend E-Mails. Tausend Pitches. Tausend Gespräche. Tausend Messen.
+    Das eine Ding, das funktioniert, wisst ihr vorher nicht.
+    Also: viele Versuche. Viele Schüsse aufs Tor.
+    Das ist kein Defizit, das ist die Methode.
+  </aside>
+</section>
+
+<!-- Slide 14: Reason 06 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">06</div>
+    <div class="rule"></div>
+    <div class="statement">Du bist <em>smart</em>.</div>
+  </div>
+  <aside class="notes">
+    Ihr seid an einer Hochschule. Ihr lest. Ihr denkt nach.
+    Ihr macht Spiele, und Spiele zu machen ist eines der härtesten kreativen Felder überhaupt:
+    Code, Design, Kunst, Sound, Narrativ, alles auf einmal.
+    Wenn ihr das macht, seid ihr per Auswahl schon smart genug.
+    Das Imposter-Syndrom lügt.
+  </aside>
+</section>
+
+<!-- Slide 15: Reason 07 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">07</div>
+    <div class="rule"></div>
+    <div class="statement">Die kochen<br>alle nur mit <em>Wasser</em>.</div>
+  </div>
+  <aside class="notes">
+    Das deutsche Sprichwort. Es stimmt.
+    Ich saß bei Förderkommissionen, mit Geschäftsführer:innen großer Studios, mit Politiker:innen.
+    Niemand davon hat einen Cheat-Code. Niemand hat das Leben durchschaut.
+    Sie sind nur länger dabei und hatten weniger Angst, den ersten Schritt zu machen.
+  </aside>
+</section>
+
+<!-- Slide 16: Reason 08 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">08</div>
+    <div class="rule"></div>
+    <div class="statement">Stell dir vor, was jemand <em>10×</em> du tun würde.<br>Tu genau das.</div>
+  </div>
+  <aside class="notes">
+    Wenn ich nicht weiß, was zu tun ist, mache ich diese Übung:
+    Stell dir die Person vor, die das, was du tust, zehnmal besser macht.
+    Was würde die jetzt tun? An welchen Punkt würde die jetzt eine E-Mail schreiben?
+    Welche Verbindung würde die suchen? Welches Risiko würde die nehmen?
+    — Und dann: tu genau das.
+    Die meiste Zeit wisst ihr genau, was ihr tun solltet. Ihr tut es nur nicht.
+  </aside>
+</section>
+
+<!-- Slide 17: Reason 09 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">09</div>
+    <div class="rule"></div>
+    <div class="statement">Das Schlimmste, was passieren kann:<br>du bist <em>genau da, wo du jetzt bist</em>.</div>
+  </div>
+  <aside class="notes">
+    Das ist mein Lieblingsargument.
+    Ihr versucht etwas. Es klappt nicht. Was passiert?
+    Ihr seid ein Jahr älter und genau da, wo ihr heute seid.
+    Das ist das Worst Case. Das ist dasselbe wie nichts tun.
+    Es gibt also keinen rationalen Grund, es nicht zu versuchen — der Verlust ist null.
+    Die einzige Differenz zwischen "versucht und gescheitert" und "nie versucht" ist:
+    im einen Fall wisst ihr was, im anderen nicht.
+  </aside>
+</section>
+
+<!-- Slide 18: Reason 10 -->
+<section data-background-color="#FFF7F2">
+  <div class="reason">
+    <div class="num">10</div>
+    <div class="rule"></div>
+    <div class="statement">Es ist <em>edel</em>,<br>etwas ehrlich unternommen zu haben.</div>
+  </div>
+  <aside class="notes">
+    Der zehnte Grund ist kein utilitärer Grund. Der ist ein Wertegrund.
+    Es ist edel, etwas ehrlich unternommen zu haben. Egal ob es klappt oder nicht.
+    Eine Person, die ihr Leben ernst nimmt und versucht, etwas zu bauen,
+    hat ein anderes Verhältnis zur eigenen Existenz als eine, die wartet.
+    Das ist kein Marketing. Das ist eine Aussage über das gute Leben.
+    Václav Havel: "Hoffnung ist nicht die Überzeugung, dass etwas gut ausgeht,
+    sondern die Gewissheit, dass etwas Sinn hat — egal wie es ausgeht."
+  </aside>
+</section>
+
+<!-- ============================================================
+     V. CONFIRMATIO 2 — Dinge die man tun kann (konkret)
+     ============================================================ -->
+
+<!-- Slide 19: Section divider -->
+<section data-background-color="#FFF7F2">
+  <div class="section-label">dinge,<br>die man tun kann<span class="punkt">.</span></div>
+  <aside class="notes">
+    OK. Genug Philosophie. Konkret. Was kann man hier, jetzt, in Mitteldeutschland tun?
+  </aside>
+</section>
+
+<!-- Slide 20: MDM Förderung -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— eins —</div>
+    <div class="verb">MDM <span style="color:var(--accent);">Förderung</span>.</div>
+  </div>
+  <aside class="notes">
+    Mitteldeutsche Medienförderung. Sitzt in Leipzig.
+    Kostenlose Beratung — geht hin und redet mit denen.
+    Sie fördern Spiele. Bis in die sechsstelligen Bereiche pro Projekt.
+    Ich habe mehrfach Förderung von der MDM bekommen. Das ist real.
+    Geht zur Beratung — kostet nichts, dauert eine Stunde.
+  </aside>
+</section>
+
+<!-- Slide 21: Gründerprämien -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— zwei —</div>
+    <div class="verb"><span style="color:var(--accent);">Gründerprämien</span>.</div>
+  </div>
+  <aside class="notes">
+    Jedes mitteldeutsche Bundesland hat eine Gründerprämie.
+    Sachsen: InnoStartBonus. Sachsen-Anhalt: ego.-Existenzgründung. Thüringen: Gründerprämie.
+    Das sind tausende Euro, die ihr bekommt, einfach weil ihr gründet.
+    Nicht zurückzuzahlen. Kein Kredit.
+    Die meisten von euch wissen das nicht. Das ist real.
+  </aside>
+</section>
+
+<!-- Slide 22: Vereinen beitreten -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— drei —</div>
+    <div class="verb">Vereinen <span style="color:var(--accent);">beitreten</span>.</div>
+  </div>
+  <aside class="notes">
+    Es gibt Vereine. GAME-Bundesverband. ProLudens (mein Verein). Cluster IT Mitteldeutschland.
+    Eine E-Mail, ihr seid drin.
+    Das öffnet euch Adressbücher, Räume, Veranstaltungen.
+    Ihr trefft sofort 50 Leute, die schon etwas geschafft haben.
+    Das ist keine Magie. Das ist nur eine E-Mail.
+  </aside>
+</section>
+
+<!-- Slide 23: Game Jams -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— vier —</div>
+    <div class="verb">Game <span style="color:var(--accent);">Jams</span>.</div>
+  </div>
+  <aside class="notes">
+    Macht Game Jams.
+    Ludum Dare, Global Game Jam, lokale Jams in Leipzig und Halle.
+    48 Stunden, ein Team, ein fertiges Spiel.
+    Das ist die schnellste Art zu lernen, wie Spielemachen wirklich funktioniert.
+    Und: am Ende habt ihr etwas in der Hand. Ihr habt geliefert.
+    Drei Jams in einem Jahr — ihr seid eine andere Person als vorher.
+  </aside>
+</section>
+
+<!-- Slide 24: Coole Leute treffen -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— fünf —</div>
+    <div class="verb">Coole Leute <span style="color:var(--accent);">treffen</span>.</div>
+  </div>
+  <aside class="notes">
+    Schreibt Leute auf LinkedIn an, deren Arbeit ihr bewundert.
+    Höflich, kurz, konkret: "Ich habe X gesehen, ich finde es Y, hättest du Zeit für 30min Kaffee?"
+    70% antworten. 40% sagen ja.
+    Niemand sagt das. Niemand erzählt euch, dass das einfach geht.
+    Aber: probiert es. Eine Anfrage pro Woche. Ein Jahr lang.
+    Am Ende kennt ihr 50 Menschen, die ihr vorher nicht kanntet.
+  </aside>
+</section>
+
+<!-- Slide 25: Events organisieren -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— sechs —</div>
+    <div class="verb">Events <span style="color:var(--accent);">organisieren</span>.</div>
+  </div>
+  <aside class="notes">
+    Wenn ihr ein Event organisiert — und sei es nur ein Stammtisch im Café —
+    werdet ihr sofort die Person, die andere kennen wollen.
+    Das ist asymmetrisch.
+    Eine Konferenz organisieren ist nicht zehnmal schwerer als zu ihr zu gehen.
+    Macht einen Showcase mit drei Studios. Macht einen Vortragsabend.
+    Plötzlich seid ihr der Knotenpunkt.
+  </aside>
+</section>
+
+<!-- Slide 26: Spielen um zu Gewinnen -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— sieben —</div>
+    <div class="verb"><span style="color:var(--accent);">Spielen,</span> um zu gewinnen.</div>
+  </div>
+  <aside class="notes">
+    Wenn ihr es macht, macht es ernst.
+    Habt einen Plan zu gewinnen. Fanatischer Fokus auf das Ziel.
+    Nicht "ich versuch's mal". Sondern: ich tue alles, was nötig ist,
+    damit das funktioniert. Innerhalb der Werte, die ich vertrete.
+    Yolo und Delulu. Glaube, dass ihr es schaffen werdet, auch wenn die Daten dagegen sprechen.
+    Die Person, die nicht damit rechnet zu gewinnen, gewinnt selten.
+  </aside>
+</section>
+
+<!-- Slide 27: Gründen -->
+<section data-background-color="#FFF7F2">
+  <div class="deed">
+    <div class="marker">— acht —</div>
+    <div class="verb"><span style="color:var(--accent);">Gründen</span>.</div>
+  </div>
+  <aside class="notes">
+    Letztens: Gründen.
+    Eine UG (haftungsbeschränkt) kostet ein paar hundert Euro.
+    Ein Nachmittag beim Notar. Ihr habt eine Firma.
+    Das gibt euch: Steuernummer, Geschäftskonto, Rechnungen schreiben können,
+    Förderung beantragen können.
+    Es macht euch real. Spätestens für die Welt.
+    Aber wichtig: meistens ist das nicht der erste Schritt. Erst das Spiel, dann die Firma.
+    PlayInsight habe ich gegründet, als der erste echte Auftrag kam.
+  </aside>
+</section>
+
+<!-- ============================================================
+     VI. PERORATIO — die Refrain wiederkommen lassen
+     ============================================================ -->
+
+<!-- Slide 28: Aphorismus / quote — Kafka or Havel as bridge -->
+<section data-background-color="#FFF7F2">
+  <div class="aphorism">
+    &bdquo;Es gibt nur ein einziges vermeidbares<br>
+    Leid: das Zurückhalten.&ldquo;
+    <span class="attr">— Franz Kafka, Zürauer Aphorismen</span>
+  </div>
+  <aside class="notes">
+    Bevor wir zum Ende kommen, ein Aphorismus, der mir wichtig geworden ist.
+    Kafka, in seinen Zürauer Aphorismen.
+    Es gibt viele Arten zu leiden, die wir nicht vermeiden können.
+    Aber das eine vermeidbare Leid: das Zurückhalten. Das nicht-Tun.
+    Das ist die einzige Form von Leid, gegen die wir wirklich etwas tun können —
+    indem wir aufhören zurückzuhalten.
+  </aside>
+</section>
+
+<!-- Slide 29: The refrain returns — full awareness -->
+<section data-background-color="#FFF7F2">
+  <div class="refrain" style="font-size: 3em;">
+    Du kannst<br>
+    einfach<br>
+    <span class="a">Dinge tun.</span>
+  </div>
+  <aside class="notes">
+    Am Anfang habe ich diesen Satz gesagt. Da klang er trivial.
+    Jetzt, hoffentlich, klingt er anders.
+    Es ist nicht verboten. Es gibt niemanden außer dir selbst.
+    Du bist smart. Hard Mode bedeutet: weniger Konkurrenz.
+    Das Schlimmste was passieren kann: du bist da, wo du jetzt bist.
+    Es ist edel, etwas ehrlich unternommen zu haben.
+    Und konkret: MDM, Gründerprämien, Vereine, Jams, Leute, Events, Ernsthaftigkeit, Gründen.
+    Das ist alles. Das ist der Vortrag.
+    Du kannst einfach Dinge tun. Bitte tu sie.
+  </aside>
+</section>
+
+<!-- Slide 30: Q&A -->
+<section class="end-slide" data-background-color="#FFF7F2">
+  <div class="mega"><span class="a">Q&amp;A.</span></div>
+  <p style="margin-top:0.6em; font-size:1em;">Was wollt ihr machen?<br>Lass uns drüber reden.</p>
+  <div class="sub">Jonas Heinke &middot; jonas@playinsightstudios.com<br>allknivesnobagel.com</div>
+  <aside class="notes">
+    Danke. Fragen?
+    Falls ihr keine Frage habt: erzählt mir, was ihr machen wollt.
+    Wir kriegen das hin.
+  </aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  progress: true,
+  controls: true,
+  controlsTutorial: false,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  width: 1280,
+  height: 720,
+  margin: 0.04,
+  center: false,
+  pdfSeparateFragments: false,
+  plugins: [ RevealNotes ]
+});
+</script>
+</body>
+</html>
