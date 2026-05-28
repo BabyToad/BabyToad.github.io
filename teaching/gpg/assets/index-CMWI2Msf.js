@@ -1,4 +1,4 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))n(s);new MutationObserver(s=>{for(const r of s)if(r.type==="childList")for(const p of r.addedNodes)p.tagName==="LINK"&&p.rel==="modulepreload"&&n(p)}).observe(document,{childList:!0,subtree:!0});function o(s){const r={};return s.integrity&&(r.integrity=s.integrity),s.referrerPolicy&&(r.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?r.credentials="include":s.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(s){if(s.ep)return;s.ep=!0;const r=o(s);fetch(s.href,r)}})();function je(t){const e=t.getContext("2d");t.width=t.clientWidth*devicePixelRatio,t.height=t.clientHeight*devicePixelRatio,e.scale(devicePixelRatio,devicePixelRatio);const o=t.clientWidth,n=t.clientHeight;let s=o/2-20,r=n/2-20;const p=5,f={},x=w=>{"wasd".includes(w.key.toLowerCase())&&(f[w.key.toLowerCase()]=w.type==="keydown",w.preventDefault())};window.addEventListener("keydown",x),window.addEventListener("keyup",x);let R;function k(){f.a&&(s-=p),f.d&&(s+=p),f.w&&(r-=p),f.s&&(r+=p),s=Math.max(0,Math.min(s,o-40)),r=Math.max(0,Math.min(r,n-40)),e.fillStyle="#0b0d10",e.fillRect(0,0,o,n),e.fillStyle="#ff6b35",e.fillRect(s,r,40,40),R=requestAnimationFrame(k)}return k(),()=>{cancelAnimationFrame(R),window.removeEventListener("keydown",x),window.removeEventListener("keyup",x)}}const O=1200,B=540,de=140,Z=B+de,Q=42,Y=54,Me=7,Fe=8,Oe=.35,We=2.2,Ne=.5,Ue=1.55,De=1.9,G=240,re=[[0,470,340,70],[420,470,200,70],[680,420,160,120],[880,350,100,190],[1040,470,160,70],[920,280,80,16]],qe=`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))n(s);new MutationObserver(s=>{for(const r of s)if(r.type==="childList")for(const p of r.addedNodes)p.tagName==="LINK"&&p.rel==="modulepreload"&&n(p)}).observe(document,{childList:!0,subtree:!0});function i(s){const r={};return s.integrity&&(r.integrity=s.integrity),s.referrerPolicy&&(r.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?r.credentials="include":s.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(s){if(s.ep)return;s.ep=!0;const r=i(s);fetch(s.href,r)}})();function je(t){const e=t.getContext("2d");t.width=t.clientWidth*devicePixelRatio,t.height=t.clientHeight*devicePixelRatio,e.scale(devicePixelRatio,devicePixelRatio);const i=t.clientWidth,n=t.clientHeight;let s=i/2-20,r=n/2-20;const p=5,f={},x=v=>{"wasd".includes(v.key.toLowerCase())&&(f[v.key.toLowerCase()]=v.type==="keydown",v.preventDefault())};window.addEventListener("keydown",x),window.addEventListener("keyup",x);let $;function k(){f.a&&(s-=p),f.d&&(s+=p),f.w&&(r-=p),f.s&&(r+=p),s=Math.max(0,Math.min(s,i-40)),r=Math.max(0,Math.min(r,n-40)),e.fillStyle="#0b0d10",e.fillRect(0,0,i,n),e.fillStyle="#ff6b35",e.fillRect(s,r,40,40),$=requestAnimationFrame(k)}return k(),()=>{cancelAnimationFrame($),window.removeEventListener("keydown",x),window.removeEventListener("keyup",x)}}const O=1200,B=540,de=140,Z=B+de,Q=42,Y=54,Me=7,Fe=8,Oe=.35,We=2.2,Ne=.5,Ue=1.55,qe=1.9,G=240,re=[[0,470,340,70],[420,470,200,70],[680,420,160,120],[880,350,100,190],[1040,470,160,70],[920,280,80,16]],De=`
 .playground-wrap {
   width: min(100%, 1420px);
   display: grid !important;
@@ -135,24 +135,24 @@
   letter-spacing: 0.03em;
   line-height: 1.55;
 }
-`;function He(){if(document.getElementById("mario-jump-styles"))return;const t=document.createElement("style");t.id="mario-jump-styles",t.textContent=qe,document.head.appendChild(t)}function Ye(t){He();const e=t.getContext("2d"),o=Math.max(1,Math.min(3,window.devicePixelRatio||1));let n=0,s=0;function r(){const a=t.getBoundingClientRect();a.width<1||a.height<1||(n=a.width,s=a.height,t.width=Math.round(n*o),t.height=Math.round(s*o))}const p=new ResizeObserver(r);p.observe(t),r();const f=new Image;f.src="img/claude-sprite.png";let x=!1;f.onload=()=>{x=!0};const R=new Image;R.src="img/playground-backdrop.png";let k=!1;R.onload=()=>{k=!0};const w={gravity:.65,jumpStrength:13.5,moveSpeed:5,airControl:1,realisticMode:!1,variableJump:!0,coyoteTime:!0,jumpBuffer:!0,apexHang:!0,asymmetricGravity:!0,fastFall:!0},_={...w},j=["variableJump","coyoteTime","jumpBuffer","apexHang","asymmetricGravity","fastFall"],i={x:80,y:470-Y,vx:0,vy:0,facing:1,squash:1},d={onGround:!1,coyote:0,buffer:0,currentGravity:w.gravity,jumpPressedThisFrame:!1,releasedJumpInRise:!1},A={vy:new Float32Array(G),ay:new Float32Array(G),y:new Float32Array(G),head:0};function c(){A.vy[A.head]=i.vy,A.ay[A.head]=d.currentGravity,A.y[A.head]=i.y,A.head=(A.head+1)%G}function m(){i.x=80,i.y=470-Y,i.vx=0,i.vy=0,i.facing=1,i.squash=1,d.onGround=!1,d.coyote=0,d.buffer=0,d.releasedJumpInRise=!1,A.vy.fill(0),A.ay.fill(0),A.y.fill(i.y),A.head=0}const u={left:!1,right:!1,jump:!1,down:!1},P={arrowleft:"left",a:"left",arrowright:"right",d:"right",arrowup:"jump",w:"jump"," ":"jump",arrowdown:"down",s:"down"};let b=!1;function W(a){if(!b)return;const y=a.key.toLowerCase();if(y==="r"&&a.type==="keydown"){m(),a.preventDefault(),a.stopImmediatePropagation();return}const g=P[y];if(!g)return;const T=a.type==="keydown";g==="jump"&&(T&&!u.jump&&(d.jumpPressedThisFrame=!0),!T&&u.jump&&i.vy<0&&(d.releasedJumpInRise=!0)),u[g]=T,a.preventDefault(),a.stopImmediatePropagation()}window.addEventListener("keydown",W,!0),window.addEventListener("keyup",W,!0),t.setAttribute("tabindex","0"),t.style.outline="none";const J=()=>{b=!0,t.style.boxShadow="inset 0 0 0 2px rgba(255,107,53,0.6)"},D=()=>{b=!1,t.style.boxShadow="",u.left=u.right=u.jump=u.down=!1};t.addEventListener("focus",J),t.addEventListener("blur",D);const X=()=>t.focus();t.addEventListener("pointerdown",X);function q(a,y,g){return`<label class="pg-toggle">
-      <input type="checkbox" data-cfg="${a}" ${w[a]?"checked":""} />
+`;function He(){if(document.getElementById("mario-jump-styles"))return;const t=document.createElement("style");t.id="mario-jump-styles",t.textContent=De,document.head.appendChild(t)}function Ye(t){He();const e=t.getContext("2d"),i=Math.max(1,Math.min(3,window.devicePixelRatio||1));let n=0,s=0;function r(){const a=t.getBoundingClientRect();a.width<1||a.height<1||(n=a.width,s=a.height,t.width=Math.round(n*i),t.height=Math.round(s*i))}const p=new ResizeObserver(r);p.observe(t),r();const f=new Image;f.src="img/claude-sprite.png";let x=!1;f.onload=()=>{x=!0};const $=new Image;$.src="img/playground-backdrop.png";let k=!1;$.onload=()=>{k=!0};const v={gravity:.65,jumpStrength:13.5,moveSpeed:5,airControl:1,realisticMode:!1,variableJump:!0,coyoteTime:!0,jumpBuffer:!0,apexHang:!0,asymmetricGravity:!0,fastFall:!0},_={...v},j=["variableJump","coyoteTime","jumpBuffer","apexHang","asymmetricGravity","fastFall"],o={x:80,y:470-Y,vx:0,vy:0,facing:1,squash:1},d={onGround:!1,coyote:0,buffer:0,currentGravity:v.gravity,jumpPressedThisFrame:!1,releasedJumpInRise:!1},S={vy:new Float32Array(G),ay:new Float32Array(G),y:new Float32Array(G),head:0};function c(){S.vy[S.head]=o.vy,S.ay[S.head]=d.currentGravity,S.y[S.head]=o.y,S.head=(S.head+1)%G}function m(){o.x=80,o.y=470-Y,o.vx=0,o.vy=0,o.facing=1,o.squash=1,d.onGround=!1,d.coyote=0,d.buffer=0,d.releasedJumpInRise=!1,S.vy.fill(0),S.ay.fill(0),S.y.fill(o.y),S.head=0}const u={left:!1,right:!1,jump:!1,down:!1},C={arrowleft:"left",a:"left",arrowright:"right",d:"right",arrowup:"jump",w:"jump"," ":"jump",arrowdown:"down",s:"down"};let b=!1;function W(a){if(!b)return;const y=a.key.toLowerCase();if(y==="r"&&a.type==="keydown"){m(),a.preventDefault(),a.stopImmediatePropagation();return}const g=C[y];if(!g)return;const T=a.type==="keydown";g==="jump"&&(T&&!u.jump&&(d.jumpPressedThisFrame=!0),!T&&u.jump&&o.vy<0&&(d.releasedJumpInRise=!0)),u[g]=T,a.preventDefault(),a.stopImmediatePropagation()}window.addEventListener("keydown",W,!0),window.addEventListener("keyup",W,!0),t.setAttribute("tabindex","0"),t.style.outline="none";const J=()=>{b=!0,t.style.boxShadow="inset 0 0 0 2px rgba(255,107,53,0.6)"},q=()=>{b=!1,t.style.boxShadow="",u.left=u.right=u.jump=u.down=!1};t.addEventListener("focus",J),t.addEventListener("blur",q);const X=()=>t.focus();t.addEventListener("pointerdown",X);function D(a,y,g){return`<label class="pg-toggle">
+      <input type="checkbox" data-cfg="${a}" ${v[a]?"checked":""} />
       <span class="pg-toggle__label">${y}</span>
       <span class="pg-toggle__desc">${g}</span>
-    </label>`}function z(a,y,g,T,$,L=S=>S.toFixed(2)){return`<label class="pg-slider">
-      <span class="pg-slider__label">${$}</span>
-      <span class="pg-slider__value" data-for="${a}">${L(w[a])}</span>
-      <input type="range" data-cfg="${a}" min="${y}" max="${g}" step="${T}" value="${w[a]}" />
-    </label>`}const C=document.createElement("div");C.className="playground-ui",C.innerHTML=`
+    </label>`}function z(a,y,g,T,E,R=A=>A.toFixed(2)){return`<label class="pg-slider">
+      <span class="pg-slider__label">${E}</span>
+      <span class="pg-slider__value" data-for="${a}">${R(v[a])}</span>
+      <input type="range" data-cfg="${a}" min="${y}" max="${g}" step="${T}" value="${v[a]}" />
+    </label>`}const L=document.createElement("div");L.className="playground-ui",L.innerHTML=`
     <div class="pg-section">
       <div class="pg-heading">Tricks</div>
-      ${q("realisticMode","Realistic (no tricks)","Pure parabolic physics. Try this first — feel how committed it is.")}
-      ${q("variableJump","Variable jump height","Release jump early → shorter jump.")}
-      ${q("coyoteTime","Coyote time","Jump within ~7 frames of leaving a ledge.")}
-      ${q("jumpBuffer","Jump buffer","Press jump ~8 frames before landing → still fires.")}
-      ${q("apexHang","Apex hangtime","Near the peak, gravity halves. Floaty, controllable.")}
-      ${q("asymmetricGravity","Asymmetric gravity","Falls faster than it rises. Snappy.")}
-      ${q("fastFall","Fast fall","Hold ↓ or S in air → accelerates down.")}
+      ${D("realisticMode","Realistic (no tricks)","Pure parabolic physics. Try this first — feel how committed it is.")}
+      ${D("variableJump","Variable jump height","Release jump early → shorter jump.")}
+      ${D("coyoteTime","Coyote time","Jump within ~7 frames of leaving a ledge.")}
+      ${D("jumpBuffer","Jump buffer","Press jump ~8 frames before landing → still fires.")}
+      ${D("apexHang","Apex hangtime","Near the peak, gravity halves. Floaty, controllable.")}
+      ${D("asymmetricGravity","Asymmetric gravity","Falls faster than it rises. Snappy.")}
+      ${D("fastFall","Fast fall","Hold ↓ or S in air → accelerates down.")}
     </div>
     <div class="pg-section">
       <div class="pg-heading">Tuning</div>
@@ -176,7 +176,7 @@
       <button class="pg-reset" type="button">Reset (R)</button>
       <div class="pg-keys">A/D or ←/→ · Space to jump · ↓ fast-fall · click canvas to focus</div>
     </div>
-  `;const H={vx:C.querySelector("[data-stat=vx]"),vy:C.querySelector("[data-stat=vy]"),ay:C.querySelector("[data-stat=ay]"),ground:C.querySelector("[data-stat=ground]"),coyote:C.querySelector("[data-stat=coyote]"),buffer:C.querySelector("[data-stat=buffer]")};C.querySelectorAll("input[data-cfg]").forEach(a=>{a.addEventListener("input",()=>{const y=a.dataset.cfg;if(a.type==="checkbox"){if(_[y]=a.checked,y==="realisticMode"&&a.checked&&j.forEach(g=>{_[g]=!1;const T=C.querySelector(`input[data-cfg="${g}"]`);T&&(T.checked=!1)}),j.includes(y)&&a.checked&&_.realisticMode){_.realisticMode=!1;const g=C.querySelector('input[data-cfg="realisticMode"]');g&&(g.checked=!1)}}else{const g=parseFloat(a.value);_[y]=g;const T=C.querySelector(`.pg-slider__value[data-for="${y}"]`);T&&(T.textContent=Number.isInteger(g*2)?g.toFixed(1):g.toFixed(2))}})}),C.querySelector(".pg-reset").addEventListener("click",m);const ee=t.closest(".demo__split");ee.classList.add("playground-wrap"),ee.appendChild(C);function he(a,y,g,T,$,L,S,v){return a<$+S&&a+g>$&&y<L+v&&y+T>L}function ae(a,y,g){return a+(y-a)*g}function ke(a){let y=0;u.left&&(y-=_.moveSpeed),u.right&&(y+=_.moveSpeed);const g=d.onGround?1:_.airControl;i.vx=ae(i.vx,y,Math.min(1,.3*g*a)),Math.abs(y)>.2&&(i.facing=Math.sign(y)),d.jumpPressedThisFrame&&(d.buffer=_.jumpBuffer?Fe:1),d.buffer=Math.max(0,d.buffer-a);const T=d.onGround||_.coyoteTime&&d.coyote>0;d.buffer>0&&T&&(i.vy=-_.jumpStrength,d.buffer=0,d.coyote=0,d.onGround=!1,d.releasedJumpInRise=!1,i.squash=1.2),_.variableJump&&d.releasedJumpInRise&&i.vy<0&&(i.vy*=Oe,d.releasedJumpInRise=!1),u.jump||(d.releasedJumpInRise=!1);let $=_.gravity;const L=!_.realisticMode;L&&_.apexHang&&Math.abs(i.vy)<We&&($*=Ne),L&&_.asymmetricGravity&&i.vy>0&&($*=Ue),L&&_.fastFall&&u.down&&i.vy>0&&($*=De),d.currentGravity=$,i.vy+=$*a,i.vy>18&&(i.vy=18),i.x+=i.vx*a;for(const[v,I,E,N]of re)he(i.x,i.y,Q,Y,v,I,E,N)&&(i.vx>0?i.x=v-Q:i.vx<0&&(i.x=v+E),i.vx=0);const S=d.onGround;d.onGround=!1,i.y+=i.vy*a;for(const[v,I,E,N]of re)if(he(i.x,i.y,Q,Y,v,I,E,N)){if(i.vy>0){if(i.y=I-Y,d.onGround=!0,!S){const K=Math.min(1,i.vy/16);i.squash=ae(1,.7,K)}}else i.vy<0&&(i.y=I+N);i.vy=0}S&&!d.onGround&&i.vy>=0?d.coyote=Me:d.coyote>0&&!d.onGround?d.coyote=Math.max(0,d.coyote-a):d.onGround&&(d.coyote=0),i.squash=ae(i.squash,1,Math.min(1,.2*a)),(i.y>B+200||i.x<-300||i.x>O+300)&&m(),d.jumpPressedThisFrame=!1,c()}let _e=0;function xe(){if(++_e%4!==0)return;const a=y=>y>=0?"+":"";H.vx.textContent=`${a(i.vx)}${i.vx.toFixed(2)}`,H.vy.textContent=`${a(i.vy)}${i.vy.toFixed(2)}`,H.ay.textContent=`${a(d.currentGravity)}${d.currentGravity.toFixed(2)}`,H.ground.textContent=d.onGround?"yes":"no",H.ground.className=d.onGround?"good":"muted",H.coyote.textContent=d.coyote.toFixed(0),H.coyote.className=d.coyote>0?"accent":"muted",H.buffer.textContent=d.buffer.toFixed(0),H.buffer.className=d.buffer>0?"accent":"muted"}function Te(){if(k){const S=R.width/R.height,v=O/B;let I,E,N,K;S>v?(E=B,I=E*S,N=(O-I)/2,K=0):(I=O,E=I/S,N=0,K=(B-E)/2),e.drawImage(R,N,K,I,E)}else{const S=e.createLinearGradient(0,0,0,B);S.addColorStop(0,"#0b0d10"),S.addColorStop(1,"#2a1f1a"),e.fillStyle=S,e.fillRect(0,0,O,B)}for(const[S,v,I,E]of re)e.fillStyle="#b78363",e.fillRect(S,v,I,E),e.fillStyle="#f1c591",e.fillRect(S,v,I,5),e.fillStyle="rgba(0,0,0,0.18)",e.fillRect(S+I-3,v,3,E),e.fillStyle="#8a5a3a",e.fillRect(S,v+5,I,2);e.save();const a=i.x+Q/2,y=i.y+Y;e.translate(a,y);let g=i.squash,T=1/i.squash;if(!d.onGround){const S=Math.max(-.15,Math.min(.22,-i.vy/80));g*=1+S,T*=1-S*.6}e.scale(T*i.facing,g);const $=Q*2,L=Y*2;x?e.drawImage(f,-$/2,-L*.92,$,L):(e.fillStyle="#d97757",e.fillRect(-Q/2,-Y,Q,Y)),e.restore()}function Ae(){const a=B,y=12,g=3,T=12,$=(O-y*2-T*(g-1))/g,L=de-y*2;e.fillStyle="rgba(11, 13, 16, 0.85)",e.fillRect(0,a,O,de),e.fillStyle="rgba(255,255,255,0.06)",e.fillRect(0,a,O,1),[{label:"y (position)",data:A.y,color:"#6fb3d2",min:0,max:B,invert:!0,zeroLine:!1},{label:"vy (velocity)",data:A.vy,color:"#ff6b35",min:-22,max:22,invert:!1,zeroLine:!0},{label:"ay (accel/grav)",data:A.ay,color:"#98c379",min:0,max:3,invert:!1,zeroLine:!1}].forEach((v,I)=>{const E=y+I*($+T);if(e.fillStyle="rgba(255,255,255,0.04)",e.fillRect(E,a+y,$,L),e.font="12px ui-monospace, monospace",e.textBaseline="top",e.fillStyle="rgba(255,255,255,0.55)",e.fillText(v.label,E+8,a+y+6),v.zeroLine){const V=a+y+L*((0-v.min)/(v.max-v.min));e.fillStyle="rgba(255,255,255,0.15)",e.fillRect(E,V,$,1)}e.strokeStyle=v.color,e.lineWidth=1.5,e.beginPath();for(let V=0;V<G;V++){const Re=(A.head+V)%G,Le=v.data[Re],Pe=V/(G-1),me=Math.max(0,Math.min(1,(Le-v.min)/(v.max-v.min))),Ce=v.invert?me:1-me,ge=E+Pe*$,be=a+y+Ce*L;V===0?e.moveTo(ge,be):e.lineTo(ge,be)}e.stroke();const N=(A.head-1+G)%G,K=v.data[N],ye=Math.max(0,Math.min(1,(K-v.min)/(v.max-v.min))),$e=v.invert?ye:1-ye,Ee=E+$-1,Ie=a+y+$e*L;e.fillStyle=v.color,e.beginPath(),e.arc(Ee,Ie,3,0,Math.PI*2),e.fill()})}function Se(){if(n<1||s<1)return;e.setTransform(1,0,0,1,0,0),e.clearRect(0,0,t.width,t.height);const a=Math.min(n/O,s/Z),y=(n-O*a)/2,g=(s-Z*a)/2,T=a*o;e.setTransform(T,0,0,T,y*o,g*o),e.imageSmoothingEnabled=!1,Te(),Ae(),b||(e.fillStyle="rgba(0,0,0,0.45)",e.fillRect(0,0,O,Z),e.fillStyle="#ffe6d4",e.font="bold 28px ui-monospace, monospace",e.textAlign="center",e.textBaseline="middle",e.fillText("click to play",O/2,Z/2),e.textAlign="start")}let se,pe=performance.now();function ue(a){const y=Math.min(40,a-pe);pe=a;const g=y/(1e3/60);ke(g),xe(),Se(),se=requestAnimationFrame(ue)}return se=requestAnimationFrame(ue),()=>{cancelAnimationFrame(se),window.removeEventListener("keydown",W,!0),window.removeEventListener("keyup",W,!0),t.removeEventListener("focus",J),t.removeEventListener("blur",D),t.removeEventListener("pointerdown",X),p.disconnect(),C.remove(),ee&&ee.classList.remove("playground-wrap"),t.style.boxShadow=""}}const Ge={"moving-square":je,"mario-jump":Ye};let te=null;function Be(t){if(te&&(te(),te=null),!t)return;const e=t.querySelector(".demo__canvas"),o=t.getAttribute("data-demo");if(!e||!o)return;const n=Ge[o];if(!n){console.warn(`[demo] unknown demo: ${o}`);return}te=n(e)||null}let ne=null;function Je(t){if(ne&&(ne(),ne=null),!(t!=null&&t.hasAttribute("data-interactive-code")))return;const e=t.querySelector(".icode");if(!e)return;const o=[...t.querySelectorAll(".icode__line[data-region]")],n=[...t.querySelectorAll(".icode__ann[data-region]")],s=[...t.querySelectorAll(".icode-tip")],r=[...new Set(o.map(c=>c.dataset.region).filter(Boolean))],p=new Set;let f=null,x=null,R=!1,k=null;function w(){const c=f!==null;e.classList.toggle("icode--has-active",c),e.classList.toggle("icode--has-revealed",p.size>0);for(const m of o){const u=m.dataset.region;u&&(m.classList.toggle("icode__line--active",u===f),m.classList.toggle("icode__line--revealed",p.has(u)))}for(const m of n){const u=m.dataset.region;m.classList.toggle("icode__ann--active",u===f),m.classList.toggle("icode__ann--revealed",p.has(u))}}function _(){R||p.size>=r.length&&(R=!0,e.classList.add("icode--complete"),setTimeout(()=>e.classList.remove("icode--complete"),900))}w();function j(c){var m,u;if(!((m=c.target)!=null&&m.isContentEditable||/input|textarea/i.test((u=c.target)==null?void 0:u.tagName))){if(c.key>="1"&&c.key<="9"){const P=parseInt(c.key)-1;if(P>=r.length)return;c.preventDefault();const b=r[P];f===b?(f=null,x=null):(p.add(b),f=b,x=b,_()),w();return}if(c.key==="0"||c.key==="Escape"){(f||x)&&(c.preventDefault(),f=null,x=null,w());return}}}addEventListener("keydown",j);const i=[];for(const c of o){const m=c.dataset.region;if(!m)continue;const u=()=>{!x&&p.has(m)&&(f=m,w())},P=()=>{x||(f=null,w())};c.addEventListener("mouseenter",u),c.addEventListener("mouseleave",P),i.push({el:c,events:{mouseenter:u,mouseleave:P}})}for(const c of n){const m=c.dataset.region,u=()=>{!x&&p.has(m)&&(f=m,w())},P=()=>{x||(f=null,w())},b=()=>{x===m?(x=null,f=null):(p.add(m),x=m,f=m,_()),w()};c.addEventListener("mouseenter",u),c.addEventListener("mouseleave",P),c.addEventListener("click",b),i.push({el:c,events:{mouseenter:u,mouseleave:P,click:b}})}function d(c){A();const m=c.dataset.tipSig||"",u=c.dataset.tipDesc||"",P=c.dataset.tipUrl||"";if(!m&&!u)return;const b=document.createElement("div");b.className="icode-tooltip",b.innerHTML=[m?`<code class="icode-tooltip__sig">${le(m)}</code>`:"",u?`<div class="icode-tooltip__desc">${le(u)}</div>`:"",P?`<a class="icode-tooltip__link" href="${le(P)}" target="_blank" rel="noopener">→ docs</a>`:""].filter(Boolean).join(""),e.appendChild(b),e.style.position="relative";let W=0,J=0,D=c;for(;D&&D!==e;)W+=D.offsetTop,J+=D.offsetLeft,D=D.offsetParent;b.style.left=Math.max(0,J)+"px",b.style.visibility="hidden";const X=b.offsetHeight,q=b.offsetWidth;W-X-10<0?(b.style.top=W+c.offsetHeight+8+"px",b.classList.add("icode-tooltip--below")):b.style.top=W-X-8+"px";const z=e.offsetWidth-q-8;parseInt(b.style.left)>z&&(b.style.left=Math.max(0,z)+"px"),b.style.visibility="",k=b}function A(){k&&(k.remove(),k=null)}for(const c of s){const m=()=>d(c),u=()=>A();c.addEventListener("mouseenter",m),c.addEventListener("mouseleave",u),i.push({el:c,events:{mouseenter:m,mouseleave:u}})}ne=()=>{removeEventListener("keydown",j);for(const c of i)for(const[m,u]of Object.entries(c.events))c.el.removeEventListener(m,u);A(),f=null,x=null,e.classList.remove("icode--has-active","icode--has-revealed","icode--complete");for(const c of o)c.classList.remove("icode__line--active","icode__line--revealed");for(const c of n)c.classList.remove("icode__ann--active","icode__ann--revealed")}}function le(t){return(t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}const ze=localStorage.getItem("deck-theme")||"dark";document.documentElement.setAttribute("data-theme",ze);class Ke extends HTMLElement{connectedCallback(){if(this._wired)return;this._wired=!0;const e=document.createElement("div");for(e.className="deck__stage";this.firstChild;)e.appendChild(this.firstChild);this.appendChild(e),this._stage=e,this._collectSlides(),this._buildFooter(),this._buildHelp(),this._index=this._readHashIndex(),this._show(this._index),this._scale(),addEventListener("resize",()=>this._scale()),addEventListener("keydown",o=>this._onKey(o)),addEventListener("hashchange",()=>this._show(this._readHashIndex()))}_collectSlides(){const o=new URLSearchParams(location.search).get("unit");let n=Array.from(this._stage.querySelectorAll(".slide"));o&&(n=n.filter(s=>s.getAttribute("data-unit")===o),this._stage.querySelectorAll(".slide").forEach(s=>{n.includes(s)||s.remove()})),this._slides=n}_buildFooter(){const e=document.createElement("div");e.className="deck__footer",e.innerHTML=`
+  `;const H={vx:L.querySelector("[data-stat=vx]"),vy:L.querySelector("[data-stat=vy]"),ay:L.querySelector("[data-stat=ay]"),ground:L.querySelector("[data-stat=ground]"),coyote:L.querySelector("[data-stat=coyote]"),buffer:L.querySelector("[data-stat=buffer]")};L.querySelectorAll("input[data-cfg]").forEach(a=>{a.addEventListener("input",()=>{const y=a.dataset.cfg;if(a.type==="checkbox"){if(_[y]=a.checked,y==="realisticMode"&&a.checked&&j.forEach(g=>{_[g]=!1;const T=L.querySelector(`input[data-cfg="${g}"]`);T&&(T.checked=!1)}),j.includes(y)&&a.checked&&_.realisticMode){_.realisticMode=!1;const g=L.querySelector('input[data-cfg="realisticMode"]');g&&(g.checked=!1)}}else{const g=parseFloat(a.value);_[y]=g;const T=L.querySelector(`.pg-slider__value[data-for="${y}"]`);T&&(T.textContent=Number.isInteger(g*2)?g.toFixed(1):g.toFixed(2))}})}),L.querySelector(".pg-reset").addEventListener("click",m);const ee=t.closest(".demo__split");ee.classList.add("playground-wrap"),ee.appendChild(L);function he(a,y,g,T,E,R,A,w){return a<E+A&&a+g>E&&y<R+w&&y+T>R}function ae(a,y,g){return a+(y-a)*g}function ke(a){let y=0;u.left&&(y-=_.moveSpeed),u.right&&(y+=_.moveSpeed);const g=d.onGround?1:_.airControl;o.vx=ae(o.vx,y,Math.min(1,.3*g*a)),Math.abs(y)>.2&&(o.facing=Math.sign(y)),d.jumpPressedThisFrame&&(d.buffer=_.jumpBuffer?Fe:1),d.buffer=Math.max(0,d.buffer-a);const T=d.onGround||_.coyoteTime&&d.coyote>0;d.buffer>0&&T&&(o.vy=-_.jumpStrength,d.buffer=0,d.coyote=0,d.onGround=!1,d.releasedJumpInRise=!1,o.squash=1.2),_.variableJump&&d.releasedJumpInRise&&o.vy<0&&(o.vy*=Oe,d.releasedJumpInRise=!1),u.jump||(d.releasedJumpInRise=!1);let E=_.gravity;const R=!_.realisticMode;R&&_.apexHang&&Math.abs(o.vy)<We&&(E*=Ne),R&&_.asymmetricGravity&&o.vy>0&&(E*=Ue),R&&_.fastFall&&u.down&&o.vy>0&&(E*=qe),d.currentGravity=E,o.vy+=E*a,o.vy>18&&(o.vy=18),o.x+=o.vx*a;for(const[w,I,P,N]of re)he(o.x,o.y,Q,Y,w,I,P,N)&&(o.vx>0?o.x=w-Q:o.vx<0&&(o.x=w+P),o.vx=0);const A=d.onGround;d.onGround=!1,o.y+=o.vy*a;for(const[w,I,P,N]of re)if(he(o.x,o.y,Q,Y,w,I,P,N)){if(o.vy>0){if(o.y=I-Y,d.onGround=!0,!A){const K=Math.min(1,o.vy/16);o.squash=ae(1,.7,K)}}else o.vy<0&&(o.y=I+N);o.vy=0}A&&!d.onGround&&o.vy>=0?d.coyote=Me:d.coyote>0&&!d.onGround?d.coyote=Math.max(0,d.coyote-a):d.onGround&&(d.coyote=0),o.squash=ae(o.squash,1,Math.min(1,.2*a)),(o.y>B+200||o.x<-300||o.x>O+300)&&m(),d.jumpPressedThisFrame=!1,c()}let _e=0;function xe(){if(++_e%4!==0)return;const a=y=>y>=0?"+":"";H.vx.textContent=`${a(o.vx)}${o.vx.toFixed(2)}`,H.vy.textContent=`${a(o.vy)}${o.vy.toFixed(2)}`,H.ay.textContent=`${a(d.currentGravity)}${d.currentGravity.toFixed(2)}`,H.ground.textContent=d.onGround?"yes":"no",H.ground.className=d.onGround?"good":"muted",H.coyote.textContent=d.coyote.toFixed(0),H.coyote.className=d.coyote>0?"accent":"muted",H.buffer.textContent=d.buffer.toFixed(0),H.buffer.className=d.buffer>0?"accent":"muted"}function Te(){if(k){const A=$.width/$.height,w=O/B;let I,P,N,K;A>w?(P=B,I=P*A,N=(O-I)/2,K=0):(I=O,P=I/A,N=0,K=(B-P)/2),e.drawImage($,N,K,I,P)}else{const A=e.createLinearGradient(0,0,0,B);A.addColorStop(0,"#0b0d10"),A.addColorStop(1,"#2a1f1a"),e.fillStyle=A,e.fillRect(0,0,O,B)}for(const[A,w,I,P]of re)e.fillStyle="#b78363",e.fillRect(A,w,I,P),e.fillStyle="#f1c591",e.fillRect(A,w,I,5),e.fillStyle="rgba(0,0,0,0.18)",e.fillRect(A+I-3,w,3,P),e.fillStyle="#8a5a3a",e.fillRect(A,w+5,I,2);e.save();const a=o.x+Q/2,y=o.y+Y;e.translate(a,y);let g=o.squash,T=1/o.squash;if(!d.onGround){const A=Math.max(-.15,Math.min(.22,-o.vy/80));g*=1+A,T*=1-A*.6}e.scale(T*o.facing,g);const E=Q*2,R=Y*2;x?e.drawImage(f,-E/2,-R*.92,E,R):(e.fillStyle="#d97757",e.fillRect(-Q/2,-Y,Q,Y)),e.restore()}function Se(){const a=B,y=12,g=3,T=12,E=(O-y*2-T*(g-1))/g,R=de-y*2;e.fillStyle="rgba(11, 13, 16, 0.85)",e.fillRect(0,a,O,de),e.fillStyle="rgba(255,255,255,0.06)",e.fillRect(0,a,O,1),[{label:"y (position)",data:S.y,color:"#6fb3d2",min:0,max:B,invert:!0,zeroLine:!1},{label:"vy (velocity)",data:S.vy,color:"#ff6b35",min:-22,max:22,invert:!1,zeroLine:!0},{label:"ay (accel/grav)",data:S.ay,color:"#98c379",min:0,max:3,invert:!1,zeroLine:!1}].forEach((w,I)=>{const P=y+I*(E+T);if(e.fillStyle="rgba(255,255,255,0.04)",e.fillRect(P,a+y,E,R),e.font="12px ui-monospace, monospace",e.textBaseline="top",e.fillStyle="rgba(255,255,255,0.55)",e.fillText(w.label,P+8,a+y+6),w.zeroLine){const V=a+y+R*((0-w.min)/(w.max-w.min));e.fillStyle="rgba(255,255,255,0.15)",e.fillRect(P,V,E,1)}e.strokeStyle=w.color,e.lineWidth=1.5,e.beginPath();for(let V=0;V<G;V++){const $e=(S.head+V)%G,Re=w.data[$e],Ce=V/(G-1),me=Math.max(0,Math.min(1,(Re-w.min)/(w.max-w.min))),Le=w.invert?me:1-me,ge=P+Ce*E,be=a+y+Le*R;V===0?e.moveTo(ge,be):e.lineTo(ge,be)}e.stroke();const N=(S.head-1+G)%G,K=w.data[N],ye=Math.max(0,Math.min(1,(K-w.min)/(w.max-w.min))),Ee=w.invert?ye:1-ye,Pe=P+E-1,Ie=a+y+Ee*R;e.fillStyle=w.color,e.beginPath(),e.arc(Pe,Ie,3,0,Math.PI*2),e.fill()})}function Ae(){if(n<1||s<1)return;e.setTransform(1,0,0,1,0,0),e.clearRect(0,0,t.width,t.height);const a=Math.min(n/O,s/Z),y=(n-O*a)/2,g=(s-Z*a)/2,T=a*i;e.setTransform(T,0,0,T,y*i,g*i),e.imageSmoothingEnabled=!1,Te(),Se(),b||(e.fillStyle="rgba(0,0,0,0.45)",e.fillRect(0,0,O,Z),e.fillStyle="#ffe6d4",e.font="bold 28px ui-monospace, monospace",e.textAlign="center",e.textBaseline="middle",e.fillText("click to play",O/2,Z/2),e.textAlign="start")}let se,pe=performance.now();function ue(a){const y=Math.min(40,a-pe);pe=a;const g=y/(1e3/60);ke(g),xe(),Ae(),se=requestAnimationFrame(ue)}return se=requestAnimationFrame(ue),()=>{cancelAnimationFrame(se),window.removeEventListener("keydown",W,!0),window.removeEventListener("keyup",W,!0),t.removeEventListener("focus",J),t.removeEventListener("blur",q),t.removeEventListener("pointerdown",X),p.disconnect(),L.remove(),ee&&ee.classList.remove("playground-wrap"),t.style.boxShadow=""}}const Ge={"moving-square":je,"mario-jump":Ye};let te=null;function Be(t){if(te&&(te(),te=null),!t)return;const e=t.querySelector(".demo__canvas"),i=t.getAttribute("data-demo");if(!e||!i)return;const n=Ge[i];if(!n){console.warn(`[demo] unknown demo: ${i}`);return}te=n(e)||null}let ne=null;function Je(t){if(ne&&(ne(),ne=null),!(t!=null&&t.hasAttribute("data-interactive-code")))return;const e=t.querySelector(".icode");if(!e)return;const i=[...t.querySelectorAll(".icode__line[data-region]")],n=[...t.querySelectorAll(".icode__ann[data-region]")],s=[...t.querySelectorAll(".icode-tip")],r=[...new Set(i.map(c=>c.dataset.region).filter(Boolean))],p=new Set;let f=null,x=null,$=!1,k=null;function v(){const c=f!==null;e.classList.toggle("icode--has-active",c),e.classList.toggle("icode--has-revealed",p.size>0);for(const m of i){const u=m.dataset.region;u&&(m.classList.toggle("icode__line--active",u===f),m.classList.toggle("icode__line--revealed",p.has(u)))}for(const m of n){const u=m.dataset.region;m.classList.toggle("icode__ann--active",u===f),m.classList.toggle("icode__ann--revealed",p.has(u))}}function _(){$||p.size>=r.length&&($=!0,e.classList.add("icode--complete"),setTimeout(()=>e.classList.remove("icode--complete"),900))}v();function j(c){var m,u;if(!((m=c.target)!=null&&m.isContentEditable||/input|textarea/i.test((u=c.target)==null?void 0:u.tagName))){if(c.key>="1"&&c.key<="9"){const C=parseInt(c.key)-1;if(C>=r.length)return;c.preventDefault();const b=r[C];f===b?(f=null,x=null):(p.add(b),f=b,x=b,_()),v();return}if(c.key==="0"||c.key==="Escape"){(f||x)&&(c.preventDefault(),f=null,x=null,v());return}}}addEventListener("keydown",j);const o=[];for(const c of i){const m=c.dataset.region;if(!m)continue;const u=()=>{!x&&p.has(m)&&(f=m,v())},C=()=>{x||(f=null,v())};c.addEventListener("mouseenter",u),c.addEventListener("mouseleave",C),o.push({el:c,events:{mouseenter:u,mouseleave:C}})}for(const c of n){const m=c.dataset.region,u=()=>{!x&&p.has(m)&&(f=m,v())},C=()=>{x||(f=null,v())},b=()=>{x===m?(x=null,f=null):(p.add(m),x=m,f=m,_()),v()};c.addEventListener("mouseenter",u),c.addEventListener("mouseleave",C),c.addEventListener("click",b),o.push({el:c,events:{mouseenter:u,mouseleave:C,click:b}})}function d(c){S();const m=c.dataset.tipSig||"",u=c.dataset.tipDesc||"",C=c.dataset.tipUrl||"";if(!m&&!u)return;const b=document.createElement("div");b.className="icode-tooltip",b.innerHTML=[m?`<code class="icode-tooltip__sig">${le(m)}</code>`:"",u?`<div class="icode-tooltip__desc">${le(u)}</div>`:"",C?`<a class="icode-tooltip__link" href="${le(C)}" target="_blank" rel="noopener">→ docs</a>`:""].filter(Boolean).join(""),e.appendChild(b),e.style.position="relative";let W=0,J=0,q=c;for(;q&&q!==e;)W+=q.offsetTop,J+=q.offsetLeft,q=q.offsetParent;b.style.left=Math.max(0,J)+"px",b.style.visibility="hidden";const X=b.offsetHeight,D=b.offsetWidth;W-X-10<0?(b.style.top=W+c.offsetHeight+8+"px",b.classList.add("icode-tooltip--below")):b.style.top=W-X-8+"px";const z=e.offsetWidth-D-8;parseInt(b.style.left)>z&&(b.style.left=Math.max(0,z)+"px"),b.style.visibility="",k=b}function S(){k&&(k.remove(),k=null)}for(const c of s){const m=()=>d(c),u=()=>S();c.addEventListener("mouseenter",m),c.addEventListener("mouseleave",u),o.push({el:c,events:{mouseenter:m,mouseleave:u}})}ne=()=>{removeEventListener("keydown",j);for(const c of o)for(const[m,u]of Object.entries(c.events))c.el.removeEventListener(m,u);S(),f=null,x=null,e.classList.remove("icode--has-active","icode--has-revealed","icode--complete");for(const c of i)c.classList.remove("icode__line--active","icode__line--revealed");for(const c of n)c.classList.remove("icode__ann--active","icode__ann--revealed")}}function le(t){return(t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}const ze=localStorage.getItem("deck-theme")||"dark";document.documentElement.setAttribute("data-theme",ze);class Ke extends HTMLElement{connectedCallback(){if(this._wired)return;this._wired=!0;const e=document.createElement("div");for(e.className="deck__stage";this.firstChild;)e.appendChild(this.firstChild);this.appendChild(e),this._stage=e,this._collectSlides(),this._buildFooter(),this._buildHelp(),this._index=this._readHashIndex(),this._show(this._index),this._scale(),addEventListener("resize",()=>this._scale()),addEventListener("keydown",i=>this._onKey(i)),addEventListener("hashchange",()=>this._show(this._readHashIndex()))}_collectSlides(){const i=new URLSearchParams(location.search).get("unit");let n=Array.from(this._stage.querySelectorAll(".slide"));i&&(n=n.filter(s=>s.getAttribute("data-unit")===i),this._stage.querySelectorAll(".slide").forEach(s=>{n.includes(s)||s.remove()})),this._slides=n}_buildFooter(){const e=document.createElement("div");e.className="deck__footer",e.innerHTML=`
       <div class="deck__footer__tag"></div>
       <div class="deck__footer__progress"><div class="deck__footer__progress__bar"></div></div>
       <div class="deck__footer__num"></div>
@@ -191,9 +191,9 @@
         <tr><td><kbd>Ctrl+Shift+E</kbd></td><td>Toggle edit mode (dev only)</td></tr>
         <tr><td><kbd>?</kbd></td><td>Toggle this help</td></tr>
       </table>
-    `,document.body.appendChild(e),this._help=e}_readHashIndex(){var n;const e=location.hash.match(/^#(\d+)/);if(!e)return 0;const o=parseInt(e[1],10)-1;return Math.max(0,Math.min(o,(((n=this._slides)==null?void 0:n.length)||1)-1))}_show(e){if(!this._slides.length||e<0||e>=this._slides.length)return;this._index=e;const o=this._slides.length;this._slides.forEach((R,k)=>{k===e?R.setAttribute("data-active",""):R.removeAttribute("data-active")});const n=this._slides[e],s=n.getAttribute("data-unit")||"",r=n.getAttribute("data-tag")||"",p=n.getAttribute("data-total")||"12",f=[];s&&f.push(`UNIT ${s} / ${p}`),r&&f.push(r);const x=f.join("  —  ");this._fTag&&(this._fTag.style.animation="none",this._fTag.offsetHeight,this._fTag.style.animation="",this._fTag.textContent=x),this._fNum&&(this._fNum.textContent=`${String(e+1).padStart(2,"0")} / ${String(o).padStart(2,"0")}`),this._progress&&(this._progress.style.width=`${(e+1)/o*100}%`),location.hash!==`#${e+1}`&&history.replaceState(null,"",`#${e+1}`),Be(n),Je(n),dispatchEvent(new CustomEvent("deck:slide-change",{detail:{index:e,slide:n}}))}_next(){this._show(Math.min(this._index+1,this._slides.length-1))}_prev(){this._show(Math.max(this._index-1,0))}_onKey(e){if(!(e.target&&e.target.isContentEditable)&&!(e.target&&/input|textarea/i.test(e.target.tagName))){if(e.ctrlKey&&e.shiftKey&&(e.key==="E"||e.key==="e")){e.preventDefault(),dispatchEvent(new CustomEvent("deck:toggle-edit"));return}switch(e.key){case"ArrowRight":case" ":case"PageDown":e.preventDefault(),this._next();break;case"ArrowLeft":case"PageUp":e.preventDefault(),this._prev();break;case"Home":e.preventDefault(),this._show(0);break;case"End":e.preventDefault(),this._show(this._slides.length-1);break;case"f":case"F":document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();break;case"t":case"T":e.preventDefault(),this._toggleTheme();break;case"?":this._help.toggleAttribute("data-open");break}}}_toggleTheme(){const o=(document.documentElement.getAttribute("data-theme")||"dark")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",o),localStorage.setItem("deck-theme",o)}_scale(){const e=innerWidth,o=innerHeight,n=Math.min(e/1920,o/1080);this._stage.style.transform=`translate(-50%, -50%) scale(${n})`}}customElements.get("deck-root")||customElements.define("deck-root",Ke);const Ve=["B","I","EM","STRONG","BR"],Qe=new Set(Ve),Xe=new Set(["BR"]);function l(t){return t==null?"":String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function U(t){if(t==null)return"";const e=document.createElement("template");return e.innerHTML=String(t),ce(e.content)}function ce(t){let e="";for(const o of t.childNodes)if(o.nodeType===Node.TEXT_NODE)e+=l(o.nodeValue);else if(o.nodeType===Node.ELEMENT_NODE){const n=o.tagName;if(Qe.has(n)){const s=n.toLowerCase();Xe.has(n)?e+=`<${s}>`:e+=`<${s}>${ce(o)}</${s}>`}else e+=ce(o)}return e}const Ze=new Set(["False","None","True","and","as","assert","async","await","break","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","nonlocal","not","or","pass","raise","return","try","while","with","yield"]),et=new Set(["print","len","range","str","int","float","list","dict","set","tuple","bool","type","isinstance","abs","min","max","sum","enumerate","zip","map","filter","input","open","round","self","cls"]),fe=new RegExp(["(?<comment>#[^\\n]*)",`(?<tstring>"""[\\s\\S]*?"""|'''[\\s\\S]*?''')`,`(?<fstring>f"(?:[^"\\\\\\n]|\\\\.)*"|f'(?:[^'\\\\\\n]|\\\\.)*')`,`(?<string>"(?:[^"\\\\\\n]|\\\\.)*"|'(?:[^'\\\\\\n]|\\\\.)*')`,"(?<decorator>@\\w+)","(?<number>\\b\\d+(?:\\.\\d+)?\\b)","(?<word>[A-Za-z_]\\w*)"].join("|"),"g");function M(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function oe(t){if(t==null)return"";let e="",o=0,n=null,s;for(fe.lastIndex=0;(s=fe.exec(t))!==null;){if(s.index>o){const p=t.slice(o,s.index);e+=M(p),/\S/.test(p)&&(n=null)}const r=s.groups;if(r.comment)e+=`<span class="tok-comment">${M(r.comment)}</span>`,n=null;else if(r.tstring)e+=`<span class="tok-string">${M(r.tstring)}</span>`,n=null;else if(r.fstring)e+=`<span class="tok-string">${M(r.fstring)}</span>`,n=null;else if(r.string)e+=`<span class="tok-string">${M(r.string)}</span>`,n=null;else if(r.decorator)e+=`<span class="tok-decorator">${M(r.decorator)}</span>`,n=null;else if(r.number)e+=`<span class="tok-number">${M(r.number)}</span>`,n=null;else if(r.word){const p=r.word;n==="function"?(e+=`<span class="tok-function-def">${M(p)}</span>`,n=null):n==="class"?(e+=`<span class="tok-class-def">${M(p)}</span>`,n=null):Ze.has(p)?(e+=`<span class="tok-keyword">${M(p)}</span>`,p==="def"?n="function":p==="class"?n="class":n=null):et.has(p)?(e+=`<span class="tok-builtin">${M(p)}</span>`,n=null):(e+=M(p),n=null)}o=s.index+s[0].length}return o<t.length&&(e+=M(t.slice(o))),e}function ve(t){const e=(t||"").split(`
-`).length;return e>=20?"xs":e>=14?"sm":e>=10?"md":"lg"}function tt(t,e){return e.map(o=>nt(o,t)).join(`
-`)}function nt(t,e){const o=ot[t.type];return o?o(t,e):`<div class="slide"><div class="slide__body">Unknown slide type: ${l(t.type)}</div></div>`}function h(t,e,o){return`data-edit="${t}/${e}/${o}"`}function ie(t,e,o){return`data-edit-list="${t}/${e}/${o}"`}function F(t,e,o="",n=""){return`<div class="slide ${o}" data-slide-type="${l(t.type)}" data-edit-slide="${l(e.id)}/${l(t.id)}" data-unit="${l(e.id)}" data-tag="${l(e.tag||"")}" data-total="${l(e.total||"")}"${n?" "+n:""}>`}const ot={section(t,e){return`${F(t,e,"slide--section")}
+    `,document.body.appendChild(e),this._help=e}_readHashIndex(){var n;const e=location.hash.match(/^#(\d+)/);if(!e)return 0;const i=parseInt(e[1],10)-1;return Math.max(0,Math.min(i,(((n=this._slides)==null?void 0:n.length)||1)-1))}_show(e){if(!this._slides.length||e<0||e>=this._slides.length)return;this._index=e;const i=this._slides.length;this._slides.forEach(($,k)=>{k===e?$.setAttribute("data-active",""):$.removeAttribute("data-active")});const n=this._slides[e],s=n.getAttribute("data-unit")||"",r=n.getAttribute("data-tag")||"",p=n.getAttribute("data-total")||"12",f=[];s&&f.push(`UNIT ${s} / ${p}`),r&&f.push(r);const x=f.join("  —  ");this._fTag&&(this._fTag.style.animation="none",this._fTag.offsetHeight,this._fTag.style.animation="",this._fTag.textContent=x),this._fNum&&(this._fNum.textContent=`${String(e+1).padStart(2,"0")} / ${String(i).padStart(2,"0")}`),this._progress&&(this._progress.style.width=`${(e+1)/i*100}%`),location.hash!==`#${e+1}`&&history.replaceState(null,"",`#${e+1}`),Be(n),Je(n),dispatchEvent(new CustomEvent("deck:slide-change",{detail:{index:e,slide:n}}))}_next(){this._show(Math.min(this._index+1,this._slides.length-1))}_prev(){this._show(Math.max(this._index-1,0))}_onKey(e){if(!(e.target&&e.target.isContentEditable)&&!(e.target&&/input|textarea/i.test(e.target.tagName))){if(e.ctrlKey&&e.shiftKey&&(e.key==="E"||e.key==="e")){e.preventDefault(),dispatchEvent(new CustomEvent("deck:toggle-edit"));return}switch(e.key){case"ArrowRight":case" ":case"PageDown":e.preventDefault(),this._next();break;case"ArrowLeft":case"PageUp":e.preventDefault(),this._prev();break;case"Home":e.preventDefault(),this._show(0);break;case"End":e.preventDefault(),this._show(this._slides.length-1);break;case"f":case"F":document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();break;case"t":case"T":e.preventDefault(),this._toggleTheme();break;case"?":this._help.toggleAttribute("data-open");break}}}_toggleTheme(){const i=(document.documentElement.getAttribute("data-theme")||"dark")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",i),localStorage.setItem("deck-theme",i)}_scale(){const e=innerWidth,i=innerHeight,n=Math.min(e/1920,i/1080);this._stage.style.transform=`translate(-50%, -50%) scale(${n})`}}customElements.get("deck-root")||customElements.define("deck-root",Ke);const Ve=["B","I","EM","STRONG","BR"],Qe=new Set(Ve),Xe=new Set(["BR"]);function l(t){return t==null?"":String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function U(t){if(t==null)return"";const e=document.createElement("template");return e.innerHTML=String(t),ce(e.content)}function ce(t){let e="";for(const i of t.childNodes)if(i.nodeType===Node.TEXT_NODE)e+=l(i.nodeValue);else if(i.nodeType===Node.ELEMENT_NODE){const n=i.tagName;if(Qe.has(n)){const s=n.toLowerCase();Xe.has(n)?e+=`<${s}>`:e+=`<${s}>${ce(i)}</${s}>`}else e+=ce(i)}return e}const Ze=new Set(["False","None","True","and","as","assert","async","await","break","class","continue","def","del","elif","else","except","finally","for","from","global","if","import","in","is","lambda","nonlocal","not","or","pass","raise","return","try","while","with","yield"]),et=new Set(["print","len","range","str","int","float","list","dict","set","tuple","bool","type","isinstance","abs","min","max","sum","enumerate","zip","map","filter","input","open","round","self","cls"]),fe=new RegExp(["(?<comment>#[^\\n]*)",`(?<tstring>"""[\\s\\S]*?"""|'''[\\s\\S]*?''')`,`(?<fstring>f"(?:[^"\\\\\\n]|\\\\.)*"|f'(?:[^'\\\\\\n]|\\\\.)*')`,`(?<string>"(?:[^"\\\\\\n]|\\\\.)*"|'(?:[^'\\\\\\n]|\\\\.)*')`,"(?<decorator>@\\w+)","(?<number>\\b\\d+(?:\\.\\d+)?\\b)","(?<word>[A-Za-z_]\\w*)"].join("|"),"g");function M(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function ie(t){if(t==null)return"";let e="",i=0,n=null,s;for(fe.lastIndex=0;(s=fe.exec(t))!==null;){if(s.index>i){const p=t.slice(i,s.index);e+=M(p),/\S/.test(p)&&(n=null)}const r=s.groups;if(r.comment)e+=`<span class="tok-comment">${M(r.comment)}</span>`,n=null;else if(r.tstring)e+=`<span class="tok-string">${M(r.tstring)}</span>`,n=null;else if(r.fstring)e+=`<span class="tok-string">${M(r.fstring)}</span>`,n=null;else if(r.string)e+=`<span class="tok-string">${M(r.string)}</span>`,n=null;else if(r.decorator)e+=`<span class="tok-decorator">${M(r.decorator)}</span>`,n=null;else if(r.number)e+=`<span class="tok-number">${M(r.number)}</span>`,n=null;else if(r.word){const p=r.word;n==="function"?(e+=`<span class="tok-function-def">${M(p)}</span>`,n=null):n==="class"?(e+=`<span class="tok-class-def">${M(p)}</span>`,n=null):Ze.has(p)?(e+=`<span class="tok-keyword">${M(p)}</span>`,p==="def"?n="function":p==="class"?n="class":n=null):et.has(p)?(e+=`<span class="tok-builtin">${M(p)}</span>`,n=null):(e+=M(p),n=null)}i=s.index+s[0].length}return i<t.length&&(e+=M(t.slice(i))),e}function we(t){const e=(t||"").split(`
+`).length;return e>=20?"xs":e>=14?"sm":e>=10?"md":"lg"}function tt(t,e){return e.map(i=>nt(i,t)).join(`
+`)}function nt(t,e){const i=it[t.type];return i?i(t,e):`<div class="slide"><div class="slide__body">Unknown slide type: ${l(t.type)}</div></div>`}function h(t,e,i){return`data-edit="${t}/${e}/${i}"`}function oe(t,e,i){return`data-edit-list="${t}/${e}/${i}"`}function F(t,e,i="",n=""){return`<div class="slide ${i}" data-slide-type="${l(t.type)}" data-edit-slide="${l(e.id)}/${l(t.id)}" data-unit="${l(e.id)}" data-tag="${l(e.tag||"")}" data-total="${l(e.total||"")}"${n?" "+n:""}>`}const it={section(t,e){return`${F(t,e,"slide--section")}
       <div class="slide__body">
         <div class="section">
           <div class="section__number">
@@ -211,12 +211,12 @@
           <div class="title-slide__subtitle" ${h(e.id,t.id,"subtitle")}>${l(t.subtitle||"")}</div>
         </div>
       </div>
-    </div>`},bullets(t,e){const o=(t.items||[]).map((n,s)=>`<li ${h(e.id,t.id,`items[${s}]`)}>${U(n)}</li>`).join("");return`${F(t,e,"slide--bullets")}
+    </div>`},bullets(t,e){const i=(t.items||[]).map((n,s)=>`<li ${h(e.id,t.id,`items[${s}]`)}>${U(n)}</li>`).join("");return`${F(t,e,"slide--bullets")}
       <div class="slide__body">
         <div class="bullets">
           <h2 class="bullets__heading" ${h(e.id,t.id,"heading")}>${l(t.heading||"")}</h2>
           ${t.lead?`<p class="bullets__lead" ${h(e.id,t.id,"lead")}>${U(t.lead)}</p>`:`<p class="bullets__lead bullets__lead--empty" ${h(e.id,t.id,"lead")}></p>`}
-          <ul class="bullets__list" ${ie(e.id,t.id,"items")}>${o}</ul>
+          <ul class="bullets__list" ${oe(e.id,t.id,"items")}>${i}</ul>
         </div>
       </div>
     </div>`},question(t,e){return`${F(t,e,"slide--question")}
@@ -226,16 +226,16 @@
           <h2 class="qslide__q"><span ${h(e.id,t.id,"question")}>${l(t.question||"")}</span></h2>
         </div>
       </div>
-    </div>`},split(t,e){const o=n=>{const s=t[n]||{title:"",items:[]},r=(s.items||[]).map((p,f)=>`<li ${h(e.id,t.id,`${n}.items[${f}]`)}>${U(p)}</li>`).join("");return`<div class="split__col">
+    </div>`},split(t,e){const i=n=>{const s=t[n]||{title:"",items:[]},r=(s.items||[]).map((p,f)=>`<li ${h(e.id,t.id,`${n}.items[${f}]`)}>${U(p)}</li>`).join("");return`<div class="split__col">
         <h3 ${h(e.id,t.id,`${n}.title`)}>${l(s.title||"")}</h3>
-        <ul ${ie(e.id,t.id,`${n}.items`)}>${r}</ul>
+        <ul ${oe(e.id,t.id,`${n}.items`)}>${r}</ul>
       </div>`};return`${F(t,e,"slide--split")}
       <div class="slide__body">
         <div class="split">
           <h2 class="split__heading" ${h(e.id,t.id,"heading")}>${l(t.heading||"")}</h2>
           <div class="split__cols">
-            ${o("left")}
-            ${o("right")}
+            ${i("left")}
+            ${i("right")}
           </div>
         </div>
       </div>
@@ -247,24 +247,24 @@
           <p class="prose__body" ${h(e.id,t.id,"body")}>${U(t.body||"")}</p>
         </div>
       </div>
-    </div>`},concept(t,e){const o=t.diagram||"";return`${F(t,e,"slide--concept")}
+    </div>`},concept(t,e){const i=t.diagram||"";return`${F(t,e,"slide--concept")}
       <div class="slide__body">
         <div class="concept">
           ${t.eyebrow?`<div class="concept__eyebrow" ${h(e.id,t.id,"eyebrow")}>${l(t.eyebrow)}</div>`:""}
           <h2 class="concept__statement" ${h(e.id,t.id,"statement")}>${U(t.statement||"")}</h2>
-          <div class="concept__diagram">${o}</div>
+          <div class="concept__diagram">${i}</div>
           ${t.caption?`<div class="concept__caption" ${h(e.id,t.id,"caption")}>${U(t.caption)}</div>`:""}
         </div>
       </div>
-    </div>`},image(t,e){const o=t.fit==="contain"?"contain":"cover",n=l(t.src||""),s=l(t.alt||"");return`${F(t,e,"slide--image")}
+    </div>`},image(t,e){const i=t.fit==="contain"?"contain":"cover",n=l(t.src||""),s=l(t.alt||"");return`${F(t,e,"slide--image")}
       <div class="slide__body">
-        <div class="image-slide image-slide--${o}">
+        <div class="image-slide image-slide--${i}">
           <img src="${n}" alt="${s}" />
           ${t.caption?`<div class="image-slide__caption" ${h(e.id,t.id,"caption")}>${U(t.caption)}</div>`:`<div class="image-slide__caption image-slide__caption--empty" ${h(e.id,t.id,"caption")}></div>`}
         </div>
       </div>
-    </div>`},demo(t,e){const o=l(t.demo||""),n=!!t.code,s=n?oe(t.code):"",r=n?t.code.split(`
-`).length:0;return`${F(t,e,`slide--demo${n?" slide--demo-with-code":""}`,`data-demo="${o}"`)}
+    </div>`},demo(t,e){const i=l(t.demo||""),n=!!t.code,s=n?ie(t.code):"",r=n?t.code.split(`
+`).length:0;return`${F(t,e,`slide--demo${n?" slide--demo-with-code":""}`,`data-demo="${i}"`)}
       <div class="slide__body">
         <div class="demo">
           ${t.eyebrow?`<div class="demo__eyebrow" ${h(e.id,t.id,"eyebrow")}>${l(t.eyebrow)}</div>`:""}
@@ -283,23 +283,23 @@
           </div>
         </div>
       </div>
-    </div>`},code(t,e){const o=(t.language||"python").toLowerCase(),n=o==="python"?oe(t.code||""):l(t.code||""),s=ve(t.code||"");return`${F(t,e,`slide--code slide--code-${s}`)}
+    </div>`},code(t,e){const i=(t.language||"python").toLowerCase(),n=i==="python"?ie(t.code||""):l(t.code||""),s=we(t.code||"");return`${F(t,e,`slide--code slide--code-${s}`)}
       <div class="slide__body">
         <div class="code-slide">
           ${t.eyebrow?`<div class="code-slide__eyebrow" ${h(e.id,t.id,"eyebrow")}>${l(t.eyebrow)}</div>`:`<div class="code-slide__eyebrow" ${h(e.id,t.id,"eyebrow")}></div>`}
           ${t.heading?`<h2 class="code-slide__heading" ${h(e.id,t.id,"heading")}>${l(t.heading)}</h2>`:`<h2 class="code-slide__heading" ${h(e.id,t.id,"heading")}></h2>`}
-          <pre class="code-slide__code language-${l(o)}"><code ${h(e.id,t.id,"code")}>${n}</code></pre>
+          <pre class="code-slide__code language-${l(i)}"><code ${h(e.id,t.id,"code")}>${n}</code></pre>
           ${t.caption?`<div class="code-slide__caption" ${h(e.id,t.id,"caption")}>${U(t.caption)}</div>`:`<div class="code-slide__caption code-slide__caption--empty" ${h(e.id,t.id,"caption")}></div>`}
         </div>
       </div>
-    </div>`},"interactive-code"(t,e){const o=t.regions||[],n=t.tooltips||{},s=/^(\s*)#\s*-{3,}\s*.+\s*-{3,}\s*$/,r={};for(const k of o)for(let w=k.lines[0];w<=k.lines[1];w++)r[w]=k;const p=Object.keys(n).sort((k,w)=>w.length-k.length),x=(t.code||"").split(`
-`).map((k,w)=>{const _=w+1,j=r[_];let i=oe(k)||" ";for(const u of p){const P=u.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),b=n[u],J=typeof b=="object"?`data-tip-sig="${l(b.sig||"")}" data-tip-desc="${l(b.desc||"")}" data-tip-url="${l(b.url||"")}"`:`data-tip-sig="" data-tip-desc="${l(b)}" data-tip-url=""`;i=i.replace(new RegExp(P),`<span class="icode-tip" ${J}>${u}</span>`)}const d=j?j.id:"",A=j?j.color:"transparent";return`<div class="${`icode__line${s.test(k)?" icode__line--divider":""}`}" data-region="${d}" data-line="${_}" style="--rc:${A}"><span class="icode__line-num">${_}</span>${i}</div>`}).join(""),R=o.map((k,w)=>{const _=(k.links||[]).map(j=>`<a href="${l(j.url)}" target="_blank" rel="noopener">→ ${l(j.label)}</a>`).join(" ");return`
+    </div>`},"interactive-code"(t,e){const i=t.regions||[],n=t.tooltips||{},s=/^(\s*)#\s*-{3,}\s*.+\s*-{3,}\s*$/,r={};for(const k of i)for(let v=k.lines[0];v<=k.lines[1];v++)r[v]=k;const p=Object.keys(n).sort((k,v)=>v.length-k.length),x=(t.code||"").split(`
+`).map((k,v)=>{const _=v+1,j=r[_];let o=ie(k)||" ";for(const u of p){const C=u.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),b=n[u],J=typeof b=="object"?`data-tip-sig="${l(b.sig||"")}" data-tip-desc="${l(b.desc||"")}" data-tip-url="${l(b.url||"")}"`:`data-tip-sig="" data-tip-desc="${l(b)}" data-tip-url=""`;o=o.replace(new RegExp(C),`<span class="icode-tip" ${J}>${u}</span>`)}const d=j?j.id:"",S=j?j.color:"transparent";return`<div class="${`icode__line${s.test(k)?" icode__line--divider":""}`}" data-region="${d}" data-line="${_}" style="--rc:${S}"><span class="icode__line-num">${_}</span>${o}</div>`}).join(""),$=i.map((k,v)=>{const _=(k.links||[]).map(j=>`<a href="${l(j.url)}" target="_blank" rel="noopener">→ ${l(j.label)}</a>`).join(" ");return`
       <div class="icode__ann" data-region="${l(k.id)}" style="--rc:${l(k.color)}">
         <div class="icode__ann-inner">
           <div class="icode__ann-header">
             <div class="icode__ann-dot"></div>
             <div class="icode__ann-label">${l(k.label)}</div>
-            <div class="icode__ann-key">${w+1}</div>
+            <div class="icode__ann-key">${v+1}</div>
           </div>
           <div class="icode__ann-body">
             <div class="icode__ann-desc">${l(k.description)}</div>
@@ -310,35 +310,35 @@
       <div class="slide__body">
         <div class="icode">
           ${t.heading?`<h2 class="icode__heading" ${h(e.id,t.id,"heading")}>${l(t.heading)}</h2>`:""}
-          <div class="icode__keys-hint">press 1–${o.length} to explore</div>
+          <div class="icode__keys-hint">press 1–${i.length} to explore</div>
           <div class="icode__cols">
             <pre class="icode__code">${x}</pre>
-            <div class="icode__annotations">${R}</div>
+            <div class="icode__annotations">${$}</div>
           </div>
           ${t.subtitle?`<div class="icode__subtitle" ${h(e.id,t.id,"subtitle")}>${l(t.subtitle)}</div>`:""}
         </div>
       </div>
-    </div>`},"annotated-code"(t,e){const o=oe(t.code||""),n=ve(t.code||""),s=(t.annotations||[]).map((r,p)=>`<li ${h(e.id,t.id,`annotations[${p}]`)}>${U(r)}</li>`).join("");return`${F(t,e,`slide--annotated-code slide--acode-${n}`)}
+    </div>`},"annotated-code"(t,e){const i=ie(t.code||""),n=we(t.code||""),s=(t.annotations||[]).map((r,p)=>`<li ${h(e.id,t.id,`annotations[${p}]`)}>${U(r)}</li>`).join("");return`${F(t,e,`slide--annotated-code slide--acode-${n}`)}
       <div class="slide__body">
         <div class="acode">
           ${t.eyebrow?`<div class="acode__eyebrow" ${h(e.id,t.id,"eyebrow")}>${l(t.eyebrow)}</div>`:""}
           ${t.heading?`<h2 class="acode__heading" ${h(e.id,t.id,"heading")}>${l(t.heading)}</h2>`:""}
           <div class="acode__cols">
-            <pre class="acode__code language-python"><code ${h(e.id,t.id,"code")}>${o}</code></pre>
-            <ol class="acode__annotations" ${ie(e.id,t.id,"annotations")}>${s}</ol>
+            <pre class="acode__code language-python"><code ${h(e.id,t.id,"code")}>${i}</code></pre>
+            <ol class="acode__annotations" ${oe(e.id,t.id,"annotations")}>${s}</ol>
           </div>
           ${t.subtitle?`<div class="acode__subtitle" ${h(e.id,t.id,"subtitle")}>${l(t.subtitle)}</div>`:""}
         </div>
       </div>
-    </div>`},live(t,e){const o=(t.items||[]).map((n,s)=>`<li ${h(e.id,t.id,`items[${s}]`)}>${U(n)}</li>`).join("");return`${F(t,e,"slide--live")}
+    </div>`},live(t,e){const i=(t.items||[]).map((n,s)=>`<li ${h(e.id,t.id,`items[${s}]`)}>${U(n)}</li>`).join("");return`${F(t,e,"slide--live")}
       <div class="slide__body">
         <div class="live">
           <div class="live__badge">● LIVE</div>
           <h2 class="live__heading" ${h(e.id,t.id,"heading")}>${l(t.heading||"")}</h2>
-          <ol class="live__list" ${ie(e.id,t.id,"items")}>${o}</ol>
+          <ol class="live__list" ${oe(e.id,t.id,"items")}>${i}</ol>
         </div>
       </div>
-    </div>`}},it={id:"01",number:"01",tag:"OPENING THE BOX",total:"12"},at=[{id:"section",type:"section",number:"01",kicker:"Unit",title:"Opening the Box"},{id:"welcome",type:"title",eyebrow:"Game Programmierung  ·  SS26",title:"Welcome.",subtitle:"Twelve weeks to build a real game without an engine. Let's take a look under the hood."},{id:"how-it-works",type:"bullets",heading:"What to expect.",lead:"This is how the course will work:",items:["<b>Bring your laptop</b> — Python, Git, and your codebase. Every session.","<b>Short input, long workshop.</b>","<b>Find a partner / rubberduck.</b>","<b>Four exercises.</b> Mandatory part of your grade.","<b>Ask early.</b>"]},{id:"why-question",type:"question",eyebrow:"Question for the room",question:"Why would anyone write a game without an engine"},{id:"why-answer",type:"image",src:"/img/shoggoth.avif",alt:"The Shoggoth — a lovecraftian mass of eyes and tentacles",caption:"To understand the Shoggoth.",fit:"contain"},{id:"today",type:"demo",eyebrow:"TODAY",heading:"A program where you move a shape when you press a button.",demo:"moving-square",hint:"WASD to move",code:`import pygame
+    </div>`}},ot={id:"01",number:"01",tag:"OPENING THE BOX",total:"12"},at=[{id:"section",type:"section",number:"01",kicker:"Unit",title:"Opening the Box"},{id:"welcome",type:"title",eyebrow:"Game Programmierung  ·  SS26",title:"Welcome.",subtitle:"Twelve weeks to build a real game without an engine. Let's take a look under the hood."},{id:"how-it-works",type:"bullets",heading:"What to expect.",lead:"This is how the course will work:",items:["<b>Bring your laptop</b> — Python, Git, and your codebase. Every session.","<b>Short input, long workshop.</b>","<b>Find a partner / rubberduck.</b>","<b>Four exercises.</b> Mandatory part of your grade.","<b>Ask early.</b>"]},{id:"why-question",type:"question",eyebrow:"Question for the room",question:"Why would anyone write a game without an engine"},{id:"why-answer",type:"image",src:"/img/shoggoth.avif",alt:"The Shoggoth — a lovecraftian mass of eyes and tentacles",caption:"To understand the Shoggoth.",fit:"contain"},{id:"today",type:"demo",eyebrow:"TODAY",heading:"A program where you move a shape when you press a button.",demo:"moving-square",hint:"WASD to move",code:`import pygame
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
@@ -429,7 +429,7 @@ git push -u origin main
 # ---- the daily loop ----
 git add .
 git commit -m "describe what changed"
-git push`,regions:[{id:"snapshot",label:"snapshot",lines:[1,4],color:"#c390d4",description:"Take a snapshot of your project right now.",detail:"git init creates a hidden .git/ folder that tracks every change. git add . stages all files — tells git 'include these in the next snapshot'. git commit saves the snapshot with a message. These three commands create your first checkpoint. You can always return to this exact state.",links:[{label:"git basics",url:"https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"}]},{id:"connect",label:"connect to github",lines:[6,9],color:"#7fd1c8",description:"Link your local project to GitHub so we can see it.",detail:"Create a new repository on github.com (the green '+' button, top right). Don't add a README — you already have files. Copy the URL it gives you. git remote add origin tells your local repo where to push. git push -u origin main uploads everything and sets up tracking. After this, your code is online and we can grade it."},{id:"daily",label:"the daily loop",lines:[11,14],color:"#98c379",description:"Add, commit, push. Every session, every feature.",detail:"After each coding session: add stages your changes, commit saves them with a message, push uploads to GitHub. Write messages that say what changed — 'add enemy spawning' not 'update' or 'stuff'. If you prefer clicking to typing: GitHub Desktop, Fork, or the Git panel built into VS Code all do the same thing with buttons.",links:[{label:"GitHub Desktop",url:"https://desktop.github.com/"}]}],tooltips:{"git init":{sig:"git init",desc:"Creates a new git repository in the current folder. Adds a hidden .git/ directory that tracks all changes. Run once per project.",url:"https://git-scm.com/docs/git-init"},"git add":{sig:"git add <files>",desc:"Stages files for the next commit. 'git add .' stages everything in the current directory. Staging is like putting items in a box before sealing it.",url:"https://git-scm.com/docs/git-add"},"git commit":{sig:'git commit -m "message"',desc:"Saves a snapshot of all staged changes with a descriptive message. Each commit is a checkpoint you can return to. Commits are local until you push.",url:"https://git-scm.com/docs/git-commit"},"git push":{sig:"git push",desc:"Uploads local commits to the remote repository (GitHub). After pushing, your code is online and visible to others. The -u flag sets up tracking so future pushes don't need extra arguments.",url:"https://git-scm.com/docs/git-push"},"git remote":{sig:"git remote add origin <url>",desc:"Connects your local repository to a remote one. 'origin' is the conventional name for your primary remote. The URL points to your GitHub repo.",url:"https://git-scm.com/docs/git-remote"}}},{id:"homework",type:"bullets",heading:"For next Friday",lead:"You built hello-square in class. Now make it yours.",items:["<b>Set up git. Make a public repo. Post the link.</b>","<b>Extend hello-square.</b> Pick one: wrap around the edges, change color on Space, add a second shape — or surprise us. We show them off next Friday. Coolest thing wins a prize.","Sleep."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],st={meta:it,slides:at},rt={id:"02",number:"02",tag:"HOW COMPUTERS THINK",total:"31"},lt=[{id:"section",type:"section",number:"02",kicker:"Unit",title:"How Computers Think"},{id:"showcase",type:"question",eyebrow:"Homework",question:"Show us your squares"},{id:"today",type:"bullets",heading:"Today.",lead:"How does a computer think?",items:["Seven basic concepts.","Then we play a game where <b>you are the computer</b>."]},{id:"concept-variable",type:"prose",eyebrow:"Concept 01",heading:"Variable",body:"A <b>name</b> attached to a <b>value</b>.<br><br>A labeled slot that holds something. The label stays. The value can change.<br><br>Last week: <b>x = 400</b> was a variable. Your square's position."},{id:"concept-type",type:"bullets",heading:"Concept 02 — Type",lead:"What kind of thing is in the slot.",items:["<b>int</b> — whole numbers. <b>42</b>, <b>-7</b>, <b>0</b>","<b>float</b> — decimal numbers. <b>3.14</b>, <b>0.5</b>, <b>-2.0</b>",'<b>str</b> — text. <b>"hello"</b>, <b>"Game Over"</b>',"<b>bool</b> — true or false. <b>True</b>, <b>False</b>. That's it.",'The computer cares. <b>"3"</b> is not the same as <b>3</b>.']},{id:"concept-expression",type:"prose",eyebrow:"Concept 03",heading:"Expression",body:'Anything that <b>produces a value</b>.<br><br><b>3 + 4</b> is an expression. <b>x > 10</b> is an expression. <b>"hello" + " world"</b> is an expression.<br><br>Every time the computer needs an answer, it <i>evaluates</i> an expression.'},{id:"concept-conditional",type:"code",eyebrow:"Concept 04 — Conditional",heading:"Making decisions.",code:`if something_is_true:
+git push`,regions:[{id:"snapshot",label:"snapshot",lines:[1,4],color:"#c390d4",description:"Take a snapshot of your project right now.",detail:"git init creates a hidden .git/ folder that tracks every change. git add . stages all files — tells git 'include these in the next snapshot'. git commit saves the snapshot with a message. These three commands create your first checkpoint. You can always return to this exact state.",links:[{label:"git basics",url:"https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"}]},{id:"connect",label:"connect to github",lines:[6,9],color:"#7fd1c8",description:"Link your local project to GitHub so we can see it.",detail:"Create a new repository on github.com (the green '+' button, top right). Don't add a README — you already have files. Copy the URL it gives you. git remote add origin tells your local repo where to push. git push -u origin main uploads everything and sets up tracking. After this, your code is online and we can grade it."},{id:"daily",label:"the daily loop",lines:[11,14],color:"#98c379",description:"Add, commit, push. Every session, every feature.",detail:"After each coding session: add stages your changes, commit saves them with a message, push uploads to GitHub. Write messages that say what changed — 'add enemy spawning' not 'update' or 'stuff'. If you prefer clicking to typing: GitHub Desktop, Fork, or the Git panel built into VS Code all do the same thing with buttons.",links:[{label:"GitHub Desktop",url:"https://desktop.github.com/"}]}],tooltips:{"git init":{sig:"git init",desc:"Creates a new git repository in the current folder. Adds a hidden .git/ directory that tracks all changes. Run once per project.",url:"https://git-scm.com/docs/git-init"},"git add":{sig:"git add <files>",desc:"Stages files for the next commit. 'git add .' stages everything in the current directory. Staging is like putting items in a box before sealing it.",url:"https://git-scm.com/docs/git-add"},"git commit":{sig:'git commit -m "message"',desc:"Saves a snapshot of all staged changes with a descriptive message. Each commit is a checkpoint you can return to. Commits are local until you push.",url:"https://git-scm.com/docs/git-commit"},"git push":{sig:"git push",desc:"Uploads local commits to the remote repository (GitHub). After pushing, your code is online and visible to others. The -u flag sets up tracking so future pushes don't need extra arguments.",url:"https://git-scm.com/docs/git-push"},"git remote":{sig:"git remote add origin <url>",desc:"Connects your local repository to a remote one. 'origin' is the conventional name for your primary remote. The URL points to your GitHub repo.",url:"https://git-scm.com/docs/git-remote"}}},{id:"homework",type:"bullets",heading:"For next Friday",lead:"You built hello-square in class. Now make it yours.",items:["<b>Set up git. Make a public repo. Post the link.</b>","<b>Extend hello-square.</b> Pick one: wrap around the edges, change color on Space, add a second shape — or surprise us. We show them off next Friday. Coolest thing wins a prize.","Sleep."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],st={meta:ot,slides:at},rt={id:"02",number:"02",tag:"HOW COMPUTERS THINK",total:"31"},lt=[{id:"section",type:"section",number:"02",kicker:"Unit",title:"How Computers Think"},{id:"showcase",type:"question",eyebrow:"Homework",question:"Show us your squares"},{id:"today",type:"bullets",heading:"Today.",lead:"How does a computer think?",items:["Seven basic concepts.","Then we play a game where <b>you are the computer</b>."]},{id:"concept-variable",type:"prose",eyebrow:"Concept 01",heading:"Variable",body:"A <b>name</b> attached to a <b>value</b>.<br><br>A labeled slot that holds something. The label stays. The value can change.<br><br>Last week: <b>x = 400</b> was a variable. Your square's position."},{id:"concept-type",type:"bullets",heading:"Concept 02 — Type",lead:"What kind of thing is in the slot.",items:["<b>int</b> — whole numbers. <b>42</b>, <b>-7</b>, <b>0</b>","<b>float</b> — decimal numbers. <b>3.14</b>, <b>0.5</b>, <b>-2.0</b>",'<b>str</b> — text. <b>"hello"</b>, <b>"Game Over"</b>',"<b>bool</b> — true or false. <b>True</b>, <b>False</b>. That's it.",'The computer cares. <b>"3"</b> is not the same as <b>3</b>.']},{id:"concept-expression",type:"prose",eyebrow:"Concept 03",heading:"Expression",body:'Anything that <b>produces a value</b>.<br><br><b>3 + 4</b> is an expression. <b>x > 10</b> is an expression. <b>"hello" + " world"</b> is an expression.<br><br>Every time the computer needs an answer, it <i>evaluates</i> an expression.'},{id:"concept-conditional",type:"code",eyebrow:"Concept 04 — Conditional",heading:"Making decisions.",code:`if something_is_true:
     do_this()
 elif something_else:
     do_that()
@@ -1119,5 +1119,295 @@ class Player:
         self.y += dy
 
 p = Player()
-p.move(5, 0)`,caption:"Every dict field becomes an attribute. Every function-of-dict becomes a method. <b>The pattern is the same;</b> Unit 6 just gives it nicer syntax and stronger checks.",language:"python"},{id:"workshop",type:"bullets",heading:"Workshop — twenty minutes",lead:"Take your Ü002. Right now it's globals soup. Refactor:",items:["<b>State dict.</b> Pull every loose variable into one <code>state</code> dict.","<b>Pass it around.</b> Functions take <code>state</code> as a parameter — no globals.","<b>Save / load.</b> Persist the highscore via <code>json.dump</code> / <code>json.load</code>.","<b>Type the signatures.</b> Every new function gets param + return hints."]},{id:"homework",type:"bullets",heading:"For next Friday",lead:"Unit 6 is Classes & Objects. We pick up exactly where we left off — the dict-and-functions pattern gets the class makeover.",items:["<b>Workshop pushed to GitHub.</b> Your refactored Ü002 with a state dict and persistent highscore.","<b>Reading (optional, ~20 min).</b> Python docs on <code>dict</code> and <code>json</code>. Skim, don't memorise.","<b>One question.</b> Bring a question about types, functions, or dicts that today's lecture didn't answer."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],ft={meta:gt,slides:bt},vt=[st,dt,pt,mt,ft],wt=vt.map(t=>tt(t.meta,t.slides)).join(`
-`),we=document.createElement("deck-root");we.innerHTML=wt;document.body.appendChild(we);
+p.move(5, 0)`,caption:"Every dict field becomes an attribute. Every function-of-dict becomes a method. <b>The pattern is the same;</b> Unit 6 just gives it nicer syntax and stronger checks.",language:"python"},{id:"workshop",type:"bullets",heading:"Workshop — twenty minutes",lead:"Take your Ü002. Right now it's globals soup. Refactor:",items:["<b>State dict.</b> Pull every loose variable into one <code>state</code> dict.","<b>Pass it around.</b> Functions take <code>state</code> as a parameter — no globals.","<b>Save / load.</b> Persist the highscore via <code>json.dump</code> / <code>json.load</code>.","<b>Type the signatures.</b> Every new function gets param + return hints."]},{id:"homework",type:"bullets",heading:"For next Friday",lead:"Unit 6 is Classes & Objects. We pick up exactly where we left off — the dict-and-functions pattern gets the class makeover.",items:["<b>Workshop pushed to GitHub.</b> Your refactored Ü002 with a state dict and persistent highscore.","<b>Reading (optional, ~20 min).</b> Python docs on <code>dict</code> and <code>json</code>. Skim, don't memorise.","<b>One question.</b> Bring a question about types, functions, or dicts that today's lecture didn't answer."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],ft={meta:gt,slides:bt},wt={id:"06",number:"06",tag:"CLASSES",total:"26"},vt=[{id:"section",type:"section",number:"06",kicker:"Unit",title:"Classes & Objects"},{id:"showcase",type:"question",eyebrow:"Last week",question:"Show me your state-dict refactor"},{id:"today",type:"bullets",heading:"Today.",lead:"Last week's bridge said <i>dict + functions IS a class</i>. Today we put the keyword on it.",items:["<b>Why bother?</b> — dicts already work. Five reasons class syntax earns its place.","<b>Syntax</b> — class, <code>__init__</code>, self. Sweeter spelling for what you already write.","<b>Modeling entities</b> — Player and Enemy as classes. The duplication is on purpose.","<b>Multi-file</b> — one class per file. Workshop promotes your Ü002 to classes."]},{id:"section-why",type:"section",number:"06",kicker:"I",title:"Why bother?"},{id:"recap-bridge",type:"code",eyebrow:"Where we left off",heading:"The pattern was already a class",code:`# What you wrote last week.
+player = {"x": 400, "y": 300, "hp": 100}
+
+def move(p, dx, dy):
+    p["x"] += dx
+    p["y"] += dy
+
+move(player, 5, 0)
+
+# Data plus functions that operate on it. Bundled by convention.
+# Today we use the language's word for this pattern: class.`,caption:"Unit 5 closed with this slide. The pattern was already a class waiting for the syntax. The work today is naming what you've been doing — and discovering what the formal version gives you that the hand-rolled one doesn't.",language:"python"},{id:"five-reasons",type:"bullets",heading:"Five payoffs",items:["<b>Encapsulation</b> — data and behaviour travel together.","<b>Identity</b> — <code>isinstance</code> tells you what kind. Type checker enforces it.","<b>Invariants</b> — <code>__init__</code> guarantees a well-formed instance from the start.","<b>Self-documenting</b> — the class definition IS the description.","<b>Vocabulary</b> — <code>enemy.take_damage(10)</code> reads what it does."]},{id:"history",type:"prose",eyebrow:"Quick history",heading:"OOP isn't one thing",body:`<b>1972.</b> Alan Kay at Xerox PARC creates <b>Smalltalk</b> — the first language built around "objects sending messages to each other." Java, C#, Ruby, Python all descend from it.<br><br>Kay later said OOP wasn't really about classes — it was about <i>late binding</i> and <i>messaging</i>. The class-based version we use is one particular way to implement his idea. JavaScript and Lua, for example, do OOP without classes at all — they use <i>prototypes</i>, where objects delegate to other objects directly.<br><br>You don't need this trivia to write a Player class. But knowing OOP is a family of related ideas — not one single doctrine — protects you from the people who think their flavour is the only true one.`},{id:"csharp-bridge",type:"prose",eyebrow:"Reframe",heading:"Every script you've written was a class",body:"Every script you've attached to a GameObject (Unity) or a Node (Godot) was a class. <code>public class Player : MonoBehaviour</code> — or <code>class_name Player extends Node2D</code>. Constructors. <code>this</code> or <code>self</code>. Methods like <code>Update()</code>, <code>_process(delta)</code>.<br><br>Today is the Python translation, not the concept introduction. Python's spelling is simpler — fewer keywords, less ceremony, no type declarations forced on you — but the ideas are the same ones you already use without thinking. <b>Trust your intuition.</b>"},{id:"section-syntax",type:"section",number:"06",kicker:"II",title:"Syntax"},{id:"anatomy",type:"code",eyebrow:"The parts named",heading:"Anatomy of a class",code:`class Player:                          # the class — a blueprint
+    def __init__(self, x, y):          # the setup method
+        self.x = x                     # an attribute
+        self.y = y
+        self.hp = 100
+
+    def move(self, dx, dy):            # a method
+        self.x += dx
+        self.y += dy
+
+p = Player(400, 300)                   # an instance — one concrete Player
+p.move(5, 0)                           # method call
+print(p.x)                             # → 405`,caption:"Five pieces. <b>Class</b> declares a new kind of thing. <b>__init__</b> is the setup method, run automatically the moment you instantiate. <b>self</b> is the instance being acted on. <b>Attributes</b> (<code>self.x</code>) are the data. <b>Methods</b> are the behaviour. Calling <code>Player(...)</code> creates one concrete instance.",language:"python"},{id:"csharp-vs-python",type:"code",eyebrow:"Side-by-side",heading:"C# and Python — same skeleton",code:`# Python                              // C#
+class Player:                          public class Player {
+    def __init__(self, x, y):              public Player(int x, int y) {
+        self.x = x                             this.x = x;
+        self.y = y                             this.y = y;
+                                           }
+    def move(self, dx, dy):                public void Move(int dx, int dy) {
+        self.x += dx                           this.x += dx;
+        self.y += dy                           this.y += dy;
+                                           }
+                                       }
+
+p = Player(400, 300)                   Player p = new Player(400, 300);
+p.move(5, 0)                           p.Move(5, 0);`,caption:'Same idea, different spelling. <code>self</code> ≈ <code>this</code>. <code>__init__</code> ≈ the constructor. No <code>public</code> / <code>private</code> (Python uses convention — leading underscore means "please treat as private"). No type declarations forced on you (Python uses hints). No <code>new</code> keyword — calling the class as a function-like is how you instantiate.',language:"text"},{id:"self-is-dict",type:"code",eyebrow:"Mechanical reveal",heading:"self IS a dict",code:`class Player:
+    def __init__(self):
+        self.x = 400
+        self.y = 300
+        self.hp = 100
+
+p = Player()
+
+p.__dict__         # → {"x": 400, "y": 300, "hp": 100}
+p.x                # → 400
+                   # Python looks this up as p.__dict__["x"]
+                   # with the class adding method-resolution on top.`,caption:"Your sidebar from Unit 5, made formal: <b>every Python instance is, mechanically, a dict</b>. The class adds methods and identity on top. Once you see this, classes stop feeling like magic — they're dicts with extras, written with sweeter syntax.",language:"python"},{id:"dunder-init",type:"code",eyebrow:"When __init__ runs",heading:"Setup happens automatically",code:`class Player:
+    def __init__(self, x, y):
+        print("__init__ ran")
+        self.x = x
+        self.y = y
+
+p = Player(400, 300)
+# → prints "__init__ ran"
+#   p now has x=400, y=300
+
+# You never call __init__ yourself. Writing Player(...) calls it for you.
+# The double-underscore ("dunder") names — __init__, __dict__, __str__ —
+# are Python's "the language hooks into this" convention. Don't invent yours.`,caption:"<code>__init__</code> is short for <i>initialize</i>. It runs once, the moment a new instance is created, and its job is to set up the instance's attributes. After it returns, the instance is ready to use.",language:"python"},{id:"instantiation",type:"code",eyebrow:"Blueprint vs instance",heading:"The class is the recipe; instances are the dishes",code:`class Player:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+Player                  # → <class 'Player'>   the blueprint
+
+p1 = Player(400, 300)   # one instance
+p2 = Player(100, 200)   # another instance
+
+p1.x                    # → 400
+p2.x                    # → 100
+                        # same blueprint, different state.`,caption:"Calling a class makes one instance. The class definition is the recipe; each call produces one concrete object with its own attributes. Make as many as you want — they share the blueprint but not the state.",language:"python"},{id:"section-modeling",type:"section",number:"06",kicker:"III",title:"Modeling entities"},{id:"player-class",type:"code",eyebrow:"The upgrade",heading:"Player, fully rebuilt as a class",code:`class Player:
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+        self.vx = 0.0
+        self.vy = 0.0
+        self.hp = 100
+        self.facing = "right"
+
+    def move(self, dx: float, dy: float) -> None:
+        self.x += dx
+        self.y += dy
+        self.facing = "left" if dx < 0 else "right"
+
+    def take_damage(self, amount: int) -> None:
+        self.hp = max(0, self.hp - amount)
+
+    def is_alive(self) -> bool:
+        return self.hp > 0`,caption:"Every field of last week's player dict is now an attribute. Every function-of-dict is now a method. Type hints on signatures, as decided. One class, one place, one source of truth for what a Player is and what it can do.",language:"python"},{id:"enemy-class",type:"code",eyebrow:"Compare",heading:"Enemy — structurally the same shape",code:`class Enemy:
+    def __init__(self, x: float, y: float, kind: str) -> None:
+        self.x = x
+        self.y = y
+        self.kind = kind
+        self.hp = 50 if kind == "grunt" else 100
+
+    def move(self, dx: float, dy: float) -> None:
+        self.x += dx
+        self.y += dy
+
+    def take_damage(self, amount: int) -> None:
+        self.hp = max(0, self.hp - amount)
+
+    def is_alive(self) -> bool:
+        return self.hp > 0`,caption:"Notice how much overlaps with Player — both have <code>x</code>, <code>y</code>, <code>hp</code>, <code>move</code>, <code>take_damage</code>, <code>is_alive</code>. Today we accept the duplication. <b>Unit 7 fixes it</b> with inheritance — the repetition isn't an accident, it's the setup.",language:"python"},{id:"has-a-vs-is-a",type:"prose",eyebrow:"Designing a class",heading:"What does it have?",body:"When you're deciding what to make a class, ask: <b>what does this thing have?</b><br><br>A Player <i>has</i> a position. A Player <i>has</i> HP. A Player <i>has</i> ammo. Each <i>has</i> becomes an attribute on the class — <code>self.x</code>, <code>self.hp</code>, <code>self.ammo</code>.<br><br>The deeper design call: is each attribute a simple value, or itself a class? <code>self.hp = 100</code> is fine as an int — HP doesn't have its own behaviour. <code>self.inventory</code> probably wants to be its own <code>Inventory</code> class, because it has methods of its own (<code>add</code>, <code>remove</code>, <code>is_full</code>).<br><br><b>Rule of thumb:</b> if it has its own behaviour, it's a class. If it's just a value, it's an attribute."},{id:"section-files",type:"section",number:"06",kicker:"IV",title:"Multi-file"},{id:"modules",type:"code",eyebrow:"One class per file",heading:"Files are modules",code:`# player.py
+class Player:
+    ...
+
+
+# enemy.py
+class Enemy:
+    ...
+
+
+# main.py — pulls them together.
+from player import Player
+from enemy import Enemy
+
+player = Player(400, 300)
+enemy = Enemy(100, 100, "grunt")`,caption:"Each <code>.py</code> file is a <i>module</i> — a unit of code you can import from. Up until now your whole game has lived in one file; as you add classes, that file gets long. One class per file is the standard move. <code>from filename import ClassName</code> brings it in elsewhere.",language:"python"},{id:"project-layout",type:"code",eyebrow:"Standard layout",heading:"Project structure",code:`your-game/
+├── main.py          ← entry point: game loop, init, draw
+├── player.py        ← class Player
+├── enemy.py         ← class Enemy
+├── bullet.py        ← class Bullet
+├── settings.py      ← SETTINGS dict, constants
+└── data/
+    ├── player.png
+    └── ...
+
+# When entities pile up, group them in a folder:
+└── entities/
+    ├── __init__.py  ← empty file, marks the folder as a package
+    ├── player.py
+    ├── enemy.py
+    └── bullet.py`,caption:'One file per class, plus a <code>main.py</code> that wires them together. The empty <code>__init__.py</code> tells Python "treat this folder as a package." <b>Why split?</b> Discoverability — when you want Player code, you open <code>player.py</code>. Single responsibility — each file does one thing, which makes refactoring safe.',language:"text"},{id:"section-workshop",type:"section",number:"06",kicker:"V",title:"Workshop"},{id:"workshop",type:"bullets",heading:"Workshop — twenty minutes",lead:"Take your Ü002 state dict from last week. Promote it to classes.",items:["<b>Player class.</b> Constructor takes starting <code>x</code>, <code>y</code>. Attributes: x, y, vx, vy, hp. Methods: <code>move</code>, <code>take_damage</code>, <code>is_alive</code>.","<b>Enemy class.</b> Same shape. Constructor takes x, y, kind.","<b>One file per class.</b> <code>player.py</code>, <code>enemy.py</code>. <code>main.py</code> imports both.","<b>Type the signatures.</b> Hints on params + return, as before."]},{id:"unit-7-preview",type:"code",eyebrow:"Where Unit 7 picks up",heading:"The duplication you just wrote IS the setup",code:`# Notice — Player and Enemy both have:
+def move(self, dx, dy):
+    self.x += dx
+    self.y += dy
+
+def take_damage(self, amount):
+    self.hp = max(0, self.hp - amount)
+
+def is_alive(self):
+    return self.hp > 0
+
+# Same code, twice. Next week — pull the shared shape up:
+#
+#     class Entity:           ← the parent
+#         move, take_damage, is_alive
+#
+#     class Player(Entity):   ← inherits Entity, adds Player-specific
+#     class Enemy(Entity):    ← inherits Entity, adds Enemy-specific`,caption:"Today you feel the seams. Next week we sew them. Inheritance pulls shared shape up into a parent class; subclasses keep what's unique. Ü003 (RealFakeGame pt.1) lands on this — you'll extend an existing Entity hierarchy, not build one from scratch.",language:"python"},{id:"homework",type:"bullets",heading:"For next Friday",lead:"Unit 7 is Inheritance & Polymorphism. Ü003 (RealFakeGame pt.1) is assigned.",items:["<b>Workshop pushed.</b> Your Ü002 refactored into Player + Enemy classes, multi-file.","<b>Read the RealFakeGame skeleton.</b> Look at how the class hierarchy is laid out. Don't write code yet — understand the shape.","<b>One question.</b> Bring something today's lecture didn't answer."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],kt={meta:wt,slides:vt},_t={id:"07",number:"07",tag:"INHERITANCE",total:"24"},xt=[{id:"section",type:"section",number:"07",kicker:"Unit",title:"Inheritance & Polymorphism"},{id:"showcase",type:"question",eyebrow:"Last week",question:"Show me your Player + Enemy classes"},{id:"today",type:"bullets",heading:"Today.",lead:"Last week ended on duplicated code. Today we factor it out — and discover what that gets you.",items:["<b>Why inherit?</b> — the duplication you wrote, pulled up into a parent.","<b>Syntax</b> — <code>class Foo(Bar)</code>, override, <code>super()</code>.","<b>Polymorphism</b> — one loop, many entities. The whole point.","<b>When to inherit</b> — IS-A vs HAS-A. Composition where it fits.","<b>Workshop</b> — Entity base for your Player + Enemy. Ü003 lands."]},{id:"section-why",type:"section",number:"07",kicker:"I",title:"Why inherit?"},{id:"recap-duplication",type:"code",eyebrow:"Last week's pain",heading:"You wrote this twice",code:`class Player:                        class Enemy:
+    def move(self, dx, dy):              def move(self, dx, dy):
+        self.x += dx                         self.x += dx
+        self.y += dy                         self.y += dy
+
+    def take_damage(self, n):            def take_damage(self, n):
+        self.hp = max(0, self.hp - n)        self.hp = max(0, self.hp - n)
+
+    def is_alive(self):                  def is_alive(self):
+        return self.hp > 0                   return self.hp > 0`,caption:"Three methods. Same code. In both classes. You felt this in the workshop — adding a fourth shared method means writing it twice; fixing a bug means fixing it twice. Today: the cure.",language:"text"},{id:"pulling-up",type:"code",eyebrow:"The move",heading:"Pull the shared shape up",code:`class Entity:                       # the new parent
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+
+    def take_damage(self, n):
+        self.hp = max(0, self.hp - n)
+
+    def is_alive(self):
+        return self.hp > 0
+
+
+class Player(Entity):              # inherits everything from Entity
+    pass
+
+class Enemy(Entity):               # ditto
+    pass`,caption:"Shared methods now live on <code>Entity</code>. <code>Player(Entity)</code> means 'Player is a kind of Entity' — and Player gets all of Entity's methods for free. <code>pass</code> means the child adds nothing yet. Same code paths, half the lines.",language:"python"},{id:"engines-do-this",type:"code",eyebrow:"You already use this",heading:"Every engine you've touched is built on it",code:`Unity                              Godot
+─────                              ─────
+Object                             Object
+ └── Component                      └── Node
+      └── Behaviour                      ├── Node2D
+           └── MonoBehaviour                  ├── Sprite2D
+                └── YOUR SCRIPT               └── YOUR SCRIPT`,caption:"Both engines' core architectures are inheritance trees. Every script you've attached was a class inheriting from the engine's base. Lifecycle methods like <code>Update()</code> or <code>_process()</code> are methods on the parent that you override. <b>You've been using inheritance for years.</b> Today you learn how to spell it.",language:"text"},{id:"section-syntax",type:"section",number:"07",kicker:"II",title:"Syntax"},{id:"inherit-syntax",type:"code",eyebrow:"The keyword",heading:"class Player(Entity):",code:`class Entity:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.hp = 100
+
+    def take_damage(self, n):
+        self.hp = max(0, self.hp - n)
+
+
+class Player(Entity):          # ← parens = parent class
+    pass
+
+p = Player(400, 300)           # uses Entity's __init__
+p.x                            # → 400
+p.take_damage(10)              # method inherited from Entity
+p.hp                           # → 90`,caption:"Parens after the class name declare the parent. <code>Player(Entity)</code> reads 'Player is a kind of Entity.' Player gets every attribute and method Entity has — even with an empty body.",language:"python"},{id:"override",type:"code",eyebrow:"Customizing inherited behaviour",heading:"Override — redefine in the child",code:`class Entity:
+    def take_damage(self, n):
+        self.hp = max(0, self.hp - n)
+
+
+class Player(Entity):
+    def take_damage(self, n):              # override
+        if self.invincible:
+            return                         # ignore damage
+        self.hp = max(0, self.hp - n)`,caption:"A child replaces any inherited method by defining one with the same name. Python uses the child's version; the parent's is ignored. This is <b>overriding</b> — the child class customizes inherited behaviour.",language:"python"},{id:"super-call",type:"code",eyebrow:"Reaching the parent",heading:"super() — call the parent's version",code:`class Entity:
+    def take_damage(self, n):
+        self.hp = max(0, self.hp - n)
+        play_sound("hit")              # generic hit sound
+
+
+class Player(Entity):
+    def take_damage(self, n):
+        if self.invincible:
+            return
+        super().take_damage(n)         # do what Entity does
+        screen_shake()                 # plus Player extras`,caption:"<code>super()</code> is 'the parent class.' Call <code>super().method()</code> inside an override to run the parent's version first, then add the child's behaviour. Standard pattern: parent logic + child extras.",language:"python"},{id:"super-init",type:"code",eyebrow:"The most-forgotten line",heading:"super().__init__() — set up the parent",code:`class Entity:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.hp = 100
+
+
+class Player(Entity):
+    def __init__(self, x, y):
+        super().__init__(x, y)         # set up Entity's attributes
+        self.ammo = 50                 # then Player-specific
+        self.score = 0`,caption:"The most common <code>super()</code> call is in <code>__init__</code>: run the parent's setup, then add the child's. <b>Forget <code>super().__init__()</code> and the parent's attributes never get set</b> — your Player has no <code>x</code>, no <code>hp</code>, no anything from Entity. This is the most common beginner bug. Don't be the beginner.",language:"python"},{id:"section-poly",type:"section",number:"07",kicker:"III",title:"Polymorphism"},{id:"polymorphism-defined",type:"code",eyebrow:"One name, many behaviours",heading:"Same method, different implementations",code:`class Entity:
+    def update(self, dt):
+        pass                  # base does nothing; children fill in
+
+
+class Player(Entity):
+    def update(self, dt):
+        # handle input, move, fire
+        ...
+
+class Enemy(Entity):
+    def update(self, dt):
+        # AI: chase the player
+        ...
+
+class Bullet(Entity):
+    def update(self, dt):
+        # travel in a straight line
+        ...`,caption:"Same method name. Three different implementations. The parent declares the <i>shape</i> of the interface; each child fills it in for itself. This is <b>polymorphism</b> — many shapes, one interface.",language:"python"},{id:"game-loop-payoff",type:"code",eyebrow:"The payoff",heading:"One loop. All entities.",code:`# Your main game loop, after inheritance.
+entities = [player, enemy1, enemy2, bullet1, bullet2]
+
+for e in entities:
+    e.update(dt)
+    e.draw(screen)
+
+# The loop doesn't know — or care — what KIND each entity is.
+# Each one's update() and draw() do the right thing for itself.`,caption:"<b>This is why inheritance exists in games.</b> Before: separate loops or a chain of <code>isinstance</code> branches. After: one loop, all entities. Add a new entity type tomorrow — the loop doesn't change. Every game engine ever shipped is built on this pattern.",language:"python"},{id:"section-when",type:"section",number:"07",kicker:"IV",title:"When to inherit"},{id:"is-a-test",type:"code",eyebrow:"The substitution test",heading:"IS-A means you can substitute",code:`def damage_all(things: list[Entity], n: int) -> None:
+    for thing in things:
+        thing.take_damage(n)
+
+# Works because Player, Enemy, Bullet all ARE Entities.
+damage_all([player, enemy, bullet], 10)
+
+
+# Liskov, 1987 — formally:
+#   A subclass should behave such that you can substitute it
+#   where the parent is expected, without breaking anything.
+#
+# Plain English: subclasses must honour the parent's contract.
+# If your Boss.take_damage() crashes, the hierarchy is broken.`,caption:"Inheritance only makes sense when the child can <b>actually be used in place of the parent</b>. If your subclass would crash or misbehave where the parent works, the IS-A claim is false — and the hierarchy will betray you in production.",language:"python"},{id:"composition-vs-inheritance",type:"code",eyebrow:"Two relationships",heading:"IS-A vs HAS-A",code:`# INHERITANCE — IS-A (a kind of thing)
+class Boss(Enemy):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.hp = 1000
+
+
+# COMPOSITION — HAS-A (a part of something)
+class Inventory:
+    def add(self, item): ...
+
+class Player(Entity):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.inventory = Inventory()    # composition`,caption:"<b>Inheritance</b> for IS-A: Boss is a kind of Enemy. <b>Composition</b> for HAS-A: Player has an Inventory. Use inheritance for real type hierarchies. Use composition for parts, capabilities, or just sharing code.",language:"python"},{id:"restraint",type:"bullets",heading:"Reach for it carefully",lead:'The Gang of Four (1994) put the rule plainly: <b>"Prefer composition over inheritance."</b> Thirty years later, still the working guideline. Three common traps:',items:["<b>Five levels deep</b> — the great-grandparent's API change breaks everything downstream.","<b>Inheriting to share two methods</b> — that's what composition or a helper function is for.","<b>Wrong IS-A</b> — Square IS-A Rectangle mathematically, but <code>set_width(5)</code> breaks the square invariant."]},{id:"section-workshop",type:"section",number:"07",kicker:"V",title:"Workshop"},{id:"realfakegame-hierarchy",type:"code",eyebrow:"What Ü003 hands you",heading:"The RealFakeGame class tree",code:`Entity                  ← shared interface, base methods
+├── Player              
+├── Enemy
+│   ├── FastEnemy        ← moves faster
+│   ├── TankEnemy        ← more HP, slower
+│   ├── SineEnemy        ← oscillates while advancing
+│   ├── ShooterEnemy     ← fires shots back
+│   └── Boss             ← scaled HP, special phases
+└── Shot
+    └── EnemyShot        ← bullets the enemies fire`,caption:"The hierarchy in the skeleton. Each branch is one kind of game thing. For <b>Ü003</b>, you read this code, understand the shape, and add features to existing classes — you don't invent the structure. The skeleton's design is the lesson.",language:"text"},{id:"workshop",type:"bullets",heading:"Workshop — twenty minutes",lead:"Take your Player + Enemy classes from last week. Apply the cure.",items:["<b>Entity base.</b> New class with shared methods: <code>move</code>, <code>take_damage</code>, <code>is_alive</code>.","<b>Inherit.</b> <code>class Player(Entity)</code>, <code>class Enemy(Entity)</code>. Drop the duplicated methods.","<b>super().__init__().</b> Pass parent args up; add child-specific attributes after.","<b>Verify.</b> Game should run identically. If something breaks, the hierarchy is telling you something."]},{id:"homework",type:"bullets",heading:"For next Friday",lead:"Unit 8 is the RealFakeGame workshop. Ü003 (RealFakeGame pt.1) is live.",items:["<b>Workshop pushed.</b> Your refactored Player + Enemy with Entity base.","<b>Read the skeleton.</b> Understand the existing hierarchy before you write code.","<b>Bring your hierarchy questions.</b> Designing class trees is hard. We'll workshop yours in Unit 8."]},{id:"questions",type:"question",eyebrow:"Before you go",question:"Questions"}],Tt={meta:_t,slides:xt},St=[st,dt,pt,mt,ft,kt,Tt],At=St.map(t=>tt(t.meta,t.slides)).join(`
+`),ve=document.createElement("deck-root");ve.innerHTML=At;document.body.appendChild(ve);
