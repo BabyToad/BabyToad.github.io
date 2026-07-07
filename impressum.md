@@ -8,8 +8,8 @@ title: Impressum
 ## Angaben gemäß § 5 TMG
 
 **Jonas Heinke**  
-Gerberstrasse 18/129  
-04105 Leipzig  
+Michael-Kazmierczak-Straße 15  
+04157 Leipzig  
 Deutschland
 
 ## Kontakt
@@ -19,8 +19,8 @@ Deutschland
 ## Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 
 Jonas Heinke  
-Gerberstrasse 18/129  
-04105 Leipzig  
+Michael-Kazmierczak-Straße 15  
+04157 Leipzig  
 Deutschland
 
 ## Haftungsausschluss
