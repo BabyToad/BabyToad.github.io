@@ -72,11 +72,8 @@ description: Personal website showcasing projects and skills
         <a href="https://github.com/babytoad" class="social-link">
             <i class="fab fa-github"></i> GitHub
         </a>
-        <a href="https://linkedin.com/in/[your-profile]" class="social-link">
+        <a href="https://www.linkedin.com/in/jonas-heinke/" class="social-link">
             <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-        <a href="https://discord.com/users/[your-discord-id]" class="social-link">
-            <i class="fab fa-discord"></i> Discord
         </a>
     </div>
 </section>

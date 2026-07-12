@@ -2,7 +2,7 @@ title: Steak Knives and Bagels
 author: Jonas Heinke
 description: Personal website showcasing projects and skills
 baseurl: ""
-url: "https://your-domain.com"
+url: "https://www.allknivesnobagel.com"
 
 # Collections
 collections:
@@ -23,8 +23,17 @@ collections:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
   - jekyll-last-modified-at
   - jekyll-katex
+
+# Posts live in the `blog` collection, not `_posts` — point the main feed at it,
+# and park the (empty) default posts feed out of the way.
+feed:
+  path: "/feed/posts.xml"
+  collections:
+    blog:
+      path: "/feed.xml"
 
 katex:
   # Enable KaTeX

@@ -8,11 +8,21 @@ use_container: false
     <header class="document-header">
         <h1>{{ page.title }}</h1>
         <div class="metadata document-metadata">
+            {% if page.version %}
             <p><strong>Version</strong>: {{ page.version }}</p>
+            {% endif %}
+            {% if page.last_modified_at %}
             <p><strong>Last Updated</strong>: {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
+            {% endif %}
+            {% if page.status %}
             <p><strong>Status</strong>: {{ page.status }}</p>
+            {% endif %}
+            {% if page.confidence %}
             <p><strong>Confidence</strong>: {{ page.confidence }}</p>
+            {% endif %}
+            {% if page.pdf_url %}
             <a href="{{ page.pdf_url }}" class="pdf-download">Download PDF</a>
+            {% endif %}
         </div>
     </header>
 
