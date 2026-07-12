@@ -25,7 +25,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-last-modified-at
-  - jekyll-katex
 
 # Posts live in the `blog` collection, not `_posts` — point the main feed at it,
 # and park the (empty) default posts feed out of the way.
@@ -34,14 +33,6 @@ feed:
   collections:
     blog:
       path: "/feed.xml"
-
-katex:
-  # Enable KaTeX
-  enable: true
-  # Enable auto-render extension
-  auto_render: true
-  # Enable display mode
-  display_mode: true
 
 sass:
   sass_dir: assets/css
