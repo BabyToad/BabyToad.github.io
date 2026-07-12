@@ -70,3 +70,6 @@ coverage/
 # Local-only talk sources (the HTML deck is the published artifact)
 press-a-to-learn-talk.pptx
 press-a-to-learn-talk.pdf
+
+# Relocated to H:/Personal Projects/task-dashboard — local leftover only
+task-dashboard/
