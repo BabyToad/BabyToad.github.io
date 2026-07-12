@@ -20,6 +20,14 @@ collections:
     output: true
     permalink: /thoughts/:title/
 
+# Most _for_want_of_fuel files carry no layout in front matter — without this
+# default they build as bare HTML fragments with no site chrome.
+defaults:
+  - scope:
+      type: for_want_of_fuel
+    values:
+      layout: for_want_of_fuel
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
