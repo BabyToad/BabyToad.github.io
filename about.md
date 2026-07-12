@@ -15,7 +15,7 @@ Beyond that, I've been designing and running roleplaying games for over 10 years
 
 ## Current Focus
 
-I am currently building my company PlayInsight Studios and working on [Endstation](/projects/endstation), a narrative game about adventure at the end of the known universe.
+I am currently building my company PlayInsight Studios and helping run [Pro Ludens](https://www.proludens.com/), a Leipzig collective for serious games.
 
 ## Contact
 
