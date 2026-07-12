@@ -41,6 +41,7 @@ sass:
 exclude:
   - docs/
   - task-dashboard/
+  - vendor/
   - README.md
   - LICENSE
   - .gitignore
