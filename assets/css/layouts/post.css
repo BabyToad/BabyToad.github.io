@@ -7,6 +7,20 @@
     padding: var(--space-lg);
 }
 
+/* Grid items must be allowed to shrink below their content's min size,
+   or wide content (KaTeX lines, code) blows the track past the viewport. */
+.content-container.post-layout > * {
+    min-width: 0;
+}
+
+/* Unwrappable content scrolls inside its own box instead of widening the page */
+.post-content .katex-display,
+.post-content table {
+    overflow-x: auto;
+    max-width: 100%;
+}
+.post-content .katex-display { display: block; }
+
 .post-content {
     grid-column: 2;
     width: 100%;
@@ -298,7 +312,7 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
     .content-container.post-layout {
-        grid-template-columns: minmax(200px, 250px) minmax(auto, 700px);
+        grid-template-columns: minmax(200px, 250px) minmax(0, 700px);
         gap: var(--space-lg);
     }
     
@@ -313,7 +327,7 @@
 
 @media (max-width: 900px) {
     .content-container.post-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         padding: var(--space-md);
     }
     
