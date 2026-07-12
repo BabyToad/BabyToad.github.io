@@ -14,33 +14,59 @@
     line-height: 1.6;
 }
 
-/* Post Header */
+/* Post Header — mono accent kicker, display headline with real scale. */
 .post-header {
     margin-bottom: var(--space-xl);
+    padding-top: var(--space-lg);
+}
+
+.post-header .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
 }
 
 .post-header h1 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    margin-bottom: var(--space-md);
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 72;
+    margin-bottom: 1rem;
+    color: var(--ink);
 }
 
 .post-metadata {
     display: flex;
-    gap: var(--space-md);
-    align-items: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: var(--space-md);
+    gap: 1rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    color: var(--ink-faint);
+    margin-bottom: 0;
+    padding-bottom: 1.2rem;
+    border-bottom: var(--rule);
+}
+
+.post-metadata .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+}
+
+.post-tags {
+    margin-top: 0;
 }
 
 .post-description {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--ink-soft);
     margin-top: var(--space-md);
-    padding-bottom: var(--space-md);
-    border-bottom: 1px solid var(--border-color);
 }
 
 /* Sidenotes */
@@ -77,99 +103,145 @@
     font-size: 0.8em;
 }
 
-/* Post Footer */
+/* Post Footer + pagination — mono direction labels, display-serif titles. */
 .post-footer {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-lg);
 }
 
-/* Post Navigation */
-.post-navigation {
+.pagination {
     display: flex;
     justify-content: space-between;
-    gap: var(--space-md);
+    gap: 1rem;
+    border-top: var(--rule);
+    padding-top: 1.4rem;
 }
 
-.post-navigation a {
-    color: var(--text-secondary);
+.pagination a {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 520;
+    color: var(--ink-soft);
     text-decoration: none;
-    max-width: 45%;
-    padding: var(--space-sm);
-    border-radius: var(--border-radius);
-    transition: all 0.2s ease;
+    max-width: 46%;
+    transition: color 0.2s ease;
 }
 
-.post-navigation a:hover {
-    color: var(--accent-color);
-    background: var(--bg-secondary);
+.pagination a:hover {
+    color: var(--accent);
 }
 
-.post-navigation .prev {
-    margin-right: auto;
+.pagination .dir {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.25rem;
 }
 
-.post-navigation .next {
-    margin-left: auto;
+.pagination .next {
     text-align: right;
+    margin-left: auto;
 }
 
-/* Mobile responsive post navigation */
+/* Mobile responsive pagination */
 @media (max-width: 768px) {
-    .post-footer {
-        margin-top: var(--space-lg);
-        padding-top: var(--space-md);
-    }
-
-    .post-navigation {
+    .pagination {
         flex-direction: column;
-        gap: var(--space-sm);
+        gap: var(--space-md);
     }
 
-    .post-navigation a {
+    .pagination a {
         max-width: 100%;
-        text-align: center;
-        padding: var(--space-md);
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
     }
 
-    .post-navigation .prev,
-    .post-navigation .next {
-        margin: 0;
-        text-align: center;
+    .pagination .next {
+        text-align: left;
     }
 }
 
-/* Post Content Styles */
+/* Post Content Styles — reading-first prose. */
 .post-body {
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    padding: var(--space-lg) 0;
 }
 
 .post-body h2 {
-    font-size: 1.8rem;
-    margin: var(--space-xl) 0 var(--space-md);
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 2.2rem 0 0.9rem;
+    color: var(--ink);
 }
 
 .post-body h3 {
-    font-size: 1.4rem;
-    margin: var(--space-lg) 0 var(--space-md);
-    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 620;
+    margin: 1.8rem 0 0.7rem;
+    color: var(--ink);
 }
 
 .post-body p {
-    margin-bottom: var(--space-md);
+    margin-bottom: 1.1rem;
 }
 
 .post-body ul, .post-body ol {
-    margin-bottom: var(--space-md);
-    padding-left: var(--space-lg);
+    margin: 0 0 1.1rem 1.3rem;
+    padding-left: 0;
 }
 
 .post-body li {
-    margin-bottom: var(--space-xs);
+    margin-bottom: 0.35rem;
+}
+
+.post-body li::marker {
+    color: var(--accent);
+}
+
+.post-body blockquote {
+    border-left: 2px solid var(--border-strong);
+    padding: 0.2rem 0 0.2rem 1.3rem;
+    margin: 1.5rem 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 430;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+}
+
+.post-body blockquote p {
+    margin: 0;
+}
+
+.post-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.1em 0.35em;
+}
+
+.post-body pre {
+    background: var(--bg-dip);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.3rem;
+    overflow-x: auto;
+    margin: 1.4rem 0;
+}
+
+.post-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--ink);
 }
 
 /* Table Styles */

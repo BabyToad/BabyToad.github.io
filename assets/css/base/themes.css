@@ -1,35 +1,88 @@
-/* Light theme */
-:root[data-theme="light"] {
-    --bg-primary: #f9f9f9;
-    --bg-secondary: #f3f3f3;
-    --bg-hover: #e8e8e8;
-    --background-alt: #eeeeee;
-    --text-primary: #222222;
-    --text-secondary: #555555;
-    --text-tertiary: #777777;
-    --accent-color: #2c3e50;
-    --border-color: #e0e0e0;
-    --navbar-bg: #f9f9f9;
-    --navbar-text: #222222;
-    --link-color: #0645ad;
-    --link-hover: #0b0080;
-    --code-bg: #f5f5f5;
+/* ============================================================
+   THEMES — print by day, CRT by night.
+   Canonical token names: --bg, --bg-raised, --bg-dip, --ink,
+   --ink-soft, --ink-faint, --border, --border-strong, --accent,
+   --accent-hover, --accent-ink.
+   Legacy names used by not-yet-ported components are aliased to
+   the canonical ones inside each theme block.
+   ============================================================ */
+
+/* ---- LIGHT: warm paper + oxblood ("Print") ---- */
+[data-theme="light"] {
+    --bg: #f6f1e7;
+    --bg-raised: #efe8d9;
+    --bg-dip: #ece3d1;
+    --ink: #221c14;
+    --ink-soft: #675d4c;
+    --ink-faint: #94886f;
+    --border: #ddd2bb;
+    --border-strong: #b8a988;
+    --accent: #a13d21;
+    --accent-hover: #7c2d16;
+    --accent-ink: #f6f1e7;
+
+    /* --- legacy aliases --- */
+    --bg-primary: var(--bg);
+    --bg-secondary: var(--bg-raised);
+    --bg-hover: var(--bg-raised);
+    --bg-alt: var(--bg-raised);
+    --background: var(--bg);
+    --background-color: var(--bg);
+    --background-alt: var(--bg-dip);
+    --surface-color: var(--bg-raised);
+    --hover-color: var(--bg-raised);
+    --code-bg: var(--bg-raised);
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-soft);
+    --text-tertiary: var(--ink-faint);
+    --text-color: var(--ink);
+    --accent-color: var(--accent);
+    --accent-color-hover: var(--accent-hover);
+    --accent-color-dark: var(--accent-hover);
+    --primary-color: var(--accent);
+    --border-color: var(--border);
+    --navbar-bg: var(--bg);
+    --navbar-text: var(--ink);
+    --link-color: var(--accent);
+    --link-hover: var(--accent-hover);
 }
 
-/* Dark theme */
-:root[data-theme="dark"] {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #242424;
-    --bg-hover: #2a2a2a;
-    --background-alt: #1e1e1e;
-    --text-primary: #d4d4d4;
-    --text-secondary: #a0a0a0;
-    --text-tertiary: #707070;
-    --accent-color: #81a2be;
-    --border-color: #333333;
-    --navbar-bg: #1a1a1a;
-    --navbar-text: #d4d4d4;
-    --link-color: #81a2be;
-    --link-hover: #b5d5ff;
-    --code-bg: #242424;
+/* ---- DARK (default): terminal amber ("CRT") ---- */
+[data-theme="dark"] {
+    --bg: #141210;
+    --bg-raised: #1d1a16;
+    --bg-dip: #0e0c0a;
+    --ink: #e8e2d4;
+    --ink-soft: #a89f8c;
+    --ink-faint: #6f675a;
+    --border: #35302a;
+    --border-strong: #524a3e;
+    --accent: #ffb000;
+    --accent-hover: #ffc94d;
+    --accent-ink: #141210;
+
+    /* --- legacy aliases --- */
+    --bg-primary: var(--bg);
+    --bg-secondary: var(--bg-raised);
+    --bg-hover: var(--bg-raised);
+    --bg-alt: var(--bg-raised);
+    --background: var(--bg);
+    --background-color: var(--bg);
+    --background-alt: var(--bg-dip);
+    --surface-color: var(--bg-raised);
+    --hover-color: var(--bg-raised);
+    --code-bg: var(--bg-raised);
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-soft);
+    --text-tertiary: var(--ink-faint);
+    --text-color: var(--ink);
+    --accent-color: var(--accent);
+    --accent-color-hover: var(--accent-hover);
+    --accent-color-dark: var(--accent-hover);
+    --primary-color: var(--accent);
+    --border-color: var(--border);
+    --navbar-bg: var(--bg);
+    --navbar-text: var(--ink);
+    --link-color: var(--accent);
+    --link-hover: var(--accent-hover);
 }

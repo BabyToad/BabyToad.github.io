@@ -20,8 +20,8 @@ input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 /* Placeholder styling */
@@ -42,48 +42,52 @@ textarea:focus {
     font-weight: 500;
 }
 
-/* Buttons */
+/* Buttons — mono, squared, 1px border. Primary fills with the accent. */
 .btn {
     display: inline-block;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    padding: var(--space-sm) var(--space-lg);
-    font-size: 1rem;
+    padding: 0.55rem 1.3rem;
     line-height: 1.5;
-    border-radius: var(--radius-sm);
-    transition: all 0.2s ease-in-out;
+    border: 1px solid var(--border-strong);
+    color: var(--ink);
+    background: transparent;
+    border-radius: var(--radius);
+    transition: all 0.18s ease;
     text-decoration: none;
 }
 
 .btn:hover {
-    transform: translateY(-1px);
-}
-
-.btn:active {
-    transform: translateY(1px);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* Button variants */
 .btn-primary {
-    background-color: var(--accent-color);
-    color: var(--bg-primary);
-    border: none;
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
 }
 
 .btn-primary:hover {
-    background-color: var(--link-hover);
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--accent-ink);
 }
 
 .btn-secondary {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border-strong);
 }
 
 .btn-secondary:hover {
-    background-color: var(--border-color);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* Form validation states */

@@ -7,23 +7,38 @@ preview_popup: true
 ---
 
 <div class="content-container">
-    <h1>Newest</h1>
-    <div class="blog-posts">
+    <h1 class="page-title">Blog</h1>
+    <div class="post-list">
         {% assign visible_posts = site.blog | where: "visibility", "public" | sort: 'date' | reverse %}
         {% for post in visible_posts %}
-        <div class="post-entry">
-            • <a href="{{ post.url }}" 
-                 data-preview="true"
-                 data-title="{{ post.title }}"
-                 data-date="{{ post.date | date: '%Y-%m-%d' }}"
-                 data-description="{{ post.description }}"
-                 data-tags="{{ post.tags | join: ', ' }}">
-                {{ post.title }}
-            </a>
-            {% if post.type == "review" %}
-            <span class="post-type">review</span>
-            {% endif %}
-        </div>
+        <article class="post-row">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+            <div>
+                <h3>
+                    <a href="{{ post.url }}"
+                       data-preview="true"
+                       data-title="{{ post.title }}"
+                       data-date="{{ post.date | date: '%Y-%m-%d' }}"
+                       data-description="{{ post.description }}"
+                       data-tags="{{ post.tags | join: ', ' }}">
+                        {{ post.title }}
+                    </a>
+                    {% if post.type == "review" %}
+                    <span class="post-type">review</span>
+                    {% endif %}
+                </h3>
+                {% if post.description %}
+                <p>{{ post.description }}</p>
+                {% endif %}
+                {% if post.tags %}
+                <div class="tags">
+                    {% for tag in post.tags limit:4 %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </article>
         {% endfor %}
     </div>
 </div>
@@ -35,4 +50,4 @@ preview_popup: true
     </div>
     <div class="preview-description"></div>
     <div class="preview-tags"></div>
-</div> 
+</div>

@@ -19,7 +19,7 @@ last_modified_at: 2025-12-13
 <div class="project-links">
     <h2 class="project-link demo">
         <a href="{{ page.demo_url }}" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-gamepad"></i> Play Schneekugel
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg></span> Play Schneekugel
         </a>
     </h2>
 </div>

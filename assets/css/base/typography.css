@@ -1,14 +1,15 @@
 /* Base Typography */
 body {
-    font-family: "Linux Libertine", Georgia, serif;
-    line-height: 1.6;
-    font-size: 16px;
-    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    line-height: var(--line-height-base);
+    font-size: var(--font-size-base);
+    color: var(--ink);
 }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Linux Libertine", Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 500;
     line-height: 1.3;
 }
@@ -49,11 +50,14 @@ li {
 
 /* Special Text Elements */
 blockquote {
-    margin: var(--space-lg) 0;
-    padding-left: var(--space-lg);
-    border-left: 3px solid var(--accent-color);
+    margin: 1.5rem 0;
+    padding: 0.2rem 0 0.2rem 1.3rem;
+    border-left: 2px solid var(--border-strong);
+    font-family: var(--font-display);
     font-style: italic;
-    color: var(--text-secondary);
+    font-weight: 430;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
 }
 
 blockquote p {
@@ -63,52 +67,69 @@ blockquote p {
 /* Code and Pre */
 code {
     font-family: var(--font-mono);
-    font-size: 0.9em;
-    background-color: var(--code-bg);
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
+    font-size: 0.85em;
+    background-color: var(--bg-raised);
+    border: 1px solid var(--border);
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius);
 }
 
 pre {
-    background-color: var(--code-bg);
-    padding: var(--space-md);
-    border-radius: var(--radius-sm);
+    background-color: var(--bg-dip);
+    border: var(--rule);
+    padding: 1.1rem 1.3rem;
+    border-radius: var(--radius);
     overflow-x: auto;
-    margin: var(--space-lg) 0;
+    margin: 1.4rem 0;
 }
 
 pre code {
     background: none;
+    border: none;
     padding: 0;
+    font-size: 0.85em;
 }
 
-/* Links */
+/* Links — accent, quiet by default. Machinery (nav, toc) stays undecorated;
+   content prose links get an underline and the CRT phosphor-decay on hover. */
 a {
-    color: var(--text-primary);
+    color: var(--accent);
     text-decoration: none;
-    border-bottom: 1px dotted var(--text-primary);
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 a:hover {
-    border-bottom-style: none;
+    color: var(--accent-hover);
 }
 
-/* Exceptions for navigation and structural elements */
-.navbar a,
-.nav-links a,
-.site-title a,
-.toc a,
-.contents a {
-    border-bottom: none;
+/* Content prose links: underline + phosphor decay (ignite fast, decay slow). */
+.post-body a,
+.essay-content a,
+.for-want-of-fuel-content a,
+.project-body a,
+.intro-section a,
+.thought-card-content a,
+.thought-content a,
+.abstract a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    transition: color 0.45s ease-out, text-shadow 0.45s ease-out, text-decoration-color 0.45s ease-out;
 }
 
-.navbar a:hover,
-.nav-links a:hover,
-.site-title a:hover,
-.toc a:hover,
-.contents a:hover {
-    border-bottom: none;
+.post-body a:hover,
+.essay-content a:hover,
+.for-want-of-fuel-content a:hover,
+.project-body a:hover,
+.intro-section a:hover,
+.thought-card-content a:hover,
+.thought-content a:hover,
+.abstract a:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 5px color-mix(in srgb, var(--accent) 32%, transparent);
+    text-decoration-color: var(--accent);
+    transition-duration: 0.03s;
 }
 
 /* Small Text and Meta */
@@ -122,11 +143,33 @@ small,
     font-size: 0.9em;
 }
 
-/* Selection */
+/* Selection — amber block by night, ink stamp by day */
 ::selection {
-    background-color: var(--accent-color);
-    color: var(--bg-primary);
+    background: var(--accent);
+    color: var(--accent-ink);
 }
+
+/* Inline SVG icons (replaces FontAwesome). Inherit color + text size. */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+.icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Theme-toggle icon follows the active theme purely via CSS —
+   moon shown on the paper theme (click to go dark), sun on the CRT theme. */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: inline-flex; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline-flex; }
 
 /* Responsive Typography */
 @media (max-width: 768px) {

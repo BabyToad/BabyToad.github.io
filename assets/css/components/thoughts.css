@@ -191,40 +191,36 @@
     color: var(--accent-color);
 }
 
-/* Homepage Latest Thought */
+/* Homepage Latest Thought — an accent rule, the thought itself in display
+   italic so a joke thought reads as intentional marginalia. */
 .latest-thought-section {
-    margin: var(--space-xl) 0;
-}
-
-.latest-thought-section h2 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-md);
+    max-width: var(--content-width);
+    margin: 0;
 }
 
 .latest-thought {
-    background: var(--bg-secondary);
-    border-left: 3px solid var(--accent-color);
-    padding: var(--space-lg);
-    border-radius: var(--border-radius);
+    border-left: 2px solid var(--accent);
+    padding: 0.4rem 0 0.4rem 1.4rem;
+    background: none;
+    border-radius: 0;
 }
 
-.latest-thought-content {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: var(--text-primary);
-    margin-bottom: var(--space-md);
+.latest-thought .thought-body {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 420;
+    line-height: 1.4;
+    color: var(--ink);
 }
 
-.latest-thought-content p {
+.latest-thought .thought-body p {
     margin: 0;
 }
 
 .latest-thought-image {
-    margin: var(--space-md) 0;
-    border-radius: var(--border-radius-sm);
+    margin: var(--space-md) 0 0;
+    border-radius: var(--radius);
     overflow: hidden;
 }
 
@@ -235,25 +231,33 @@
     display: block;
 }
 
-.latest-thought-meta {
+.latest-thought .thought-sources {
+    margin-top: var(--space-md);
+}
+
+.thought-meta {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    align-items: baseline;
+    gap: 1rem;
+    margin-top: 0.9rem;
 }
 
-.latest-thought-meta time {
-    opacity: 0.8;
+.thought-meta time {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
 }
 
-.all-thoughts-link {
-    color: var(--accent-color);
+.thought-meta .more {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
     text-decoration: none;
 }
 
-.all-thoughts-link:hover {
-    text-decoration: underline;
+.thought-meta .more:hover {
+    color: var(--accent-hover);
 }
 
 /* Responsive */

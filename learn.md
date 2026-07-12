@@ -56,7 +56,7 @@ math: true
 
   <!-- Empty State -->
   <div class="srs-empty">
-    <div class="srs-empty-icon"><i class="fas fa-check-circle"></i></div>
+    <div class="srs-empty-icon"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span></div>
     <p class="srs-empty-title">All done for now</p>
     <p class="srs-next-due"></p>
   </div>
@@ -64,7 +64,7 @@ math: true
   <!-- Stats Panel -->
   <div class="srs-stats">
     <button class="srs-stats-toggle">
-      <i class="fas fa-chart-bar"></i> Stats
+      <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></span> Stats
     </button>
     <div class="srs-stats-panel">
       <div class="srs-stats-grid">
@@ -87,7 +87,7 @@ math: true
       </div>
       <div class="srs-stats-actions">
         <button class="srs-reset-progress" title="Reset all progress (cannot be undone)">
-          <i class="fas fa-trash"></i> Reset Progress
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span> Reset Progress
         </button>
       </div>
     </div>

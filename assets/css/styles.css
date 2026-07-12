@@ -1,3 +1,4 @@
+@import 'base/fonts.css';
 @import 'base/reset.css';
 @import 'base/variables.css';
 @import 'base/themes.css';
@@ -27,23 +28,25 @@
 @import 'components/projects.css';
 @import 'components/thoughts.css';
 @import 'components/srs.css';
+@import 'components/dither.css';
+@import 'components/footer.css';
 
 /* Base styles */
 body {
     width: 100%;
     overflow-x: hidden;
-    background-color: var(--bg-primary);
+    background-color: var(--bg);
     transition: background-color 0.3s ease, color 0.3s ease;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--ink);
 }
 
 /* Global styles */
 img {
     max-width: 100%;
     height: auto;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
 }
 
 h1, h2, h3, h4, h5, h6 {

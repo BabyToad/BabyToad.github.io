@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if page.url == "/" %}
@@ -8,8 +9,9 @@
     {% else %}
     <title>{{ page.title }} | {{ site.title }}</title>
     {% endif %}
+    <link rel="preload" href="{{ '/assets/fonts/newsreader-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/jetbrains-mono-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
     {% seo title=false %}
 
@@ -69,6 +71,10 @@
 
     <!-- Navigation JavaScript (always loaded for mobile menu) -->
     <script src="{{ '/assets/js/components/navigation.js' | relative_url }}"></script>
+
+    <!-- Dither develop: shared kit + lazy-load image wrapper (order matters) -->
+    <script defer src="{{ '/assets/js/dither.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/dither-img.js' | relative_url }}"></script>
     
     {% include footer.html %}
 </body>

@@ -1,6 +1,58 @@
 /* Shared Components */
 /* Used across blog posts, essays, and FWOF layouts */
 
+/* Section label — mono small-caps accent kicker above a section. */
+.section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+}
+
+/* Asterism — a quiet typographic divider between sections. */
+.asterism {
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 1.1rem;
+    letter-spacing: 0.5em;
+    margin: var(--space-xl) 0;
+}
+
+/* 404 — a huge display-italic numeral wandering off. */
+.error-404 {
+    text-align: center;
+    padding: var(--space-xl) 0;
+    max-width: var(--content-width);
+    margin: 0 auto;
+}
+
+.error-404-code {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--ink-faint);
+    font-variation-settings: "opsz" 72;
+}
+
+.error-404 p {
+    color: var(--ink-soft);
+    margin-top: 1rem;
+}
+
+.error-404 em {
+    font-style: italic;
+    color: var(--ink-faint);
+}
+
+.error-404-links {
+    font-size: 0.98rem;
+    margin-top: 1.4rem;
+}
+
 /* Metadata Component */
 .metadata {
     background: var(--bg-secondary);
@@ -55,21 +107,25 @@
     color: var(--text-primary);
 }
 
-/* Special Links */
+/* Special Links — the PDF download reads as a primary button. */
 .pdf-download {
     display: inline-block;
-    padding: var(--space-sm) var(--space-md);
-    background: var(--accent-color);
-    color: white;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 0.55rem 1.3rem;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: var(--accent-ink);
     text-decoration: none;
-    border-radius: var(--border-radius);
-    font-weight: 500;
-    transition: background-color 0.2s ease;
+    border-radius: var(--radius);
+    transition: all 0.18s ease;
 }
 
 .pdf-download:hover {
-    background: var(--accent-color-hover, var(--accent-color));
-    opacity: 0.9;
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--accent-ink);
 }
 
 /* Last Modified */

@@ -1,37 +1,41 @@
-/* Table of Contents Container */
+/* Table of Contents Container — a bg-raised box in the reading gutter. */
 .toc {
     grid-column: 1;
     position: sticky;
     top: var(--space-lg);
-    height: calc(100vh - var(--space-lg) * 2);
+    max-height: calc(100vh - var(--space-lg) * 2);
     display: flex;
     flex-direction: column;
+    background: var(--bg-raised);
+    border: var(--rule);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.3rem;
 }
 
 /* Mobile: inline TOC at top of content */
 @media (max-width: 900px) {
     .toc {
         position: static;
-        height: auto;
+        max-height: none;
         margin-bottom: var(--space-lg);
-        padding: var(--space-md);
-        background: var(--bg-secondary);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
     }
 }
 
-/* Fixed Header */
+/* Header */
 .toc-header {
-    background: var(--bg-primary);
     padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: var(--space-md);
+    margin-bottom: 0.7rem;
     position: relative;
 }
 
 .toc-header h3 {
     margin: 0 0 var(--space-sm) 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
 }
 
 /* Scrollable List */
@@ -41,6 +45,7 @@
     margin: 0;
     overflow-y: auto;
     flex-grow: 1;
+    counter-reset: toc;
 }
 
 /* Mobile: simpler list layout */
@@ -70,18 +75,29 @@
     background: var(--text-secondary);
 }
 
-/* TOC Items */
+/* TOC Items — mono decimal-leading-zero counter in accent. */
 .toc-item {
     margin-bottom: var(--space-sm);
     position: relative;
+    counter-increment: toc;
 }
 
 .toc-item a, .toc-link {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     text-decoration: none;
     display: block;
     padding: var(--space-xs) 0;
+    font-size: 0.92rem;
     transition: color 0.2s ease;
+}
+
+.toc-item > a::before,
+.toc-item > .toc-link::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-right: 0.6rem;
 }
 
 /* Visual hierarchy for heading levels */
@@ -107,13 +123,18 @@
 }
 
 .toc-item a:hover, .toc-link:hover {
-    color: var(--accent-color);
+    color: var(--ink);
 }
 
-/* Active section highlighting */
+/* Active section highlighting — current item reads in full ink. */
 .toc-item.active a, .toc-item.active .toc-link {
-    color: var(--accent-color);
+    color: var(--ink);
     font-weight: 500;
+}
+
+.toc-item.active > a::before,
+.toc-item.active > .toc-link::before {
+    color: var(--ink);
 }
 
 /* Mobile: simpler item styling */

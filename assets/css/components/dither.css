@@ -1,0 +1,53 @@
+/* dither.css — view-transition (progressive-scan theme switch) + dither canvas
+   and rule styling. Paired with assets/js/theme.js, dither.js, dither-img.js. */
+
+/* Progressive-scan theme switch: the new theme is revealed top-to-bottom like a
+   display redrawing its frame. No overlay element — the content is the effect.
+   Browsers without View Transitions switch instantly. */
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  animation: scan-in 0.3s ease-out forwards;
+  clip-path: inset(0 0 100% 0);
+}
+@keyframes scan-in {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 -1% 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}
+
+/* Image develop: the canvas overlays the reserved image box (no layout shift),
+   then is removed to reveal the true image. */
+.dither-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+.dither-wrap > canvas.dither-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+/* Dithered rules: Bayer-gradient divider strips. */
+canvas.dither-rule {
+  display: block;
+  width: 100%;
+  height: 8px;
+  image-rendering: pixelated;
+  margin: 0.6rem 0;
+}
+
+/* Plain-rule fallback shape before JS upgrades it (and if JS never runs). */
+hr.dither {
+  border: none;
+  height: 8px;
+  margin: 0.6rem 0;
+}

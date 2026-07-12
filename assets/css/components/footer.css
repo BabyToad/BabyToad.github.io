@@ -1,0 +1,176 @@
+/* ============================================================
+   Footer + gallery (the footer gallery). Tokens only, no hardcoded
+   colors. Canvas art is theme-aware via gallery.js; CSS here is chrome.
+   ============================================================ */
+
+.site-footer {
+  margin-top: var(--space-xl);
+  border-top: var(--rule, 1px solid var(--border));
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* keep footer content on the same rail as the page container */
+.footer-piece-frame,
+.footer-nav,
+.footer-noscript {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+/* --- the daily piece --- */
+.footer-piece-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer-piece-frame[hidden] { display: none; }
+
+.footer-canvas {
+  display: block;
+  width: 100%;
+  max-width: 45rem;
+  height: auto;
+  aspect-ratio: 720 / 220;
+  image-rendering: pixelated;
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 2px);
+  background: var(--bg-dip);
+  cursor: pointer;
+}
+
+.footer-piece-caption {
+  max-width: 45rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+.footer-piece-caption .footer-piece-title {
+  color: var(--ink-soft);
+  font-style: normal;
+}
+.footer-piece-caption .footer-piece-link {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.footer-piece-caption .footer-piece-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* --- the nav row --- */
+.footer-nav {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+}
+.footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.footer-nav a:hover { color: var(--accent); }
+.footer-nav .footer-dot { color: var(--ink-faint); }
+.footer-nav .footer-boggle {
+  margin-left: auto;
+  font-family: var(--font-display, var(--font-serif));
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink-faint);
+}
+
+.footer-noscript {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 32rem) {
+  .footer-nav .footer-boggle { margin-left: 0; flex-basis: 100%; }
+}
+
+/* ============================================================
+   The gallery page (/footer/)
+   ============================================================ */
+.gallery-intro {
+  max-width: var(--content-width);
+  margin-bottom: var(--space-xl);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin: var(--space-lg) 0 var(--space-xl);
+}
+
+.gallery-item { margin: 0; }
+
+.gallery-canvas {
+  display: block;
+  width: 100%;
+  max-width: 45rem;
+  height: auto;
+  aspect-ratio: 720 / 220;
+  image-rendering: pixelated;
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 2px);
+  background: var(--bg-dip);
+  cursor: pointer;
+}
+
+.gallery-caption { max-width: 45rem; margin-top: 0.9rem; }
+.gallery-title {
+  font-family: var(--font-display, var(--font-serif));
+  font-size: 1.35rem;
+  font-weight: 580;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.2rem;
+}
+.gallery-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+}
+.gallery-statement {
+  font-family: var(--font-display, var(--font-serif));
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+}
+.gallery-subject {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.gallery-subject span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-right: 0.4rem;
+}
+
+.gallery-invitation {
+  max-width: var(--content-width);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-lg);
+  margin-top: var(--space-xl);
+}
