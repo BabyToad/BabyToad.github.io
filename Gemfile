@@ -13,8 +13,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :x64_mingw, :mswin, :jruby]
 
-# Remove the WDM gem temporarily
-# gem 'wdm', '~> 0.1.1' if Gem.win_platform?
+# Windows file-watcher for `jekyll serve --watch` (skipped on Linux/CI)
+gem 'wdm', '>= 0.1.0', platforms: [:windows]
 
 gem "webrick", "~> 1.8"
 
@@ -23,5 +23,3 @@ gem "webrick", "~> 1.8"
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 gem 'faraday-retry'
-
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
