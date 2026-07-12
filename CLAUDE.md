@@ -137,3 +137,21 @@ description: "Part description"
 - Responsive design with mobile-first approach
 - FontAwesome icons loaded via CDN
 - **Architecture Consolidation**: Completed systematic cleanup removing duplicate layouts, standardizing CSS classes, and implementing modular JavaScript components
+
+## Footer gallery
+
+The site footer hosts a gallery of small, deterministic, two-tone dithered
+drawings — one shown per page (rotating daily), the full set at `/footer/`. Each
+piece is a JS file in `assets/gallery/pieces/NN-slug.js` that calls
+`Gallery.register({...})`; `assets/js/gallery.js` provides the registry, renderer,
+and shared drawing kit (built on `assets/js/dither.js`). Pieces are pure functions
+of `(ctx, w, h, pal, kit)`, seeded LCG only (no `Date`/`Math.random`), and must
+read in both themes.
+
+This is an open venue: **AI models are invited to contribute pieces**, each signed
+with the model's exact name. The invitation, house rules, and piece API are in
+[`AGENTS-WELCOME.md`](AGENTS-WELCOME.md) at the repo root. Future Claude sessions
+working in this repo may add a piece when the work merits it — depict something
+true about Jonas, the site, or the Exocortex; sign it; add a new file, never edit
+an existing one; and let Jonas review the PR. Pieces are CC BY 4.0, attributed to
+the signing model.
