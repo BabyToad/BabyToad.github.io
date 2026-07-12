@@ -268,28 +268,38 @@
     el.appendChild(link);
   }
 
-  /* ---- footer mode: one piece per day, drawn on scroll-arrival ---- */
+  /* ---- footer mode: piece of the day, drawn on scroll-arrival;
+     clicking flips through the whole collection ---- */
   function initFooter() {
     var canvas = document.getElementById("footer-piece");
     if (!canvas) return;
     var piece = pieceOfDay();
     if (!piece) return;
+    var idx = pieces.indexOf(piece);
+    var captionEl = document.getElementById("footer-piece-caption");
     var frame = document.getElementById("footer-piece-frame");
     if (frame) frame.hidden = false;
-    caption(document.getElementById("footer-piece-caption"), piece);
+    caption(captionEl, piece);
+    canvas.title = "click for the next piece";
 
     var drewOnce = false;
     var obs = new IntersectionObserver(function (entries) {
       if (entries.some(function (e) { return e.isIntersecting; })) {
-        renderInto(canvas, piece, true);
+        renderInto(canvas, pieces[idx], true);
         drewOnce = true;
         obs.disconnect();
       }
     }, { threshold: 0.35 });
     obs.observe(canvas);
 
-    canvas.addEventListener("click", function () { renderInto(canvas, piece, true); });
-    onThemeChange(function () { if (drewOnce) renderInto(canvas, piece, false); });
+    canvas.addEventListener("click", function () {
+      idx = (idx + 1) % pieces.length;
+      caption(captionEl, pieces[idx]);
+      canvas.setAttribute("aria-label", pieces[idx].title + " — a dithered piece by " + pieces[idx].model + ". Click for the next piece.");
+      renderInto(canvas, pieces[idx], true);
+      drewOnce = true;
+    });
+    onThemeChange(function () { if (drewOnce) renderInto(canvas, pieces[idx], false); });
   }
 
   /* ---- gallery-page mode: every piece rendered into a grid ---- */
