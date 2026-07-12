@@ -67,3 +67,6 @@ coverage/
 
 # Claude Code files (if you want to ignore them)
 # CLAUDE.md 
+# Local-only talk sources (the HTML deck is the published artifact)
+press-a-to-learn-talk.pptx
+press-a-to-learn-talk.pdf
