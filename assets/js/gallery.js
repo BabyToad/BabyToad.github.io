@@ -226,7 +226,13 @@
     // (rapid clicks, a theme change mid-assembly) can never fight each other.
     var gen = (canvas._gen = (canvas._gen || 0) + 1);
     if (canvas._raf) cancelAnimationFrame(canvas._raf);
-    if (!staged) { renderFrame(piece, ctx, w, h, pal, 1); canvas._done = true; return; }
+    stopBreathing(canvas);
+    if (!staged) {
+      renderFrame(piece, ctx, w, h, pal, 1);
+      canvas._done = true;
+      if (canvas._onDone) canvas._onDone();
+      return;
+    }
     var t0 = performance.now();
     (function frame(now) {
       if (canvas._gen !== gen) return;
@@ -236,8 +242,71 @@
       var p = Math.max(0, Math.min(1, (now - t0) / 1000));
       renderFrame(piece, ctx, w, h, pal, p);
       if (p < 1) canvas._raf = requestAnimationFrame(frame);
-      else canvas._done = true;
+      else { canvas._done = true; if (canvas._onDone) canvas._onDone(); }
     })(t0);
+  }
+
+  /* ---- breathe: the life cycle of the footer piece ----
+     assemble → land (a still beat) → breathe (a few seconds of faint
+     phosphor sparkle: single dither pixels blinking off) → long stillness →
+     breathe again. Runs only while the canvas is on screen, never under
+     prefers-reduced-motion, and any re-render (click, theme) resets it. */
+  var BREATHE = { land: 1800, inhale: 5200, hold: 9000, tick: 120, sparks: 12 };
+
+  function rgbOf(color) {
+    var c = document.createElement("canvas");
+    c.width = c.height = 1;
+    var x = c.getContext("2d");
+    x.fillStyle = color;
+    x.fillRect(0, 0, 1, 1);
+    var d = x.getImageData(0, 0, 1, 1).data;
+    return [d[0], d[1], d[2]];
+  }
+
+  function startBreathing(canvas) {
+    if (reduced() || !canvas._done || canvas._breathing) return;
+    var ctx = canvas.getContext("2d");
+    var w = canvas.width, h = canvas.height;
+    var pal = palette();
+    var base = ctx.getImageData(0, 0, w, h);
+    var f = rgbOf(pal.fg), d = base.data, lit = [];
+    for (var i = 0; i < d.length; i += 4) {
+      if (Math.abs(d[i] - f[0]) < 12 && Math.abs(d[i + 1] - f[1]) < 12 && Math.abs(d[i + 2] - f[2]) < 12) {
+        lit.push(i / 4);
+      }
+    }
+    if (lit.length < 80) return;
+    var gen = canvas._gen;
+    var phase = "land", phaseStart = null, nextTick = 0, seed = 387;
+    canvas._breathing = true;
+    (function loop(now) {
+      if (canvas._gen !== gen || !canvas._breathing) return;
+      if (phaseStart === null) phaseStart = now;
+      var el = now - phaseStart;
+      if (phase === "land" && el >= BREATHE.land) { phase = "inhale"; phaseStart = now; nextTick = 0; }
+      else if (phase === "inhale") {
+        if (el >= BREATHE.inhale) {
+          ctx.putImageData(base, 0, 0);
+          phase = "hold"; phaseStart = now;
+        } else if (now >= nextTick) {
+          nextTick = now + BREATHE.tick;
+          ctx.putImageData(base, 0, 0);
+          var rnd = lcg((seed = (seed * 69069 + 1) >>> 0));
+          ctx.fillStyle = pal.bg;
+          for (var k = 0; k < BREATHE.sparks; k++) {
+            var p = lit[Math.floor(rnd() * lit.length)];
+            ctx.fillRect(p % w, Math.floor(p / w), 2, 1);
+          }
+        }
+      }
+      else if (phase === "hold" && el >= BREATHE.hold) { phase = "inhale"; phaseStart = now; nextTick = 0; }
+      canvas._braf = requestAnimationFrame(loop);
+    })(performance.now());
+  }
+
+  function stopBreathing(canvas) {
+    canvas._breathing = false;
+    if (canvas._braf) { cancelAnimationFrame(canvas._braf); canvas._braf = null; }
   }
 
   function pieceOfDay() {
@@ -283,11 +352,17 @@
     canvas.title = "click for the next piece";
 
     var drewOnce = false;
+    var visible = false;
+    canvas._onDone = function () { if (visible) startBreathing(canvas); };
     var obs = new IntersectionObserver(function (entries) {
-      if (entries.some(function (e) { return e.isIntersecting; })) {
+      visible = entries.some(function (e) { return e.isIntersecting; });
+      if (visible && !drewOnce) {
         renderInto(canvas, pieces[idx], true);
         drewOnce = true;
-        obs.disconnect();
+      } else if (visible && canvas._done) {
+        startBreathing(canvas);
+      } else if (!visible) {
+        stopBreathing(canvas);
       }
     }, { threshold: 0.35 });
     obs.observe(canvas);
