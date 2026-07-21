@@ -51,7 +51,7 @@
     cursor: pointer;
 }
 
-.aknb-seek {
+.aknb-controls input[type="range"].aknb-seek {
     --p: 0;
     width: 100%;
     height: 6px;
@@ -160,7 +160,7 @@
     color: var(--ink-faint);
 }
 
-.aknb-vol {
+.aknb-controls input[type="range"].aknb-vol {
     --p: 100;
     width: 4.5rem;
     height: 4px;
