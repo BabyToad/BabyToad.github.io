@@ -9,7 +9,8 @@ context: video
 Guided affirmations for the man who yearns for the bagel but mostly grabs steak knife. Seven minutes. Take it completely seriously, and then slightly more seriously than that.
 
 <figure class="thought-video">
-  <video controls preload="none" playsinline poster="/assets/images/bagel-male-poster.jpg">
+  <video controls preload="metadata" playsinline poster="/assets/images/bagel-male-poster.jpg"
+    data-chapters="8:GROUNDING,56:THE TRIUMPHANT BAGEL,111:STEAK KNIVES,195:THE PROTOCOLS,256:THE ASCENT,296:THE ARENA,381:BENEDICTION">
     <source src="https://github.com/BabyToad/BabyToad.github.io/releases/download/bagel-male-v1/bagel-male-affirmations.mp4" type="video/mp4">
     Your browser does not support the video tag.
     <a href="https://github.com/BabyToad/BabyToad.github.io/releases/download/bagel-male-v1/bagel-male-affirmations.mp4">Download the video.</a>

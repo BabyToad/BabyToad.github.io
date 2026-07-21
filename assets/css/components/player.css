@@ -1,7 +1,9 @@
 /* ============================================================
    AKNB PLAYER — a terminal instrument panel wrapped around film.
-   Progressive enhancement: without JS the native controls remain
-   and none of this applies beyond the frame itself.
+   Two rows: full-width timeline, then transport. Controls use
+   hard resets (all: unset) so sitewide form styles can't inflate
+   them. Progressive enhancement: without JS the native controls
+   remain and none of this applies beyond the frame itself.
    ============================================================ */
 
 .thought-video video {
@@ -12,7 +14,6 @@
     background: #000;
 }
 
-/* JS installed: panel docks under the frame */
 .thought-video.aknb-enhanced video {
     border-radius: var(--radius) var(--radius) 0 0;
     border-bottom: none;
@@ -21,9 +22,9 @@
 
 .aknb-controls {
     display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.45rem 0.6rem;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.55rem 0.7rem 0.5rem;
     border: 1px solid var(--border-strong);
     border-radius: 0 0 var(--radius) var(--radius);
     background: var(--bg-raised);
@@ -33,15 +34,90 @@
     color: var(--ink-soft);
 }
 
-.aknb-controls button {
+/* ---- Row 1: the timeline ---- */
+
+.aknb-timeline {
+    position: relative;
+    width: 100%;
+}
+
+.aknb-controls input[type="range"] {
+    all: unset;
+    box-sizing: border-box;
     appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    margin: 0;
+    cursor: pointer;
+}
+
+.aknb-seek {
+    --p: 0;
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius);
+    background: linear-gradient(90deg,
+        var(--accent) calc(var(--p) * 1%),
+        var(--border) calc(var(--p) * 1%));
+}
+
+.aknb-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 16px;
     border: none;
-    background: none;
+    border-radius: var(--radius);
+    background: var(--accent);
+}
+
+.aknb-controls input[type="range"]::-moz-range-thumb {
+    width: 8px;
+    height: 16px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--accent);
+}
+
+.aknb-controls input[type="range"]:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* movement ticks over the track, under the pointer */
+.aknb-ticks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.aknb-ticks span {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 6px;
+    background: var(--border-strong);
+}
+
+/* ---- Row 2: transport ---- */
+
+.aknb-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+}
+
+.aknb-controls button {
+    all: unset;
+    box-sizing: border-box;
     padding: 0.15rem 0.3rem;
     border-radius: var(--radius);
     font: inherit;
+    letter-spacing: inherit;
     color: var(--ink-soft);
     cursor: pointer;
+    text-align: center;
     transition: color 150ms ease, background-color 150ms ease;
 }
 
@@ -59,72 +135,59 @@
     color: var(--accent-ink);
 }
 
-.aknb-controls .aknb-play {
-    min-width: 2.1em;
-    text-align: center;
+.aknb-play {
+    min-width: 1.6em;
     color: var(--accent);
 }
 
-.aknb-controls .aknb-play:hover {
-    color: var(--accent-hover);
-}
-
-.aknb-controls .aknb-time {
+.aknb-time {
     white-space: nowrap;
     color: var(--ink-faint);
 }
 
-.aknb-controls .aknb-time .aknb-cur {
+.aknb-time .aknb-cur {
     color: var(--ink);
 }
 
-/* Scrubber — block-cursor thumb on a thin track */
-.aknb-controls .aknb-seek {
-    --p: 0;
+/* current movement readout — takes the slack space */
+.aknb-chapter {
     flex: 1;
-    appearance: none;
-    -webkit-appearance: none;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+    color: var(--ink-faint);
+}
+
+.aknb-vol {
+    --p: 100;
+    width: 4.5rem;
     height: 4px;
-    min-width: 4rem;
-    margin: 0;
-    border: none;
     border-radius: var(--radius);
     background: linear-gradient(90deg,
-        var(--accent) calc(var(--p) * 1%),
+        var(--ink-soft) calc(var(--p) * 1%),
         var(--border) calc(var(--p) * 1%));
-    cursor: pointer;
 }
 
-.aknb-controls .aknb-seek::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 8px;
-    height: 15px;
-    border: none;
-    border-radius: var(--radius);
-    background: var(--accent);
+.aknb-vol::-webkit-slider-thumb {
+    width: 6px;
+    height: 12px;
 }
 
-.aknb-controls .aknb-seek::-moz-range-thumb {
-    width: 8px;
-    height: 15px;
-    border: none;
-    border-radius: var(--radius);
-    background: var(--accent);
+.aknb-vol::-moz-range-thumb {
+    width: 6px;
+    height: 12px;
 }
 
-.aknb-controls .aknb-seek:focus-visible {
-    outline: 1px solid var(--accent);
-    outline-offset: 2px;
-}
-
-/* Theater — break the frame out of the reading column. Instant:
-   no motion on the critical path. */
+/* ---- Theater — break out of the reading column. Instant:
+   no motion on the critical path. ---- */
 .thought-video.aknb-theater {
     width: min(92vw, var(--container-max));
     margin-left: calc(50% - min(46vw, var(--container-max) / 2));
 }
 
-/* Fullscreen on the figure keeps the instrument panel */
+/* ---- Fullscreen on the figure keeps the instrument panel ---- */
 .thought-video:fullscreen {
     display: flex;
     flex-direction: column;
@@ -137,7 +200,7 @@
 .thought-video:fullscreen video {
     min-height: 0;
     flex: 0 1 auto;
-    max-height: calc(100vh - 6rem);
+    max-height: calc(100vh - 7rem);
 }
 
 .thought-video:fullscreen figcaption {
@@ -146,11 +209,19 @@
 
 @media (max-width: 640px) {
     .aknb-controls {
-        gap: 0.45rem;
         font-size: 0.68rem;
     }
 
-    .aknb-controls .aknb-theater-btn {
+    .aknb-row {
+        gap: 0.5rem;
+    }
+
+    .aknb-chapter,
+    .aknb-theater-btn {
         display: none;   /* nothing to break out of on a phone */
+    }
+
+    .aknb-vol {
+        width: 3.2rem;
     }
 }
