@@ -196,6 +196,7 @@
         reflect();
         tick();
         drawTicks();
+        if (video.duration) dur.textContent = fmt(video.duration);
     }
 
     function init() {
