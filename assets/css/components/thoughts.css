@@ -272,3 +272,46 @@
         font-size: 1rem;
     }
 }
+
+/* Video thoughts — machinery frame around moving pictures */
+.thought-video {
+    margin: var(--space-lg) 0 var(--space-md);
+}
+
+.thought-video video {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: #000;
+}
+
+.thought-video figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    align-items: baseline;
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-faint);
+}
+
+.thought-video .video-links {
+    margin-left: auto;
+}
+
+.thought-video .video-credit {
+    flex-basis: 100%;
+    font-size: 0.6875rem;
+}
+
+.thought-video figcaption a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.thought-video figcaption a:hover {
+    color: var(--accent-hover);
+}
