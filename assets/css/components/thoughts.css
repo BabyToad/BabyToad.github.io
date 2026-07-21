@@ -278,14 +278,6 @@
     margin: var(--space-lg) 0 var(--space-md);
 }
 
-.thought-video video {
-    display: block;
-    width: 100%;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    background: #000;
-}
-
 .thought-video figcaption {
     display: flex;
     flex-wrap: wrap;

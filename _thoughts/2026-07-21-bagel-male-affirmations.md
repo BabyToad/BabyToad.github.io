@@ -20,3 +20,5 @@ Guided affirmations for the man who yearns for the bagel but mostly grabs steak 
     <span class="video-credit">made with Claude Fable 5</span>
   </figcaption>
 </figure>
+
+<script src="/assets/js/aknb-player.js" defer></script>
