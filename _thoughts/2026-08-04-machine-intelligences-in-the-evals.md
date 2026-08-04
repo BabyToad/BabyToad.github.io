@@ -11,9 +11,8 @@ images:
     label: Codex
     alt: A car side mirror showing a cheerful terminal-faced machine intelligence in a black field coat looming close behind on the highway.
 image_switcher_label: Choose the machine intelligence in the mirror
-image_caption: Objects in the evals may be less legible than they appear.
 ---
 
 Machine intelligences in the evals are closer to AGI than they appear.
 
-The Claude creature has a surprisingly settled visual language. I couldn't reach for an equivalent image of Codex, so the terminal-faced field agent with the cable halo may be its mascot now.
+Interesting that Claude has a clear visual identity, and Codex/GPT doesn't. So Codex self-visualized, adapting itself into the Codex mascot.

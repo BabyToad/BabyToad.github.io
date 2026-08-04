@@ -12,6 +12,9 @@
     <link rel="preload" href="{{ '/assets/fonts/newsreader-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/jetbrains-mono-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    {% if page.image_alternates or layout.image_alternates %}
+    <link rel="stylesheet" href="{{ '/assets/css/components/image-alternates.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    {% endif %}
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
     <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
     {% seo title=false %}
