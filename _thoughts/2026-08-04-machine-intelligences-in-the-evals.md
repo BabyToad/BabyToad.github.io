@@ -13,6 +13,6 @@ images:
 image_switcher_label: Choose the machine intelligence in the mirror
 ---
 
-Machine intelligences in the evals are closer to AGI than they appear.
+machine intelligence in the evals are closer to agi than they appears.
 
-Interesting that Claude has a clear visual identity, and Codex/GPT doesn't. So Codex self-visualized, adapting itself into the Codex mascot.
+interesting that claude has a clear visual identity, and codex/gpt doesn't. so the codex self-visualized adapting the codex mascot
