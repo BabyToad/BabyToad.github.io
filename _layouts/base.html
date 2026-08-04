@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
+    <script>document.documentElement.classList.add('js');try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if page.url == "/" %}
@@ -72,6 +72,10 @@
 
     <!-- Navigation JavaScript (always loaded for mobile menu) -->
     <script src="{{ '/assets/js/components/navigation.js' | relative_url }}"></script>
+
+    {% if page.image_alternates or layout.image_alternates %}
+    <script src="{{ '/assets/js/components/image-alternates.js' | relative_url }}"></script>
+    {% endif %}
 
     <!-- Dither develop: shared kit + lazy-load image wrapper (order matters) -->
     <script defer src="{{ '/assets/js/dither.js' | relative_url }}"></script>

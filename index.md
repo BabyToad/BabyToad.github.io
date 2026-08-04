@@ -2,6 +2,7 @@
 layout: base
 title: Steak Knives and Bagels
 description: Personal website showcasing projects and skills
+image_alternates: true
 ---
 
 <header class="intro-section">
@@ -21,11 +22,7 @@ description: Personal website showcasing projects and skills
         <div class="thought-body">
             {{ latest_thought.content }}
         </div>
-        {% if latest_thought.image %}
-        <figure class="latest-thought-image">
-            <img src="{{ latest_thought.image }}" alt="{{ latest_thought.image_alt | default: '' }}" data-dither loading="lazy">
-        </figure>
-        {% endif %}
+        {% include thought-images.html item=latest_thought figure_class="latest-thought-image" dither=true %}
         {% if latest_thought.sources %}
         <div class="thought-sources">
             {% for source in latest_thought.sources %}

@@ -3,6 +3,7 @@ layout: base
 title: Thoughts
 description: Short musings, observations, and things I wanted to say somewhere
 permalink: /thoughts/
+image_alternates: true
 ---
 
 <section class="thoughts-timeline">
@@ -28,11 +29,7 @@ permalink: /thoughts/
                 {{ thought.content }}
             </div>
 
-            {% if thought.image %}
-            <figure class="thought-card-image">
-                <img src="{{ thought.image }}" alt="{{ thought.image_alt | default: 'Thought image' }}" loading="lazy">
-            </figure>
-            {% endif %}
+            {% include thought-images.html item=thought figure_class="thought-card-image" %}
 
             {% if thought.sources %}
             <div class="thought-sources">

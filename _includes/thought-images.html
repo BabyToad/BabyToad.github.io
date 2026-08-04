@@ -1,0 +1,38 @@
+{% assign thought_item = include.item %}
+{% if thought_item.images %}
+<figure class="{{ include.figure_class }} thought-images" data-image-alternates>
+    <div class="thought-images-frame">
+        {% for image in thought_item.images %}
+        <img src="{{ image.src }}"
+             alt="{{ image.alt | default: 'Thought image' }}"
+             loading="lazy"
+             class="thought-images-panel{% if forloop.first %} is-active{% endif %}"
+             data-image-panel
+             aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+        {% endfor %}
+    </div>
+    {% if thought_item.images.size > 1 %}
+    <div class="thought-images-switcher" role="group" aria-label="{{ thought_item.image_switcher_label | default: 'Choose image version' }}">
+        <span class="thought-images-switcher-label" aria-hidden="true">View as</span>
+        {% for image in thought_item.images %}
+        <button type="button"
+                class="thought-images-option{% if forloop.first %} is-active{% endif %}"
+                data-image-index="{{ forloop.index0 }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+            {{ image.label | default: 'Version' }}
+        </button>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if include.show_caption and thought_item.image_caption %}
+    <figcaption>{{ thought_item.image_caption }}</figcaption>
+    {% endif %}
+</figure>
+{% elsif thought_item.image %}
+<figure class="{{ include.figure_class }}">
+    <img src="{{ thought_item.image }}" alt="{{ thought_item.image_alt | default: 'Thought image' }}" loading="lazy"{% if include.dither %} data-dither{% endif %}>
+    {% if include.show_caption and thought_item.image_caption %}
+    <figcaption>{{ thought_item.image_caption }}</figcaption>
+    {% endif %}
+</figure>
+{% endif %}
