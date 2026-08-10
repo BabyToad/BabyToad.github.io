@@ -84,7 +84,8 @@
     overflow: hidden;
 }
 
-.thought-card-image img {
+.thought-card-image img,
+.thought-card-image video {
     width: 100%;
     height: auto;
     display: block;
@@ -162,7 +163,8 @@
     overflow: hidden;
 }
 
-.thought-image img {
+.thought-image img,
+.thought-image video {
     width: 100%;
     height: auto;
     display: block;

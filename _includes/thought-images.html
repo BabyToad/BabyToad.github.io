@@ -1,5 +1,40 @@
 {% assign thought_item = include.item %}
-{% if thought_item.images %}
+{% if thought_item.videos %}
+<figure class="{{ include.figure_class }} thought-images thought-videos" data-image-alternates>
+    <div class="thought-images-frame">
+        {% for video in thought_item.videos %}
+        <video controls
+               preload="metadata"
+               playsinline
+               {% if video.poster %}poster="{{ video.poster }}"{% endif %}
+               class="thought-images-panel{% if forloop.first %} is-active{% endif %}"
+               data-image-panel
+               aria-label="{{ video.title | default: video.label | default: 'Thought video' }}"
+               aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+            <source src="{{ video.src }}" type="{{ video.type | default: 'video/mp4' }}">
+            Your browser does not support the video tag.
+            <a href="{{ video.src }}">Download the video.</a>
+        </video>
+        {% endfor %}
+    </div>
+    {% if thought_item.videos.size > 1 %}
+    <div class="thought-images-switcher" role="group" aria-label="{{ thought_item.video_switcher_label | default: 'Choose video' }}">
+        <span class="thought-images-switcher-label" aria-hidden="true">Watch</span>
+        {% for video in thought_item.videos %}
+        <button type="button"
+                class="thought-images-option{% if forloop.first %} is-active{% endif %}"
+                data-image-index="{{ forloop.index0 }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+            {{ video.label | default: 'Video' }}
+        </button>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if include.show_caption and thought_item.video_caption %}
+    <figcaption>{{ thought_item.video_caption }}</figcaption>
+    {% endif %}
+</figure>
+{% elsif thought_item.images %}
 <figure class="{{ include.figure_class }} thought-images" data-image-alternates>
     <div class="thought-images-frame">
         {% for image in thought_item.images %}

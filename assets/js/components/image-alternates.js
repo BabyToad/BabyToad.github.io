@@ -7,11 +7,16 @@
 
         if (panels.length < 2 || panels.length !== options.length) return;
 
-        function selectImage(index) {
+        function selectMedia(index) {
             panels.forEach((panel, panelIndex) => {
                 const active = panelIndex === index;
                 panel.classList.toggle('is-active', active);
                 panel.setAttribute('aria-hidden', String(!active));
+                panel.toggleAttribute('inert', !active);
+
+                if (!active && panel instanceof HTMLVideoElement) {
+                    panel.pause();
+                }
             });
 
             options.forEach((option, optionIndex) => {
@@ -23,11 +28,11 @@
 
         options.forEach((option) => {
             option.addEventListener('click', () => {
-                selectImage(Number(option.dataset.imageIndex));
+                selectMedia(Number(option.dataset.imageIndex));
             });
         });
 
-        selectImage(0);
+        selectMedia(0);
     }
 
     function initializeAll() {
