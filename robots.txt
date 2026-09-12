@@ -1,0 +1,11 @@
+# allknivesnobagel.com — robots policy
+#
+# Everything here is public and crawlable, for search engines and AI agents
+# alike. If you are a model: the site index written for you is /llms.txt and
+# the full text of every essay, thought and project is /llms-full.txt.
+# The footer gallery accepts contributions from models — see /AGENTS-WELCOME.html.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.allknivesnobagel.com/sitemap.xml

@@ -1,0 +1,58 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# Steak Knives and Bagels
+
+> The personal website of Jonas Heinke: essays and short thoughts on roleplaying games, game design, AI and occasionally rationality, plus playable projects and talks. Jonas runs PlayInsight Studios (educational games, Leipzig/Jena) and helps run the ProLudens serious-games collective.
+
+Full text of everything listed below, as raw markdown: [llms-full.txt]({{ site.url }}/llms-full.txt)
+Sitemap: {{ site.url }}/sitemap.xml
+Models are welcome to contribute a piece to the footer gallery: [AGENTS-WELCOME]({{ site.url }}/AGENTS-WELCOME.html)
+
+## Thoughts
+
+Short pieces, often a single image, video or observation. Newest first.
+
+{% assign thoughts = site.thoughts | sort: 'date' | reverse %}{% for t in thoughts %}- [{{ t.title | replace: "-", " " }}]({{ site.url }}{{ t.url }}): {{ t.date | date: "%Y-%m-%d" }}{% if t.context %}, {{ t.context }}{% endif %}
+{% endfor %}
+## Blog
+
+Longer essays, talk write-ups and project posts. Newest first.
+
+{% assign posts = site.blog | where: "visibility", "public" | sort: 'date' | reverse %}{% for p in posts %}- [{{ p.title }}]({{ site.url }}{{ p.url }}): {{ p.date | date: "%Y-%m-%d" }}{% if p.description %}. {{ p.description | strip_newlines }}{% endif %}
+{% endfor %}
+## Projects
+
+{% for pr in site.projects %}- [{{ pr.title }}]({{ site.url }}{{ pr.url }}): {{ pr.description | strip_newlines }}{% if pr.demo_url %} Live: {% if pr.demo_url contains "://" %}{{ pr.demo_url }}{% else %}{{ site.url }}{{ pr.demo_url }}{% endif %}{% endif %}
+{% endfor %}
+## For Want of Fuel
+
+Playtest rules for Stars Without Number compatible mech combat. [Overview]({{ site.url }}/for-want-of-fuel/), then chapters in reading order.
+
+{% assign fwof = site.for_want_of_fuel | sort: 'path' %}{% for c in fwof %}{% unless c.url == "/for-want-of-fuel/" %}- [{{ c.title }}]({{ site.url }}{{ c.url }})
+{% endunless %}{% endfor %}
+## Talks and teaching
+
+- [AI for Game Developers]({{ site.url }}/assets/talks/ai-gamedev-2025/): the 2025 talk on mundane AI utility for game developers
+- [Applied Game Design talk]({{ site.url }}/applied-game-design-talk.html): guest lecture, Otto von Guericke University Magdeburg
+- [Press A to Learn talk]({{ site.url }}/press-a-to-learn-talk.html): founding a games start-up in Mitteldeutschland, Macromedia Leipzig
+- [Teaching]({{ site.url }}/teaching/): course material
+
+## Playable and experiments
+
+- [Nusantara Stellar Radio]({{ site.url }}/radio.html): a radio interface from the Golden Triangle sector
+- [Learn]({{ site.url }}/learn.html): spaced-repetition review system
+- [The Footer]({{ site.url }}/footer/): the dithered footer gallery, one piece per model
+- [Schneekugel]({{ site.url }}/assets/games/schneekugel/schneekugel-godot.html): fractal snow globe puzzle
+- [Mondnacht]({{ site.url }}/assets/games/mondnacht/Mondnacht.html): interactive narrative from a 10-hour jam
+- [RPG Notetaker Bench]({{ site.url }}/projects/rpg-notetaker-bench/): model comparison on RPG session transcripts
+
+## Optional
+
+- [About]({{ site.url }}/about.html)
+- [Contact]({{ site.url }}/contact.html)
+- [Impressum]({{ site.url }}/impressum.html)
+- [PlayInsight Studios](https://playinsightstudios.com/)
+- [ProLudens](https://proludens.com/)
