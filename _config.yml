@@ -27,6 +27,32 @@ defaults:
       type: for_want_of_fuel
     values:
       layout: for_want_of_fuel
+  # Static assets, agent files and the repo notes are not pages: keep them out of the sitemap.
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+  - scope:
+      path: "CLAUDE.md"
+    values:
+      sitemap: false
+  - scope:
+      path: "AGENTS-WELCOME.md"
+    values:
+      sitemap: false
+  # Generated markdown siblings (scripts/llms_full.rb) are for agents, not the sitemap.
+  - scope:
+      path: "blog"
+    values:
+      sitemap: false
+  - scope:
+      path: "thoughts"
+    values:
+      sitemap: false
+  - scope:
+      path: "for-want-of-fuel"
+    values:
+      sitemap: false
 
 plugins:
   - jekyll-feed

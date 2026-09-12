@@ -9,6 +9,7 @@
 # file. Local check: `ruby scripts/llms_full.rb && head llms-full.txt`.
 require 'yaml'
 require 'date'
+require 'fileutils'
 
 ROOT = File.expand_path('..', __dir__)
 CONFIG = YAML.safe_load(File.read(File.join(ROOT, '_config.yml')), permitted_classes: [Date, Time]) || {}
@@ -49,10 +50,27 @@ def url_for(doc, pattern)
   pattern.sub(':name', doc[:slug]).sub(':title', doc[:slug])
 end
 
+def display_title(doc)
+  t = doc[:data]['title'] || doc[:slug]
+  # Thoughts carry their slug as title; read it as words.
+  t == doc[:slug] ? t.tr('-', ' ') : t
+end
+
+# Markdown sibling: the raw source as a static file next to the HTML page, so
+# an agent can append .md to a page URL (/blog/slug.md, /thoughts/slug.md).
+def sibling(doc, url)
+  bare = url.chomp('/')
+  dir = File.join(ROOT, File.dirname(bare))
+  FileUtils.mkdir_p(dir)
+  name = File.basename(bare) + '.md'
+  body = "<!-- #{display_title(doc)} — markdown sibling of #{BASE}#{url} -->\n\n#{clean(doc[:body])}\n"
+  File.write(File.join(dir, name), body, encoding: 'utf-8')
+end
+
 def entry(out, doc, url)
   d = doc[:data]
   out << ''
-  out << "### #{d['title'] || doc[:slug]}"
+  out << "### #{display_title(doc)}"
   out << ''
   out << "Source: #{BASE}#{url}"
   out << "Date: #{doc[:date].strftime('%Y-%m-%d')}" if doc[:date]
@@ -84,13 +102,13 @@ projects = collection('_projects')
 fwof = collection('_for_want_of_fuel')
 
 out << '## Thoughts'
-thoughts.each { |d| entry(out, d, url_for(d, '/thoughts/:title/')) }
+thoughts.each { |d| u = url_for(d, '/thoughts/:title/'); entry(out, d, u); sibling(d, u) if u.start_with?('/thoughts/') }
 out << '' << '## Blog'
-blog.each { |d| entry(out, d, url_for(d, '/blog/:title/')) }
+blog.each { |d| u = url_for(d, '/blog/:title/'); entry(out, d, u); sibling(d, u) }
 out << '' << '## Projects'
 projects.each { |d| entry(out, d, url_for(d, "/projects/#{d[:slug]}.html")) }
 out << '' << '## For Want of Fuel'
-fwof.each { |d| entry(out, d, url_for(d, "/for-want-of-fuel/#{d[:slug].tr('_', '-')}/")) }
+fwof.each { |d| u = url_for(d, "/for-want-of-fuel/#{d[:slug].tr('_', '-')}/"); entry(out, d, u); sibling(d, u) unless d[:slug] == 'index' }
 out << ''
 
 File.write(File.join(ROOT, 'llms-full.txt'), out.join("\n") + "\n", encoding: 'utf-8')
