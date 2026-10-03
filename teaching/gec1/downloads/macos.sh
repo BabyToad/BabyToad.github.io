@@ -12,8 +12,8 @@
 # Starten (im Terminal, im Ordner dieser Datei):
 #   bash macos.sh
 
-UNITY_VERSION="6000.3.25f1"     # aus setup/stack.json (apply_stack.py haelt das aktuell)
-UNITY_CHANGESET="e1dba0a9aba4"
+UNITY_VERSION="6000.3.15f1"     # aus setup/stack.json (apply_stack.py haelt das aktuell)
+UNITY_CHANGESET="c1aa84e375f6"
 
 ask() { read -r -p "$1 [j/n] " a; [[ "$a" =~ ^(j|ja|y|yes)$ ]]; }
 

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: ca. 20 Min pro Agent
 
@@ -112,7 +112,7 @@ Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen 
 welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
 ```
 
-✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.15f1** und Regeln aus `AGENTS.md`.
 GitHub Desktop zeigt weiterhin **No local changes**.
 
 Weiter mit **Schritt 5: Der erste Commit durch den Agenten**.
@@ -163,7 +163,7 @@ Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen 
 welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
 ```
 
-✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.15f1** und Regeln aus `AGENTS.md`.
 GitHub Desktop zeigt weiterhin **No local changes**.
 
 ## Schritt 5: Der erste Commit durch den Agenten

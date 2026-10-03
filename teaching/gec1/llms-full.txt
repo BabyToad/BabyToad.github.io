@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-03T17:15Z · a299914. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-03T22:11Z · 981ef7d. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was eine Engine tut
 
@@ -1337,7 +1337,7 @@ wenn etwas kaputt geht, lässt sich schnell helfen.
 |---|---|---|
 | Git | aktuelle Version | Unity lädt damit das Kurs-Paket; Rückgängig-Knopf |
 | Unity Hub | aktuelle Version | installiert und öffnet Unity |
-| Unity Editor | **Unity 6.3 LTS – 6000.3.25f1** | die Engine |
+| Unity Editor | **Unity 6.3 LTS – 6000.3.15f1** | die Engine |
 | Projektvorlage | Kursvorlage auf GitHub (Universal 3D, URP) | das eigene Projekt |
 | GitHub Desktop | aktuelle Version | Git ohne Kommandozeile |
 | Visual Studio Code | aktuelle Version + Unity-Erweiterung | C# lesen und schreiben |
@@ -1384,7 +1384,7 @@ optionalen Werkzeuge (Installationsskript, Claude Code, Codex) stehen unter
 
 Wer Unity und Git schon kennt, darf eigene Wege gehen. **Fest** sind:
 
-- Unity **6000.3.25f1**,
+- Unity **6000.3.15f1**,
 - das Projekt aus der **Kursvorlage**, als **privates** Repository auf GitHub,
 - `AGENTS.md`, `KI-VERZEICHNIS.md` und `DOKUMENTATION.md` bleiben im Projekt,
 - **Kurs > Setup prüfen** zeigt keinen FEHLER,
@@ -1438,7 +1438,7 @@ anderen Seiten herunterladen, auch wenn sie in der Suchmaschine weiter oben steh
 |---|---|---|---|
 | Git | <https://git-scm.com/downloads/win> (ca. 70 MB) | im Terminal `xcode-select --install` (Command Line Tools von Apple, 10–25 Min) | Git installieren |
 | Unity Hub | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe> | Apple-Chip: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg> · Intel: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg> | Unity installieren |
-| Unity 6000.3.25f1 | Link `unityhub://6000.3.25f1/e1dba0a9aba4` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.25f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
+| Unity 6000.3.15f1 | Link `unityhub://6000.3.15f1/c1aa84e375f6` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.15f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
 | GitHub Desktop | <https://desktop.github.com> | <https://desktop.github.com> | GitHub einrichten |
 | Visual Studio Code | <https://code.visualstudio.com/download> | <https://code.visualstudio.com/download> | VS Code und KI-Agent |
 | Unity-Erweiterung für VS Code | [Marketplace: Unity (Microsoft)](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc) – in VS Code nach "Unity" suchen | wie Windows | VS Code und KI-Agent |
@@ -1451,8 +1451,8 @@ Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen*
 Spieler-Controller und Kit) direkt aus einem Git-Repository. GitHub Desktop bringt zwar ein Git
 mit, aber nur für sich selbst.
 
-Download-Größen (Unity 6000.3.25f1, laut Unity): Editor Windows ca. **4,2 GB**, Mac ca.
-**5,2 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
+Download-Größen (Unity 6000.3.15f1, laut Unity): Editor Windows ca. **4,1 GB**, Mac ca.
+**5,1 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
 **abwählen**) 1,7 GB. Installiert braucht Unity ca. 8–10 GB, während der Installation
 vorübergehend mehr (ca. 20 GB frei halten).
 
@@ -1651,7 +1651,7 @@ Voraussetzungen: 25 GB freier Speicher (während der Installation werden ca. 20 
 Checkpunkte:
 - [ ] Unity Hub startet und zeigt das angemeldete Konto
 - [ ] Im Hub steht eine aktive Lizenz "Unity Personal"
-- [ ] Unter Installs steht 6000.3.25f1 (im Kurs reicht es, dass der Download läuft)
+- [ ] Unter Installs steht 6000.3.15f1 (im Kurs reicht es, dass der Download läuft)
 
 Stand: nicht durchgespielt
 
@@ -1659,12 +1659,16 @@ Stand: nicht durchgespielt
 
 Unity besteht aus zwei Programmen. Der **Unity Hub** ist der Startbildschirm: Er lädt
 Unity-Versionen herunter und öffnet Projekte. Der **Unity Editor** ist die eigentliche
-Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: **6000.3.25f1**
+Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: **6000.3.15f1**
 (Unity 6.3 LTS).
 
 Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
 wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
 immer – und dann sieht das Projekt anders aus als bei allen anderen.
+
+**Keine neuere 6.3-Version nehmen.** Ab 6000.3.16 hat Unity etwas geändert, das den
+Graph-Editor des Kurs-Kits kaputt macht. Darum nutzt der Kurs genau **6000.3.15f1**, auch wenn
+der Hub eine neuere anbietet. **Kurs > Setup prüfen** meldet neuere Versionen als FEHLER.
 
 **Im Kurs:** Den Download so früh wie möglich starten (Schritt 3), danach geht es mit
 [GitHub einrichten](../github/) weiter, während Unity lädt. **Deckel offen lassen und das
@@ -1717,15 +1721,15 @@ Anmeldeseite oder der Projektliste.
 ✅ **Checkpoint:** Oben links im Hub ist das Konto-Symbol zu sehen. Unter **Einstellungen
 (Zahnrad) > Licenses** steht eine aktive Lizenz **Unity Personal**.
 
-### Schritt 3: Unity 6000.3.25f1 installieren
+### Schritt 3: Unity 6000.3.15f1 installieren
 
 Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
 eine neuere als die Kursversion sein. Darum kommt die Kursversion über einen Link:
 
-1. Auf diesen Link klicken: [**Unity 6000.3.25f1 im Hub installieren**](unityhub://6000.3.25f1/e1dba0a9aba4)
-   (oder `unityhub://6000.3.25f1/e1dba0a9aba4` in die Adresszeile kopieren und Enter drücken).
+1. Auf diesen Link klicken: [**Unity 6000.3.15f1 im Hub installieren**](unityhub://6000.3.15f1/c1aa84e375f6)
+   (oder `unityhub://6000.3.15f1/c1aa84e375f6` in die Adresszeile kopieren und Enter drücken).
 2. Der Browser fragt, ob er den Unity Hub öffnen darf: **Ja / Öffnen**.
-3. Der Hub zeigt **Install Unity 6000.3.25f1** und eine Liste von **Modulen**. So einstellen:
+3. Der Hub zeigt **Install Unity 6000.3.15f1** und eine Liste von **Modulen**. So einstellen:
 
 | Modul | Windows | Mac |
 |---|---|---|
@@ -1753,18 +1757,18 @@ einmal **Möchten Sie zulassen, dass durch diese App Änderungen …?** – **Ja
 oft mitten in der Vorlesung. Bleibt sie unbeantwortet, bricht die Installation ab. Darum den
 Hub zwischendurch ansehen (Taskleiste).
 
-✅ **Checkpoint:** Unter **Downloads** erscheint ein Fortschrittsbalken für **6000.3.25f1**. Im
+✅ **Checkpoint:** Unter **Downloads** erscheint ein Fortschrittsbalken für **6000.3.15f1**. Im
 Kurs: Jetzt mit [GitHub einrichten](../github/) weitermachen, während Unity lädt. Ist alles
-fertig, steht unter **Installs** ein Eintrag **6000.3.25f1** mit dem Zusatz **LTS**, ohne
+fertig, steht unter **Installs** ein Eintrag **6000.3.15f1** mit dem Zusatz **LTS**, ohne
 Fortschrittsbalken.
 
-(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.)
+(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.15f1 LTS.)
 
 ### Später, zu Hause (nur Mac): Windows-Build-Modul
 
 Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
 **Windows Build Support (Mono)** installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
-irgendwann vor der Abgabe: Unity Hub > **Installs** > Zahnrad bei **6000.3.25f1** >
+irgendwann vor der Abgabe: Unity Hub > **Installs** > Zahnrad bei **6000.3.15f1** >
 **Add modules** > **Windows Build Support (Mono)** anhaken > **Install**. **Kurs > Setup prüfen**
 erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).
 
@@ -1775,7 +1779,7 @@ Weiter mit [GitHub einrichten](../github/).
 **Der Link `unityhub://…` tut nichts.**
 Ist der Hub installiert und einmal gestartet worden? Dann den Link in die Adresszeile kopieren
 statt ihn anzuklicken. Klappt es immer noch nicht: Die Seite
-<https://unity.com/releases/editor/whats-new/6000.3.25f1> öffnen und dort auf **Install** klicken
+<https://unity.com/releases/editor/whats-new/6000.3.15f1> öffnen und dort auf **Install** klicken
 (derselbe Link, als Knopf).
 
 **Windows: Die Installation ist abgebrochen, unter Installs steht nichts.**
@@ -1812,7 +1816,8 @@ Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie `C:\
 statt unter `C:\Users\Jörg\…` (siehe [Projekt anlegen](../create-project/)).
 
 **Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem `f1`).**
-Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
+Nicht installieren – ab 6000.3.16 funktioniert der Graph-Editor des Kurs-Kits nicht. Den Link
+aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
 ist das kein Problem – sie schadet nicht, kostet aber Platz.
 
 **Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.**
@@ -1968,13 +1973,13 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/github/
 
 Dauer: ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
 
-Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.15f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
 
 Checkpunkte:
 - [ ] Es gibt einen Ordner Unity direkt unter C:\ (Windows) bzw. im Benutzerordner (Mac)
 - [ ] Auf GitHub gibt es das eigene private Repository, erstellt aus der Kursvorlage
 - [ ] GitHub Desktop zeigt das Repository mit "No local changes"
-- [ ] Das Projekt ist in Unity 6000.3.25f1 geöffnet
+- [ ] Das Projekt ist in Unity 6000.3.15f1 geöffnet
 - [ ] Menü „Kurs > Setup prüfen“ zeigt keine Fehler
 
 Stand: nicht durchgespielt
@@ -2060,14 +2065,14 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
 2. Auf den Pfeil neben **Add** (bzw. **Open**) > **Add project from disk** klicken.
 3. Den Ordner `gec1-nachname` wählen – **den Ordner selbst**, in dem `Assets` liegt, nicht
    einen Ordner darin oder darüber. Auf **Öffnen** / **Add Project** klicken.
-4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.25f1**.
+4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.15f1**.
    Darauf klicken.
 5. Das erste Öffnen dauert lange (2–15 Minuten, auf älteren Rechnern länger): Unity baut den
    Ordner `Library/` auf und lädt das Kurs-Paket. Einfach laufen lassen.
 6. **Windows:** Fragt die Windows-Firewall nach Unity, **Zulassen** (privates Netzwerk) oder
    **Abbrechen** wählen – beides geht.
 
-(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.25f1, ohne Warnsymbol.)
+(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.15f1, ohne Warnsymbol.)
 
 ✅ **Checkpoint:** Unity ist offen. Oben in der Menüleiste gibt es einen Eintrag **Kurs**.
 
@@ -2113,7 +2118,7 @@ Der falsche Ordner ist gewählt. Richtig ist der Ordner, der direkt `Assets`, `P
 und `ProjectSettings` enthält.
 
 **Im Hub steht beim Projekt ein Warnsymbol und "Editor version not installed".**
-Unity 6000.3.25f1 fehlt oder ist noch nicht fertig installiert (siehe
+Unity 6000.3.15f1 fehlt oder ist noch nicht fertig installiert (siehe
 [Unity installieren](../install-unity/), Schritt 3). **Nicht** "Choose another Editor version"
 wählen – das baut das Projekt auf eine andere Version um.
 
@@ -2152,7 +2157,7 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/
 
 Dauer: ca. 30 Min
 
-Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.15f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
 
 Checkpunkte:
 - [ ] Das Projekt liegt in C:\Unity bzw. ~/Unity und wurde mit der Vorlage Universal 3D angelegt
@@ -2175,7 +2180,7 @@ im Projektordner liegen.
 1. Einen Ordner `C:\Unity` (Windows) bzw. `~/Unity` (Mac) anlegen – siehe
    [Projekt anlegen](../create-project/), Schritt 1.
 2. Unity Hub > **Projects** > **New project**.
-3. Oben bei **Editor Version**: **6000.3.25f1** auswählen.
+3. Oben bei **Editor Version**: **6000.3.15f1** auswählen.
 4. Vorlage: **Universal 3D**. (Fehlt das Vorschaubild: auf **Download template** klicken.)
 5. Rechts:
    - **Project name:** kurz, ohne Leerzeichen und Umlaute, z. B. `gec1-nachname`
@@ -2184,7 +2189,7 @@ im Projektordner liegen.
      arbeitet mit Git und GitHub.
 6. **Create project**. Unity öffnet sich nach einigen Minuten. Unity danach wieder schließen.
 
-(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.25f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
+(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.15f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
 
 ✅ **Checkpoint:** Im Ordner `Unity/gec1-nachname` liegen `Assets`, `Packages`,
 `ProjectSettings` und `Library`.
@@ -2222,7 +2227,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.2.0
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -2278,7 +2283,7 @@ Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
-Ist oben die Editor-Version 6000.3.25f1 gewählt? Die Vorlagen hängen an der Version.
+Ist oben die Editor-Version 6000.3.15f1 gewählt? Die Vorlagen hängen an der Version.
 Gegebenenfalls **Download template** klicken.
 
 **Unity fragt beim Anlegen nach Unity Cloud / Organisation.**
@@ -2396,9 +2401,9 @@ Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (**Ask** / **E
    welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
    ```
 
-(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.)
+(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.15f1 nennt.)
 
-✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.25f1** und Regeln aus
+✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.15f1** und Regeln aus
 `AGENTS.md`. In GitHub Desktop steht weiterhin **No local changes** (er hat nichts geändert).
 
 Zum Schluss in Unity **Kurs > Setup prüfen**: Jetzt ist auch **Code-Editor** OK.
@@ -2581,7 +2586,7 @@ Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen 
 welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
 ```
 
-✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.15f1** und Regeln aus `AGENTS.md`.
 GitHub Desktop zeigt weiterhin **No local changes**.
 
 Weiter mit **Schritt 5: Der erste Commit durch den Agenten**.
@@ -2632,7 +2637,7 @@ Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen 
 welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
 ```
 
-✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.15f1** und Regeln aus `AGENTS.md`.
 GitHub Desktop zeigt weiterhin **No local changes**.
 
 ### Schritt 5: Der erste Commit durch den Agenten

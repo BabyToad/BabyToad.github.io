@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: 5 Min lesen
 
@@ -23,7 +23,7 @@ anderen Seiten herunterladen, auch wenn sie in der Suchmaschine weiter oben steh
 |---|---|---|---|
 | Git | <https://git-scm.com/downloads/win> (ca. 70 MB) | im Terminal `xcode-select --install` (Command Line Tools von Apple, 10–25 Min) | Git installieren |
 | Unity Hub | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe> | Apple-Chip: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg> · Intel: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg> | Unity installieren |
-| Unity 6000.3.25f1 | Link `unityhub://6000.3.25f1/e1dba0a9aba4` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.25f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
+| Unity 6000.3.15f1 | Link `unityhub://6000.3.15f1/c1aa84e375f6` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.15f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
 | GitHub Desktop | <https://desktop.github.com> | <https://desktop.github.com> | GitHub einrichten |
 | Visual Studio Code | <https://code.visualstudio.com/download> | <https://code.visualstudio.com/download> | VS Code und KI-Agent |
 | Unity-Erweiterung für VS Code | [Marketplace: Unity (Microsoft)](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc) – in VS Code nach "Unity" suchen | wie Windows | VS Code und KI-Agent |
@@ -36,8 +36,8 @@ Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen*
 Spieler-Controller und Kit) direkt aus einem Git-Repository. GitHub Desktop bringt zwar ein Git
 mit, aber nur für sich selbst.
 
-Download-Größen (Unity 6000.3.25f1, laut Unity): Editor Windows ca. **4,2 GB**, Mac ca.
-**5,2 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
+Download-Größen (Unity 6000.3.15f1, laut Unity): Editor Windows ca. **4,1 GB**, Mac ca.
+**5,1 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
 **abwählen**) 1,7 GB. Installiert braucht Unity ca. 8–10 GB, während der Installation
 vorübergehend mehr (ca. 20 GB frei halten).
 

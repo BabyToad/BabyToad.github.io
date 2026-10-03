@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: ca. 60 Min (davon 30–45 Min Download)
 
@@ -7,7 +7,7 @@ Voraussetzungen: 25 GB freier Speicher (während der Installation werden ca. 20 
 Checkpunkte:
 - [ ] Unity Hub startet und zeigt das angemeldete Konto
 - [ ] Im Hub steht eine aktive Lizenz "Unity Personal"
-- [ ] Unter Installs steht 6000.3.25f1 (im Kurs reicht es, dass der Download läuft)
+- [ ] Unter Installs steht 6000.3.15f1 (im Kurs reicht es, dass der Download läuft)
 
 Stand: nicht durchgespielt
 
@@ -15,12 +15,16 @@ Stand: nicht durchgespielt
 
 Unity besteht aus zwei Programmen. Der **Unity Hub** ist der Startbildschirm: Er lädt
 Unity-Versionen herunter und öffnet Projekte. Der **Unity Editor** ist die eigentliche
-Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: **6000.3.25f1**
+Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: **6000.3.15f1**
 (Unity 6.3 LTS).
 
 Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
 wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
 immer – und dann sieht das Projekt anders aus als bei allen anderen.
+
+**Keine neuere 6.3-Version nehmen.** Ab 6000.3.16 hat Unity etwas geändert, das den
+Graph-Editor des Kurs-Kits kaputt macht. Darum nutzt der Kurs genau **6000.3.15f1**, auch wenn
+der Hub eine neuere anbietet. **Kurs > Setup prüfen** meldet neuere Versionen als FEHLER.
 
 **Im Kurs:** Den Download so früh wie möglich starten (Schritt 3), danach geht es mit
 [GitHub einrichten](../github/) weiter, während Unity lädt. **Deckel offen lassen und das
@@ -73,15 +77,15 @@ Anmeldeseite oder der Projektliste.
 ✅ **Checkpoint:** Oben links im Hub ist das Konto-Symbol zu sehen. Unter **Einstellungen
 (Zahnrad) > Licenses** steht eine aktive Lizenz **Unity Personal**.
 
-## Schritt 3: Unity 6000.3.25f1 installieren
+## Schritt 3: Unity 6000.3.15f1 installieren
 
 Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
 eine neuere als die Kursversion sein. Darum kommt die Kursversion über einen Link:
 
-1. Auf diesen Link klicken: [**Unity 6000.3.25f1 im Hub installieren**](unityhub://6000.3.25f1/e1dba0a9aba4)
-   (oder `unityhub://6000.3.25f1/e1dba0a9aba4` in die Adresszeile kopieren und Enter drücken).
+1. Auf diesen Link klicken: [**Unity 6000.3.15f1 im Hub installieren**](unityhub://6000.3.15f1/c1aa84e375f6)
+   (oder `unityhub://6000.3.15f1/c1aa84e375f6` in die Adresszeile kopieren und Enter drücken).
 2. Der Browser fragt, ob er den Unity Hub öffnen darf: **Ja / Öffnen**.
-3. Der Hub zeigt **Install Unity 6000.3.25f1** und eine Liste von **Modulen**. So einstellen:
+3. Der Hub zeigt **Install Unity 6000.3.15f1** und eine Liste von **Modulen**. So einstellen:
 
 | Modul | Windows | Mac |
 |---|---|---|
@@ -109,18 +113,18 @@ einmal **Möchten Sie zulassen, dass durch diese App Änderungen …?** – **Ja
 oft mitten in der Vorlesung. Bleibt sie unbeantwortet, bricht die Installation ab. Darum den
 Hub zwischendurch ansehen (Taskleiste).
 
-✅ **Checkpoint:** Unter **Downloads** erscheint ein Fortschrittsbalken für **6000.3.25f1**. Im
+✅ **Checkpoint:** Unter **Downloads** erscheint ein Fortschrittsbalken für **6000.3.15f1**. Im
 Kurs: Jetzt mit [GitHub einrichten](../github/) weitermachen, während Unity lädt. Ist alles
-fertig, steht unter **Installs** ein Eintrag **6000.3.25f1** mit dem Zusatz **LTS**, ohne
+fertig, steht unter **Installs** ein Eintrag **6000.3.15f1** mit dem Zusatz **LTS**, ohne
 Fortschrittsbalken.
 
-(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.)
+(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.15f1 LTS.)
 
 ## Später, zu Hause (nur Mac): Windows-Build-Modul
 
 Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
 **Windows Build Support (Mono)** installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
-irgendwann vor der Abgabe: Unity Hub > **Installs** > Zahnrad bei **6000.3.25f1** >
+irgendwann vor der Abgabe: Unity Hub > **Installs** > Zahnrad bei **6000.3.15f1** >
 **Add modules** > **Windows Build Support (Mono)** anhaken > **Install**. **Kurs > Setup prüfen**
 erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).
 
@@ -131,7 +135,7 @@ Weiter mit [GitHub einrichten](../github/).
 **Der Link `unityhub://…` tut nichts.**
 Ist der Hub installiert und einmal gestartet worden? Dann den Link in die Adresszeile kopieren
 statt ihn anzuklicken. Klappt es immer noch nicht: Die Seite
-<https://unity.com/releases/editor/whats-new/6000.3.25f1> öffnen und dort auf **Install** klicken
+<https://unity.com/releases/editor/whats-new/6000.3.15f1> öffnen und dort auf **Install** klicken
 (derselbe Link, als Knopf).
 
 **Windows: Die Installation ist abgebrochen, unter Installs steht nichts.**
@@ -168,7 +172,8 @@ Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie `C:\
 statt unter `C:\Users\Jörg\…` (siehe [Projekt anlegen](../create-project/)).
 
 **Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem `f1`).**
-Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
+Nicht installieren – ab 6000.3.16 funktioniert der Graph-Editor des Kurs-Kits nicht. Den Link
+aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
 ist das kein Problem – sie schadet nicht, kostet aber Platz.
 
 **Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.**

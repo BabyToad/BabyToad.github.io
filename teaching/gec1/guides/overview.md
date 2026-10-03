@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/overview/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/overview/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: 5 Min lesen; im Kurs ca. 2–3 Stunden, viel davon Download im Hintergrund
 
@@ -28,7 +28,7 @@ wenn etwas kaputt geht, lässt sich schnell helfen.
 |---|---|---|
 | Git | aktuelle Version | Unity lädt damit das Kurs-Paket; Rückgängig-Knopf |
 | Unity Hub | aktuelle Version | installiert und öffnet Unity |
-| Unity Editor | **Unity 6.3 LTS – 6000.3.25f1** | die Engine |
+| Unity Editor | **Unity 6.3 LTS – 6000.3.15f1** | die Engine |
 | Projektvorlage | Kursvorlage auf GitHub (Universal 3D, URP) | das eigene Projekt |
 | GitHub Desktop | aktuelle Version | Git ohne Kommandozeile |
 | Visual Studio Code | aktuelle Version + Unity-Erweiterung | C# lesen und schreiben |
@@ -75,7 +75,7 @@ optionalen Werkzeuge (Installationsskript, Claude Code, Codex) stehen unter
 
 Wer Unity und Git schon kennt, darf eigene Wege gehen. **Fest** sind:
 
-- Unity **6000.3.25f1**,
+- Unity **6000.3.15f1**,
 - das Projekt aus der **Kursvorlage**, als **privates** Repository auf GitHub,
 - `AGENTS.md`, `KI-VERZEICHNIS.md` und `DOKUMENTATION.md` bleiben im Projekt,
 - **Kurs > Setup prüfen** zeigt keinen FEHLER,

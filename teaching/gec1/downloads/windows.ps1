@@ -12,8 +12,8 @@
 #   powershell -ExecutionPolicy Bypass -File .\windows.ps1
 # "-ExecutionPolicy Bypass" gilt nur fuer diesen einen Aufruf.
 
-$UnityVersion   = "6000.3.25f1"   # aus setup/stack.json (apply_stack.py haelt das aktuell)
-$UnityChangeset = "e1dba0a9aba4"
+$UnityVersion   = "6000.3.15f1"   # aus setup/stack.json (apply_stack.py haelt das aktuell)
+$UnityChangeset = "c1aa84e375f6"
 
 function Ask($question) {
     $answer = Read-Host "$question [j/n]"

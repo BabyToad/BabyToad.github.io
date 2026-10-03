@@ -4,11 +4,14 @@
 </style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.C2L4j32R.css"></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article><div class="label">Anleitung 1 · ca. 60 Min (davon 30–45 Min Download)</div><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/guides/install-unity.md" data-titel="Unity installieren">Für KI kopieren</button><a href="/teaching/gec1/guides/install-unity.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nimm den Link „Markdown“.`))})});</script><h1 id="unity-installieren">Unity installieren</h1>
 <p>Unity besteht aus zwei Programmen. Der <strong>Unity Hub</strong> ist der Startbildschirm: Er lädt
 Unity-Versionen herunter und öffnet Projekte. Der <strong>Unity Editor</strong> ist die eigentliche
-Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: <strong>6000.3.25f1</strong>
+Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: <strong>6000.3.15f1</strong>
 (Unity 6.3 LTS).</p>
 <p>Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
 wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
 immer – und dann sieht das Projekt anders aus als bei allen anderen.</p>
+<p><strong>Keine neuere 6.3-Version nehmen.</strong> Ab 6000.3.16 hat Unity etwas geändert, das den
+Graph-Editor des Kurs-Kits kaputt macht. Darum nutzt der Kurs genau <strong>6000.3.15f1</strong>, auch wenn
+der Hub eine neuere anbietet. <strong>Kurs > Setup prüfen</strong> meldet neuere Versionen als FEHLER.</p>
 <p><strong>Im Kurs:</strong> Den Download so früh wie möglich starten (Schritt 3), danach geht es mit
 <a href="../github/">GitHub einrichten</a> weiter, während Unity lädt. <strong>Deckel offen lassen und das
 Netzteil anstecken</strong> – schläft der Rechner, hält der Download an.</p>
@@ -65,14 +68,14 @@ man nicht für eine Firma mit mehr als 200.000 $ Umsatz arbeitet.</li>
 (<strong>Skip installation</strong>). Der Kurs braucht eine bestimmte Version, nicht die neueste.</p>
 <p>✅ <strong>Checkpoint:</strong> Oben links im Hub ist das Konto-Symbol zu sehen. Unter <strong>Einstellungen
 (Zahnrad) > Licenses</strong> steht eine aktive Lizenz <strong>Unity Personal</strong>.</p>
-<h2 id="schritt-3-unity-6000325f1-installieren">Schritt 3: Unity 6000.3.25f1 installieren</h2>
+<h2 id="schritt-3-unity-6000315f1-installieren">Schritt 3: Unity 6000.3.15f1 installieren</h2>
 <p>Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
 eine neuere als die Kursversion sein. Darum kommt die Kursversion über einen Link:</p>
 <ol>
-<li>Auf diesen Link klicken: <a href="unityhub://6000.3.25f1/e1dba0a9aba4"><strong>Unity 6000.3.25f1 im Hub installieren</strong></a>
-(oder <code>unityhub://6000.3.25f1/e1dba0a9aba4</code> in die Adresszeile kopieren und Enter drücken).</li>
+<li>Auf diesen Link klicken: <a href="unityhub://6000.3.15f1/c1aa84e375f6"><strong>Unity 6000.3.15f1 im Hub installieren</strong></a>
+(oder <code>unityhub://6000.3.15f1/c1aa84e375f6</code> in die Adresszeile kopieren und Enter drücken).</li>
 <li>Der Browser fragt, ob er den Unity Hub öffnen darf: <strong>Ja / Öffnen</strong>.</li>
-<li>Der Hub zeigt <strong>Install Unity 6000.3.25f1</strong> und eine Liste von <strong>Modulen</strong>. So einstellen:</li>
+<li>Der Hub zeigt <strong>Install Unity 6000.3.15f1</strong> und eine Liste von <strong>Modulen</strong>. So einstellen:</li>
 </ol>
 
 
@@ -133,15 +136,15 @@ Visual Studio Community allein wären 1,7 GB.</p>
 einmal <strong>Möchten Sie zulassen, dass durch diese App Änderungen …?</strong> – <strong>Ja</strong>. Diese Frage kommt
 oft mitten in der Vorlesung. Bleibt sie unbeantwortet, bricht die Installation ab. Darum den
 Hub zwischendurch ansehen (Taskleiste).</p>
-<p>✅ <strong>Checkpoint:</strong> Unter <strong>Downloads</strong> erscheint ein Fortschrittsbalken für <strong>6000.3.25f1</strong>. Im
+<p>✅ <strong>Checkpoint:</strong> Unter <strong>Downloads</strong> erscheint ein Fortschrittsbalken für <strong>6000.3.15f1</strong>. Im
 Kurs: Jetzt mit <a href="../github/">GitHub einrichten</a> weitermachen, während Unity lädt. Ist alles
-fertig, steht unter <strong>Installs</strong> ein Eintrag <strong>6000.3.25f1</strong> mit dem Zusatz <strong>LTS</strong>, ohne
+fertig, steht unter <strong>Installs</strong> ein Eintrag <strong>6000.3.15f1</strong> mit dem Zusatz <strong>LTS</strong>, ohne
 Fortschrittsbalken.</p>
-<figure class="screenshot platz" data-datei="hub-installs-fertig.png"><div class="screenshot-bild">Screenshot folgt: hub-installs-fertig.png</div><figcaption>Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.</figcaption></figure>
+<figure class="screenshot platz" data-datei="hub-installs-fertig.png"><div class="screenshot-bild">Screenshot folgt: hub-installs-fertig.png</div><figcaption>Zeigt Installs mit genau einem Eintrag 6000.3.15f1 LTS.</figcaption></figure>
 <h2 id="später-zu-hause-nur-mac-windows-build-modul">Später, zu Hause (nur Mac): Windows-Build-Modul</h2>
 <p>Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
 <strong>Windows Build Support (Mono)</strong> installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
-irgendwann vor der Abgabe: Unity Hub > <strong>Installs</strong> > Zahnrad bei <strong>6000.3.25f1</strong> >
+irgendwann vor der Abgabe: Unity Hub > <strong>Installs</strong> > Zahnrad bei <strong>6000.3.15f1</strong> >
 <strong>Add modules</strong> > <strong>Windows Build Support (Mono)</strong> anhaken > <strong>Install</strong>. <strong>Kurs > Setup prüfen</strong>
 erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).</p>
 <p>Weiter mit <a href="../github/">GitHub einrichten</a>.</p>
@@ -149,7 +152,7 @@ erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).</p>
 <p><strong>Der Link <code>unityhub://…</code> tut nichts.</strong>
 Ist der Hub installiert und einmal gestartet worden? Dann den Link in die Adresszeile kopieren
 statt ihn anzuklicken. Klappt es immer noch nicht: Die Seite
-<a href="https://unity.com/releases/editor/whats-new/6000.3.25f1">https://unity.com/releases/editor/whats-new/6000.3.25f1</a> öffnen und dort auf <strong>Install</strong> klicken
+<a href="https://unity.com/releases/editor/whats-new/6000.3.15f1">https://unity.com/releases/editor/whats-new/6000.3.15f1</a> öffnen und dort auf <strong>Install</strong> klicken
 (derselbe Link, als Knopf).</p>
 <p><strong>Windows: Die Installation ist abgebrochen, unter Installs steht nichts.</strong>
 Meist wurde die Frage <strong>Änderungen zulassen?</strong> nicht rechtzeitig beantwortet. Den Link aus
@@ -178,7 +181,8 @@ angeschlossen sein.</p>
 Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie <code>C:\Unity\</code> legen
 statt unter <code>C:\Users\Jörg\…</code> (siehe <a href="../create-project/">Projekt anlegen</a>).</p>
 <p><strong>Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem <code>f1</code>).</strong>
-Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
+Nicht installieren – ab 6000.3.16 funktioniert der Graph-Editor des Kurs-Kits nicht. Den Link
+aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
 ist das kein Problem – sie schadet nicht, kostet aber Platz.</p>
 <p><strong>Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.</strong>
 Rosetta installieren (siehe Schritt 1), dann den Hub neu starten.</p>
@@ -186,4 +190,4 @@ Rosetta installieren (siehe Schritt 1), dann den Hub neu starten.</p>
 Erlauben. Sonst kann er die Projekte nicht öffnen.</p>
 <p><strong>Im Kurs: Der Download ist extrem langsam (Restzeit über eine Stunde).</strong>
 Jonas Bescheid sagen. Den Download laufen lassen und zu Hause fertig werden lassen; der Rest
-der Einrichtung geht trotzdem weiter.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>25 GB freier Speicher (während der Installation werden ca. 20 GB gebraucht)</li><li>Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac)</li><li>Git ist installiert oder lädt gerade (Git installieren)</li></ul></div><div><b>Checkpunkte</b><ul><li>Unity Hub startet und zeigt das angemeldete Konto</li><li>Im Hub steht eine aktive Lizenz &quot;Unity Personal&quot;</li><li>Unter Installs steht 6000.3.25f1 (im Kurs reicht es, dass der Download läuft)</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T17:15Z · a299914</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+der Einrichtung geht trotzdem weiter.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>25 GB freier Speicher (während der Installation werden ca. 20 GB gebraucht)</li><li>Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac)</li><li>Git ist installiert oder lädt gerade (Git installieren)</li></ul></div><div><b>Checkpunkte</b><ul><li>Unity Hub startet und zeigt das angemeldete Konto</li><li>Im Hub steht eine aktive Lizenz &quot;Unity Personal&quot;</li><li>Unter Installs steht 6000.3.15f1 (im Kurs reicht es, dass der Download läuft)</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T22:11Z · 981ef7d</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

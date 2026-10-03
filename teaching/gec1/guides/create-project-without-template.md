@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: ca. 30 Min
 
-Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.15f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
 
 Checkpunkte:
 - [ ] Das Projekt liegt in C:\Unity bzw. ~/Unity und wurde mit der Vorlage Universal 3D angelegt
@@ -25,7 +25,7 @@ im Projektordner liegen.
 1. Einen Ordner `C:\Unity` (Windows) bzw. `~/Unity` (Mac) anlegen – siehe
    [Projekt anlegen](../create-project/), Schritt 1.
 2. Unity Hub > **Projects** > **New project**.
-3. Oben bei **Editor Version**: **6000.3.25f1** auswählen.
+3. Oben bei **Editor Version**: **6000.3.15f1** auswählen.
 4. Vorlage: **Universal 3D**. (Fehlt das Vorschaubild: auf **Download template** klicken.)
 5. Rechts:
    - **Project name:** kurz, ohne Leerzeichen und Umlaute, z. B. `gec1-nachname`
@@ -34,7 +34,7 @@ im Projektordner liegen.
      arbeitet mit Git und GitHub.
 6. **Create project**. Unity öffnet sich nach einigen Minuten. Unity danach wieder schließen.
 
-(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.25f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
+(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.15f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
 
 ✅ **Checkpoint:** Im Ordner `Unity/gec1-nachname` liegen `Assets`, `Packages`,
 `ProjectSettings` und `Library`.
@@ -72,7 +72,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.2.0
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -128,7 +128,7 @@ Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
-Ist oben die Editor-Version 6000.3.25f1 gewählt? Die Vorlagen hängen an der Version.
+Ist oben die Editor-Version 6000.3.15f1 gewählt? Die Vorlagen hängen an der Version.
 Gegebenenfalls **Download template** klicken.
 
 **Unity fragt beim Anlegen nach Unity Cloud / Organisation.**

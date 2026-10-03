@@ -1,14 +1,14 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
 
-Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.15f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
 
 Checkpunkte:
 - [ ] Es gibt einen Ordner Unity direkt unter C:\ (Windows) bzw. im Benutzerordner (Mac)
 - [ ] Auf GitHub gibt es das eigene private Repository, erstellt aus der Kursvorlage
 - [ ] GitHub Desktop zeigt das Repository mit "No local changes"
-- [ ] Das Projekt ist in Unity 6000.3.25f1 geöffnet
+- [ ] Das Projekt ist in Unity 6000.3.15f1 geöffnet
 - [ ] Menü „Kurs > Setup prüfen“ zeigt keine Fehler
 
 Stand: nicht durchgespielt
@@ -94,14 +94,14 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
 2. Auf den Pfeil neben **Add** (bzw. **Open**) > **Add project from disk** klicken.
 3. Den Ordner `gec1-nachname` wählen – **den Ordner selbst**, in dem `Assets` liegt, nicht
    einen Ordner darin oder darüber. Auf **Öffnen** / **Add Project** klicken.
-4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.25f1**.
+4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.15f1**.
    Darauf klicken.
 5. Das erste Öffnen dauert lange (2–15 Minuten, auf älteren Rechnern länger): Unity baut den
    Ordner `Library/` auf und lädt das Kurs-Paket. Einfach laufen lassen.
 6. **Windows:** Fragt die Windows-Firewall nach Unity, **Zulassen** (privates Netzwerk) oder
    **Abbrechen** wählen – beides geht.
 
-(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.25f1, ohne Warnsymbol.)
+(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.15f1, ohne Warnsymbol.)
 
 ✅ **Checkpoint:** Unity ist offen. Oben in der Menüleiste gibt es einen Eintrag **Kurs**.
 
@@ -147,7 +147,7 @@ Der falsche Ordner ist gewählt. Richtig ist der Ordner, der direkt `Assets`, `P
 und `ProjectSettings` enthält.
 
 **Im Hub steht beim Projekt ein Warnsymbol und "Editor version not installed".**
-Unity 6000.3.25f1 fehlt oder ist noch nicht fertig installiert (siehe
+Unity 6000.3.15f1 fehlt oder ist noch nicht fertig installiert (siehe
 [Unity installieren](../install-unity/), Schritt 3). **Nicht** "Choose another Editor version"
 wählen – das baut das Projekt auf eine andere Version um.
 

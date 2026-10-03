@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T17:15Z · a299914 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T22:11Z · 981ef7d -->
 
 Dauer: ca. 30 Min
 
@@ -108,9 +108,9 @@ Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (**Ask** / **E
    welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
    ```
 
-(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.)
+(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.15f1 nennt.)
 
-✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.25f1** und Regeln aus
+✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.15f1** und Regeln aus
 `AGENTS.md`. In GitHub Desktop steht weiterhin **No local changes** (er hat nichts geändert).
 
 Zum Schluss in Unity **Kurs > Setup prüfen**: Jetzt ist auch **Code-Editor** OK.
