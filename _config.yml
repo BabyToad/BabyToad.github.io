@@ -53,6 +53,12 @@ defaults:
       path: "for-want-of-fuel"
     values:
       sitemap: false
+  # GEC1 course site (built elsewhere, copied verbatim): its .md siblings get turned into
+  # extra .html pages by GitHub Pages' optional-front-matter; keep those out of the sitemap.
+  - scope:
+      path: "teaching/gec1/**/*.md"
+    values:
+      sitemap: false
 
 plugins:
   - jekyll-feed
