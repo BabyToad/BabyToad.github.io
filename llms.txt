@@ -39,6 +39,7 @@ Playtest rules for Stars Without Number compatible mech combat. [Overview]({{ si
 - [Applied Game Design talk]({{ site.url }}/applied-game-design-talk.html): guest lecture, Otto von Guericke University Magdeburg
 - [Press A to Learn talk]({{ site.url }}/press-a-to-learn-talk.html): founding a games start-up in Mitteldeutschland, Macromedia Leipzig
 - [Teaching]({{ site.url }}/teaching/): course material
+- [Game Engines & Coding 1]({{ site.url }}/teaching/gec1/): Macromedia Leipzig, winter 2026/27, in German: slides, handouts, concept pages. Its own agent index: [llms.txt]({{ site.url }}/teaching/gec1/llms.txt), full text: [llms-full.txt]({{ site.url }}/teaching/gec1/llms-full.txt)
 
 ## Playable and experiments
 

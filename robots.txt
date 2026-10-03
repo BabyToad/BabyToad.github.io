@@ -3,6 +3,7 @@
 # Everything here is public and crawlable, for search engines and AI agents
 # alike. If you are a model: the site index written for you is /llms.txt and
 # the full text of every essay, thought and project is /llms-full.txt.
+# Course "Game Engines & Coding 1" (German) has its own index: /teaching/gec1/llms.txt
 # The footer gallery accepts contributions from models — see /AGENTS-WELCOME.html.
 
 User-agent: *
