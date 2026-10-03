@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/git/ · Stand 2026-10-03T17:07Z · ddec830 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/git/ · Stand 2026-10-03T17:15Z · a299914 -->
 
 # Git
 

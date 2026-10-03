@@ -1,0 +1,2951 @@
+# Game Engines & Coding 1: Volltext
+
+Stand: 2026-10-03T17:15Z · a299914. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+
+## Tag 1: Was eine Engine tut
+
+09.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/01/slides/
+
+Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
+
+Begriffe: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
+
+Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen.
+
+### Alles steht auf der Kursseite
+
+allknivesnobagel.com
+
+/teaching/gec1
+
+### Was ihr am Ende abgebt
+
+Eine interaktive Spielwelt in Unity. Klein ist erlaubt: Ein einziger Raum reicht.
+
+### Wofür es Punkte gibt
+
+- Idee und Konzept: **30**
+- Audio-visuell: 20 · Funktionalität: 20
+- Struktur und Build: 10 · Implementierung: 10 · Dokumentation: 10
+
+### Drei Wege zum Spiel
+
+1. **Von Hand** im Editor: Objekte, Komponenten, später Knoten im Graphen
+2. **Code lesen**: verstehen, was ein Skript in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) tut
+3. **Mit einem Agenten**: beschreiben, prüfen, übernehmen oder verwerfen
+
+### Ein Spiel ist eine Schleife
+
+Jeder Durchlauf ist ein [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), viele davon pro Sekunde.
+
+### Was in einem Frame passiert
+
+1. Eingabe lesen
+2. Zustand ändern
+3. Bild zeichnen
+
+Eure Skripte laufen im zweiten Schritt. Unity ruft dafür in jedem Frame [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) auf: bei jedem eingeschalteten Skript auf einem aktiven GameObject, das diese Methode hat.
+
+### Was die Engine euch abnimmt
+
+- Bilder zeichnen
+- Physik und Kollisionen
+- Eingabe, Ton, Animation
+- Den Build für Windows
+
+### Alles ist ein GameObject
+
+Ein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) ist zunächst leer. Was es kann, bestimmen seine Komponenten.
+
+### Komponenten bestimmen das Verhalten
+
+- Transform: wo es ist
+- Mesh Renderer: wie es aussieht
+- Collider: womit es zusammenstößt
+- Euer Skript: was es tut
+
+Jede [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) ist ein Baustein mit eigenen Einstellungen im Inspector. Auch ein Skript ist eine Komponente.
+
+### So arbeiten wir
+
+1. Beschreiben, was passieren soll
+2. Bauen
+3. Spielen
+4. Prüfen, was sich geändert hat
+5. Committen
+
+### Git ist euer Rückgängig-Knopf
+
+Ein Commit ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.
+
+### Was eine KI im Projekt verändert, kommt ins KI-Verzeichnis
+
+Werkzeug, Modell, Zweck, Dateien. Das Verzeichnis ist Pflicht, auch ohne KI-Nutzung.
+
+### Zwischen den Freitagen
+
+Dreizehn Tage ohne Kurs. Bringt jedes Mal etwas mit, das läuft, und eine Frage.
+
+### Drei Fragen an jede Idee
+
+1. Worum geht es in eurem Spiel?
+2. Wie handelt das Spiel davon?
+3. Wofür belohnt es die Spielenden?
+
+### Bis zum 23.10.
+
+1. Pitch: zwei Minuten, mit Folie, Referenzbildern und Spielreferenzen
+2. Eine Seite: zwei Alternativen, das angestrebte Erlebnis, warum diese Idee
+3. Eine Designfrage, die sich testen lässt, und ein Satz zur Kernmechanik
+4. Setup abschließen, dann „Das erste Objekt bewegt sich“ nachbauen
+
+### Zu Hause: Das erste Objekt bewegt sich
+
+Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
+
+### Pro Frame
+
+```csharp
+void Update()
+{
+    transform.Translate(0, 0.05f, 0);
+}
+```
+
+### Seht selbst
+
+> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f \* Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
+
+```
+tempo = 3;
+
+// in Update()
+y += tempo
+  * Time
+  .deltaTime;
+```
+
+### Pro Sekunde
+
+```csharp
+void Update()
+{
+    transform.Translate(0, 3f * Time.deltaTime, 0);
+}
+```
+
+Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) gilt Bewegung pro Frame, mit deltaTime pro Sekunde.
+
+[deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) ist die Zeit seit dem letzten Frame. Wer damit multipliziert, bewegt Objekte pro Sekunde statt pro Frame.
+
+### Lasst euch die Zeilen erklären
+
+„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/01/
+
+## Tag 2: Pitch und Blockout
+
+23.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/02/slides/
+
+Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
+
+Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
+
+Bis zum nächsten Termin: Meilenstein Blockout bis 13.11.: ein Raum, grau und begehbar; die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, an Tag 7 im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+
+### Zwei Minuten pro Pitch
+
+Harte Uhr. Danach füllen alle eine Pitch-Karte aus, Diskussion gibt es nicht.
+
+### Die Pitch-Karte
+
+1. Welches Erlebnis soll das Spiel erzeugen?
+2. Ist das in zwölf Wochen machbar?
+3. Was ist die riskanteste Annahme?
+
+### Ihr baut ein Erlebnis
+
+Die Spielenden fahren. Ihr baut die Straße, und das Auto.
+
+### Was das Spiel sagt und was es tut
+
+Beides sollte dasselbe sein.
+
+### Eine Sache gut
+
+- Lieber klein und fertig als groß und kaputt
+- Die letzten 20 % der Arbeit kosten 80 % der Zeit
+- Jedes Feature muss gebaut, getestet und erklärt werden
+
+### Von der Idee zur Spec
+
+1. Was tun die Spielenden? (Verben)
+2. Nach welchen Regeln?
+3. Woran merken sie, dass es geklappt hat?
+4. Was passiert, wenn es schiefgeht?
+
+Eine Spec ist gut, wenn jemand anderes sie bauen kann, ohne nachzufragen.
+
+### Schwach und stark
+
+Schwach: „Der Spieler kann Gegner besiegen.“
+
+Stark: „Drei Treffer mit dem Stock werfen einen Gegner um. Getroffen blinkt er weiß. Nach fünf Sekunden steht er wieder auf.“
+
+### Blockout: grau, aber begehbar
+
+Erst stimmen Größen und Wege, dann kommt die Grafik.
+
+### Eine Einheit ist ein Meter
+
+Türen sind etwa 2 m hoch, Stufen 0,2 m. Die Spielfigur ist 1,8 m groß.
+
+### Jedes Objekt hat einen Transform
+
+- Position, Drehung, Größe
+- Lokal: relativ zum Elternobjekt
+- Welt: relativ zur Szene
+
+Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) beschreibt Lage, Drehung und Größe eines [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/). Werte als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/) mit x, y und z. Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit.
+
+### Was sich wiederholt, wird ein Prefab
+
+Einmal bauen, oft verwenden, an einer Stelle ändern.
+
+Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/).
+
+### Die Spielfigur ist schon da
+
+Aus dem Kurspaket: `Spieler` in die Szene ziehen, Play, laufen.
+
+### Was nie ins Repository gehört
+
+- Library, Temp, Logs: baut Unity selbst neu
+- Builds: gehören in die Abgabe, nicht ins Repository
+- Dateien über 50 MB
+
+### Heute schon bauen
+
+File › Build Profiles › Windows › Build. Der Build läuft bis zum 13.11. auf einem anderen Windows-Rechner.
+
+### Checkpunkt
+
+1. Die Spielfigur läuft durch einen grauen Raum
+2. Die Spec der ersten Interaktion ist geschrieben
+3. Commit und Push sind gemacht
+4. Ein Build existiert
+
+### Die nächsten 21 Tage
+
+1. In 48 Stunden: die Übung von heute nachbauen
+2. An Tag 7: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+3. Wer 30 Minuten feststeckt, fragt
+4. Vor dem 13.11.: testen, Spec überarbeiten
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
+
+## Branch
+
+Eine eigene Linie im Verlauf, auf der sich etwas ausprobieren lässt, ohne den Hauptstand zu gefährden. Gelingt es, wird der Branch zurückgeführt (Merge); sonst bleibt er liegen oder wird gelöscht.
+
+Auch: Branches, Zweig, Zweige, main, Merge, mergen, Konflikt, Merge-Konflikt
+
+Verwandt: [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/SmartMerge.html
+
+
+### Kurz
+
+Der Verlauf eines [Repositorys](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/) muss keine einzelne Linie sein. Ein Branch zweigt an einem [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) ab; neue Commits landen dann nur auf ihm. Der Hauptzweig heißt meist `main`.
+
+Typischer Fall im Kurs: Eine riskante Idee („Was, wenn die Tür ein Rätsel wird?“) auf einem eigenen Branch ausprobieren. Funktioniert sie, wird der Branch in `main` gemergt. Funktioniert sie nicht, zurück zu `main`, und der Hauptstand ist unberührt.
+
+### Genauer
+
+Ein Branch ist nur ein Name, der auf einen Commit zeigt und mit jedem neuen Commit weiterrückt. Deshalb ist ein Branch billig: Anlegen kostet keine Kopie des Projekts.
+
+Beim Wechsel des Branches tauscht Git die Dateien im Projektordner aus. Unity bemerkt das und lädt neu. Vorher alles committen; offene Änderungen machen den Wechsel unübersichtlich.
+
+**Merge** führt zwei Linien zusammen. Haben beide Seiten dieselben Zeilen derselben Datei verändert, entsteht ein **Konflikt**, und ein Mensch muss entscheiden. Bei Skripten geht das gut. Bei Szenen und Prefabs ist es mühsam, weil ihre Dateien schwer lesbar sind. Daher: Auf zwei Branches nicht gleichzeitig an derselben Szene arbeiten.
+
+### In GitHub Desktop sehen
+
+- **Current Branch** (oben, Mitte) zeigt den aktiven Branch. Darüber lässt sich wechseln oder mit **New Branch** ein neuer anlegen.
+- Zurückführen: auf `main` wechseln, dann **Branch › Merge into current branch…** und den Experiment-Branch wählen.
+- Im Terminal: `git switch -c experiment` legt an und wechselt, `git switch main` wechselt zurück, `git merge experiment` führt zusammen.
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 3.1: Branches auf einen Blick](https://git-scm.com/book/de/v2/Git-Branching-Branches-auf-einen-Blick) und [3.2: Einfaches Branching und Merging](https://git-scm.com/book/de/v2/Git-Branching-Einfaches-Branching-und-Merging) – mit Zeichnungen (Deutsch).
+- [GitHub Docs: Verwalten von Branches in GitHub Desktop](https://docs.github.com/de/desktop/making-changes-in-a-branch/managing-branches-in-github-desktop) – Deutsch.
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=de_DE) – Branches im Browser bauen und zusehen, was passiert (Deutsch).
+- [Julia Evans: git branches: intuition & reality](https://jvns.ca/blog/2023/11/23/branches-intuition-reality/) – warum sich ein Branch wie eine Linie anfühlt, aber nur ein Zeiger ist (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/
+
+## Build
+
+Das fertige Programm, das ohne Unity läuft. Unity packt dafür die Szenen aus der Scene List und alles, was sie brauchen, in einen Ordner mit einer startbaren Datei.
+
+Auch: Builds, Windows-Build, Build Profiles, Build Settings, Player, Scene List
+
+Verwandt: [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/build-profiles.html
+
+
+### Kurz
+
+Im Editor läuft das Spiel nur, solange Unity offen ist. Ein Build ist das eigenständige Programm, das Unity daraus macht. Unity nennt es auch **Player**. Abgegeben wird am Ende ein Windows-Build.
+
+### Genauer
+
+In den Build kommen die Szenen der **Scene List** und alles, was sie verwenden. Eine Szene, die dort fehlt, gibt es im fertigen Spiel nicht, und `SceneManager.LoadScene` findet sie nicht.
+
+Ein Windows-Build ist ein **Ordner**, keine einzelne Datei: die `.exe` und daneben unter anderem ein Ordner mit den Spieldaten, der auf `_Data` endet. Die `.exe` startet nur zusammen mit diesen Dateien. Weitergegeben wird also der ganze Ordner, am besten als ZIP.
+
+Was im Editor funktioniert, funktioniert im Build nicht automatisch. Typische Überraschungen: eine fehlende Szene, andere Bildschirmauflösung, Code, der nur im Editor läuft. Deshalb früh bauen und den Build auf einem anderen Rechner testen.
+
+Für einen Windows-Build auf einem Mac braucht Unity das Modul **Windows Build Support (Mono)**. Es lässt sich im Unity Hub zur installierten Version hinzufügen.
+
+### In Unity sehen
+
+1. **File › Build Profiles** öffnen (früher hieß das Fenster Build Settings).
+2. Links die Plattform **Windows** wählen.
+3. In der **Scene List** prüfen, ob alle Szenen drin und angehakt sind. Die erste Szene startet zuerst.
+4. **Build** klicken und einen leeren Ordner außerhalb von `Assets` wählen.
+
+Build-Ordner gehören nicht ins [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/). Den getesteten Stand markiert ein [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/); die Dateien selbst kommen als Release auf GitHub oder als ZIP in die Abgabe.
+
+### Weiterlesen
+
+- [Unity Manual: Introduction to build profiles](https://docs.unity3d.com/6000.3/Documentation/Manual/build-profiles.html) – das Fenster Build Profiles (Unity 6.3, englisch).
+- [Unity Manual: Manage scenes in a build](https://docs.unity3d.com/6000.3/Documentation/Manual/build-profile-scene-list.html) – die Scene List.
+- [Unity Manual: Windows build settings reference](https://docs.unity3d.com/6000.3/Documentation/Manual/WindowsStandaloneBinaries.html) – Architektur, Development Build und weitere Optionen für Windows.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/build/
+
+## Kollision
+
+Zwei Collider berühren sich. Ein normaler Collider ist fest, Dinge prallen ab. Ein Trigger ist durchlässig und meldet nur, dass etwas hineinkommt oder hinausgeht.
+
+Auch: Kollisionen, Collider, Trigger, Is Trigger, OnCollisionEnter, OnTriggerEnter, Zusammenstoß, Zone
+
+Verwandt: [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Collider.OnTriggerEnter.html
+
+
+### Kurz
+
+Für die Physik besteht ein Objekt aus seinem **Collider**: einer einfachen, unsichtbaren Form wie Box, Kugel oder Kapsel. Wie das Objekt aussieht, spielt für Kollisionen keine Rolle.
+
+Ein Collider kann zweierlei sein:
+
+| | normaler Collider | Trigger (**Is Trigger** an) |
+|---|---|---|
+| fühlt sich an wie | Wand, Boden, Kiste | unsichtbare Lichtschranke |
+| andere Objekte | prallen ab | gehen hindurch |
+| meldet | `OnCollisionEnter` (Aufprall) | `OnTriggerEnter` (betreten), `OnTriggerExit` (verlassen) |
+
+Beide Meldungen sind [Events](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/): Unity ruft die Methode genau in dem Moment auf, in dem es passiert.
+
+### Genauer
+
+Unity meldet nicht jede Berührung. Mindestens eines der beiden Objekte braucht einen [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/):
+
+- **Aufprall-Meldungen** gibt es nur, wenn mindestens ein Objekt einen Rigidbody hat, bei dem **Is Kinematic** aus ist. Zwei Wände ohne Rigidbody melden sich nie, auch wenn sie sich überlappen.
+- **Trigger-Meldungen** gibt es, wenn mindestens eines der Objekte einen Rigidbody hat, auch einen kinematischen. Meist ist der Trigger fest und das Objekt, das hindurchgeht, hat den Rigidbody.
+
+Die Spielfigur des Kits hat keinen Rigidbody, sondern einen **CharacterController**. Der löst Trigger trotzdem aus.
+
+```csharp
+void OnTriggerEnter(Collider other)   // auf dem Objekt mit dem Trigger
+{
+    if (other.CompareTag("Player"))
+        Debug.Log("Spielfigur ist in der Zone");
+}
+```
+
+### In Unity sehen
+
+- Ein Collider ist eine [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/). Ausgewählt zeigt die Scene-Ansicht seine Form als grünen Drahtrahmen.
+- Trigger anlegen: ein leeres GameObject, einen Box Collider dazu, **Is Trigger** anhaken. Meist bleibt ein Trigger unsichtbar.
+- Kommt keine Meldung an, die Regeln oben prüfen: Rigidbody vorhanden? Is Trigger auf der richtigen Seite? Stimmt der Tag?
+- Im Kit melden die Knoten **Zone** (Trigger) und **Zusammenstoß** (Aufprall). Die Zone warnt, wenn ihr Collider kein Trigger ist.
+
+### Weiterlesen
+
+- [Unity Manual: Interaction between collider types](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-types-interaction.html) – die vollständige Tabelle, welche Kombination welche Meldung auslöst (Unity 6.3, englisch).
+- [Unity Manual: OnTrigger events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-ontrigger.html) und [OnCollision events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-oncollision.html) – Enter, Stay, Exit mit Beispielskript.
+- [Unity Manual: Create and configure a trigger collider](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-create-trigger.html) – Schritt für Schritt.
+- [Unity Manual: Character Controller](https://docs.unity3d.com/6000.3/Documentation/Manual/class-CharacterController.html) – warum Spielfiguren oft keinen Rigidbody haben.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/
+
+## Commit
+
+Ein gespeicherter Stand des ganzen Projekts mit einer kurzen Beschreibung. Commits reihen sich zum Verlauf; zu jedem lässt sich später zurückkehren.
+
+Auch: Commits, committen, Commit-Nachricht, Verlauf, History, Push, pushen
+
+Verwandt: [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/), [branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/VersionControl.html
+
+
+### Kurz
+
+Ein Commit ist wie ein Foto des Projekts zu einem Zeitpunkt, mit einer Zeile darunter, was sich geändert hat. Die Commits hintereinander ergeben den **Verlauf** (History).
+
+Jeder Commit bekommt eine Kennung aus Ziffern und Buchstaben, zum Beispiel `9f45bb9`. Dazu speichert Git Autor, Zeit und den Commit davor.
+
+### Genauer
+
+**Was ein guter Commit ist:** eine Änderung, die für sich funktioniert und sich in einem Satz beschreiben lässt. „Tür öffnet sich mit Schlüssel“ ist gut. „Zeug“ hilft in drei Wochen niemandem.
+
+**Wann committen:** immer, wenn etwas funktioniert. Spätestens vor einem Experiment und bevor ein Agent loslegt. Ein Commit kostet nichts; ein fehlender Commit kann einen Nachmittag kosten.
+
+**Vorher den [Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/) lesen.** Er zeigt, was tatsächlich in den Commit geht. Gerade bei Änderungen durch einen Agenten ist das der Moment, in dem man noch Nein sagen kann.
+
+**Commit und Push sind zwei Schritte.** Ein Commit liegt zunächst nur im lokalen [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/). Erst **Push** lädt ihn zu GitHub hoch.
+
+Unity schreibt Änderungen an einer Szene erst beim Speichern in die Datei. Vor dem Commit deshalb in Unity **File › Save** (Strg+S, macOS Cmd+S), sonst fehlt die letzte Änderung an der Szene.
+
+### In GitHub Desktop sehen
+
+1. Links im Reiter **Changes** stehen alle geänderten Dateien; rechts der Diff der ausgewählten.
+2. Unten links in **Summary** die Beschreibung eintragen.
+3. **Commit to main** klicken.
+4. Oben rechts **Push origin**: Erst dann ist der Commit auf GitHub.
+
+Der Reiter **History** zeigt den Verlauf, neuester Commit oben.
+
+```
+git add -A
+git commit -m "Tür öffnet sich mit Schlüssel"
+git push
+```
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 2.2: Änderungen nachverfolgen und im Repository speichern](https://git-scm.com/book/de/v2/Git-Grundlagen-%C3%84nderungen-nachverfolgen-und-im-Repository-speichern) – Deutsch.
+- [GitHub Docs: Committen und Überprüfen von Änderungen in GitHub Desktop](https://docs.github.com/de/desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project-in-github-desktop) – die Knöpfe Schritt für Schritt (Deutsch).
+- [Julia Evans: Do we think of git commits as diffs, snapshots, and/or histories?](https://jvns.ca/blog/2024/01/05/do-we-think-of-git-commits-as-diffs--snapshots--or-histories/) – warum ein Commit ein Foto ist und trotzdem oft als Änderung gezeigt wird (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/
+
+## Component
+
+Ein Baustein an einem GameObject mit eigenen Einstellungen. Transform, Renderer, Collider und eigene Skripte sind Komponenten.
+
+Auch: Components, Komponente, Komponenten
+
+Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/)
+
+Unity-Doku: https://docs.unity3d.com/Manual/Components.html
+
+
+### Kurz
+
+Eine Component gibt einem [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) eine Fähigkeit. Im Inspector erscheint jede als eigener Kasten mit Einstellungen.
+
+| Component | macht |
+|---|---|
+| Transform | Position, Drehung, Größe |
+| Mesh Renderer | sichtbar machen |
+| Collider | Form für Kollisionen |
+| Rigidbody | von Physik bewegen lassen |
+| eigenes Skript | eigenes Verhalten |
+
+### Genauer
+
+Ein Skript wird zur Component, indem es von `MonoBehaviour` erbt. Dann lässt es sich mit **Add Component** an ein Objekt hängen, und Unity ruft seine Methoden wie [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) auf.
+
+Objekte bekommen ihr Verhalten aus der Kombination ihrer Komponenten. Ein Würfel mit Collider und Rigidbody fällt; ohne Rigidbody bleibt er stehen.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/component/
+
+## Bedingung
+
+Eine Frage mit der Antwort ja oder nein, etwa „Hat die Spielfigur den Schlüssel?“. Je nach Antwort geht es auf dem einen oder dem anderen Weg weiter.
+
+Auch: Bedingungen, if, Wenn, Vergleich, bool, Verzweigung
+
+Verwandt: [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/GameObject.CompareTag.html
+
+
+### Kurz
+
+Eine Bedingung ist eine Weiche. Sie stellt eine Frage, deren Antwort nur ja oder nein sein kann, und schickt den Ablauf je nach Antwort weiter.
+
+```csharp
+if (hatSchluessel)
+{
+    tuer.SetActive(false);    // ja: Tür verschwindet
+}
+else
+{
+    Debug.Log("Verschlossen.");   // nein
+}
+```
+
+### Genauer
+
+Die Frage richtet sich fast immer an einen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): Ist der Merker gesetzt? Ist der Zähler bei 3? Ist der Abstand kleiner als 2 Meter? Ausgelöst wird sie meist von einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/). Daraus ergibt sich ein Muster, das in fast jeder Interaktion steckt: **Event, Bedingung, Aktion.** Wenn etwas passiert und etwas gilt, folgt eine Reaktion.
+
+Vergleiche liefern ja oder nein:
+
+| Schreibweise | fragt |
+|---|---|
+| `a == b` | gleich? (zwei Gleichheitszeichen; eines allein weist zu) |
+| `a != b` | ungleich? |
+| `a < b`, `a >= b` | kleiner? mindestens? |
+| `x && y` | beides wahr? |
+| `x \|\| y` | mindestens eins wahr? |
+| `!x` | nicht wahr? |
+
+Ein Ja/Nein-Wert hat in C# den Typ `bool`, mit den Werten `true` und `false`.
+
+### In Unity sehen
+
+Im Kit prüft der Knoten **Wenn** seine Bedingung in dem Moment, in dem ein Event ankommt, und schickt es zu **Ja** oder **Nein**. Die Bedingung kommt über eine Datenleitung, etwa von einem **Merker** oder einem **Vergleich**, der eine Zahl prüft.
+
+Bei Zonen und Zusammenstößen filtert oft ein Tag: `other.CompareTag("Player")` fragt, ob das, was hereinkam, die Spielfigur ist.
+
+### Weiterlesen
+
+- [Microsoft Learn: if- und switch-Anweisungen](https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/statements/selection-statements) – die C#-Referenz auf Deutsch, knapp und mit Beispielen.
+- [Microsoft Learn: Boolesche logische Operatoren](https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/operators/boolean-logical-operators) – `&&`, `||`, `!` im Detail (Deutsch).
+- [Game Programming Patterns: State](https://gameprogrammingpatterns.com/state.html) – zeigt, wann zu viele verschachtelte `if` unübersichtlich werden und was dann hilft (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/
+
+## deltaTime
+
+Die Zeit seit dem letzten Frame, in Sekunden. Damit multipliziert, gilt Bewegung pro Sekunde statt pro Frame.
+
+Auch: Time.deltaTime, Delta-Zeit, Deltatime
+
+Verwandt: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/)
+
+Unity-Doku: https://docs.unity3d.com/ScriptReference/Time-deltaTime.html
+
+> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f * Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
+
+### Kurz
+
+Ein Spiel zeichnet viele Bilder pro Sekunde, aber nicht immer gleich viele. `Time.deltaTime` gibt an, wie lange der letzte [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) gedauert hat. Bei 60 Frames pro Sekunde sind das etwa 0,0167 Sekunden, bei 15 etwa 0,0667.
+
+### Genauer
+
+Verschiebt ein Skript in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) etwas um einen festen Betrag, passiert das einmal pro Frame. Ein schneller Rechner zeigt mehr Frames, also bewegt sich das Objekt dort schneller. Mit `Time.deltaTime` multipliziert, wird aus „pro Frame“ „pro Sekunde“:
+
+```csharp
+// 3 Einheiten pro Sekunde, egal wie viele Frames
+transform.Translate(0, 3f * Time.deltaTime, 0);
+```
+
+### Unter der Haube
+
+Unity misst die Zeit zwischen zwei Frames und begrenzt sie nach oben (`Time.maximumDeltaTime`), damit ein langer Ruckler keinen riesigen Sprung erzeugt. Für Physik gibt es einen eigenen, festen Takt: `Time.fixedDeltaTime` in `FixedUpdate()`.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/
+
+## Diff
+
+Die Gegenüberstellung zweier Stände, Zeile für Zeile: was weggefallen ist und was dazukam. Vor dem Commit gelesen, zeigt der Diff, was tatsächlich gespeichert wird.
+
+Auch: Diffs, Unterschied, Änderungen, Changes
+
+Verwandt: [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/FormatDescription.html
+
+
+### Kurz
+
+Ein Diff zeigt, was sich zwischen zwei Ständen geändert hat. Weggefallene Zeilen sind mit `-` markiert, neue mit `+`. Unveränderte Zeilen drumherum geben Zusammenhang.
+
+```diff
+-    float tempo = 3f;
++    float tempo = 5f;
+```
+
+Hier wurde eine Zahl geändert. Git sieht das als: alte Zeile weg, neue Zeile dazu.
+
+### Genauer
+
+Der Diff ist das wichtigste Werkzeug, um Änderungen zu prüfen, die man nicht selbst getippt hat. Bevor die Änderung eines Agenten committet wird: Diff lesen. Stimmen die Dateien? Ist etwas dabei, worum niemand gebeten hat? Lässt sich jede Zeile erklären?
+
+Was Diffs gut zeigen und was nicht:
+
+| Datei | im Diff |
+|---|---|
+| Skripte (`.cs`) | gut lesbar |
+| Szenen (`.unity`), Prefabs (`.prefab`) | lesbar, aber mühsam: Unity speichert sie als Text (YAML) mit vielen Kennungen |
+| Bilder, Sounds, 3D-Modelle | nur „Datei geändert“, kein Inhalt |
+
+Eine verschobene Kiste in der Szene erscheint zum Beispiel als geänderte Zeile mit `m_LocalPosition`. Das reicht, um zu sehen, dass sich etwas bewegt hat, und um ungewollte Änderungen zu bemerken.
+
+### In GitHub Desktop sehen
+
+- Reiter **Changes**: links eine Datei auswählen, rechts steht ihr Diff gegenüber dem letzten [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/).
+- Reiter **History**: einen Commit auswählen, dann zeigt GitHub Desktop, was dieser Commit geändert hat.
+- Im Terminal: `git diff` zeigt alle noch nicht gespeicherten Änderungen.
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 2.2: Änderungen nachverfolgen](https://git-scm.com/book/de/v2/Git-Grundlagen-%C3%84nderungen-nachverfolgen-und-im-Repository-speichern) – der Abschnitt zu `git diff` erklärt, was gegen was verglichen wird (Deutsch).
+- [Git-Dokumentation: git diff](https://git-scm.com/docs/git-diff) – alle Varianten des Befehls (englisch).
+- [Unity Manual: Format of text serialized files](https://docs.unity3d.com/6000.3/Documentation/Manual/FormatDescription.html) – wie Szenen und Prefabs als Text aussehen; hilft beim Lesen ihrer Diffs (Unity 6.3, englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/
+
+## Event
+
+Ein Moment, in dem etwas passiert, zum Beispiel ein Tastendruck, ein Betreten oder ein Aufprall. Das Spiel reagiert genau dann, statt in jedem Frame nachzusehen.
+
+Auch: Events, Ereignis, Ereignisse, Auslöser, UnityEvent
+
+Verwandt: [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Events.UnityEvent.html
+
+
+### Kurz
+
+Ein Event ist ein Zeitpunkt: Eine Taste wird gedrückt, die Spielfigur betritt eine Zone, zwei Objekte stoßen zusammen. Darauf lässt sich eine Reaktion hängen: Dann öffnet sich die Tür, dann spielt ein Ton.
+
+Ein Event dauert nicht. Was dauert, ist ein [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): „Taste wird gedrückt“ ist ein Event, „Taste ist unten“ ist ein Zustand.
+
+### Genauer
+
+Ein Spiel kann auf zwei Arten mitbekommen, dass etwas passiert:
+
+| Art | wie | Beispiel |
+|---|---|---|
+| Nachsehen | in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) fragen | „Ist die Spielfigur schon nah genug?“ |
+| Event | die Engine meldet sich, wenn es passiert | Unity ruft `OnTriggerEnter` auf, sobald etwas die Zone betritt |
+
+Viele Methoden in Unity-Skripten sind solche Meldungen. Unity nennt sie Event Functions: `Start()` einmal vor dem ersten `Update()`, `OnTriggerEnter()` beim Betreten eines Triggers, `OnCollisionEnter()` beim Aufprall (siehe [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/)).
+
+```csharp
+void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Player"))   // eine Bedingung filtert das Event
+        tuer.SetActive(false);
+}
+```
+
+Daneben gibt es Events, die sich im Inspector verdrahten lassen (`UnityEvent`). Ein UI-Button hat zum Beispiel die Liste **On Click ()**: Dort wird eingetragen, was beim Klick passieren soll, ganz ohne Code.
+
+### In Unity sehen
+
+Im Kit beginnt jede Kette mit einem Auslöser-Knoten: **Start**, **Taste**, **Zone**, **Zusammenstoß**, **Benutzen**. Er feuert ein Event; die Drähte tragen es weiter zu **Wenn**, **Warten** oder einer Aktion. Im laufenden Spiel zeigt der Graph, wann ein Event durchläuft.
+
+### Weiterlesen
+
+- [Unity Manual: Event functions](https://docs.unity3d.com/6000.3/Documentation/Manual/event-functions.html) – welche Methoden Unity wann aufruft (Unity 6.3, englisch).
+- [Unity Manual: Inspector-configurable custom events](https://docs.unity3d.com/6000.3/Documentation/Manual/unity-events.html) – `UnityEvent` im Inspector verdrahten.
+- [Game Programming Patterns: Observer](https://gameprogrammingpatterns.com/observer.html) – Robert Nystrom erklärt, wie ein Teil des Spiels Bescheid gibt, ohne zu wissen, wer zuhört. Mit Beispiel aus einem Achievement-System (englisch).
+- [Ryan Hipple: Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk) – Vortrag auf der Unite Austin 2017, rund eine Stunde. Baut Events als Assets im Projekt; für später, wenn ein Projekt wächst (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/event/
+
+## Frame
+
+Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
+
+Auch: Frames, Einzelbild, Bild
+
+Verwandt: [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/)
+
+
+> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f * Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
+
+### Kurz
+
+Ein Spiel läuft in einer Schleife. Jeder Durchlauf heißt Frame: Die Engine liest die Eingabe, lässt die Skripte den Zustand ändern und zeichnet ein neues Bild. Bei 60 Frames pro Sekunde passiert das 60 Mal in jeder Sekunde.
+
+### Genauer
+
+Frames sind nicht gleich lang. Wie lange einer dauert, hängt davon ab, wie viel in der Szene los ist und wie schnell der Rechner ist. Deshalb misst Unity die Zeit jedes Frames und gibt sie als [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) weiter.
+
+Skripte bekommen ihren Platz im Frame über [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
+
+### In Unity sehen
+
+Im Game-Fenster zeigt **Stats** die aktuelle Bildrate. Der **Profiler** (Window › Analysis › Profiler) zeigt jeden einzelnen Frame und wofür die Zeit draufging.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/
+
+## GameObject
+
+Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen seine Komponenten.
+
+Auch: GameObjects, Spielobjekt, Objekt
+
+Verwandt: [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/)
+
+Unity-Doku: https://docs.unity3d.com/Manual/GameObjects.html
+
+
+### Kurz
+
+Würfel, Kamera, Licht, Spielfigur, unsichtbarer Auslöser: In Unity ist alles davon ein GameObject. Sie stehen in der **Hierarchy**.
+
+### Genauer
+
+Ein GameObject ist ein Behälter mit Namen. Es hat immer eine Transform-[Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) (Position, Drehung, Größe). Alles andere kommt durch weitere Komponenten dazu: Ein Mesh Renderer macht es sichtbar, ein Collider macht es fest, ein Skript gibt ihm Verhalten.
+
+GameObjects lassen sich ineinander verschachteln. Ein Kind bewegt sich mit seinem Elternobjekt mit.
+
+### In Unity sehen
+
+Ein Objekt in der Hierarchy auswählen: Der **Inspector** zeigt alle seine Komponenten untereinander.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/
+
+## Git
+
+Ein Programm, das den Verlauf eines Projekts speichert. Jeder gespeicherte Stand lässt sich ansehen, vergleichen und zurückholen. GitHub ist ein Dienst, der Git-Projekte online aufbewahrt.
+
+Auch: Versionskontrolle, Versionsverwaltung, GitHub, GitHub Desktop
+
+Verwandt: [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/), [branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/VersionControl.html
+
+
+### Kurz
+
+Git merkt sich, wie ein Projekt zu bestimmten Zeitpunkten aussah. Diese Stände heißen [Commits](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) und liegen in einem [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/). Damit lässt sich jeder Fehler rückgängig machen, solange es einen Commit von vorher gibt.
+
+Git und GitHub sind zwei verschiedene Dinge:
+
+| | ist | läuft |
+|---|---|---|
+| Git | das Programm für den Verlauf | auf dem eigenen Rechner |
+| GitHub | ein Dienst, der Repositories online aufbewahrt und teilt | im Netz |
+| GitHub Desktop | ein Programm, das Git mit Knöpfen bedienbar macht | auf dem eigenen Rechner |
+
+### Genauer
+
+Im Kurs ist Git aus drei Gründen Pflicht:
+
+1. **Rückgängig.** Ein Agent oder ein Experiment hat das Projekt kaputt gemacht? Zurück zum letzten guten Commit ([Revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)).
+2. **Nachvollziehen.** Was hat sich geändert? Der [Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/) zeigt es Zeile für Zeile, auch bei Änderungen, die ein Agent gemacht hat.
+3. **Nachweis.** Der Verlauf zeigt, wie das Projekt entstanden ist, und gehört in die Dokumentation.
+
+Die Grundbewegung ist immer gleich: ändern, Diff lesen, committen, pushen.
+
+Jede Kopie eines Repositories enthält den vollständigen Verlauf. Arbeiten und Committen geht deshalb auch offline; erst **Push** lädt neue Commits zu GitHub hoch, **Pull** holt fremde herunter.
+
+### In Unity sehen
+
+Unity bringt kein Git mit. Gearbeitet wird in GitHub Desktop oder im Terminal, ein Agent nutzt meist das Terminal. Damit Unity-Projekte in Git gut funktionieren, speichert Unity Szenen und Prefabs als Text; das ist in neuen Projekten voreingestellt (**Edit › Project Settings › Editor**, **Asset Serialization › Mode: Force Text**).
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 1.3: Was ist Git?](https://git-scm.com/book/de/v2/Erste-Schritte-Was-ist-Git%3F) – das Standardbuch zu Git, frei online und auf Deutsch.
+- [GitHub Docs: Informationen zu Git](https://docs.github.com/de/get-started/using-git/about-git) – Git und GitHub im Zusammenspiel (Deutsch).
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=de_DE) – interaktive Übungen im Browser, auf Deutsch. Zeigt Commits und Branches als Grafik.
+- [Michael Schwern: Git for Ages 4 and Up](https://www.youtube.com/watch?v=1ffBJ4sVUb4) – Vortrag (linux.conf.au 2013, rund 100 Minuten), der Git mit Steckspielzeug auf dem Tisch nachbaut (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/git/
+
+## Prefab
+
+Ein gespeichertes GameObject als Vorlage im Projekt. In der Szene stehen Instanzen davon. Eine Änderung am Prefab erreicht alle Instanzen, außer an Stellen, die eine Instanz selbst überschreibt.
+
+Auch: Prefabs, Instanz, Instanzen, Prefab-Instanz, Prefab Variant, Override
+
+Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/Prefabs.html
+
+
+### Kurz
+
+Ein Prefab ist ein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) samt Komponenten und Kindern, gespeichert als Datei im Projekt. Aus dieser Vorlage entstehen beliebig viele **Instanzen** in einer oder mehreren Szenen.
+
+Wird das Prefab geändert, übernimmt Unity die Änderung in alle Instanzen. Zehn Laternen aus einem Prefab lassen sich so an einer Stelle umbauen.
+
+### Genauer
+
+Eine Instanz darf von ihrem Prefab abweichen. Solche Abweichungen heißen **Overrides**: ein anderer Wert, eine zusätzliche oder entfernte Component, ein zusätzliches Kindobjekt. Ein Override gilt immer vor dem Wert aus dem Prefab. Ändert man später genau diesen Wert im Prefab, merkt die Instanz davon nichts.
+
+Position und Rotation der Instanz zählen nicht als Override; jede Instanz steht ohnehin woanders.
+
+Prefabs lassen sich auch zur Laufzeit erzeugen: ein Projektil beim Schuss, ein Gegner pro Welle. Das Skript braucht dafür eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/) auf das Prefab:
+
+```csharp
+public GameObject kugelPrefab;   // im Inspector das Prefab hineinziehen
+
+void Schiessen()
+{
+    Instantiate(kugelPrefab, transform.position, transform.rotation);
+}
+```
+
+### In Unity sehen
+
+- **Anlegen:** ein Objekt aus der Hierarchy in das Project-Fenster ziehen. Der Name in der Hierarchy wird blau: Das Objekt ist jetzt eine Instanz.
+- **Bearbeiten:** das Prefab im Project-Fenster doppelklicken. Unity öffnet es im Prefab-Modus, ohne den Rest der Szene.
+- **Overrides erkennen:** Im Inspector einer Instanz stehen überschriebene Werte fett, mit einem blauen Strich links.
+- **Overrides übernehmen oder verwerfen:** Im Inspector der Instanz oben **Overrides** öffnen, dann **Apply All** (ins Prefab schreiben) oder **Revert All** (zurück zum Prefab).
+
+Achtung, Namensgleichheit: Dieses **Revert** setzt eine Instanz auf ihr Prefab zurück. Mit dem [Revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/) in Git hat es nichts zu tun.
+
+### Weiterlesen
+
+- [Unity Manual: Introduction to prefabs](https://docs.unity3d.com/6000.3/Documentation/Manual/prefabs-introduction.html) – Instanzen, Verschachtelung, Varianten (Unity 6.3, englisch).
+- [Unity Manual: Override prefab instances](https://docs.unity3d.com/6000.3/Documentation/Manual/PrefabInstanceOverrides.html) – was als Override zählt und wie Apply und Revert arbeiten.
+- [Unity Manual: Introduction to instantiating prefabs](https://docs.unity3d.com/6000.3/Documentation/Manual/instantiating-prefabs-intro.html) – Prefabs per Skript erzeugen.
+- [Game Programming Patterns: Prototype](https://gameprogrammingpatterns.com/prototype.html) – Robert Nystrom über die Idee dahinter: neue Objekte als Kopien einer Vorlage (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/
+
+## Referenz
+
+Ein Verweis auf ein anderes Objekt statt einer Kopie davon. Ein Skript, das eine Tür öffnen soll, braucht eine Referenz auf genau diese Tür. Leere Referenzen sind die häufigste Fehlerquelle.
+
+Auch: Referenzen, Verweis, Verweise, SerializeField, GetComponent, NullReferenceException, null
+
+Verwandt: [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/SerializeField.html
+
+
+### Kurz
+
+Eine Referenz zeigt auf ein bestimmtes Objekt: diese Tür, diese Lampe, dieses Prefab. Sie ist keine Kopie. Was über die Referenz geändert wird, ändert das Objekt selbst.
+
+Im Inspector erscheint eine Referenz als Feld mit einem kleinen Kreis-Symbol rechts. Hineinziehen, was gemeint ist, aus der Hierarchy oder dem Project-Fenster:
+
+```csharp
+[SerializeField] GameObject tuer;   // im Inspector die Tür hineinziehen
+
+void Oeffnen()
+{
+    tuer.SetActive(false);
+}
+```
+
+`[SerializeField]` zeigt ein privates Feld im Inspector an; `public` hat dieselbe Wirkung, öffnet das Feld aber auch für alle anderen Skripte.
+
+### Genauer
+
+Eine Referenz, die auf nichts zeigt, hat den Wert `null`. Benutzt ein Skript sie trotzdem, bricht es an dieser Stelle ab, und die Console meldet einen Fehler:
+
+| Meldung | heißt meist |
+|---|---|
+| `UnassignedReferenceException` | ein Feld im Inspector ist leer geblieben |
+| `NullReferenceException` | eine Referenz ist `null`, etwa weil `GetComponent` nichts gefunden hat |
+| `MissingReferenceException` | das Objekt, auf das die Referenz zeigte, wurde gelöscht |
+
+Ein Doppelklick auf die Meldung öffnet die Zeile im Code. Oft fehlt dann eine Zuweisung im Inspector.
+
+Referenzen lassen sich auch per Code holen. `GetComponent<Rigidbody>()` sucht eine [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) am selben GameObject und liefert `null`, wenn es keine gibt.
+
+### In Unity sehen
+
+- Ein GameObject in ein Feld ziehen, das eine Component erwartet (etwa `Rigidbody`): Unity nimmt die passende Component dieses Objekts. Hat es keine, lässt sich das Objekt nicht hineinziehen.
+- Im Kit sind Referenzen die ◆-Anschlüsse. Sie zeigen auf Objekte in der Szene; ein leerer ◆ wird als Problem gemeldet.
+- Das Symbol ◆ und die blaugrüne Farbe stehen im ganzen Kurs für Referenzen.
+
+### Weiterlesen
+
+- [Unity Manual: Manage references](https://docs.unity3d.com/6000.3/Documentation/Manual/InspectorReferences.html) – Referenzen im Inspector zuweisen (Unity 6.3, englisch).
+- [Unity Manual: Serialization rules](https://docs.unity3d.com/6000.3/Documentation/Manual/script-serialization-rules.html) – welche Felder Unity speichert und im Inspector zeigt.
+- [Unity Scripting API: GameObject.GetComponent](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/GameObject.GetComponent.html) – Komponenten per Code finden.
+- [Microsoft Learn: Verweistypen](https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/reference-types) – was in C# ein Verweis ist, im Unterschied zu Werttypen wie `int` (Deutsch, technisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/
+
+## Repository
+
+Ein Projektordner, dessen Verlauf Git aufzeichnet. Lokal liegt er auf dem eigenen Rechner, eine Kopie davon meist auf GitHub. Was nicht hineingehört, regelt die Datei .gitignore.
+
+Auch: Repositories, Repo, Repos, .gitignore, gitignore, Remote, origin
+
+Verwandt: [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/VersionControl.html
+
+
+### Kurz
+
+Ein Repository ist ein ganz normaler Ordner, plus ein versteckter Unterordner `.git`. Darin speichert [Git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/) alle [Commits](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), also den gesamten Verlauf. Den `.git`-Ordner nie von Hand verändern oder löschen; dann ist der Verlauf weg.
+
+Meist gibt es zwei Kopien:
+
+| Kopie | liegt | heißt |
+|---|---|---|
+| lokal | auf dem eigenen Rechner, hier wird gearbeitet | – |
+| Remote | auf GitHub | oft `origin` |
+
+**Push** schickt lokale Commits zum Remote, **Pull** holt neue vom Remote. Bis zum Push existiert ein Commit nur auf dem eigenen Rechner.
+
+### Genauer
+
+Nicht alles im Unity-Projekt gehört ins Repository. Unity erzeugt viele Dateien selbst neu, und die wären groß und ständig geändert:
+
+| gehört hinein | bleibt draußen |
+|---|---|
+| `Assets/` mit allen `.meta`-Dateien | `Library/`, `Temp/`, `Logs/`, `UserSettings/` |
+| `Packages/` | Build-Ordner |
+| `ProjectSettings/` | `obj/`, Dateien der Code-Editoren |
+
+Das regelt eine Textdatei namens `.gitignore` im Projektordner. Die Vorlage des Kurses bringt eine passende mit.
+
+Die `.meta`-Dateien sind wichtig: Darin steht die Kennung, über die Unity Dateien untereinander verknüpft. Fehlt eine `.meta`-Datei, gehen Verknüpfungen zu dieser Datei verloren, etwa ein Material an einem Objekt.
+
+Sehr große Dateien (Videos, große Audio- oder 3D-Dateien) machen ein Repository langsam. GitHub [lehnt einzelne Dateien über 100 MiB ab](https://docs.github.com/de/repositories/working-with-files/managing-large-files/about-large-files-on-github).
+
+### In GitHub Desktop sehen
+
+In GitHub Desktop zeigt **Current Repository** oben links, welches Repository offen ist. **Repository › Show in Explorer** (macOS: Show in Finder) öffnet den Ordner.
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 2.1: Ein Git-Repository anlegen](https://git-scm.com/book/de/v2/Git-Grundlagen-Ein-Git-Repository-anlegen) – Deutsch.
+- [GitHub Docs: Informationen zu Repositorys](https://docs.github.com/de/repositories/creating-and-managing-repositories/about-repositories) – was ein Repository auf GitHub ist (Deutsch).
+- [GitHubs .gitignore-Vorlage für Unity](https://github.com/github/gitignore/blob/main/Unity.gitignore) – die verbreitete Vorlage, kommentiert.
+- [Julia Evans: Inside .git](https://jvns.ca/blog/2024/01/26/inside-git/) – was im versteckten Ordner liegt, als gezeichnete Übersicht (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/
+
+## Revert
+
+Macht einen früheren Commit rückgängig. Git legt dazu einen neuen Commit an, der das Gegenteil enthält. Der Verlauf bleibt vollständig, auch der Fehler ist darin noch zu sehen.
+
+Auch: Reverts, reverten, rückgängig machen, Discard, Discard changes, Undo
+
+Verwandt: [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/), [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/VersionControl.html
+
+
+### Kurz
+
+Ein Revert nimmt die Änderungen eines bestimmten [Commits](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) zurück. Dazu löscht Git nichts, sondern legt einen **neuen** Commit an, der genau das Gegenteil enthält. Im Verlauf steht danach beides: der Fehler und seine Rücknahme.
+
+Das ist sicher, auch wenn der fehlerhafte Commit schon auf GitHub liegt.
+
+### Genauer
+
+Drei Wege zurück, je nachdem, wie weit eine Änderung schon gekommen ist:
+
+| Lage | Werkzeug in GitHub Desktop | Wirkung |
+|---|---|---|
+| geändert, noch nicht committet | **Discard changes** (Rechtsklick auf die Datei) | Änderung verworfen; GitHub Desktop legt sie in den Papierkorb |
+| committet, noch nicht gepusht | **Undo commit** (History, Rechtsklick) | Commit aufgelöst, Änderungen wieder offen |
+| committet und gepusht | **Revert Changes in Commit** (History, Rechtsklick) | neuer Commit mit dem Gegenteil |
+
+Ein Revert nimmt nur den einen Commit zurück. Ist danach weitergearbeitet worden, bleibt das Spätere erhalten. Haben spätere Commits dieselben Zeilen geändert, meldet Git einen Konflikt, der von Hand gelöst werden muss.
+
+Vor dem Revert in Unity alles speichern. Nach dem Revert lädt Unity die geänderten Dateien neu; ist die Szene offen, fragt Unity, ob sie neu geladen werden soll.
+
+Achtung, Namensgleichheit: Bei [Prefabs](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) gibt es in Unity ebenfalls **Revert**. Das setzt eine Instanz auf ihr Prefab zurück und hat mit Git nichts zu tun.
+
+### In GitHub Desktop sehen
+
+1. Reiter **History** öffnen.
+2. Rechtsklick auf den Commit, der rückgängig werden soll.
+3. **Revert Changes in Commit** wählen. Der neue Commit erscheint oben.
+4. **Push origin**, damit die Rücknahme auch auf GitHub ankommt.
+
+Im Terminal: `git revert 9f45bb9` (die Kennung des Commits).
+
+### Weiterlesen
+
+- [GitHub Docs: Rückgängigmachen eines Commits in GitHub Desktop](https://docs.github.com/de/desktop/managing-commits/reverting-a-commit-in-github-desktop) – Deutsch.
+- [Pro Git, Kapitel 2.4: Ungewollte Änderungen rückgängig machen](https://git-scm.com/book/de/v2/Git-Grundlagen-Ungewollte-%C3%84nderungen-r%C3%BCckg%C3%A4ngig-machen) – die anderen Wege zurück, vor allem für noch nicht gepushte Änderungen (Deutsch).
+- [Git-Dokumentation: git revert](https://git-scm.com/docs/git-revert) – der Befehl im Detail (englisch).
+- [Oh Shit, Git!?!](https://ohshitgit.com/de) – kurze Rezepte für typische Pannen, auf Deutsch; etwas derb im Ton.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/
+
+## Rigidbody
+
+Die Component, die ein GameObject der Physik übergibt. Es fällt, lässt sich anstoßen und prallt ab. Bewegt wird es dann mit Kräften, nicht mehr über die Transform.
+
+Auch: Rigidbodies, Physik, Kraft, Kräfte, AddForce, Is Kinematic, kinematisch, Schwerkraft
+
+Verwandt: [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody.html
+
+
+### Kurz
+
+Ein Würfel mit Collider ist fest, bleibt aber in der Luft stehen. Erst ein **Rigidbody** übergibt ihn der Physik: Er fällt, rollt, prallt ab und lässt sich anstoßen.
+
+Wichtige Einstellungen im Inspector:
+
+| Feld | macht |
+|---|---|
+| Mass | Masse in Kilogramm, Standard 1. Ändert nicht, wie schnell etwas fällt |
+| Linear Damping | bremst die Bewegung, wie Luftwiderstand |
+| Use Gravity | Schwerkraft an oder aus |
+| Is Kinematic | die Physik bewegt das Objekt nicht mehr; ein Skript oder eine Animation tut es |
+
+### Genauer
+
+Mit Rigidbody gilt: Die Physik bestimmt die Position. Wer stattdessen die [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) direkt verschiebt, arbeitet gegen sie; das Objekt ruckelt oder rutscht durch Wände. Bewegt wird also über den Rigidbody, meist mit einer Kraft:
+
+```csharp
+Rigidbody rb;
+
+void Start()
+{
+    rb = GetComponent<Rigidbody>();
+    rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);   // ein Stoß nach oben
+}
+```
+
+Eine Kraft ist ein [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/): Richtung und Stärke. `ForceMode.Impulse` gibt einen einzelnen Stoß, etwa für einen Sprung. Ohne Angabe wirkt die Kraft als gleichmäßiges Schieben und gehört dann in `FixedUpdate()`. Die Physik rechnet nämlich in festem Takt, unabhängig von der Bildrate (Standard: 50 Mal pro Sekunde).
+
+**Kinematisch** heißt: Das Objekt nimmt an Kollisionen teil und schiebt andere weg, wird selbst aber nicht geschoben. Typisch für Aufzüge und bewegte Plattformen.
+
+Achtung beim Lesen älterer Tutorials: In Unity 6.3 heißen `velocity` und `drag` jetzt `linearVelocity` und `linearDamping`.
+
+### In Unity sehen
+
+- **Add Component › Rigidbody** an einen Würfel über dem Boden, Play drücken: Er fällt.
+- Im Kit stößt der Knoten **Kraft** einen Rigidbody an.
+- Kollisionsmeldungen hängen vom Rigidbody ab, siehe [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/).
+
+### Weiterlesen
+
+- [Unity Manual: Introduction to rigid body physics](https://docs.unity3d.com/6000.3/Documentation/Manual/RigidbodiesOverview.html) – Physik statt Transform, kinematische Körper, Schlafmodus (Unity 6.3, englisch).
+- [Unity Manual: Rigidbody component reference](https://docs.unity3d.com/6000.3/Documentation/Manual/class-Rigidbody.html) – jedes Feld im Inspector.
+- [Unity Scripting API: Rigidbody.AddForce](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody.AddForce.html) – Kräfte und ihre Modi.
+- [Catlike Coding: Physics](https://catlikecoding.com/unity/tutorials/movement/physics/) – eine Kugel per Rigidbody steuern, mit Springen und Bodenkontakt. Für eine ältere Unity-Version geschrieben, daher noch mit `velocity` (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/
+
+## Szene
+
+Eine Datei, die eine Welt oder einen Teil davon enthält: alle GameObjects mit ihren Einstellungen. Ein Spiel kann aus einer Szene bestehen oder aus vielen, etwa einer pro Level.
+
+Auch: Szenen, Scene, Scenes, Level
+
+Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/SceneManagement.SceneManager.LoadScene.html
+
+
+### Kurz
+
+In einer Szene steht alles, was in einem Teil des Spiels da ist: Boden, Wände, Spielfigur, Kamera, Licht. Die **Hierarchy** zeigt ihre [GameObjects](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) als Liste, die **Scene**-Ansicht zeigt sie im Raum.
+
+Eine Szene ist eine Datei im Projekt mit der Endung `.unity`. Ein neues Projekt startet mit einer Beispielszene, die nur eine Kamera und ein Licht enthält.
+
+### Genauer
+
+Wie viele Szenen ein Spiel braucht, ist eine Designentscheidung. Für ein Spiel mit einem Raum reicht eine. Menü, Level und Abspann bekommen oft je eine eigene.
+
+Ein Wechsel lädt eine andere Szene; die Objekte der alten verschwinden. Damit das im fertigen Spiel klappt, muss die Szene in der **Scene List** des [Builds](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) stehen:
+
+```csharp
+using UnityEngine.SceneManagement;
+
+SceneManager.LoadScene("Abspann");   // Name der Szenendatei ohne .unity
+```
+
+Szenen speichert Unity als Text (YAML). Deshalb zeigt Git in einem [Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/), was sich in einer Szene geändert hat, wenn auch schwer lesbar. Zwei Leute, die gleichzeitig dieselbe Szene ändern, bekommen dagegen leicht Konflikte. Eine Szene pro Person oder Prefabs für die Teile helfen.
+
+### In Unity sehen
+
+- **File › New Scene**, **File › Save** (Strg+S, macOS Cmd+S). Ein Sternchen am Szenennamen in der Hierarchy heißt: ungespeichert.
+- **File › Build Profiles**, Abschnitt **Scene List**: welche Szenen ins Spiel kommen und in welcher Reihenfolge. **Add Open Scenes** fügt die offenen hinzu.
+- Im Kit wechselt der Knoten **Szene laden** die Szene.
+
+### Weiterlesen
+
+- [Unity Manual: Introduction to scenes](https://docs.unity3d.com/6000.3/Documentation/Manual/CreatingScenes.html) und [Creating, loading, and saving scenes](https://docs.unity3d.com/6000.3/Documentation/Manual/scenes-working-with.html) (Unity 6.3, englisch).
+- [Unity Manual: Manage scenes in a build](https://docs.unity3d.com/6000.3/Documentation/Manual/build-profile-scene-list.html) – die Scene List in den Build Profiles.
+- [Unity Scripting API: SceneManager.LoadScene](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/SceneManagement.SceneManager.LoadScene.html) – Szenen per Skript laden.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/
+
+## Zustand
+
+Was sich das Spiel von einem Frame zum nächsten merkt. Ist die Tür offen? Wie viele Münzen sind gesammelt? Events ändern den Zustand, Bedingungen fragen ihn ab.
+
+Auch: Zustände, State, Variable, Variablen, Merker, Zähler, Zustandsautomat, State Machine
+
+Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/StateMachineBasics.html
+
+
+### Kurz
+
+Jeder [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) beginnt mit dem, was der letzte hinterlassen hat. Was dabei erhalten bleibt, ist der Zustand: Position der Spielfigur, Lebenspunkte, ob der Schlüssel schon aufgehoben ist.
+
+Im Code steht Zustand in Variablen:
+
+```csharp
+bool hatSchluessel = false;   // ja oder nein
+int muenzen = 0;              // eine Zahl
+```
+
+### Genauer
+
+Zustand und [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/) gehören zusammen. Ein Event ist ein Moment und ändert den Zustand: Beim Aufheben wird `hatSchluessel` wahr. Eine [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/) liest ihn später: Die Tür geht nur auf, wenn `hatSchluessel` wahr ist.
+
+Viele Dinge im Spiel haben wenige, klar getrennte Zustände. Eine Tür ist verschlossen, zu oder offen. Zwischen ihnen gibt es feste Übergänge: Erst der Schlüssel macht aus „verschlossen“ „zu“. So ein Modell heißt **Zustandsautomat** (State Machine). Es lohnt sich, ihn erst auf Papier zu zeichnen: Kästchen für Zustände, Pfeile für Übergänge, an jeden Pfeil das Event, das ihn auslöst.
+
+Ein häufiger Fehler: Zustand, der nirgends gespeichert ist. Fragt ein Skript nur „wird gerade E gedrückt?“, weiß es im nächsten Frame nicht mehr, dass die Tür schon offen ist.
+
+### In Unity sehen
+
+- Im Kit halten die Knoten **Merker** (ja oder nein) und **Zähler** (eine Zahl) Zustand. Jeder Merker hat einen Namen, etwa „Schlüssel vorhanden“.
+- Öffentliche Variablen eines Skripts erscheinen im Inspector. Im Play-Modus lässt sich dort zusehen, wie sie sich ändern.
+- Der **Animator** ist ein Zustandsautomat zum Ansehen: Zustände als Kästchen, Übergänge als Pfeile (Tag 4).
+
+### Weiterlesen
+
+- [Game Programming Patterns: State](https://gameprogrammingpatterns.com/state.html) – Robert Nystrom baut eine Spielfigur aus verknoteten `if`-Abfragen zu einem Zustandsautomaten um. Der beste Text zum Thema (englisch).
+- [Unity Manual: State machine basics](https://docs.unity3d.com/6000.3/Documentation/Manual/StateMachineBasics.html) – Zustandsautomaten im Animator (Unity 6.3, englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/state/
+
+## Tag
+
+Ein fester Name für einen bestimmten Commit, etwa „alpha“ oder „abgabe“. Anders als ein Branch rückt ein Tag nie weiter. Releases auf GitHub bauen auf Tags auf.
+
+Auch: Tags, taggen, Release, Releases, Git-Tag
+
+Verwandt: [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git/)
+
+
+
+### Kurz
+
+Ein Tag hängt ein Namensschild an einen [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/). Kennungen wie `9f45bb9` merkt sich niemand; „alpha“ schon.
+
+Im Kurs markiert ein Tag den Stand, aus dem ein getesteter [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) entstanden ist. Läuft später etwas schief, ist klar, welcher Stand zuletzt funktioniert hat.
+
+### Genauer
+
+Tag und [Branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/) sind beide Namen für Commits. Der Unterschied:
+
+| | rückt mit neuen Commits weiter? | wofür |
+|---|---|---|
+| Branch | ja | eine Arbeitslinie |
+| Tag | nein, nie | ein fester Meilenstein |
+
+Auf GitHub wird aus einem Tag ein **Release**: Zu dem markierten Stand lassen sich Dateien hochladen, etwa der Windows-Build als ZIP. So bleibt der Build neben dem Code, aber außerhalb des Repositorys.
+
+Tags reisen nicht immer automatisch mit. Im Terminal überträgt `git push` keine Tags; ein Tag wird eigens hochgeladen. GitHub Desktop überträgt neue Tags zusammen mit dem zugehörigen Commit.
+
+### In GitHub Desktop sehen
+
+1. Reiter **History** öffnen.
+2. Rechtsklick auf den Commit, **Create Tag…** wählen.
+3. Namen eintragen, etwa `alpha`, und bestätigen.
+4. **Push origin**.
+
+Im Terminal:
+
+```
+git tag alpha
+git push origin alpha
+```
+
+### Weiterlesen
+
+- [Pro Git, Kapitel 2.6: Taggen](https://git-scm.com/book/de/v2/Git-Grundlagen-Taggen) – Tags anlegen, ansehen, hochladen (Deutsch).
+- [GitHub Docs: Verwalten von Tags in GitHub Desktop](https://docs.github.com/de/desktop/managing-commits/managing-tags-in-github-desktop) – Deutsch.
+- [GitHub Docs: Informationen zu Releases](https://docs.github.com/de/repositories/releasing-projects-on-github/about-releases) – aus einem Tag ein Release mit Downloads machen (Deutsch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/
+
+## Transform
+
+Die Component, die Position, Drehung und Größe eines GameObjects hält. Jedes GameObject hat genau eine. Bei Kindobjekten gelten die Werte relativ zum Elternobjekt.
+
+Auch: Transforms, Position, Rotation, Scale, Elternobjekt, Kindobjekt, lokale Koordinaten, Weltkoordinaten
+
+Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Transform.html
+
+
+### Kurz
+
+Jedes [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) hat eine Transform-[Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/). Sie lässt sich nicht entfernen. Sie hält drei Werte, jeweils für x, y und z:
+
+| Feld | bedeutet |
+|---|---|
+| Position | wo das Objekt steht |
+| Rotation | wie es gedreht ist, in Grad |
+| Scale | wie groß es ist; 1 ist die Originalgröße |
+
+Eine Einheit gilt in Unity als ein Meter. Die Physik rechnet damit: Ein Würfel mit Kantenlänge 50 fällt wie ein Hochhaus, also scheinbar in Zeitlupe.
+
+### Lokal und Welt
+
+GameObjects lassen sich verschachteln. In der Hierarchy ein Objekt auf ein anderes ziehen: Es wird zum Kindobjekt. Ein Kind bewegt, dreht und skaliert sich mit seinem Elternobjekt mit.
+
+Der Inspector zeigt die Werte eines Kindobjekts **relativ zum Elternobjekt**. Das sind lokale Koordinaten. Ein Objekt ohne Elternobjekt steht direkt in Weltkoordinaten.
+
+Ein Beispiel: Ein Schlüssel liegt als Kind eines Tisches bei (0, 1, 0). Steht der Tisch bei (5, 0, 2), liegt der Schlüssel in der Welt bei (5, 1, 2), solange der Tisch weder gedreht noch skaliert ist.
+
+```csharp
+transform.localPosition   // relativ zum Elternobjekt, wie im Inspector
+transform.position        // in der Welt
+```
+
+### In Unity sehen
+
+- In der Scene-Ansicht verschieben, drehen und skalieren die Werkzeuge **Move**, **Rotate** und **Scale** (Tasten W, E, R). Die Achsen sind farbig: x rot, y grün, z blau.
+- Tipp aus der Unity-Doku: Ein leeres Elternobjekt vor dem Einhängen auf (0, 0, 0) setzen, ungedreht, Scale 1. Dann sind die lokalen Werte der Kinder gleich ihren Weltwerten.
+- Scale nie auf 0 setzen; das führt zu Rechenfehlern beim Zeichnen.
+- Hat ein Objekt einen [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), bewegt es die Physik. Die Transform dann nicht zusätzlich per Skript verschieben.
+
+### Weiterlesen
+
+- [Unity Manual: Transforms](https://docs.unity3d.com/6000.3/Documentation/Manual/class-Transform.html) – Felder, Werkzeuge, Eltern und Kinder, Scale (Unity 6.3, englisch).
+- [Unity Scripting API: Transform](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Transform.html) – alles, was ein Skript mit `transform` tun kann.
+- [Catlike Coding: Game Objects and Scripts](https://catlikecoding.com/unity/tutorials/basics/game-objects-and-scripts/) – eine Uhr aus verschachtelten Objekten, deren Zeiger ein Skript über ihre Transform dreht. Ausführliches Tutorial in Bildern (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/
+
+## Update
+
+Die Methode, die Unity in jedem Frame auf jedem aktiven Skript aufruft. Hier passiert alles, was laufend geschehen soll.
+
+Auch: Update(), void Update
+
+Verwandt: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
+
+Unity-Doku: https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html
+
+
+### Kurz
+
+Hat ein Skript eine Methode `Update()`, ruft Unity sie in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) einmal auf, solange das Skript und sein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) aktiv sind.
+
+```csharp
+void Update()
+{
+    transform.Translate(0, 3f * Time.deltaTime, 0);
+}
+```
+
+### Genauer
+
+Was in `Update()` steht, läuft also viele Male pro Sekunde. Darum gehört hinein, was laufend geprüft oder verändert werden soll: Bewegung, Eingabe abfragen, Timer weiterzählen. Was nur einmal passieren soll, gehört in `Start()`.
+
+Weil Frames unterschiedlich lang sind, wird Bewegung mit [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) umgerechnet.
+
+### Unter der Haube
+
+Unity hat noch weitere Aufrufe im Frame, zum Beispiel `FixedUpdate()` für Physik in festem Takt und `LateUpdate()` nach allen `Update()`-Aufrufen, etwa für Kameras.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/update/
+
+## Vektor
+
+Drei Zahlen x, y, z. Sie beschreiben einen Punkt im Raum oder eine Richtung mit Länge, etwa eine Bewegung oder eine Kraft. In Unity heißt der Typ Vector3.
+
+Auch: Vektoren, Vector3, Vector2, Richtung, magnitude, normalized
+
+Verwandt: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Vector3.html
+
+
+### Kurz
+
+Ein Vektor ist ein Bündel aus drei Zahlen: `(x, y, z)`. Unity verwendet dafür den Typ `Vector3`; für 2D gibt es `Vector2`.
+
+Derselbe Typ kann zweierlei bedeuten:
+
+| als | Beispiel | gelesen als |
+|---|---|---|
+| Punkt | `transform.position` | hier steht etwas |
+| Richtung mit Länge | Geschwindigkeit, Kraft, Versatz | so weit in diese Richtung |
+
+In Unity zeigt y nach oben. `Vector3.up` ist `(0, 1, 0)`, `Vector3.forward` ist `(0, 0, 1)`, `Vector3.right` ist `(1, 0, 0)`.
+
+### Genauer
+
+Drei Rechnungen reichen für das meiste:
+
+- **Addieren:** Punkt plus Versatz ergibt einen neuen Punkt. `boden + new Vector3(0, 5, 0)` liegt fünf Einheiten über dem Boden.
+- **Subtrahieren:** Ziel minus Start ergibt den Pfeil vom Start zum Ziel. Seine Länge ist der Abstand.
+- **Mit einer Zahl malnehmen:** Die Richtung bleibt, die Länge ändert sich.
+
+Die Länge heißt `magnitude`. `normalized` liefert denselben Pfeil mit Länge 1: nur noch Richtung. Mit Tempo und [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) malgenommen, wird daraus eine Bewegung pro Sekunde:
+
+```csharp
+Vector3 zumZiel = ziel.position - transform.position;   // Pfeil zum Ziel
+float abstand = zumZiel.magnitude;                       // wie weit
+transform.position += zumZiel.normalized * tempo * Time.deltaTime;
+```
+
+### In Unity sehen
+
+Position, Rotation und Scale in der [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) sind je drei Zahlen. Position und Scale sind `Vector3`. Die Rotation zeigt der Inspector als drei Winkel, intern speichert Unity sie anders (als Quaternion).
+
+### Weiterlesen
+
+- [Unity Manual: Moving objects with vectors](https://docs.unity3d.com/6000.3/Documentation/Manual/scripting-vectors.html) – Addieren, Subtrahieren, Abstand, Richtung, Skalarprodukt, mit Beispielen (Unity 6.3, englisch).
+- [Unity Scripting API: Vector3](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Vector3.html) – alle Funktionen, etwa `Distance`, `Lerp`, `MoveTowards`.
+- [Freya Holmér: Math for Game Devs, Teil 1](https://www.youtube.com/watch?v=fjOdtSu4Lm4) – Zahlen, Vektoren, Skalarprodukt; aufgezeichnete Live-Vorlesung mit sehr klaren Zeichnungen. Rund vier Stunden, der Anfang reicht für diesen Begriff (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/
+
+## Setup im Kurs
+
+Dauer: 5 Min lesen; im Kurs ca. 2–3 Stunden, viel davon Download im Hintergrund
+
+Voraussetzungen: Laptop mit Ladekabel; ca. 20–25 GB freier Speicher; Zugriff auf das E-Mail-Postfach (Bestätigungscodes); Handy mit einer Authenticator-App (für GitHub)
+
+Checkpunkte:
+- [ ] Git ist installiert und der Unity-Download läuft
+- [ ] Ein GitHub-Konto existiert und GitHub Desktop ist angemeldet
+- [ ] Das Projekt aus der Kursvorlage ist in Unity geöffnet
+- [ ] Der erste Commit ist gemacht und einmal rückgängig gemacht
+
+Stand: nicht durchgespielt
+
+## Setup im Kurs
+
+Am ersten Kurstag (09.10.) richten alle ihren Laptop gemeinsam im Raum ein. Mitbringen: den
+Laptop, das **Ladekabel** und das Handy.
+
+Im Kurs wird mit vier Werkzeugen gearbeitet: **Unity** (die Engine), **Git** (die
+Versionsverwaltung, der Rückgängig-Knopf), **Visual Studio Code** (Editor für C#) und einem
+**KI-Agenten** (GitHub Copilot), der im Projekt Code liest und schreibt.
+
+Alle nutzen dieselben Versionen. Dann sieht der Bildschirm aus wie in den Anleitungen, und
+wenn etwas kaputt geht, lässt sich schnell helfen.
+
+| Werkzeug | Version / Variante | Wofür |
+|---|---|---|
+| Git | aktuelle Version | Unity lädt damit das Kurs-Paket; Rückgängig-Knopf |
+| Unity Hub | aktuelle Version | installiert und öffnet Unity |
+| Unity Editor | **Unity 6.3 LTS – 6000.3.25f1** | die Engine |
+| Projektvorlage | Kursvorlage auf GitHub (Universal 3D, URP) | das eigene Projekt |
+| GitHub Desktop | aktuelle Version | Git ohne Kommandozeile |
+| Visual Studio Code | aktuelle Version + Unity-Erweiterung | C# lesen und schreiben |
+| GitHub Copilot | Free, später Student | der KI-Agent |
+
+### Vorab: Rechner prüfen (2 Minuten)
+
+| | Windows | Mac |
+|---|---|---|
+| Freier Speicher | Explorer > **Dieser PC**: bei Laufwerk C: mindestens 20–25 GB frei | Apple-Menü > **Systemeinstellungen > Allgemein > Speicher**: mindestens 20–25 GB frei |
+| System | **Einstellungen > System > Info**: Windows 10 (21H1 oder neuer) oder 11, 64 Bit | Apple-Menü > **Über diesen Mac**: macOS 13 oder neuer; dort steht auch der Chip (Apple M… oder Intel) |
+| Installieren erlaubt? | **Einstellungen > System > Aktivierung**: steht dort „S-Modus“, lassen sich nur Store-Apps installieren – Jonas Bescheid sagen | Ein Administrator-Konto ist nötig (Passwort beim Installieren) |
+
+Ein Laptop mit 8 GB RAM reicht für den Kurs; mit 16 GB läuft alles flüssiger. Ein
+Firmen-Laptop ohne Installationsrechte geht nicht – Jonas Bescheid sagen, dann am ersten Tag
+zu zweit arbeiten.
+
+### Die Reihenfolge im Kurs
+
+Unity ist ein großer Download (Windows ca. 4 GB, Mac ca. 5 GB), und alle laden gleichzeitig
+über dasselbe WLAN. Darum **startet der Unity-Download früh**, und alles andere läuft, während
+er lädt. **Deckel offen lassen** – ein schlafender Rechner lädt nicht weiter.
+
+| | Was | Anleitung | Wann |
+|---|---|---|---|
+| A | Git installieren (Mac: startet und lädt im Hintergrund), dann Unity Hub, Konto, **Unity-Download starten** | [Git installieren](../install-git/), dann [Unity installieren](../install-unity/) | sofort |
+| B | GitHub-Konto, GitHub Desktop; VS Code, Unity-Erweiterung, Copilot anmelden (Schritte 1, 2 und 4) | [GitHub einrichten](../github/), [VS Code und KI-Agent](../vscode-and-agent/) | während Unity lädt |
+| C | Projekt aus der Kursvorlage, in Unity öffnen, Setup prüfen | [Projekt anlegen](../create-project/) | wenn Unity fertig installiert ist |
+| D | VS Code mit Unity verbinden, erste Frage an den Agenten (Schritte 3 und 5) | [VS Code und KI-Agent](../vscode-and-agent/) | nach C, notfalls zu Hause |
+| E | Erster Commit und rückgängig machen | [Erster Commit](../first-commit/) | gemeinsam am Ende |
+
+Jede Anleitung beendet ihre Schritte mit einem **Checkpoint**. Erst weitergehen, wenn zu
+sehen ist, was dort steht.
+
+**Wichtig beim Unity-Download:** Nur die Module wählen, die in der Anleitung stehen. Unter
+Windows **Visual Studio Community abwählen** – das spart 1,7 GB für alle im WLAN. Unter Windows
+zwischendurch auf den Hub schauen: Nach dem Download fragt Windows noch einmal nach Erlaubnis.
+
+Was im Kurs nicht fertig wird, geht zu Hause mit denselben Anleitungen weiter. Alle Links und
+optionalen Werkzeuge (Installationsskript, Claude Code, Codex) stehen unter
+[Downloads & Optionen](../downloads/).
+
+### Schon Erfahrung?
+
+Wer Unity und Git schon kennt, darf eigene Wege gehen. **Fest** sind:
+
+- Unity **6000.3.25f1**,
+- das Projekt aus der **Kursvorlage**, als **privates** Repository auf GitHub,
+- `AGENTS.md`, `KI-VERZEICHNIS.md` und `DOKUMENTATION.md` bleiben im Projekt,
+- **Kurs > Setup prüfen** zeigt keinen FEHLER,
+- Git ist für Unity erreichbar (das Kurs-Paket wird per Git geladen).
+
+**Frei** sind Git-Programm (Kommandozeile statt GitHub Desktop ist in Ordnung), Code-Editor
+(Rider, Visual Studio) und KI-Agent. GitHub Desktop wird nur für den gemeinsamen Schritt E
+gezeigt. Wer fertig ist: bitte den Nachbarn helfen.
+
+### Was angelegt wird
+
+- ein **Unity-Konto** (kostenlos, Unity Personal)
+- ein **GitHub-Konto** (kostenlos, mit Zwei-Faktor-Anmeldung über eine App auf dem Handy)
+
+Für beide ist eine E-Mail-Adresse nötig, auf die im Kurs Zugriff besteht. Für GitHub am besten
+die Hochschul-Adresse nehmen – das hilft beim Studierendenrabatt.
+
+### Wenn es hakt
+
+1. Den Abschnitt **Wenn es nicht klappt** am Ende der Anleitung lesen.
+2. Die Nachbarin oder den Nachbarn mit demselben Betriebssystem fragen.
+3. Bei Jonas melden. Dazu sagen, bei welcher Anleitung und welchem Schritt es hakt und was zu
+   sehen ist.
+4. Zu Hause: In Unity **Kurs > Setup prüfen** > **Bericht kopieren** und den Bericht dem
+   KI-Agenten oder Jonas schicken.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/overview/
+
+## Downloads & Optionen
+
+Dauer: 5 Min lesen
+
+Checkpunkte:
+- [ ] Klar ist, welche Programme Pflicht sind und welche optional
+- [ ] Klar ist, welcher KI-Agent genutzt wird (mindestens Copilot)
+- [ ] Entschieden ist, ob von Hand oder mit dem Installationsskript installiert wird
+
+Stand: nicht durchgespielt
+
+## Downloads & Optionen
+
+Im Kurs am 09.10. richten alle gemeinsam ein – die Reihenfolge steht in [Setup im Kurs](../overview/).
+Diese Seite ist das Nachschlagewerk: alle Links, Größen und Optionen.
+
+Alle Links auf dieser Seite führen zu den offiziellen Seiten der Hersteller. Nichts von
+anderen Seiten herunterladen, auch wenn sie in der Suchmaschine weiter oben stehen.
+
+### Pflicht: das brauchen alle
+
+| Programm | Windows | Mac | Anleitung |
+|---|---|---|---|
+| Git | <https://git-scm.com/downloads/win> (ca. 70 MB) | im Terminal `xcode-select --install` (Command Line Tools von Apple, 10–25 Min) | Git installieren |
+| Unity Hub | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe> | Apple-Chip: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg> · Intel: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg> | Unity installieren |
+| Unity 6000.3.25f1 | Link `unityhub://6000.3.25f1/e1dba0a9aba4` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.25f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
+| GitHub Desktop | <https://desktop.github.com> | <https://desktop.github.com> | GitHub einrichten |
+| Visual Studio Code | <https://code.visualstudio.com/download> | <https://code.visualstudio.com/download> | VS Code und KI-Agent |
+| Unity-Erweiterung für VS Code | [Marketplace: Unity (Microsoft)](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc) – in VS Code nach "Unity" suchen | wie Windows | VS Code und KI-Agent |
+| GitHub Copilot | in VS Code eingebaut, Anmeldung mit GitHub | wie Windows | VS Code und KI-Agent |
+| Rosetta 2 | – | nur Apple-Chip (M1 …): `softwareupdate --install-rosetta --agree-to-license` | Unity installieren |
+
+Unity braucht ein kostenloses **Unity-Konto**, GitHub ein kostenloses **GitHub-Konto**.
+
+Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später
+Spieler-Controller und Kit) direkt aus einem Git-Repository. GitHub Desktop bringt zwar ein Git
+mit, aber nur für sich selbst.
+
+Download-Größen (Unity 6000.3.25f1, laut Unity): Editor Windows ca. **4,2 GB**, Mac ca.
+**5,2 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
+**abwählen**) 1,7 GB. Installiert braucht Unity ca. 8–10 GB, während der Installation
+vorübergehend mehr (ca. 20 GB frei halten).
+
+### Optional: ein zweiter KI-Agent
+
+| Programm | Wofür | Windows | Mac |
+|---|---|---|---|
+| Claude Code | KI-Agent von Anthropic, **kostenpflichtig** (Claude Pro oder höher) | [Installationsanleitung](https://code.claude.com/docs/en/setup) | gleiche Seite |
+| Codex | KI-Agent von OpenAI, mit ChatGPT-Konto. Im Terminal und in VS Code ab **ChatGPT Plus**; mit Free/Go nur in der ChatGPT-Desktop-App und nur, wo schon freigeschaltet | [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) | gleiche Seite |
+
+### Welcher KI-Agent passt?
+
+| Wer … | nimmt | Kosten | Anleitung |
+|---|---|---|---|
+| nichts bezahlen will | **GitHub Copilot** in VS Code (Pflicht für alle) | 0 € (Free, mit Studierendennachweis Copilot Student) | VS Code und KI-Agent |
+| schon ChatGPT Plus hat oder bereit ist, dafür zu zahlen | zusätzlich **Codex** | Plus 20 $/Monat (Free/Go: nur Desktop-App, eingeschränkt) | Claude Code und Codex |
+| schon Claude Pro hat oder bereit ist, dafür zu zahlen | zusätzlich **Claude Code** | Pro 20 $/Monat (17 $ bei Jahreszahlung), zzgl. MwSt. | Claude Code und Codex |
+
+Jonas arbeitet selbst mit Claude Code und Codex. Der Vorteil gegenüber Copilot im Kurs: Git
+lässt sich an den Agenten abgeben ("committe das mit einer passenden Nachricht"), statt jeden
+Schritt in GitHub Desktop selbst zu klicken. Pflicht ist das nicht. Alles im Kurs geht auch mit
+Copilot und GitHub Desktop.
+
+Preise laut Herstellerseiten am 03.10.2026: [Claude](https://claude.com/pricing),
+[ChatGPT/Codex](https://learn.chatgpt.com/docs/pricing),
+[Copilot](https://github.com/features/copilot/plans). Sie ändern sich oft – vor dem Bezahlen
+nachsehen.
+
+### Von Hand oder mit Skript?
+
+| Weg | Für wen | Wie |
+|---|---|---|
+| **Von Hand** (empfohlen bei Unsicherheit) | alle | die Anleitungen in der Reihenfolge von [Setup im Kurs](../overview/), Links oben |
+| **Installationsskript** (optional) | wer ein Terminal öffnen kann und Zeit sparen will | Windows: [windows.ps1](https://www.allknivesnobagel.com/teaching/gec1/downloads/windows.ps1) (nutzt **winget**), Mac: [macos.sh](https://www.allknivesnobagel.com/teaching/gec1/downloads/macos.sh) (nutzt **Homebrew**) |
+
+Das Skript installiert nur Pakete aus den offiziellen Paketquellen (winget bzw. Homebrew), die
+auf die Downloads der Hersteller zeigen. Es zeigt jeden Befehl an, erklärt ihn und fragt vor
+jedem Schritt nach. Konten anlegen, anmelden und die Unity-Lizenz bleiben trotzdem Handarbeit –
+also danach trotzdem die Anleitungen durchgehen und die Checkpoints abhaken.
+
+#### Windows-Skript benutzen
+
+1. Prüfen, ob winget vorhanden ist: **Start** > "PowerShell" öffnen > `winget --version` eingeben.
+   Kommt eine Versionsnummer: gut. Kommt ein Fehler: Im **Microsoft Store** die App
+   **App Installer** installieren bzw. aktualisieren, PowerShell neu öffnen.
+2. Das Skript herunterladen: <https://www.allknivesnobagel.com/teaching/gec1/downloads/windows.ps1>
+   **Vor dem Starten lesen.** Die Datei mit einem Texteditor öffnen (Rechtsklick >
+   **Öffnen mit** > Editor). Sie ist kurz und kommentiert. Nie ein Skript ausführen, das man
+   nicht gelesen hat – auch nicht von einer Kursseite.
+3. In PowerShell, im Ordner der Datei (meist **Downloads**: `cd $HOME\Downloads`):
+
+   ```
+   powershell -ExecutionPolicy Bypass -File .\windows.ps1
+   ```
+
+   `-ExecutionPolicy Bypass` erlaubt genau dieses eine Skript, ohne Windows dauerhaft
+   umzustellen.
+
+#### Mac-Skript benutzen
+
+1. Prüfen, ob Homebrew vorhanden ist: **Terminal** öffnen > `brew --version`. Fehlt es: Den
+   Installationsbefehl von <https://brew.sh> kopieren und im Terminal ausführen (er fragt nach
+   dem Mac-Passwort – das ist normal).
+2. Das Skript herunterladen: <https://www.allknivesnobagel.com/teaching/gec1/downloads/macos.sh>
+   **Vor dem Starten lesen.** Die Datei mit TextEdit öffnen. Sie ist kurz und kommentiert.
+   Nie ein Skript ausführen, das man nicht gelesen hat – auch nicht von einer Kursseite.
+3. Im Terminal, im Ordner der Datei (meist **Downloads**: `cd ~/Downloads`):
+
+   ```
+   bash macos.sh
+   ```
+
+### Wenn es nicht klappt
+
+**winget: "Der Begriff 'winget' wurde nicht erkannt".**
+App Installer fehlt oder ist veraltet. Microsoft Store > **App Installer** > Aktualisieren.
+Auf Hochschul- oder Firmenrechnern ist winget manchmal gesperrt – dann von Hand installieren.
+
+**Das Skript bricht bei einem Programm ab.**
+Kein Problem: Dieses eine Programm über den Link oben von Hand installieren und das Skript
+erneut starten. Schon Installiertes überspringt es.
+
+**Homebrew: "command not found: brew" direkt nach der Installation.**
+Homebrew zeigt am Ende zwei, drei Befehle unter **Next steps** an (sie tragen brew in die
+Shell ein). Diese ausführen, Terminal neu öffnen.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/
+
+## Git installieren
+
+Dauer: Windows ca. 5 Min; Mac 10–25 Min (läuft im Hintergrund)
+
+Voraussetzungen: Rechte, Programme zu installieren
+
+Checkpunkte:
+- [ ] Im Terminal (Windows: PowerShell) zeigt "git --version" eine Versionsnummer
+
+Stand: nicht durchgespielt
+
+## Git installieren
+
+Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später Spieler-Controller und Kit)
+direkt aus einem Git-Repository. Dafür muss **Git** als eigenes Programm installiert sein.
+GitHub Desktop bringt zwar ein Git mit, aber nur für sich selbst – Unity findet es nicht. Ohne
+Git öffnet sich das Kursprojekt mit dem Fehler _„No 'git' executable was found“_. KI-Agenten im
+Terminal (Claude Code, Codex) brauchen Git ebenfalls.
+
+**Im Kurs:** Diese Anleitung kommt **zuerst**, noch vor dem Unity Hub. Unter Windows ist sie in
+fünf Minuten erledigt. Am Mac startet der Download, und während er läuft, geht es mit
+[Unity installieren](../install-unity/) weiter.
+
+### Windows: Git für Windows
+
+1. <https://git-scm.com/downloads/win> öffnen. Der Download startet (sonst auf **Click here to
+   download** klicken).
+2. Die heruntergeladene Datei `Git-…-64-bit.exe` starten. Windows fragt **Möchten Sie zulassen,
+   dass durch diese App Änderungen …?** – **Ja**.
+3. Durch alle Seiten mit **Next** klicken, **nichts ändern**, am Ende **Install** und **Finish**.
+   Wichtig ist nur die Seite _Adjusting your PATH environment_: Dort muss der vorausgewählte
+   Punkt **Git from the command line and also from 3rd-party software** stehen bleiben.
+
+(Screenshot folgt: Zeigt die Installer-Seite "Adjusting your PATH environment" mit dem vorausgewählten mittleren Punkt.)
+
+4. **Start** > „PowerShell“ öffnen (ein **neues** Fenster) und eingeben:
+
+   ```
+   git --version
+   ```
+
+✅ **Checkpoint:** Es erscheint eine Zeile wie `git version 2.5…windows.1`.
+
+**Wichtig:** Lief der Unity Hub schon, bevor Git installiert wurde, kennt er Git noch nicht.
+Dann den Hub einmal ganz beenden (Symbol unten rechts in der Taskleiste > **Quit**) und neu
+starten – aber erst, wenn kein Unity-Download mehr läuft.
+
+### Mac: Command Line Tools von Apple
+
+Apple liefert Git mit den **Command Line Tools** (Entwicklerwerkzeuge, ohne das große Xcode).
+
+1. Das Programm **Terminal** öffnen (Spotlight: Cmd+Leertaste, „Terminal“).
+
+2. Eingeben:
+
+   ```
+   xcode-select --install
+   ```
+
+3. Ein Fenster fragt, ob die Command Line Tools installiert werden sollen: **Installieren**,
+   dann den Lizenzbedingungen zustimmen. Der Download dauert je nach WLAN 10–25 Minuten.
+   **Im Kurs: nicht warten**, sondern mit [Unity installieren](../install-unity/) weitermachen.
+   Das Fenster meldet sich, wenn es fertig ist.
+
+4. Wenn es fertig ist, im Terminal eingeben:
+
+   ```
+   git --version
+   ```
+
+✅ **Checkpoint:** Es erscheint eine Zeile wie `git version 2.39.5 (Apple Git-154)`.
+
+Steht dort stattdessen _„xcode-select: note: install requested …“_ oder öffnet sich wieder das
+Installationsfenster, sind die Command Line Tools noch nicht fertig.
+
+Warum nicht Git über Homebrew? Programme, die aus dem Dock oder dem Unity Hub starten, sehen
+Homebrew-Programme nicht. Das Git der Command Line Tools sehen sie.
+
+### Wenn es nicht klappt
+
+**Windows: „git“ wird in PowerShell nicht erkannt.**
+Das PowerShell-Fenster war schon offen, bevor Git installiert war. Ein neues öffnen. Hilft das
+nicht: Den Installer erneut starten und auf der Seite _Adjusting your PATH environment_ prüfen,
+dass der mittlere Punkt gewählt ist.
+
+**Windows: Unity meldet „No 'git' executable was found“, obwohl git --version funktioniert.**
+Der Unity Hub lief schon vor der Git-Installation. Hub ganz beenden (Taskleiste > **Quit**),
+neu starten, Projekt neu öffnen.
+
+**Mac: „xcode-select: error: command line tools are already installed“.**
+Gut – Git ist schon da. `git --version` prüfen.
+
+**Mac: Der Download der Command Line Tools bricht ab oder hängt.**
+Später erneut `xcode-select --install` eingeben. Alternativ die Command Line Tools von
+<https://developer.apple.com/download/all/> laden (Apple-Konto nötig).
+
+**Firmen- oder Hochschulrechner ohne Installationsrechte.**
+Jonas Bescheid sagen. Ohne Git lässt sich das Kursprojekt nicht öffnen.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/install-git/
+
+## Unity installieren
+
+Dauer: ca. 60 Min (davon 30–45 Min Download)
+
+Voraussetzungen: 25 GB freier Speicher (während der Installation werden ca. 20 GB gebraucht); Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac); Git ist installiert oder lädt gerade (Git installieren)
+
+Checkpunkte:
+- [ ] Unity Hub startet und zeigt das angemeldete Konto
+- [ ] Im Hub steht eine aktive Lizenz "Unity Personal"
+- [ ] Unter Installs steht 6000.3.25f1 (im Kurs reicht es, dass der Download läuft)
+
+Stand: nicht durchgespielt
+
+## Unity installieren
+
+Unity besteht aus zwei Programmen. Der **Unity Hub** ist der Startbildschirm: Er lädt
+Unity-Versionen herunter und öffnet Projekte. Der **Unity Editor** ist die eigentliche
+Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: **6000.3.25f1**
+(Unity 6.3 LTS).
+
+Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
+wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
+immer – und dann sieht das Projekt anders aus als bei allen anderen.
+
+**Im Kurs:** Den Download so früh wie möglich starten (Schritt 3), danach geht es mit
+[GitHub einrichten](../github/) weiter, während Unity lädt. **Deckel offen lassen und das
+Netzteil anstecken** – schläft der Rechner, hält der Download an.
+
+### Schritt 1: Unity Hub herunterladen und installieren
+
+Den Hub direkt von Unity herunterladen:
+
+| System | Download |
+|---|---|
+| Windows | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe> |
+| Mac mit Apple-Chip (M1, M2, …) | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg> |
+| Mac mit Intel-Chip | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg> |
+
+(Welcher Mac? Apple-Menü > **Über diesen Mac**: Steht dort „Chip Apple M…“, ist es ein
+Apple-Chip.) Die Seite unity.com/download führt inzwischen zuerst zur Anmeldung – die Links oben
+sparen diesen Umweg.
+
+- **Windows:** `UnityHubSetup-x64.exe` starten. Windows fragt **Möchten Sie zulassen, dass durch
+  diese App Änderungen …?** – **Ja**. Dann mit den Standardeinstellungen durchklicken.
+- **Mac:** Die `.dmg`-Datei öffnen und **Unity Hub** in den Ordner **Programme** ziehen.
+
+Den Unity Hub starten.
+
+**Mac mit Apple-Chip:** Unity braucht zusätzlich **Rosetta 2**. Fragt der Mac beim Start danach,
+auf **Installieren** klicken. Fragt er nicht, das Programm **Terminal** öffnen und eingeben:
+
+```
+softwareupdate --install-rosetta --agree-to-license
+```
+
+✅ **Checkpoint:** Jetzt sollte das Fenster des Unity Hub zu sehen sein, mit einer
+Anmeldeseite oder der Projektliste.
+
+### Schritt 2: Unity-Konto anlegen und anmelden
+
+1. Im Hub auf **Sign in** klicken. Der Browser öffnet sich.
+2. Falls noch kein Unity-Konto existiert: **Create a Unity ID**. Die E-Mail bestätigen, die
+   Unity schickt.
+3. Anmelden. Der Browser fragt, ob er den Unity Hub öffnen darf: **Ja / Öffnen**.
+4. Fragt der Hub nach einer Lizenz, **Unity Personal** (kostenlos) wählen. Bestätigen, dass
+   man nicht für eine Firma mit mehr als 200.000 $ Umsatz arbeitet.
+
+(Screenshot folgt: Zeigt Hub > Einstellungen (Zahnrad) > Licenses mit einer aktiven Lizenz "Personal".)
+
+**Fragt der Hub direkt, ob er die neueste Unity-Version installieren soll: Überspringen**
+(**Skip installation**). Der Kurs braucht eine bestimmte Version, nicht die neueste.
+
+✅ **Checkpoint:** Oben links im Hub ist das Konto-Symbol zu sehen. Unter **Einstellungen
+(Zahnrad) > Licenses** steht eine aktive Lizenz **Unity Personal**.
+
+### Schritt 3: Unity 6000.3.25f1 installieren
+
+Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
+eine neuere als die Kursversion sein. Darum kommt die Kursversion über einen Link:
+
+1. Auf diesen Link klicken: [**Unity 6000.3.25f1 im Hub installieren**](unityhub://6000.3.25f1/e1dba0a9aba4)
+   (oder `unityhub://6000.3.25f1/e1dba0a9aba4` in die Adresszeile kopieren und Enter drücken).
+2. Der Browser fragt, ob er den Unity Hub öffnen darf: **Ja / Öffnen**.
+3. Der Hub zeigt **Install Unity 6000.3.25f1** und eine Liste von **Modulen**. So einstellen:
+
+| Modul | Windows | Mac |
+|---|---|---|
+| Microsoft Visual Studio Community | **abwählen** (der Kurs nutzt VS Code) | – |
+| Windows Build Support (Mono) | ist schon dabei | **im Kurs weglassen**, zu Hause nachinstallieren (siehe unten) |
+| Windows Build Support (IL2CPP) | **weglassen** | weglassen |
+| Mac Build Support (Mono) | weglassen | ist schon dabei |
+| Mac Build Support (IL2CPP) | weglassen | weglassen |
+| Documentation | weglassen | weglassen |
+| alles andere (Android, iOS, Linux, WebGL, Sprachpakete) | weglassen | weglassen |
+
+4. Auf **Install** klicken (eventuell vorher Lizenzbedingungen bestätigen).
+5. Warten. Der Fortschritt steht unter **Downloads**.
+
+(Screenshot folgt: Zeigt den Modul-Dialog unter Windows: Visual Studio Community abgewählt, alle Module darunter (auch IL2CPP) ohne Haken.)
+
+(Screenshot folgt: Zeigt den Modul-Dialog am Mac: nichts angehakt.)
+
+Warum so wenig? Alle laden im Kurs gleichzeitig über dasselbe WLAN. Der Editor allein ist
+schon ca. 4 GB (Windows) bzw. 5 GB (Mac) groß. Jedes weggelassene Modul hilft allen.
+Visual Studio Community allein wären 1,7 GB.
+
+**Windows: Zwischendurch auf den Hub schauen.** Ist der Download fertig, fragt Windows noch
+einmal **Möchten Sie zulassen, dass durch diese App Änderungen …?** – **Ja**. Diese Frage kommt
+oft mitten in der Vorlesung. Bleibt sie unbeantwortet, bricht die Installation ab. Darum den
+Hub zwischendurch ansehen (Taskleiste).
+
+✅ **Checkpoint:** Unter **Downloads** erscheint ein Fortschrittsbalken für **6000.3.25f1**. Im
+Kurs: Jetzt mit [GitHub einrichten](../github/) weitermachen, während Unity lädt. Ist alles
+fertig, steht unter **Installs** ein Eintrag **6000.3.25f1** mit dem Zusatz **LTS**, ohne
+Fortschrittsbalken.
+
+(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.)
+
+### Später, zu Hause (nur Mac): Windows-Build-Modul
+
+Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
+**Windows Build Support (Mono)** installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
+irgendwann vor der Abgabe: Unity Hub > **Installs** > Zahnrad bei **6000.3.25f1** >
+**Add modules** > **Windows Build Support (Mono)** anhaken > **Install**. **Kurs > Setup prüfen**
+erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).
+
+Weiter mit [GitHub einrichten](../github/).
+
+### Wenn es nicht klappt
+
+**Der Link `unityhub://…` tut nichts.**
+Ist der Hub installiert und einmal gestartet worden? Dann den Link in die Adresszeile kopieren
+statt ihn anzuklicken. Klappt es immer noch nicht: Die Seite
+<https://unity.com/releases/editor/whats-new/6000.3.25f1> öffnen und dort auf **Install** klicken
+(derselbe Link, als Knopf).
+
+**Windows: Die Installation ist abgebrochen, unter Installs steht nichts.**
+Meist wurde die Frage **Änderungen zulassen?** nicht rechtzeitig beantwortet. Den Link aus
+Schritt 3 noch einmal öffnen und diesmal beim Hub bleiben, bis die Frage kommt. Der Download
+wird nicht wiederholt, wenn er schon fertig war.
+
+**Der Mac sagt: "Unity Hub kann nicht geöffnet werden".**
+macOS 15 und neuer: **Systemeinstellungen > Datenschutz & Sicherheit**, ganz nach unten
+scrollen, bei Unity Hub **Dennoch öffnen** klicken. Ältere macOS-Versionen: Rechtsklick auf
+**Unity Hub** im Programme-Ordner > **Öffnen** > **Öffnen**.
+
+**"No valid Unity Editor license found" / "Lizenz fehlt".**
+Hub > Zahnrad > **Licenses** > **Add** > **Get a free personal license**.
+
+**Die Installation bricht ab oder steht bei "Validating" / "Unpacking" still.**
+Meist zu wenig Speicher: Beim Entpacken braucht Unity vorübergehend mehr Platz, als am Ende
+belegt ist. Ca. 20 GB freien Platz schaffen, dann im Hub unter Installs das Zahnrad am Eintrag >
+**Uninstall** und Schritt 3 wiederholen. Virenscanner (nicht Windows Defender) können die
+Installation bremsen.
+
+**Windows: Auf C: ist zu wenig Platz.**
+Hub > Zahnrad > **Installs** > **Installs location** auf eine andere Festplatte stellen, dann
+Schritt 3 wiederholen. Einen Ordner ohne Umlaute und Leerzeichen nehmen, z. B. `D:\Unity\Editors`.
+
+**Mac: Zu wenig Platz.**
+**Systemeinstellungen > Allgemein > Speicher** zeigt, was Platz belegt, und bietet Aufräumen an.
+Reicht das nicht: Hub > **Settings** > **Installs** > **Installs location** auf eine externe SSD
+(Format APFS) stellen und Schritt 3 wiederholen. Die SSD muss dann beim Arbeiten mit Unity
+angeschlossen sein.
+
+**Der Windows-Benutzername enthält Umlaute oder Sonderzeichen (z. B. `Jörg`).**
+Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie `C:\Unity\` legen
+statt unter `C:\Users\Jörg\…` (siehe [Projekt anlegen](../create-project/)).
+
+**Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem `f1`).**
+Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
+ist das kein Problem – sie schadet nicht, kostet aber Platz.
+
+**Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.**
+Rosetta installieren (siehe Schritt 1), dann den Hub neu starten.
+
+**Mac: Der Hub fragt nach Zugriff auf Ordner (Dokumente, Schreibtisch).**
+Erlauben. Sonst kann er die Projekte nicht öffnen.
+
+**Im Kurs: Der Download ist extrem langsam (Restzeit über eine Stunde).**
+Jonas Bescheid sagen. Den Download laufen lassen und zu Hause fertig werden lassen; der Rest
+der Einrichtung geht trotzdem weiter.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/
+
+## GitHub einrichten
+
+Dauer: ca. 20 Min
+
+Voraussetzungen: Zugriff auf das Hochschul-E-Mail-Postfach; Handy mit einer Authenticator-App (z. B. GitHub Mobile oder Microsoft Authenticator)
+
+Checkpunkte:
+- [ ] Auf github.com angemeldet, mit Zwei-Faktor-Anmeldung
+- [ ] GitHub Desktop ist installiert und mit dem eigenen Konto angemeldet
+
+Stand: nicht durchgespielt
+
+## GitHub einrichten
+
+**Git** speichert Zwischenstände des Projekts. Jeder Zwischenstand heißt **Commit**. Wenn
+etwas kaputt geht – durch eigene Änderungen oder durch den KI-Agenten –, lässt sich der letzte
+Commit wiederherstellen. Darum ist Git im Kurs Pflicht: Es ist der Rückgängig-Knopf.
+
+**GitHub** ist eine Website, auf der die Commits zusätzlich liegen: als Sicherung und
+damit Jonas ins Projekt schauen kann. **GitHub Desktop** ist das Programm, mit dem sich
+Git bedienen lässt, ohne Befehle zu tippen.
+
+**Im Kurs:** Diese Anleitung läuft, während Unity lädt. Danach geht es mit
+[VS Code und KI-Agent](../vscode-and-agent/) weiter (nur die Schritte 1, 2 und 4).
+
+### Schritt 1: GitHub-Konto anlegen
+
+1. <https://github.com/signup> öffnen.
+2. Als E-Mail die **Hochschul-Adresse** nehmen. (Eine private lässt sich später dazunehmen.)
+3. Einen Benutzernamen wählen, der auch in einer Bewerbung stehen kann. Er steht in jeder
+   Adresse der eigenen Projekte.
+4. Die E-Mail mit dem Code bestätigen, den GitHub schickt.
+
+GitHub verlangt eine **Zwei-Faktor-Anmeldung** (2FA): Neben dem Passwort kommt ein Code von
+einer App auf dem Handy dazu. Geeignet sind z. B. **GitHub Mobile** oder **Microsoft
+Authenticator** (beide kostenlos im App Store bzw. bei Google Play). Einrichten:
+Profilbild oben rechts > **Settings** > **Password and authentication** > **Enable two-factor
+authentication**, dann den angezeigten QR-Code mit der App scannen.
+
+Danach zeigt GitHub **Wiederherstellungscodes** (Recovery codes): **Download** klicken und die
+Datei sicher aufbewahren, z. B. im Passwort-Manager. Ohne Handy und ohne diese Codes ist das
+Konto sonst verloren.
+
+✅ **Checkpoint:** Die Anmeldung auf github.com hat geklappt. Unter **Settings > Password and
+authentication** steht bei Two-factor authentication **Enabled**.
+
+### Schritt 2: Studierendenrabatt beantragen (optional, auch später möglich)
+
+Studierende bekommen **GitHub Copilot Student** kostenlos – mehr KI-Nutzung als im
+kostenlosen Copilot Free. Die Prüfung kann ein paar Tage dauern. Wer die
+**Immatrikulationsbescheinigung** (PDF oder scharfes Foto) gerade zur Hand hat, beantragt es
+jetzt. **Sonst zu Hause** – im Kurs reicht Copilot Free.
+
+1. <https://github.com/education/students> öffnen und auf **Join GitHub Education** bzw.
+   **Get student benefits** klicken.
+2. Die Hochschul-E-Mail wählen und die Hochschule suchen (**Macromedia**, Standort Leipzig).
+3. Als Nachweis die Immatrikulationsbescheinigung hochladen. Wichtig: Darauf müssen Name,
+   Hochschule und ein **aktuelles Datum** zu sehen sein.
+4. Den Antrag abschicken. GitHub fragt eventuell nach dem Standort – erlauben, das ist Teil
+   der Prüfung.
+
+(Screenshot folgt: Zeigt das Antragsformular mit ausgewählter Hochschule und hochgeladenem Nachweis, persönliche Daten geschwärzt.)
+
+Wenn der Antrag abgeschickt ist, erscheint eine Bestätigung. Den Status zeigt später
+<https://github.com/settings/education/benefits>.
+
+### Schritt 3: GitHub Desktop installieren
+
+1. <https://desktop.github.com> öffnen und GitHub Desktop herunterladen.
+   - **Windows:** Installer starten. Er installiert sich ohne Rückfragen und öffnet sich.
+   - **Mac:** Die `.zip` entpacken (passiert meist automatisch) und **GitHub Desktop** in den
+     Ordner **Programme** ziehen. Dann starten.
+2. Auf **Sign in to GitHub.com** klicken. Der Browser öffnet sich. Anmelden und auf
+   **Authorize desktop** klicken. Der Browser fragt, ob er GitHub Desktop öffnen darf: **Ja / Öffnen**.
+3. GitHub Desktop fragt nach **Configure Git**: Name und E-Mail. Die Vorschläge stehen lassen
+   (GitHub-Name und E-Mail-Auswahl) und auf **Finish** klicken.
+
+(Screenshot folgt: Zeigt GitHub Desktop nach dem Anmelden: die leere Startseite mit "Let's get started!" und den Knöpfen Clone / Create / Add.)
+
+GitHub Desktop bringt ein eigenes Git mit, aber nur für sich selbst. Unity braucht zusätzlich
+das Git aus [Git installieren](../install-git/).
+
+✅ **Checkpoint:** GitHub Desktop zeigt **Let's get started!**. Unter **File > Options >
+Accounts** (Mac: **GitHub Desktop > Settings > Accounts**) steht der eigene GitHub-Name.
+
+### Jonas Zugriff geben – freiwillig
+
+Das Projekt-Repository ist **privat**: Außer dem eigenen Konto sieht es niemand. Wer will,
+lädt Jonas als Mitarbeiter (Collaborator) ein. Dann kann er bei Bedarf ins Projekt schauen und
+helfen. Das ist **freiwillig und keine Bedingung** für den Kurs oder die Bewertung. Empfohlen
+ist es trotzdem: Mit Zugriff sieht Jonas Probleme oft in einer Minute, statt sie sich
+beschreiben zu lassen.
+
+Das geht erst, wenn das Repository existiert (siehe [Projekt anlegen](../create-project/)):
+auf github.com im eigenen Repository **Settings** > **Collaborators** > **Add people** >
+`BabyToad` > **Add to repository**. Der Zugriff lässt sich jederzeit an derselben Stelle wieder
+entfernen.
+
+**Im Kurs** weiter mit [VS Code und KI-Agent](../vscode-and-agent/) (Schritte 1, 2 und 4).
+**Zu Hause** weiter mit [Projekt anlegen](../create-project/).
+
+### Wenn es nicht klappt
+
+**GitHub schickt keinen Bestätigungscode.**
+Spam-Ordner prüfen. Hochschul-Postfächer filtern manchmal stark – dann mit einer privaten
+Adresse anmelden und die Hochschul-Adresse später unter **Settings > Emails** hinzufügen
+(sie ist für den Education-Antrag nötig).
+
+**Keine Authenticator-App auf dem Handy.**
+Eine der beiden genannten installieren. Im Kurs-WLAN dauert das ein paar Minuten; wer mobile
+Daten hat, nimmt die.
+
+**Der Education-Antrag wird abgelehnt.**
+Meist ist der Nachweis das Problem: kein Datum, unscharf, abgeschnitten, oder der Name im
+Dokument passt nicht zum GitHub-Profil. Unter **Settings > Public profile** den
+echten Namen eintragen und den Antrag mit einem besseren Nachweis neu stellen. Bis dahin reicht
+Copilot Free.
+
+**Die Hochschule ist in der Liste nicht zu finden.**
+Nach "Macromedia" ohne Zusatz suchen und den Eintrag wählen, der zur eigenen E-Mail-Adresse passt.
+Falls nichts passt: Jonas Bescheid sagen und mit Copilot Free weitermachen.
+
+**GitHub Desktop: Nach "Authorize desktop" passiert nichts.**
+Der Browser hat die Rückfrage "GitHub Desktop öffnen?" eventuell blockiert. Prüfen, ob oben in
+der Adresszeile ein Hinweis steht, oder einen anderen Browser versuchen. Alternativ in
+GitHub Desktop **File > Options > Accounts > Sign in** nochmal.
+
+**Mac: "GitHub Desktop kann nicht geöffnet werden".**
+macOS 15 und neuer: **Systemeinstellungen > Datenschutz & Sicherheit**, ganz nach unten
+scrollen, bei GitHub Desktop **Dennoch öffnen** klicken. Ältere macOS-Versionen: Rechtsklick auf
+**GitHub Desktop** im Programme-Ordner > **Öffnen** > **Öffnen**.
+
+**Die 2FA-Wiederherstellungscodes sind nicht gespeichert.**
+Jetzt nachholen: **Settings > Password and authentication > Recovery codes > View**.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/github/
+
+## Projekt anlegen
+
+Dauer: ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
+
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
+
+Checkpunkte:
+- [ ] Es gibt einen Ordner Unity direkt unter C:\ (Windows) bzw. im Benutzerordner (Mac)
+- [ ] Auf GitHub gibt es das eigene private Repository, erstellt aus der Kursvorlage
+- [ ] GitHub Desktop zeigt das Repository mit "No local changes"
+- [ ] Das Projekt ist in Unity 6000.3.25f1 geöffnet
+- [ ] Menü „Kurs > Setup prüfen“ zeigt keine Fehler
+
+Stand: nicht durchgespielt
+
+## Projekt anlegen
+
+Das Kursprojekt wird nicht leer angelegt, sondern aus der **Kursvorlage**. Die Vorlage ist
+ein fertiges, leeres Unity-Projekt (Szene, Einstellungen, URP), in dem schon alles liegt,
+was sonst gern schiefgeht:
+
+- die richtige Unity-Version und Render-Pipeline (URP),
+- eine `.gitignore`, die Unitys riesige Zwischendateien (`Library/`) aus Git heraushält,
+- `AGENTS.md`: die Regeln, die der KI-Agent im Projekt befolgt,
+- `KI-VERZEICHNIS.md` und `DOKUMENTATION.md` für die Abgabe,
+- das **Kurs-Paket** mit dem Menüpunkt **Kurs > Setup prüfen**. Unity lädt es beim ersten
+  Öffnen per Git – darum muss Git installiert sein.
+
+Daraus entsteht ein eigenes Repository auf GitHub. Das wird auf den eigenen Rechner geholt
+und in Unity geöffnet.
+
+### Schritt 1: Einen Ordner für Unity-Projekte anlegen
+
+Einen Ordner anlegen, in dem alle Unity-Projekte liegen. Er soll **nicht** in OneDrive,
+iCloud, Dropbox oder Downloads liegen und **keine Umlaute** im Pfad haben.
+
+- **Windows:** Explorer öffnen > links **Dieser PC** > **Doppelklick** auf **Lokaler
+  Datenträger (C:)** > Rechtsklick auf eine freie Stelle im Fenster > **Neu > Ordner** > `Unity`.
+  Ergebnis: `C:\Unity`
+- **Mac:** Finder > **Gehe zu > Benutzerordner** (Cmd+Shift+H) > Rechtsklick auf eine freie
+  Stelle > **Neuer Ordner** > `Unity`. Ergebnis: `/Users/benutzername/Unity`
+
+Warum nicht unter Dokumente? Auf vielen Windows-Rechnern ist Dokumente unbemerkt ein
+OneDrive-Ordner. OneDrive synchronisiert dann tausende Unity-Dateien und kommt Git in die
+Quere.
+
+✅ **Checkpoint:** An der Stelle oben gibt es jetzt einen leeren Ordner `Unity`.
+
+### Schritt 2: Das eigene Repository aus der Kursvorlage erstellen
+
+1. Die Kursvorlage öffnen: <https://github.com/BabyToad/macromedia-gec1-ws26>.
+2. Oben rechts auf den grünen Knopf **Use this template** > **Create a new repository** klicken.
+3. Einstellen:
+   - **Owner:** der eigene GitHub-Name
+   - **Repository name:** ein kurzer Name ohne Leerzeichen und Umlaute, z. B. `gec1-nachname`.
+     Der Name des Spiels steht noch nicht fest – das ist in Ordnung.
+   - **Private** auswählen.
+4. Auf **Create repository** klicken.
+
+(Screenshot folgt: Zeigt die Kursvorlage auf GitHub mit dem aufgeklappten Knopf "Use this template" > "Create a new repository".)
+
+(Screenshot folgt: Zeigt das Formular "Create a new repository" mit Owner, Name gec1-nachname und "Private" ausgewählt.)
+
+Freiwillig: Jetzt lässt sich Jonas als Collaborator einladen (**Settings** >
+**Collaborators** > **Add people** > `BabyToad`). Keine Bedingung, aber hilfreich, falls
+später Hilfe nötig ist (siehe [GitHub einrichten](../github/)).
+
+✅ **Checkpoint:** Die Seite des neuen Repositorys ist offen. Oben steht
+`github-name / gec1-nachname`, daneben **Private**, darunter "generated from …" mit dem Namen
+der Vorlage. Ordner wie `Assets`, `Packages`, `ProjectSettings` sind zu sehen.
+
+### Schritt 3: Das Repository auf den Rechner holen (klonen)
+
+1. Auf der Repository-Seite auf den grünen Knopf **Code** > **Open with GitHub
+   Desktop** klicken. Der Browser fragt, ob er GitHub Desktop öffnen darf: **Ja / Öffnen**.
+   (Alternativ in GitHub Desktop: **File > Clone repository** > Reiter **GitHub.com** > das
+   Repository auswählen.)
+2. GitHub Desktop zeigt **Clone a repository**. Neben **Local path** auf **Choose…** klicken
+   und den Ordner **`C:\Unity`** (Mac: **`Unity`** im Benutzerordner) auswählen. GitHub Desktop
+   hängt den Namen des Repositorys selbst an. Der Pfad endet danach auf
+   `\Unity\gec1-nachname` (Mac: `/Unity/gec1-nachname`) – den Namen **nicht** noch einmal
+   von Hand anhängen.
+3. Auf **Clone** klicken.
+
+(Screenshot folgt: Zeigt den Clone-Dialog mit Local path C:\Unity\gec1-nachname und dem Knopf "Choose…".)
+
+✅ **Checkpoint:** GitHub Desktop zeigt oben links **Current repository: gec1-nachname** und in
+der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
+`Unity/gec1-nachname` mit `Assets`, `Packages`, `ProjectSettings` und `AGENTS.md`.
+
+### Schritt 4: Das Projekt in Unity öffnen
+
+1. Den Unity Hub öffnen > **Projects**.
+2. Auf den Pfeil neben **Add** (bzw. **Open**) > **Add project from disk** klicken.
+3. Den Ordner `gec1-nachname` wählen – **den Ordner selbst**, in dem `Assets` liegt, nicht
+   einen Ordner darin oder darüber. Auf **Öffnen** / **Add Project** klicken.
+4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.25f1**.
+   Darauf klicken.
+5. Das erste Öffnen dauert lange (2–15 Minuten, auf älteren Rechnern länger): Unity baut den
+   Ordner `Library/` auf und lädt das Kurs-Paket. Einfach laufen lassen.
+6. **Windows:** Fragt die Windows-Firewall nach Unity, **Zulassen** (privates Netzwerk) oder
+   **Abbrechen** wählen – beides geht.
+
+(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.25f1, ohne Warnsymbol.)
+
+✅ **Checkpoint:** Unity ist offen. Oben in der Menüleiste gibt es einen Eintrag **Kurs**.
+
+### Schritt 5: Setup prüfen
+
+1. In Unity auf **Kurs > Setup prüfen** klicken.
+2. Ein Fenster zeigt eine Liste mit **OK**, **INFO**, **WARNUNG** und **FEHLER**.
+
+(Screenshot folgt: Zeigt das Fenster "Setup prüfen" nach diesem Schritt: OK und INFO, eine WARNUNG bei "Code-Editor".)
+
+Erwartet ist an dieser Stelle: kein **FEHLER**, höchstens eine **WARNUNG** bei **Code-Editor**
+(die verschwindet in [VS Code und KI-Agent](../vscode-and-agent/)). **INFO**-Zeilen sind
+normal, z. B. beim KI-Verzeichnis oder am Mac beim Windows-Build.
+
+Zum Schluss ein Blick in GitHub Desktop: Dort steht weiter **No local changes**. Zeigt es doch
+ein paar geänderte Dateien (z. B. `packages-lock.json`), ist das in Ordnung. Sie kommen beim
+[Ersten Commit](../first-commit/) mit.
+
+✅ **Checkpoint:** **Setup prüfen** zeigt **keinen FEHLER**.
+
+Fertig. Weiter mit [VS Code und KI-Agent](../vscode-and-agent/) (Schritte 3 und 5).
+
+### Wenn es nicht klappt
+
+**Den Knopf "Use this template" gibt es nicht.**
+Ist die Anmeldung auf github.com erfolgt? Ohne Anmeldung fehlt er. Ist die Vorlage gar nicht
+zu sehen (Seite 404), ist der Link falsch – bei Jonas nachfragen.
+
+**GitHub Desktop: "This directory already exists and is not empty".**
+Unter dem Local path liegt schon ein Ordner mit dem Namen. Einen anderen Namen am Ende
+des Pfads nehmen oder den alten Ordner löschen, wenn er nur ein missglückter Versuch war.
+
+**Der Pfad endet auf `gec1-nachname\gec1-nachname`.**
+Der Name wurde doppelt angehängt. Den inneren Ordner nicht verwenden: In GitHub Desktop
+**Repository > Remove**, den Ordner löschen und Schritt 3 mit **Choose…** wiederholen.
+
+**GitHub Desktop: "Authentication failed" beim Klonen.**
+Abmelden und neu anmelden: **File > Options > Accounts** (Mac: **Settings > Accounts**) >
+**Sign out**, dann **Sign in**.
+
+**Der Hub sagt beim Hinzufügen "Invalid project path" oder "not a valid Unity project".**
+Der falsche Ordner ist gewählt. Richtig ist der Ordner, der direkt `Assets`, `Packages`
+und `ProjectSettings` enthält.
+
+**Im Hub steht beim Projekt ein Warnsymbol und "Editor version not installed".**
+Unity 6000.3.25f1 fehlt oder ist noch nicht fertig installiert (siehe
+[Unity installieren](../install-unity/), Schritt 3). **Nicht** "Choose another Editor version"
+wählen – das baut das Projekt auf eine andere Version um.
+
+**Unity meldet „Project has invalid dependencies … No 'git' executable was found“.**
+Unity findet kein Git. Git installieren ([Git installieren](../install-git/)). Unter Windows
+danach den Unity Hub ganz beenden (Taskleiste > **Quit**) und neu starten, dann das Projekt
+erneut öffnen. Am Mac warten, bis die Command Line Tools fertig sind.
+
+**Unity fragt: "Enter Safe Mode?"**
+Unity hat Fehler im Code gefunden. Auf **Enter Safe Mode** klicken und einen Screenshot
+der Fehler unten in der **Console** machen. Den an Jonas schicken. In der frischen Vorlage
+sollte das nicht passieren.
+
+**Es gibt kein Menü "Kurs".**
+Unity hat noch nicht fertig geladen (unten rechts dreht sich etwas) – warten. Kommt es nicht:
+Unten in der **Console** nach roten Fehlern sehen, die `de.macromedia.gec1` oder `git`
+erwähnen, und den Eintrag oben zu Git prüfen.
+
+**Setup prüfen zeigt FEHLER bei "Projektordner" oder WARNUNG wegen OneDrive/Umlauten.**
+Projekt schließen. In GitHub Desktop **Repository > Remove** (nur aus der Liste entfernen,
+**nicht** "Also move this repository to the trash" anhaken), den Ordner nach `C:\Unity`
+bzw. `~/Unity` verschieben, dann in GitHub Desktop **File > Add local repository** und im Hub
+das Projekt neu hinzufügen.
+
+**Setup prüfen zeigt einen anderen FEHLER.**
+Die Zeile **Lösung** lesen. Hilft das nicht: **Bericht kopieren** und den Text an Jonas
+schicken (sobald VS Code eingerichtet ist, auch an den KI-Agenten).
+
+**Mac: Der Hub kann den Ordner nicht öffnen oder zeigt ihn leer.**
+**Systemeinstellungen > Datenschutz & Sicherheit > Dateien und Ordner** (oder
+**Festplattenvollzugriff**) > dem Unity Hub Zugriff geben. Hub neu starten.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/
+
+## Projekt ohne Vorlage anlegen (Ersatzweg)
+
+Dauer: ca. 30 Min
+
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
+
+Checkpunkte:
+- [ ] Das Projekt liegt in C:\Unity bzw. ~/Unity und wurde mit der Vorlage Universal 3D angelegt
+- [ ] GitHub Desktop zeigt das Projekt als Repository mit Unity-.gitignore
+- [ ] AGENTS.md, CLAUDE.md, KI-VERZEICHNIS.md, DOKUMENTATION.md und bilder/ liegen im Projekt; das Kurs-Paket ist installiert
+- [ ] Das Repository ist privat auf GitHub veröffentlicht
+- [ ] Menü „Kurs > Setup prüfen“ zeigt keine Fehler
+
+Stand: nicht durchgespielt
+
+## Projekt ohne Vorlage anlegen (Ersatzweg)
+
+**Diese Anleitung nur verwenden, wenn Jonas es sagt oder die Kursvorlage nicht erreichbar ist.**
+Der normale Weg ist [Projekt anlegen](../create-project/) (aus der Kursvorlage). Hier wird von Hand nachgebaut,
+was die Vorlage mitbringt. Die heikle Stelle ist Schritt 2: Das Git-Repository muss **genau**
+im Projektordner liegen.
+
+### Schritt 1: Projekt im Unity Hub anlegen
+
+1. Einen Ordner `C:\Unity` (Windows) bzw. `~/Unity` (Mac) anlegen – siehe
+   [Projekt anlegen](../create-project/), Schritt 1.
+2. Unity Hub > **Projects** > **New project**.
+3. Oben bei **Editor Version**: **6000.3.25f1** auswählen.
+4. Vorlage: **Universal 3D**. (Fehlt das Vorschaubild: auf **Download template** klicken.)
+5. Rechts:
+   - **Project name:** kurz, ohne Leerzeichen und Umlaute, z. B. `gec1-nachname`
+   - **Location:** der Ordner `C:\Unity` bzw. `~/Unity`
+   - **Connect to Unity Cloud** und **Use Unity Version Control:** **abwählen**. Der Kurs
+     arbeitet mit Git und GitHub.
+6. **Create project**. Unity öffnet sich nach einigen Minuten. Unity danach wieder schließen.
+
+(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.25f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
+
+✅ **Checkpoint:** Im Ordner `Unity/gec1-nachname` liegen `Assets`, `Packages`,
+`ProjectSettings` und `Library`.
+
+### Schritt 2: Den Projektordner zum Git-Repository machen
+
+1. GitHub Desktop > **File > Add local repository**.
+2. **Choose…** > den Projektordner `gec1-nachname` auswählen – den, in dem `Assets` liegt.
+3. GitHub Desktop sagt: _This directory does not appear to be a Git repository._ Auf den
+   Link **create a repository** klicken.
+4. Im Dialog **Create a new repository**:
+   - **Name:** muss genau der Ordnername sein (`gec1-nachname`) – ist vorausgefüllt, nicht
+     ändern.
+   - **Local path:** der Ordner **darüber** (`C:\Unity` bzw. `~/Unity`) – vorausgefüllt,
+     nicht ändern.
+   - **Git ignore:** **Unity** auswählen. **Das ist der wichtigste Klick dieser Anleitung.**
+   - **License:** None.
+5. **Create repository**.
+
+(Screenshot folgt: Zeigt den Dialog "Create a new repository" mit Name gec1-nachname, Local path C:\Unity, Git ignore "Unity".)
+
+✅ **Checkpoint:** GitHub Desktop zeigt **Current repository: gec1-nachname** und links unter
+**History** einen ersten Commit **Initial commit**. Im Reiter **Changes** steht **nicht**
+`Library` – wenn doch, siehe unten.
+
+### Schritt 3: Kursdateien und Kurs-Paket hinzufügen
+
+1. `kursdateien.zip` entpacken.
+2. Die Dateien `AGENTS.md`, `CLAUDE.md`, `KI-VERZEICHNIS.md`, `DOKUMENTATION.md`,
+   `.gitattributes` und den Ordner `bilder` in den Projektordner kopieren (neben `Assets`).
+   Mac: Dateien mit Punkt vorne (`.gitattributes`) sind im Finder versteckt.
+   **Cmd+Shift+Punkt** blendet sie ein.
+3. Das Projekt im Hub öffnen.
+4. In Unity: **Window > Package Manager** > oben links **+** > **Install package from git URL…**
+5. Diese Adresse einfügen und **Install** klicken:
+
+   ```
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0
+   ```
+
+(Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
+
+6. Nach kurzer Zeit erscheint oben das Menü **Kurs**.
+7. In GitHub Desktop: links stehen die neuen Dateien und die geänderte
+   `Packages/manifest.json`. Unten bei **Summary** `Kursdateien` eintragen > **Commit to main**.
+
+✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**. In Unity gibt es **Kurs > Setup
+prüfen**.
+
+### Schritt 4: Auf GitHub veröffentlichen
+
+1. GitHub Desktop > oben **Publish repository**.
+2. **Keep this code private** angehakt lassen. **Publish repository**.
+
+✅ **Checkpoint:** Oben steht jetzt **Fetch origin** statt Publish repository. Unter
+**Repository > View on GitHub** ist das Projekt auf github.com zu sehen, als **Private**.
+
+### Schritt 5: Setup prüfen
+
+**Kurs > Setup prüfen**. Erwartet: kein **FEHLER**, höchstens eine **WARNUNG** bei Code-Editor.
+**INFO**-Zeilen sind normal.
+
+✅ **Checkpoint:** **Setup prüfen** zeigt **keinen FEHLER**.
+
+Weiter mit [VS Code und KI-Agent](../vscode-and-agent/).
+
+### Wenn es nicht klappt
+
+**Im Reiter Changes stehen tausende Dateien, viele davon in `Library/`.**
+Die `.gitignore` fehlt oder liegt am falschen Ort. **Nichts committen.** Prüfen: Liegt im
+Projektordner eine Datei `.gitignore`? Wenn nicht: **Repository > Repository settings >
+Ignored files** öffnen und den Inhalt von `Unity.gitignore` aus den Kursdateien einfügen,
+speichern. Die Liste sollte dann auf wenige Dateien schrumpfen.
+
+**Der erste Commit enthält schon `Library/`.**
+Repository entfernen und neu anlegen ist hier am einfachsten: GitHub Desktop **Repository >
+Remove** (Häkchen "move to trash" **nicht** setzen), im Projektordner den versteckten Ordner
+`.git` löschen, dann Schritt 2 nochmal – diesmal mit Git ignore **Unity**.
+Wurde das Repository schon veröffentlicht: Jonas fragen.
+
+**Name oder Local path im Create-Dialog sehen anders aus als beschrieben.**
+Abbrechen und Schritt 2 nochmal, diesmal über **Add local repository** mit dem Projektordner.
+Wird das Repository woanders angelegt, landet es in einem neuen leeren Ordner neben dem
+Projekt.
+
+**Package Manager: „No 'git' executable was found“ oder „Unable to add package“.**
+Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
+[Git installieren](../install-git/); unter Windows danach den Hub ganz beenden und neu starten.
+
+**Package Manager: Die Adresse wird nicht gefunden.**
+Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
+
+**Die Vorlage "Universal 3D" fehlt im Hub.**
+Ist oben die Editor-Version 6000.3.25f1 gewählt? Die Vorlagen hängen an der Version.
+Gegebenenfalls **Download template** klicken.
+
+**Unity fragt beim Anlegen nach Unity Cloud / Organisation.**
+Abwählen bzw. überspringen. Der Kurs braucht keinen Cloud-Dienst.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/
+
+## VS Code und KI-Agent einrichten
+
+Dauer: ca. 30 Min
+
+Voraussetzungen: GitHub-Konto (GitHub einrichten); für die Schritte 3 und 5: Projekt geöffnet (Projekt anlegen)
+
+Checkpunkte:
+- [ ] VS Code mit der Erweiterung "Unity" von Microsoft ist installiert
+- [ ] In Unity ist Visual Studio Code als External Script Editor eingestellt
+- [ ] Ein Doppelklick auf ein C#-Skript öffnet es in VS Code, mit farbigem Code
+- [ ] Copilot ist mit dem eigenen GitHub-Konto angemeldet
+- [ ] Der Agent hat AGENTS.md gelesen und zusammengefasst
+- [ ] Menü „Kurs > Setup prüfen“ zeigt „Alles bereit“
+
+Stand: nicht durchgespielt
+
+## VS Code und KI-Agent einrichten
+
+**Visual Studio Code** (kurz VS Code) ist der Editor zum Lesen und Schreiben von C#-Code.
+**GitHub Copilot** ist in VS Code eingebaut. Im **Agent-Modus** liest Copilot die Dateien
+des Projekts, schlägt Änderungen vor und schreibt sie. Prüfen und entscheiden muss man selbst.
+
+Im Kurs wird mit dem Agenten gearbeitet. Der Ablauf: eine Mechanik genau beschreiben, der Agent
+setzt sie um, dann spielen, die Änderung lesen und committen. Damit das funktioniert, muss der
+Agent das Projekt sehen können. Das wird hier eingerichtet.
+
+**Im Kurs:** Die Schritte 1, 2 und 4 laufen, während Unity lädt – dafür muss das Projekt noch
+nicht da sein. Die Schritte 3 und 5 kommen nach [Projekt anlegen](../create-project/).
+
+### Schritt 1: VS Code installieren
+
+1. <https://code.visualstudio.com> öffnen und VS Code herunterladen.
+   - **Windows:** Installer starten. Bei **Zusätzliche Aufgaben** die Häkchen bei
+     **Zu PATH hinzufügen** und **"Mit Code öffnen" … hinzufügen** setzen.
+   - **Mac:** Die `.zip` entpacken und **Visual Studio Code** in **Programme** ziehen.
+2. VS Code starten.
+
+✅ **Checkpoint:** VS Code ist offen und zeigt die Willkommensseite.
+
+### Schritt 2: Die Unity-Erweiterung installieren
+
+1. Links in der Leiste auf **Extensions** (die vier Quadrate) klicken oder
+   Strg+Shift+X (Mac: Cmd+Shift+X) drücken.
+2. Nach **Unity** suchen. Den Eintrag **Unity** von **Microsoft** (blauer Haken) wählen.
+3. **Install**. Die Erweiterung holt sich **C#** und **C# Dev Kit** automatisch dazu und lädt
+   im Hintergrund ein .NET herunter. Das dauert ein, zwei Minuten.
+
+(Screenshot folgt: Zeigt die Erweiterungssuche mit "Unity" von Microsoft, Herausgeber verifiziert, Knopf "Install".)
+
+✅ **Checkpoint:** Unter **Extensions > Installed** stehen **Unity**, **C# Dev Kit** und
+**C#**.
+
+### Schritt 3: Unity mit VS Code verbinden
+
+1. In Unity: **Edit > Preferences** (Mac: **Unity > Settings**) > **External Tools**.
+2. Bei **External Script Editor**: **Visual Studio Code** auswählen. Steht es nicht in der
+   Liste: **Browse…** und VS Code auswählen (Windows meist
+   `C:\Users\…\AppData\Local\Programs\Microsoft VS Code\Code.exe`, Mac
+   **Programme > Visual Studio Code**).
+3. Auf **Regenerate project files** klicken.
+4. Das Fenster schließen.
+
+(Screenshot folgt: Zeigt Preferences > External Tools mit "Visual Studio Code" als External Script Editor.)
+
+Test: Im **Project**-Fenster Rechtsklick > **Create > Scripting > MonoBehaviour
+Script** (bzw. **Create > C# Script**), Name `Test`. Doppelklick darauf.
+
+✅ **Checkpoint:** VS Code öffnet sich mit `Test.cs`. Der Code ist farbig, und wenn die
+Maus über `MonoBehaviour` steht, erscheint eine Erklärung. Fragt VS Code **Do you trust
+the authors of the files in this folder?**: **Yes, I trust the authors**.
+
+Das Skript `Test` danach wieder löschen (in Unity: Rechtsklick > **Delete**).
+
+### Schritt 4: Copilot anmelden
+
+1. In VS Code: oben rechts in der Titelleiste auf das **Copilot-Symbol** klicken (bzw. unten
+   rechts in der Statusleiste) > **Sign in** / **Use AI features**.
+2. **Sign in with GitHub** wählen. Der Browser öffnet sich: anmelden und auf
+   **Authorize Visual Studio Code** klicken. Zurück in VS Code bestätigen.
+3. Ist der Education-Antrag noch nicht durch, gibt es **Copilot Free**. Das reicht zum
+   Start.
+
+**Modellauswahl:** In Copilot Free und Copilot Student steht die Modellauswahl im Chat fest auf
+**Auto** – GitHub wählt das Modell selbst. Eine Auswahl wie "Claude" oder "GPT" gibt es in
+diesen Plänen seit dem 24.06.2026 nicht mehr. Das ist kein Fehler im eigenen Setup.
+(Quelle: GitHub, <https://github.com/orgs/community/discussions/189268>)
+
+**Datenschutz – einmal einstellen:** <https://github.com/settings/copilot> öffnen. Dort gibt
+es eine Einstellung, ob GitHub die eigenen Eingaben und Code-Ausschnitte zum Verbessern und
+Trainieren seiner Modelle verwenden darf. Wer das nicht möchte, schaltet sie aus.
+
+(Screenshot folgt: Zeigt github.com/settings/copilot mit dem aktuellen Plan (Free oder Student) und der Datenschutz-Einstellung.)
+
+✅ **Checkpoint:** Rechts in VS Code ist die **Chat**-Ansicht offen (sonst: Strg+Alt+I bzw.
+Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (**Ask** / **Edit** /
+**Agent** o. ä.).
+
+### Schritt 5: Den Agenten zum ersten Mal benutzen
+
+1. Das Projekt in VS Code als Ordner öffnen, falls noch nicht geschehen: In Unity
+   **Assets > Open C# Project**. Im Explorer links in VS Code stehen `Assets`, `AGENTS.md`
+   usw.
+2. Im Chat den Modus auf **Agent** stellen.
+3. Eingeben:
+
+   ```
+   Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen zusammen,
+   welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
+   ```
+
+(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.)
+
+✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.25f1** und Regeln aus
+`AGENTS.md`. In GitHub Desktop steht weiterhin **No local changes** (er hat nichts geändert).
+
+Zum Schluss in Unity **Kurs > Setup prüfen**: Jetzt ist auch **Code-Editor** OK.
+
+✅ **Checkpoint:** **Setup prüfen** zeigt **Alles bereit**.
+
+Fertig. Weiter mit [Erster Commit](../first-commit/).
+
+### Das KI-Verzeichnis
+
+Die Hochschule Macromedia verlangt in jeder Projektarbeit ein **KI-Verzeichnis**: welches
+KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
+muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
+`KI-VERZEICHNIS.md` mit. Die Regel: Eine Zeile bekommt jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat. Reine Fragen ohne Änderung am Projekt brauchen keine Zeile – außer die Antwort geht in die Arbeit ein. Beispiel: „Erkläre mir dieses Skript Zeile für Zeile“ braucht keine Zeile; übernimmt man die Erklärung in die Dokumentation, schon. Laut `AGENTS.md` hängt der Agent
+solche Zeilen selbst an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
+„Copilot (Auto)“, weil Copilot Free/Student das Modell selbst wählt. Für die
+Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
+Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?
+
+### Copilot Student freischalten (später)
+
+Sobald GitHub den Education-Antrag bestätigt (E-Mail), wird Copilot Student meist von
+selbst aktiv – das kann nach der Bestätigung noch bis zu drei Tage dauern. Prüfen lässt sich das
+unter <https://github.com/settings/copilot>. In VS Code einmal abmelden und neu anmelden
+(Konto-Symbol unten links), falls VS Code noch Free anzeigt.
+
+### Wenn es nicht klappt
+
+**Doppelklick auf ein Skript öffnet einen anderen Editor (z. B. Visual Studio oder Notepad).**
+Schritt 3 nochmal. Wichtig ist **Regenerate project files**.
+
+**Der Code in VS Code ist nicht farbig, oder es gibt keine Erklärungen beim Drüberfahren.**
+VS Code hat das Projekt nicht als C#-Projekt erkannt.
+
+1. Das Projekt aus Unity heraus öffnen (**Assets > Open C# Project**), nicht irgendwo über
+   **Datei > Ordner öffnen**.
+2. Unten in VS Code nachsehen: **Ausgabe** (Output) > im Auswahlfeld **C# Dev Kit** bzw. **C#**.
+   Steht dort etwas von .NET, das nicht installiert werden konnte: VS Code neu starten, Internet
+   prüfen.
+3. In Unity: **Window > Package Manager** > **In Project** – ist **Visual Studio Editor**
+   installiert? Wenn nicht: installieren (gleiches Paket, auch für VS Code).
+
+**VS Code fragt nach Anmeldung bei C# Dev Kit / Microsoft-Konto.**
+Für Studierende ist C# Dev Kit kostenlos. Wegklicken geht meist; sonst mit einem Microsoft-
+Konto anmelden.
+
+**Im Chat gibt es keinen Agent-Modus.**
+VS Code aktualisieren: **Hilfe > Nach Updates suchen** (Mac: **Code > Nach Updates suchen**).
+
+**"You've reached your monthly limit" / Copilot antwortet nicht mehr.**
+Copilot Free hat ein Monatskontingent. Ist der Education-Antrag durch, gibt es mehr
+(siehe oben). Bis dahin: Fragen bündeln, genauer formulieren, und Jonas Bescheid geben.
+
+**Der Agent will einen Befehl im Terminal ausführen und fragt um Erlaubnis.**
+Nur erlauben, was man versteht. Im Zweifel den Agenten fragen: "Was macht dieser Befehl, und was passiert,
+wenn ich ablehne?" Befehle, die Dateien löschen oder "git reset" / "git push --force"
+enthalten, ablehnen.
+
+**Der Agent kennt die Regeln aus AGENTS.md nicht, obwohl die Datei im Projektordner liegt.**
+VS Code-Einstellungen öffnen (Strg+, bzw. Cmd+,), nach `useAgentsMdFile` suchen und
+**Chat: Use Agents Md File** anhaken. Chat neu starten.
+
+**Der Agent sagt, er findet AGENTS.md nicht.**
+In VS Code ist ein falscher Ordner offen. Links im Explorer muss ganz oben der
+Projektordner stehen (mit `Assets` darin). **Datei > Ordner öffnen** > den Projektordner.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/
+
+## Claude Code und Codex (optional)
+
+Dauer: ca. 20 Min pro Agent
+
+Voraussetzungen: Projekt geöffnet, Setup prüfen ohne Fehler (Projekt anlegen); Für Claude Code ein Claude-Abo (Pro oder höher); Für Codex ein ChatGPT-Abo (Plus oder höher)
+
+Checkpunkte:
+- [ ] git --version zeigt im Terminal eine Versionsnummer
+- [ ] Der Agent startet im Projektordner und ist angemeldet
+- [ ] Der Agent hat AGENTS.md gelesen und zusammengefasst, ohne etwas zu ändern
+- [ ] Der Agent hat auf Anfrage einen Commit gemacht, und GitHub Desktop zeigt ihn in History
+
+Stand: nicht durchgespielt
+
+## Claude Code und Codex (optional)
+
+**Copilot in VS Code ([VS Code und KI-Agent](../vscode-and-agent/)) reicht für den ganzen Kurs.** Diese Anleitung ist für alle,
+die zusätzlich einen der beiden Agenten nutzen wollen, mit denen Jonas selbst arbeitet:
+**Claude Code** (Anthropic) oder **Codex** (OpenAI). Beide kosten Geld.
+
+Der Vorteil: Beide laufen im **Terminal** im Projektordner und können dort auch **Git**
+bedienen. Statt in GitHub Desktop jede Datei anzuklicken, genügt ein Satz wie "Committe das mit
+einer passenden Nachricht", und der Agent zeigt, was er committen will. Den Diff muss man
+trotzdem selbst lesen – dafür bleibt GitHub Desktop das Werkzeug.
+
+| | Claude Code | Codex |
+|---|---|---|
+| Hersteller | Anthropic | OpenAI |
+| Nötiges Abo | Claude **Pro**, Max, Team oder Enterprise. Das kostenlose Claude-Konto reicht **nicht**. | ChatGPT **Plus** oder höher für Terminal und VS Code. Mit Free/Go nur in der ChatGPT-Desktop-App, und nur, wo schon freigeschaltet. |
+| Preis (Herstellerseite, 03.10.2026) | Pro: 20 $/Monat, 17 $/Monat bei Jahreszahlung, zzgl. MwSt. | Plus: 20 $/Monat; Go: 8 $/Monat |
+| Liest Regeln aus | `CLAUDE.md` (in der Kursvorlage holt sie `AGENTS.md` dazu) | `AGENTS.md` |
+| Offizielle Anleitung | <https://code.claude.com/docs/en/setup> | <https://learn.chatgpt.com/docs/codex/cli> |
+
+Quellen: [Claude-Preise](https://claude.com/pricing),
+[ChatGPT-/Codex-Preise](https://learn.chatgpt.com/docs/pricing). Preise ändern sich – vor dem
+Bezahlen nachsehen.
+
+### Schritt 1: Git für die Kommandozeile
+
+GitHub Desktop bringt Git mit, aber nur für sich selbst. Ein Agent im Terminal braucht Git als
+eigenes Programm.
+
+- **Windows:** Git für Windows von <https://git-scm.com/downloads/win> installieren. Im
+  Installer alle Vorschläge übernehmen. (Mit winget: `winget install --id Git.Git --exact`.)
+- **Mac:** Terminal öffnen und `xcode-select --install` eingeben. Ein Fenster bietet die
+  "Command Line Tools" an: **Installieren**. Darin ist Git.
+
+Danach ein **neues** Terminal (Windows: PowerShell) öffnen und eingeben:
+
+```
+git --version
+```
+
+✅ **Checkpoint:** Eine Zeile wie `git version 2.…` erscheint.
+
+### Schritt 2: Terminal im Projektordner öffnen
+
+Am einfachsten über GitHub Desktop: **Repository > Open in Command Prompt** (Windows; je nach
+Einstellung PowerShell) bzw. **Repository > Open in Terminal** (Mac). Das Terminal startet dann
+direkt im Projektordner.
+
+Zur Kontrolle `dir` (Windows) bzw. `ls` (Mac) eingeben.
+
+✅ **Checkpoint:** Es erscheinen `Assets`, `Packages`, `ProjectSettings` und `AGENTS.md`.
+
+Ab hier entweder **Claude Code** (Schritt 3) oder **Codex** (Schritt 4) – oder beide.
+
+### Schritt 3: Claude Code
+
+#### Installieren
+
+Die offiziellen Befehle (Stand 03.10.2026, <https://code.claude.com/docs/en/setup>):
+
+- **Windows (PowerShell):** `irm https://claude.ai/install.ps1 | iex`
+  – oder mit winget: `winget install Anthropic.ClaudeCode`
+- **Mac:** `curl -fsSL https://claude.ai/install.sh | bash`
+  – oder mit Homebrew: `brew install --cask claude-code`
+
+Admin-Rechte sind dafür nicht nötig. Danach ein **neues** Terminal im Projektordner öffnen
+(Schritt 2) und prüfen:
+
+```
+claude --version
+```
+
+#### Anmelden und starten
+
+Im Projektordner eingeben:
+
+```
+claude
+```
+
+Beim ersten Start öffnet sich der Browser. Mit dem Claude-Konto anmelden (dem mit dem
+Pro-Abo) und bestätigen. Zurück im Terminal fragt Claude Code eventuell, ob man dem Ordner
+vertraut: Ja.
+
+**Wichtig – den Modus einstellen:** Claude Code startet in neuen Versionen im **Auto-Modus**.
+Darin entscheidet ein zweites KI-Modell, welche Aktionen ohne Rückfrage laufen. Für den Anfang
+ist es besser, jede Änderung selbst zu sehen. **Shift+Tab** drücken, bis unten **Manual** (bzw.
+"default") steht. Dann fragt Claude Code vor jeder Dateiänderung und jedem Befehl.
+(Quelle: <https://code.claude.com/docs/en/permission-modes>)
+
+(Screenshot folgt: Zeigt Claude Code im Terminal nach dem Start im Projektordner, unten die Modusanzeige auf Manual.)
+
+✅ **Checkpoint:** Claude Code zeigt ein Eingabefeld und unten den Modus **Manual**.
+
+#### Erste Frage – nur lesen
+
+```
+Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen zusammen,
+welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
+```
+
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+GitHub Desktop zeigt weiterhin **No local changes**.
+
+Weiter mit **Schritt 5: Der erste Commit durch den Agenten**.
+
+### Schritt 4: Codex
+
+#### Installieren
+
+Die offiziellen Befehle (Stand 03.10.2026, <https://learn.chatgpt.com/docs/codex/cli>):
+
+- **Windows (PowerShell):**
+  `powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"`
+- **Mac:** `curl -fsSL https://chatgpt.com/codex/install.sh | sh`
+  – oder mit Homebrew: `brew install --cask codex`
+
+Codex läuft auf Windows direkt in PowerShell, WSL ist nicht nötig. Danach ein **neues**
+Terminal im Projektordner öffnen (Schritt 2) und prüfen:
+
+```
+codex --version
+```
+
+#### Anmelden und starten
+
+Im Projektordner eingeben:
+
+```
+codex
+```
+
+**Sign in with ChatGPT** wählen und im Browser mit dem ChatGPT-Konto anmelden. Zurück im
+Terminal fragt Codex eventuell, ob man dem Ordner vertraut: Ja.
+
+**Der Modus:** Codex darf standardmäßig im Projektordner lesen, Dateien ändern und Befehle
+ausführen, und fragt nach, wenn es darüber hinaus will. Für die ersten Schritte Codex
+vorsichtiger einstellen: `/permissions` eingeben und **Read-only** wählen. Für den Commit in
+Schritt 5 wieder auf **Auto** stellen – dann fragt Codex vor dem Commit nach.
+(Quelle: <https://learn.chatgpt.com/docs/agent-approvals-security.md>)
+
+(Screenshot folgt: Zeigt Codex im Terminal nach dem Start im Projektordner, mit dem Menü von /permissions.)
+
+✅ **Checkpoint:** Codex zeigt ein Eingabefeld und ist angemeldet.
+
+#### Erste Frage – nur lesen
+
+```
+Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen zusammen,
+welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
+```
+
+✅ **Checkpoint:** Die Antwort nennt Unity **6000.3.25f1** und Regeln aus `AGENTS.md`.
+GitHub Desktop zeigt weiterhin **No local changes**.
+
+### Schritt 5: Der erste Commit durch den Agenten
+
+Gleicher Ablauf für Claude Code und Codex.
+
+1. In Unity eine kleine Änderung machen: In der Szene eine **Sphere** hinzufügen
+   (Hierarchy > Rechtsklick > **3D Object > Sphere**) und **speichern**.
+
+2. Dem Agenten schreiben:
+
+   ```
+   Zeig mir mit git status und git diff --stat, was sich seit dem letzten Commit geändert
+   hat, und erklär es in einem Satz. Dann committe genau diese Änderung mit einer kurzen
+   deutschen Commit-Nachricht. Nicht pushen.
+   ```
+
+3. Der Agent will Befehle ausführen (`git status`, `git diff`, `git add`, `git commit`) und
+   fragt nach. Jeden Befehl vor dem Zustimmen lesen:
+   - `git status`, `git diff`, `git add`, `git commit`: in Ordnung.
+   - `git push`: nur, wenn es gewollt ist (hier: ablehnen, im Prompt steht "nicht pushen").
+   - `git reset --hard`, `git push --force`, `git clean`, alles mit Löschen: **ablehnen**.
+
+4. In **GitHub Desktop** nachsehen: Reiter **History**.
+
+(Screenshot folgt: Zeigt GitHub Desktop, History, oben der Commit mit der Nachricht des Agenten; rechts der Diff der Szenendatei.)
+
+✅ **Checkpoint:** In GitHub Desktop steht der neue Commit oben in **History**. Oben rechts
+zeigt GitHub Desktop **Push origin** mit einer 1 – der Commit ist noch nicht hochgeladen. Hochgeladen
+wird von Hand mit **Push origin**, wenn das Ergebnis passt.
+
+Das ist die Arbeitsweise im Kurs: Der Agent darf committen, aber was er committet hat, wird in
+GitHub Desktop gelesen.
+
+**Warum der Agent nicht selbst pusht:** In `AGENTS.md` steht, dass der Agent nur pusht, wenn
+man ihn ausdrücklich darum bittet. Der Grund: Man bleibt selbst in der Schleife, bis man versteht, wann <!-- Durchsicht -->
+es klug ist, einem Agenten das Steuer zu überlassen. Zustimmen und aushandeln kann man nur
+eine Zusammenarbeit, die man versteht. Wer weiß, was ein Push bewirkt und was man dabei
+abgibt, kann später selbst entscheiden, wie viel man dem Agenten überlässt. Rückgängig machen geht wie immer: In GitHub Desktop **History** >
+Rechtsklick auf den Commit > **Revert changes in commit**, oder den Agenten bitten: "Mach den
+letzten Commit mit git revert rückgängig."
+
+### Das KI-Verzeichnis
+
+Die Hochschule Macromedia verlangt in jeder Projektarbeit ein **KI-Verzeichnis**: welches
+KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
+muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
+`KI-VERZEICHNIS.md` mit. Die Regel: Eine Zeile bekommt jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat. Reine Fragen ohne Änderung am Projekt brauchen keine Zeile – außer die Antwort geht in die Arbeit ein. Beispiel: „Erkläre mir dieses Skript Zeile für Zeile“ braucht keine Zeile; übernimmt man die Erklärung in die Dokumentation, schon. Laut `AGENTS.md` hängt der Agent
+solche Zeilen selbst an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Für die
+Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
+Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?
+
+### Wenn es nicht klappt
+
+**"claude" bzw. "codex" wird nicht erkannt / command not found.**
+Das Terminal war schon vor der Installation offen. Neues Terminal öffnen. Hilft das nicht:
+Für Claude Code `claude doctor` ausprobieren bzw. die Fehlerhilfe auf
+<https://code.claude.com/docs/en/troubleshoot-install> lesen.
+
+**Windows: "irm wird nicht erkannt".**
+Das falsche Terminal ist offen: `irm …` gehört in **PowerShell**. Vorne im PowerShell-Fenster
+steht `PS C:\…`.
+
+**Claude Code: "Your account does not have access to Claude Code" o. ä.**
+Das kostenlose Claude-Konto enthält Claude Code nicht. Nötig ist Pro oder höher – oder bei
+Copilot bleiben.
+
+**Codex: Nach der Anmeldung kommt eine Meldung zum Plan oder Limit.**
+Mit ChatGPT Free/Go gibt es Codex im Terminal nicht. Nötig ist Plus – oder bei
+Copilot bleiben.
+
+**Der Agent sagt "not a git repository".**
+Das Terminal ist im falschen Ordner. Schritt 2 nochmal, über GitHub Desktop.
+
+**Der Agent sagt "git: command not found".**
+Schritt 1 fehlt oder das Terminal war schon vorher offen. Neues Terminal öffnen.
+
+**Der Agent hat etwas committet, das nicht gewollt war.**
+Noch nicht gepusht? In GitHub Desktop **History** > Rechtsklick auf den Commit > **Undo commit**
+(nur beim obersten Commit möglich). Die Änderungen stehen dann wieder unter **Changes**, und
+es kann neu entschieden werden.
+
+**Der Agent will `git push --force` oder `git reset --hard` ausführen.**
+Ablehnen. Dem Agenten schreiben, dass das in diesem Projekt verboten ist (steht auch in `AGENTS.md`).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/
+
+## Erster Commit
+
+Dauer: ca. 15 Min
+
+Voraussetzungen: VS Code und KI-Agent eingerichtet (Setup prüfen zeigt „Alles bereit“)
+
+Checkpunkte:
+- [ ] Ein erster Commit mit einer eigenen Änderung ist angelegt
+- [ ] Der Commit ist auf github.com zu sehen
+- [ ] Eine Änderung wurde mit "Discard changes" rückgängig gemacht, und Unity hat sie zurückgeholt
+
+Stand: nicht durchgespielt
+
+## Erster Commit
+
+Ein **Commit** ist ein gespeicherter Zwischenstand des Projekts, mit einer kurzen
+Beschreibung. **Push** lädt die Commits zu GitHub hoch. In dieser Anleitung kommt beides
+einmal vor – dazu der wichtigste Handgriff des Kurses: eine Änderung **rückgängig** machen.
+
+### Schritt 1: Etwas in der Szene ändern
+
+1. In Unity unten im **Project**-Fenster: **Assets > Scenes** > Doppelklick auf die Szene
+   (z. B. `SampleScene`).
+2. Im **Hierarchy**-Fenster: Rechtsklick > **3D Object > Cube**.
+3. Speichern: **File > Save** (Strg+S / Cmd+S).
+
+✅ **Checkpoint:** In der Scene-Ansicht ist ein Würfel zu sehen. In der **Hierarchy** steht
+ganz oben der Szenenname (z. B. `SampleScene`) **ohne Sternchen** (`*`) – das heißt:
+gespeichert.
+
+### Schritt 2: Die Änderung in GitHub Desktop ansehen
+
+1. Zu GitHub Desktop wechseln, Reiter **Changes**.
+2. Links steht die Szenendatei, z. B. `Assets/Scenes/SampleScene.unity`. Darauf klicken.
+3. Rechts ist zu sehen, was sich geändert hat: grüne Zeilen sind neu. Unity speichert Szenen als
+   Text – darin steht jetzt der Würfel (`Cube`, seine Position, seine [Components](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)).
+
+(Screenshot folgt: Zeigt den Reiter Changes mit der Szenendatei links und rechts grünen Zeilen, in denen "m\_Name: Cube" zu sehen ist.)
+
+Diese Ansicht heißt **Diff**. Sie wird ständig gebraucht: Wenn der KI-Agent etwas
+geändert hat, zeigt sie, **was** er geändert hat.
+
+✅ **Checkpoint:** Links steht mindestens die Szenendatei. Nirgends steht `Library/`.
+
+### Schritt 3: Committen
+
+1. Unten links bei **Summary** eine kurze Beschreibung: `Würfel in die Szene gestellt`.
+2. Auf **Commit to main** klicken.
+
+✅ **Checkpoint:** Links steht **No local changes**. Im Reiter **History** steht der Commit
+ganz oben.
+
+### Schritt 4: Hochladen (Push)
+
+1. Oben auf **Push origin** klicken.
+2. Danach auf **Repository > View on GitHub** klicken.
+
+(Screenshot folgt: Zeigt die Repository-Seite auf github.com mit "Würfel in die Szene gestellt" als letztem Commit.)
+
+✅ **Checkpoint:** Auf github.com steht über der Dateiliste der Commit **Würfel in die Szene
+gestellt**.
+
+### Schritt 5: Rückgängig machen
+
+Jetzt das Wichtigste: zurück zum letzten Commit.
+
+1. In Unity den Würfel löschen (auswählen, Entf bzw. Cmd+Backspace) und **speichern**.
+2. In GitHub Desktop erscheint die Szenendatei wieder unter **Changes** – diesmal mit roten
+   Zeilen (gelöscht).
+3. Rechtsklick auf die Datei > **Discard changes…** > bestätigen.
+4. Zurück in Unity: Unity merkt, dass sich die Szene geändert hat, und lädt sie neu. Fragt
+   Unity nach: auf **Reload** klicken.
+
+✅ **Checkpoint:** Der Würfel ist wieder da. GitHub Desktop zeigt **No local changes**.
+
+Das ist der Rückgängig-Knopf. Er funktioniert für alles, was seit dem letzten Commit passiert
+ist – auch für Änderungen, die der KI-Agent gemacht hat.
+
+### Die Arbeitsregel für den Kurs
+
+Von jetzt an gilt diese Schleife:
+
+1. **Committen**, bevor der Agent eine Aufgabe bekommt. (Nichts unter Changes.)
+2. Dem Agenten **genau beschreiben**, was passieren soll.
+3. Im Spiel **ausprobieren** (Play).
+4. In GitHub Desktop den **Diff lesen**: Welche Dateien hat er angefasst? Ist klar, was
+   passiert?
+5. Passt es: **committen**. Passt es nicht: **Discard changes** und neu beschreiben.
+6. **Pushen** selbst übernehmen, wenn das Ergebnis passt – auch wenn der Agent Git bedienen kann.
+   Er pusht nur, wenn man ihn ausdrücklich darum bittet. Man bleibt selbst in der Schleife, bis man <!-- Durchsicht -->
+   versteht, wann es klug ist, einem Agenten das Steuer zu überlassen: Zustimmen kann man nur
+   einer Zusammenarbeit, die man versteht.
+
+Zum Schluss **Kurs > Setup prüfen**: alles OK, auch **Commits** und **Mit GitHub verbunden**.
+
+### Wenn es nicht klappt
+
+**Unter Changes steht nichts, obwohl etwas geändert wurde.**
+Nicht gespeichert. Im Szenen-Reiter in Unity nach dem Sternchen schauen und mit
+Strg+S / Cmd+S speichern.
+
+**Unter Changes stehen hunderte Dateien oder etwas mit `Library/`.**
+Nicht committen. **Kurs > Setup prüfen** öffnen und den Fehler bei **.gitignore** beheben.
+
+**Neben der eigenen Datei stehen `.meta`-Dateien.**
+Richtig so. Jede Datei in `Assets` hat eine `.meta`-Datei, in der Unity sich ihre Verknüpfungen
+merkt. Immer mit committen.
+
+**Statt "Push origin" steht dort "Publish repository".**
+Das Repository ist noch nicht auf GitHub. Darauf klicken, **Keep this code private** angehakt
+lassen.
+
+**Push: "Authentication failed" oder "rejected".**
+In GitHub Desktop ab- und wieder anmelden (**File > Options > Accounts**). Steht da
+"rejected … fetch first": erst **Fetch origin**, dann **Pull origin**, dann nochmal Push.
+
+**Push: "file … exceeds GitHub's file size limit of 100 MB".**
+Eine Datei ist zu groß für GitHub. **Kurs > Setup prüfen** zeigt sie unter **Große Dateien**.
+Jonas fragen, bevor etwas gelöscht wird – der Commit muss dann neu gemacht werden.
+
+**Nach Discard changes ist der Würfel nicht wieder da.**
+Unity hat die Szene nicht neu geladen. Doppelklick auf die Szene im Project-Fenster und
+**Don't Save** wählen, falls Unity fragt.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/
+
+## Kurs-Paket aktualisieren
+
+Dauer: ca. 5 Min
+
+Voraussetzungen: Projekt aus der Kursvorlage (Projekt anlegen); Git ist installiert (Git installieren); Jonas hat eine neue Version angekündigt (zum 23.10.: v0.2.0)
+
+Checkpunkte:
+- [ ] Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer
+- [ ] Menü „Kurs > Setup prüfen“ zeigt beim Kurs-Paket die neue Version
+- [ ] Die Änderung an Packages/manifest.json ist committet
+- [ ] Ab v0.2.0: Im Project-Fenster liegt unter Packages > GEC1 Kurs-Paket > Player das Prefab „Spieler“
+
+Stand: nicht durchgespielt
+
+## Kurs-Paket aktualisieren
+
+Das **Kurs-Paket** (`de.macromedia.gec1`) bringt das Menü **Kurs > Setup prüfen** und im Lauf
+des Semesters weitere Werkzeuge: den Spieler-Controller und das Kit. Es liegt nicht im eigenen
+Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich nur, **welche
+Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
+
+```
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0",
+```
+
+Das `#v0.1.0` am Ende ist die Version. Aktualisieren heißt: diese Zeile auf die neue Version
+setzen. Unity lädt den Rest selbst (dafür braucht es Git).
+
+Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgängig machen.
+
+| Version | Ab | Neu |
+|---|---|---|
+| v0.1.0 | 09.10. (in der Kursvorlage) | Menü **Kurs > Setup prüfen** |
+| v0.2.0 | 23.10. | Spieler-Controller: Prefab **Spieler** (laufen, springen, umsehen; Ich- und Dritte-Person-Ansicht) |
+| v0.3.0 | 13.11. | Kit: Interaktionen als Graph |
+
+### Schritt 1: Neue Version eintragen
+
+1. In GitHub Desktop prüfen: **No local changes**. Wenn nicht, erst committen.
+2. In Unity: **Window > Package Manager**.
+3. Oben links auf **+** > **Install package from git URL…** klicken.
+4. Die Adresse mit der neuen Version einfügen, z. B. für Version 0.2.0:
+
+   ```
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.2.0
+   ```
+
+   Die genaue Versionsnummer nennt Jonas.
+5. **Install** klicken. Unity lädt die neue Version und kompiliert kurz.
+
+(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.2.0.)
+
+✅ **Checkpoint:** Im Package Manager steht unter **In Project** das **GEC1 Kurs-Paket** mit
+der neuen Versionsnummer. **Kurs > Setup prüfen** zeigt bei **Kurs-Paket** dieselbe Version.
+Ab v0.2.0 liegt im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket > Player** das Prefab
+**Spieler**; es lässt sich von dort in die Szene ziehen.
+
+### Schritt 2: Die Änderung ansehen und committen
+
+1. In GitHub Desktop, Reiter **Changes**: Geändert sind `Packages/manifest.json` und
+   `Packages/packages-lock.json`.
+2. Auf `manifest.json` klicken. Rechts zeigt der **Diff** genau eine geänderte Zeile: rot die
+   alte Version, grün die neue.
+3. Unten bei **Summary** z. B. `Kurs-Paket auf 0.2.0` eintragen > **Commit to main** >
+   **Push origin**.
+
+✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**, der Commit steht oben in
+**History**.
+
+Das ist der ganze Mechanismus: Die Version eines Pakets ist eine Zeile Text im Projekt, und
+Git bewahrt jede Version auf. Ging bei der Aktualisierung etwas schief, macht **History** >
+Rechtsklick auf den Commit > **Revert changes in commit** sie wieder rückgängig.
+
+### Mit einem KI-Agenten
+
+Mit Claude Code oder Codex im Projektordner geht es auch so:
+
+```
+Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.2.0. Ändere sonst
+nichts. Zeig mir danach den Diff. Nicht committen.
+```
+
+Danach Unity in den Vordergrund holen (Unity lädt das Paket dann neu) und weiter mit Schritt 2.
+
+### Wenn es nicht klappt
+
+**„No 'git' executable was found“ oder „Unable to add package“.**
+Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
+[Git installieren](../install-git/).
+
+**„Could not find … v0.2.0“ / die Version wird nicht gefunden.**
+Tippfehler in der Adresse oder die Version gibt es (noch) nicht. Die Adresse genau so einfügen,
+mit `#v` vor der Nummer und ohne Leerzeichen.
+
+**Nach der Aktualisierung zeigt Unity rote Fehler in der Console.**
+In GitHub Desktop beide geänderten Dateien mit **Discard changes** zurücksetzen (vor dem
+Commit) bzw. den Commit mit **Revert changes in commit** rückgängig machen. Dann Jonas Bescheid
+sagen und den Text aus der Console mitschicken.
+
+**Im Package Manager steht noch die alte Version.**
+Unity neu starten. Steht in `Packages/manifest.json` die neue Version, lädt Unity sie beim Öffnen.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/
