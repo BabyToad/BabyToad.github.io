@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 # Tag 2: Pitch und Blockout
 
@@ -63,13 +63,13 @@ Türen sind etwa 2 m hoch, Stufen 0,2 m. Die Spielfigur ist 1,8 m groß.
 - Lokal: relativ zum Elternobjekt
 - Welt: relativ zur Szene
 
-Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) beschreibt Lage, Drehung und Größe eines [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/). Werte als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/) mit x, y und z. Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit.
+Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) beschreibt Lage, Drehung und Größe eines [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/). Werte als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/) mit x, y und z. Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit.
 
 ## Was sich wiederholt, wird ein Prefab
 
 Einmal bauen, oft verwenden, an einer Stelle ändern.
 
-Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/).
+Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/).
 
 ## Die Spielfigur ist schon da
 

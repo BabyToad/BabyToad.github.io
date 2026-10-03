@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 Dauer: 5 Min lesen
 

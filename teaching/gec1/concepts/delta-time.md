@@ -1,12 +1,12 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 # deltaTime
 
-Die Zeit seit dem letzten Frame, in Sekunden. Mal damit, und Bewegung gilt pro Sekunde statt pro Frame.
+Die Zeit seit dem letzten Frame, in Sekunden. Damit multipliziert, gilt Bewegung pro Sekunde statt pro Frame.
 
 Auch: Time.deltaTime, Delta-Zeit, Deltatime
 
-Verwandt: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/)
+Verwandt: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/)
 
 Unity-Doku: https://docs.unity3d.com/ScriptReference/Time-deltaTime.html
 

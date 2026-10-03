@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 Dauer: ca. 20 Min (davon bis zu 10 Min erstes Öffnen)
 
@@ -16,7 +16,7 @@ Stand: nicht durchgespielt
 # Projekt anlegen
 
 Das Kursprojekt wird nicht leer angelegt, sondern aus der **Kursvorlage**. Die Vorlage ist
-ein fertiges, leeres Unity-Projekt ([Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/), Einstellungen, URP), in dem schon alles liegt,
+ein fertiges, leeres Unity-Projekt ([Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), Einstellungen, URP), in dem schon alles liegt,
 was sonst gern schiefgeht:
 
 - die richtige Unity-Version und Render-Pipeline (URP),

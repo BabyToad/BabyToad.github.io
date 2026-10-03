@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 # GameObject
 
@@ -6,7 +6,7 @@ Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen s
 
 Auch: GameObjects, Spielobjekt, Objekt
 
-Verwandt: [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
+Verwandt: [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/)
 
 Unity-Doku: https://docs.unity3d.com/Manual/GameObjects.html
 

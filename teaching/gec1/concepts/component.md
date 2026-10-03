@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/component/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/component/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 # Component
 
@@ -6,7 +6,7 @@ Ein Baustein an einem GameObject mit eigenen Einstellungen. Transform, Renderer,
 
 Auch: Components, Komponente, Komponenten
 
-Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/)
+Verwandt: [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/)
 
 Unity-Doku: https://docs.unity3d.com/Manual/Components.html
 

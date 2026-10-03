@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/01/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/01/ · Stand 2026-10-03T17:03Z · b690772 -->
 
 # Tag 1: Was eine Engine tut
 
@@ -9,6 +9,12 @@ Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 Begriffe: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
 
 Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen.
+
+## Alles steht auf der Kursseite
+
+allknivesnobagel.com
+
+/teaching/gec1
 
 ## Was ihr am Ende abgebt
 
@@ -70,15 +76,15 @@ Jede [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/compone
 
 Ein Commit ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.
 
-## Jede KI-Nutzung gehört ins KI-Verzeichnis
+## Was eine KI im Projekt verändert, kommt ins KI-Verzeichnis
 
-Werkzeug, Modell, Zweck, Dateien. Pflicht, auch ohne KI-Nutzung.
+Werkzeug, Modell, Zweck, Dateien. Das Verzeichnis ist Pflicht, auch ohne KI-Nutzung.
 
 ## Zwischen den Freitagen
 
 Dreizehn Tage ohne Kurs. Bringt jedes Mal etwas mit, das läuft, und eine Frage.
 
-## Teil B: Das erste Objekt bewegt sich
+## Das erste Objekt bewegt sich
 
 Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
 

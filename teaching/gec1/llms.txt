@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-03T16:48Z · 87a2a07
+Stand: 2026-10-03T17:03Z · b690772
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md), Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), falls dein Werkzeug text/markdown ablehnt. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
@@ -13,11 +13,29 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 
 ## Begriffe
 
+- [Branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch.md): Eine eigene Linie im Verlauf, auf der sich etwas ausprobieren lässt, ohne den Hauptstand zu gefährden. Gelingt es, wird der Branch zurückgeführt (Merge); sonst bleibt er liegen oder wird gelöscht.
+- [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build.md): Das fertige Programm, das ohne Unity läuft. Unity packt dafür die Szenen aus der Scene List und alles, was sie brauchen, in einen Ordner mit einer startbaren Datei.
+- [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision.md): Zwei Collider berühren sich. Ein normaler Collider ist fest, Dinge prallen ab. Ein Trigger ist durchlässig und meldet nur, dass etwas hineinkommt oder hinausgeht.
+- [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit.md): Ein gespeicherter Stand des ganzen Projekts mit einer kurzen Beschreibung. Commits reihen sich zum Verlauf; zu jedem lässt sich später zurückkehren.
 - [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component.md): Ein Baustein an einem GameObject mit eigenen Einstellungen. Transform, Renderer, Collider und eigene Skripte sind Komponenten.
-- [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time.md): Die Zeit seit dem letzten Frame, in Sekunden. Mal damit, und Bewegung gilt pro Sekunde statt pro Frame.
+- [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition.md): Eine Frage mit der Antwort ja oder nein, etwa „Hat die Spielfigur den Schlüssel?“. Je nach Antwort geht es auf dem einen oder dem anderen Weg weiter.
+- [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time.md): Die Zeit seit dem letzten Frame, in Sekunden. Damit multipliziert, gilt Bewegung pro Sekunde statt pro Frame.
+- [Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff.md): Die Gegenüberstellung zweier Stände, Zeile für Zeile: was weggefallen ist und was dazukam. Vor dem Commit gelesen, zeigt der Diff, was tatsächlich gespeichert wird.
+- [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event.md): Ein Moment, in dem etwas passiert, zum Beispiel ein Tastendruck, ein Betreten oder ein Aufprall. Das Spiel reagiert genau dann, statt in jedem Frame nachzusehen.
 - [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame.md): Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
 - [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object.md): Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen seine Komponenten.
+- [Git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git.md): Ein Programm, das den Verlauf eines Projekts speichert. Jeder gespeicherte Stand lässt sich ansehen, vergleichen und zurückholen. GitHub ist ein Dienst, der Git-Projekte online aufbewahrt.
+- [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab.md): Ein gespeichertes GameObject als Vorlage im Projekt. In der Szene stehen Instanzen davon. Eine Änderung am Prefab erreicht alle Instanzen, außer an Stellen, die eine Instanz selbst überschreibt.
+- [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference.md): Ein Verweis auf ein anderes Objekt statt einer Kopie davon. Ein Skript, das eine Tür öffnen soll, braucht eine Referenz auf genau diese Tür. Leere Referenzen sind die häufigste Fehlerquelle.
+- [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository.md): Ein Projektordner, dessen Verlauf Git aufzeichnet. Lokal liegt er auf dem eigenen Rechner, eine Kopie davon meist auf GitHub. Was nicht hineingehört, regelt die Datei .gitignore.
+- [Revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert.md): Macht einen früheren Commit rückgängig. Git legt dazu einen neuen Commit an, der das Gegenteil enthält. Der Verlauf bleibt vollständig, auch der Fehler ist darin noch zu sehen.
+- [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody.md): Die Component, die ein GameObject der Physik übergibt. Es fällt, lässt sich anstoßen und prallt ab. Bewegt wird es dann mit Kräften, nicht mehr über die Transform.
+- [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene.md): Eine Datei, die eine Welt oder einen Teil davon enthält: alle GameObjects mit ihren Einstellungen. Ein Spiel kann aus einer Szene bestehen oder aus vielen, etwa einer pro Level.
+- [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state.md): Was sich das Spiel von einem Frame zum nächsten merkt. Ist die Tür offen? Wie viele Münzen sind gesammelt? Events ändern den Zustand, Bedingungen fragen ihn ab.
+- [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag.md): Ein fester Name für einen bestimmten Commit, etwa „alpha“ oder „abgabe“. Anders als ein Branch rückt ein Tag nie weiter. Releases auf GitHub bauen auf Tags auf.
+- [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform.md): Die Component, die Position, Drehung und Größe eines GameObjects hält. Jedes GameObject hat genau eine. Bei Kindobjekten gelten die Werte relativ zum Elternobjekt.
 - [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update.md): Die Methode, die Unity in jedem Frame auf jedem aktiven Skript aufruft. Hier passiert alles, was laufend geschehen soll.
+- [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector.md): Drei Zahlen x, y, z. Sie beschreiben einen Punkt im Raum oder eine Richtung mit Länge, etwa eine Bewegung oder eine Kraft. In Unity heißt der Typ Vector3.
 
 ## Anleitungen
 
