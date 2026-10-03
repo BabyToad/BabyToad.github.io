@@ -1,0 +1,135 @@
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/01/ · Stand 2026-10-03T16:36Z · a410945 -->
+
+# Tag 1: Was eine Engine tut
+
+09.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/01/slides/
+
+Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
+
+Begriffe: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
+
+Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen.
+
+## Was ihr am Ende abgebt
+
+Eine interaktive Spielwelt in Unity. Klein ist erlaubt: Ein einziger Raum reicht.
+
+## Wofür es Punkte gibt
+
+- Idee und Konzept: **30**
+- Audio-visuell: 20 · Funktionalität: 20
+- Struktur und Build: 10 · Implementierung: 10 · Dokumentation: 10
+
+## Drei Wege zum Spiel
+
+1. **Von Hand** im Editor: Objekte, Komponenten, später Knoten im Graphen
+2. **Code lesen**: verstehen, was ein Skript in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) tut
+3. **Mit einem Agenten**: beschreiben, prüfen, übernehmen oder verwerfen
+
+## Ein Spiel ist eine Schleife
+
+Jeder Durchlauf ist ein [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), viele davon pro Sekunde.
+
+## Was in einem Frame passiert
+
+1. Eingabe lesen
+2. Zustand ändern
+3. Bild zeichnen
+
+Eure Skripte laufen im zweiten Schritt. Unity ruft dafür in jedem Frame [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) auf: bei jedem eingeschalteten Skript auf einem aktiven GameObject, das diese Methode hat.
+
+## Was die Engine euch abnimmt
+
+- Bilder zeichnen
+- Physik und Kollisionen
+- Eingabe, Ton, Animation
+- Den Build für Windows
+
+## Alles ist ein GameObject
+
+Ein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) ist zunächst leer. Was es kann, bestimmen seine Komponenten.
+
+## Komponenten bestimmen das Verhalten
+
+- Transform: wo es ist
+- Mesh Renderer: wie es aussieht
+- Collider: womit es zusammenstößt
+- Euer Skript: was es tut
+
+Jede [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) ist ein Baustein mit eigenen Einstellungen im Inspector. Auch ein Skript ist eine Komponente.
+
+## So arbeiten wir
+
+1. Beschreiben, was passieren soll
+2. Bauen
+3. Spielen
+4. Prüfen, was sich geändert hat
+5. Committen
+
+## Git ist euer Rückgängig-Knopf
+
+Ein Commit ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.
+
+## Jede KI-Nutzung gehört ins KI-Verzeichnis
+
+Werkzeug, Modell, Zweck, Dateien. Pflicht, auch ohne KI-Nutzung.
+
+## Zwischen den Freitagen
+
+Dreizehn Tage ohne Kurs. Bringt jedes Mal etwas mit, das läuft, und eine Frage.
+
+## Teil B: Das erste Objekt bewegt sich
+
+Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
+
+## Pro Frame
+
+```csharp
+void Update()
+{
+    transform.Translate(0, 0.05f, 0);
+}
+```
+
+## Seht selbst
+
+> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f \* Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
+
+```
+tempo = 3;
+
+// in Update()
+y += tempo
+  * Time
+  .deltaTime;
+```
+
+## Pro Sekunde
+
+```csharp
+void Update()
+{
+    transform.Translate(0, 3f * Time.deltaTime, 0);
+}
+```
+
+Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) gilt Bewegung pro Frame, mit deltaTime pro Sekunde.
+
+[deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) ist die Zeit seit dem letzten Frame. Wer damit multipliziert, bewegt Objekte pro Sekunde statt pro Frame.
+
+## Lasst euch die Zeilen erklären
+
+„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“
+
+## Drei Fragen an jede Idee
+
+1. Worum geht es in eurem Spiel?
+2. Wie handelt das Spiel davon?
+3. Wofür belohnt es die Spielenden?
+
+## Bis zum 23.10.
+
+1. Pitch: zwei Minuten, mit Folie, Referenzbildern und Spielreferenzen
+2. Eine Seite: zwei Alternativen, das angestrebte Erlebnis, warum diese Idee
+3. Eine Designfrage, die sich testen lässt, und ein Satz zur Kernmechanik
+4. Setup zu Hause abschließen

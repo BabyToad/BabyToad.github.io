@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#1d2a25"/>
+  <rect x="0" y="0" width="12" height="64" fill="#1f2d28"/>
+  <rect x="12" y="0" width="2" height="64" fill="#121a17"/>
+  <rect x="52" y="0" width="12" height="64" fill="#1f2d28"/>
+  <rect x="50" y="0" width="2" height="64" fill="#121a17"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Verdana, sans-serif" font-weight="700" font-size="24" fill="#eeece4">Δt</text>
+  <path d="M19 47 L45 46" stroke="#f7f09c" stroke-width="4" stroke-linecap="round"/>
+</svg>

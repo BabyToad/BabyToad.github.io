@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><title>Projekt anlegen · GEC1</title><link rel="alternate" type="text/markdown" href="/teaching/gec1/guides/create-project.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.CKAdqCzU.css"></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article><div class="label">Anleitung 3 · ca. 20 Min (davon bis zu 10 Min erstes Öffnen)</div><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/guides/create-project.md" data-titel="Projekt anlegen">Für KI kopieren</button><a href="/teaching/gec1/guides/create-project.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nimm den Link „Markdown“.`))})});</script><h1 id="projekt-anlegen">Projekt anlegen</h1>
+<p>Das Kursprojekt wird nicht leer angelegt, sondern aus der <strong>Kursvorlage</strong>. Die Vorlage ist
+ein fertiges, leeres Unity-Projekt (<a href="/teaching/gec1/concepts/szene/" class="begriff art-daten fehlt" data-begriff="szene">Szene</a>, Einstellungen, URP), in dem schon alles liegt,
+was sonst gern schiefgeht:</p>
+<ul>
+<li>die richtige Unity-Version und Render-Pipeline (URP),</li>
+<li>eine <code>.gitignore</code>, die Unitys riesige Zwischendateien (<code>Library/</code>) aus Git heraushält,</li>
+<li><code>AGENTS.md</code>: die Regeln, die der KI-Agent im Projekt befolgt,</li>
+<li>der Menüpunkt <strong>Kurs > Setup prüfen</strong>, der das Setup kontrolliert.</li>
+</ul>
+<p>Daraus entsteht ein eigenes Repository auf GitHub. Das wird auf den eigenen Rechner geholt
+und in Unity geöffnet.</p>
+<h2 id="schritt-1-einen-ordner-für-unity-projekte-anlegen">Schritt 1: Einen Ordner für Unity-Projekte anlegen</h2>
+<p>Einen Ordner anlegen, in dem alle Unity-Projekte liegen. Er soll <strong>nicht</strong> in OneDrive,
+iCloud, Dropbox oder Downloads liegen und <strong>keine Umlaute</strong> im Pfad haben.</p>
+<ul>
+<li><strong>Windows:</strong> Explorer öffnen > <strong>Dieser PC</strong> > <strong>Lokaler Datenträger (C:)</strong> > Rechtsklick >
+<strong>Neu > Ordner</strong> > <code>Unity</code>. Ergebnis: <code>C:\Unity</code></li>
+<li><strong>Mac:</strong> Finder > <strong>Gehe zu > Benutzerordner</strong> (Cmd+Shift+H) > Rechtsklick > <strong>Neuer
+Ordner</strong> > <code>Unity</code>. Ergebnis: <code>/Users/benutzername/Unity</code></li>
+</ul>
+<p>Warum nicht unter Dokumente? Auf vielen Windows-Rechnern ist Dokumente unbemerkt ein
+OneDrive-Ordner. OneDrive synchronisiert dann tausende Unity-Dateien und kommt Git in die
+Quere.</p>
+<p>✅ <strong>Checkpoint:</strong> An der Stelle oben gibt es jetzt einen leeren Ordner <code>Unity</code>.</p>
+<h2 id="schritt-2-das-eigene-repository-aus-der-kursvorlage-erstellen">Schritt 2: Das eigene Repository aus der Kursvorlage erstellen</h2>
+<ol>
+<li>Die Kursvorlage öffnen: <a href="https://github.com/BabyToad/macromedia-gec1-ws26">https://github.com/BabyToad/macromedia-gec1-ws26</a>.</li>
+<li>Oben rechts auf den grünen Knopf <strong>Use this template</strong> > <strong>Create a new repository</strong> klicken.</li>
+<li>Einstellen:
+<ul>
+<li><strong>Owner:</strong> der eigene GitHub-Name</li>
+<li><strong>Repository name:</strong> ein kurzer Name ohne Leerzeichen und Umlaute, z. B. <code>gec1-nachname</code>.
+Der Name des Spiels steht noch nicht fest – das ist in Ordnung.</li>
+<li><strong>Private</strong> auswählen.</li>
+</ul>
+</li>
+<li>Auf <strong>Create repository</strong> klicken.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: template-use.png]</strong> Zeigt die Kursvorlage auf GitHub mit dem aufgeklappten
+Knopf "Use this template" > "Create a new repository".</p>
+<p><strong>[Screenshot: template-create.png]</strong> Zeigt das Formular "Create a new repository" mit
+Owner, Name <code>gec1-nachname</code> und "Private" ausgewählt.</p>
+</blockquote>
+<p>Freiwillig: Jetzt lässt sich Jonas als Collaborator einladen (<strong>Settings</strong> >
+<strong>Collaborators</strong> > <strong>Add people</strong> > <code>BabyToad</code>). Keine Bedingung, aber hilfreich, falls
+später Hilfe nötig ist (siehe <strong>GitHub einrichten</strong>).</p>
+<p>✅ <strong>Checkpoint:</strong> Die Seite des neuen Repositorys ist offen. Oben steht
+<code>github-name / gec1-nachname</code>, daneben <strong>Private</strong>, darunter "generated from …" mit dem Namen
+der Vorlage. Ordner wie <code>Assets</code>, <code>Packages</code>, <code>ProjectSettings</code> sind zu sehen.</p>
+<h2 id="schritt-3-das-repository-auf-den-rechner-holen-klonen">Schritt 3: Das Repository auf den Rechner holen (klonen)</h2>
+<ol>
+<li>Auf der Repository-Seite auf den grünen Knopf <strong>Code</strong> > <strong>Open with GitHub
+Desktop</strong> klicken. Der Browser fragt, ob er GitHub Desktop öffnen darf: <strong>Ja / Öffnen</strong>.
+(Alternativ in GitHub Desktop: <strong>File > Clone repository</strong> > Reiter <strong>GitHub.com</strong> > das
+Repository auswählen.)</li>
+<li>GitHub Desktop zeigt <strong>Clone a repository</strong>. <strong>Local path</strong> so ändern, dass er im
+Unity-Ordner endet:
+<ul>
+<li>Windows: <code>C:\Unity\gec1-nachname</code></li>
+<li>Mac: <code>/Users/benutzername/Unity/gec1-nachname</code></li>
+</ul>
+</li>
+<li>Auf <strong>Clone</strong> klicken.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: desktop-clone.png]</strong> Zeigt den Clone-Dialog mit Local path
+<code>C:\Unity\gec1-nachname</code>.</p>
+</blockquote>
+<p>✅ <strong>Checkpoint:</strong> GitHub Desktop zeigt oben links <strong>Current repository: gec1-nachname</strong> und in
+der Mitte <strong>No local changes</strong>. Im Explorer/Finder gibt es jetzt den Ordner
+<code>Unity/gec1-nachname</code> mit <code>Assets</code>, <code>Packages</code>, <code>ProjectSettings</code> und <code>AGENTS.md</code>.</p>
+<h2 id="schritt-4-das-projekt-in-unity-öffnen">Schritt 4: Das Projekt in Unity öffnen</h2>
+<ol>
+<li>Den Unity Hub öffnen > <strong>Projects</strong>.</li>
+<li>Auf den Pfeil neben <strong>Add</strong> (bzw. <strong>Open</strong>) > <strong>Add project from disk</strong> klicken.</li>
+<li>Den Ordner <code>gec1-nachname</code> wählen – <strong>den Ordner selbst</strong>, in dem <code>Assets</code> liegt, nicht
+einen Ordner darin oder darüber. Auf <strong>Öffnen</strong> / <strong>Add Project</strong> klicken.</li>
+<li>In der Projektliste steht jetzt <code>gec1-nachname</code> mit der Editor-Version <strong>6000.3.25f1</strong>.
+Darauf klicken.</li>
+<li>Das erste Öffnen dauert lange (2–10 Minuten): Unity baut den Ordner <code>Library/</code> auf.
+Einfach laufen lassen.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: hub-projekt-hinzugefuegt.png]</strong> Zeigt die Projektliste im Hub mit
+<code>gec1-nachname</code>, Editor-Version 6000.3.25f1, ohne Warnsymbol.</p>
+</blockquote>
+<p>✅ <strong>Checkpoint:</strong> Unity ist offen. Oben in der Menüleiste gibt es einen Eintrag <strong>Kurs</strong>.</p>
+<h2 id="schritt-5-setup-prüfen">Schritt 5: Setup prüfen</h2>
+<ol>
+<li>In Unity auf <strong>Kurs > Setup prüfen</strong> klicken.</li>
+<li>Ein Fenster zeigt eine Liste mit <strong>OK</strong>, <strong>INFO</strong>, <strong>WARNUNG</strong> und <strong>FEHLER</strong>.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: setup-pruefen-anleitung3.png]</strong> Zeigt das Fenster "Setup prüfen" nach
+diesem Schritt: alles OK bis auf eine WARNUNG bei "Code-Editor".</p>
+</blockquote>
+<p>Erwartet ist an dieser Stelle: alles <strong>OK</strong>, nur bei <strong>Code-Editor</strong> eine <strong>WARNUNG</strong>. Die
+wird in Anleitung 4 behoben.</p>
+<p>Zum Schluss ein Blick in GitHub Desktop: Dort steht weiter <strong>No local changes</strong>. Zeigt es doch
+ein paar geänderte Dateien (z. B. <code>packages-lock.json</code>), ist das in Ordnung. Sie kommen in
+Anleitung 5 in den ersten Commit.</p>
+<p>✅ <strong>Checkpoint:</strong> <strong>Setup prüfen</strong> zeigt <strong>keinen FEHLER</strong>.</p>
+<p>Fertig. Weiter mit <strong>VS Code und KI-Agent</strong>.</p>
+<h2 id="wenn-es-nicht-klappt">Wenn es nicht klappt</h2>
+<p><strong>Den Knopf "Use this template" gibt es nicht.</strong>
+Ist die Anmeldung auf github.com erfolgt? Ohne Anmeldung fehlt er. Ist die Vorlage gar nicht
+zu sehen (Seite 404), ist der Link falsch – bei Jonas nachfragen.</p>
+<p><strong>GitHub Desktop: "This directory already exists and is not empty".</strong>
+Unter dem Local path liegt schon ein Ordner mit dem Namen. Einen anderen Namen am Ende
+des Pfads nehmen oder den alten Ordner löschen, wenn er nur ein missglückter Versuch war.</p>
+<p><strong>GitHub Desktop: "Authentication failed" beim Klonen.</strong>
+Abmelden und neu anmelden: <strong>File > Options > Accounts</strong> (Mac: <strong>Settings > Accounts</strong>) >
+<strong>Sign out</strong>, dann <strong>Sign in</strong>.</p>
+<p><strong>Der Hub sagt beim Hinzufügen "Invalid project path" oder "not a valid Unity project".</strong>
+Der falsche Ordner ist gewählt. Richtig ist der Ordner, der direkt <code>Assets</code>, <code>Packages</code>
+und <code>ProjectSettings</code> enthält.</p>
+<p><strong>Im Hub steht beim Projekt ein Warnsymbol und "Editor version not installed".</strong>
+Unity 6000.3.25f1 fehlt. Anleitung 1, Schritt 3. <strong>Nicht</strong> "Choose another Editor
+version" wählen – das baut das Projekt auf eine andere Version um.</p>
+<p><strong>Unity fragt: "Enter Safe Mode?"</strong>
+Unity hat Fehler im Code gefunden. Auf <strong>Enter Safe Mode</strong> klicken und einen Screenshot
+der Fehler unten in der <strong>Console</strong> machen. Den an Jonas schicken. In der frischen Vorlage sollte das
+nicht passieren.</p>
+<p><strong>Es gibt kein Menü "Kurs".</strong>
+Unity hat noch nicht fertig geladen (unten rechts dreht sich etwas) – warten. Kommt es nicht:
+Fehlt im Projektordner <code>Packages/de.macromedia.gec1.setupcheck</code>? Dann wurde nicht aus der
+Vorlage geklont. Unten in der <strong>Console</strong> nachsehen, ob dort rote Fehler stehen.</p>
+<p><strong>Setup prüfen zeigt FEHLER bei "Projektordner" oder WARNUNG wegen OneDrive/Umlauten.</strong>
+Projekt schließen. In GitHub Desktop <strong>Repository > Remove</strong> (nur aus der Liste entfernen,
+<strong>nicht</strong> "Also move this repository to the trash" anhaken), den Ordner nach <code>C:\Unity</code>
+bzw. <code>~/Unity</code> verschieben, dann in GitHub Desktop <strong>File > Add local repository</strong> und im Hub
+das Projekt neu hinzufügen.</p>
+<p><strong>Setup prüfen zeigt einen anderen FEHLER.</strong>
+Die Zeile <strong>Lösung</strong> lesen. Hilft das nicht: <strong>Bericht kopieren</strong> und den Text
+an Jonas schicken (ab Anleitung 4 auch an den KI-Agenten).</p>
+<p><strong>Mac: Der Hub kann den Ordner nicht öffnen oder zeigt ihn leer.</strong>
+<strong>Systemeinstellungen > Datenschutz &#x26; Sicherheit > Dateien und Ordner</strong> (oder <strong>Festplattenvollzugriff</strong>) > dem Unity Hub Zugriff geben. Hub neu starten.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Anleitung 1 (Unity 6000.3.25f1 installiert)</li><li>Anleitung 2 (GitHub-Konto und GitHub Desktop)</li></ul></div><div><b>Checkpunkte</b><ul><li>Es gibt einen Ordner Unity direkt unter C:\ (Windows) bzw. im Benutzerordner (Mac)</li><li>Auf GitHub gibt es das eigene private Repository, erstellt aus der Kursvorlage</li><li>GitHub Desktop zeigt das Repository mit &quot;No local changes&quot;</li><li>Das Projekt ist in Unity 6000.3.25f1 geöffnet</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt keine Fehler</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T16:36Z · a410945</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

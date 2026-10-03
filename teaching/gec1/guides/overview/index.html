@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><title>Setup im Kurs · GEC1</title><link rel="alternate" type="text/markdown" href="/teaching/gec1/guides/overview.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.CKAdqCzU.css"></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article><div class="label">Anleitung 0 · 5 Min lesen; im Kurs ca. 2 Stunden, viel davon Download im Hintergrund</div><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/guides/overview.md" data-titel="Setup im Kurs">Für KI kopieren</button><a href="/teaching/gec1/guides/overview.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nimm den Link „Markdown“.`))})});</script><h1 id="setup-im-kurs">Setup im Kurs</h1>
+<p>Am ersten Kurstag (09.10.) richten alle ihren Laptop gemeinsam im Raum ein. Vorher muss
+nichts installiert werden. Mitzubringen: Laptop, <strong>Ladekabel</strong> und Handy.</p>
+<p>Im Kurs kommen vier Werkzeuge zum Einsatz: <strong>Unity</strong> (die Engine), <strong>Git</strong> (die
+Versionsverwaltung, der Rückgängig-Knopf), <strong>Visual Studio Code</strong> (Editor für C#) und ein
+<strong>KI-Agent</strong> (GitHub Copilot), der im Projekt Code liest und schreibt.</p>
+<p>Alle nutzen dieselben Versionen. Dann sieht der Bildschirm aus wie in den Anleitungen, und
+wenn etwas kaputt geht, ist schnell Hilfe möglich.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Werkzeug</th><th>Version / Variante</th><th>Wofür</th></tr></thead><tbody><tr><td>Unity Hub</td><td>aktuelle Version</td><td>installiert und öffnet Unity</td></tr><tr><td>Unity Editor</td><td><strong>Unity 6.3 LTS – 6000.3.25f1</strong></td><td>die Engine</td></tr><tr><td>Projektvorlage</td><td>Kursvorlage auf GitHub (Universal 3D, URP)</td><td>das eigene Projekt</td></tr><tr><td>GitHub Desktop</td><td>aktuelle Version</td><td>Git ohne Kommandozeile</td></tr><tr><td>Visual Studio Code</td><td>aktuelle Version + Unity-Erweiterung</td><td>C# lesen und schreiben</td></tr><tr><td>GitHub Copilot</td><td>Free, später Student</td><td>der KI-Agent</td></tr></tbody></table>
+<h2 id="die-reihenfolge-im-kurs">Die Reihenfolge im Kurs</h2>
+<p>Unity ist ein großer Download (Windows ca. 4 GB, Mac ca. 5 GB), und alle laden gleichzeitig
+über dasselbe WLAN. Darum <strong>zuerst den Unity-Download starten</strong> und alles andere erledigen,
+während er läuft.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Was</th><th>Anleitung</th><th>Wann</th></tr></thead><tbody><tr><td>A</td><td>Unity Hub installieren, anmelden, <strong>Unity-Download starten</strong></td><td><strong>Unity installieren</strong></td><td>sofort</td></tr><tr><td>B</td><td>GitHub-Konto, GitHub Desktop</td><td><strong>GitHub einrichten</strong></td><td>während Unity lädt</td></tr><tr><td>B</td><td>VS Code, Unity-Erweiterung, Copilot anmelden (nur Schritte 1, 2 und 4)</td><td><strong>VS Code und KI-Agent</strong></td><td>während Unity lädt</td></tr><tr><td>C</td><td>Projekt aus der Kursvorlage, in Unity öffnen, Setup prüfen</td><td><strong>Projekt anlegen</strong></td><td>wenn Unity fertig ist</td></tr><tr><td>D</td><td>VS Code mit Unity verbinden, erste Frage an den Agenten (Schritte 3 und 5)</td><td><strong>VS Code und KI-Agent</strong></td><td>nach C</td></tr><tr><td>E</td><td>Erster Commit und rückgängig machen</td><td><strong>Erster Commit</strong></td><td>nach D</td></tr></tbody></table>
+<p>Die Schritte jeder Anleitung enden mit einem <strong>Checkpoint</strong>. Erst weitermachen, wenn das zu
+sehen ist, was dort steht.</p>
+<p><strong>Wichtig beim Unity-Download:</strong> Nur die Module wählen, die in der Anleitung stehen. Unter
+Windows <strong>Visual Studio Community abwählen</strong> – das spart 1,7 GB auf dem eigenen Rechner und
+im WLAN für alle anderen.</p>
+<p>Was im Kurs nicht fertig wird, geht zu Hause mit denselben Anleitungen weiter. Optional,
+und zu Hause: <strong>Claude Code und Codex</strong> (zwei kostenpflichtige Agenten im Terminal). Alle Links
+stehen auf <strong>Downloads &#x26; Optionen</strong>.</p>
+<h2 id="was-der-rechner-braucht">Was der Rechner braucht</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Windows</th><th>Mac</th></tr></thead><tbody><tr><td>Betriebssystem</td><td>Windows 10 (21H1) oder 11, 64 Bit, <strong>nicht im S-Modus</strong></td><td>macOS 13 Ventura oder neuer</td></tr><tr><td>Prozessor</td><td>x64 (Intel/AMD)</td><td>Apple Silicon (M1 oder neuer) oder Intel</td></tr><tr><td>Speicher</td><td>mind. 25 GB frei</td><td>mind. 25 GB frei</td></tr><tr><td>Rechte</td><td>Programme installieren muss erlaubt sein</td><td>Programme installieren muss erlaubt sein</td></tr></tbody></table>
+<p>Ein Laptop mit 8 GB RAM reicht für den Kurs. Mit 16 GB läuft alles flüssiger. Ein <!-- Durchsicht -->
+Firmen-Laptop, auf dem nichts installiert werden darf, geht nicht. In dem Fall Jonas Bescheid
+sagen, dann wird am ersten Tag zu zweit gearbeitet.</p>
+<h2 id="welche-konten-angelegt-werden">Welche Konten angelegt werden</h2>
+<ul>
+<li>ein <strong>Unity-Konto</strong> (kostenlos, Unity Personal)</li>
+<li>ein <strong>GitHub-Konto</strong> (kostenlos, mit Zwei-Faktor-Anmeldung über eine App auf dem Handy)</li>
+</ul>
+<p>Für beide ist eine E-Mail-Adresse nötig, auf die im Kurs Zugriff besteht. Für GitHub am
+besten die Hochschul-Adresse nehmen – das hilft beim Studierendenrabatt.</p>
+<h2 id="wenn-es-hakt">Wenn es hakt</h2>
+<ol>
+<li>Den Abschnitt <strong>Wenn es nicht klappt</strong> am Ende der Anleitung lesen.</li>
+<li>Bei Sitznachbarn mit demselben Betriebssystem nachfragen.</li>
+<li>Bei Jonas melden. Dazu sagen: welche Anleitung, welcher Schritt, was zu sehen ist.</li>
+<li>Zu Hause: In Unity <strong>Kurs > Setup prüfen</strong> > <strong>Bericht kopieren</strong> und den Bericht an den
+KI-Agenten oder an Jonas schicken.</li>
+</ol></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>eigener Laptop mit Ladekabel</li><li>25 GB freier Speicher</li><li>Zugriff auf das eigene E-Mail-Postfach (Bestätigungscodes)</li><li>eigenes Handy (Zwei-Faktor-Anmeldung für GitHub)</li></ul></div><div><b>Checkpunkte</b><ul><li>Der Unity-Download läuft im Unity Hub</li><li>Ein GitHub-Konto existiert und GitHub Desktop ist angemeldet</li><li>Das eigene Projekt aus der Kursvorlage ist in Unity geöffnet</li><li>Der erste Commit ist gemacht und einmal rückgängig gemacht</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T16:36Z · a410945</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

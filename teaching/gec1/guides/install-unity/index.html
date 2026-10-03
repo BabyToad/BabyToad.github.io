@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><title>Unity installieren · GEC1</title><link rel="alternate" type="text/markdown" href="/teaching/gec1/guides/install-unity.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.CKAdqCzU.css"></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article><div class="label">Anleitung 1 · ca. 60 Min (davon 30–45 Min Download)</div><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/guides/install-unity.md" data-titel="Unity installieren">Für KI kopieren</button><a href="/teaching/gec1/guides/install-unity.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nimm den Link „Markdown“.`))})});</script><h1 id="unity-installieren">Unity installieren</h1>
+<p>Unity besteht aus zwei Programmen. Der <strong>Unity Hub</strong> ist der Startbildschirm: Er lädt
+Unity-Versionen herunter und öffnet Projekte. Der <strong>Unity Editor</strong> ist die eigentliche
+Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: <strong>6000.3.25f1</strong>
+(Unity 6.3 LTS).</p>
+<p>Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
+wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
+immer – und dann sieht das Projekt anders aus als bei allen anderen.</p>
+<h2 id="schritt-1-unity-hub-herunterladen-und-installieren">Schritt 1: Unity Hub herunterladen und installieren</h2>
+<ol>
+<li><a href="https://unity.com/download">https://unity.com/download</a> öffnen.</li>
+<li>Den Unity Hub für das eigene System herunterladen.
+<ul>
+<li><strong>Windows:</strong> <code>UnityHubSetup.exe</code> starten und mit den Standardeinstellungen durchklicken.</li>
+<li><strong>Mac:</strong> Die <code>.dmg</code>-Datei öffnen und <strong>Unity Hub</strong> in den Ordner <strong>Programme</strong> ziehen.</li>
+</ul>
+</li>
+<li>Den Unity Hub starten.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: unity-download-seite.png]</strong> Zeigt die Download-Seite von unity.com mit dem
+Download-Knopf für den Unity Hub, Windows und Mac nebeneinander.</p>
+</blockquote>
+<p><strong>Mac mit Apple-Chip (M1, M2, …):</strong> Unity braucht zusätzlich <strong>Rosetta 2</strong>. Fragt der Mac
+beim Start danach, auf <strong>Installieren</strong> klicken. Fragt er nicht, das Programm <strong>Terminal</strong>
+öffnen und eingeben:</p>
+<pre><code>softwareupdate --install-rosetta --agree-to-license
+</code></pre>
+<p>✅ <strong>Checkpoint:</strong> Jetzt sollte das Fenster des Unity Hub zu sehen sein, mit einer
+Anmeldeseite oder der Projektliste.</p>
+<h2 id="schritt-2-unity-konto-anlegen-und-anmelden">Schritt 2: Unity-Konto anlegen und anmelden</h2>
+<ol>
+<li>Im Hub auf <strong>Sign in</strong> klicken. Der Browser öffnet sich.</li>
+<li>Falls noch kein Unity-Konto existiert: <strong>Create a Unity ID</strong>. Die E-Mail bestätigen, die
+Unity schickt.</li>
+<li>Anmelden. Der Browser fragt, ob er den Unity Hub öffnen darf: <strong>Ja / Öffnen</strong>.</li>
+<li>Fragt der Hub nach einer Lizenz, <strong>Unity Personal</strong> (kostenlos) wählen. Bestätigen, dass
+man nicht für eine Firma mit mehr als 200.000 $ Umsatz arbeitet.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: hub-lizenz.png]</strong> Zeigt Hub > Einstellungen (Zahnrad) > Licenses mit einer
+aktiven Lizenz "Personal".</p>
+</blockquote>
+<p><strong>Fragt der Hub direkt, ob er die neueste Unity-Version installieren soll: Überspringen</strong>
+(<strong>Skip installation</strong>). Wir brauchen eine bestimmte Version, nicht die neueste.</p>
+<p>✅ <strong>Checkpoint:</strong> Oben links im Hub ist das Konto-Symbol zu sehen. Unter <strong>Einstellungen
+(Zahnrad) > Licenses</strong> steht eine aktive Lizenz <strong>Unity Personal</strong>.</p>
+<h2 id="schritt-3-unity-6000325f1-installieren">Schritt 3: Unity 6000.3.25f1 installieren</h2>
+<p>Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
+eine neuere als unsere sein. Darum kommt unsere Version über einen Link:</p>
+<ol>
+<li>Diesen Link in die Adresszeile des Browsers kopieren und Enter drücken:
+<code>unityhub://6000.3.25f1/e1dba0a9aba4</code></li>
+<li>Der Browser fragt, ob er den Unity Hub öffnen darf: <strong>Ja / Öffnen</strong>.</li>
+<li>Der Hub zeigt <strong>Install Unity 6000.3.25f1</strong> und eine Liste von <strong>Modulen</strong>. So einstellen:</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Modul</th><th>Windows</th><th>Mac</th></tr></thead><tbody><tr><td>Microsoft Visual Studio Community</td><td><strong>abwählen</strong> (wir nehmen VS Code)</td><td>–</td></tr><tr><td>Windows Build Support (Mono)</td><td>ist schon dabei</td><td><strong>im Kurs weglassen</strong>, zu Hause nachinstallieren (siehe unten)</td></tr><tr><td>Mac Build Support (Mono)</td><td>nicht nötig</td><td>ist schon dabei</td></tr><tr><td>Documentation</td><td>weglassen</td><td>weglassen</td></tr><tr><td>alles andere (Android, iOS, WebGL, Sprachpakete)</td><td>weglassen</td><td>weglassen</td></tr></tbody></table>
+<ol start="4">
+<li>Auf <strong>Install</strong> klicken (eventuell vorher Lizenzbedingungen bestätigen).</li>
+<li>Warten. Der Fortschritt steht unter <strong>Installs</strong> und <strong>Downloads</strong>. Den Rechner anlassen
+und den Hub offen lassen.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: hub-module-windows.png]</strong> Zeigt den Modul-Dialog unter Windows: Visual Studio
+Community abgewählt, sonst nichts angehakt.</p>
+<p><strong>[Screenshot: hub-module-mac.png]</strong> Zeigt den Modul-Dialog am Mac: nichts angehakt.</p>
+</blockquote>
+<p>Warum so wenig? Alle laden im Kurs gleichzeitig über dasselbe WLAN. Der Editor allein ist
+schon ca. 4 GB (Windows) bzw. 5 GB (Mac) groß. Jedes weggelassene Modul hilft allen.
+Visual Studio Community allein wären 1,7 GB.</p>
+<p>✅ <strong>Checkpoint:</strong> Unter <strong>Downloads</strong> (bzw. <strong>Installs</strong>) erscheint ein Fortschrittsbalken
+für <strong>6000.3.25f1</strong>. Im Kurs: Jetzt mit <strong>GitHub einrichten</strong> weitermachen, während Unity lädt.
+Ist der Download fertig, steht unter <strong>Installs</strong> ein Eintrag <strong>6000.3.25f1</strong> mit dem Zusatz
+<strong>LTS</strong>, ohne Fortschrittsbalken.</p>
+<blockquote>
+<p><strong>[Screenshot: hub-installs-fertig.png]</strong> Zeigt Installs mit genau einem Eintrag
+6000.3.25f1 LTS.</p>
+</blockquote>
+<h2 id="später-zu-hause-nur-mac-windows-build-modul">Später, zu Hause (nur Mac): Windows-Build-Modul</h2>
+<p>Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
+<strong>Windows Build Support (Mono)</strong> installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
+irgendwann vor der Abgabe: Unity Hub > <strong>Installs</strong> > Zahnrad bei <strong>6000.3.25f1</strong> >
+<strong>Add modules</strong> > <strong>Windows Build Support (Mono)</strong> anhaken > <strong>Install</strong>. <strong>Kurs > Setup prüfen</strong>
+zeigt eine Warnung, solange es fehlt.</p>
+<p><strong>Unity im Kurs vom USB-Stick installiert?</strong> Dann geht <strong>Add modules</strong> im Hub nicht
+(das geht nur bei Versionen, die der Hub selbst installiert hat). Stattdessen den
+offiziellen Modul-Installer von Unity nehmen (ca. 400 MB):
+<a href="https://download.unity3d.com/download_unity/e1dba0a9aba4/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-6000.3.25f1.pkg">https://download.unity3d.com/download_unity/e1dba0a9aba4/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-6000.3.25f1.pkg</a>
+Datei öffnen, durchklicken, Unity neu starten. Er installiert das Modul in das Unity unter
+<code>/Applications/Unity/</code>. <em>(Dieser Weg ist noch nicht getestet. Falls er nicht klappt, Jonas
+Bescheid sagen.)</em></p>
+<p>Fertig. Weiter mit <strong>GitHub einrichten</strong>.</p>
+<h2 id="wenn-es-nicht-klappt">Wenn es nicht klappt</h2>
+<p><strong>Der Link <code>unityhub://…</code> tut nichts.</strong>
+Ist der Hub installiert und einmal gestartet worden? Dann den Link nicht anklicken, sondern
+in die Adresszeile kopieren. Klappt es immer noch nicht:
+<a href="https://unity.com/releases/editor/archive">https://unity.com/releases/editor/archive</a> öffnen, <strong>6000.3.25f1</strong> suchen und dort auf
+<strong>Install</strong> (bzw. <strong>Unity Hub</strong>) klicken.</p>
+<p><strong>Im Kurs: Der Download ist sehr langsam (Restzeit über eine Stunde).</strong>
+Jonas Bescheid sagen. Er hat USB-Sticks mit den offiziellen Unity-Installern dabei. Den
+Hub-Download dann unter <strong>Downloads</strong> abbrechen.</p>
+<p><strong>Der Mac sagt: "Unity Hub kann nicht geöffnet werden, da der Entwickler nicht verifiziert
+werden kann."</strong>
+Rechtsklick auf <strong>Unity Hub</strong> im Programme-Ordner > <strong>Öffnen</strong> > <strong>Öffnen</strong>.</p>
+<p><strong>"No valid Unity Editor license found" / "Lizenz fehlt".</strong>
+Hub > Zahnrad > <strong>Licenses</strong> > <strong>Add</strong> > <strong>Get a free personal license</strong>.</p>
+<p><strong>Die Installation bricht ab oder steht bei "Validating" / "Unpacking" still.</strong>
+Meist Speicherplatz oder ein abgebrochener Download. Prüfen, ob 25 GB frei sind. Dann im
+Hub unter Installs das Zahnrad am Eintrag > <strong>Uninstall</strong> und Schritt 3 wiederholen.
+Virenscanner (nicht Windows Defender) können die Installation bremsen.</p>
+<p><strong>Auf C: (Windows) ist zu wenig Platz.</strong>
+Hub > Zahnrad > <strong>Installs</strong> > <strong>Installs location</strong> auf eine andere Festplatte stellen, dann
+Schritt 3 wiederholen. Einen Ordner ohne Umlaute und Leerzeichen nehmen, z. B. <code>D:\Unity\Editors</code>.</p>
+<p><strong>Der Windows-Benutzername enthält Umlaute oder Sonderzeichen (z. B. <code>Jörg</code>).</strong>
+Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie <code>C:\Unity\</code> legen
+statt unter <code>C:\Users\Jörg\…</code> (Anleitung 3).</p>
+<p><strong>Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem <code>f1</code>).</strong>
+Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
+ist das kein Problem – sie schadet nicht, kostet aber Platz.</p>
+<p><strong>Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.</strong>
+Rosetta installieren (siehe Schritt 1), dann den Hub neu starten.</p>
+<p><strong>Mac: Der Hub fragt nach Zugriff auf Ordner (Dokumente, Schreibtisch).</strong>
+Erlauben. Sonst kann er die Projekte nicht öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>25 GB freier Speicher</li><li>Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac)</li></ul></div><div><b>Checkpunkte</b><ul><li>Unity Hub startet und zeigt das angemeldete Konto</li><li>Im Hub steht eine aktive Lizenz &quot;Unity Personal&quot;</li><li>Unter Installs steht 6000.3.25f1</li><li>Im Kurs reicht es, dass der Download läuft</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T16:36Z · a410945</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

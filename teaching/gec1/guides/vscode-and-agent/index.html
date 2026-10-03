@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><title>VS Code und KI-Agent einrichten · GEC1</title><link rel="alternate" type="text/markdown" href="/teaching/gec1/guides/vscode-and-agent.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.CKAdqCzU.css"></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article><div class="label">Anleitung 4 · ca. 30 Min</div><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/guides/vscode-and-agent.md" data-titel="VS Code und KI-Agent einrichten">Für KI kopieren</button><a href="/teaching/gec1/guides/vscode-and-agent.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nimm den Link „Markdown“.`))})});</script><h1 id="vs-code-und-ki-agent-einrichten">VS Code und KI-Agent einrichten</h1>
+<p><strong>Visual Studio Code</strong> (kurz VS Code) ist der Editor zum Lesen und Schreiben von C#-Code.
+<strong>GitHub Copilot</strong> ist in VS Code eingebaut. Im <strong>Agent-Modus</strong> liest Copilot die Dateien
+des Projekts, schlägt Änderungen vor und schreibt sie. Prüfen und entscheiden muss man selbst.</p>
+<p>Der Agent ist im Kurs das Arbeitsmittel. Der Ablauf: eine Mechanik genau beschreiben, der Agent <!-- Durchsicht -->
+setzt sie um, dann spielen, die Änderung lesen und committen. Damit das funktioniert, muss der
+Agent das Projekt sehen können. Das wird hier eingerichtet.</p>
+<h2 id="schritt-1-vs-code-installieren">Schritt 1: VS Code installieren</h2>
+<ol>
+<li><a href="https://code.visualstudio.com">https://code.visualstudio.com</a> öffnen und VS Code herunterladen.
+<ul>
+<li><strong>Windows:</strong> Installer starten. Bei <strong>Zusätzliche Aufgaben</strong> die Häkchen bei
+<strong>Zu PATH hinzufügen</strong> und <strong>"Mit Code öffnen" … hinzufügen</strong> setzen.</li>
+<li><strong>Mac:</strong> Die <code>.zip</code> entpacken und <strong>Visual Studio Code</strong> in <strong>Programme</strong> ziehen.</li>
+</ul>
+</li>
+<li>VS Code starten.</li>
+</ol>
+<p>✅ <strong>Checkpoint:</strong> VS Code ist offen und zeigt die Willkommensseite.</p>
+<h2 id="schritt-2-die-unity-erweiterung-installieren">Schritt 2: Die Unity-Erweiterung installieren</h2>
+<ol>
+<li>Links in der Leiste auf <strong>Extensions</strong> (die vier Quadrate) klicken oder
+Strg+Shift+X (Mac: Cmd+Shift+X) drücken.</li>
+<li>Nach <strong>Unity</strong> suchen. Den Eintrag <strong>Unity</strong> von <strong>Microsoft</strong> (blauer Haken) wählen.</li>
+<li><strong>Install</strong>. Die Erweiterung holt sich <strong>C#</strong> und <strong>C# Dev Kit</strong> automatisch dazu und lädt
+im Hintergrund ein .NET herunter. Das dauert ein, zwei Minuten.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: vscode-unity-extension.png]</strong> Zeigt die Erweiterungssuche mit "Unity" von
+Microsoft, Herausgeber verifiziert, Knopf "Install".</p>
+</blockquote>
+<p>✅ <strong>Checkpoint:</strong> Unter <strong>Extensions > Installed</strong> stehen <strong>Unity</strong>, <strong>C# Dev Kit</strong> und
+<strong>C#</strong>.</p>
+<h2 id="schritt-3-unity-mit-vs-code-verbinden">Schritt 3: Unity mit VS Code verbinden</h2>
+<ol>
+<li>In Unity: <strong>Edit > Preferences</strong> (Mac: <strong>Unity > Settings</strong>) > <strong>External Tools</strong>.</li>
+<li>Bei <strong>External Script Editor</strong>: <strong>Visual Studio Code</strong> auswählen. Steht es nicht in der
+Liste: <strong>Browse…</strong> und VS Code auswählen (Windows meist
+<code>C:\Users\…\AppData\Local\Programs\Microsoft VS Code\Code.exe</code>, Mac
+<strong>Programme > Visual Studio Code</strong>).</li>
+<li>Auf <strong>Regenerate project files</strong> klicken.</li>
+<li>Das Fenster schließen.</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: unity-external-tools.png]</strong> Zeigt Preferences > External Tools mit
+"Visual Studio Code" als External Script Editor.</p>
+</blockquote>
+<p>Test: Im <strong>Project</strong>-Fenster Rechtsklick > <strong>Create > Scripting > MonoBehaviour
+Script</strong> (bzw. <strong>Create > C# Script</strong>), Name <code>Test</code>. Doppelklick darauf.</p>
+<p>✅ <strong>Checkpoint:</strong> VS Code öffnet sich mit <code>Test.cs</code>. Der Code ist farbig, und wenn die
+Maus über <code>MonoBehaviour</code> steht, erscheint eine Erklärung. Fragt VS Code <strong>Do you trust
+the authors of the files in this folder?</strong>: <strong>Yes, I trust the authors</strong>.</p>
+<p>Das Skript <code>Test</code> danach wieder löschen (in Unity: Rechtsklick > <strong>Delete</strong>).</p>
+<h2 id="schritt-4-copilot-anmelden">Schritt 4: Copilot anmelden</h2>
+<ol>
+<li>In VS Code: oben rechts in der Titelleiste auf das <strong>Copilot-Symbol</strong> klicken (bzw. unten
+rechts in der Statusleiste) > <strong>Sign in</strong> / <strong>Use AI features</strong>.</li>
+<li><strong>Sign in with GitHub</strong> wählen. Der Browser öffnet sich: anmelden und auf
+<strong>Authorize Visual Studio Code</strong> klicken. Zurück in VS Code bestätigen.</li>
+<li>Ist der Education-Antrag noch nicht durch, gibt es <strong>Copilot Free</strong>. Das reicht zum
+Start.</li>
+</ol>
+<p><strong>Modellauswahl:</strong> In Copilot Free und Copilot Student steht die Modellauswahl im Chat fest auf
+<strong>Auto</strong> – GitHub wählt das Modell selbst. Eine Auswahl wie "Claude" oder "GPT" gibt es in
+diesen Plänen seit dem 24.06.2026 nicht mehr. Das ist kein Fehler im eigenen Setup.
+(Quelle: GitHub, <a href="https://github.com/orgs/community/discussions/189268">https://github.com/orgs/community/discussions/189268</a>)</p>
+<p><strong>Datenschutz – einmal einstellen:</strong> <a href="https://github.com/settings/copilot">https://github.com/settings/copilot</a> öffnen. Dort gibt
+es eine Einstellung, ob GitHub die eigenen Eingaben und Code-Ausschnitte zum Verbessern und
+Trainieren seiner Modelle verwenden darf. Wer das nicht möchte, schaltet sie aus.</p>
+<blockquote>
+<p><strong>[Screenshot: github-copilot-settings.png]</strong> Zeigt github.com/settings/copilot mit dem
+aktuellen Plan (Free oder Student) und der Datenschutz-Einstellung.</p>
+</blockquote>
+<p>✅ <strong>Checkpoint:</strong> Rechts in VS Code ist die <strong>Chat</strong>-Ansicht offen (sonst: Strg+Alt+I bzw.
+Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (<strong>Ask</strong> / <strong>Edit</strong> /
+<strong>Agent</strong> o. ä.).</p>
+<h2 id="schritt-5-den-agenten-zum-ersten-mal-benutzen">Schritt 5: Den Agenten zum ersten Mal benutzen</h2>
+<ol>
+<li>
+<p>Das Projekt in VS Code als Ordner öffnen, falls noch nicht geschehen: In Unity
+<strong>Assets > Open C# Project</strong>. Im Explorer links in VS Code stehen <code>Assets</code>, <code>AGENTS.md</code>
+usw.</p>
+</li>
+<li>
+<p>Im Chat den Modus auf <strong>Agent</strong> stellen.</p>
+</li>
+<li>
+<p>Eingeben:</p>
+<pre><code>Lies AGENTS.md und ProjectSettings/ProjectVersion.txt. Fass mir in drei Sätzen zusammen,
+welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
+</code></pre>
+</li>
+</ol>
+<blockquote>
+<p><strong>[Screenshot: copilot-agent-erste-frage.png]</strong> Zeigt die Chat-Ansicht im Agent-Modus mit
+der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.</p>
+</blockquote>
+<p>✅ <strong>Checkpoint:</strong> Der Agent antwortet und nennt Unity <strong>6000.3.25f1</strong> und Regeln aus
+<code>AGENTS.md</code>. In GitHub Desktop steht weiterhin <strong>No local changes</strong> (er hat nichts geändert).</p>
+<p>Zum Schluss in Unity <strong>Kurs > Setup prüfen</strong>: Jetzt ist auch <strong>Code-Editor</strong> OK.</p>
+<p>✅ <strong>Checkpoint:</strong> <strong>Setup prüfen</strong> zeigt <strong>Alles bereit</strong>.</p>
+<p>Fertig. Weiter mit <strong>Erster Commit</strong>.</p>
+<h2 id="das-ki-verzeichnis">Das KI-Verzeichnis</h2>
+<p>Die Hochschule Macromedia verlangt in jeder Projektarbeit ein <strong>KI-Verzeichnis</strong>: welches
+KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
+muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
+<code>KI-VERZEICHNIS.md</code> mit. Laut <code>AGENTS.md</code> hängt der Agent nach jeder Aufgabe selbst eine Zeile
+an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
+„Copilot (Auto)“, weil Copilot Free/Student das Modell selbst wählt. Für die
+Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
+Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?</p>
+<h2 id="copilot-student-freischalten-später">Copilot Student freischalten (später)</h2>
+<p>Sobald GitHub den Education-Antrag bestätigt (E-Mail), wird Copilot Student meist von
+selbst aktiv – das kann nach der Bestätigung noch bis zu drei Tage dauern. Prüfen lässt sich das
+unter <a href="https://github.com/settings/copilot">https://github.com/settings/copilot</a>. In VS Code einmal abmelden und neu anmelden
+(Konto-Symbol unten links), falls VS Code noch Free anzeigt.</p>
+<h2 id="wenn-es-nicht-klappt">Wenn es nicht klappt</h2>
+<p><strong>Doppelklick auf ein Skript öffnet einen anderen Editor (z. B. Visual Studio oder Notepad).</strong>
+Schritt 3 nochmal. Wichtig ist <strong>Regenerate project files</strong>.</p>
+<p><strong>Der Code in VS Code ist nicht farbig, oder es gibt keine Erklärungen beim Drüberfahren.</strong>
+VS Code hat das Projekt nicht als C#-Projekt erkannt.</p>
+<ol>
+<li>Das Projekt aus Unity heraus öffnen (<strong>Assets > Open C# Project</strong>), nicht irgendwo über
+<strong>Datei > Ordner öffnen</strong>.</li>
+<li>Unten in VS Code nachsehen: <strong>Ausgabe</strong> (Output) > im Auswahlfeld <strong>C# Dev Kit</strong> bzw. <strong>C#</strong>.
+Steht dort etwas von .NET, das nicht installiert werden konnte: VS Code neu starten, Internet
+prüfen.</li>
+<li>In Unity: <strong>Window > Package Manager</strong> > <strong>In Project</strong> – ist <strong>Visual Studio Editor</strong>
+installiert? Wenn nicht: installieren (gleiches Paket, auch für VS Code).</li>
+</ol>
+<p><strong>VS Code fragt nach Anmeldung bei C# Dev Kit / Microsoft-Konto.</strong>
+Für Studierende ist C# Dev Kit kostenlos. Wegklicken geht meist; sonst mit einem Microsoft-
+Konto anmelden.</p>
+<p><strong>Im Chat gibt es keinen Agent-Modus.</strong>
+VS Code aktualisieren: <strong>Hilfe > Nach Updates suchen</strong> (Mac: <strong>Code > Nach Updates suchen</strong>).</p>
+<p><strong>"You've reached your monthly limit" / Copilot antwortet nicht mehr.</strong>
+Copilot Free hat ein Monatskontingent. Ist der Education-Antrag durch, gibt es mehr
+(siehe oben). Bis dahin: Fragen bündeln, genauer formulieren, und Jonas Bescheid geben.</p>
+<p><strong>Der Agent will einen Befehl im Terminal ausführen und fragt um Erlaubnis.</strong>
+Nur erlauben, was man versteht. Im Zweifel den Agenten fragen: "Was macht dieser Befehl, und was passiert,
+wenn ich ablehne?" Befehle, die Dateien löschen oder "git reset" / "git push --force"
+enthalten, ablehnen.</p>
+<p><strong>Der Agent kennt die Regeln aus AGENTS.md nicht, obwohl die Datei im Projektordner liegt.</strong>
+VS Code-Einstellungen öffnen (Strg+, bzw. Cmd+,), nach <code>useAgentsMdFile</code> suchen und
+<strong>Chat: Use Agents Md File</strong> anhaken. Chat neu starten.</p>
+<p><strong>Der Agent sagt, er findet AGENTS.md nicht.</strong>
+In VS Code ist ein falscher Ordner offen. Links im Explorer muss ganz oben der
+Projektordner stehen (mit <code>Assets</code> darin). <strong>Datei > Ordner öffnen</strong> > den Projektordner.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Anleitung 3 (Projekt geöffnet, Setup prüfen ohne Fehler)</li><li>GitHub-Konto (Anleitung 2)</li></ul></div><div><b>Checkpunkte</b><ul><li>VS Code mit der Erweiterung &quot;Unity&quot; von Microsoft ist installiert</li><li>In Unity ist Visual Studio Code als External Script Editor eingestellt</li><li>Ein Doppelklick auf ein C#-Skript öffnet es in VS Code, mit farbigem Code</li><li>Copilot ist mit dem eigenen GitHub-Konto angemeldet</li><li>Der Agent hat AGENTS.md gelesen und zusammengefasst</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt alles OK</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T16:36Z · a410945</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

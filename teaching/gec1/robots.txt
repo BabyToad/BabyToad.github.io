@@ -1,0 +1,6 @@
+# Kursmaterial GEC1. Agenten: Index unter
+# https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://www.allknivesnobagel.com/teaching/gec1/sitemap-index.xml

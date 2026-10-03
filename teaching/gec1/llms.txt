@@ -1,0 +1,38 @@
+# Game Engines & Coding 1
+
+> Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
+
+Stand: 2026-10-03T16:36Z · a410945
+
+Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md), Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), falls dein Werkzeug text/markdown ablehnt. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
+
+## Termine
+
+- [Tag 1: Was eine Engine tut](https://www.allknivesnobagel.com/teaching/gec1/days/01.md): 09.10.2026. Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
+
+## Begriffe
+
+- [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component.md): Ein Baustein an einem GameObject mit eigenen Einstellungen. Transform, Renderer, Collider und eigene Skripte sind Komponenten.
+- [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time.md): Die Zeit seit dem letzten Frame, in Sekunden. Mal damit, und Bewegung gilt pro Sekunde statt pro Frame.
+- [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame.md): Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
+- [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object.md): Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen seine Komponenten.
+- [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update.md): Die Methode, die Unity in jedem Frame auf jedem aktiven Skript aufruft. Hier passiert alles, was laufend geschehen soll.
+
+## Anleitungen
+
+- [Setup im Kurs](https://www.allknivesnobagel.com/teaching/gec1/guides/overview.md): 5 Min lesen; im Kurs ca. 2 Stunden, viel davon Download im Hintergrund
+- [Downloads & Optionen](https://www.allknivesnobagel.com/teaching/gec1/guides/downloads.md): 5 Min lesen
+- [Unity installieren](https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity.md): ca. 60 Min (davon 30–45 Min Download)
+- [GitHub einrichten](https://www.allknivesnobagel.com/teaching/gec1/guides/github.md): ca. 20 Min (plus Wartezeit für die Studierenden-Prüfung)
+- [Projekt anlegen](https://www.allknivesnobagel.com/teaching/gec1/guides/create-project.md): ca. 20 Min (davon bis zu 10 Min erstes Öffnen)
+- [Projekt ohne Vorlage anlegen (Ersatzweg)](https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template.md): ca. 30 Min
+- [VS Code und KI-Agent einrichten](https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent.md): ca. 30 Min
+- [Claude Code und Codex (optional)](https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex.md): ca. 20 Min pro Agent
+- [Erster Commit](https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit.md): ca. 15 Min
+
+## Optional
+
+- [Volltext](https://www.allknivesnobagel.com/teaching/gec1/llms-full.txt): alle Seiten als Markdown in einer Datei
+- [windows.ps1](https://www.allknivesnobagel.com/teaching/gec1/downloads/windows.ps1): Installationsskript Windows (winget), optional, siehe Anleitung „Downloads“
+- [macos.sh](https://www.allknivesnobagel.com/teaching/gec1/downloads/macos.sh): Installationsskript Mac (Homebrew), optional, siehe Anleitung „Downloads“
+- [Erklärer: Frame, Update und deltaTime](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/): interaktiv; Textfassung in den .md-Seiten

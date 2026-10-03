@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Beispiel-Kreideschicht (Vsync, Platzhalter): gelber Kreidebogen "nächster Frame".
+       Jonas ersetzt das durch eigene Zeichnungen (siehe ARCHITECTURE.md, Kreideschicht). -->
+  <defs>
+    <filter id="k" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/>
+      <feComposite in="d" in2="m" operator="in"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="#f7f09c" stroke-width="7" stroke-linecap="round" filter="url(#k)">
+    <path d="M1380 640 C 1420 860, 600 880, 560 650"/>
+    <path d="M540 680 L 560 640 L 600 668"/>
+  </g>
+</svg>
