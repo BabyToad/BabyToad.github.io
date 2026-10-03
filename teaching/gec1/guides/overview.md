@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/overview/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/overview/ · Stand 2026-10-03T16:48Z · 87a2a07 -->
 
 Dauer: 5 Min lesen; im Kurs ca. 2 Stunden, viel davon Download im Hintergrund
 
