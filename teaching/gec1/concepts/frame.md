@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/ · Stand 2026-10-03T16:36Z · a410945 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/ · Stand 2026-10-03T16:41Z · a49d988 -->
 
 # Frame
 
