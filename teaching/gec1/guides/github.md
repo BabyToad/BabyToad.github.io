@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/github/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/github/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 20 Min (plus Wartezeit für die Studierenden-Prüfung)
 
@@ -52,8 +52,7 @@ auch wenn Copilot erst später gebraucht wird. Bis zur Freigabe geht es mit Copi
 4. Den Antrag abschicken. GitHub fragt eventuell nach dem Standort – erlauben, das ist Teil
    der Prüfung.
 
-> **\[Screenshot: github-education-antrag.png]** Zeigt das Antragsformular mit ausgewählter
-> Hochschule und hochgeladenem Nachweis, persönliche Daten geschwärzt.
+(Screenshot folgt: Zeigt das Antragsformular mit ausgewählter Hochschule und hochgeladenem Nachweis, persönliche Daten geschwärzt.)
 
 ✅ **Checkpoint:** Eine Bestätigung erscheint, dass der Antrag eingegangen ist. Der Status
 steht später unter <https://github.com/settings/education/benefits>.
@@ -69,8 +68,7 @@ steht später unter <https://github.com/settings/education/benefits>.
 3. GitHub Desktop fragt nach **Configure Git**: Name und E-Mail. Die Vorschläge stehen lassen
    (GitHub-Name und E-Mail-Auswahl) und auf **Finish** klicken.
 
-> **\[Screenshot: desktop-angemeldet.png]** Zeigt GitHub Desktop nach dem Anmelden: die leere
-> Startseite mit "Let's get started!" und den Knöpfen Clone / Create / Add.
+(Screenshot folgt: Zeigt GitHub Desktop nach dem Anmelden: die leere Startseite mit "Let's get started!" und den Knöpfen Clone / Create / Add.)
 
 GitHub Desktop bringt Git selbst mit. Git muss **nicht** extra installiert werden.
 

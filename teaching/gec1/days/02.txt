@@ -1,0 +1,100 @@
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
+
+# Tag 2: Pitch und Blockout
+
+23.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/02/slides/
+
+Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
+
+Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
+
+Bis zum nächsten Termin: Meilenstein Blockout bis 13.11.: ein Raum, grau und begehbar; die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, an Tag 7 im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+
+## Zwei Minuten pro Pitch
+
+Harte Uhr. Danach füllen alle eine Pitch-Karte aus, Diskussion gibt es nicht.
+
+## Die Pitch-Karte
+
+1. Welches Erlebnis soll das Spiel erzeugen?
+2. Ist das in zwölf Wochen machbar?
+3. Was ist die riskanteste Annahme?
+
+## Ihr baut ein Erlebnis
+
+Die Spielenden fahren. Ihr baut die Straße, und das Auto.
+
+## Was das Spiel sagt und was es tut
+
+Beides sollte dasselbe sein.
+
+## Eine Sache gut
+
+- Lieber klein und fertig als groß und kaputt
+- Die letzten 20 % der Arbeit kosten 80 % der Zeit
+- Jedes Feature muss gebaut, getestet und erklärt werden
+
+## Von der Idee zur Spec
+
+1. Was tun die Spielenden? (Verben)
+2. Nach welchen Regeln?
+3. Woran merken sie, dass es geklappt hat?
+4. Was passiert, wenn es schiefgeht?
+
+Eine Spec ist gut, wenn jemand anderes sie bauen kann, ohne nachzufragen.
+
+## Schwach und stark
+
+Schwach: „Der Spieler kann Gegner besiegen.“
+
+Stark: „Drei Treffer mit dem Stock werfen einen Gegner um. Getroffen blinkt er weiß. Nach fünf Sekunden steht er wieder auf.“
+
+## Blockout: grau, aber begehbar
+
+Erst stimmen Größen und Wege, dann kommt die Grafik.
+
+## Eine Einheit ist ein Meter
+
+Türen sind etwa 2 m hoch, Stufen 0,2 m. Die Spielfigur ist 1,8 m groß.
+
+## Jedes Objekt hat einen Transform
+
+- Position, Drehung, Größe
+- Lokal: relativ zum Elternobjekt
+- Welt: relativ zur Szene
+
+Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) beschreibt Lage, Drehung und Größe eines [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/). Werte als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/) mit x, y und z. Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit.
+
+## Was sich wiederholt, wird ein Prefab
+
+Einmal bauen, oft verwenden, an einer Stelle ändern.
+
+Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/).
+
+## Die Spielfigur ist schon da
+
+Aus dem Kurspaket: `Spieler` in die Szene ziehen, Play, laufen.
+
+## Was nie ins Repository gehört
+
+- Library, Temp, Logs: baut Unity selbst neu
+- Builds: gehören in die Abgabe, nicht ins Repository
+- Dateien über 50 MB
+
+## Heute schon bauen
+
+File › Build Profiles › Windows › Build. Der Build läuft bis zum 13.11. auf einem anderen Windows-Rechner.
+
+## Checkpunkt
+
+1. Die Spielfigur läuft durch einen grauen Raum
+2. Die Spec der ersten Interaktion ist geschrieben
+3. Commit und Push sind gemacht
+4. Ein Build existiert
+
+## Die nächsten 21 Tage
+
+1. In 48 Stunden: die Übung von heute nachbauen
+2. An Tag 7: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+3. Wer 30 Minuten feststeckt, fragt
+4. Vor dem 13.11.: testen, Spec überarbeiten

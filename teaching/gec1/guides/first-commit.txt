@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 15 Min
 
@@ -34,8 +34,7 @@ steht der Szenenname **ohne Sternchen** (`*`) – das heißt: gespeichert.
 3. Rechts ist zu sehen, was sich geändert hat: grüne Zeilen sind neu. Unity speichert Szenen als
    Text – darin steht jetzt der Würfel (`Cube`, seine Position, seine [Components](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)).
 
-> **\[Screenshot: desktop-diff-cube.png]** Zeigt den Reiter Changes mit der Szenendatei links
-> und rechts grünen Zeilen, in denen "m\_Name: Cube" zu sehen ist.
+(Screenshot folgt: Zeigt den Reiter Changes mit der Szenendatei links und rechts grünen Zeilen, in denen "m\_Name: Cube" zu sehen ist.)
 
 Diese Ansicht heißt **Diff**. Sie wird ständig gebraucht: Wenn der KI-Agent etwas
 geändert hat, zeigt sie, **was** er geändert hat.
@@ -55,8 +54,7 @@ ganz oben.
 1. Oben auf **Push origin** klicken.
 2. Danach auf **Repository > View on GitHub** klicken.
 
-> **\[Screenshot: github-commit-sichtbar.png]** Zeigt die Repository-Seite auf github.com mit
-> "Würfel in die Szene gestellt" als letztem Commit.
+(Screenshot folgt: Zeigt die Repository-Seite auf github.com mit "Würfel in die Szene gestellt" als letztem Commit.)
 
 ✅ **Checkpoint:** Auf github.com steht über der Dateiliste der Commit **Würfel in die Szene
 gestellt**.

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 30 Min
 
@@ -42,8 +42,7 @@ Agent das Projekt sehen können. Das wird hier eingerichtet.
 3. **Install**. Die Erweiterung holt sich **C#** und **C# Dev Kit** automatisch dazu und lädt
    im Hintergrund ein .NET herunter. Das dauert ein, zwei Minuten.
 
-> **\[Screenshot: vscode-unity-extension.png]** Zeigt die Erweiterungssuche mit "Unity" von
-> Microsoft, Herausgeber verifiziert, Knopf "Install".
+(Screenshot folgt: Zeigt die Erweiterungssuche mit "Unity" von Microsoft, Herausgeber verifiziert, Knopf "Install".)
 
 ✅ **Checkpoint:** Unter **Extensions > Installed** stehen **Unity**, **C# Dev Kit** und
 **C#**.
@@ -58,8 +57,7 @@ Agent das Projekt sehen können. Das wird hier eingerichtet.
 3. Auf **Regenerate project files** klicken.
 4. Das Fenster schließen.
 
-> **\[Screenshot: unity-external-tools.png]** Zeigt Preferences > External Tools mit
-> "Visual Studio Code" als External Script Editor.
+(Screenshot folgt: Zeigt Preferences > External Tools mit "Visual Studio Code" als External Script Editor.)
 
 Test: Im **Project**-Fenster Rechtsklick > **Create > Scripting > MonoBehaviour
 Script** (bzw. **Create > C# Script**), Name `Test`. Doppelklick darauf.
@@ -88,8 +86,7 @@ diesen Plänen seit dem 24.06.2026 nicht mehr. Das ist kein Fehler im eigenen Se
 es eine Einstellung, ob GitHub die eigenen Eingaben und Code-Ausschnitte zum Verbessern und
 Trainieren seiner Modelle verwenden darf. Wer das nicht möchte, schaltet sie aus.
 
-> **\[Screenshot: github-copilot-settings.png]** Zeigt github.com/settings/copilot mit dem
-> aktuellen Plan (Free oder Student) und der Datenschutz-Einstellung.
+(Screenshot folgt: Zeigt github.com/settings/copilot mit dem aktuellen Plan (Free oder Student) und der Datenschutz-Einstellung.)
 
 ✅ **Checkpoint:** Rechts in VS Code ist die **Chat**-Ansicht offen (sonst: Strg+Alt+I bzw.
 Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (**Ask** / **Edit** /
@@ -108,8 +105,7 @@ Cmd+Ctrl+I). Unten im Eingabefeld ist ein Modus-Schalter zu sehen (**Ask** / **E
    welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Ändere nichts.
    ```
 
-> **\[Screenshot: copilot-agent-erste-frage.png]** Zeigt die Chat-Ansicht im Agent-Modus mit
-> der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.
+(Screenshot folgt: Zeigt die Chat-Ansicht im Agent-Modus mit der Frage und einer Antwort, die AGENTS.md und 6000.3.25f1 nennt.)
 
 ✅ **Checkpoint:** Der Agent antwortet und nennt Unity **6000.3.25f1** und Regeln aus
 `AGENTS.md`. In GitHub Desktop steht weiterhin **No local changes** (er hat nichts geändert).

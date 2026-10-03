@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Pitch-Karte · GEC1</title>
+<style>
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10.5pt/1.35 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #1a1a1a; background: #fff; }
+.sheet { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6mm; width: 190mm; height: 277mm; margin: 0 auto; }
+.card { border: 0.4mm solid #1a1a1a; padding: 5mm 6mm; display: flex; flex-direction: column; gap: 3mm; }
+.head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.3mm solid #1a1a1a; padding-bottom: 2mm; }
+.head b { font-size: 12pt; letter-spacing: .02em; }
+.head span { font-size: 8.5pt; }
+.field { flex: 1; display: flex; flex-direction: column; }
+.field p { margin: 0 0 1mm; font-weight: 700; }
+.field small { font-weight: 400; color: #444; }
+.lines { flex: 1; background-image: linear-gradient(to bottom, transparent calc(100% - 0.35mm), #8a8a8a calc(100% - 0.35mm)); background-size: 100% 6.5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.name { font-size: 9pt; flex: none; }
+.name .lines { height: 7mm; flex: none; }
+@media screen { body { background: #ddd; padding: 10mm 0; } .sheet { background: #fff; padding: 10mm; height: auto; min-height: 297mm; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <!-- vier gleiche Karten pro Blatt -->
+  <section class="card"><div class="head"><b>Pitch-Karte</b><span>GEC1 · 23.10.2026</span></div>
+    <div class="field name"><p>Pitch von</p><div class="lines"></div></div>
+    <div class="field"><p>Erlebnis <small>Welches Erlebnis soll das Spiel erzeugen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Machbarkeit <small>In zwölf Wochen machbar? Was wäre zu viel?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Riskanteste Annahme <small>Was muss stimmen, damit es funktioniert?</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Pitch-Karte</b><span>GEC1 · 23.10.2026</span></div>
+    <div class="field name"><p>Pitch von</p><div class="lines"></div></div>
+    <div class="field"><p>Erlebnis <small>Welches Erlebnis soll das Spiel erzeugen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Machbarkeit <small>In zwölf Wochen machbar? Was wäre zu viel?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Riskanteste Annahme <small>Was muss stimmen, damit es funktioniert?</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Pitch-Karte</b><span>GEC1 · 23.10.2026</span></div>
+    <div class="field name"><p>Pitch von</p><div class="lines"></div></div>
+    <div class="field"><p>Erlebnis <small>Welches Erlebnis soll das Spiel erzeugen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Machbarkeit <small>In zwölf Wochen machbar? Was wäre zu viel?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Riskanteste Annahme <small>Was muss stimmen, damit es funktioniert?</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Pitch-Karte</b><span>GEC1 · 23.10.2026</span></div>
+    <div class="field name"><p>Pitch von</p><div class="lines"></div></div>
+    <div class="field"><p>Erlebnis <small>Welches Erlebnis soll das Spiel erzeugen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Machbarkeit <small>In zwölf Wochen machbar? Was wäre zu viel?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Riskanteste Annahme <small>Was muss stimmen, damit es funktioniert?</small></p><div class="lines"></div></div>
+  </section>
+</div>
+</body>
+</html>

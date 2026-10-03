@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 # deltaTime
 

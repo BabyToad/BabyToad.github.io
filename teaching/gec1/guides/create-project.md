@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 20 Min (davon bis zu 10 Min erstes Öffnen)
 
@@ -54,11 +54,9 @@ Quere.
    - **Private** auswählen.
 4. Auf **Create repository** klicken.
 
-> **\[Screenshot: template-use.png]** Zeigt die Kursvorlage auf GitHub mit dem aufgeklappten
-> Knopf "Use this template" > "Create a new repository".
->
-> **\[Screenshot: template-create.png]** Zeigt das Formular "Create a new repository" mit
-> Owner, Name `gec1-nachname` und "Private" ausgewählt.
+(Screenshot folgt: Zeigt die Kursvorlage auf GitHub mit dem aufgeklappten Knopf "Use this template" > "Create a new repository".)
+
+(Screenshot folgt: Zeigt das Formular "Create a new repository" mit Owner, Name gec1-nachname und "Private" ausgewählt.)
 
 Freiwillig: Jetzt lässt sich Jonas als Collaborator einladen (**Settings** >
 **Collaborators** > **Add people** > `BabyToad`). Keine Bedingung, aber hilfreich, falls
@@ -80,8 +78,7 @@ der Vorlage. Ordner wie `Assets`, `Packages`, `ProjectSettings` sind zu sehen.
    - Mac: `/Users/benutzername/Unity/gec1-nachname`
 3. Auf **Clone** klicken.
 
-> **\[Screenshot: desktop-clone.png]** Zeigt den Clone-Dialog mit Local path
-> `C:\Unity\gec1-nachname`.
+(Screenshot folgt: Zeigt den Clone-Dialog mit Local path C:\Unity\gec1-nachname.)
 
 ✅ **Checkpoint:** GitHub Desktop zeigt oben links **Current repository: gec1-nachname** und in
 der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
@@ -98,8 +95,7 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
 5. Das erste Öffnen dauert lange (2–10 Minuten): Unity baut den Ordner `Library/` auf.
    Einfach laufen lassen.
 
-> **\[Screenshot: hub-projekt-hinzugefuegt.png]** Zeigt die Projektliste im Hub mit
-> `gec1-nachname`, Editor-Version 6000.3.25f1, ohne Warnsymbol.
+(Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.25f1, ohne Warnsymbol.)
 
 ✅ **Checkpoint:** Unity ist offen. Oben in der Menüleiste gibt es einen Eintrag **Kurs**.
 
@@ -108,8 +104,7 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
 1. In Unity auf **Kurs > Setup prüfen** klicken.
 2. Ein Fenster zeigt eine Liste mit **OK**, **INFO**, **WARNUNG** und **FEHLER**.
 
-> **\[Screenshot: setup-pruefen-anleitung3.png]** Zeigt das Fenster "Setup prüfen" nach
-> diesem Schritt: alles OK bis auf eine WARNUNG bei "Code-Editor".
+(Screenshot folgt: Zeigt das Fenster "Setup prüfen" nach diesem Schritt: alles OK bis auf eine WARNUNG bei "Code-Editor".)
 
 Erwartet ist an dieser Stelle: alles **OK**, nur bei **Code-Editor** eine **WARNUNG**. Die
 wird in Anleitung 4 behoben.

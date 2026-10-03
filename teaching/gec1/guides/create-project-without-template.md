@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 30 Min
 
@@ -34,9 +34,7 @@ im Projektordner liegen.
      arbeitet mit Git und GitHub.
 6. **Create project**. Unity öffnet sich nach einigen Minuten. Unity danach wieder schließen.
 
-> **\[Screenshot: hub-new-project.png]** Zeigt den Dialog "New project" mit Editor-Version
-> 6000.3.25f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud-
-> Häkchen aus.
+(Screenshot folgt: Zeigt den Dialog "New project" mit Editor-Version 6000.3.25f1, Vorlage Universal 3D ausgewählt, Name und Location ausgefüllt, beide Cloud- Häkchen aus.)
 
 ✅ **Checkpoint:** Im Ordner `Unity/gec1-nachname` liegen `Assets`, `Packages`,
 `ProjectSettings` und `Library`.
@@ -56,8 +54,7 @@ im Projektordner liegen.
    - **License:** None.
 5. **Create repository**.
 
-> **\[Screenshot: desktop-create-here.png]** Zeigt den Dialog "Create a new repository" mit
-> Name `gec1-nachname`, Local path `C:\Unity`, Git ignore "Unity".
+(Screenshot folgt: Zeigt den Dialog "Create a new repository" mit Name gec1-nachname, Local path C:\Unity, Git ignore "Unity".)
 
 ✅ **Checkpoint:** GitHub Desktop zeigt **Current repository: gec1-nachname** und links unter
 **History** einen ersten Commit **Initial commit**. Im Reiter **Changes** steht **nicht**

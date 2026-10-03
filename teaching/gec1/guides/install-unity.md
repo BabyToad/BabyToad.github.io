@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 60 Min (davon 30–45 Min Download)
 
@@ -31,8 +31,7 @@ immer – und dann sieht das Projekt anders aus als bei allen anderen.
    - **Mac:** Die `.dmg`-Datei öffnen und **Unity Hub** in den Ordner **Programme** ziehen.
 3. Den Unity Hub starten.
 
-> **\[Screenshot: unity-download-seite.png]** Zeigt die Download-Seite von unity.com mit dem
-> Download-Knopf für den Unity Hub, Windows und Mac nebeneinander.
+(Screenshot folgt: Zeigt die Download-Seite von unity.com mit dem Download-Knopf für den Unity Hub, Windows und Mac nebeneinander.)
 
 **Mac mit Apple-Chip (M1, M2, …):** Unity braucht zusätzlich **Rosetta 2**. Fragt der Mac
 beim Start danach, auf **Installieren** klicken. Fragt er nicht, das Programm **Terminal**
@@ -54,8 +53,7 @@ Anmeldeseite oder der Projektliste.
 4. Fragt der Hub nach einer Lizenz, **Unity Personal** (kostenlos) wählen. Bestätigen, dass
    man nicht für eine Firma mit mehr als 200.000 $ Umsatz arbeitet.
 
-> **\[Screenshot: hub-lizenz.png]** Zeigt Hub > Einstellungen (Zahnrad) > Licenses mit einer
-> aktiven Lizenz "Personal".
+(Screenshot folgt: Zeigt Hub > Einstellungen (Zahnrad) > Licenses mit einer aktiven Lizenz "Personal".)
 
 **Fragt der Hub direkt, ob er die neueste Unity-Version installieren soll: Überspringen**
 (**Skip installation**). Wir brauchen eine bestimmte Version, nicht die neueste.
@@ -85,10 +83,9 @@ eine neuere als unsere sein. Darum kommt unsere Version über einen Link:
 5. Warten. Der Fortschritt steht unter **Installs** und **Downloads**. Den Rechner anlassen
    und den Hub offen lassen.
 
-> **\[Screenshot: hub-module-windows.png]** Zeigt den Modul-Dialog unter Windows: Visual Studio
-> Community abgewählt, sonst nichts angehakt.
->
-> **\[Screenshot: hub-module-mac.png]** Zeigt den Modul-Dialog am Mac: nichts angehakt.
+(Screenshot folgt: Zeigt den Modul-Dialog unter Windows: Visual Studio Community abgewählt, sonst nichts angehakt.)
+
+(Screenshot folgt: Zeigt den Modul-Dialog am Mac: nichts angehakt.)
 
 Warum so wenig? Alle laden im Kurs gleichzeitig über dasselbe WLAN. Der Editor allein ist
 schon ca. 4 GB (Windows) bzw. 5 GB (Mac) groß. Jedes weggelassene Modul hilft allen.
@@ -99,8 +96,7 @@ für **6000.3.25f1**. Im Kurs: Jetzt mit **GitHub einrichten** weitermachen, wä
 Ist der Download fertig, steht unter **Installs** ein Eintrag **6000.3.25f1** mit dem Zusatz
 **LTS**, ohne Fortschrittsbalken.
 
-> **\[Screenshot: hub-installs-fertig.png]** Zeigt Installs mit genau einem Eintrag
-> 6000.3.25f1 LTS.
+(Screenshot folgt: Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.)
 
 ## Später, zu Hause (nur Mac): Windows-Build-Modul
 

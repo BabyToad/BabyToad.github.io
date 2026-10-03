@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T16:41Z · a49d988 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T16:46Z · f9bdc78 -->
 
 Dauer: ca. 20 Min pro Agent
 
@@ -101,8 +101,7 @@ ist es besser, jede Änderung selbst zu sehen. **Shift+Tab** drücken, bis unten
 "default") steht. Dann fragt Claude Code vor jeder Dateiänderung und jedem Befehl.
 (Quelle: <https://code.claude.com/docs/en/permission-modes>)
 
-> **\[Screenshot: claude-code-start.png]** Zeigt Claude Code im Terminal nach dem Start im
-> Projektordner, unten die Modusanzeige auf Manual.
+(Screenshot folgt: Zeigt Claude Code im Terminal nach dem Start im Projektordner, unten die Modusanzeige auf Manual.)
 
 ✅ **Checkpoint:** Claude Code zeigt ein Eingabefeld und unten den Modus **Manual**.
 
@@ -153,8 +152,7 @@ vorsichtiger einstellen: `/permissions` eingeben und **Read-only** wählen. Für
 Schritt 5 wieder auf **Auto** stellen – dann fragt Codex vor dem Commit nach.
 (Quelle: <https://learn.chatgpt.com/docs/agent-approvals-security.md>)
 
-> **\[Screenshot: codex-start.png]** Zeigt Codex im Terminal nach dem Start im Projektordner,
-> mit dem Menü von /permissions.
+(Screenshot folgt: Zeigt Codex im Terminal nach dem Start im Projektordner, mit dem Menü von /permissions.)
 
 ✅ **Checkpoint:** Codex zeigt ein Eingabefeld und ist angemeldet.
 
@@ -191,8 +189,7 @@ Gleicher Ablauf für Claude Code und Codex.
 
 4. In **GitHub Desktop** nachsehen: Reiter **History**.
 
-> **\[Screenshot: agent-commit-history.png]** Zeigt GitHub Desktop, History, oben der Commit
-> mit der Nachricht des Agenten; rechts der Diff der Szenendatei.
+(Screenshot folgt: Zeigt GitHub Desktop, History, oben der Commit mit der Nachricht des Agenten; rechts der Diff der Szenendatei.)
 
 ✅ **Checkpoint:** In GitHub Desktop steht der neue Commit oben in **History**. Oben rechts
 zeigt GitHub Desktop **Push origin** mit einer 1 – der Commit ist noch nicht hochgeladen. Hochgeladen
