@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/update/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/update/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 # Update
 

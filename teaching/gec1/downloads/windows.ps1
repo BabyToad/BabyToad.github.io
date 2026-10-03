@@ -58,7 +58,9 @@ if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# 1. Pflichtprogramme
+# 1. Pflichtprogramme. Git zuerst: Unity laedt das Kurs-Paket per Git, und der Unity Hub
+#    sieht Git nur, wenn Git vor dem Hub installiert wurde (sonst Hub neu starten).
+Winget-Install "Git.Git"                    "Git fuer Windows (Pflicht: Unity laedt das Kurs-Paket per Git)"
 Winget-Install "Unity.UnityHub"             "Unity Hub (startet Unity und installiert Editor-Versionen)"
 Winget-Install "GitHub.GitHubDesktop"       "GitHub Desktop (Git mit Knoepfen statt Befehlen)"
 Winget-Install "Microsoft.VisualStudioCode" "Visual Studio Code (Editor fuer C#, mit GitHub Copilot)"
@@ -69,10 +71,9 @@ $code = Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code\bin\code.cmd"
 if (-not (Test-Path $code)) { $code = "code" }
 Show-And-Run "Unity-Erweiterung von Microsoft fuer VS Code (holt C# und C# Dev Kit dazu)" "& `"$code`" --install-extension VisualStudioToolsForUnity.vstuc"
 
-# 3. Optional: Git fuer die Kommandozeile (braucht ein KI-Agent im Terminal, um zu committen)
+# 3. Optional: KI-Agenten im Terminal (beide kostenpflichtig)
 Write-Host ""
-Write-Host "Optional: Git, Claude Code, Codex. Nur noetig fuer einen Agenten im Terminal."
-Winget-Install "Git.Git" "Git fuer Windows (optional: damit Claude Code oder Codex committen koennen)"
+Write-Host "Optional: Claude Code und Codex. Nur noetig fuer einen kostenpflichtigen Agenten im Terminal."
 
 # 4. Optional: KI-Agenten im Terminal (beide kostenpflichtig, siehe 'Downloads & Optionen')
 Winget-Install "Anthropic.ClaudeCode" "Claude Code (optional, braucht Claude Pro oder hoeher)"
@@ -83,8 +84,8 @@ if (-not (Get-Command codex -ErrorAction SilentlyContinue)) {
 
 # 5. Unity Editor ueber den Hub. Der Link oeffnet den Hub mit genau unserer Version.
 Write-Host ""
-Write-Host "Letzter Schritt: Unity $UnityVersion. Vorher den Unity Hub einmal starten und anmelden (Anleitung 1, Schritt 2)."
+Write-Host "Letzter Schritt: Unity $UnityVersion. Vorher den Unity Hub einmal starten und anmelden (Anleitung "Unity installieren", Schritt 2)."
 Show-And-Run "Unity $UnityVersion im Unity Hub installieren (Hub fragt nach Modulen: Visual Studio Community abwaehlen, spart 1,7 GB)" "Start-Process `"unityhub://$UnityVersion/$UnityChangeset`""
 
 Write-Host ""
-Write-Host "Fertig. Weiter mit den Anleitungen 1-5 und hake die Checkpoints ab." -ForegroundColor Green
+Write-Host "Fertig. Danach die Anleitungen ab 'Unity installieren' durchgehen und die Checkpoints abhaken." -ForegroundColor Green

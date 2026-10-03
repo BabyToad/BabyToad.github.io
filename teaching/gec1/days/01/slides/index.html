@@ -40,33 +40,33 @@
 <section class="folie" id="git-ist-euer-rueckgaengig-knopf" data-nr="11"><h2 id="git-ist-euer-rückgängig-knopf">Git ist euer Rückgängig-Knopf</h2><p>Ein Commit ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.</p></section>
 <section class="folie" id="was-eine-ki-im-projekt-veraendert-kommt-ins-ki-verzeichnis" data-nr="12"><h2 id="was-eine-ki-im-projekt-verändert-kommt-ins-ki-verzeichnis">Was eine KI im Projekt verändert, kommt ins KI-Verzeichnis</h2><p>Werkzeug, Modell, Zweck, Dateien. Das Verzeichnis ist Pflicht, auch ohne KI-Nutzung.</p></section>
 <section class="folie" id="zwischen-den-freitagen" data-nr="13"><h2 id="zwischen-den-freitagen">Zwischen den Freitagen</h2><p>Dreizehn Tage ohne Kurs. Bringt jedes Mal etwas mit, das läuft, und eine Frage.</p></section>
-<section class="folie" id="das-erste-objekt-bewegt-sich" data-nr="14"><h2 id="das-erste-objekt-bewegt-sich">Das erste Objekt bewegt sich</h2><p>Ein Würfel, ein Skript, eine Zeile in <a href="/teaching/gec1/concepts/update/" class="begriff art-daten" data-begriff="update">Update</a>.</p></section>
-<section class="folie" id="pro-frame" data-nr="15"><h2 id="pro-frame">Pro Frame</h2><pre><code class="language-csharp">void Update()
+<section class="folie" id="drei-fragen-an-jede-idee" data-nr="14"><h2 id="drei-fragen-an-jede-idee">Drei Fragen an jede Idee</h2><div class="schritte"><ol>
+<li>Worum geht es in eurem Spiel?</li>
+<li>Wie handelt das Spiel davon?</li>
+<li>Wofür belohnt es die Spielenden?</li>
+</ol></div></section>
+<section class="folie" id="bis-zum-23-10" data-nr="15"><h2 id="bis-zum-2310">Bis zum 23.10.</h2><div class="schritte"><ol>
+<li>Pitch: zwei Minuten, mit Folie, Referenzbildern und Spielreferenzen</li>
+<li>Eine Seite: zwei Alternativen, das angestrebte Erlebnis, warum diese Idee</li>
+<li>Eine Designfrage, die sich testen lässt, und ein Satz zur Kernmechanik</li>
+<li>Setup abschließen, dann „Das erste Objekt bewegt sich“ nachbauen</li>
+</ol></div></section>
+<section class="folie" id="zu-hause-das-erste-objekt-bewegt-sich" data-nr="16"><h2 id="zu-hause-das-erste-objekt-bewegt-sich">Zu Hause: Das erste Objekt bewegt sich</h2><p>Ein Würfel, ein Skript, eine Zeile in <a href="/teaching/gec1/concepts/update/" class="begriff art-daten" data-begriff="update">Update</a>.</p></section>
+<section class="folie" id="pro-frame" data-nr="17"><h2 id="pro-frame">Pro Frame</h2><pre><code class="language-csharp">void Update()
 {
     transform.Translate(0, 0.05f, 0);
 }
 </code></pre></section>
-<section class="folie" id="seht-selbst" data-nr="16"><h2 id="seht-selbst">Seht selbst</h2><figure class="erklaerer geraet" data-erklaerer="delta-time" data-erklaerer-schritte="6"><div class="erklaerer-buehne" style="--hoehe:56.25%"><gec-delta-time data-step="0"></gec-delta-time></div><figcaption><span class="erklaerer-titel">Erklärer: Frame, Update und deltaTime</span><details class="erklaerer-text"><summary>Als Text</summary><p>Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f * Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde.</p></details></figcaption></figure><script type="module" src="/teaching/gec1/assets/Erklaerer.astro_astro_type_script_index_0_lang.BruBBbzg.js"></script><div class="rechts"><pre><code>tempo = 3;
+<section class="folie" id="seht-selbst" data-nr="18"><h2 id="seht-selbst">Seht selbst</h2><figure class="erklaerer geraet" data-erklaerer="delta-time" data-erklaerer-schritte="6"><div class="erklaerer-buehne" style="--hoehe:56.25%"><gec-delta-time data-step="0"></gec-delta-time></div><figcaption><span class="erklaerer-titel">Erklärer: Frame, Update und deltaTime</span><details class="erklaerer-text"><summary>Als Text</summary><p>Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f * Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde.</p></details></figcaption></figure><script type="module" src="/teaching/gec1/assets/Erklaerer.astro_astro_type_script_index_0_lang.C8r5ghWI.js"></script><div class="rechts"><pre><code>tempo = 3;
 
 // in Update()
 y += tempo
   * Time
   .deltaTime;
 </code></pre></div></section>
-<section class="folie" id="pro-sekunde" data-nr="17"><h2 id="pro-sekunde">Pro Sekunde</h2><pre><code class="language-csharp">void Update()
+<section class="folie" id="pro-sekunde" data-nr="19"><h2 id="pro-sekunde">Pro Sekunde</h2><pre><code class="language-csharp">void Update()
 {
     transform.Translate(0, 3f * Time.deltaTime, 0);
 }
 </code></pre><div class="merke"><p>Ohne <a href="/teaching/gec1/concepts/delta-time/" class="begriff art-daten" data-begriff="delta-time">deltaTime</a> gilt Bewegung pro Frame, mit deltaTime pro Sekunde.</p></div><div class="nur-handout"><p><a href="/teaching/gec1/concepts/delta-time/" class="begriff art-daten" data-begriff="delta-time">deltaTime</a> ist die Zeit seit dem letzten Frame. Wer damit multipliziert, bewegt Objekte pro Sekunde statt pro Frame.</p></div></section>
-<section class="folie" id="lasst-euch-die-zeilen-erklaeren" data-nr="18"><h2 id="lasst-euch-die-zeilen-erklären">Lasst euch die Zeilen erklären</h2><p>„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“</p></section>
-<section class="folie" id="drei-fragen-an-jede-idee" data-nr="19"><h2 id="drei-fragen-an-jede-idee">Drei Fragen an jede Idee</h2><div class="schritte"><ol>
-<li>Worum geht es in eurem Spiel?</li>
-<li>Wie handelt das Spiel davon?</li>
-<li>Wofür belohnt es die Spielenden?</li>
-</ol></div></section>
-<section class="folie" id="bis-zum-23-10" data-nr="20"><h2 id="bis-zum-2310">Bis zum 23.10.</h2><div class="schritte"><ol>
-<li>Pitch: zwei Minuten, mit Folie, Referenzbildern und Spielreferenzen</li>
-<li>Eine Seite: zwei Alternativen, das angestrebte Erlebnis, warum diese Idee</li>
-<li>Eine Designfrage, die sich testen lässt, und ein Satz zur Kernmechanik</li>
-<li>Setup zu Hause abschließen</li>
-</ol></div></section><div class="deck-fuss"><span>Tag 1</span><span class="deck-nr"></span></div></div><div class="deck-leiste"><span class="deck-fortschritt"><i></i></span></div><div class="deck-hilfe" hidden><div><kbd>→</kbd>weiter (erst Schritte, dann Folie)<br><kbd>←</kbd>zurück<br><kbd>S</kbd>Presenter-Fenster (Notizen nur im privaten Build)<br><kbd>F</kbd>Vollbild · <kbd>B</kbd>schwarz · <kbd>O</kbd>Übersicht<br><kbd>G</kbd>Folie wählen · <kbd>?</kbd>Hilfe · <kbd>Esc</kbd>schließen<br><a href="/teaching/gec1/days/01/" style="color:inherit">Zum Handout</a></div></div><script type="module" src="/teaching/gec1/assets/slides.astro_astro_type_script_index_0_lang.CsANbI3P.js"></script></body></html>
+<section class="folie" id="lasst-euch-die-zeilen-erklaeren" data-nr="20"><h2 id="lasst-euch-die-zeilen-erklären">Lasst euch die Zeilen erklären</h2><p>„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“</p></section><div class="deck-fuss"><span>Tag 1</span><span class="deck-nr"></span></div></div><div class="deck-leiste"><span class="deck-fortschritt"><i></i></span></div><div class="deck-hilfe" hidden><div><kbd>→</kbd>weiter (erst Schritte, dann Folie)<br><kbd>←</kbd>zurück<br><kbd>S</kbd>Presenter-Fenster (Notizen nur im privaten Build)<br><kbd>F</kbd>Vollbild · <kbd>B</kbd>schwarz · <kbd>O</kbd>Übersicht<br><kbd>G</kbd>Folie wählen · <kbd>?</kbd>Hilfe · <kbd>Esc</kbd>schließen<br><a href="/teaching/gec1/days/01/" style="color:inherit">Zum Handout</a></div></div><script type="module" src="/teaching/gec1/assets/slides.astro_astro_type_script_index_0_lang.CrPfnuSu.js"></script></body></html>

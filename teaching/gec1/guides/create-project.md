@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
-Dauer: ca. 20 Min (davon bis zu 10 Min erstes Öffnen)
+Dauer: ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
 
-Voraussetzungen: Anleitung 1 (Unity 6000.3.25f1 installiert); Anleitung 2 (GitHub-Konto und GitHub Desktop)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten)
 
 Checkpunkte:
 - [ ] Es gibt einen Ordner Unity direkt unter C:\ (Windows) bzw. im Benutzerordner (Mac)
@@ -16,13 +16,15 @@ Stand: nicht durchgespielt
 # Projekt anlegen
 
 Das Kursprojekt wird nicht leer angelegt, sondern aus der **Kursvorlage**. Die Vorlage ist
-ein fertiges, leeres Unity-Projekt ([Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), Einstellungen, URP), in dem schon alles liegt,
+ein fertiges, leeres Unity-Projekt (Szene, Einstellungen, URP), in dem schon alles liegt,
 was sonst gern schiefgeht:
 
 - die richtige Unity-Version und Render-Pipeline (URP),
 - eine `.gitignore`, die Unitys riesige Zwischendateien (`Library/`) aus Git heraushält,
 - `AGENTS.md`: die Regeln, die der KI-Agent im Projekt befolgt,
-- der Menüpunkt **Kurs > Setup prüfen**, der das Setup kontrolliert.
+- `KI-VERZEICHNIS.md` und `DOKUMENTATION.md` für die Abgabe,
+- das **Kurs-Paket** mit dem Menüpunkt **Kurs > Setup prüfen**. Unity lädt es beim ersten
+  Öffnen per Git – darum muss Git installiert sein.
 
 Daraus entsteht ein eigenes Repository auf GitHub. Das wird auf den eigenen Rechner geholt
 und in Unity geöffnet.
@@ -32,10 +34,11 @@ und in Unity geöffnet.
 Einen Ordner anlegen, in dem alle Unity-Projekte liegen. Er soll **nicht** in OneDrive,
 iCloud, Dropbox oder Downloads liegen und **keine Umlaute** im Pfad haben.
 
-- **Windows:** Explorer öffnen > **Dieser PC** > **Lokaler Datenträger (C:)** > Rechtsklick >
-  **Neu > Ordner** > `Unity`. Ergebnis: `C:\Unity`
-- **Mac:** Finder > **Gehe zu > Benutzerordner** (Cmd+Shift+H) > Rechtsklick > **Neuer
-  Ordner** > `Unity`. Ergebnis: `/Users/benutzername/Unity`
+- **Windows:** Explorer öffnen > links **Dieser PC** > **Doppelklick** auf **Lokaler
+  Datenträger (C:)** > Rechtsklick auf eine freie Stelle im Fenster > **Neu > Ordner** > `Unity`.
+  Ergebnis: `C:\Unity`
+- **Mac:** Finder > **Gehe zu > Benutzerordner** (Cmd+Shift+H) > Rechtsklick auf eine freie
+  Stelle > **Neuer Ordner** > `Unity`. Ergebnis: `/Users/benutzername/Unity`
 
 Warum nicht unter Dokumente? Auf vielen Windows-Rechnern ist Dokumente unbemerkt ein
 OneDrive-Ordner. OneDrive synchronisiert dann tausende Unity-Dateien und kommt Git in die
@@ -60,7 +63,7 @@ Quere.
 
 Freiwillig: Jetzt lässt sich Jonas als Collaborator einladen (**Settings** >
 **Collaborators** > **Add people** > `BabyToad`). Keine Bedingung, aber hilfreich, falls
-später Hilfe nötig ist (siehe **GitHub einrichten**).
+später Hilfe nötig ist (siehe [GitHub einrichten](../github/)).
 
 ✅ **Checkpoint:** Die Seite des neuen Repositorys ist offen. Oben steht
 `github-name / gec1-nachname`, daneben **Private**, darunter "generated from …" mit dem Namen
@@ -72,13 +75,14 @@ der Vorlage. Ordner wie `Assets`, `Packages`, `ProjectSettings` sind zu sehen.
    Desktop** klicken. Der Browser fragt, ob er GitHub Desktop öffnen darf: **Ja / Öffnen**.
    (Alternativ in GitHub Desktop: **File > Clone repository** > Reiter **GitHub.com** > das
    Repository auswählen.)
-2. GitHub Desktop zeigt **Clone a repository**. **Local path** so ändern, dass er im
-   Unity-Ordner endet:
-   - Windows: `C:\Unity\gec1-nachname`
-   - Mac: `/Users/benutzername/Unity/gec1-nachname`
+2. GitHub Desktop zeigt **Clone a repository**. Neben **Local path** auf **Choose…** klicken
+   und den Ordner **`C:\Unity`** (Mac: **`Unity`** im Benutzerordner) auswählen. GitHub Desktop
+   hängt den Namen des Repositorys selbst an. Der Pfad endet danach auf
+   `\Unity\gec1-nachname` (Mac: `/Unity/gec1-nachname`) – den Namen **nicht** noch einmal
+   von Hand anhängen.
 3. Auf **Clone** klicken.
 
-(Screenshot folgt: Zeigt den Clone-Dialog mit Local path C:\Unity\gec1-nachname.)
+(Screenshot folgt: Zeigt den Clone-Dialog mit Local path C:\Unity\gec1-nachname und dem Knopf "Choose…".)
 
 ✅ **Checkpoint:** GitHub Desktop zeigt oben links **Current repository: gec1-nachname** und in
 der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
@@ -92,8 +96,10 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
    einen Ordner darin oder darüber. Auf **Öffnen** / **Add Project** klicken.
 4. In der Projektliste steht jetzt `gec1-nachname` mit der Editor-Version **6000.3.25f1**.
    Darauf klicken.
-5. Das erste Öffnen dauert lange (2–10 Minuten): Unity baut den Ordner `Library/` auf.
-   Einfach laufen lassen.
+5. Das erste Öffnen dauert lange (2–15 Minuten, auf älteren Rechnern länger): Unity baut den
+   Ordner `Library/` auf und lädt das Kurs-Paket. Einfach laufen lassen.
+6. **Windows:** Fragt die Windows-Firewall nach Unity, **Zulassen** (privates Netzwerk) oder
+   **Abbrechen** wählen – beides geht.
 
 (Screenshot folgt: Zeigt die Projektliste im Hub mit gec1-nachname, Editor-Version 6000.3.25f1, ohne Warnsymbol.)
 
@@ -104,18 +110,19 @@ der Mitte **No local changes**. Im Explorer/Finder gibt es jetzt den Ordner
 1. In Unity auf **Kurs > Setup prüfen** klicken.
 2. Ein Fenster zeigt eine Liste mit **OK**, **INFO**, **WARNUNG** und **FEHLER**.
 
-(Screenshot folgt: Zeigt das Fenster "Setup prüfen" nach diesem Schritt: alles OK bis auf eine WARNUNG bei "Code-Editor".)
+(Screenshot folgt: Zeigt das Fenster "Setup prüfen" nach diesem Schritt: OK und INFO, eine WARNUNG bei "Code-Editor".)
 
-Erwartet ist an dieser Stelle: alles **OK**, nur bei **Code-Editor** eine **WARNUNG**. Die
-wird in Anleitung 4 behoben.
+Erwartet ist an dieser Stelle: kein **FEHLER**, höchstens eine **WARNUNG** bei **Code-Editor**
+(die verschwindet in [VS Code und KI-Agent](../vscode-and-agent/)). **INFO**-Zeilen sind
+normal, z. B. beim KI-Verzeichnis oder am Mac beim Windows-Build.
 
 Zum Schluss ein Blick in GitHub Desktop: Dort steht weiter **No local changes**. Zeigt es doch
-ein paar geänderte Dateien (z. B. `packages-lock.json`), ist das in Ordnung. Sie kommen in
-Anleitung 5 in den ersten Commit.
+ein paar geänderte Dateien (z. B. `packages-lock.json`), ist das in Ordnung. Sie kommen beim
+[Ersten Commit](../first-commit/) mit.
 
 ✅ **Checkpoint:** **Setup prüfen** zeigt **keinen FEHLER**.
 
-Fertig. Weiter mit **VS Code und KI-Agent**.
+Fertig. Weiter mit [VS Code und KI-Agent](../vscode-and-agent/) (Schritte 3 und 5).
 
 ## Wenn es nicht klappt
 
@@ -127,6 +134,10 @@ zu sehen (Seite 404), ist der Link falsch – bei Jonas nachfragen.
 Unter dem Local path liegt schon ein Ordner mit dem Namen. Einen anderen Namen am Ende
 des Pfads nehmen oder den alten Ordner löschen, wenn er nur ein missglückter Versuch war.
 
+**Der Pfad endet auf `gec1-nachname\gec1-nachname`.**
+Der Name wurde doppelt angehängt. Den inneren Ordner nicht verwenden: In GitHub Desktop
+**Repository > Remove**, den Ordner löschen und Schritt 3 mit **Choose…** wiederholen.
+
 **GitHub Desktop: "Authentication failed" beim Klonen.**
 Abmelden und neu anmelden: **File > Options > Accounts** (Mac: **Settings > Accounts**) >
 **Sign out**, dann **Sign in**.
@@ -136,18 +147,24 @@ Der falsche Ordner ist gewählt. Richtig ist der Ordner, der direkt `Assets`, `P
 und `ProjectSettings` enthält.
 
 **Im Hub steht beim Projekt ein Warnsymbol und "Editor version not installed".**
-Unity 6000.3.25f1 fehlt. Anleitung 1, Schritt 3. **Nicht** "Choose another Editor
-version" wählen – das baut das Projekt auf eine andere Version um.
+Unity 6000.3.25f1 fehlt oder ist noch nicht fertig installiert (siehe
+[Unity installieren](../install-unity/), Schritt 3). **Nicht** "Choose another Editor version"
+wählen – das baut das Projekt auf eine andere Version um.
+
+**Unity meldet „Project has invalid dependencies … No 'git' executable was found“.**
+Unity findet kein Git. Git installieren ([Git installieren](../install-git/)). Unter Windows
+danach den Unity Hub ganz beenden (Taskleiste > **Quit**) und neu starten, dann das Projekt
+erneut öffnen. Am Mac warten, bis die Command Line Tools fertig sind.
 
 **Unity fragt: "Enter Safe Mode?"**
 Unity hat Fehler im Code gefunden. Auf **Enter Safe Mode** klicken und einen Screenshot
-der Fehler unten in der **Console** machen. Den an Jonas schicken. In der frischen Vorlage sollte das
-nicht passieren.
+der Fehler unten in der **Console** machen. Den an Jonas schicken. In der frischen Vorlage
+sollte das nicht passieren.
 
 **Es gibt kein Menü "Kurs".**
 Unity hat noch nicht fertig geladen (unten rechts dreht sich etwas) – warten. Kommt es nicht:
-Fehlt im Projektordner `Packages/de.macromedia.gec1.setupcheck`? Dann wurde nicht aus der
-Vorlage geklont. Unten in der **Console** nachsehen, ob dort rote Fehler stehen.
+Unten in der **Console** nach roten Fehlern sehen, die `de.macromedia.gec1` oder `git`
+erwähnen, und den Eintrag oben zu Git prüfen.
 
 **Setup prüfen zeigt FEHLER bei "Projektordner" oder WARNUNG wegen OneDrive/Umlauten.**
 Projekt schließen. In GitHub Desktop **Repository > Remove** (nur aus der Liste entfernen,
@@ -156,8 +173,9 @@ bzw. `~/Unity` verschieben, dann in GitHub Desktop **File > Add local repository
 das Projekt neu hinzufügen.
 
 **Setup prüfen zeigt einen anderen FEHLER.**
-Die Zeile **Lösung** lesen. Hilft das nicht: **Bericht kopieren** und den Text
-an Jonas schicken (ab Anleitung 4 auch an den KI-Agenten).
+Die Zeile **Lösung** lesen. Hilft das nicht: **Bericht kopieren** und den Text an Jonas
+schicken (sobald VS Code eingerichtet ist, auch an den KI-Agenten).
 
 **Mac: Der Hub kann den Ordner nicht öffnen oder zeigt ihn leer.**
-**Systemeinstellungen > Datenschutz & Sicherheit > Dateien und Ordner** (oder **Festplattenvollzugriff**) > dem Unity Hub Zugriff geben. Hub neu starten.
+**Systemeinstellungen > Datenschutz & Sicherheit > Dateien und Ordner** (oder
+**Festplattenvollzugriff**) > dem Unity Hub Zugriff geben. Hub neu starten.

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/downloads/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 Dauer: 5 Min lesen
 
@@ -11,7 +11,7 @@ Stand: nicht durchgespielt
 
 # Downloads & Optionen
 
-Im Kurs am 09.10. richten alle gemeinsam ein – die Reihenfolge steht in **Setup im Kurs**.
+Im Kurs am 09.10. richten alle gemeinsam ein – die Reihenfolge steht in [Setup im Kurs](../overview/).
 Diese Seite ist das Nachschlagewerk: alle Links, Größen und Optionen.
 
 Alle Links auf dieser Seite führen zu den offiziellen Seiten der Hersteller. Nichts von
@@ -21,25 +21,30 @@ anderen Seiten herunterladen, auch wenn sie in der Suchmaschine weiter oben steh
 
 | Programm | Windows | Mac | Anleitung |
 |---|---|---|---|
-| Unity Hub | <https://unity.com/download> | <https://unity.com/download> | 1 |
-| Unity 6000.3.25f1 | Link `unityhub://6000.3.25f1/e1dba0a9aba4` (öffnet den Hub) | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | 1 |
-| GitHub Desktop | <https://desktop.github.com> | <https://desktop.github.com> | 2 |
-| Visual Studio Code | <https://code.visualstudio.com/download> | <https://code.visualstudio.com/download> | 4 |
-| Unity-Erweiterung für VS Code | [Marketplace: Unity (Microsoft)](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc) – in VS Code nach "Unity" suchen | wie Windows | 4 |
-| GitHub Copilot | in VS Code eingebaut, Anmeldung mit GitHub | wie Windows | 4 |
-| Rosetta 2 | – | nur Apple-Chip (M1 …): `softwareupdate --install-rosetta --agree-to-license` | 1 |
+| Git | <https://git-scm.com/downloads/win> (ca. 70 MB) | im Terminal `xcode-select --install` (Command Line Tools von Apple, 10–25 Min) | Git installieren |
+| Unity Hub | <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe> | Apple-Chip: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg> · Intel: <https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg> | Unity installieren |
+| Unity 6000.3.25f1 | Link `unityhub://6000.3.25f1/e1dba0a9aba4` (öffnet den Hub); Seite: <https://unity.com/releases/editor/whats-new/6000.3.25f1> | gleicher Link; Modul **Windows Build Support (Mono)** erst zu Hause (vor der Abgabe) | Unity installieren |
+| GitHub Desktop | <https://desktop.github.com> | <https://desktop.github.com> | GitHub einrichten |
+| Visual Studio Code | <https://code.visualstudio.com/download> | <https://code.visualstudio.com/download> | VS Code und KI-Agent |
+| Unity-Erweiterung für VS Code | [Marketplace: Unity (Microsoft)](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc) – in VS Code nach "Unity" suchen | wie Windows | VS Code und KI-Agent |
+| GitHub Copilot | in VS Code eingebaut, Anmeldung mit GitHub | wie Windows | VS Code und KI-Agent |
+| Rosetta 2 | – | nur Apple-Chip (M1 …): `softwareupdate --install-rosetta --agree-to-license` | Unity installieren |
 
 Unity braucht ein kostenloses **Unity-Konto**, GitHub ein kostenloses **GitHub-Konto**.
 
+Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später
+Spieler-Controller und Kit) direkt aus einem Git-Repository. GitHub Desktop bringt zwar ein Git
+mit, aber nur für sich selbst.
+
 Download-Größen (Unity 6000.3.25f1, laut Unity): Editor Windows ca. **4,2 GB**, Mac ca.
 **5,2 GB**; Windows-Build-Modul für den Mac ca. 0,4 GB; Visual Studio Community (unter Windows
-**abwählen**) 1,7 GB. Installiert braucht Unity ca. 8–10 GB.
+**abwählen**) 1,7 GB. Installiert braucht Unity ca. 8–10 GB, während der Installation
+vorübergehend mehr (ca. 20 GB frei halten).
 
-## Optional: Git und ein zweiter KI-Agent
+## Optional: ein zweiter KI-Agent
 
 | Programm | Wofür | Windows | Mac |
 |---|---|---|---|
-| Git (Kommandozeile) | Damit ein KI-Agent im Terminal Commits machen kann. GitHub Desktop bringt zwar Git mit, aber nur für den eigenen Gebrauch. | <https://git-scm.com/downloads/win> | im Terminal `xcode-select --install` (Apple-Entwicklerwerkzeuge, enthält Git) oder <https://git-scm.com/downloads/mac> |
 | Claude Code | KI-Agent von Anthropic, **kostenpflichtig** (Claude Pro oder höher) | [Installationsanleitung](https://code.claude.com/docs/en/setup) | gleiche Seite |
 | Codex | KI-Agent von OpenAI, mit ChatGPT-Konto. Im Terminal und in VS Code ab **ChatGPT Plus**; mit Free/Go nur in der ChatGPT-Desktop-App und nur, wo schon freigeschaltet | [Codex CLI](https://learn.chatgpt.com/docs/codex/cli) | gleiche Seite |
 
@@ -47,7 +52,7 @@ Download-Größen (Unity 6000.3.25f1, laut Unity): Editor Windows ca. **4,2 GB**
 
 | Wer … | nimmt | Kosten | Anleitung |
 |---|---|---|---|
-| nichts bezahlen will | **GitHub Copilot** in VS Code (Pflicht für alle) | 0 € (Free, mit Studierendennachweis Copilot Student) | 4 |
+| nichts bezahlen will | **GitHub Copilot** in VS Code (Pflicht für alle) | 0 € (Free, mit Studierendennachweis Copilot Student) | VS Code und KI-Agent |
 | schon ChatGPT Plus hat oder bereit ist, dafür zu zahlen | zusätzlich **Codex** | Plus 20 $/Monat (Free/Go: nur Desktop-App, eingeschränkt) | Claude Code und Codex |
 | schon Claude Pro hat oder bereit ist, dafür zu zahlen | zusätzlich **Claude Code** | Pro 20 $/Monat (17 $ bei Jahreszahlung), zzgl. MwSt. | Claude Code und Codex |
 
@@ -65,7 +70,7 @@ nachsehen.
 
 | Weg | Für wen | Wie |
 |---|---|---|
-| **Von Hand** (empfohlen bei Unsicherheit) | alle | Anleitungen 1–5 der Reihe nach, Links oben |
+| **Von Hand** (empfohlen bei Unsicherheit) | alle | die Anleitungen in der Reihenfolge von [Setup im Kurs](../overview/), Links oben |
 | **Installationsskript** (optional) | wer ein Terminal öffnen kann und Zeit sparen will | Windows: [windows.ps1](https://www.allknivesnobagel.com/teaching/gec1/downloads/windows.ps1) (nutzt **winget**), Mac: [macos.sh](https://www.allknivesnobagel.com/teaching/gec1/downloads/macos.sh) (nutzt **Homebrew**) |
 
 Das Skript installiert nur Pakete aus den offiziellen Paketquellen (winget bzw. Homebrew), die

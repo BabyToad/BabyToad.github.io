@@ -1,13 +1,13 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 Dauer: ca. 30 Min
 
-Voraussetzungen: Anleitung 1 (Unity 6000.3.25f1 installiert); Anleitung 2 (GitHub-Konto und GitHub Desktop); die Datei kursdateien.zip (von Jonas)
+Voraussetzungen: Git ist installiert (Git installieren); Unity 6000.3.25f1 ist installiert (Unity installieren); GitHub-Konto und GitHub Desktop (GitHub einrichten); die Datei kursdateien.zip (von Jonas)
 
 Checkpunkte:
 - [ ] Das Projekt liegt in C:\Unity bzw. ~/Unity und wurde mit der Vorlage Universal 3D angelegt
 - [ ] GitHub Desktop zeigt das Projekt als Repository mit Unity-.gitignore
-- [ ] AGENTS.md, CLAUDE.md, KI-VERZEICHNIS.md und der Ordner Packages/de.macromedia.gec1.setupcheck liegen im Projekt
+- [ ] AGENTS.md, CLAUDE.md, KI-VERZEICHNIS.md, DOKUMENTATION.md und bilder/ liegen im Projekt; das Kurs-Paket ist installiert
 - [ ] Das Repository ist privat auf GitHub veröffentlicht
 - [ ] Menü „Kurs > Setup prüfen“ zeigt keine Fehler
 
@@ -16,14 +16,14 @@ Stand: nicht durchgespielt
 # Projekt ohne Vorlage anlegen (Ersatzweg)
 
 **Diese Anleitung nur verwenden, wenn Jonas es sagt oder die Kursvorlage nicht erreichbar ist.**
-Der normale Weg ist **Projekt anlegen** (aus der Kursvorlage). Hier wird von Hand nachgebaut,
+Der normale Weg ist [Projekt anlegen](../create-project/) (aus der Kursvorlage). Hier wird von Hand nachgebaut,
 was die Vorlage mitbringt. Die heikle Stelle ist Schritt 2: Das Git-Repository muss **genau**
 im Projektordner liegen.
 
 ## Schritt 1: Projekt im Unity Hub anlegen
 
-1. Einen Ordner `C:\Unity` (Windows) bzw. `~/Unity` (Mac) anlegen – siehe **Projekt anlegen**,
-   Schritt 1.
+1. Einen Ordner `C:\Unity` (Windows) bzw. `~/Unity` (Mac) anlegen – siehe
+   [Projekt anlegen](../create-project/), Schritt 1.
 2. Unity Hub > **Projects** > **New project**.
 3. Oben bei **Editor Version**: **6000.3.25f1** auswählen.
 4. Vorlage: **Universal 3D**. (Fehlt das Vorschaubild: auf **Download template** klicken.)
@@ -60,29 +60,26 @@ im Projektordner liegen.
 **History** einen ersten Commit **Initial commit**. Im Reiter **Changes** steht **nicht**
 `Library` – wenn doch, siehe unten.
 
-## Schritt 3: Kursdateien hinzufügen
+## Schritt 3: Kursdateien und Kurs-Paket hinzufügen
 
 1. `kursdateien.zip` entpacken.
-2. Die Dateien `AGENTS.md`, `CLAUDE.md`, `KI-VERZEICHNIS.md` und `.gitattributes` in den
-   Projektordner kopieren (neben `Assets`).
-3. **Den Ordner `Packages` nicht als Ganzes kopieren.** Das Projekt hat schon einen Ordner
-   `Packages` mit wichtigen Dateien (`manifest.json`, `packages-lock.json`). Wird er ersetzt,
-   sind diese Dateien weg, und das Projekt öffnet nicht mehr richtig. So geht es:
-
-   - In den entpackten Kursdateien den Ordner `Packages` öffnen. Darin liegt
-     `de.macromedia.gec1.setupcheck`.
-   - In einem zweiten Fenster den Ordner `Packages` **des Projekts** öffnen.
-   - Nur den Ordner `de.macromedia.gec1.setupcheck` dort hineinkopieren.
-   - Fragt Windows oder der Mac, ob etwas **ersetzt** werden soll: **Abbrechen** und nochmal
-     prüfen, ob der richtige Ordner offen ist. Beim ersten Mal gibt es nichts zu ersetzen.
-
-   Danach liegen in `Packages` des Projekts: `manifest.json`, `packages-lock.json` und der
-   Ordner `de.macromedia.gec1.setupcheck`.
-4. Mac: Dateien mit Punkt vorne (`.gitattributes`) sind im Finder versteckt.
+2. Die Dateien `AGENTS.md`, `CLAUDE.md`, `KI-VERZEICHNIS.md`, `DOKUMENTATION.md`,
+   `.gitattributes` und den Ordner `bilder` in den Projektordner kopieren (neben `Assets`).
+   Mac: Dateien mit Punkt vorne (`.gitattributes`) sind im Finder versteckt.
    **Cmd+Shift+Punkt** blendet sie ein.
-5. Das Projekt im Hub öffnen. Oben gibt es jetzt das Menü **Kurs**.
-6. In GitHub Desktop: links stehen die neuen Dateien. Unten bei **Summary** `Kursdateien`
-   eintragen > **Commit to main**.
+3. Das Projekt im Hub öffnen.
+4. In Unity: **Window > Package Manager** > oben links **+** > **Install package from git URL…**
+5. Diese Adresse einfügen und **Install** klicken:
+
+   ```
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0
+   ```
+
+(Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
+
+6. Nach kurzer Zeit erscheint oben das Menü **Kurs**.
+7. In GitHub Desktop: links stehen die neuen Dateien und die geänderte
+   `Packages/manifest.json`. Unten bei **Summary** `Kursdateien` eintragen > **Commit to main**.
 
 ✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**. In Unity gibt es **Kurs > Setup
 prüfen**.
@@ -97,11 +94,12 @@ prüfen**.
 
 ## Schritt 5: Setup prüfen
 
-**Kurs > Setup prüfen**. Erwartet: alles **OK**, höchstens eine **WARNUNG** bei Code-Editor.
+**Kurs > Setup prüfen**. Erwartet: kein **FEHLER**, höchstens eine **WARNUNG** bei Code-Editor.
+**INFO**-Zeilen sind normal.
 
 ✅ **Checkpoint:** **Setup prüfen** zeigt **keinen FEHLER**.
 
-Weiter mit **VS Code und KI-Agent**.
+Weiter mit [VS Code und KI-Agent](../vscode-and-agent/).
 
 ## Wenn es nicht klappt
 
@@ -122,10 +120,12 @@ Abbrechen und Schritt 2 nochmal, diesmal über **Add local repository** mit dem 
 Wird das Repository woanders angelegt, landet es in einem neuen leeren Ordner neben dem
 Projekt.
 
-**Nach dem Kopieren öffnet Unity das Projekt nicht mehr, oder `manifest.json` fehlt.**
-Der Ordner `Packages` wurde ersetzt statt ergänzt. In GitHub Desktop unter **Changes** auf
-`Packages/manifest.json` (und `packages-lock.json`) rechtsklicken > **Discard changes**. Dann
-Schritt 3 nochmal, diesmal nur den einen Ordner kopieren.
+**Package Manager: „No 'git' executable was found“ oder „Unable to add package“.**
+Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
+[Git installieren](../install-git/); unter Windows danach den Hub ganz beenden und neu starten.
+
+**Package Manager: Die Adresse wird nicht gefunden.**
+Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
 Ist oben die Editor-Version 6000.3.25f1 gewählt? Die Vorlagen hängen an der Version.

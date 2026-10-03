@@ -9,21 +9,44 @@ Engine. Zuerst wird der Hub installiert, dann damit genau eine Editor-Version: <
 <p>Warum genau diese Version? Ein Unity-Projekt merkt sich, mit welcher Version es angelegt
 wurde. Wird es mit einer anderen geöffnet, baut Unity es um. Das klappt meistens, aber nicht
 immer – und dann sieht das Projekt anders aus als bei allen anderen.</p>
+<p><strong>Im Kurs:</strong> Den Download so früh wie möglich starten (Schritt 3), danach geht es mit
+<a href="../github/">GitHub einrichten</a> weiter, während Unity lädt. <strong>Deckel offen lassen und das
+Netzteil anstecken</strong> – schläft der Rechner, hält der Download an.</p>
 <h2 id="schritt-1-unity-hub-herunterladen-und-installieren">Schritt 1: Unity Hub herunterladen und installieren</h2>
-<ol>
-<li><a href="https://unity.com/download">https://unity.com/download</a> öffnen.</li>
-<li>Den Unity Hub für das eigene System herunterladen.
+<p>Den Hub direkt von Unity herunterladen:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>System</th><th>Download</th></tr></thead><tbody><tr><td>Windows</td><td><a href="https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe">https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.exe</a></td></tr><tr><td>Mac mit Apple-Chip (M1, M2, …)</td><td><a href="https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg">https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-arm64.dmg</a></td></tr><tr><td>Mac mit Intel-Chip</td><td><a href="https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg">https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup-x64.dmg</a></td></tr></tbody></table>
+<p>(Welcher Mac? Apple-Menü > <strong>Über diesen Mac</strong>: Steht dort „Chip Apple M…“, ist es ein
+Apple-Chip.) Die Seite unity.com/download führt inzwischen zuerst zur Anmeldung – die Links oben
+sparen diesen Umweg.</p>
 <ul>
-<li><strong>Windows:</strong> <code>UnityHubSetup.exe</code> starten und mit den Standardeinstellungen durchklicken.</li>
+<li><strong>Windows:</strong> <code>UnityHubSetup-x64.exe</code> starten. Windows fragt <strong>Möchten Sie zulassen, dass durch
+diese App Änderungen …?</strong> – <strong>Ja</strong>. Dann mit den Standardeinstellungen durchklicken.</li>
 <li><strong>Mac:</strong> Die <code>.dmg</code>-Datei öffnen und <strong>Unity Hub</strong> in den Ordner <strong>Programme</strong> ziehen.</li>
 </ul>
-</li>
-<li>Den Unity Hub starten.</li>
-</ol>
-<figure class="screenshot platz" data-datei="unity-download-seite.png"><div class="screenshot-bild">Screenshot folgt: unity-download-seite.png</div><figcaption>Zeigt die Download-Seite von unity.com mit dem Download-Knopf für den Unity Hub, Windows und Mac nebeneinander.</figcaption></figure>
-<p><strong>Mac mit Apple-Chip (M1, M2, …):</strong> Unity braucht zusätzlich <strong>Rosetta 2</strong>. Fragt der Mac
-beim Start danach, auf <strong>Installieren</strong> klicken. Fragt er nicht, das Programm <strong>Terminal</strong>
-öffnen und eingeben:</p>
+<p>Den Unity Hub starten.</p>
+<p><strong>Mac mit Apple-Chip:</strong> Unity braucht zusätzlich <strong>Rosetta 2</strong>. Fragt der Mac beim Start danach,
+auf <strong>Installieren</strong> klicken. Fragt er nicht, das Programm <strong>Terminal</strong> öffnen und eingeben:</p>
 <pre><code>softwareupdate --install-rosetta --agree-to-license
 </code></pre>
 <p>✅ <strong>Checkpoint:</strong> Jetzt sollte das Fenster des Unity Hub zu sehen sein, mit einer
@@ -39,15 +62,15 @@ man nicht für eine Firma mit mehr als 200.000 $ Umsatz arbeitet.</li>
 </ol>
 <figure class="screenshot platz" data-datei="hub-lizenz.png"><div class="screenshot-bild">Screenshot folgt: hub-lizenz.png</div><figcaption>Zeigt Hub > Einstellungen (Zahnrad) > Licenses mit einer aktiven Lizenz "Personal".</figcaption></figure>
 <p><strong>Fragt der Hub direkt, ob er die neueste Unity-Version installieren soll: Überspringen</strong>
-(<strong>Skip installation</strong>). Wir brauchen eine bestimmte Version, nicht die neueste.</p>
+(<strong>Skip installation</strong>). Der Kurs braucht eine bestimmte Version, nicht die neueste.</p>
 <p>✅ <strong>Checkpoint:</strong> Oben links im Hub ist das Konto-Symbol zu sehen. Unter <strong>Einstellungen
 (Zahnrad) > Licenses</strong> steht eine aktive Lizenz <strong>Unity Personal</strong>.</p>
 <h2 id="schritt-3-unity-6000325f1-installieren">Schritt 3: Unity 6000.3.25f1 installieren</h2>
 <p>Der Hub zeigt in seiner Liste immer nur die neueste 6.3-Version. Bis zum Kurs kann das schon
-eine neuere als unsere sein. Darum kommt unsere Version über einen Link:</p>
+eine neuere als die Kursversion sein. Darum kommt die Kursversion über einen Link:</p>
 <ol>
-<li>Diesen Link in die Adresszeile des Browsers kopieren und Enter drücken:
-<code>unityhub://6000.3.25f1/e1dba0a9aba4</code></li>
+<li>Auf diesen Link klicken: <a href="unityhub://6000.3.25f1/e1dba0a9aba4"><strong>Unity 6000.3.25f1 im Hub installieren</strong></a>
+(oder <code>unityhub://6000.3.25f1/e1dba0a9aba4</code> in die Adresszeile kopieren und Enter drücken).</li>
 <li>Der Browser fragt, ob er den Unity Hub öffnen darf: <strong>Ja / Öffnen</strong>.</li>
 <li>Der Hub zeigt <strong>Install Unity 6000.3.25f1</strong> und eine Liste von <strong>Modulen</strong>. So einstellen:</li>
 </ol>
@@ -86,64 +109,81 @@ eine neuere als unsere sein. Darum kommt unsere Version über einen Link:</p>
 
 
 
-<table><thead><tr><th>Modul</th><th>Windows</th><th>Mac</th></tr></thead><tbody><tr><td>Microsoft Visual Studio Community</td><td><strong>abwählen</strong> (wir nehmen VS Code)</td><td>–</td></tr><tr><td>Windows Build Support (Mono)</td><td>ist schon dabei</td><td><strong>im Kurs weglassen</strong>, zu Hause nachinstallieren (siehe unten)</td></tr><tr><td>Mac Build Support (Mono)</td><td>nicht nötig</td><td>ist schon dabei</td></tr><tr><td>Documentation</td><td>weglassen</td><td>weglassen</td></tr><tr><td>alles andere (Android, iOS, WebGL, Sprachpakete)</td><td>weglassen</td><td>weglassen</td></tr></tbody></table>
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Modul</th><th>Windows</th><th>Mac</th></tr></thead><tbody><tr><td>Microsoft Visual Studio Community</td><td><strong>abwählen</strong> (der Kurs nutzt VS Code)</td><td>–</td></tr><tr><td>Windows Build Support (Mono)</td><td>ist schon dabei</td><td><strong>im Kurs weglassen</strong>, zu Hause nachinstallieren (siehe unten)</td></tr><tr><td>Windows Build Support (IL2CPP)</td><td><strong>weglassen</strong></td><td>weglassen</td></tr><tr><td>Mac Build Support (Mono)</td><td>weglassen</td><td>ist schon dabei</td></tr><tr><td>Mac Build Support (IL2CPP)</td><td>weglassen</td><td>weglassen</td></tr><tr><td>Documentation</td><td>weglassen</td><td>weglassen</td></tr><tr><td>alles andere (Android, iOS, Linux, WebGL, Sprachpakete)</td><td>weglassen</td><td>weglassen</td></tr></tbody></table>
 <ol start="4">
 <li>Auf <strong>Install</strong> klicken (eventuell vorher Lizenzbedingungen bestätigen).</li>
-<li>Warten. Der Fortschritt steht unter <strong>Installs</strong> und <strong>Downloads</strong>. Den Rechner anlassen
-und den Hub offen lassen.</li>
+<li>Warten. Der Fortschritt steht unter <strong>Downloads</strong>.</li>
 </ol>
-<figure class="screenshot platz" data-datei="hub-module-windows.png"><div class="screenshot-bild">Screenshot folgt: hub-module-windows.png</div><figcaption>Zeigt den Modul-Dialog unter Windows: Visual Studio Community abgewählt, sonst nichts angehakt.</figcaption></figure>
+<figure class="screenshot platz" data-datei="hub-module-windows.png"><div class="screenshot-bild">Screenshot folgt: hub-module-windows.png</div><figcaption>Zeigt den Modul-Dialog unter Windows: Visual Studio Community abgewählt, alle Module darunter (auch IL2CPP) ohne Haken.</figcaption></figure>
 <figure class="screenshot platz" data-datei="hub-module-mac.png"><div class="screenshot-bild">Screenshot folgt: hub-module-mac.png</div><figcaption>Zeigt den Modul-Dialog am Mac: nichts angehakt.</figcaption></figure>
 <p>Warum so wenig? Alle laden im Kurs gleichzeitig über dasselbe WLAN. Der Editor allein ist
 schon ca. 4 GB (Windows) bzw. 5 GB (Mac) groß. Jedes weggelassene Modul hilft allen.
 Visual Studio Community allein wären 1,7 GB.</p>
-<p>✅ <strong>Checkpoint:</strong> Unter <strong>Downloads</strong> (bzw. <strong>Installs</strong>) erscheint ein Fortschrittsbalken
-für <strong>6000.3.25f1</strong>. Im Kurs: Jetzt mit <strong>GitHub einrichten</strong> weitermachen, während Unity lädt.
-Ist der Download fertig, steht unter <strong>Installs</strong> ein Eintrag <strong>6000.3.25f1</strong> mit dem Zusatz
-<strong>LTS</strong>, ohne Fortschrittsbalken.</p>
+<p><strong>Windows: Zwischendurch auf den Hub schauen.</strong> Ist der Download fertig, fragt Windows noch
+einmal <strong>Möchten Sie zulassen, dass durch diese App Änderungen …?</strong> – <strong>Ja</strong>. Diese Frage kommt
+oft mitten in der Vorlesung. Bleibt sie unbeantwortet, bricht die Installation ab. Darum den
+Hub zwischendurch ansehen (Taskleiste).</p>
+<p>✅ <strong>Checkpoint:</strong> Unter <strong>Downloads</strong> erscheint ein Fortschrittsbalken für <strong>6000.3.25f1</strong>. Im
+Kurs: Jetzt mit <a href="../github/">GitHub einrichten</a> weitermachen, während Unity lädt. Ist alles
+fertig, steht unter <strong>Installs</strong> ein Eintrag <strong>6000.3.25f1</strong> mit dem Zusatz <strong>LTS</strong>, ohne
+Fortschrittsbalken.</p>
 <figure class="screenshot platz" data-datei="hub-installs-fertig.png"><div class="screenshot-bild">Screenshot folgt: hub-installs-fertig.png</div><figcaption>Zeigt Installs mit genau einem Eintrag 6000.3.25f1 LTS.</figcaption></figure>
 <h2 id="später-zu-hause-nur-mac-windows-build-modul">Später, zu Hause (nur Mac): Windows-Build-Modul</h2>
 <p>Abgegeben wird ein Windows-Build. Der lässt sich auch am Mac erstellen, wenn das Modul
 <strong>Windows Build Support (Mono)</strong> installiert ist (ca. 400 MB). Das Modul zu Hause installieren,
 irgendwann vor der Abgabe: Unity Hub > <strong>Installs</strong> > Zahnrad bei <strong>6000.3.25f1</strong> >
 <strong>Add modules</strong> > <strong>Windows Build Support (Mono)</strong> anhaken > <strong>Install</strong>. <strong>Kurs > Setup prüfen</strong>
-zeigt eine Warnung, solange es fehlt.</p>
-<p><strong>Unity im Kurs vom USB-Stick installiert?</strong> Dann geht <strong>Add modules</strong> im Hub nicht
-(das geht nur bei Versionen, die der Hub selbst installiert hat). Stattdessen den
-offiziellen Modul-Installer von Unity nehmen (ca. 400 MB):
-<a href="https://download.unity3d.com/download_unity/e1dba0a9aba4/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-6000.3.25f1.pkg">https://download.unity3d.com/download_unity/e1dba0a9aba4/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-6000.3.25f1.pkg</a>
-Datei öffnen, durchklicken, Unity neu starten. Er installiert das Modul in das Unity unter
-<code>/Applications/Unity/</code>. <em>(Dieser Weg ist noch nicht getestet. Falls er nicht klappt, Jonas
-Bescheid sagen.)</em></p>
-<p>Fertig. Weiter mit <strong>GitHub einrichten</strong>.</p>
+erinnert daran (bis kurz vor der Abgabe als INFO, danach als WARNUNG).</p>
+<p>Weiter mit <a href="../github/">GitHub einrichten</a>.</p>
 <h2 id="wenn-es-nicht-klappt">Wenn es nicht klappt</h2>
 <p><strong>Der Link <code>unityhub://…</code> tut nichts.</strong>
-Ist der Hub installiert und einmal gestartet worden? Dann den Link nicht anklicken, sondern
-in die Adresszeile kopieren. Klappt es immer noch nicht:
-<a href="https://unity.com/releases/editor/archive">https://unity.com/releases/editor/archive</a> öffnen, <strong>6000.3.25f1</strong> suchen und dort auf
-<strong>Install</strong> (bzw. <strong>Unity Hub</strong>) klicken.</p>
-<p><strong>Im Kurs: Der Download ist sehr langsam (Restzeit über eine Stunde).</strong>
-Jonas Bescheid sagen. Er hat USB-Sticks mit den offiziellen Unity-Installern dabei. Den
-Hub-Download dann unter <strong>Downloads</strong> abbrechen.</p>
-<p><strong>Der Mac sagt: "Unity Hub kann nicht geöffnet werden, da der Entwickler nicht verifiziert
-werden kann."</strong>
-Rechtsklick auf <strong>Unity Hub</strong> im Programme-Ordner > <strong>Öffnen</strong> > <strong>Öffnen</strong>.</p>
+Ist der Hub installiert und einmal gestartet worden? Dann den Link in die Adresszeile kopieren
+statt ihn anzuklicken. Klappt es immer noch nicht: Die Seite
+<a href="https://unity.com/releases/editor/whats-new/6000.3.25f1">https://unity.com/releases/editor/whats-new/6000.3.25f1</a> öffnen und dort auf <strong>Install</strong> klicken
+(derselbe Link, als Knopf).</p>
+<p><strong>Windows: Die Installation ist abgebrochen, unter Installs steht nichts.</strong>
+Meist wurde die Frage <strong>Änderungen zulassen?</strong> nicht rechtzeitig beantwortet. Den Link aus
+Schritt 3 noch einmal öffnen und diesmal beim Hub bleiben, bis die Frage kommt. Der Download
+wird nicht wiederholt, wenn er schon fertig war.</p>
+<p><strong>Der Mac sagt: "Unity Hub kann nicht geöffnet werden".</strong>
+macOS 15 und neuer: <strong>Systemeinstellungen > Datenschutz &#x26; Sicherheit</strong>, ganz nach unten
+scrollen, bei Unity Hub <strong>Dennoch öffnen</strong> klicken. Ältere macOS-Versionen: Rechtsklick auf
+<strong>Unity Hub</strong> im Programme-Ordner > <strong>Öffnen</strong> > <strong>Öffnen</strong>.</p>
 <p><strong>"No valid Unity Editor license found" / "Lizenz fehlt".</strong>
 Hub > Zahnrad > <strong>Licenses</strong> > <strong>Add</strong> > <strong>Get a free personal license</strong>.</p>
 <p><strong>Die Installation bricht ab oder steht bei "Validating" / "Unpacking" still.</strong>
-Meist Speicherplatz oder ein abgebrochener Download. Prüfen, ob 25 GB frei sind. Dann im
-Hub unter Installs das Zahnrad am Eintrag > <strong>Uninstall</strong> und Schritt 3 wiederholen.
-Virenscanner (nicht Windows Defender) können die Installation bremsen.</p>
-<p><strong>Auf C: (Windows) ist zu wenig Platz.</strong>
+Meist zu wenig Speicher: Beim Entpacken braucht Unity vorübergehend mehr Platz, als am Ende
+belegt ist. Ca. 20 GB freien Platz schaffen, dann im Hub unter Installs das Zahnrad am Eintrag >
+<strong>Uninstall</strong> und Schritt 3 wiederholen. Virenscanner (nicht Windows Defender) können die
+Installation bremsen.</p>
+<p><strong>Windows: Auf C: ist zu wenig Platz.</strong>
 Hub > Zahnrad > <strong>Installs</strong> > <strong>Installs location</strong> auf eine andere Festplatte stellen, dann
 Schritt 3 wiederholen. Einen Ordner ohne Umlaute und Leerzeichen nehmen, z. B. <code>D:\Unity\Editors</code>.</p>
+<p><strong>Mac: Zu wenig Platz.</strong>
+<strong>Systemeinstellungen > Allgemein > Speicher</strong> zeigt, was Platz belegt, und bietet Aufräumen an.
+Reicht das nicht: Hub > <strong>Settings</strong> > <strong>Installs</strong> > <strong>Installs location</strong> auf eine externe SSD
+(Format APFS) stellen und Schritt 3 wiederholen. Die SSD muss dann beim Arbeiten mit Unity
+angeschlossen sein.</p>
 <p><strong>Der Windows-Benutzername enthält Umlaute oder Sonderzeichen (z. B. <code>Jörg</code>).</strong>
 Die Installation klappt trotzdem. Projekte aber später in einen Ordner wie <code>C:\Unity\</code> legen
-statt unter <code>C:\Users\Jörg\…</code> (Anleitung 3).</p>
+statt unter <code>C:\Users\Jörg\…</code> (siehe <a href="../create-project/">Projekt anlegen</a>).</p>
 <p><strong>Der Hub zeigt nur eine neuere Version (höhere Zahl vor dem <code>f1</code>).</strong>
 Nicht installieren. Den Link aus Schritt 3 nehmen. Ist schon eine andere Version installiert,
 ist das kein Problem – sie schadet nicht, kostet aber Platz.</p>
 <p><strong>Mac: "Diese App benötigt Rosetta" oder Unity startet nicht.</strong>
 Rosetta installieren (siehe Schritt 1), dann den Hub neu starten.</p>
 <p><strong>Mac: Der Hub fragt nach Zugriff auf Ordner (Dokumente, Schreibtisch).</strong>
-Erlauben. Sonst kann er die Projekte nicht öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>25 GB freier Speicher</li><li>Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac)</li></ul></div><div><b>Checkpunkte</b><ul><li>Unity Hub startet und zeigt das angemeldete Konto</li><li>Im Hub steht eine aktive Lizenz &quot;Unity Personal&quot;</li><li>Unter Installs steht 6000.3.25f1</li><li>Im Kurs reicht es, dass der Download läuft</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T17:03Z · b690772</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+Erlauben. Sonst kann er die Projekte nicht öffnen.</p>
+<p><strong>Im Kurs: Der Download ist extrem langsam (Restzeit über eine Stunde).</strong>
+Jonas Bescheid sagen. Den Download laufen lassen und zu Hause fertig werden lassen; der Rest
+der Einrichtung geht trotzdem weiter.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>25 GB freier Speicher (während der Installation werden ca. 20 GB gebraucht)</li><li>Internet (der Download ist ca. 4 GB unter Windows, 5 GB am Mac)</li><li>Git ist installiert oder lädt gerade (Git installieren)</li></ul></div><div><b>Checkpunkte</b><ul><li>Unity Hub startet und zeigt das angemeldete Konto</li><li>Im Hub steht eine aktive Lizenz &quot;Unity Personal&quot;</li><li>Unter Installs steht 6000.3.25f1 (im Kurs reicht es, dass der Download läuft)</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T17:07Z · ddec830</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

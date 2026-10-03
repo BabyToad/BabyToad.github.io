@@ -52,6 +52,14 @@ if [[ "$(uname -m)" == "arm64" ]] && ! /usr/bin/pgrep -q oahd; then
   show_and_run "Rosetta 2 (Apple-Werkzeug, von Unity benoetigt)" "softwareupdate --install-rosetta --agree-to-license"
 fi
 
+# 2a. Pflicht: Git ueber Apples Command Line Tools. Unity laedt das Kurs-Paket per Git.
+#     (Nicht Homebrew-Git: Programme aus dem Dock/Unity Hub sehen /opt/homebrew/bin nicht.)
+if ! xcode-select -p >/dev/null 2>&1; then
+  show_and_run "Git ueber Apples Command Line Tools (Pflicht; Download 10-25 Min, laeuft im Hintergrund weiter)" "xcode-select --install"
+else
+  echo; echo "== Git (Command Line Tools): schon installiert, uebersprungen."
+fi
+
 # 2. Pflichtprogramme
 cask unity-hub          "Unity Hub (startet Unity und installiert Editor-Versionen)"
 cask github             "GitHub Desktop (Git mit Knoepfen statt Befehlen)"
@@ -62,14 +70,8 @@ CODE="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
 [[ -x "$CODE" ]] || CODE="code"
 show_and_run "Unity-Erweiterung von Microsoft fuer VS Code (holt C# und C# Dev Kit dazu)" "\"$CODE\" --install-extension VisualStudioToolsForUnity.vstuc"
 
-# 4. Optional: Git fuer die Kommandozeile. Apple liefert Git mit den Command Line Tools.
 echo
-echo "Optional: Git, Claude Code, Codex. Nur noetig fuer einen Agenten im Terminal."
-if ! xcode-select -p >/dev/null 2>&1; then
-  show_and_run "Git ueber Apples Command Line Tools (optional: damit Claude Code oder Codex committen koennen)" "xcode-select --install"
-else
-  echo; echo "== Git (Command Line Tools): schon installiert, uebersprungen."
-fi
+echo "Optional: Claude Code und Codex. Nur noetig fuer einen kostenpflichtigen Agenten im Terminal."
 
 # 5. Optional: KI-Agenten im Terminal (beide kostenpflichtig, siehe 'Downloads & Optionen')
 cask claude-code "Claude Code (optional, braucht Claude Pro oder hoeher)"
@@ -77,8 +79,8 @@ cask codex       "Codex CLI (optional, braucht ChatGPT Plus oder hoeher)"
 
 # 6. Unity Editor ueber den Hub. Der Link oeffnet den Hub mit genau unserer Version.
 echo
-echo "Letzter Schritt: Unity $UNITY_VERSION. Vorher den Unity Hub einmal starten und anmelden (Anleitung 1, Schritt 2)."
+echo "Letzter Schritt: Unity $UNITY_VERSION. Vorher den Unity Hub einmal starten und anmelden (Anleitung "Unity installieren", Schritt 2)."
 show_and_run "Unity $UNITY_VERSION im Unity Hub installieren (Hub fragt nach Modulen: nichts anhaken; 'Windows Build Support (Mono)' spaeter zu Hause)" "open \"unityhub://$UNITY_VERSION/$UNITY_CHANGESET\""
 
 echo
-echo "Fertig. Weiter mit den Anleitungen 1-5 und hake die Checkpoints ab."
+echo "Fertig. Danach die Anleitungen ab 'Unity installieren' durchgehen und die Checkpoints abhaken."

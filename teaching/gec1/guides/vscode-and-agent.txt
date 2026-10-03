@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 Dauer: ca. 30 Min
 
-Voraussetzungen: Anleitung 3 (Projekt geöffnet, Setup prüfen ohne Fehler); GitHub-Konto (Anleitung 2)
+Voraussetzungen: GitHub-Konto (GitHub einrichten); für die Schritte 3 und 5: Projekt geöffnet (Projekt anlegen)
 
 Checkpunkte:
 - [ ] VS Code mit der Erweiterung "Unity" von Microsoft ist installiert
@@ -10,7 +10,7 @@ Checkpunkte:
 - [ ] Ein Doppelklick auf ein C#-Skript öffnet es in VS Code, mit farbigem Code
 - [ ] Copilot ist mit dem eigenen GitHub-Konto angemeldet
 - [ ] Der Agent hat AGENTS.md gelesen und zusammengefasst
-- [ ] Menü „Kurs > Setup prüfen“ zeigt alles OK
+- [ ] Menü „Kurs > Setup prüfen“ zeigt „Alles bereit“
 
 Stand: nicht durchgespielt
 
@@ -20,9 +20,12 @@ Stand: nicht durchgespielt
 **GitHub Copilot** ist in VS Code eingebaut. Im **Agent-Modus** liest Copilot die Dateien
 des Projekts, schlägt Änderungen vor und schreibt sie. Prüfen und entscheiden muss man selbst.
 
-Der Agent ist im Kurs das Arbeitsmittel. Der Ablauf: eine Mechanik genau beschreiben, der Agent <!-- Durchsicht -->
+Im Kurs wird mit dem Agenten gearbeitet. Der Ablauf: eine Mechanik genau beschreiben, der Agent
 setzt sie um, dann spielen, die Änderung lesen und committen. Damit das funktioniert, muss der
 Agent das Projekt sehen können. Das wird hier eingerichtet.
+
+**Im Kurs:** Die Schritte 1, 2 und 4 laufen, während Unity lädt – dafür muss das Projekt noch
+nicht da sein. Die Schritte 3 und 5 kommen nach [Projekt anlegen](../create-project/).
 
 ## Schritt 1: VS Code installieren
 
@@ -114,15 +117,15 @@ Zum Schluss in Unity **Kurs > Setup prüfen**: Jetzt ist auch **Code-Editor** OK
 
 ✅ **Checkpoint:** **Setup prüfen** zeigt **Alles bereit**.
 
-Fertig. Weiter mit **Erster Commit**.
+Fertig. Weiter mit [Erster Commit](../first-commit/).
 
 ## Das KI-Verzeichnis
 
 Die Hochschule Macromedia verlangt in jeder Projektarbeit ein **KI-Verzeichnis**: welches
 KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
 muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
-`KI-VERZEICHNIS.md` mit. Laut `AGENTS.md` hängt der Agent nach jeder Aufgabe selbst eine Zeile
-an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
+`KI-VERZEICHNIS.md` mit. Die Regel: Eine Zeile bekommt jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat. Reine Fragen ohne Änderung am Projekt brauchen keine Zeile – außer die Antwort geht in die Arbeit ein. Beispiel: „Erkläre mir dieses Skript Zeile für Zeile“ braucht keine Zeile; übernimmt man die Erklärung in die Dokumentation, schon. Laut `AGENTS.md` hängt der Agent
+solche Zeilen selbst an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
 „Copilot (Auto)“, weil Copilot Free/Student das Modell selbst wählt. Für die
 Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
 Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?

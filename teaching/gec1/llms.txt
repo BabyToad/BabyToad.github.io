@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-03T17:03Z · b690772
+Stand: 2026-10-03T17:07Z · ddec830
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md), Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), falls dein Werkzeug text/markdown ablehnt. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
@@ -39,15 +39,17 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 
 ## Anleitungen
 
-- [Setup im Kurs](https://www.allknivesnobagel.com/teaching/gec1/guides/overview.md): 5 Min lesen; im Kurs ca. 2 Stunden, viel davon Download im Hintergrund
+- [Setup im Kurs](https://www.allknivesnobagel.com/teaching/gec1/guides/overview.md): 5 Min lesen; im Kurs ca. 2–3 Stunden, viel davon Download im Hintergrund
 - [Downloads & Optionen](https://www.allknivesnobagel.com/teaching/gec1/guides/downloads.md): 5 Min lesen
+- [Git installieren](https://www.allknivesnobagel.com/teaching/gec1/guides/install-git.md): Windows ca. 5 Min; Mac 10–25 Min (läuft im Hintergrund)
 - [Unity installieren](https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity.md): ca. 60 Min (davon 30–45 Min Download)
-- [GitHub einrichten](https://www.allknivesnobagel.com/teaching/gec1/guides/github.md): ca. 20 Min (plus Wartezeit für die Studierenden-Prüfung)
-- [Projekt anlegen](https://www.allknivesnobagel.com/teaching/gec1/guides/create-project.md): ca. 20 Min (davon bis zu 10 Min erstes Öffnen)
+- [GitHub einrichten](https://www.allknivesnobagel.com/teaching/gec1/guides/github.md): ca. 20 Min
+- [Projekt anlegen](https://www.allknivesnobagel.com/teaching/gec1/guides/create-project.md): ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
 - [Projekt ohne Vorlage anlegen (Ersatzweg)](https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template.md): ca. 30 Min
 - [VS Code und KI-Agent einrichten](https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent.md): ca. 30 Min
 - [Claude Code und Codex (optional)](https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex.md): ca. 20 Min pro Agent
 - [Erster Commit](https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit.md): ca. 15 Min
+- [Kurs-Paket aktualisieren](https://www.allknivesnobagel.com/teaching/gec1/guides/update-package.md): ca. 5 Min
 
 ## Optional
 

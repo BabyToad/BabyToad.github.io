@@ -5,9 +5,11 @@
 <p><strong>Visual Studio Code</strong> (kurz VS Code) ist der Editor zum Lesen und Schreiben von C#-Code.
 <strong>GitHub Copilot</strong> ist in VS Code eingebaut. Im <strong>Agent-Modus</strong> liest Copilot die Dateien
 des Projekts, schlägt Änderungen vor und schreibt sie. Prüfen und entscheiden muss man selbst.</p>
-<p>Der Agent ist im Kurs das Arbeitsmittel. Der Ablauf: eine Mechanik genau beschreiben, der Agent <!-- Durchsicht -->
+<p>Im Kurs wird mit dem Agenten gearbeitet. Der Ablauf: eine Mechanik genau beschreiben, der Agent
 setzt sie um, dann spielen, die Änderung lesen und committen. Damit das funktioniert, muss der
 Agent das Projekt sehen können. Das wird hier eingerichtet.</p>
+<p><strong>Im Kurs:</strong> Die Schritte 1, 2 und 4 laufen, während Unity lädt – dafür muss das Projekt noch
+nicht da sein. Die Schritte 3 und 5 kommen nach <a href="../create-project/">Projekt anlegen</a>.</p>
 <h2 id="schritt-1-vs-code-installieren">Schritt 1: VS Code installieren</h2>
 <ol>
 <li><a href="https://code.visualstudio.com">https://code.visualstudio.com</a> öffnen und VS Code herunterladen.
@@ -90,13 +92,13 @@ welche Regeln in diesem Projekt gelten und welche Unity-Version es nutzt. Änder
 <code>AGENTS.md</code>. In GitHub Desktop steht weiterhin <strong>No local changes</strong> (er hat nichts geändert).</p>
 <p>Zum Schluss in Unity <strong>Kurs > Setup prüfen</strong>: Jetzt ist auch <strong>Code-Editor</strong> OK.</p>
 <p>✅ <strong>Checkpoint:</strong> <strong>Setup prüfen</strong> zeigt <strong>Alles bereit</strong>.</p>
-<p>Fertig. Weiter mit <strong>Erster Commit</strong>.</p>
+<p>Fertig. Weiter mit <a href="../first-commit/">Erster Commit</a>.</p>
 <h2 id="das-ki-verzeichnis">Das KI-Verzeichnis</h2>
 <p>Die Hochschule Macromedia verlangt in jeder Projektarbeit ein <strong>KI-Verzeichnis</strong>: welches
 KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
 muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
-<code>KI-VERZEICHNIS.md</code> mit. Laut <code>AGENTS.md</code> hängt der Agent nach jeder Aufgabe selbst eine Zeile
-an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
+<code>KI-VERZEICHNIS.md</code> mit. Die Regel: Eine Zeile bekommt jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat. Reine Fragen ohne Änderung am Projekt brauchen keine Zeile – außer die Antwort geht in die Arbeit ein. Beispiel: „Erkläre mir dieses Skript Zeile für Zeile“ braucht keine Zeile; übernimmt man die Erklärung in die Dokumentation, schon. Laut <code>AGENTS.md</code> hängt der Agent
+solche Zeilen selbst an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Bei Copilot steht als Modell
 „Copilot (Auto)“, weil Copilot Free/Student das Modell selbst wählt. Für die
 Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
 Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?</p>
@@ -136,4 +138,4 @@ VS Code-Einstellungen öffnen (Strg+, bzw. Cmd+,), nach <code>useAgentsMdFile</c
 <strong>Chat: Use Agents Md File</strong> anhaken. Chat neu starten.</p>
 <p><strong>Der Agent sagt, er findet AGENTS.md nicht.</strong>
 In VS Code ist ein falscher Ordner offen. Links im Explorer muss ganz oben der
-Projektordner stehen (mit <code>Assets</code> darin). <strong>Datei > Ordner öffnen</strong> > den Projektordner.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Anleitung 3 (Projekt geöffnet, Setup prüfen ohne Fehler)</li><li>GitHub-Konto (Anleitung 2)</li></ul></div><div><b>Checkpunkte</b><ul><li>VS Code mit der Erweiterung &quot;Unity&quot; von Microsoft ist installiert</li><li>In Unity ist Visual Studio Code als External Script Editor eingestellt</li><li>Ein Doppelklick auf ein C#-Skript öffnet es in VS Code, mit farbigem Code</li><li>Copilot ist mit dem eigenen GitHub-Konto angemeldet</li><li>Der Agent hat AGENTS.md gelesen und zusammengefasst</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt alles OK</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T17:03Z · b690772</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+Projektordner stehen (mit <code>Assets</code> darin). <strong>Datei > Ordner öffnen</strong> > den Projektordner.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>GitHub-Konto (GitHub einrichten)</li><li>für die Schritte 3 und 5: Projekt geöffnet (Projekt anlegen)</li></ul></div><div><b>Checkpunkte</b><ul><li>VS Code mit der Erweiterung &quot;Unity&quot; von Microsoft ist installiert</li><li>In Unity ist Visual Studio Code als External Script Editor eingestellt</li><li>Ein Doppelklick auf ein C#-Skript öffnet es in VS Code, mit farbigem Code</li><li>Copilot ist mit dem eigenen GitHub-Konto angemeldet</li><li>Der Agent hat AGENTS.md gelesen und zusammengefasst</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt „Alles bereit“</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T17:07Z · ddec830</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

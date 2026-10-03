@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 Dauer: ca. 15 Min
 
-Voraussetzungen: Anleitung 4 (Setup prüfen zeigt "Alles bereit")
+Voraussetzungen: VS Code und KI-Agent eingerichtet (Setup prüfen zeigt „Alles bereit“)
 
 Checkpunkte:
 - [ ] Ein erster Commit mit einer eigenen Änderung ist angelegt
@@ -24,8 +24,9 @@ einmal vor – dazu der wichtigste Handgriff des Kurses: eine Änderung **rückg
 2. Im **Hierarchy**-Fenster: Rechtsklick > **3D Object > Cube**.
 3. Speichern: **File > Save** (Strg+S / Cmd+S).
 
-✅ **Checkpoint:** In der Scene-Ansicht ist ein Würfel zu sehen. Im Reiter über der Hierarchy
-steht der Szenenname **ohne Sternchen** (`*`) – das heißt: gespeichert.
+✅ **Checkpoint:** In der Scene-Ansicht ist ein Würfel zu sehen. In der **Hierarchy** steht
+ganz oben der Szenenname (z. B. `SampleScene`) **ohne Sternchen** (`*`) – das heißt:
+gespeichert.
 
 ## Schritt 2: Die Änderung in GitHub Desktop ansehen
 

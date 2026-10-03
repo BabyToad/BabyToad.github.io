@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T17:03Z · b690772 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/claude-code-and-codex/ · Stand 2026-10-03T17:07Z · ddec830 -->
 
 Dauer: ca. 20 Min pro Agent
 
-Voraussetzungen: Anleitung 3 (Projekt geöffnet, Setup prüfen ohne Fehler); Für Claude Code ein Claude-Abo (Pro oder höher); Für Codex ein ChatGPT-Abo (Plus oder höher)
+Voraussetzungen: Projekt geöffnet, Setup prüfen ohne Fehler (Projekt anlegen); Für Claude Code ein Claude-Abo (Pro oder höher); Für Codex ein ChatGPT-Abo (Plus oder höher)
 
 Checkpunkte:
 - [ ] git --version zeigt im Terminal eine Versionsnummer
@@ -14,7 +14,7 @@ Stand: nicht durchgespielt
 
 # Claude Code und Codex (optional)
 
-**Copilot in VS Code (Anleitung 4) reicht für den ganzen Kurs.** Diese Anleitung ist für alle,
+**Copilot in VS Code ([VS Code und KI-Agent](../vscode-and-agent/)) reicht für den ganzen Kurs.** Diese Anleitung ist für alle,
 die zusätzlich einen der beiden Agenten nutzen wollen, mit denen Jonas selbst arbeitet:
 **Claude Code** (Anthropic) oder **Codex** (OpenAI). Beide kosten Geld.
 
@@ -211,8 +211,8 @@ letzten Commit mit git revert rückgängig."
 Die Hochschule Macromedia verlangt in jeder Projektarbeit ein **KI-Verzeichnis**: welches
 KI-Werkzeug wofür benutzt wurde (KI-Richtlinie vom 28.04.2025). KI ist erlaubt. Wer sie nutzt,
 muss sie nur vollständig angeben und die Verantwortung übernehmen. Das Projekt bringt dafür die Datei
-`KI-VERZEICHNIS.md` mit. Laut `AGENTS.md` hängt der Agent nach jeder Aufgabe selbst eine Zeile
-an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Für die
+`KI-VERZEICHNIS.md` mit. Die Regel: Eine Zeile bekommt jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat. Reine Fragen ohne Änderung am Projekt brauchen keine Zeile – außer die Antwort geht in die Arbeit ein. Beispiel: „Erkläre mir dieses Skript Zeile für Zeile“ braucht keine Zeile; übernimmt man die Erklärung in die Dokumentation, schon. Laut `AGENTS.md` hängt der Agent
+solche Zeilen selbst an und sagt Bescheid. Die Zeile lesen, wenn nötig korrigieren und mit committen. Für die
 Abgabe kommt die Tabelle in den Anhang der Dokumentation. Sie ist auch Material für die
 Dokumentation selbst: Was wurde gefragt, was übernommen, was verworfen?
 
@@ -223,9 +223,9 @@ Das Terminal war schon vor der Installation offen. Neues Terminal öffnen. Hilft
 Für Claude Code `claude doctor` ausprobieren bzw. die Fehlerhilfe auf
 <https://code.claude.com/docs/en/troubleshoot-install> lesen.
 
-**Windows: "irm wird nicht erkannt" oder "Das Token '&&' ist kein gültiges Anweisungstrennzeichen".**
-Das falsche Terminal ist offen. `irm …` gehört in **PowerShell**, Befehle mit `&&` in die
-**Eingabeaufforderung (CMD)**. Vorne im Terminal steht `PS C:\…` bei PowerShell.
+**Windows: "irm wird nicht erkannt".**
+Das falsche Terminal ist offen: `irm …` gehört in **PowerShell**. Vorne im PowerShell-Fenster
+steht `PS C:\…`.
 
 **Claude Code: "Your account does not have access to Claude Code" o. ä.**
 Das kostenlose Claude-Konto enthält Claude Code nicht. Nötig ist Pro oder höher – oder bei
