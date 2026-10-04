@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/ · Stand 2026-10-03T22:11Z · 981ef7d -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/ · Stand 2026-10-04T09:03Z · 033fe2a -->
 
 # Revert
 

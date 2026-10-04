@@ -36,7 +36,7 @@ setzen. Unity lädt den Rest selbst (dafür braucht es Git).</p>
 
 
 
-<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.1.0</td><td>09.10. (in der Kursvorlage)</td><td>Menü <strong>Kurs > Setup prüfen</strong></td></tr><tr><td>v0.2.0</td><td>23.10.</td><td>Spieler-Controller: Prefab <strong>Spieler</strong> (laufen, springen, umsehen; Ich- und Dritte-Person-Ansicht)</td></tr><tr><td>v0.3.0</td><td>13.11.</td><td>Kit: Interaktionen als Graph</td></tr></tbody></table>
+<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.1.0</td><td>09.10. (in der Kursvorlage)</td><td>Menü <strong>Kurs > Setup prüfen</strong></td></tr><tr><td>v0.2.0</td><td>23.10.</td><td>Spieler-Controller: Prefab <strong>Spieler</strong> (laufen, springen, umsehen; Ich- und Dritte-Person-Ansicht)</td></tr><tr><td>v0.3.0</td><td>13.11.</td><td>Kit mit Graph-Editor: Interaktionen als Graph bauen und beim Spielen beobachten; Beispiel „Schlüssel und Tür“</td></tr></tbody></table>
 <h2 id="schritt-1-neue-version-eintragen">Schritt 1: Neue Version eintragen</h2>
 <ol>
 <li>
@@ -63,6 +63,11 @@ setzen. Unity lädt den Rest selbst (dafür braucht es Git).</p>
 der neuen Versionsnummer. <strong>Kurs > Setup prüfen</strong> zeigt bei <strong>Kurs-Paket</strong> dieselbe Version.
 Ab v0.2.0 liegt im <strong>Project</strong>-Fenster unter <strong>Packages > GEC1 Kurs-Paket > Player</strong> das Prefab
 <strong>Spieler</strong>; es lässt sich von dort in die Szene ziehen.</p>
+<p><strong>Ab v0.3.0: Beispiel importieren.</strong> Im Package Manager beim <strong>GEC1 Kurs-Paket</strong> den Reiter
+<strong>Samples</strong> öffnen und bei <strong>Schlüssel und Tür</strong> auf <strong>Import</strong> klicken. Das Beispiel landet unter
+<code>Assets/Samples/GEC1 Kurs-Paket/…</code>. Ein Doppelklick auf <code>Schlüssel und Tür.kit</code> öffnet den
+Graph-Editor; die Szene <code>Keller</code> zeigt das Beispiel im Spiel.</p>
+<figure class="screenshot platz" data-datei="package-manager-samples.png"><div class="screenshot-bild">Screenshot folgt: package-manager-samples.png</div><figcaption>Zeigt den Package Manager mit dem GEC1 Kurs-Paket, Reiter "Samples", Eintrag "Schlüssel und Tür" mit dem Knopf "Import".</figcaption></figure>
 <h2 id="schritt-2-die-änderung-ansehen-und-committen">Schritt 2: Die Änderung ansehen und committen</h2>
 <ol>
 <li>In GitHub Desktop, Reiter <strong>Changes</strong>: Geändert sind <code>Packages/manifest.json</code> und
@@ -94,5 +99,9 @@ mit <code>#v</code> vor der Nummer und ohne Leerzeichen.</p>
 In GitHub Desktop beide geänderten Dateien mit <strong>Discard changes</strong> zurücksetzen (vor dem
 Commit) bzw. den Commit mit <strong>Revert changes in commit</strong> rückgängig machen. Dann Jonas Bescheid
 sagen und den Text aus der Console mitschicken.</p>
+<p><strong>Ab v0.3.0 zeigt Unity oben einen Hinweis auf „experimentelle Pakete“.</strong>
+Das ist erwartet: Der Graph-Editor des Kits baut auf dem <strong>Graph Toolkit</strong> von Unity auf, das
+noch als experimentell gekennzeichnet ist. Der Kurs nutzt genau die getestete Version. Den
+Hinweis einfach stehen lassen.</p>
 <p><strong>Im Package Manager steht noch die alte Version.</strong>
-Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt (zum 23.10.: v0.2.0)</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li><li>Ab v0.2.0: Im Project-Fenster liegt unter Packages &gt; GEC1 Kurs-Paket &gt; Player das Prefab „Spieler“</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-03T22:11Z · 981ef7d</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt (zum 23.10.: v0.2.0)</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li><li>Ab v0.2.0: Im Project-Fenster liegt unter Packages &gt; GEC1 Kurs-Paket &gt; Player das Prefab „Spieler“</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-04T09:03Z · 033fe2a</span></footer><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

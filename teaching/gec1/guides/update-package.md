@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-03T22:11Z · 981ef7d -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-04T09:03Z · 033fe2a -->
 
 Dauer: ca. 5 Min
 
@@ -32,7 +32,7 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 |---|---|---|
 | v0.1.0 | 09.10. (in der Kursvorlage) | Menü **Kurs > Setup prüfen** |
 | v0.2.0 | 23.10. | Spieler-Controller: Prefab **Spieler** (laufen, springen, umsehen; Ich- und Dritte-Person-Ansicht) |
-| v0.3.0 | 13.11. | Kit: Interaktionen als Graph |
+| v0.3.0 | 13.11. | Kit mit Graph-Editor: Interaktionen als Graph bauen und beim Spielen beobachten; Beispiel „Schlüssel und Tür“ |
 
 ## Schritt 1: Neue Version eintragen
 
@@ -54,6 +54,13 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 der neuen Versionsnummer. **Kurs > Setup prüfen** zeigt bei **Kurs-Paket** dieselbe Version.
 Ab v0.2.0 liegt im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket > Player** das Prefab
 **Spieler**; es lässt sich von dort in die Szene ziehen.
+
+**Ab v0.3.0: Beispiel importieren.** Im Package Manager beim **GEC1 Kurs-Paket** den Reiter
+**Samples** öffnen und bei **Schlüssel und Tür** auf **Import** klicken. Das Beispiel landet unter
+`Assets/Samples/GEC1 Kurs-Paket/…`. Ein Doppelklick auf `Schlüssel und Tür.kit` öffnet den
+Graph-Editor; die Szene `Keller` zeigt das Beispiel im Spiel.
+
+(Screenshot folgt: Zeigt den Package Manager mit dem GEC1 Kurs-Paket, Reiter "Samples", Eintrag "Schlüssel und Tür" mit dem Knopf "Import".)
 
 ## Schritt 2: Die Änderung ansehen und committen
 
@@ -96,6 +103,11 @@ mit `#v` vor der Nummer und ohne Leerzeichen.
 In GitHub Desktop beide geänderten Dateien mit **Discard changes** zurücksetzen (vor dem
 Commit) bzw. den Commit mit **Revert changes in commit** rückgängig machen. Dann Jonas Bescheid
 sagen und den Text aus der Console mitschicken.
+
+**Ab v0.3.0 zeigt Unity oben einen Hinweis auf „experimentelle Pakete“.**
+Das ist erwartet: Der Graph-Editor des Kits baut auf dem **Graph Toolkit** von Unity auf, das
+noch als experimentell gekennzeichnet ist. Der Kurs nutzt genau die getestete Version. Den
+Hinweis einfach stehen lassen.
 
 **Im Package Manager steht noch die alte Version.**
 Unity neu starten. Steht in `Packages/manifest.json` die neue Version, lädt Unity sie beim Öffnen.

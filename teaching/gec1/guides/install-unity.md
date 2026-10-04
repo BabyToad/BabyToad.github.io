@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-03T22:11Z · 981ef7d -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-unity/ · Stand 2026-10-04T09:03Z · 033fe2a -->
 
 Dauer: ca. 60 Min (davon 30–45 Min Download)
 
