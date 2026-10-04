@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/component/ · Stand 2026-10-04T09:31Z · f1d1dad -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/component/ · Stand 2026-10-04T10:20Z · cb3c273 -->
 
 # Component
 

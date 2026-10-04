@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-04T09:31Z · f1d1dad. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-04T10:20Z · cb3c273. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -14,37 +14,70 @@ Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unt
 
 ### Alles steht auf der Kursseite
 
-allknivesnobagel.com
+allknivesnobagel.com/teaching/gec1
 
-/teaching/gec1
+Deckel offen, Ladegerät rein, WLAN an.
+
+### Setup heute
+
+- A · Git, dann den Unity-Download starten
+- B · GitHub-Konto, GitHub Desktop, VS Code
+- C · Projekt aus der Vorlage
+- E · Erster Commit
+- D · VS Code mit Unity und Agent
+
+Bis 14:50: Fortschritt im Hub.
+
+Der Rest geht auch zu Hause.
 
 ### Was ihr am Ende abgebt
 
-Eine interaktive Spielwelt in Unity. Klein ist erlaubt: Ein einziger Raum reicht.
+Eine interaktive Spielwelt in Unity.
+
+Ein Raum reicht.
+
+Abgabe: 22.01.2027
+
+Ein ZIP mit Projekt, Windows-Build und PDF.
+
+Mindestens zwei Interaktionen aus der Liste der Aufgabenstellung. Beispiele von dort: selbst das Monster spielen, möglichst schnell bankrottgehen, ein Flipper, der sich über Highscores aufregt.
 
 ### Wofür es Punkte gibt
 
-- Idee und Konzept: **30**
-- Audio-visuell: 20 · Funktionalität: 20
-- Struktur und Build: 10 · Implementierung: 10 · Dokumentation: 10
+**Tafelbild:** Balken je Kriterium: Idee und Konzept 30 Punkte, Audio-visuell 20, Funktionalität 20, Struktur und Build 10, Implementierung 10, Dokumentation 10.
 
 ### Drei Wege zum Spiel
 
-1. **Von Hand** im Editor: Objekte, Komponenten, später Knoten im Graphen
-2. **Code lesen**: verstehen, was ein Skript in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) tut
-3. **Mit einem Agenten**: beschreiben, prüfen, übernehmen oder verwerfen
+1. Von Hand im Editor: Objekte, Komponenten, später Knoten im Graphen
+2. Code lesen: verstehen, was ein Skript in jedem Durchlauf tut
+3. Mit einem Agenten: beschreiben, prüfen, übernehmen oder verwerfen
+
+Im Kurs etwa:
+
+1/3 Arbeit mit Agenten
+
+2/3 die Engine verstehen
 
 ### Ein Spiel ist eine Schleife
 
-Jeder Durchlauf ist ein [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), viele davon pro Sekunde.
+Jeder Durchlauf ist ein [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/).
 
-### Was in einem Frame passiert
-
-1. Eingabe lesen
-2. Zustand ändern
-3. Bild zeichnen
+**Tafelbild:** Drei Kästen im Kreis: Eingabe lesen, Zustand ändern, Bild zeichnen. Ein Rückpfeil führt zum nächsten Frame, etwa 60-mal pro Sekunde. Am Kasten „Zustand ändern“ hängt das Schild Update().
 
 Eure Skripte laufen im zweiten Schritt. Unity ruft dafür in jedem Frame [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/) auf: bei jedem eingeschalteten Skript auf einem aktiven GameObject, das diese Methode hat.
+
+### Pro Frame oder pro Sekunde?
+
+> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f \* Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
+
+```
+tempo = 3;
+
+// in Update()
+y += tempo * Time.deltaTime;
+```
+
+[deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) ist die Zeit seit dem letzten Frame. Wer damit multipliziert, bewegt Objekte pro Sekunde statt pro Frame. Den Code dazu gibt es unten im Selbststudium.
 
 ### Was die Engine euch abnimmt
 
@@ -53,57 +86,109 @@ Eure Skripte laufen im zweiten Schritt. Unity ruft dafür in jedem Frame [Update
 - Eingabe, Ton, Animation
 - Den Build für Windows
 
-### Alles ist ein GameObject
+Was sie kostet
 
-Ein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) ist zunächst leer. Was es kann, bestimmen seine Komponenten.
+Gigabytes an Download, eine eigene Denkweise, Lizenzen und Updates.
 
-### Komponenten bestimmen das Verhalten
+### Was ein GameObject kann
 
-- Transform: wo es ist
-- Mesh Renderer: wie es aussieht
-- Collider: womit es zusammenstößt
-- Euer Skript: was es tut
+Ein [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/) ist zunächst leer. Jede [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) gibt ihm eine Fähigkeit.
 
-Jede [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) ist ein Baustein mit eigenen Einstellungen im Inspector. Auch ein Skript ist eine Komponente.
+**Tafelbild:** Ein GameObject „Würfel“ wie im Inspector: Transform (wo es ist), Mesh Renderer (wie es aussieht), Box Collider (womit es zusammenstößt), euer Skript (was es tut).
+
+Jede Component hat im Inspector ihre eigenen Einstellungen. Auch ein Skript ist eine Component.
 
 ### So arbeiten wir
 
-1. Beschreiben, was passieren soll
-2. Bauen
-3. Spielen
-4. Prüfen, was sich geändert hat
-5. Committen
+**Tafelbild:** Fünf Stationen im Kreis: beschreiben, bauen, spielen, Diff lesen, committen; dann wieder von vorn.
+
+[Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/): was sich geändert hat.
+
+Die Beschreibung aus Schritt 1 ist der Anfang der Dokumentation. Wer jede Woche zwei Sätze schreibt, hat im Januar eine Dokumentation statt einer Nachtschicht.
 
 ### Git ist euer Rückgängig-Knopf
 
-Ein Commit ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.
+Ein [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) ist ein Speicherpunkt. Geht etwas kaputt, springt ihr dorthin zurück.
 
-### Was eine KI im Projekt verändert, kommt ins KI-Verzeichnis
+**Tafelbild:** Drei Commits auf einer Zeitleiste: Würfel angelegt, Sprung eingebaut, Kamera folgt. Der vierte Stand ist kaputt; ein Pfeil springt zurück zum letzten Commit.
 
-Werkzeug, Modell, Zweck, Dateien. Das Verzeichnis ist Pflicht, auch ohne KI-Nutzung.
+Noch nicht committet? In GitHub Desktop: Discard.
+
+Agenten committen nur, wenn ihr darum bittet, und gepusht wird nur auf ausdrückliche Anweisung. So bleibt ein Mensch im Kreislauf, bis ihr einschätzen könnt, wann ein Agent das Steuer übernehmen darf.
+
+### Das KI-Verzeichnis
+
+Jede Änderung, die eine KI im Projekt macht, bekommt eine Zeile.
+
+**Tafelbild:** Beispielzeile im KI-Verzeichnis: Werkzeug Copilot, Modell steht im Chat, Zweck Sprung höher gemacht, Datei Spieler.cs.
+
+Pflicht, auch ohne KI-Nutzung.
+
+Richtlinie der Hochschule vom 28.04.2025: Das Verzeichnis gehört in den Anhang der PDF. Reine Fragen ohne Änderung kommen nicht hinein, außer ihr verwendet die Antwort. Der Agent kann die Zeile eintragen; ihr prüft sie.
+
+### Lasst euch die Zeilen erklären
+
+„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“
+
+```csharp
+void Update()
+{
+    float weg = 3f * Time.deltaTime;
+    transform.Translate(0, weg, 0);
+}
+```
 
 ### Zwischen den Freitagen
 
-Dreizehn Tage ohne Kurs. Bringt jedes Mal etwas mit, das läuft, und eine Frage.
+**Tafelbild:** Die sechs Termine 09.10., 23.10., 13.11., 27.11., 11.12. und 08.01.; dazwischen zwei bis vier Wochen, vor dem letzten vier Wochen.
+
+Bringt jedes Mal etwas mit, das läuft, und eine Frage.
+
+Fragen vorher per Mail oder im Blackboard-Thread, dann kann ich mich vorbereiten.
 
 ### Drei Fragen an jede Idee
 
 1. Worum geht es in eurem Spiel?
-2. Wie handelt das Spiel davon?
+2. Wie wird das spielbar?
 3. Wofür belohnt es die Spielenden?
 
-### Bis zum 23.10.
+Papers, Please Es geht um Pflicht gegen Gewissen. Ihr prüft Pässe unter Zeitdruck. Belohnt wird mit Geld für die Familie.
 
-1. Pitch: zwei Minuten, mit Folie, Referenzbildern und Spielreferenzen
-2. Eine Seite: zwei Alternativen, das angestrebte Erlebnis, warum diese Idee
-3. Eine Designfrage, die sich testen lässt, und ein Satz zur Kernmechanik
-4. Setup abschließen, dann „Das erste Objekt bewegt sich“ nachbauen
+### Pitch am 23.10.
 
-### Zu Hause: Das erste Objekt bewegt sich
+Zwei Minuten.
+
+Die Uhr ist hart. Zeigt Bilder: eine Folie, Referenzbilder, Spiele, die ähnlich sind.
+
+### Eine Seite zur Idee
+
+- Zwei Alternativen
+- Das angestrebte Erlebnis
+- Warum diese Idee
+- Eine Designfrage, die sich testen lässt
+- Ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte
+
+Außerdem: das Setup zu Hause fertig machen.
+
+### Zwei Beispielsätze
+
+Designfrage
+
+„Bleiben Spielende länger, wenn das Scheitern lustig ist?“
+
+Mechanik-Satz
+
+„Solange ich die Taste halte, lädt sich ein Sprung auf, höchstens zwei Sekunden. Beim Loslassen springe ich so hoch, wie geladen wurde.“
+
+### Zu Hause: der erste Würfel
+
+Selbststudium
 
 Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
 
-### Pro Frame
+Würfel anlegen, Skript `Mover` anlegen, auf den Würfel ziehen, Play. Am 23.10. greifen wir das zu Beginn kurz auf.
+
+### Wie schnell steigt der Würfel?
 
 ```csharp
 void Update()
@@ -112,35 +197,20 @@ void Update()
 }
 ```
 
-### Seht selbst
+Pro Frame 0,05. Bei 30 Frames pro Sekunde sind das 1,5 pro Sekunde, bei 144 Frames pro Sekunde 7,2.
 
-> **Interaktive Erklärung: Frame, Update und deltaTime.** Ein Spiel läuft in Frames: In jedem Frame ruft die Engine Update() auf. Zwei Würfel steigen nach oben, beide im selben Spiel. Der eine rechnet „pro Frame 0,05 weiter“ (transform.Translate(0, 0.05f, 0); ohne deltaTime), der andere „3 pro Sekunde mal deltaTime“ (transform.Translate(0, 3f \* Time.deltaTime, 0); mit deltaTime). deltaTime ist die Zeit seit dem letzten Frame in Sekunden: bei 60 Frames pro Sekunde etwa 0,0167, bei 15 etwa 0,0667. Das Diagramm zeigt den Weg über der Zeit. Jeder Frame ist eine Stufe der Treppe und ein Strich auf der Frame-Leiste unter der Zeitachse; der Abstand zweier Striche ist deltaTime. Eine gestrichelte Linie zeigt das Soll: 3 Einheiten pro Sekunde. Bei 60 Frames pro Sekunde liegen beide Treppen auf dieser Linie. Bei 15 Frames pro Sekunde schafft der Würfel ohne deltaTime nur ein Viertel des Wegs (seine Treppe ist flacher), bei 144 Frames das 2,4-Fache (steiler). Der Würfel mit deltaTime bleibt bei jeder Bildrate auf der Linie: wenige Frames heißt große Stufen, viele Frames kleine. Ein Ruckler (ein Frame dauert eine halbe Sekunde) lässt den Würfel ohne deltaTime zurückfallen; der mit deltaTime springt in einer Stufe 1,5 Einheiten hoch und ist wieder auf der Linie. Merksatz: Ohne deltaTime gilt die Bewegung pro Frame, mit deltaTime pro Sekunde. [Zum Erklärer](https://www.allknivesnobagel.com/teaching/gec1/explainers/delta-time/)
-
-```
-tempo = 3;
-
-// in Update()
-y += tempo
-  * Time
-  .deltaTime;
-```
-
-### Pro Sekunde
+### Pro Sekunde statt pro Frame
 
 ```csharp
-void Update()
-{
-    transform.Translate(0, 3f * Time.deltaTime, 0);
-}
+// vorher: pro Frame
+transform.Translate(0, 0.05f, 0);
+
+// jetzt: pro Sekunde
+float weg = 3f * Time.deltaTime;
+transform.Translate(0, weg, 0);
 ```
 
 Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) gilt Bewegung pro Frame, mit deltaTime pro Sekunde.
-
-[deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) ist die Zeit seit dem letzten Frame. Wer damit multipliziert, bewegt Objekte pro Sekunde statt pro Frame.
-
-### Lasst euch die Zeilen erklären
-
-„Erkläre Zeile für Zeile, was dieses Skript in jedem Frame tut. Ändere nichts.“
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/01/
 
@@ -152,96 +222,157 @@ Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
 
 Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
 
-Bis zum nächsten Termin: Meilenstein Blockout bis 13.11.: ein Raum, grau und begehbar; die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, an Tag 7 im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+Bis zum nächsten Termin: Meilenstein Blockout bis 13.11.: ein Raum, grau und begehbar; die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+
+### Kurz zurück: deltaTime
+
+Wer hat den Würfel zu Hause bewegt?
+
+Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) steigt er pro Frame, auf schnellen Rechnern also schneller. Mit deltaTime steigt er pro Sekunde, überall gleich.
 
 ### Zwei Minuten pro Pitch
 
-Harte Uhr. Danach füllen alle eine Pitch-Karte aus, Diskussion gibt es nicht.
+2:00
+
+Die Uhr ist hart. Danach schreibt jede Person eine Pitch-Karte. Diskutiert wird nicht.
+
+Die Reihenfolge ist ausgelost. Wer dran ist, steht schon bereit.
 
 ### Die Pitch-Karte
 
-1. Welches Erlebnis soll das Spiel erzeugen?
-2. Ist das in zwölf Wochen machbar?
-3. Was ist die riskanteste Annahme?
+**Tafelbild:** Die gedruckte Pitch-Karte mit drei Feldern: Erlebnis (Welches Erlebnis soll das Spiel erzeugen?), Machbarkeit (In zwölf Wochen machbar? Was wäre zu viel?), riskanteste Annahme (Was muss stimmen, damit es funktioniert?).
+
+Eine Karte pro Pitch. Am Ende bekommt jede Person die Karten zu ihrem eigenen Pitch.
 
 ### Ihr baut ein Erlebnis
 
-Die Spielenden fahren. Ihr baut die Straße, und das Auto.
+Ihr baut Straße und Auto. Fahren tun die Spielenden.
 
-### Was das Spiel sagt und was es tut
+Darum gilt: Was das Spiel erzählt, sollen die Spielenden auch tun.
 
-Beides sollte dasselbe sein.
+### Ideen, schwach und stark
 
-### Eine Sache gut
+Schwach: „Ein Open-World-Spiel mit Crafting, Dialogen und Bosskämpfen.“
 
-- Lieber klein und fertig als groß und kaputt
+Stark: „Eine Leuchtturmwärterin, eine Sturmnacht, drei Schiffe. Man dreht nur das Licht.“
+
+Stark heißt: ein Erlebnis, eine Handlung, eine Grenze.
+
+### Lieber eine Sache richtig
+
+- Klein und fertig schlägt groß und kaputt
 - Die letzten 20 % der Arbeit kosten 80 % der Zeit
 - Jedes Feature muss gebaut, getestet und erklärt werden
 
+Kursstandard: ein Raum, eine Kernschleife, zwei Interaktionen, ein Neustart. Feature-Freeze am 11.12.
+
 ### Von der Idee zur Spec
 
-1. Was tun die Spielenden? (Verben)
-2. Nach welchen Regeln?
-3. Woran merken sie, dass es geklappt hat?
-4. Was passiert, wenn es schiefgeht?
+1. Verb: Was tun die Spielenden?
+2. Regel: Nach welchen Regeln?
+3. Rückmeldung: Woran merken sie, dass es geklappt hat?
+4. Scheitern: Was passiert, wenn es schiefgeht?
 
-Eine Spec ist gut, wenn jemand anderes sie bauen kann, ohne nachzufragen.
+Eine Spec (Spezifikation) ist gut, wenn jemand anderes sie bauen kann, ohne nachzufragen.
 
-### Schwach und stark
+### Eine Spec zerlegen
 
-Schwach: „Der Spieler kann Gegner besiegen.“
+**Tafelbild:** Die starke Spec in vier Zeilen, Schild für Schild: Verb: Mit dem Stock zuschlagen. Regel: Drei Treffer werfen einen Gegner um. Rückmeldung: Getroffen blinkt er weiß. Scheitern: Zu langsam? Nach fünf Sekunden steht er wieder auf.
 
-Stark: „Drei Treffer mit dem Stock werfen einen Gegner um. Getroffen blinkt er weiß. Nach fünf Sekunden steht er wieder auf.“
+Schwach
+
+„Der Spieler kann Gegner besiegen.“
+
+### Lasst die Spec prüfen
+
+„Was ist an dieser Spec mehrdeutig? Schreib sie nicht um.“
+
+Der Agent fragt nach. Ihr entscheidet und schreibt.
 
 ### Blockout: grau, aber begehbar
 
 Erst stimmen Größen und Wege, dann kommt die Grafik.
 
+**Tafelbild:** Grundriss eines grauen Raums: Wände, eine Tür, drei Kisten, eine Rampe und ein Startpunkt. Ein Weg führt vom Start zur Tür.
+
+Würfel, Ebenen, ProBuilder: mehr braucht ein Blockout nicht.
+
 ### Eine Einheit ist ein Meter
 
-Türen sind etwa 2 m hoch, Stufen 0,2 m. Die Spielfigur ist 1,8 m groß.
+Stellt zuerst die Spielfigur hinein. Dann seht ihr, ob der Rest passt.
 
-### Jedes Objekt hat einen Transform
-
-- Position, Drehung, Größe
-- Lokal: relativ zum Elternobjekt
-- Welt: relativ zur Szene
-
-Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) beschreibt Lage, Drehung und Größe eines [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/). Werte als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/) mit x, y und z. Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit.
-
-### Was sich wiederholt, wird ein Prefab
-
-Einmal bauen, oft verwenden, an einer Stelle ändern.
-
-Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/) ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/).
+**Tafelbild:** Maßstab auf Kästchen von 1 m: Spielfigur 1,8 m, Tür 2 m, Stufe 0,2 m, Würfel 1 m.
 
 ### Die Spielfigur ist schon da
 
-Aus dem Kurspaket: `Spieler` in die Szene ziehen, Play, laufen.
+Aus dem Kurspaket: `Spieler` in die [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/) ziehen, Play, laufen.
+
+- WASD laufen, Maus schauen
+- Leertaste springen, Shift rennen
+- V wechselt zwischen Ego- und Third-Person-Ansicht
+
+Fällt die Figur aus der Welt, erscheint sie wieder am Start. Ein Gamepad geht auch.
+
+### Transform: lokal und Welt
+
+Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/) hält Position, Drehung und Größe, je als [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/) mit x, y und z.
+
+**Tafelbild:** Eine Tasse steht auf einem Tisch, lokal bei (0, 1, 0). Der Tisch fährt von x = 2 nach x = 6. Die Tasse fährt mit: Lokal bleibt (0, 1, 0), in der Welt wird aus (2, 1, 0) die Position (6, 1, 0).
+
+Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit. Die Weltkoordinaten zählen von der Mitte der Szene.
+
+### Prefab und Instanzen
+
+Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/): einmal bauen, oft verwenden, an einer Stelle ändern.
+
+**Tafelbild:** Ein Prefab „Laterne“ und fünf Instanzen in der Szene. Eine Änderung am Prefab erscheint in allen Instanzen; eine Instanz hat einen Override und bleibt an dieser Stelle anders.
+
+Ein Prefab ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der Szene, außer dort, wo eine Instanz einen Override hat.
+
+### Heute schon ein Build
+
+Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum 13.11. muss eurer auf einem fremden Windows-Rechner laufen.
+
+File › Build Profiles › Windows › Build
+
+Mac: im Hub das Windows-Modul dazuholen, Backend Mono.
+
+Der Build kommt bewusst früh, damit Probleme nicht erst im Januar auffallen. Auf dem Mac geht für Windows nur das Mono-Backend, IL2CPP nicht. Wer kein Windows-Gerät hat, tauscht mit einer Person aus dem Kurs.
 
 ### Was nie ins Repository gehört
 
-- Library, Temp, Logs: baut Unity selbst neu
-- Builds: gehören in die Abgabe, nicht ins Repository
+Das [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/) hält nur, was ihr selbst gemacht habt.
+
+- Library, Temp, Logs: baut Unity neu
+- Builds: gehören in die Abgabe
 - Dateien über 50 MB
 
-### Heute schon bauen
+```
+/Library/
+/Temp/
+/Logs/
+/Build/
+```
 
-File › Build Profiles › Windows › Build. Der Build läuft bis zum 13.11. auf einem anderen Windows-Rechner.
+History: jeder [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) mit Nachricht.
 
-### Checkpunkt
+Die `.gitignore` der Vorlage hält diese Ordner schon heraus. GitHub warnt bei Dateien über 50 MB und lehnt sie ab 100 MB ab. In GitHub Desktop zeigt der Reiter History jeden Commit von heute: Gute Nachrichten sagen, was und warum, nicht „update“.
+
+### Checkpoint
 
 1. Die Spielfigur läuft durch einen grauen Raum
-2. Die Spec der ersten Interaktion ist geschrieben
-3. Commit und Push sind gemacht
+2. Die Spec der ersten Interaktion steht
+3. Committet und gepusht
 4. Ein Build existiert
+
+Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
 
 ### Die nächsten 21 Tage
 
-1. In 48 Stunden: die Übung von heute nachbauen
-2. An Tag 7: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+1. Nach 48 Stunden: die Übung von heute nachbauen
+2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
 3. Wer 30 Minuten feststeckt, fragt
-4. Vor dem 13.11.: testen, Spec überarbeiten
+4. Bis zum 13.11.: testen, Spec überarbeiten
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
 
