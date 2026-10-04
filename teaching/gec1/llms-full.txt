@@ -1,8 +1,8 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-04T09:03Z · 033fe2a. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-04T09:31Z · f1d1dad. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
-## Tag 1: Was eine Engine tut
+## Tag 1: Was macht eine Engine?
 
 09.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/01/slides/
 
@@ -150,7 +150,7 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/01/
 
 Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
 
-Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vektor/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/szene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
+Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
 
 Bis zum nächsten Termin: Meilenstein Blockout bis 13.11.: ein Raum, grau und begehbar; die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, an Tag 7 im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
 
