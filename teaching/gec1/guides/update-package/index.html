@@ -6,9 +6,9 @@
 Spieler-Controller (Prefab <strong>Spieler</strong>) und das Kit mit dem Graph-Editor. Es liegt nicht im eigenen
 Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich nur, <strong>welche
 Version</strong> es verwendet – eine einzige Zeile in <code>Packages/manifest.json</code>:</p>
-<pre><code>"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1",
+<pre><code>"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2",
 </code></pre>
-<p>Das <code>#v0.3.1</code> am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+<p>Das <code>#v0.3.2</code> am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).</p>
 <p>Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgängig machen.</p>
@@ -27,7 +27,7 @@ Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht e
 
 
 
-<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.3.1</td><td>09.10. (in der Kursvorlage)</td><td>Setup-Check, Spieler-Controller (Prefab <strong>Spieler</strong>), Kit mit Graph-Editor, Beispiel „Schlüssel und Tür“</td></tr></tbody></table>
+<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.3.2</td><td>09.10. (in der Kursvorlage)</td><td>Setup-Check, Spieler-Controller (Prefab <strong>Spieler</strong>), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über <strong>Tools › Kit</strong>), Vorlage für eigene Knoten</td></tr></tbody></table>
 <p>Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.</p>
 <h2 id="schritt-1-neue-version-eintragen">Schritt 1: Neue Version eintragen</h2>
 <ol>
@@ -55,11 +55,10 @@ Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht e
 der neuen Versionsnummer. <strong>Kurs > Setup prüfen</strong> zeigt bei <strong>Kurs-Paket</strong> dieselbe Version.
 Das Prefab <strong>Spieler</strong> liegt weiterhin im <strong>Project</strong>-Fenster unter <strong>Packages > GEC1 Kurs-Paket >
 Player</strong>.</p>
-<p><strong>Beispiel importieren.</strong> Im Package Manager beim <strong>GEC1 Kurs-Paket</strong> den Reiter
-<strong>Samples</strong> öffnen und bei <strong>Schlüssel und Tür</strong> auf <strong>Import</strong> klicken. Das Beispiel landet unter
-<code>Assets/Samples/GEC1 Kurs-Paket/…</code>. Ein Doppelklick auf <code>Schlüssel und Tür.kit</code> öffnet den
-Graph-Editor; die Szene <code>Keller</code> zeigt das Beispiel im Spiel.</p>
-<figure class="screenshot platz" data-datei="package-manager-samples.png"><div class="screenshot-bild">Screenshot folgt: package-manager-samples.png</div><figcaption>Zeigt den Package Manager mit dem GEC1 Kurs-Paket, Reiter "Samples", Eintrag "Schlüssel und Tür" mit dem Knopf "Import".</figcaption></figure>
+<p><strong>Beispiele bauen.</strong> Die Beispiele kommen aus dem Menü <strong>Tools › Kit</strong>, nicht aus dem Package
+Manager: z. B. <strong>Tools › Kit › Beispiel „Schlüssel und Tür“ bauen</strong> oder <strong>Tools › Kit › Beispiel
+„Werkstatt (kaputt)“ bauen</strong>. Sie landen unter <code>Assets/Kit Beispiel/…</code>; eigene Änderungen daran
+bleiben beim Aktualisieren erhalten.</p>
 <h2 id="schritt-2-die-änderung-ansehen-und-committen">Schritt 2: Die Änderung ansehen und committen</h2>
 <ol>
 <li>In GitHub Desktop, Reiter <strong>Changes</strong>: Geändert sind <code>Packages/manifest.json</code> und
@@ -96,4 +95,4 @@ Das ist erwartet: Der Graph-Editor des Kits baut auf dem <strong>Graph Toolkit</
 noch als experimentell gekennzeichnet ist. Der Kurs nutzt genau die getestete Version. Den
 Hinweis einfach stehen lassen.</p>
 <p><strong>Im Package Manager steht noch die alte Version.</strong>
-Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-05T10:26Z · 915d46a</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-05T12:36Z · 9fcef5f</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/ · Stand 2026-10-05T10:26Z · 915d46a -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/ · Stand 2026-10-05T12:36Z · 9fcef5f -->
 
 # Transform
 

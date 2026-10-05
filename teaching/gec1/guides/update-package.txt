@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-05T10:26Z · 915d46a -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-05T12:36Z · 9fcef5f -->
 
 Dauer: ca. 5 Min
 
@@ -19,10 +19,10 @@ Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich 
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2",
 ```
 
-Das `#v0.3.1` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+Das `#v0.3.2` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
@@ -30,7 +30,7 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 
 | Version | Ab | Neu |
 |---|---|---|
-| v0.3.1 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiel „Schlüssel und Tür“ |
+| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**), Vorlage für eigene Knoten |
 
 Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
@@ -55,12 +55,10 @@ der neuen Versionsnummer. **Kurs > Setup prüfen** zeigt bei **Kurs-Paket** dies
 Das Prefab **Spieler** liegt weiterhin im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket >
 Player**.
 
-**Beispiel importieren.** Im Package Manager beim **GEC1 Kurs-Paket** den Reiter
-**Samples** öffnen und bei **Schlüssel und Tür** auf **Import** klicken. Das Beispiel landet unter
-`Assets/Samples/GEC1 Kurs-Paket/…`. Ein Doppelklick auf `Schlüssel und Tür.kit` öffnet den
-Graph-Editor; die Szene `Keller` zeigt das Beispiel im Spiel.
-
-(Screenshot folgt: Zeigt den Package Manager mit dem GEC1 Kurs-Paket, Reiter "Samples", Eintrag "Schlüssel und Tür" mit dem Knopf "Import".)
+**Beispiele bauen.** Die Beispiele kommen aus dem Menü **Tools › Kit**, nicht aus dem Package
+Manager: z. B. **Tools › Kit › Beispiel „Schlüssel und Tür“ bauen** oder **Tools › Kit › Beispiel
+„Werkstatt (kaputt)“ bauen**. Sie landen unter `Assets/Kit Beispiel/…`; eigene Änderungen daran
+bleiben beim Aktualisieren erhalten.
 
 ## Schritt 2: Die Änderung ansehen und committen
 

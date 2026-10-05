@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-05T10:26Z · 915d46a. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-05T12:36Z · 9fcef5f. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -447,6 +447,8 @@ Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
 2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
 3. Wer 30 Minuten feststeckt, fragt
 4. Bis zum 13.11.: testen, Spec überarbeiten
+
+Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
 
@@ -2432,7 +2434,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -2485,7 +2487,7 @@ Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/); unter Windows danach den Hub ganz beenden und neu starten.
 
 **Package Manager: Die Adresse wird nicht gefunden.**
-Die Adresse genau so einfügen, inklusive `#v0.3.1` am Ende, ohne Leerzeichen.
+Die Adresse genau so einfügen, inklusive `#v0.3.2` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
 Ist oben die Editor-Version 6000.3.15f1 gewählt? Die Vorlagen hängen an der Version.
@@ -3077,10 +3079,10 @@ Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich 
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2",
 ```
 
-Das `#v0.3.1` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+Das `#v0.3.2` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
@@ -3088,7 +3090,7 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 
 | Version | Ab | Neu |
 |---|---|---|
-| v0.3.1 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiel „Schlüssel und Tür“ |
+| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**), Vorlage für eigene Knoten |
 
 Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
@@ -3113,12 +3115,10 @@ der neuen Versionsnummer. **Kurs > Setup prüfen** zeigt bei **Kurs-Paket** dies
 Das Prefab **Spieler** liegt weiterhin im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket >
 Player**.
 
-**Beispiel importieren.** Im Package Manager beim **GEC1 Kurs-Paket** den Reiter
-**Samples** öffnen und bei **Schlüssel und Tür** auf **Import** klicken. Das Beispiel landet unter
-`Assets/Samples/GEC1 Kurs-Paket/…`. Ein Doppelklick auf `Schlüssel und Tür.kit` öffnet den
-Graph-Editor; die Szene `Keller` zeigt das Beispiel im Spiel.
-
-(Screenshot folgt: Zeigt den Package Manager mit dem GEC1 Kurs-Paket, Reiter "Samples", Eintrag "Schlüssel und Tür" mit dem Knopf "Import".)
+**Beispiele bauen.** Die Beispiele kommen aus dem Menü **Tools › Kit**, nicht aus dem Package
+Manager: z. B. **Tools › Kit › Beispiel „Schlüssel und Tür“ bauen** oder **Tools › Kit › Beispiel
+„Werkstatt (kaputt)“ bauen**. Sie landen unter `Assets/Kit Beispiel/…`; eigene Änderungen daran
+bleiben beim Aktualisieren erhalten.
 
 ### Schritt 2: Die Änderung ansehen und committen
 

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-05T10:26Z · 915d46a -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project/ · Stand 2026-10-05T12:36Z · 9fcef5f -->
 
 Dauer: ca. 20–30 Min (davon 2–15 Min erstes Öffnen)
 
