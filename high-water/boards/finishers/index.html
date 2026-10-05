@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Execution Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Shippori+Mincho+B1:wght@800&family=Noto+Sans+JP:wght@700&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0e0f;--panel:#141719;--line:#2a2f33;--ink:#e9e7e1;--mute:#9aa0a4;--cy:#5ff0ff;--ice:#dff9ff;--or:#ff8a00;--red:#ff2a3a;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif;--mono:"JetBrains Mono",Consolas,monospace;--sans:"IBM Plex Sans",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--sans)}
+body{padding:0 16px 120px}
+main{max-width:1120px;margin:0 auto}
+.band{height:10px;margin:0 -16px;background:repeating-linear-gradient(135deg,var(--or) 0 14px,#111 14px 28px)}
+header{padding:48px 0 28px}
+.doc{font:500 12px var(--mono);letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+h1,h2,h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
+h1{font-size:clamp(44px,8vw,84px);margin:10px 0 14px}h1 em{font-style:normal;color:var(--cy)}
+header p{font-size:clamp(18px,2.3vw,22px);max-width:34em;margin:0}
+section{padding:44px 0;border-top:1px solid var(--line)}
+section>h2{font-size:clamp(28px,4.5vw,42px);margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 22px}
+/* the stage: 1280x720 design, scaled */
+.stage-outer{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;border:1px solid var(--line);background:#000}
+.stage{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0}
+.shot{position:absolute;inset:0;background:url(shots/moment_640.png) center/cover;image-rendering:pixelated;filter:saturate(.35) brightness(.72)}
+.slow .shot{animation:crawl 6s linear infinite}
+@keyframes crawl{from{transform:scale(1.02)}to{transform:scale(1.06) translateX(-8px)}}
+.tint{position:absolute;inset:0;background:radial-gradient(60% 55% at 47% 52%,transparent 30%,rgba(0,18,24,.78) 100%),repeating-linear-gradient(0deg,rgba(95,240,255,.05) 0 1px,transparent 1px 4px)}
+.bars{position:absolute;left:0;right:0;height:48px;background:#000}.bars.t{top:0;border-bottom:1px solid rgba(95,240,255,.35)}.bars.b{bottom:0;border-top:1px solid rgba(95,240,255,.35)}
+.rec{position:absolute;left:20px;top:14px;font:500 15px var(--mono);color:rgba(95,240,255,.8)}
+.clock{position:absolute;right:20px;bottom:14px;font:500 15px var(--mono);color:rgba(95,240,255,.8)}
+.head{position:absolute;left:64px;top:84px;display:flex;align-items:baseline;gap:18px}
+.head .jp{font:800 44px "Shippori Mincho B1";color:var(--or);transform:scaleX(.8);transform-origin:0 50%}
+.head .en{font:800 34px var(--cond);letter-spacing:.2em;color:var(--ice)}
+.head .rate{font:600 16px var(--mono);color:var(--cy);letter-spacing:.14em}
+.timer{position:absolute;left:64px;right:64px;top:140px;height:4px;background:rgba(95,240,255,.18)}
+.timer i{display:block;height:100%;width:62%;background:var(--cy)}
+.timer span{position:absolute;right:0;top:10px;font:500 13px var(--mono);color:var(--mute)}
+.cards{position:absolute;left:64px;right:64px;bottom:78px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;background:rgba(2,10,14,.86);border-top:2px solid var(--cy);padding:14px 16px 16px 16px;min-height:188px;transition:transform .12s}
+.card.best{border-top-color:var(--or)}
+.card .btn{position:absolute;left:16px;top:-26px;width:44px;height:44px;border-radius:50%;background:#0b0d0e;border:2px solid var(--gc);display:grid;place-items:center;font:800 24px var(--cond);color:var(--gc)}
+.card .kb{position:absolute;left:66px;top:-18px;font:700 13px var(--mono);background:#e9e7e1;color:#111;border-radius:4px;padding:2px 7px}
+.card .best-tag{position:absolute;right:14px;top:-14px;font:700 12px var(--mono);letter-spacing:.14em;background:var(--or);color:#000;padding:2px 8px}
+.card .sil{position:absolute;right:14px;top:22px;width:74px;height:74px;opacity:.9}
+.card .jp{font:700 18px "Noto Sans JP";color:var(--or);margin-top:14px}
+.card .name{font:800 34px/0.95 var(--cond);letter-spacing:.02em;color:var(--ice);margin:4px 0 10px;max-width:9.5em}
+.card .tag{display:inline-flex;align-items:center;gap:8px;font:700 15px var(--mono);letter-spacing:.1em;padding:3px 9px;border:1.5px solid var(--tc);color:var(--tc)}
+.card .tag b{font:800 18px var(--cond)}
+.card .gain{font:500 14px var(--mono);color:var(--mute);margin-top:8px}
+.foot{position:absolute;left:64px;right:64px;bottom:58px;display:flex;justify-content:space-between;font:600 14px var(--mono);letter-spacing:.12em;color:var(--mute)}
+.foot b{color:var(--ice)}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+.ctl button{font:700 15px var(--mono);letter-spacing:.08em;background:var(--panel);color:var(--ink);border:1px solid var(--line);padding:9px 14px;cursor:pointer}
+.ctl button:hover{border-color:var(--cy)}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 13px var(--mono);letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+td .t{font:700 13px var(--mono);padding:1px 7px;border:1.5px solid var(--tc);color:var(--tc);white-space:nowrap}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.box{background:var(--panel);border-left:2px solid var(--cy);padding:14px 16px}
+.box.or{border-left-color:var(--or)}
+.box h3{font-size:22px;margin-bottom:6px}
+code{font:500 .9em var(--mono);color:var(--cy)}
+ul{padding-left:1.2em;margin:.4em 0}li{margin:.25em 0}
+.q li{margin:.5em 0}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Time slows almost to a stop and three rolled finishers sit on the face buttons, each with a benefit tag. The GRAB and EXECUTE prompts show only for the first three. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="band"></div>
+<main>
+<header>
+  <div class="doc">Studio Hitstop · Slate (Director lane) · board · 2026-09-28</div>
+  <h1>Execution <em>menu</em></h1>
+  <p>Jonas: agency over which finisher you get and how to pull it off. When a finisher is armed, time drops to a crawl and three are offered on the three face buttons. One press picks one; every finisher states what it buys you.</p>
+</header>
+
+<section>
+  <h2>The moment</h2>
+  <p class="sub">Mockup at 1280 × 720, over a frame from the finisher lab. The world keeps crawling at 0.08 speed behind the cards, so it stays a moment in the fight, not a menu screen. The rolls are drawn by the same rules the game will use.</p>
+  <div class="stage-outer" id="outer"><div class="stage slow" id="stage">
+    <div class="shot"></div><div class="tint"></div>
+    <div class="bars t"></div><div class="bars b"></div>
+    <div class="rec">HW-07 OPTICAL REC ● · DISCOVERY · 開示</div>
+    <div class="clock">TIME ×0.08 · 処刑選択</div>
+    <div class="head"><span class="jp">処刑選択</span><span class="en">SELECT TERMINATION</span><span class="rate">3 OFFERS · 1 PRESS</span></div>
+    <div class="timer"><i id="bar"></i><span>AUTO: BEST FIT IN 0.9 s</span></div>
+    <div class="cards" id="cards"></div>
+    <div class="foot"><span><b>(LB)</b> GATE · abort, WATERLINE kept</span><span>the thug stays in your glove until you pick</span></div>
+  </div></div>
+  <div class="ctl"><button id="roll">Reroll</button><button data-ctx="open">Context: open street</button><button data-ctx="wall">by a wall</button><button data-ctx="pier">by a pier</button><button data-ctx="barrel">by a barrel</button><button data-ctx="crowd">in a crowd</button><button data-ctx="pair">second thug in reach</button></div>
+</section>
+
+<section>
+  <h2>How it flows</h2>
+  <p class="sub">Tested against the finisher research (findings F1–F8) and Jonas's "never interrupt the flow" rule.</p>
+  <div class="cols">
+    <div class="box"><h3>Trigger: punch, not grab</h3>WATERLINE full, holding a thug, <b>punch</b> opens the menu, as today. Opening on grab would hijack every grab-and-throw while the meter is full; punching a held thug already means "execute". The HUD's teaching prompts ((B) GRAB, (X) EXECUTE) show for the first three finishers only (Readout).</div>
+    <div class="box"><h3>One press, no cursor</h3>Each card maps to a face button: <b>X</b>, <b>Y</b>, <b>B</b> on the pad, which are punch, kick and grab (keyboard <b>X V C</b>). The best-fit card is always on <b>X</b>, so punch-punch executes the best-fit pick at once: the fast path costs one extra tap.</div>
+    <div class="box"><h3>A crawl, not a pause</h3>Time runs at <b>0.08</b>, sound goes under water, and the street dims around you. You are invulnerable and rooted while it's open (DOOM: finishers are safe). After <b>1.5 s</b> of real time it picks the best fit by itself. The finisher itself still runs its 0.4–1.0 s and hands control back on its payoff.</div>
+    <div class="box or"><h3>Abort</h3><b>LB / Shift (GATE)</b> closes the menu with no finisher: time snaps back, the WATERLINE stays full and the thug stays in your glove.</div>
+    <div class="box"><h3>The roll</h3><ul><li><b>Slot X:</b> the context's best fit (wall, pier, barrel, a second thug in reach, a crowd, a caught pull). In the open, it takes the next of a rotation.</li><li><b>Slots Y and B:</b> drawn from what is <i>valid here</i>. A wall finisher needs a wall, Merger needs a second thug and Liquidity needs a barrel. They never repeat the previous menu's pair while other options exist.</li><li><b>Deterministic:</b> drawn from <code>Clock.rng</code>, the gameplay stream.</li></ul></div>
+    <div class="box"><h3>Research check</h3><ul><li><b>F2</b> said players never learn a command list. The menu is that list, learned by playing, with no memorisation.</li><li><b>F3</b> said 36–60 f. The choice adds a decision; the auto-pick and the X fast path cap it.</li><li><b>F6</b>, the payoff, becomes the tags below: a finisher has to pay off in a way the player can choose.</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>What each one buys (the RPG layer)</h2>
+  <p class="sub"><b>Jonas: every finisher heals</b> (DOOM glory kills), one constant: <code>Finishers.HEAL = 2</code> armour. On top, each carries one tag: two <b>resources</b> (TRANCHES, WATERLINE) and three <b>situational</b> (CROWD, STRUCTURE, ARMOUR BREAK). The choice is a resource now versus solving the room.</p>
+  <table>
+    <tr><th>Tag</th><th>Effect</th><th>Finishers</th></tr>
+    <tr><td><span class="t" style="--tc:#5ff0ff">◑ TRANCHES</span></td><td>Railgun cells refilled: all three TRANCHES.</td><td>Due Diligence · Contract Terminated</td></tr>
+    <tr><td><span class="t" style="--tc:#dff9ff">≋ WATERLINE</span></td><td>The meter restarts at 70 %, not 35 %: the next finisher comes about twice as soon.</td><td>Hostile Takeover · Wall Street</td></tr>
+    <tr><td><span class="t" style="--tc:#ff8a00">⌖ CROWD</span></td><td>Knocks the room down: sweeps, quakes and volleys that hit everyone in reach.</td><td>Market Sweep · Asset Consolidation · Downsizing · Merger</td></tr>
+    <tr><td><span class="t" style="--tc:#ffc94d">▥ STRUCTURE</span></td><td>Opens the level: breaches a wall, drops a pier, sets off barrels.</td><td>Severance Package · Load-Bearing Review · Liquidity Event</td></tr>
+    <tr><td><span class="t" style="--tc:#ff2a3a">◇ ARMOUR BREAK</span></td><td>Strips armour from the victim and every armoured thug within 3 m (Ballast, Doorman); +2 damage to armoured targets meanwhile.</td><td>Compliance Check · Chiropractic Review</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>The API between Slate and Readout (agreed)</h2>
+  <div class="cols">
+    <div class="box"><h3>Slate (the mechanic)</h3>Emits <code>Events.finisher_choice_open(options, timeout, 0)</code> after the time drops. Each option: <code>{id, name, tag, tag_jp, note, placeholder}</code> plus extras. Resolves <code>finisher_choice_picked(index, auto)</code> on the next physics tick and emits <code>finisher_choice_close()</code> when it closes the cards itself (dash, hit, scene exit). Handles dash as the abort. Backstop auto-pick 0.5 s after the timeout. Dials: <code>Finishers.choice_delay / choice_slow / choice_reveal / choice_stagger</code>.</div>
+    <div class="box"><h3>Readout (the cards)</h3>Owns the cards and the picking input (attack / kick / grab = left / middle / right, deaf for 0.2 s), a UiStack FULL ticket "choice" at 110, and the countdown. Without Readout's cards (tools that load arena.tscn) Slate draws a placeholder and reads the buttons itself.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Open for Jonas</h2>
+  <ul class="q">
+    <li><b>1.5 s auto-pick:</b> long enough to read three names, short enough to keep the fight moving. Shorter?</li>
+    <li><b>Decided:</b> every finisher heals (+2, one constant); HEAL is no longer a tag. Auto-pick delay, slow-motion scale and card stagger are dials on Ctrl+F6..F11 in game.</li>
+    <li><b>ARMOUR BREAK</b> waits on Ballast and Doorman (not in the build yet). Until then Compliance Check still reads as a helmet crush.</li>
+  </ul>
+</section>
+</main>
+<script>
+const F={
+ contract_terminated:{n:"CONTRACT TERMINATED",jp:"契約解除",tag:"TRANCHES",g:"All three railgun cells refilled"},
+ severance_package:{n:"SEVERANCE PACKAGE",jp:"退職金",tag:"STRUCTURE",g:"Through the wall behind him",need:"wall"},
+ hostile_takeover:{n:"HOSTILE TAKEOVER",jp:"敵対的買収",tag:"WATERLINE",g:"Meter restarts at 70 %"},
+ compliance_check:{n:"COMPLIANCE CHECK",jp:"法令遵守",tag:"ARMOUR BREAK",g:"Strips armour within 3 m"},
+ chiropractic_review:{n:"CHIROPRACTIC REVIEW",jp:"整体審査",tag:"ARMOUR BREAK",g:"Strips armour within 3 m"},
+ merger:{n:"MERGER",jp:"合併",tag:"CROWD",g:"Two thugs at once",need:"pair"},
+ market_sweep:{n:"MARKET SWEEP",jp:"市場一掃",tag:"CROWD",g:"Swings through everyone in reach",need:"any"},
+ downsizing:{n:"DOWNSIZING",jp:"人員削減",tag:"CROWD",g:"Quake pops the room"},
+ due_diligence:{n:"DUE DILIGENCE",jp:"買収監査",tag:"TRANCHES",g:"All three railgun cells refilled"},
+ liquidity_event:{n:"LIQUIDITY EVENT",jp:"流動性危機",tag:"STRUCTURE",g:"Barrel rocket down the lane",need:"barrel"},
+ load_bearing_review:{n:"LOAD-BEARING REVIEW",jp:"構造審査",tag:"STRUCTURE",g:"Drops the pier",need:"pier"},
+ asset_consolidation:{n:"ASSET CONSOLIDATION",jp:"資産統合",tag:"CROWD",g:"The crowd pulled into a knot",need:"any"},
+ wall_street:{n:"WALL STREET",jp:"ウォール街",tag:"WATERLINE",g:"Meter restarts at 70 %",need:"wall"},
+};
+const TAGS={TRANCHES:["◑","#5ff0ff"],WATERLINE:["≋","#dff9ff"],CROWD:["⌖","#ff8a00"],STRUCTURE:["▥","#ffc94d"],"ARMOUR BREAK":["◇","#ff2a3a"]};
+const BEST={wall:"severance_package",pier:"load_bearing_review",barrel:"liquidity_event",crowd:"market_sweep",pair:"merger"};
+const BTN=[["X","#3b8ee8","X"],["Y","#f2c200","V"],["B","#e8473b","C"]];
+let ctx="crowd",last=[],rot=0;
+function valid(id){const n=F[id].need;if(!n)return true;if(n==="any")return ctx==="crowd"||ctx==="pair";if(n==="pair")return ctx==="pair";if(n==="wall")return ctx==="wall";if(n==="pier")return ctx==="pier";if(n==="barrel")return ctx==="barrel";return false}
+function roll(){const rotation=["compliance_check","chiropractic_review","contract_terminated","downsizing","due_diligence"];
+ let best=BEST[ctx]||rotation[rot++%rotation.length];
+ let pool=Object.keys(F).filter(id=>id!==best&&valid(id));let fresh=pool.filter(id=>!last.includes(id));if(fresh.length>=2)pool=fresh;
+ const pick=[];while(pick.length<2&&pool.length){pick.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0])}
+ last=pick;return [best,...pick]}
+function sil(tag){const c=TAGS[tag][1];return `<svg class="sil" viewBox="0 0 74 74"><rect x="1" y="1" width="72" height="72" fill="none" stroke="${c}" stroke-opacity=".35"/><g fill="${c}" fill-opacity=".85"><rect x="18" y="20" width="14" height="30"/><rect x="14" y="14" width="22" height="10"/><rect x="36" y="${tag==='HEAL'?44:16}" width="24" height="8" transform="rotate(${tag==='CROWD'?-25:0} 48 20)"/><rect x="20" y="50" width="5" height="16"/><rect x="27" y="50" width="5" height="16"/></g></svg>`}
+function render(){const ids=roll();document.getElementById('cards').innerHTML=ids.map((id,i)=>{const f=F[id],t=TAGS[f.tag];return `<div class="card ${i==0?'best':''}"><div class="btn" style="--gc:${BTN[i][1]}">${BTN[i][0]}</div><div class="kb">${BTN[i][2]}</div>${i==0?'<div class="best-tag">BEST FIT</div>':''}${sil(f.tag)}<div class="jp">${f.jp}</div><div class="name">${f.n}</div><div class="tag" style="--tc:${t[1]}"><b>${t[0]}</b>${f.tag}</div><div class="gain">${f.g} · +2 装甲</div></div>`}).join('')}
+document.getElementById('roll').onclick=render;
+document.querySelectorAll('[data-ctx]').forEach(b=>b.onclick=()=>{ctx=b.dataset.ctx;render()});
+function fit(){const o=document.getElementById('outer');document.getElementById('stage').style.transform=`scale(${o.clientWidth/1280})`}
+addEventListener('resize',fit);fit();render();
+let t0=performance.now();(function tick(t){const k=((t-t0)/1500)%1;document.getElementById('bar').style.width=(100-k*100)+'%';requestAnimationFrame(tick)})(t0);
+</script>
+</body>
+</html>

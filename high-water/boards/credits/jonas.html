@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jonas's ID Card</title>
+<style>
+:root{
+  --bg:#0c0e0f; --panel:#141719; --line:#2b3134; --text:#e6e1d6; --dim:#979a96;
+  --cyan:#5ff0ff; --amber:#ffb000; --orange:#ff8a00; --red:#ff2a3a; --bone:#efe8d8;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 var(--sans)}
+body{padding:0 16px 120px}
+main{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
+.band{height:10px;margin:0 -16px;background:repeating-linear-gradient(135deg,var(--orange) 0 14px,#1b1b1b 14px 28px)}
+header{padding:44px 0 24px}
+.doc{font:500 13px var(--mono);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+header h1{font-size:clamp(44px,8vw,84px);margin:10px 0 14px}
+header h1 em{font-style:normal;color:var(--cyan)}
+header p{font-size:clamp(17px,2.2vw,20px);max-width:44em;margin:0 0 10px}
+section{padding:40px 0;border-top:1px solid var(--line)}
+section>h2{font-size:clamp(28px,5vw,44px);margin-bottom:10px}
+section>h2 small{font:500 13px var(--mono);letter-spacing:.14em;color:var(--cyan);display:block;margin-bottom:8px}
+.sub{color:var(--dim);margin:0 0 22px;max-width:50em}
+.roll{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px}
+.m{background:var(--panel);border:1px solid var(--line);padding:10px;display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px 10px;align-items:start}
+.m img.b{width:64px;height:64px;image-rendering:pixelated;background:#05080a}
+.m .n{font:800 20px/1 var(--cond);text-transform:uppercase}
+.m .n small{display:block;font:500 11px var(--mono);letter-spacing:.06em;color:var(--dim);margin-top:5px;text-transform:none}
+.m img.a{grid-column:1/-1;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;border:1px solid #1e2a2e}
+.m .k{grid-column:1/-1;font:500 11px var(--mono);color:var(--amber);letter-spacing:.06em;text-transform:uppercase}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.o{background:var(--panel);border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:8px;position:relative}
+.o.rec{border-color:#1f6a70;box-shadow:inset 0 0 0 1px #1f6a70}
+.o .tag{position:absolute;top:10px;right:10px;font:600 11px var(--mono);letter-spacing:.1em;color:var(--cyan)}
+.o h3{font-size:26px}
+.o h3 small{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);margin-bottom:5px}
+.o p{margin:0;font-size:15px}
+.o .fit{font:500 12px var(--mono);letter-spacing:.04em;color:var(--amber)}
+.o img.big{width:100%;max-width:256px;image-rendering:pixelated;align-self:center;background:#05080a}
+.o img.small{width:16px;height:16px;image-rendering:pixelated}
+.o canvas{width:100%;aspect-ratio:16/9;background:#000;border:1px solid #1e2a2e;display:block}
+.pick{display:flex;align-items:center;gap:8px;font:600 14px var(--sans);cursor:pointer;margin-top:auto}
+input[type=radio]{accent-color:var(--cyan);width:20px;height:20px;cursor:pointer}
+.card{background:#030b0e;border-top:2px solid var(--orange);border-left:3px solid var(--orange);padding:14px 18px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center;max-width:720px}
+.card img{width:120px;height:120px;image-rendering:pixelated;background:#000}
+.card .nm{font:800 46px/1 var(--cond);text-transform:uppercase}
+.card .tr{font:600 13px var(--mono);letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;margin-top:6px}
+.card .ln{font:600 22px/1.2 var(--cond);color:var(--bone);margin-top:8px;border-left:3px solid var(--orange);padding-left:10px}
+.note{font-size:15px;color:var(--dim);max-width:52em}
+.pickbar{position:fixed;left:0;right:0;bottom:0;background:#101315f0;border-top:2px solid var(--cyan);display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.pickbar b{color:var(--cyan)}
+.pickbar button{font:600 15px var(--sans);background:var(--cyan);color:#0b1011;border:0;padding:10px 16px;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Badge C, the knife (“All knives, no bagel”), and artifact 2, the Boggle tray. Readout had recommended the monk and the slot machine. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="band"></div>
+<main>
+<header>
+  <div class="doc">High Water · Credits · CTR-T3-01 · for Jonas</div>
+  <h1>Your <em>ID card</em></h1>
+  <p>Your trade and line are in the game now. Below is what everyone else's card shows, captured from the roll, then four badges and four signature artifacts for yours. Pick one of each. Everything is drawn in code, as the other cards are.</p>
+  <div class="card" id="preview">
+    <img id="pv-badge" src="jonas/opt_badge_B_monk.png" alt="the badge you picked">
+    <div><div class="nm">Jonas Heinke</div><div class="tr">Client · Lead — Monk in a Casino</div><div class="ln">that's boggle, baby</div></div>
+  </div>
+</header>
+
+<section>
+  <h2><small>The register so far</small>Everyone else's card</h2>
+  <p class="sub">Each badge at 4× and the artifact as it showed on the card, half a second after it landed. The roll reads the cards from Opticals onward in Bone night vision, so those artifacts show grey here, as they do in the game. Strips, rigs and sounds move or play in the roll; a still catches one moment.</p>
+  <div class="roll" id="roll"></div>
+</section>
+
+<section>
+  <h2><small>Pick one</small>Your badge</h2>
+  <p class="sub">16×16, drawn in code like the others. Motifs come from your own titles: the trade, the line, and Steak Knives and Bagels (the knife and the ⁂ asterism).</p>
+  <div class="opts" id="badges"></div>
+</section>
+
+<section>
+  <h2><small>Pick one</small>Your signature artifact</h2>
+  <p class="sub">What plays in the 16:9 pane while your card is up. The others show their real work. Yours is the client's: what you did was pick, play and decide, so these show a choice being made. The mock-ups below are drawn in your browser; the game version is drawn the same way in Godot.</p>
+  <div class="opts" id="arts"></div>
+  <p class="note">The site gave motifs only: its name, the knife and the asterism. Nothing from it (text, images, people) goes into the game.</p>
+</section>
+</main>
+
+<div class="pickbar"><span>Badge: <b id="pb">none</b> · Artifact: <b id="pa">none</b></span><button id="copy">Copy picks</button><span id="msg"></span></div>
+
+<script>
+const ROLL=[
+ ["cornerman","Cornerman","strip","The perfect dodge, into the crit hook (capture coming from Armature)"],
+ ["astra","Astra","text","Review round 8, F73 performance"],
+ ["flywheel","Flywheel","stamp","game_bench.gd, the whole-game benchmark"],
+ ["foley","Foley","sound","The wrecking-ball finisher, plays when the card lands"],
+ ["armature","Armature","live rig","The rising uppercut, the machine version"],
+ ["readout","Readout","strip","SYSTEM BREACHED, the slam strip"],
+ ["drywall","Drywall","strip","The F75 mezzanine, a C2 load path"],
+ ["downbeat","Downbeat","music","Mirrorshades, the first two bars of the drop"],
+ ["slipway","Slipway","live","The build you are running"],
+ ["opticals","Opticals","CCTV","F70's security feed in the blackout, on IR"],
+ ["plumb","Plumb","strip","The dollhouse drawer, F73 sliding out"],
+ ["hitlag","Hitlag","strip","The training room's services chain"],
+ ["afterimage","Afterimage","strip","The explosion flash (between plays in this still)"],
+ ["barker","Barker","stamp","The storefront"],
+ ["tidewater","Tidewater","strip","The main drain swallowing"],
+ ["gallery","Gallery","live rig","The Collector, and the test every enemy passed"],
+ ["stencil","Stencil","stamp","The codex"],
+ ["scout","Scout","stamp","The asset board, every row unticked"],
+ ["slate","Slate","still","Chiropractic Review, the two-tone knee frame"],
+];
+const roll=document.getElementById("roll");
+for(const [id,n,k,t] of ROLL){const el=document.createElement("article");el.className="m";
+ el.innerHTML=`<img class="b" src="jonas/badge_${id}.png" alt="${n}'s badge"><div class="n">${n}<small>${t}</small></div><img class="a" src="jonas/art_${id}.jpg" alt="${n}'s artifact" loading="lazy"><div class="k">${k}</div>`;roll.appendChild(el)}
+
+const BADGES=[
+ ["A_die","A","The letter die","A Boggle die in the game's voxel shading: bone top, grey sides, a red J on the face. It takes the line literally.","Reads as a die at 16 px; the J is small",0],
+ ["B_monk","B","The monk with a chip","Shaved head, eyes closed, an orange robe, a casino chip in his hand. The trade in one picture.","My pick: it says Monk in a Casino with no explanation, and the chip ties it to the line",1],
+ ["C_knife","C","All knives, no bagel","A steak knife across an empty plate with three crumbs. Your site's name, for whoever knows it.","An in-joke; to anyone else it reads as a knife",0],
+ ["D_chip","D","The chip with the asterism","A red casino chip turning, your site's ⁂ asterism at its centre.","Reads at any size; the asterism needs the board to explain it",0],
+];
+const ARTS=[
+ ["slot","1","The house slot","Three reels spin through every member's badge and stop on three of yours. The client hits the jackpot, and the jackpot is the team.","My pick: the casino is in the trade, the reels are the register, and it closes the loop of the roll",1],
+ ["boggle","2","That's boggle","A 4×4 tray of letter dice rattles and settles; HIGH, WATER and TOWER trace themselves through it.","The line, played straight; letters stay readable in night vision",0],
+ ["roulette","3","Pick a floor","A roulette wheel of the five floors and the crown. The ball runs and drops into F75, the floor you made the team finish.","Casino, plus the game's own floors",0],
+ ["pad","4","Not fun yet","A controller drawn in code: the inputs of the A+X uppercut light up, a NOT FUN YET stamp lands, then it is struck through and stamped FUN.","Your actual job on this game; the least casino of the four",0],
+];
+function opt(list,host,group,kind){
+ for(const [id,key,title,desc,fit,rec] of list){const el=document.createElement("article");el.className="o"+(rec?" rec":"");
+  const vis=kind==="badge"?`<img class="big" src="jonas/opt_badge_${id}.png" alt="badge ${key}"><div>In the index, actual size: <img class="small" src="jonas/opt_badge_${id}.png" alt=""></div>`:`<canvas width="480" height="270" data-art="${id}"></canvas>`;
+  el.innerHTML=`${rec?'<span class="tag">RECOMMENDED</span>':''}<h3><small>${kind==="badge"?"Badge":"Artifact"} ${key}</small>${title}</h3>${vis}<p>${desc}</p><div class="fit">${fit}</div><label class="pick"><input type="radio" name="${group}" value="${key} · ${title}" data-id="${id}"> Pick ${key}</label>`;
+  host.appendChild(el)}}
+opt(BADGES,document.getElementById("badges"),"badge","badge");
+opt(ARTS,document.getElementById("arts"),"art","art");
+
+// --- the artifact mock-ups, drawn in code -------------------------------------------
+const C={cyan:"#5ff0ff",ice:"#dff9ff",orange:"#ff8a00",red:"#ff2a3a",bone:"#efe8d8",amber:"#ffb000",ink:"#05080a"};
+const reelIds=ROLL.map(r=>r[0]);const imgs={};
+for(const id of reelIds){const i=new Image();i.src=`jonas/badge_${id}.png`;imgs[id]=i}
+const mine=new Image();mine.src="jonas/opt_badge_B_monk.png";
+function slot(g,t){g.fillStyle="#0a0d0f";g.fillRect(0,0,480,270);
+ g.fillStyle="#2a0d10";g.fillRect(60,30,360,210);g.strokeStyle=C.amber;g.lineWidth=3;g.strokeRect(60,30,360,210);
+ g.fillStyle=C.amber;g.font="700 18px Barlow Condensed,Arial Narrow,sans-serif";g.fillText("THE HOUSE · CTR-T3",74,54);
+ const cyc=t%6;for(let r=0;r<3;r++){const x=86+r*104,stop=1.6+r*0.5;g.fillStyle="#000";g.fillRect(x,66,92,140);
+  g.save();g.beginPath();g.rect(x,66,92,140);g.clip();
+  if(cyc<stop){const off=(cyc*900+r*137)%(reelIds.length*92);for(let k=-1;k<3;k++){const idx=((Math.floor(off/92)+k)%reelIds.length+reelIds.length)%reelIds.length;const y=66+k*92-(off%92)+24;const im=imgs[reelIds[idx]];if(im.complete)g.drawImage(im,x+14,y,64,64)}}
+  else{g.imageSmoothingEnabled=false;if(mine.complete)g.drawImage(mine,0,0,256,256,x+14,98,64,64)}
+  g.restore()}
+ g.imageSmoothingEnabled=false;
+ if(cyc>2.7&&cyc<5.6&&Math.floor(cyc*6)%2===0){g.fillStyle=C.amber;g.font="800 30px Barlow Condensed,Arial Narrow,sans-serif";g.fillText("JACKPOT · THE TEAM",128,236)}}
+const LET="HIGHAWOXTERNLQDS".split("");
+function boggle(g,t){g.fillStyle="#0a0d0f";g.fillRect(0,0,480,270);const cyc=t%6;
+ const grid=[["H","I","G","H"],["W","A","T","O"],["E","R","W","E"],["S","T","O","R"]];
+ g.fillStyle="#1b2226";g.fillRect(140,15,200,240);
+ for(let y=0;y<4;y++)for(let x=0;x<4;x++){let jx=0,jy=0,ch=grid[y][x];
+  if(cyc<1.2){jx=(Math.random()-.5)*10;jy=(Math.random()-.5)*10;ch=LET[(Math.floor(t*20)+x*3+y*7)%LET.length]}
+  const px=150+x*46+jx,py=25+y*56+jy;g.fillStyle=C.bone;g.fillRect(px,py,40,46);g.fillStyle="#8f897d";g.fillRect(px,py+40,40,6);
+  g.fillStyle=C.ink;g.font="800 28px Barlow Condensed,Arial Narrow,sans-serif";g.fillText(ch,px+12,py+32)}
+ const words=[[[0,0],[1,0],[2,0],[3,0]],[[0,1],[1,1],[2,1],[3,2],[2,3]]],wi=Math.floor((cyc-1.4)/2.2);
+ if(cyc>1.4&&wi<2){const w=words[wi],k=Math.min(1,(cyc-1.4-wi*2.2)/1.2),n=Math.max(1,Math.ceil(k*w.length));g.strokeStyle=C.cyan;g.lineWidth=5;g.beginPath();
+  for(let i=0;i<n;i++){const[x,y]=w[i];const px=170+x*46,py=48+y*56;i?g.lineTo(px,py):g.moveTo(px,py)}g.stroke();
+  g.fillStyle=C.cyan;g.font="700 22px Barlow Condensed,Arial Narrow,sans-serif";g.fillText(wi?"WATER":"HIGH",360,140)}}
+function roulette(g,t){g.fillStyle="#0a0d0f";g.fillRect(0,0,480,270);const cyc=t%6;const cx=240,cy=135,R=110;
+ const sl=["F70","F71","F72","F73","F74","F75","F70","F71","F72","F73","F74","F75"];const rot=cyc<4?cyc*cyc*0.9:16*0.9+(cyc-4)*0;
+ for(let i=0;i<12;i++){const a0=rot+i*Math.PI/6,a1=a0+Math.PI/6;g.beginPath();g.moveTo(cx,cy);g.arc(cx,cy,R,a0,a1);g.closePath();g.fillStyle=sl[i]==="F75"?C.red:(i%2?"#111":"#1d2a2e");g.fill();
+  g.save();g.translate(cx,cy);g.rotate(a0+Math.PI/12);g.fillStyle=C.ice;g.font="700 13px IBM Plex Mono,monospace";g.fillText(sl[i],R-44,5);g.restore()}
+ g.beginPath();g.arc(cx,cy,34,0,7);g.fillStyle="#2a0d10";g.fill();g.strokeStyle=C.amber;g.lineWidth=2;g.stroke();
+ const land=rot+5*Math.PI/6+Math.PI/12;const ba=cyc<4?-cyc*3.1:land;const br=cyc<4?R+8-cyc*4:R-22;
+ g.beginPath();g.arc(cx+Math.cos(ba)*br,cy+Math.sin(ba)*br,6,0,7);g.fillStyle=C.bone;g.fill();
+ if(cyc>4.2){g.fillStyle=C.red;g.font="800 30px Barlow Condensed,Arial Narrow,sans-serif";g.fillText("F75 · THE CROWN",370-80,250)}}
+function pad(g,t){g.fillStyle="#0a0d0f";g.fillRect(0,0,480,270);const cyc=t%6;
+ g.fillStyle="#22292d";g.beginPath();g.ellipse(170,140,80,55,0,0,7);g.ellipse(310,140,80,55,0,0,7);g.fill();g.fillRect(170,95,140,80);
+ g.fillStyle="#11171a";g.fillRect(130,128,40,12);g.fillRect(144,114,12,40);
+ const btn=[[330,118,"Y"],[310,140,"X"],[350,140,"B"],[330,162,"A"]];const on=cyc>0.6&&cyc<1.8;
+ for(const[x,y,l]of btn){const lit=on&&(l==="A"||l==="X");g.beginPath();g.arc(x,y,11,0,7);g.fillStyle=lit?C.cyan:"#11171a";g.fill();g.fillStyle=lit?C.ink:"#6d7b80";g.font="700 12px IBM Plex Mono,monospace";g.fillText(l,x-4,y+4)}
+ g.fillStyle="#6d7b80";g.font="600 12px IBM Plex Mono,monospace";g.fillText(on?"A + X  RISING":"",208,230);
+ function stamp(txt,col,ang,s){g.save();g.translate(240,70);g.rotate(ang);g.scale(s,s);g.strokeStyle=col;g.lineWidth=3;const w=txt.length*15+20;g.strokeRect(-w/2,-20,w,40);g.fillStyle=col;g.font="800 26px Barlow Condensed,Arial Narrow,sans-serif";g.fillText(txt,-w/2+12,9);g.restore()}
+ if(cyc>2)stamp("NOT FUN YET",C.orange,-0.07,cyc<2.05?1.16:1);
+ if(cyc>3.4){g.strokeStyle=C.red;g.lineWidth=4;g.beginPath();g.moveTo(150,74);g.lineTo(330,66);g.stroke()}
+ if(cyc>4.2){g.save();g.translate(0,150);stamp("FUN",C.cyan,0.06,cyc<4.25?1.16:1);g.restore()}}
+const DRAW={slot,boggle,roulette,pad};
+const cans=[...document.querySelectorAll("canvas[data-art]")];const t0=performance.now();
+function frame(){const t=(performance.now()-t0)/1000;for(const c of cans){const g=c.getContext("2d");g.imageSmoothingEnabled=false;DRAW[c.dataset.art](g,t)}requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+
+// --- picks --------------------------------------------------------------------------
+const KEY="hw-archive-jonas-card-picks";
+// Archive: with nothing stored, the radios show Jonas's recorded picks (knife badge, Boggle tray).
+const load=()=>{try{const s=localStorage.getItem(KEY);return s===null?{badge:"C · All knives, no bagel",art:"2 · That's boggle"}:JSON.parse(s)}catch(e){return{}}};
+const save=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}};
+const st=load();
+for(const r of document.querySelectorAll("input[type=radio]")){if(st[r.name]===r.value)r.checked=true;r.addEventListener("change",update)}
+function update(){const v={};for(const r of document.querySelectorAll("input[type=radio]:checked"))v[r.name]=r.value;save(v);
+ document.getElementById("pb").textContent=v.badge||"none";document.getElementById("pa").textContent=v.art||"none";
+ const b=document.querySelector("input[name=badge]:checked");if(b)document.getElementById("pv-badge").src=`jonas/opt_badge_${b.dataset.id}.png`;return v}
+update();
+document.getElementById("copy").onclick=async()=>{const v=update();const t=`Jonas's card picks:\n- badge: ${v.badge||"(none)"}\n- artifact: ${v.art||"(none)"}`;const m=document.getElementById("msg");try{await navigator.clipboard.writeText(t);m.textContent="Copied"}catch(e){m.textContent="Copy blocked; see console";console.log(t)}};
+</script>
+</body>
+</html>

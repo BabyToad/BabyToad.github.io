@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tower 3 Blocks</title>
+<!-- Stencil (lore and naming, Studio Hitstop), 2026-09-29. Idea pile: each floor of Tower 3
+     as a city block, laid out as a High Water site survey. Same engine as index.html. Fonts are the game's own, borrowed from ../intro/assets/fonts
+     (DejaVu licence, OFL). Picks persist in this browser only; COPY PICKS exports them. -->
+<style>
+@font-face{font-family:HWSans;src:url(../intro/assets/fonts/DejaVuSansCondensed-Bold.ttf)}
+@font-face{font-family:HWSerif;src:url(../intro/assets/fonts/DejaVuSerifCondensed-Bold.ttf)}
+@font-face{font-family:HWMono;font-weight:400;src:url(../intro/assets/fonts/JetBrainsMono-Regular.ttf)}
+@font-face{font-family:HWMono;font-weight:700;src:url(../intro/assets/fonts/JetBrainsMono-Bold.ttf)}
+:root{
+  --paper:#e9e3d4;--paper2:#ddd6c4;--sheet:#f4f0e6;--ink:#17191a;--graphite:#3a3f42;--mute:#6d695f;
+  --rule:#bcb39f;--green:#45553a;--green2:#5d6f45;--cy:#0e8c9b;--cyhi:#5ff0ff;--rust:#b0492a;--alert:#e0531f;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:400 15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;
+  background:var(--paper);
+  background-image:linear-gradient(rgba(23,25,26,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(23,25,26,.045) 1px,transparent 1px);
+  background-size:24px 24px}
+.mono{font-family:HWMono,ui-monospace,monospace}
+.page{max-width:1320px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------------------------------------------------------------- title block */
+.tb{margin-top:28px;border:2px solid var(--ink);background:var(--sheet);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.tb .brand{padding:18px 22px 16px;border-right:2px solid var(--ink);display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:center}
+.tb .brand svg{width:84px;height:auto;grid-row:span 3}
+.tb .org{font:700 12px/1.3 HWMono;letter-spacing:.26em;color:var(--green);text-transform:uppercase}
+.tb h1{margin:0;font:400 clamp(34px,5.4vw,66px)/.95 HWSerif;text-transform:uppercase;letter-spacing:-.005em}
+.tb .sub{font:400 clamp(13px,1.6vw,17px)/1.3 HWSans;letter-spacing:.18em;text-transform:uppercase;color:var(--graphite)}
+.tb .cells{display:grid;grid-template-columns:1fr 1fr}
+.tb .cells div{padding:7px 10px 8px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);font:400 12.5px/1.35 HWMono;min-width:0;overflow-wrap:anywhere}
+.tb .cells div:nth-child(2n){border-right:0}
+.tb .cells b{display:block;font:700 9.5px HWMono;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+.tb .cells .wide{grid-column:span 2;border-right:0}
+.stamp{display:inline-block;font:700 12px HWMono;letter-spacing:.2em;text-transform:uppercase;border:2px solid currentColor;padding:3px 8px 2px;transform:rotate(-2.5deg);color:var(--rust)}
+.strip{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font:700 10.5px HWMono;letter-spacing:.3em;color:var(--green);text-transform:uppercase;padding:6px 2px 0}
+
+/* ---------------------------------------------------------------- instructions + legend */
+.howto{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin:16px 0 0}
+.howto .card{background:var(--sheet);border:1px solid var(--ink);padding:12px 16px}
+.howto h4{margin:0 0 6px;font:700 11px HWMono;letter-spacing:.22em;text-transform:uppercase;color:var(--cy)}
+.howto p{margin:.3em 0;max-width:80ch}
+.legend{display:grid;grid-template-columns:auto 1fr;gap:5px 10px;align-items:baseline;font-size:13.5px}
+
+/* ---------------------------------------------------------------- layout */
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;margin-top:22px;align-items:start}
+.req{position:sticky;top:12px;background:var(--sheet);border:2px solid var(--ink);font-family:HWMono,monospace}
+.req .rh{background:var(--ink);color:var(--paper);padding:7px 10px;font:700 11px HWMono;letter-spacing:.2em}
+.req .rh span{display:block;font-weight:400;opacity:.7;letter-spacing:.12em;font-size:10px}
+.req ol{list-style:none;margin:0;padding:6px 0;border-bottom:1px solid var(--rule)}
+.req li a{display:flex;justify-content:space-between;gap:8px;padding:3px 10px;color:var(--ink);text-decoration:none;font-size:12px}
+.req li a:hover{background:var(--paper2)}
+.req li b{color:var(--cy)}
+.req .tot{display:flex;align-items:baseline;gap:8px;padding:8px 10px 4px}
+.req .tot b{font:400 44px/1 HWSerif;color:var(--ink)}
+.req .tot span{font-size:11px;color:var(--mute);letter-spacing:.1em}
+.req button{display:block;width:calc(100% - 20px);margin:6px 10px;padding:9px 8px 8px;font:700 12px HWMono;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:2px solid var(--ink);background:var(--green);color:var(--sheet)}
+.req button:hover{background:var(--ink)}
+.req button.sec{background:transparent;color:var(--ink);border-width:1px;padding:5px 8px 4px;font-size:10.5px}
+.req button.sec:hover{background:var(--paper2)}
+.req textarea{display:block;width:calc(100% - 20px);margin:6px 10px 10px;min-height:70px;font:400 12px/1.4 HWMono;background:var(--paper);border:1px solid var(--rule);padding:6px;resize:vertical;color:var(--ink)}
+.req .flt{padding:6px 10px 8px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:4px}
+.req .flt b{width:100%;font-size:9.5px;letter-spacing:.2em;color:var(--mute)}
+.req .flt button{all:unset;cursor:pointer;font:700 10px HWMono;letter-spacing:.12em;padding:3px 6px 2px;border:1px solid var(--rule)}
+.req .flt button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.req .ok{display:none;margin:0 10px 8px;font:700 11px HWMono;letter-spacing:.2em;color:var(--green)}
+.req .ok.on{display:block}
+
+/* ---------------------------------------------------------------- groups */
+.grp{margin:0 0 34px}
+.gh{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 18px;align-items:end;border-bottom:3px solid var(--ink);padding-bottom:8px;margin-bottom:12px}
+.gno{font:400 72px/.8 HWSerif;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.gh h2{margin:0;font:400 clamp(22px,3vw,34px)/1 HWSans;letter-spacing:.05em;text-transform:uppercase}
+.gh .jp{font:700 11px HWMono;letter-spacing:.24em;color:var(--green);margin-top:4px;text-transform:uppercase}
+.gh .gm{font:700 10.5px HWMono;letter-spacing:.16em;color:var(--mute);text-align:right;text-transform:uppercase}
+.gh .gm b{color:var(--cy)}
+.gintro{max-width:88ch;margin:0 0 12px;font-size:14.5px}
+
+.plate{background:var(--sheet);border:1px solid var(--ink);margin:0 0 14px;position:relative}
+.plate>.ph{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 14px;background:var(--green);color:var(--sheet);padding:6px 12px 5px}
+.plate>.ph h3{margin:0;font:400 17px/1.2 HWSans;letter-spacing:.12em;text-transform:uppercase}
+.plate>.ph h3 small{font:700 11px HWMono;letter-spacing:.18em;opacity:.8;margin-left:10px}
+.plate>.ph .pn{font:700 10.5px HWMono;letter-spacing:.18em;opacity:.85}
+.plate>.pnote{margin:0;padding:8px 12px 0;font-size:13.5px;color:var(--graphite);max-width:92ch}
+.sg{padding:4px 0 6px}
+.sg>h5{margin:8px 12px 2px;font:700 10.5px HWMono;letter-spacing:.22em;text-transform:uppercase;color:var(--cy);border-bottom:1px dashed var(--rule);padding-bottom:3px}
+
+/* line items */
+.it{display:grid;grid-template-columns:20px 58px minmax(0,30%) minmax(0,1fr) 150px;gap:2px 10px;align-items:baseline;padding:5px 12px 5px;border-bottom:1px solid rgba(188,179,159,.5);cursor:pointer;position:relative}
+.it:last-child{border-bottom:0}
+.it:hover{background:rgba(14,140,155,.06)}
+.it input{position:absolute;opacity:0;pointer-events:none}
+.it .bx{width:15px;height:15px;border:1.5px solid var(--ink);align-self:start;margin-top:3px;display:grid;place-items:center;background:var(--sheet)}
+.it input:checked~.bx{background:var(--ink)}
+.it input:checked~.bx::after{content:"";width:9px;height:9px;background:
+  linear-gradient(45deg,transparent 42%,var(--cyhi) 42%,var(--cyhi) 58%,transparent 58%),
+  linear-gradient(-45deg,transparent 42%,var(--cyhi) 42%,var(--cyhi) 58%,transparent 58%)}
+.it input:focus-visible~.bx{outline:2px solid var(--cy);outline-offset:2px}
+.it:has(input:checked){background:rgba(95,240,255,.14)}
+.it .cd{font:400 11px HWMono;color:var(--mute);letter-spacing:.04em}
+.it .nm{font:400 15px/1.25 HWSans;letter-spacing:.04em;overflow-wrap:break-word;min-width:0}
+.it .wy{font-size:13.5px;line-height:1.42;color:var(--graphite)}
+.it .tg{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;align-self:start;padding-top:2px}
+.it .ex{grid-column:3 / -1;font:400 12px/1.5 HWMono;color:var(--ink);padding:2px 0 2px;display:flex;flex-wrap:wrap;gap:3px 12px}
+.it .ex span::before{content:"▸ ";color:var(--cy)}
+.chip{font:700 9px/1 HWMono;letter-spacing:.12em;padding:3px 5px 2px;border:1px solid currentColor;white-space:nowrap;text-transform:uppercase}
+.s-dsg{background:var(--graphite);color:var(--sheet);border-color:var(--graphite)}
+.s-line{color:var(--cy)}
+.s-ledger{background:var(--green);color:var(--sheet);border-color:var(--green)}
+.s-brev{color:var(--ink);background:var(--paper2);border-color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink)}
+.s-street{background:var(--rust);color:var(--sheet);border-color:var(--rust)}
+.s-tide{background:var(--cy);color:var(--sheet);border-color:var(--cy)}
+.p-game{color:var(--green)}
+.p-intro{color:var(--green);border-style:dashed}
+.p-camp{color:var(--alert)}
+.p-rule{color:var(--alert);border-style:dashed}
+.p-prior{color:#8a5a14}
+.p-real{color:var(--mute)}
+.p-loan{color:#6a4c8c}
+.p-codex{color:var(--cy)}
+.odd{color:var(--rust);border:1.5px solid var(--rust);font:700 9px/1 HWMono;letter-spacing:.14em;padding:3px 5px 2px;transform:rotate(-4deg);display:inline-block}
+
+/* decal items: the name shown as a stencil */
+.it.decal .nm{font:700 12.5px/1.3 HWMono;letter-spacing:.08em;border:1.5px solid var(--ink);padding:4px 6px 3px;background:repeating-linear-gradient(-45deg,transparent 0 6px,rgba(23,25,26,.04) 6px 12px);text-transform:uppercase;justify-self:start}
+/* scheme cards */
+.it.scheme .nm{font:400 22px/1.05 HWSerif;text-transform:uppercase}
+.it.scheme{padding-top:10px;padding-bottom:10px}
+.it.scheme .nm{grid-column:3 / 5;grid-row:1}
+.it.scheme .wy{grid-column:3 / -1;grid-row:2;max-width:95ch}
+.it.scheme .tg{grid-column:5;grid-row:1}
+.it.scheme .ex{grid-row:3}
+
+/* ---------------------------------------------------------------- figure */
+.fig{display:grid;grid-template-columns:minmax(0,1fr);background:var(--sheet);border:1px solid var(--ink);margin:0 0 14px}
+.fig svg{width:100%;height:auto;display:block;max-height:430px}
+.fig .cap{font:700 10.5px HWMono;letter-spacing:.2em;color:var(--mute);padding:6px 12px;border-top:1px solid var(--rule);text-transform:uppercase;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.fig a{fill:var(--ink)}
+.fig a:hover text{fill:var(--cy)}
+
+/* ---------------------------------------------------------------- annex V: the Vermin */
+.annex .gh{border-bottom-color:var(--rust)}
+.annex .gno{-webkit-text-stroke-color:var(--rust)}
+.annex .haz{height:14px;margin:-8px 0 12px;background:repeating-linear-gradient(-45deg,var(--ink) 0 10px,var(--alert) 10px 20px)}
+.annex .plate{border:1.5px dashed var(--ink);background:linear-gradient(0deg,rgba(224,83,31,.03),rgba(224,83,31,.03)),var(--sheet)}
+.annex .plate>.ph{background:var(--ink);color:var(--paper)}
+.annex .plate>.ph .pn{color:var(--alert);opacity:1}
+.annex .plate::after{content:"EVIDENCE";position:absolute;right:10px;bottom:6px;font:700 20px HWMono;letter-spacing:.3em;color:rgba(176,73,42,.12);transform:rotate(-6deg);pointer-events:none}
+.it.tag .nm{font:700 14px/1.2 HWSans;color:var(--rust);text-shadow:0 0 6px rgba(224,83,31,.35)}
+
+#s7 .it{grid-template-columns:20px 58px minmax(0,46%) minmax(0,1fr) 150px}
+/* hooks: end-card style */
+.hooks .it .nm{font:400 17px/1.2 HWSerif;text-transform:uppercase}
+
+/* ---------------------------------------------------------------- footer */
+.foot{margin-top:40px;border-top:3px solid var(--ink);padding-top:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font:700 10.5px HWMono;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+
+/* filters */
+body[data-f=fresh] .it:not([data-fresh]){display:none}
+body[data-f=borrowed] .it[data-fresh]{display:none}
+body[data-f=odd] .it:not([data-odd]){display:none}
+body[data-f=picked] .it:not(:has(input:checked)){display:none}
+
+/* ---------------------------------------------------------------- narrow */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  .req{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:10;border-width:2px 0 0;display:grid;grid-template-columns:auto 1fr auto;align-items:center}
+  .req .rh,.req ol,.req textarea,.req .flt,.req button.sec{display:none}
+  .req .tot{padding:6px 12px}
+  .req .tot b{font-size:30px}
+  .req button{width:auto;margin:6px 12px}
+  .req .ok{grid-column:1 / -1;margin:0 12px 6px}
+  .tb{grid-template-columns:1fr}
+  .tb .brand{border-right:0;border-bottom:2px solid var(--ink)}
+  .howto{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .it,#s7 .it{grid-template-columns:20px minmax(0,1fr) auto;padding:7px 10px}
+  .it .cd{grid-column:2;grid-row:1}
+  .it .tg{grid-column:3;grid-row:1}
+  .it .nm{grid-column:2 / -1}
+  .it .wy{grid-column:2 / -1}
+  .it .ex{grid-column:2 / -1}
+  .it.scheme .nm,.it.scheme .wy,.it.scheme .ex{grid-column:2 / -1;grid-row:auto}
+  .it.scheme .tg{grid-column:3;grid-row:1}
+  .gno{font-size:52px}
+  .gh{grid-template-columns:auto minmax(0,1fr)}
+  .gh .gm{grid-column:1 / -1;text-align:left}
+  .tb .brand{grid-template-columns:1fr}
+  .tb .brand svg{grid-row:auto;width:64px}
+}
+</style>
+</head>
+<body data-f="all">
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> 78 of 99 lines. F70 The Village Lobby, F71 The Labelling Farm, F72 Three-Shift School, F73 The Wet Market, F74 The Gang's Own Street. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="page">
+
+<header class="tb">
+  <div class="brand">
+    <svg viewBox="0 0 100 80" aria-hidden="true"><g fill="none" stroke="#17191a" stroke-width="8">
+      <path d="M8 26 C 28 10, 46 34, 66 18 S 90 12, 94 8"/><path d="M8 46 C 28 30, 46 54, 66 38 S 90 32, 94 28"/><path d="M8 66 C 28 50, 46 74, 66 58 S 90 52, 94 48"/></g></svg>
+    <div class="org">High Water · Vertical Clearance · 现场勘查</div>
+    <h1>Site Survey · Tower 3</h1>
+    <div class="sub">Floors 70–74 as city blocks · what the tenants live with</div>
+  </div>
+  <div class="cells">
+    <div><b>Doc no.</b>HW-SRV-T3-70</div>
+    <div><b>Rev</b>A · idea pile</div>
+    <div><b>Date</b>2026-09-29</div>
+    <div><b>Line items</b><span id="count">—</span></div>
+    <div class="wide"><b>Compiled by</b>Stencil · lore &amp; naming, Studio Hitstop</div>
+    <div class="wide"><b>Status</b><span class="stamp">For picking · not canon</span></div>
+  </div>
+</header>
+<div class="strip"><span>HIGH WATER · Destroy the System</span><span>Tower 3 · 275 m · F70 ≈ 255 m</span><span>Field conditions may vary</span></div>
+
+<div class="howto">
+  <div class="card">
+    <h4>How to use this sheet</h4>
+    <p>Each floor is a city block. Pick one identity per floor, the details you want to see built, and who holds it; then <b>COPY PICKS</b> and paste the text back to Cornerman. Drywall and Plumb build Stage 2 and the cutaway from the picks.</p>
+    <p>The tone is Gibson's mundane made present: specific, lived-in, unglamorous, funny-sad. There's no neon here unless someone is paying the electric for it. <span class="odd">ODD</span> marks the left-field lines.</p>
+    <div class="legend" style="margin-top:8px">
+      <span class="chip" style="color:var(--mute)">—</span><span>Fresh, made for this sheet.</span>
+      <span class="chip p-game">game</span><span>Already built on Floor 70.</span>
+      <span class="chip p-codex">codex</span><span>An approved name from the game's naming codex.</span>
+      <span class="chip p-prior">earlier</span><span>A place type borrowed from an earlier Babel project.</span>
+      <span class="chip p-camp">campaign</span><span>A Babel tabletop campaign.</span>
+      <span class="chip p-rule">rulebook</span><span>The Dark City Shining Babel setting. Names cleared for the game.</span>
+    </div>
+  </div>
+  <div class="card" style="padding:8px">
+    <svg viewBox="0 0 360 300" role="img" aria-label="Tower 3 cutaway, floors 70 to 75" style="width:100%;height:auto;display:block;font-family:HWMono,monospace">
+      <g stroke="#17191a" stroke-width="1.5">
+        <polygon points="70,292 90,20 190,20 210,292" fill="#ddd6c4"/>
+        <line x1="112" y1="20" x2="112" y2="292" stroke-dasharray="3 3"/><line x1="168" y1="20" x2="168" y2="292" stroke-dasharray="3 3"/>
+      </g>
+      <g font-size="10.5" letter-spacing="1">
+        <a href="#f70"><rect x="88" y="232" width="104" height="30" fill="#45553a" stroke="#17191a"/><text x="200" y="244" font-weight="700" fill="#17191a">F70 THE TOLL</text><text x="200" y="257" fill="#6d695f">BUILT · TOLL CREW</text></a>
+        <a href="#f71"><rect x="89" y="200" width="102" height="30" fill="#0e8c9b" stroke="#17191a"/><text x="200" y="212" font-weight="700" fill="#17191a">F71 PV-NET CORE</text><text x="200" y="225" fill="#6d695f">STAGE 2 · WIRE AUNTIES</text></a>
+        <a href="#f72"><rect x="90" y="168" width="100" height="30" fill="#f4f0e6" stroke="#17191a"/><text x="200" y="180" font-weight="700" fill="#17191a">F72 LOCKED</text><text x="200" y="193" fill="#6d695f">THE BOOK</text></a>
+        <a href="#f73"><rect x="91" y="136" width="98" height="30" fill="#f4f0e6" stroke="#17191a"/><text x="200" y="148" font-weight="700" fill="#17191a">F73 LOCKED</text><text x="200" y="161" fill="#6d695f">TOWER THREE</text></a>
+        <a href="#f74"><rect x="92" y="104" width="96" height="30" fill="#f4f0e6" stroke="#17191a"/><text x="200" y="116" font-weight="700" fill="#17191a">F74 LOCKED</text><text x="200" y="129" fill="#6d695f">TOWER THREE</text></a>
+        <rect x="93" y="72" width="94" height="30" fill="#17191a" stroke="#17191a"/><text x="200" y="84" font-weight="700" fill="#b0492a">F75 SAKI ♛</text><text x="200" y="97" fill="#6d695f">NOT ON THIS SHEET</text>
+        <text x="14" y="248" fill="#6d695f">≈255 m</text><text x="14" y="26" fill="#6d695f">275 m</text>
+        <text x="100" y="286" fill="#6d695f" font-size="9">STAIRS</text><text x="146" y="286" fill="#6d695f" font-size="9">LIFTS</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="req" aria-label="Requisition">
+    <div class="rh">REQUISITION · 請求書<span>FORM HW-RQ-7 · PICKS</span></div>
+    <ol id="toc"></ol>
+    <div class="tot"><b id="tot">0</b><span>PICKED<br>OF <span id="tot2">—</span></span></div>
+    <button id="copy" type="button">Copy picks</button>
+    <p class="ok" id="ok">Copied to clipboard</p>
+    <textarea id="remarks" placeholder="Remarks (go out with the copy)"></textarea>
+    <button id="clear" class="sec" type="button">Clear all picks</button>
+    <div class="flt" id="flt"><b>SHOW</b>
+      <button type="button" data-f="all" aria-pressed="true">ALL</button>
+      <button type="button" data-f="fresh" aria-pressed="false">FRESH</button>
+      <button type="button" data-f="borrowed" aria-pressed="false">BORROWED</button>
+      <button type="button" data-f="odd" aria-pressed="false">ODD</button>
+      <button type="button" data-f="picked" aria-pressed="false">PICKED</button>
+    </div>
+  </aside>
+  <main id="main"></main>
+</div>
+
+<div class="foot"><span>Compiled by Stencil · Studio Hitstop</span><span>Field conditions may vary</span><span>HW-SRV-T3-70 · rev A · see also index.html (the codex)</span></div>
+</div>
+
+
+
+<script>
+// ------------------------------------------------------------------ DATA
+// item: [name, why, scheme, provenance, flags]
+//   scheme: dsg line ledger brev street tide | ""   provenance: "" (fresh) or one of the PRV keys (space separated)
+//   flags: "odd" left-field; "decal" stencil; "tag" graffiti; "scheme" naming-system card
+//   a 6th field is an array of examples (scheme cards)
+const SCH = {dsg:"Designation", line:"Line", ledger:"Ledger", brev:"Brevity", street:"Street", tide:"Tideworks"};
+const PRV = {game:"game", intro:"intro", camp:"campaign", rule:"rulebook", prior:"earlier", real:"real", loan:"loan", codex:"codex"};
+
+const DATA = [
+{no:"70", id:"f70", title:"F70 · The Toll", jp:"第七十层 · sky lobby · built (stage 1)",
+ intro:"Built already: the sky lobby with its desk barricade, cubicle homes, lookout gallery, turnstiles and the Toll. These options dress what exists; they don't move walls.",
+ plates:[
+  {t:"Block identity", pn:"PICK ONE", groups:[{items:[
+   ["THE VILLAGE LOBBY","A company's sky lobby that became a village: reception is the border post and the cubicles are homes.","","game",""],
+   ["THE WAITING ROOM","A lift interchange where nobody commutes any more, so the waiting became tenancy.","","",""],
+   ["HALF PACKED","An office floor mid-eviction: half the tenants still pay the Toll and half are packing into laundry bags.","","prior",""],
+  ]}]},
+  {t:"Mundane-future details", pn:"SET DRESSING", groups:[{items:[
+   ["Cubicle homes","Partition fabric still pinned with a 2063 org chart; a family has circled their own names on it.","","game",""],
+   ["The badge printer","The reception visitor-badge printer still works, so the Toll Crew print their receipts on it: VISITOR · 20.","","",""],
+   ["Meeting room display","The door panel still cycles “ALL HANDS · RECURRING”. Someone sleeps under the table.","","",""],
+   ["World clocks","A row of city clocks behind reception, each stopped at a different time. Tenants use it as the appointment board.","","",""],
+   ["Security arch","The scanner arch is now a doorframe to a kitchen and still beeps at belt buckles.","","",""],
+   ["Water-cooler bottles","19-litre bottles as storage, stools and currency. The refill man carries two up the stairs at dawn.","","",""],
+   ["Whiteboard homework","A child's fractions over a ghosted quarterly KPI nobody can wipe off.","","",""],
+   ["Turnstile garland","A marigold garland on the turnstile arm; tenants touch it on the way through.","","",""],
+   ["Fire assembly sign","The arrow points at a wall that is now somebody's stove.","","","odd"],
+   ["The vending machine","Restocked by hand with loose cigarettes and phone-credit scratch cards. It's also the one you throw through the gate.","","game",""],
+  ]}]},
+  {t:"Held by", pn:"LEVEL REGISTER", groups:[{items:[
+   ["THE TOLL CREW","They run the booth, the cage and the badge printer.","","codex",""],
+   ["THE KARAOKE COMMITTEE","Lookouts in the dead lounge off the lobby. The one song the machine still plays is the alarm.","","codex prior",""],
+   ["THE SHORT COUNT","Skimmers in the Toll Crew: the booth's second, smaller cash box.","","codex",""],
+  ]}]},
+ ]},
+
+{no:"71", id:"f71", title:"F71 · PV-NET Core", jp:"第七十一层 · stage 2 · the switchboard",
+ intro:"Where PV-NET lives. The floor is everybody's internet, so breaking it is breaking the block's phone line: stage 2's moral texture.",
+ plates:[
+  {t:"Block identity", pn:"PICK ONE", groups:[{items:[
+   ["THE EXCHANGE","A call-centre floor turned telephone exchange: headset desks by the hundred, now the Vermin's switchboard and the block's internet.","","",""],
+   ["THE WARM FLOOR","A server floor that heats the block. The racks are the only warm place, so people sleep in the hot aisle.","","",""],
+   ["THE LABELLING FARM","Rows of people tagging pictures for a machine by the hour. PV-NET's uplink is rented out to them.","","prior",""],
+  ]}]},
+  {t:"Mundane-future details", pn:"SET DRESSING", groups:[{items:[
+   ["Nail-polish cables","The Wire Aunties colour-code every household's cable with nail polish; the key is taped to the switch.","","codex",""],
+   ["The leaderboard","An old sales leaderboard screen now shows each flat's data balance, top to bottom.","","",""],
+   ["Line time","A queue ticker for minutes on the one clean uplink. Grandmothers book the night slots to call home.","","",""],
+   ["Routers in biscuit tins","Repeaters in biscuit tins and rice cookers, taped to every third ceiling tile, blinking like a slow rosary.","","",""],
+   ["Laundry on the exhaust","Shirts drying on the server exhaust grille, ironed flat by the airflow.","","",""],
+   ["Four-language notice","PLEASE DO NOT UNPLUG in four languages, the fourth crossed out and corrected by hand.","","",""],
+   ["The switch shrine","Offerings on the core switch: energy drinks, a spare fan, a photograph of a router.","","","odd"],
+   ["Swollen batteries","UPS batteries lined up on the floor, swollen like loaves. Nobody sits near them.","","",""],
+   ["Headset desks by shift","Rented to scam callers by day and to people calling their mothers by night. Same headsets.","","",""],
+   ["The sock","The fire suppression nozzle over the racks is disabled with a sock.","","","odd"],
+  ]}]},
+  {t:"Held by", pn:"LEVEL REGISTER", groups:[{items:[
+   ["WIRE AUNTIES","They run the splices from their flats, and the floor answers to them more than to the gang.","","codex",""],
+   ["NETTERS","The router carriers, who walk the network like a milk round.","","codex",""],
+   ["ZIRINKA boards","Black-market Zirinka hardware in every rack; the gang's one supplier relationship.","","rule",""],
+  ]}]},
+ ]},
+
+{no:"72", id:"f72", title:"F72 · locked", jp:"第七十二层 · schools, clinics, debts",
+ plates:[
+  {t:"Block identity", pn:"PICK ONE", groups:[{items:[
+   ["THREE-SHIFT SCHOOL","One school floor, three schools: primary in the morning, vocational in the afternoon, night class for the Toll's bookkeepers.","","rule",""],
+   ["THE WAITING FLOOR","A clinic floor where every corridor is a waiting room, and every waiting room has a queue ticker.","","rule",""],
+   ["THE BOOK'S FLOOR","A debt-collection office between a pawn counter and a wedding photographer.","","codex",""],
+  ]}]},
+  {t:"Mundane-future details", pn:"SET DRESSING", groups:[{items:[
+   ["Queue ticker","The clinic's number ticker skips every 4, so the wait is always longer than it looks.","","",""],
+   ["Dentist over the noodles","The dentist shares an extractor fan with the noodle counter below. Patients leave hungry.","","",""],
+   ["Timetable for three","One classroom door carries three timetables in three typefaces, from Surma School Labs and two franchises of it.","","rule",""],
+   ["Uniform exchange","School uniforms on a coat rail by size, name tapes unpicked and resewn.","","",""],
+   ["Protein bar machine","Nutrition Unlimited, flavour of the month “Birthday”.","","rule",""],
+   ["Oh-Di waiting room","A poster says SEE WHAT YOU ARE CAPABLE OF over plastic chairs bolted in threes.","","camp rule",""],
+   ["Augments by the gram","The pawn counter's scale is calibrated for cybernetics.","","",""],
+   ["The beach backdrop","The wedding photographer's backdrop is a beach that isn't there any more.","","","odd"],
+   ["The only book","The Book's ledger on a lectern, the only paper book on the floor.","","codex",""],
+  ]}]},
+  {t:"Held by", pn:"LEVEL REGISTER", groups:[{items:[
+   ["THE BOOK","The collectors keep an office here and make house calls up and down.","","codex prior",""],
+   ["STAIRWELL KINGS","Their price list is posted at the landing, per trip, per child.","","codex",""],
+  ]}]},
+ ]},
+
+{no:"73", id:"f73", title:"F73 · locked", jp:"第七十三层 · kitchens, market, shrines",
+ plates:[
+  {t:"Block identity", pn:"PICK ONE", groups:[{items:[
+   ["THE WET MARKET","A wet market with no ground floor: fish in tanks along the fire escape, the drains running down to 72.","","",""],
+   ["THE KITCHEN FLOOR","Hawker stalls that feed the tower. The smell of frying shallots rises up the stair cores at five.","","",""],
+   ["THE SHRINE ROTA","A shrine for every trade on the floor, kept by a rota taped to the pillar.","","prior",""],
+  ]}]},
+  {t:"Mundane-future details", pn:"SET DRESSING", groups:[{items:[
+   ["Fish in cooling tanks","Live fish in old server-cooling tanks, bought from 71 when the racks moved.","","",""],
+   ["Laundromat credit","The washers take the same credit as the lift; a full load costs two floors.","","",""],
+   ["Drone mail slots","Hatches cut in the facade with family names painted round them. Half are bricked up.","","",""],
+   ["Prayer app","A shrine screen takes QR offerings; the incense in front of it is real.","","",""],
+   ["Oxygen in the smoking room","A Nerps! oxygen bar in the old smoking room, with the ashtrays still set in the wall.","","rule",""],
+   ["The rice cooker","A hawker's rice cooker older than the tower, repaired more times than the lift.","","prior",""],
+   ["Chickens in a phone booth","Hens in a glass meeting pod. The sign on the door still says QUIET ROOM.","","","odd"],
+   ["Three-token menu","A painted price board in lift credit, Toll tokens and Nobusama bus tokens.","","rule codex",""],
+  ]}]},
+  {t:"Held by", pn:"LEVEL REGISTER", groups:[{items:[
+   ["TOWER THREE","The bosses eat here, and the stall holders pay in portions.","","codex prior",""],
+   ["STAIRWELL KINGS","Market deliveries pay by the landing.","","codex",""],
+  ]}]},
+ ]},
+
+{no:"74", id:"f74", title:"F74 · locked", jp:"第七十四层 · sleepers, the dead mall",
+ plates:[
+  {t:"Block identity", pn:"PICK ONE", groups:[{items:[
+   ["THE SHIFT DORM","Capsule bunks rented by the shift: three sleepers per bed per day.","","prior",""],
+   ["THE DEAD MALL","A mall that closed in the air: a food court with forty chairs and one open stall.","","",""],
+   ["THE GANG'S OWN STREET","Tower Three's families live here, and it's the tidiest floor in the tower.","","codex",""],
+  ]}]},
+  {t:"Mundane-future details", pn:"SET DRESSING", groups:[{items:[
+   ["Hot-bed rota","A rota taped inside each capsule lid, with three names and a fight in the margin.","","prior",""],
+   ["The food court","Chairs bolted in rows facing a stage where nobody has performed since the opening.","","",""],
+   ["Escalator seats","A dead escalator used as an amphitheatre for football on the screen.","","",""],
+   ["Paint-tin weights","The gangers' gym uses concrete poured into paint tins.","","",""],
+   ["YOU ARE HERE","The mall directory's YOU ARE HERE is scratched out and replaced with WE ARE.","","","odd"],
+   ["Muay Thai ring","A ring in the old cinema, sponsored by a cousin's tyre shop.","","camp",""],
+   ["Pachinko hall","Half the machines work, and the other half are shrines to the ones that do.","","prior",""],
+   ["Kids' rules","A chalked list of ball-game rules, rule 4: don't hit the Plumber poster.","","codex",""],
+  ]}]},
+  {t:"Held by", pn:"LEVEL REGISTER", groups:[{items:[
+   ["TOWER THREE","Enforcers and their families, the gang's home floor under Saki's.","","codex prior",""],
+   ["SHAFT BOYS","They live in the lift lobby and ride the car roofs to work.","","codex",""],
+  ]}]},
+ ]},
+
+{no:"↕", id:"xf", title:"Cross-floor texture", jp:"垂直之城 · the vertical city",
+ intro:"What runs through every floor: the infrastructure, the senses, the ads and the paperwork.",
+ plates:[
+  {t:"Vertical infrastructure", pn:"RISERS", groups:[{items:[
+   ["Lift-car shops","A barber works in a stalled lift car and moves when it's repaired.","","",""],
+   ["Metered lift fares","Fares are charged by the floor. The Shaft Boys ride on top for free.","","codex",""],
+   ["Stairwell tolls","The Stairwell Kings charge per landing; the receipt is an ink stamp on the wrist.","","codex",""],
+   ["The tank floor","Water tanks every tenth floor, and the tank floor is always the richest.","","",""],
+   ["Cable risers","Every flat's power is tapped from the riser and labelled in marker, and the labels are lies.","","",""],
+   ["Bucket pulleys","Groceries go up the light well and laundry comes down.","","",""],
+   ["The chute","The rubbish chute clogs at 70 every Thursday, and everyone knows whose fault it is.","","","odd"],
+   ["Tramway stop","The Tramway runs halfway up the tower (about F40), so everything reaches 70 by stair.","","rule",""],
+  ]}]},
+  {t:"Sounds & smells", pn:"SENSES", groups:[{items:[
+   ["Lift motor hum","Everyone can pitch it, and it goes flat when a car sticks.","","",""],
+   ["Five o'clock shallots","Frying shallots on every floor at once.","","",""],
+   ["Brown-out diesel","Generator fumes when the grid dips, and a cheer when it comes back.","","",""],
+   ["Karaoke in the ducts","The lounge's one song bleeds through the ventilation to 74.","","codex",""],
+   ["The wind at 255 m","Through a cracked curtain-wall panel: a note the tenants tune guitars to.","","","odd"],
+   ["Incense and ozone","Near the racks on 71.","","",""],
+   ["Wet concrete and mothballs","The stairwells' smell.","","",""],
+  ]}]},
+  {t:"Ads", pn:"SCREENS", groups:[{items:[
+   ["SEE WHAT YOU ARE CAPABLE OF","Oh-Di, on every clinic screen.","","camp rule",""],
+   ["High Water recruitment","“Security solutions for a vertical world.”, sprayed DROWNING.","","intro codex",""],
+   ["Nerps! Oxygen","A flavour of the week, sold by the breath.","","rule",""],
+   ["Coming 2071: Tower 3 Residences","A Cronus hoarding over the stair door. The render has no people in it.","","prior",""],
+   ["The spinner","Ad screens stuck on a loading spinner; tenants call them clocks.","","","odd"],
+   ["水位上升中","High Water's ticker on a lobby screen nobody paid for.","line","codex",""],
+  ]}]},
+  {t:"Bureaucracy", pn:"PAPERWORK", groups:[{items:[
+   ["Cronus notices","NOTICE OF INTENT TO RESTORE TITLE, pasted over the older notices ten layers deep.","","prior codex",""],
+   ["High Water stamp","A cyan ≋ stamp on doors: INSPECTED · LEVEL SET.","","codex",""],
+   ["The census","Three census forms from three authorities, each numbering the floors differently (Cronus from the ground, the Vermin from 70).","","prior","odd"],
+   ["Lift inspection card","Signed every month by the same person, who died in 2066.","","","odd"],
+   ["Fire certificate","Framed, dated 2058, in the lobby.","","",""],
+   ["Toll receipts","On THE SPIKE by the booth window.","","codex",""],
+  ]}]},
+ ]},
+];
+
+// ------------------------------------------------------------------ RENDER
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+const KEY = "hw-floors-picks-v1", RKEY = "hw-floors-remarks-v1";
+let picks = new Set();
+try { picks = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (e) {}
+const index = {}; // code -> {item, sec, plate}
+let total = 0;
+
+const main = $("#main"), toc = $("#toc");
+DATA.forEach((sec, si) => {
+  const g = el("section", "grp" + (sec.annex ? " annex" : "") + (sec.hooks ? " hooks" : "")); g.id = sec.id;
+  const gh = el("header", "gh");
+  gh.append(el("div", "gno", sec.no));
+  const hd = el("div"); hd.append(el("h2", null, sec.title), el("div", "jp", sec.jp)); gh.append(hd);
+  const gm = el("div", "gm"); gm.innerHTML = 'Items <b data-n></b> · picked <b data-p>0</b>'; gh.append(gm);
+  g.append(gh);
+  if (sec.annex) g.append(el("div", "haz"));
+  if (sec.intro) g.append(el("p", "gintro", sec.intro));
+  
+  let n = 0;
+  sec.plates.forEach((pl, pi) => {
+    const plate = el("div", "plate"); if (pl.id) plate.id = pl.id;
+    const ph = el("div", "ph");
+    const h3 = el("h3", null, pl.t); if (pl.jp) h3.append(el("small", null, pl.jp));
+    ph.append(h3, el("span", "pn", pl.pn || ""));
+    plate.append(ph);
+    if (pl.note) plate.append(el("p", "pnote", pl.note));
+    let k = 0;
+    pl.groups.forEach(gr => {
+      const sg = el("div", "sg");
+      if (gr.h) sg.append(el("h5", null, gr.h));
+      gr.items.forEach(it => {
+        k++; n++; total++;
+        const [name, why, sch, prv, flags, ex] = it;
+        const code = `${/^\d+$/.test(sec.no) ? sec.no : "X"}.${pi + 1}.${String(k).padStart(2, "0")}`;
+        const fl = (flags || "").split(" ").filter(Boolean);
+        const pv = (prv || "").split(" ").filter(Boolean);
+        const row = el("label", "it " + fl.filter(f => f !== "odd").join(" "));
+        if (!pv.length || pv.every(p => p === "real" || p === "loan")) row.dataset.fresh = "";
+        if (fl.includes("odd")) row.dataset.odd = "";
+        const cb = el("input"); cb.type = "checkbox"; cb.dataset.code = code; cb.checked = picks.has(code);
+        row.append(cb, el("span", "bx"), el("span", "cd", code), el("span", "nm", name), el("span", "wy", why || ""));
+        const tg = el("span", "tg");
+        if (fl.includes("odd")) tg.append(el("span", "odd", "ODD"));
+        if (sch) tg.append(el("span", "chip s-" + sch, SCH[sch]));
+        pv.forEach(p => tg.append(el("span", "chip p-" + p, PRV[p])));
+        row.append(tg);
+        if (ex) { const exd = el("span", "ex"); ex.forEach(x => exd.append(el("span", null, x))); row.append(exd); }
+        sg.append(row);
+        index[code] = {name, why, sch, pv, odd: fl.includes("odd"), sec, plate: pl.t};
+      });
+      plate.append(sg);
+    });
+    g.append(plate);
+  });
+  $("[data-n]", gh).textContent = n;
+  main.append(g);
+  const li = el("li"); const a = el("a"); a.href = "#" + sec.id;
+  a.append(el("span", null, sec.no + " " + sec.title)); const b = el("b", null, "0"); b.dataset.sec = sec.id; a.append(b);
+  li.append(a); toc.append(li);
+});
+$("#count").textContent = total; $("#tot2").textContent = total;
+
+function refresh() {
+  $("#tot").textContent = picks.size;
+  DATA.forEach(sec => {
+    const c = [...picks].filter(code => index[code] && index[code].sec === sec).length;
+    $(`[data-sec="${sec.id}"]`).textContent = c;
+    $(`#${sec.id} [data-p]`).textContent = c;
+  });
+  try { localStorage.setItem(KEY, JSON.stringify([...picks])); } catch (e) {}
+}
+main.addEventListener("change", e => {
+  const cb = e.target; if (!cb.dataset || !cb.dataset.code) return;
+  cb.checked ? picks.add(cb.dataset.code) : picks.delete(cb.dataset.code);
+  refresh();
+});
+// drop stale codes from an older revision
+picks = new Set([...picks].filter(c => index[c]));
+refresh();
+
+const rem = $("#remarks");
+try { rem.value = localStorage.getItem(RKEY) || ""; } catch (e) {}
+rem.addEventListener("input", () => { try { localStorage.setItem(RKEY, rem.value); } catch (e) {} });
+
+function exportText() {
+  const codes = Object.keys(index).filter(c => picks.has(c));
+  const out = [`TOWER 3 BLOCKS · picks from boards/codex/floors.html (HW-SRV-T3-70 rev A)`, `${codes.length} of ${total} picked`, ""];
+  let lastSec = null, lastPlate = null;
+  codes.forEach(c => {
+    const it = index[c];
+    if (it.sec !== lastSec) { out.push(`${it.sec.no} ${it.sec.title.toUpperCase()}`); lastSec = it.sec; lastPlate = null; }
+    if (it.plate !== lastPlate) { out.push(`  [${it.plate}]`); lastPlate = it.plate; }
+    const tags = [it.sch ? SCH[it.sch] : null, ...it.pv.map(p => PRV[p]), it.odd ? "odd" : null].filter(Boolean).join(", ");
+    out.push(`  ${c}  ${it.name}${tags ? `  (${tags})` : ""}${it.why ? `: ${it.why}` : ""}`);
+  });
+  if (rem.value.trim()) out.push("", "Remarks:", rem.value.trim());
+  return out.join("\n");
+}
+$("#copy").addEventListener("click", async () => {
+  const txt = exportText(), ok = $("#ok");
+  let done = false;
+  try { await navigator.clipboard.writeText(txt); done = true; } catch (e) {
+    const ta = el("textarea"); ta.value = txt; document.body.append(ta); ta.select();
+    try { done = document.execCommand("copy"); } catch (e2) {} ta.remove();
+  }
+  ok.textContent = done ? `Copied ${picks.size} picks` : "Copy failed; select from console";
+  if (!done) console.log(txt);
+  ok.classList.add("on"); clearTimeout(ok._t); ok._t = setTimeout(() => ok.classList.remove("on"), 2400);
+});
+$("#clear").addEventListener("click", () => {
+  if (!picks.size || !confirm(`Clear all ${picks.size} picks?`)) return;
+  picks.clear(); document.querySelectorAll(".it input").forEach(cb => cb.checked = false); refresh();
+});
+$("#flt").addEventListener("click", e => {
+  const b = e.target.closest("button[data-f]"); if (!b) return;
+  document.body.dataset.f = b.dataset.f;
+  document.querySelectorAll("#flt button").forEach(x => x.setAttribute("aria-pressed", x === b));
+});
+window.hwCodexExport = exportText;
+</script>
+</body>
+</html>

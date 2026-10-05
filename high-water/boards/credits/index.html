@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contractor Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e0f; --panel:#141719; --line:#2b3134; --text:#e6e1d6; --dim:#979a96;
+  --cyan:#5ff0ff; --amber:#ffb000; --red:#ff3b2f; --bone:#efe8d8;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:17px/1.5 var(--sans)}
+body{padding:0 16px 120px}
+main{max-width:1100px;margin:0 auto}
+h1,h2,h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1;text-wrap:balance}
+.band{height:10px;margin:0 -16px;background:repeating-linear-gradient(135deg,var(--amber) 0 14px,#1b1b1b 14px 28px)}
+header{padding:48px 0 28px}
+.doc{font:500 13px var(--mono);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+header h1{font-size:clamp(46px,8vw,88px);margin:10px 0 16px}
+header h1 em{font-style:normal;color:var(--cyan)}
+header p{font-size:clamp(18px,2.2vw,21px);max-width:38em;margin:0 0 10px}
+section{padding:44px 0;border-top:1px solid var(--line)}
+section>h2{font-size:clamp(30px,5vw,46px);margin-bottom:10px}
+section>h2 small{font:500 13px var(--mono);letter-spacing:.14em;color:var(--cyan);display:block;margin-bottom:8px}
+.sub{color:var(--dim);margin:0 0 22px;max-width:46em}
+.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px}
+.idea{background:var(--panel);border:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-content:start}
+.idea h3{font-size:25px}
+.idea h3 small{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);margin-bottom:5px}
+.idea p{grid-column:1/-1;margin:2px 0 0;font-size:16px}
+.idea .fit{grid-column:1/-1;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-top:4px}
+.idea.rec{border-color:#1f6a70}
+input[type=checkbox]{accent-color:var(--cyan);width:22px;height:22px;cursor:pointer}
+.call{margin-top:18px;font-size:18px;border-left:4px solid var(--cyan);padding:6px 14px;max-width:48em}
+.call b{color:var(--cyan)}
+.wrap{overflow-x:auto;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{border-bottom:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;font-size:15px}
+th{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#101315}
+td.n{font:800 20px/1 var(--cond);text-transform:uppercase;white-space:nowrap}
+td.n small{display:block;font:500 11px var(--mono);color:var(--dim);letter-spacing:.08em;margin-top:4px}
+td.l{font-style:italic;color:var(--bone)}
+td.p{color:var(--dim)}
+.pickbar{position:fixed;left:0;right:0;bottom:0;background:#101315f0;border-top:2px solid var(--cyan);display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
+.pickbar b{color:var(--cyan);font-size:20px}
+.pickbar button{font:600 15px var(--sans);background:var(--cyan);color:#0b1011;border:0;padding:10px 16px;cursor:pointer}
+.pickbar button.ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> S1–S6: a bar-mapped score, hit grammar per card, a stamp and the ring bell, the register's power failing into night vision, the roster lineup and REGISTER ISSUED. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="band"></div>
+<main>
+<header>
+  <div class="doc">High Water · Credits board · Studio Hitstop · for Jonas's picks</div>
+  <h1>Contractor <em>register</em></h1>
+  <p>Every team member chose their own ID card: trade, a line in their own voice, a badge built in code, and one real piece of their work for the card to show or play. Several also pitched an idea for the roll as a whole. Pick the staging pieces you want and Readout builds them.</p>
+</header>
+
+<section>
+  <h2><small>The roll as a whole</small>Staging ideas from the team</h2>
+  <p class="sub">They mostly combine. The cyan-bordered ones are my suggested set: a score with a bar map, the hit grammar on each card, a blackout halfway, and the roster lineup at the end. Two of them conflict (marked), so pick one of those.</p>
+  <div class="ideas" id="ideas"></div>
+  <div class="call"><b>Suggested set:</b> the roll runs on Downbeat's credits score. Each card lands on a bar line with one white frame and a stamp. Halfway, the register's power fails and the rest is read in night vision. It ends on the roster lineup in black filling with crew colours, the ring bell, and "REGISTER ISSUED" with your build stamp. About 4–5 hours on top of the cards.</div>
+</section>
+
+<section>
+  <h2><small>In their own words</small>The cards so far</h2>
+  <p class="sub">These are first drafts; you can edit any line. Still to come: Plumb, Readout, Tidewater, Flywheel (Codex) and Stencil. You write your own entry.</p>
+  <div class="wrap"><table><thead><tr><th>Name</th><th>Trade</th><th>Line</th><th>Card plays / shows</th></tr></thead><tbody id="cards"></tbody></table></div>
+</section>
+</main>
+
+<div class="pickbar"><span><b id="pc">0</b> picked</span><button id="mine">Pick suggested set</button><button id="copy">Copy picks</button><button class="ghost" id="clear">Clear</button><span id="msg" role="status"></span></div>
+
+<script>
+const IDEAS=[
+ ["S1","Downbeat","Bar-mapped score","The roll runs on a credits score (Black ICE re-voiced synth-led, with the dirtier piano), with a bar map. Each card slides in on a bar line, and the last one lands on the final chord. About 2 h, plus the bar map.","",1],
+ ["S2","Afterimage","Hit grammar per card","Each card lands like a hit: one white frame, then the card, with a short hitstop on the name.","",1],
+ ["S3","Foley","Filed with a stamp, ends on the bell","Each card lands with a quiet stamp, filed into the register. The roll ends on the ring bell: ding-ding-ding.","",1],
+ ["S4","Opticals","The register's power fails","Halfway down, the lamps die outward, five black frames, the optics boot, and the rest of the cards are read in Bone night vision. About 1 h.","",1],
+ ["S5","Gallery","Roster lineup","The roll ends on the whole enemy roster in solid black, ordered by shape, held for a beat, then filled with crew colours. The hostiles get a page in the register too.","",1],
+ ["S6","Slipway","REGISTER ISSUED","The last line is the register's issue line, with the player's own build stamp.","",1],
+ ["S7","Slate","Cards as finishers","Each card goes through Cinema like a finisher, without locking input: a two-frame two-tone flash, a 20 px letterbox for the whole roll, and the name stamped with the finisher overshoot. Jonas's card comes last and is the only one with a world stop.","Conflicts with S2: pick one card landing",0],
+ ["S8","Drywall","The roll is a load path","Each card hangs on a small deck. Once it's been read, the deck bows and drops it out of frame, and the next one slides in.","Conflicts with S2/S7 as the card exit; could be the exit only",0],
+ ["S9","Scout","Considered 35, used 0","The bill of materials ends with: \"Third-party assets considered: 35. Used: 0. Ruling: all in-house (client, 2026-09-29).\"","",0],
+ ["S10","Astra (Codex)","Unresolved complaints","Each card carries a stamp with that department's unresolved complaint.","Copy per card; members would write their own",0],
+ ["S11","Cornerman","Git-log order","Cards are ordered by each member's first commit, so the register reads like the history.","",0]
+];
+const CARDS=[
+ ["Jonas","Client · lead","(you write this)","",""],
+ ["Cornerman","Claude · site lead","Site lead: combat, briefs, merges, the main branch.","Merged everyone's work, broke main twice, and said \"held\" a lot.","The rising uppercut"],
+ ["Astra","Codex · inspector","Independent inspector, performance review.","The benchmark had enemies running. I had questions.","A clipped finding from review round 8"],
+ ["Hitlag","Claude","Enemies, game feel and the building's chemistry.","I taught the thugs to take turns, then gave the building a turn.","The training room's services chain"],
+ ["Slate","Claude","Finishers, cinema and the building's incident reports.","I gave every death a camera, then had to give the controls back.","Chiropractic Review's two-tone knee frame"],
+ ["Armature","Claude","Rigging and animation: poses, reactions, IK, dangles.","I keep the gloves on the thug, even through a dash.","The rising uppercut, the machine version"],
+ ["Foley","Claude","Sound effects and codec voices, synthesised in code.","I made every sound in this game and have never heard one of them.","The wrecking-ball finisher sound"],
+ ["Downbeat","Claude","Score, synthesis engine and the reactive music.","Never heard a note I wrote. Jonas did, and said \"horrible\" once.","Two bars of the title drop"],
+ ["Opticals","Claude","Motion graphics: intro film, night vision, CCTV feeds.","I made the lights go out, then built the eyes to see without them.","F70's security feed on IR"],
+ ["Afterimage","Claude","Visual effects lead: hits, blood, water, sparks, fire.","Every hit you saw flashed white for exactly one frame. I counted.","The explosion flash strip"],
+ ["Drywall","Claude","Level design: floors, piers, and what falls down.","I built floors to come down, then wrote checks proving they come down right.","The F75 mezzanine giving way"],
+ ["Gallery","Claude","Enemy look research: crews, shapes, the 37-pixel test.","I checked every thug at 37 pixels, in solid black. The hoods had ears.","The Collector, colour to silhouette"],
+ ["Slipway","Claude","Release engineering, builds, Web performance, QA.","Every build you played came through me, stamped with its commit.","Your live build stamp"],
+ ["Scout","Claude","Asset research: licences, provenance, scale fit.","Read thirty-five licences so Jonas could say no to all of them.","The asset board, every row unticked"]
+];
+const ih=document.getElementById("ideas");
+for(const [id,who,t,d,fit,rec] of IDEAS){const el=document.createElement("article");el.className="idea"+(rec?" rec":"");el.innerHTML=`<h3><small>${id} · ${who}</small>${t}</h3><input type="checkbox" id="pk-${id}" aria-label="Pick ${id}" data-pick="${id} ${t}" data-rec="${rec}"><p>${d}</p>${fit?`<div class="fit">${fit}</div>`:""}`;ih.appendChild(el)}
+const ch=document.getElementById("cards");
+for(const [n,k,t,l,p] of CARDS){const tr=document.createElement("tr");tr.innerHTML=`<td class="n">${n}<small>${k}</small></td><td>${t}</td><td class="l">${l}</td><td class="p">${p}</td>`;ch.appendChild(tr)}
+const KEY="hw-archive-credits-picks";
+const load=()=>{try{const s=localStorage.getItem(KEY);return s===null?null:JSON.parse(s)}catch(e){return null}};
+// Archive: with nothing stored, the boxes show Jonas's recorded picks.
+const JONAS_PICKS=["S1", "S2", "S3", "S4", "S5", "S6"];
+const save=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}};
+const boxes=[...document.querySelectorAll("input[data-pick]")];const st0=load();const saved=new Set(st0||[]);boxes.forEach(b=>b.checked=st0===null?JONAS_PICKS.some(p=>b.dataset.pick.startsWith(p+" ")):saved.has(b.dataset.pick));
+function update(){const v=boxes.filter(b=>b.checked).map(b=>b.dataset.pick);document.getElementById("pc").textContent=v.length;save(v);return v}
+boxes.forEach(b=>b.addEventListener("change",update));update();
+document.getElementById("mine").onclick=()=>{boxes.forEach(b=>b.checked=b.dataset.rec==="1");update()};
+document.getElementById("copy").onclick=async()=>{const v=update();const t="Credits picks:\n"+(v.length?v.map(x=>"- "+x).join("\n"):"- (none)");const m=document.getElementById("msg");try{await navigator.clipboard.writeText(t);m.textContent="Copied"}catch(e){m.textContent="Copy blocked; see console";console.log(t)}};
+document.getElementById("clear").onclick=()=>{boxes.forEach(b=>b.checked=false);update()};
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Between Missions Board · Readout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@500&family=Noto+Serif+SC:wght@900&family=Shippori+Mincho+B1:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0e0f;--panel:#141719;--line:#2a2f33;--ink:#e9e7e1;--mute:#9aa0a4;--cy:#5ff0ff;--ice:#dff9ff;--or:#ff8a00;--red:#ff2a3a;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 'Barlow',system-ui,sans-serif}
+a{color:var(--cy)}
+code{font-family:'JetBrains Mono',monospace;font-size:.86em}
+.wrap{max-width:1500px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:50;background:rgba(12,14,15,.94);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;gap:18px;align-items:center;min-height:50px;flex-wrap:wrap}
+header.top b{font:600 13px 'JetBrains Mono';letter-spacing:.16em}
+header.top nav{display:flex;gap:14px;flex-wrap:wrap;font:500 13px 'Barlow';letter-spacing:.06em;text-transform:uppercase}
+header.top nav a{color:var(--mute);text-decoration:none}
+h1{font:600 clamp(30px,4vw,52px)/1.05 'Barlow Condensed';margin:36px 0 10px;text-transform:uppercase}
+h2{font:700 clamp(24px,2.6vw,34px)/1.1 'Barlow Condensed';text-transform:uppercase;margin:0 0 6px}
+section{padding:40px 0 14px;border-bottom:1px solid var(--line)}
+p,li{max-width:86ch;color:#d6d4ce}
+.kicker{font:600 12px 'JetBrains Mono';letter-spacing:.2em;color:var(--cy);text-transform:uppercase}
+.scope{display:inline-block;font:700 13px 'JetBrains Mono';letter-spacing:.1em;padding:3px 8px;margin-right:8px;border:1px solid}
+.s{color:#7fe08a;border-color:#7fe08a}.m{color:#ffc94d;border-color:#ffc94d}.l{color:#ff6a6a;border-color:#ff6a6a}
+.rec{border-left:3px solid var(--cy);background:#101618;padding:14px 18px;margin:16px 0}
+.rec b{color:var(--cy)}
+.warn{border-left:3px solid var(--or);background:#18130c;padding:12px 18px;margin:16px 0}
+.warn b{color:var(--or)}
+.stage{background:#000;border:1px solid var(--line)}
+canvas{display:block;width:100%;height:auto}
+.hint{font:500 13px 'JetBrains Mono';color:var(--mute);margin:6px 0 0}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0}
+.btn{font:600 12px/1 'JetBrains Mono';letter-spacing:.06em;background:transparent;color:var(--mute);border:1px solid var(--line);padding:9px 11px;cursor:pointer;text-transform:uppercase}
+.btn:hover{color:var(--ink);border-color:var(--mute)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;margin-top:14px}
+.fact{background:var(--panel);border:1px solid var(--line);padding:10px 14px;font-size:15px}
+.fact b{display:block;font:700 12px 'JetBrains Mono';letter-spacing:.1em;color:var(--mute);text-transform:uppercase;margin-bottom:3px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{font:600 12px 'JetBrains Mono';letter-spacing:.1em;color:var(--mute);text-transform:uppercase}
+.tablewrap{overflow-x:auto}
+footer{padding:30px 0 60px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Option S, a level select. It became a Tower 3 cutaway with five floors, each floor a city block. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<header class="top"><div class="wrap"><b>BETWEEN MISSIONS · READOUT</b><nav><a href="#s">S · Turf map</a><a href="#m">M · The Harbour</a><a href="#l">L · Level register</a><a href="#compare">Compare</a></nav></div></header>
+<main class="wrap">
+<h1>Between missions: map, hub or turf war</h1>
+<p class="kicker">Decision board · not a build · stop for Jonas's pick · 2026-09-29</p>
+<p>Jonas is "somewhat considering setting up a between-missions hub, and maybe a level-select world map, or maybe a turf map. Not sure at all." This board lays out three options by scope against the jam deadline (<b>Sunday 4 October, 23:59</b>; five days from today), each with a live mockup in Section Alert over the game's own dawn city plates. Names and hooks are from Stencil (codex-writer) and the game's naming codex. Stencil's fresh proposals are marked as such, and all copy is placeholder.</p>
+<div class="warn"><b>Proposals, not canon.</b> The Stage 2 name (CTR-2070-T3/F72 · PV-NET CORE), the Level Register terms (HOLDINGS, IN ARREARS, IN DISPUTE, FORECLOSED) and the floor assignments are Stencil's fresh proposals. The picked items: THE HARBOUR, VERTICAL CLEARANCE, the Floors 71–75 and Tower 5 hooks, the Cyber Monday bid, DE-LISTED and NON-BILLABLE.</div>
+
+<section id="s">
+<h2><span class="scope s">S</span>Turf map level select</h2>
+<p>This replaces DEPLOY's direct jump. VERTICAL CLEARANCE · OPEN CONTRACTS shows Tower 3's crown and Tower 5 over the city as thin-line nodes. Pick a contract, read its card (code, class, client, hook, your best EVAL and intel), confirm, and SOLARIS's MAGI briefing plays. Locked contracts tease Babel forward.</p>
+<div class="stage"><canvas id="cs" width="1280" height="720"></canvas></div>
+<p class="hint">← → ↑ ↓ or click: pick a node · Enter / A: confirm (the MAGI briefing cut-in) · the demo cycles by itself.</p>
+<div class="facts">
+<div class="fact"><b>Adds to replay</b>Contracts as a list you return to: the best EVAL and intel per contract, and Stage 2 unlocking after F70. A clear, visible "more is coming".</div>
+<div class="fact"><b>Adds to worldbuilding</b>Babel's geography at a glance: 275 m Tower 3 with F70 at about 255 m, the crown floors, Tower 5's Sea Wall, the Cyber Monday bid as a threat. Cheap and reads well.</div>
+<div class="fact"><b>Hours</b>Readout 6–8 (map screen, node data, flow into briefing and results). Stencil 1 (card copy). Cornerman 1 (flow). About 9 in total.</div>
+<div class="fact"><b>Deadline risk</b><span style="color:#7fe08a">Low.</span> It's a 2D screen in the existing menu kit, with no new scene or streaming. Stage 2 only needs a node that's either locked or pointing at its scene.</div>
+<div class="fact"><b>Team</b>Readout (build), Stencil (copy), Cornerman (flow), Downbeat (Standby under it; the track exists).</div>
+</div>
+</section>
+
+<section id="m">
+<h2><span class="scope m">M</span>The Harbour hub</h2>
+<p>High Water's HQ (THE HARBOUR, where operators "berth") as one small walkable room between missions, under Standby ("hub, overlooking the city"). Stations are named for the divisions:
+<ul>
+<li>the VERTICAL CLEARANCE contract terminal, which opens the S map;</li>
+<li>the CONTRACT OPTICS dossier, the Hostile Register with the intel you've collected;</li>
+<li>the TIDAL ASSETS locker and ID plate (TIDEMARK, Tier 3 Asset, HW-07 · SN 4F-2210);</li>
+<li>the WELLNESS &amp; RETENTION decompression corner;</li>
+<li>the window over Babel with 水位上升中.</li>
+</ul>
+SOLARIS speaks as Wired asides.</p>
+<div class="stage"><canvas id="cm" width="1280" height="720"></canvas></div>
+<p class="hint">← → walks · A / Enter opens the station in front of you · B / Esc closes it · the demo walks by itself.</p>
+<div class="facts">
+<div class="fact"><b>Adds to replay</b>A place to come back to: dossier entries filling up, grade progression on the ID plate, contracts at the terminal. It's the best frame for later content (shop, repairs) and gives the codec a home.</div>
+<div class="fact"><b>Adds to worldbuilding</b>The most: High Water as a company you work for, with divisions on the walls, tier billboards in the city, decompression as HR. It lands the satire.</div>
+<div class="fact"><b>Hours</b>
+<ul>
+<li>Drywall 8–12: room, lighting, window plates.</li>
+<li>Readout 6–8: station screens, which include S.</li>
+<li>Armature 1–2: idle and terminal poses.</li>
+<li>Cornerman 2: flow and camera.</li>
+<li>Foley 1: room tone.</li>
+</ul>
+About 20–25 in total.</div>
+<div class="fact"><b>Deadline risk</b><span style="color:#ffc94d">Medium to high.</span> It's a new scene with camera, collisions and Web performance, and it competes with Stage 2 for the level lane. It's safe only if Stage 2 is locked by Thursday.</div>
+<div class="fact"><b>Team</b>Drywall, Readout, Armature, Cornerman, Foley, Downbeat (Standby exists), Stencil (division signage).</div>
+</div>
+</section>
+
+<section id="l">
+<h2><span class="scope l">L</span>Level register: a turf-war map</h2>
+<p>This is a light meta layer over Tower 3's crown in the Ledger register, titled <b>LEVEL REGISTER</b>. "Level" is the approved jargon for a floor and doubles as the water level. Each floor is split into blocks:
+<ul>
+<li>Stair cores held by the STAIRWELL KINGS; lift shafts held by the SHAFT BOYS.</li>
+<li>F70: the TOLL CREW and the KARAOKE COMMITTEE.</li>
+<li>F71: THE BOOK.</li>
+<li>F72: the WIRE AUNTIES (Stage 2's core).</li>
+<li>F73–74: TOWER THREE.</li>
+<li>F75: Saki ♛.</li>
+<li>Off the column: Hatch's Market on Tower 5.</li>
+</ul>
+Clearing a contract forecloses blocks. High Water's HOLDINGS rise as a cyan waterline, tying the map to the WATERLINE meter, and crews push back into disputed blocks between contracts.</p>
+<div class="stage"><canvas id="cl" width="1280" height="720"></canvas></div>
+<div class="bar"><button class="btn" id="ladv">Clear a contract</button><button class="btn" id="lreset">Reset</button></div>
+<div class="facts">
+<div class="fact"><b>Adds to replay</b>The highest in theory: a campaign state, contested blocks and crews that respond. But it needs contracts to feed it, and the jam has two (F70 and Stage 2).</div>
+<div class="fact"><b>Adds to worldbuilding</b>High: gangs as a living ecosystem, High Water as a creditor foreclosing floors, the Ledger joke carried through the whole campaign.</div>
+<div class="fact"><b>Hours</b>
+<ul>
+<li>Readout 10–14: the map and meta state.</li>
+<li>Jonas and design 4–6: rules for pushback, what control changes in the levels.</li>
+<li>Stencil 2.</li>
+<li>Level and enemy lanes 6+ to make a floor's owner matter in play.</li>
+</ul>
+25+ in total.</div>
+<div class="fact"><b>Deadline risk</b><span style="color:#ff6a6a">High.</span> It's a systems design question as much as UI, and it's content-starved with two stages. As a static "state of the tower" screen it shrinks to about S's size, but then it's decoration.</div>
+<div class="fact"><b>Team</b>Readout, Jonas (rules), Stencil, Drywall and Hitlag (floor ownership in play), Cornerman.</div>
+</div>
+</section>
+
+<section id="compare">
+<h2>Compare</h2>
+<div class="tablewrap"><table>
+<thead><tr><th></th><th>Replay</th><th>Worldbuilding</th><th>Hours</th><th>Risk by Sunday</th><th>New scene?</th></tr></thead>
+<tbody>
+<tr><td><b>S · Turf map</b></td><td>Medium</td><td>Medium-high</td><td>~9</td><td style="color:#7fe08a">Low</td><td>No (a menu screen)</td></tr>
+<tr><td><b>M · The Harbour</b></td><td>Medium-high</td><td>Highest</td><td>~20–25</td><td style="color:#ffc94d">Medium-high</td><td>Yes (a small room)</td></tr>
+<tr><td><b>L · Level register</b></td><td>High, content-limited</td><td>High</td><td>25+</td><td style="color:#ff6a6a">High</td><td>No, but needs systems</td></tr>
+</tbody></table></div>
+<div class="rec"><b>Readout's read:</b> build <b>S</b> for the jam and design it as the <b>Harbour's contract terminal</b>, so M can wrap it later without rework: the same screen opens from DEPLOY now and from a terminal in the room later. The node colours can already carry L's legend (HOLDINGS / IN ARREARS on each contract) as flavour without any meta state. That gives most of the worldbuilding for about a third of the hours.</div>
+</section>
+
+<footer>Readout · UI lane · city plates from the game's dawn backdrop (Plumb) · names and hooks from Stencil's codex · placeholder copy throughout.</footer>
+</main>
+
+<script>
+(() => {
+const CY = '#5ff0ff', ICE = '#dff9ff', OR = '#ff8a00', RED = '#ff2a3a', DIM = 'rgba(95,240,255,.18)';
+const city = new Image(); city.src = 'hub/city.jpg';
+const now = () => performance.now() / 1000;
+function T(g, s, x, y, font, col, a = 1, align = 'left') { g.globalAlpha = a; g.fillStyle = col; g.font = font; g.textAlign = align; g.fillText(s, x, y); g.textAlign = 'left'; g.globalAlpha = 1; }
+function ticker(g, t) {
+  g.fillStyle = 'rgba(2,8,10,.9)'; g.fillRect(0, 0, 1280, 26); g.fillStyle = 'rgba(95,240,255,.35)'; g.fillRect(0, 26, 1280, 1);
+  const step = 170, x0 = -((t * 36) % step);
+  for (let x = x0; x < 1280; x += step) T(g, '水位上升中', x + 8, 19, "500 15px 'Noto Sans SC'", CY, .6);
+}
+function bg(g, dim) { if (city.complete) g.drawImage(city, 0, 0, 1280, 720); g.fillStyle = `rgba(3,7,10,${dim})`; g.fillRect(0, 0, 1280, 720); }
+
+// ---------------- S · turf map ----------------
+const NODES = [
+  { id: 'f70', x: 430, y: 330, code: 'CTR-2070-T3/F70', name: 'THE TOLL', state: 'open', cls: 'RESTORATION OF TITLE', client: 'CRONUS CONSTRUCTION', hook: 'Cronus Construction thanks you for your cooperation.', best: 'EVAL A · INTEL 1/3', ledger: 'FORECLOSED' },
+  { id: 'f72', x: 430, y: 290, code: 'CTR-2070-T3/F72', name: 'PV-NET CORE', state: 'next', cls: 'DISCOVERY (proposal)', client: 'CRONUS CONSTRUCTION', hook: 'The Wire Aunties’ splices converge here. (proposal)', best: 'UNLOCKS AFTER F70', ledger: 'IN ARREARS' },
+  { id: 'crown', x: 430, y: 220, code: 'CTR-2070-T3/F71–75', name: 'MANAGEMENT', state: 'locked', cls: '—', client: '—', hook: 'Floors 71–75 · Management · Unseen.', best: 'UNSEEN', ledger: 'IN ARREARS' },
+  { id: 't5', x: 820, y: 420, code: 'CTR-2070-T5', name: 'SEA WALL', state: 'locked', cls: 'TOWER 5 ROOF', client: 'PENDING', hook: 'CTR-2070-T5 · Sea Wall · Tower 5 roof · pending.', best: 'PENDING', ledger: 'NON-BILLABLE' },
+  { id: 'cm', x: 1090, y: 250, code: 'COUNTER-BID', name: 'CYBER MONDAY', state: 'threat', cls: 'AGAINST YOU', client: 'NEW WALLED CITY', hook: 'Cyber Monday has placed a bid on your gloves.', best: 'THREAT', ledger: '—' },
+];
+const S = { sel: 0, t0: now(), confirm: -9, auto: true };
+const cs = document.getElementById('cs'), gs = cs.getContext('2d');
+function drawS() {
+  const g = gs, t = now();
+  bg(g, .62); ticker(g, t);
+  T(g, 'VERTICAL CLEARANCE · OPEN CONTRACTS', 60, 70, "600 16px 'Barlow Condensed'", OR);
+  T(g, 'BABEL · TOWER 3 CROWN · 平面', 60, 92, "400 12px 'JetBrains Mono'", ICE, .6);
+  // Tower 3: 275 m, crown floors at the top
+  const tx = 430, top = 180, base = 700;
+  g.strokeStyle = 'rgba(223,249,255,.55)'; g.lineWidth = 1;
+  g.strokeRect(tx - 60, top, 120, base - top);
+  for (let y = top + 8; y < base; y += 8) { g.globalAlpha = .12; g.beginPath(); g.moveTo(tx - 60, y); g.lineTo(tx + 60, y); g.stroke(); }
+  g.globalAlpha = 1;
+  T(g, 'TOWER 3 · 275 M', tx - 60, base - 8, "600 11px 'JetBrains Mono'", ICE, .7);
+  // crown band 70-75
+  g.fillStyle = 'rgba(95,240,255,.08)'; g.fillRect(tx - 60, top, 120, 170);
+  for (let f = 70; f <= 75; f++) { const y = 340 - (f - 70) * 26; T(g, 'F' + f, tx + 70, y + 4, "400 11px 'JetBrains Mono'", ICE, f <= 72 ? .8 : .35); g.globalAlpha = .3; g.beginPath(); g.moveTo(tx - 60, y + 10); g.lineTo(tx + 60, y + 10); g.stroke(); g.globalAlpha = 1; }
+  T(g, '♛', tx, top - 8, "700 22px 'Barlow Condensed'", RED, .8, 'center');
+  // Tower 5
+  g.strokeStyle = 'rgba(223,249,255,.4)'; g.strokeRect(780, 430, 90, 270); T(g, 'TOWER 5', 780, 692, "600 11px 'JetBrains Mono'", ICE, .6);
+  // off-map threat line
+  g.setLineDash([4, 6]); g.strokeStyle = 'rgba(255,42,58,.5)'; g.beginPath(); g.moveTo(1090, 250); g.lineTo(1260, 200); g.stroke(); g.setLineDash([]);
+  T(g, 'NEW WALLED CITY →', 1150, 196, "600 11px 'JetBrains Mono'", RED, .7);
+  // nodes
+  NODES.forEach((n, i) => {
+    const on = i === S.sel, col = n.state === 'threat' ? RED : n.state === 'open' ? CY : n.state === 'next' ? OR : 'rgba(223,249,255,.45)';
+    const r = on ? 13 : 9, pulse = n.state === 'next' ? .5 + .5 * Math.sin(t * 4) : 1;
+    g.strokeStyle = col; g.lineWidth = on ? 2.5 : 1.5; g.globalAlpha = pulse;
+    g.beginPath(); for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; g.lineTo(n.x + Math.cos(a) * r, n.y + Math.sin(a) * r); } g.closePath();
+    if (n.state === 'open' || on) { g.fillStyle = on ? col : 'rgba(95,240,255,.35)'; g.fill(); }
+    g.stroke(); g.globalAlpha = 1;
+    if (n.state === 'locked') T(g, '✕', n.x, n.y + 4, "700 11px 'JetBrains Mono'", ICE, .6, 'center');
+    T(g, n.name, n.x + (n.id === 'cm' || n.id === 't5' ? 20 : -20), n.y + 4, "700 14px 'Barlow Condensed'", on ? '#fff' : col, 1, n.id === 'cm' || n.id === 't5' ? 'left' : 'right');
+  });
+  // contract card
+  const n = NODES[S.sel], x = 900, y = 470, w = 340;
+  const col = n.state === 'threat' ? RED : n.state === 'open' ? CY : n.state === 'next' ? OR : ICE;
+  g.fillStyle = 'rgba(2,9,13,.92)'; g.fillRect(x, y, w, 200); g.fillStyle = col; g.fillRect(x, y, 3, 200); g.fillRect(x, y, w, 2);
+  T(g, n.code, x + 16, y + 24, "600 12px 'JetBrains Mono'", col);
+  T(g, n.name, x + 16, y + 58, "800 32px 'Barlow Condensed'", '#fff');
+  T(g, 'CLASS  ' + n.cls, x + 16, y + 82, "600 11px 'JetBrains Mono'", ICE, .75);
+  T(g, 'CLIENT ' + n.client, x + 16, y + 98, "600 11px 'JetBrains Mono'", ICE, .75);
+  // wrap hook
+  g.font = "400 15px 'Barlow'"; let line = '', yy = 124;
+  for (const wd of n.hook.split(' ')) { if (g.measureText(line + wd).width > w - 32) { T(g, line, x + 16, yy, "400 15px 'Barlow'", ICE, .9); line = ''; yy += 19; } line += wd + ' '; }
+  T(g, line, x + 16, yy, "400 15px 'Barlow'", ICE, .9);
+  T(g, n.best, x + 16, y + 186, "700 12px 'JetBrains Mono'", col);
+  T(g, n.ledger, x + w - 12, y + 186, "700 11px 'JetBrains Mono'", n.ledger === 'FORECLOSED' ? CY : OR, .9, 'right');
+  T(g, n.state === 'open' ? 'A · DEPLOY' : n.state === 'next' ? 'LOCKED · CLEAR F70' : n.state === 'threat' ? 'NO CONTRACT' : 'LOCKED', x + w - 12, y + 24, "600 11px 'JetBrains Mono'", col, 1, 'right');
+  T(g, 'PLACEHOLDER COPY', x + 16, y + 214, "500 9px 'JetBrains Mono'", OR, .85);
+  // confirm: the MAGI cut-in preview
+  const ct = t - S.confirm;
+  if (ct >= 0 && ct < 1.4) {
+    if (ct < .035) { g.fillStyle = '#fff'; g.fillRect(0, 0, 1280, 720); }
+    else {
+      g.fillStyle = 'rgba(2,3,4,.9)'; g.fillRect(0, 0, 1280, 720);
+      [[90, 380], [490, 300], [810, 380]].forEach(([px, pw], i) => { if (ct > .05 + i * .017) { g.strokeStyle = OR; g.lineWidth = 2; g.strokeRect(px, 140, pw, 400); g.fillStyle = OR; g.fillRect(px + 18, 114, pw - 36, 20); } });
+      T(g, '→ MAGI BRIEFING · SOLARIS', 640, 600, "700 20px 'Barlow Condensed'", OR, 1, 'center');
+    }
+  }
+  if (S.auto && t - S.t0 > 1.6) { S.t0 = t; S.sel = (S.sel + 1) % NODES.length; if (S.sel === 0) S.confirm = t + .8; }
+}
+cs.addEventListener('click', e => {
+  const r = cs.getBoundingClientRect(), x = (e.clientX - r.left) * 1280 / r.width, y = (e.clientY - r.top) * 720 / r.height;
+  S.auto = false; let best = 0, bd = 1e9; NODES.forEach((n, i) => { const d = Math.hypot(n.x - x, n.y - y); if (d < bd) { bd = d; best = i; } });
+  if (best === S.sel && NODES[best].state === 'open') S.confirm = now(); S.sel = best;
+});
+
+// ---------------- M · The Harbour ----------------
+const STATIONS = [
+  { x: 170, name: 'CONTRACT TERMINAL', div: 'VERTICAL CLEARANCE', screen: 'map' },
+  { x: 410, name: 'DOSSIER · HOSTILE REGISTER', div: 'CONTRACT OPTICS DIVISION', screen: 'dossier' },
+  { x: 640, name: 'WINDOW', div: 'BABEL · 水位上升中', screen: 'window' },
+  { x: 870, name: 'LOCKER · ID PLATE', div: 'TIDAL ASSETS', screen: 'locker' },
+  { x: 1090, name: 'DECOMPRESSION', div: 'WELLNESS & RETENTION', screen: 'rest' },
+];
+const M = { px: 170, target: 1, open: null, openT: 0, auto: true, t0: now() };
+const cm = document.getElementById('cm'), gm = cm.getContext('2d');
+function drawM() {
+  const g = gm, t = now();
+  g.fillStyle = '#07090b'; g.fillRect(0, 0, 1280, 720);
+  // window across the back wall
+  if (city.complete) { g.save(); g.beginPath(); g.rect(80, 90, 1120, 330); g.clip(); g.drawImage(city, 0, 0, 1280, 720, 80, 30, 1280, 720); g.restore(); }
+  g.fillStyle = 'rgba(3,7,10,.35)'; g.fillRect(80, 90, 1120, 330);
+  g.strokeStyle = 'rgba(223,249,255,.5)'; g.lineWidth = 1; g.strokeRect(80.5, 90.5, 1120, 330);
+  for (let x = 80 + 280; x < 1200; x += 280) { g.beginPath(); g.moveTo(x, 90); g.lineTo(x, 420); g.stroke(); }
+  // tier billboards in the city
+  ['HW STANDBY', 'HW SURGE', 'HW SPRING'].forEach((s, i) => { g.fillStyle = 'rgba(95,240,255,.12)'; g.fillRect(200 + i * 330, 170 + (i % 2) * 40, 120, 26); T(g, s, 260 + i * 330, 188 + (i % 2) * 40, "700 13px 'Barlow Condensed'", CY, .7, 'center'); });
+  // floor and stations
+  g.fillStyle = '#0d1114'; g.fillRect(0, 560, 1280, 160); g.fillStyle = 'rgba(95,240,255,.35)'; g.fillRect(0, 560, 1280, 1);
+  T(g, 'THE HARBOUR · 港', 60, 60, "800 26px 'Barlow Condensed'", '#fff');
+  T(g, 'HIGH WATER HQ · BERTH 07', 250, 60, "400 12px 'JetBrains Mono'", ICE, .6);
+  STATIONS.forEach((st, i) => {
+    const near = Math.abs(M.px - st.x) < 60;
+    g.fillStyle = near ? 'rgba(255,138,0,.18)' : 'rgba(95,240,255,.06)'; g.fillRect(st.x - 70, 440, 140, 120);
+    g.strokeStyle = near ? OR : 'rgba(95,240,255,.45)'; g.strokeRect(st.x - 70 + .5, 440.5, 140, 120);
+    T(g, st.name, st.x, 462, "700 12px 'Barlow Condensed'", near ? '#fff' : ICE, 1, 'center');
+    T(g, st.div, st.x, 478, "400 9px 'JetBrains Mono'", near ? OR : ICE, .7, 'center');
+    if (near && !M.open) T(g, 'A · OPEN', st.x, 600, "700 12px 'JetBrains Mono'", OR, .5 + .5 * Math.sin(t * 5), 'center');
+  });
+  // the enforcer (a marker; the room would use the voxel rig)
+  g.fillStyle = ICE; g.fillRect(M.px - 10, 500, 20, 60); g.fillStyle = CY; g.fillRect(M.px - 10, 508, 20, 6);
+  // SOLARIS, Wired aside
+  const aside = (t % 12) > 7 && !M.open;
+  if (aside) {
+    g.fillStyle = 'rgba(2,8,10,.9)'; g.fillRect(900, 620, 340, 70); g.strokeStyle = ICE; g.strokeRect(900.5, 620.5, 340, 70);
+    g.fillStyle = ICE; g.fillRect(900, 620, 340, 13); T(g, 'TTY · 70.70', 905, 630, "700 9px 'JetBrains Mono'", '#000');
+    T(g, 'solaris> [hub aside · placeholder]', 910, 660, "400 12px 'JetBrains Mono'", '#fff');
+  }
+  // station screens
+  if (M.open) {
+    const k = Math.min((t - M.openT) / .12, 1);
+    g.fillStyle = `rgba(2,4,6,${.85 * k})`; g.fillRect(0, 0, 1280, 720);
+    const x = 140, y = 90, w = 1000, h = 520;
+    g.fillStyle = 'rgba(2,9,13,.96)'; g.fillRect(x, y, w, h * k); g.fillStyle = OR; g.fillRect(x, y, w, 2);
+    const st = STATIONS.find(s => s.screen === M.open);
+    T(g, st.div + ' · ' + st.name, x + 20, y + 32, "700 18px 'Barlow Condensed'", OR);
+    if (M.open === 'map') { T(g, 'The S map lives here: the same screen DEPLOY opens now.', x + 20, y + 80, "400 18px 'Barlow'", ICE); NODES.forEach((n, i) => T(g, `${n.code} · ${n.name}`, x + 20, y + 130 + i * 30, "600 16px 'JetBrains Mono'", n.state === 'open' ? CY : n.state === 'threat' ? RED : ICE, n.state === 'locked' ? .5 : 1)); }
+    if (M.open === 'dossier') ['TOLL CREW · SOLDIER', 'RUNNER', 'BALLAST', 'DOORMAN', 'NETTER', 'BIG RAT'].forEach((r, i) => { const cx = x + 20 + (i % 3) * 320, cy = y + 70 + Math.floor(i / 3) * 200; g.strokeStyle = 'rgba(95,240,255,.5)'; g.strokeRect(cx, cy, 300, 180); T(g, r, cx + 12, cy + 26, "700 18px 'Barlow Condensed'", '#fff'); T(g, i < 3 ? 'FILED · INTEL 1/3' : 'NOT YET SEEN', cx + 12, cy + 168, "600 11px 'JetBrains Mono'", i < 3 ? CY : ICE, i < 3 ? 1 : .4); });
+    if (M.open === 'locker') { T(g, 'TIDEMARK', x + 20, y + 130, "800 72px 'Shippori Mincho B1'", '#fff'); T(g, 'TIER 3 ASSET → TIER 1 ASSET → CAPITAL ASSET → FULLY DEPRECIATED', x + 24, y + 170, "600 13px 'JetBrains Mono'", CY); T(g, 'HW-07 · SN 4F-2210', x + 24, y + 196, "400 13px 'JetBrains Mono'", ICE, .7); }
+    if (M.open === 'window') T(g, 'The lookout, at home: take a knee, Standby thins, the city breathes.', x + 20, y + 80, "400 18px 'Barlow'", ICE);
+    if (M.open === 'rest') { T(g, 'MANDATORY DECOMPRESSION', x + 20, y + 90, "800 36px 'Barlow Condensed'", '#fff'); T(g, 'Please rate your termination.  ★★★★★', x + 20, y + 130, "400 18px 'Barlow'", ICE); }
+    T(g, 'PLACEHOLDER COPY · B CLOSE', x + 20, y + h - 16, "500 10px 'JetBrains Mono'", OR);
+  }
+  // demo walk
+  if (M.auto) {
+    const goal = STATIONS[M.target].x;
+    if (M.open) { if (t - M.openT > 2.2) { M.open = null; M.target = (M.target + 1) % STATIONS.length; } }
+    else if (Math.abs(M.px - goal) > 2) M.px += Math.sign(goal - M.px) * 3;
+    else { M.open = STATIONS[M.target].screen; M.openT = t; }
+  }
+}
+addEventListener('keydown', e => {
+  const k = e.key;
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(k)) { S.auto = false; M.auto = false; }
+  if (k === 'ArrowRight') { S.sel = (S.sel + 1) % NODES.length; M.px = Math.min(M.px + 30, 1200); }
+  if (k === 'ArrowLeft') { S.sel = (S.sel + NODES.length - 1) % NODES.length; M.px = Math.max(M.px - 30, 80); }
+  if (k === 'Enter' || k === 'a') { if (NODES[S.sel].state === 'open') S.confirm = now(); const st = STATIONS.find(s => Math.abs(M.px - s.x) < 60); if (st && !M.auto) { M.open = st.screen; M.openT = now(); } }
+  if (k === 'Escape' || k === 'b') M.open = null;
+});
+
+// ---------------- L · level register ----------------
+const CREW = { HW: [CY, 'HOLDINGS'], TOLL: ['#ff8a00', 'TOLL CREW'], KAR: ['#ff5ec4', 'KARAOKE COMMITTEE'], BOOK: ['#ffc94d', 'THE BOOK'], WIRE: ['#b388ff', 'WIRE AUNTIES'], T3: ['#ff6a6a', 'TOWER THREE'], SAKI: [RED, 'SAKI ♛'], STAIR: ['#7fe08a', 'STAIRWELL KINGS'], SHAFT: ['#9aa0a4', 'SHAFT BOYS'], NB: ['#3a4046', 'NON-BILLABLE'] };
+const COLS = ['STAIR', 'WEST', 'CORE', 'EAST', 'SHAFT'];
+function freshL() {
+  const g = {};
+  for (let f = 70; f <= 75; f++) g[f] = ['STAIR', f === 70 ? 'TOLL' : f === 71 ? 'BOOK' : f === 72 ? 'WIRE' : f === 75 ? 'SAKI' : 'T3', f === 70 ? 'KAR' : f === 72 ? 'WIRE' : f === 75 ? 'SAKI' : f === 71 ? 'BOOK' : 'T3', f === 74 ? 'NB' : f === 70 ? 'TOLL' : f === 72 ? 'WIRE' : f === 75 ? 'SAKI' : 'T3', 'SHAFT'].map(o => ({ o, state: o === 'NB' ? 'NON-BILLABLE' : 'IN ARREARS', t: -9 }));
+  return { grid: g, cleared: 0, log: [] };
+}
+let L = freshL();
+function clearContract() {
+  const t = now(), f = 70 + L.cleared; if (f > 72) { L.log.unshift('NO FURTHER CONTRACTS IN THE JAM · F73+ LOCKED'); return; }
+  L.grid[f].forEach((c, i) => { if (c.o !== 'NB') { c.o = 'HW'; c.state = 'FORECLOSED'; c.t = t; } });
+  // pushback: a crew disputes a held block below
+  if (f > 70) { const c = L.grid[f - 1][1]; c.state = 'IN DISPUTE'; c.t = t; L.log.unshift(`F${f - 1} WEST · IN DISPUTE · THE SHORT COUNT`); }
+  L.log.unshift(`F${f} · FORECLOSED · ${f === 70 ? 'TOLL CREW DE-LISTED' : f === 71 ? 'THE BOOK IN ARREARS → HOLDINGS' : 'WIRE AUNTIES CUT'}`);
+  L.cleared++;
+}
+document.getElementById('ladv').onclick = clearContract;
+document.getElementById('lreset').onclick = () => { L = freshL(); };
+const cl = document.getElementById('cl'), gl = cl.getContext('2d');
+function drawL() {
+  const g = gl, t = now();
+  bg(g, .8);
+  T(g, 'LEVEL REGISTER · TOWER 3 CROWN', 60, 60, "800 26px 'Barlow Condensed'", '#fff');
+  T(g, 'TIDAL ASSETS · LEDGER OF FLOORS · 水位', 60, 82, "400 12px 'JetBrains Mono'", ICE, .6);
+  const x0 = 180, y0 = 120, cw = 150, rh = 70;
+  COLS.forEach((c, i) => T(g, c, x0 + i * cw + cw / 2, y0 - 8, "600 11px 'JetBrains Mono'", ICE, .6, 'center'));
+  for (let f = 75; f >= 70; f--) {
+    const y = y0 + (75 - f) * rh;
+    T(g, 'F' + f, x0 - 20, y + rh / 2 + 5, "700 18px 'Barlow Condensed'", ICE, 1, 'right');
+    L.grid[f].forEach((c, i) => {
+      const [col] = CREW[c.o], x = x0 + i * cw, fresh = t - c.t < .6;
+      g.fillStyle = col; g.globalAlpha = c.o === 'HW' ? .35 : .22; g.fillRect(x + 2, y + 2, cw - 4, rh - 4); g.globalAlpha = 1;
+      if (fresh) { g.fillStyle = 'rgba(255,255,255,.4)'; g.fillRect(x + 2, y + 2, cw - 4, rh - 4); }
+      g.strokeStyle = c.state === 'IN DISPUTE' ? OR : col; g.lineWidth = c.state === 'IN DISPUTE' ? 2 : 1; g.strokeRect(x + 2.5, y + 2.5, cw - 5, rh - 5);
+      T(g, CREW[c.o][1], x + 10, y + 26, "700 13px 'Barlow Condensed'", '#fff', c.o === 'NB' ? .5 : 1);
+      T(g, c.state, x + 10, y + rh - 14, "600 10px 'JetBrains Mono'", c.state === 'FORECLOSED' || c.o === 'HW' ? CY : c.state === 'IN DISPUTE' ? OR : ICE, .8);
+    });
+  }
+  // the waterline: holdings rise from F70
+  const held = L.cleared, wy = y0 + 6 * rh - held * rh;
+  if (held > 0) { g.strokeStyle = CY; g.lineWidth = 2; g.beginPath(); g.moveTo(x0 - 10, wy); g.lineTo(x0 + 5 * cw + 10, wy); g.stroke(); T(g, '▸ WATERLINE', x0 + 5 * cw + 16, wy + 4, "700 12px 'JetBrains Mono'", CY); }
+  // Tower 5 block
+  const bx = 1000, by = 480; g.strokeStyle = 'rgba(255,201,77,.6)'; g.strokeRect(bx, by, 220, 90); T(g, "HATCH'S MARKET", bx + 12, by + 30, "700 16px 'Barlow Condensed'", '#fff'); T(g, 'TOWER 5 · SEA WALL · PENDING', bx + 12, by + 72, "600 10px 'JetBrains Mono'", ICE, .7);
+  // legend and log
+  const lg = [['HOLDINGS', CY], ['IN ARREARS', ICE], ['IN DISPUTE', OR], ['FORECLOSED', CY], ['DE-LISTED', RED], ['NON-BILLABLE', '#9aa0a4']];
+  lg.forEach(([s, c], i) => { g.fillStyle = c; g.fillRect(1000, 130 + i * 24, 10, 10); T(g, s, 1018, 140 + i * 24, "600 12px 'JetBrains Mono'", ICE, .85); });
+  L.log.slice(0, 5).forEach((s, i) => T(g, s, 1000, 320 + i * 20, "400 11px 'JetBrains Mono'", i ? ICE : '#fff', i ? .5 : 1));
+  T(g, 'PROPOSAL · PLACEHOLDER COPY', 60, 700, "500 10px 'JetBrains Mono'", OR);
+}
+function loop() { drawS(); drawM(); drawL(); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+setInterval(() => { if (L.cleared < 3) clearContract(); else L = freshL(); }, 3500);
+})();
+</script>
+</body>
+</html>

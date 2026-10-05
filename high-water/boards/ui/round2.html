@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Board Round 2 · Readout</title>
+<!-- Fonts: all SIL Open Font License, served by Google Fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho+B1:wght@800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0e0f;--panel:#141719;--line:#2a2f33;--ink:#e9e7e1;--mute:#9aa0a4;--cy:#5ff0ff;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 'Barlow',system-ui,sans-serif}
+a{color:var(--cy)}
+code{overflow-wrap:anywhere}
+code,.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.86em}
+.wrap{max-width:1600px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:50;background:rgba(12,14,15,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;gap:18px;align-items:center;min-height:52px;flex-wrap:wrap}
+header.top b{font:600 13px/1 'JetBrains Mono';letter-spacing:.16em}
+header.top nav{display:flex;gap:14px;flex-wrap:wrap;font:500 13px/1 'Barlow';letter-spacing:.06em;text-transform:uppercase}
+header.top nav a{color:var(--mute);text-decoration:none}
+header.top nav a:hover{color:var(--ink)}
+.glyphpick{margin-left:auto;display:flex;gap:6px;align-items:center;font:500 12px 'JetBrains Mono';color:var(--mute)}
+.glyphpick button,.tabs button,.btn{font:600 12px/1 'JetBrains Mono';letter-spacing:.08em;background:transparent;color:var(--mute);border:1px solid var(--line);padding:8px 10px;cursor:pointer;text-transform:uppercase}
+.glyphpick button.on,.tabs button.on,.btn.on{color:#0c0e0f;background:var(--ink);border-color:var(--ink)}
+section{padding:56px 0 8px;border-bottom:1px solid var(--line)}
+h1{font:600 clamp(30px,4vw,54px)/1.05 'Barlow Condensed';margin:40px 0 12px;text-transform:uppercase}
+h2{font:700 clamp(24px,2.6vw,36px)/1.1 'Barlow Condensed';text-transform:uppercase;letter-spacing:.02em;margin:0 0 14px}
+h3{font:600 19px/1.2 'Barlow';margin:22px 0 8px}
+.kicker{font:600 12px 'JetBrains Mono';letter-spacing:.2em;color:var(--cy);text-transform:uppercase}
+p,li{max-width:80ch;color:#d6d4ce}
+.lede{font-size:19px;max-width:92ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);padding:16px 18px}
+.card h3{margin-top:0}
+.rec{border-left:3px solid var(--cy);background:#101618;padding:16px 20px;margin:18px 0}
+.rec b{color:var(--cy)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{font:600 12px 'JetBrains Mono';letter-spacing:.1em;color:var(--mute);text-transform:uppercase}
+.tablewrap{overflow-x:auto}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.ref{background:var(--panel);border:1px solid var(--line);padding:12px 16px}
+.ref h4{margin:0 0 4px;font:600 16px 'Barlow'}
+.ref .links{font:500 12px 'JetBrains Mono';margin-bottom:6px}
+.ref p{margin:0;font-size:15px}
+.ref .tag{font:600 11px 'JetBrains Mono';color:var(--mute);letter-spacing:.1em}
+.dirhead{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.stage-outer{position:relative;width:100%;max-width:calc((100vh - 64px)*16/9);margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:#000;outline:1px solid var(--line)}
+.stage-outer:focus-visible{outline:2px solid var(--cy)}
+.stage{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;overflow:hidden;contain:strict}
+.stage .view{position:absolute;inset:0;display:none}
+.stage .view.on{display:block}
+.stage .plate{position:absolute;left:0;top:0;width:1280px;height:720px;image-rendering:pixelated;display:block}
+.stage .fx{position:absolute;left:0;top:0;width:1280px;height:720px;pointer-events:none;overflow:visible}
+.abs{position:absolute}
+.dirnotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px 22px;margin-top:14px}
+.dirnotes div{font-size:15px}
+.dirnotes b{display:block;font:600 11px 'JetBrains Mono';letter-spacing:.14em;color:var(--mute);text-transform:uppercase;margin-bottom:2px}
+.gly{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;border-radius:50%;font:700 .8em/1 'Barlow';vertical-align:middle;padding:0 .2em;background:#16191b;color:var(--gc,#fff);border:1.5px solid var(--gc,#fff);letter-spacing:0}
+.gly.kb{border-radius:4px;min-width:2em;padding:0 .45em;background:#e9e7e1;color:#111;border:none;box-shadow:0 2px 0 #777;font-family:'JetBrains Mono';font-size:.72em}
+.gly.sh{border-radius:6px;min-width:2.2em}
+.gly.ps{font-size:.95em}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+
+/* ================= Shared Eva × High Water core ================= */
+.h{position:absolute;inset:0;color:var(--tx);font-family:'Barlow Condensed',sans-serif}
+.h .jp{font-family:'Noto Sans JP';font-weight:700}
+.h .serif{font-family:'Shippori Mincho B1';font-weight:800;display:inline-block;transform:scaleX(.72);transform-origin:0 50%;white-space:nowrap}
+.h .mono{font-family:var(--monof,'JetBrains Mono');font-size:inherit}
+.h .hw{display:inline-flex;align-items:center;gap:8px;font:800 15px/1 'Barlow Condensed';letter-spacing:.34em}
+.h .hw svg{width:28px;height:18px}
+.h .stencil{font:700 11px 'JetBrains Mono';letter-spacing:.18em;opacity:.7}
+.h .bars{display:flex;gap:3px;align-items:flex-end;height:30px}
+.h .bars i{flex:1;background:var(--a1);height:100%}
+.h .bars i.off{background:var(--dim2);height:30%}
+.h .bars i.lost{background:var(--red)}
+.h .gm{height:10px;display:flex;gap:2px}
+.h .gm i{flex:1;background:var(--dim2)}
+.h .gm i.on{background:var(--live)}
+.h .gm.full i.on{background:#fff}
+.h .emerg{left:0;right:0;top:0;height:34px;background:repeating-linear-gradient(-45deg,var(--red) 0 20px,#000 20px 40px);opacity:0;overflow:hidden}
+.h .emerg .mq{position:absolute;left:0;top:5px;white-space:nowrap;font:800 19px/1 'Barlow Condensed';letter-spacing:.3em;color:#fff;background:#000;padding:3px 0;animation:mq 9s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.h .ret{left:0;top:0;width:110px;height:110px;will-change:transform}
+.h .ret svg{width:110px;height:110px;overflow:visible}
+.h .ret .tag{position:absolute;left:0;top:116px;white-space:nowrap;padding:3px 7px}
+.h .ret .tag b{display:block;font:700 12px 'Noto Sans JP'}
+.h .ret .tag span{font:700 14px 'Barlow Condensed';letter-spacing:.12em}
+.h .hit svg{position:absolute;left:-40px;top:-40px;width:80px;height:80px;overflow:visible}
+.h .call{white-space:nowrap;padding:5px 12px 6px}
+.h .call b{display:block;font:700 12px 'Noto Sans JP'}
+.h .call span{font:800 26px/1 'Barlow Condensed';letter-spacing:.1em}
+.h .num{position:absolute;font:700 12px 'JetBrains Mono';padding:1px 5px}
+/* wipe used by all three (Persona lesson: confident full-screen wipes) */
+.h .wipe{position:absolute;left:-300px;top:-100px;width:1900px;height:920px;transform:translateX(-2000px) skewX(-18deg)}
+
+/* ================= A: SECTION ALERT (Ghost in the Shell × Evangelion) ================= */
+.A{--tx:#dff9ff;--a1:#5ff0ff;--or:#ff8a00;--red:#ff2a3a;--live:#5ff0ff;--dim2:rgba(95,240,255,.18);--glass:rgba(2,10,14,.66)}
+.A .optics{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 100% at 50% 50%,transparent 58%,rgba(0,18,24,.7) 100%)}
+.A .scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(95,240,255,.035) 0 1px,transparent 1px 4px)}
+.A .datacol{left:14px;top:170px;width:130px;height:380px;overflow:hidden;font:400 10px/1.5 'JetBrains Mono';color:rgba(95,240,255,.3);white-space:pre}
+.A .thermo{position:absolute;left:0;right:0;height:90px;top:-100px;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(95,240,255,.18) 45%,rgba(255,255,255,.35) 50%,rgba(95,240,255,.18) 55%,transparent);mix-blend-mode:screen;opacity:0}
+.A .vit{left:30px;top:44px;width:360px;padding:10px 14px 12px;background:linear-gradient(90deg,var(--glass),rgba(2,10,14,.2));border-left:2px solid var(--a1)}
+.A .vit .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.A .vit .mid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:end}
+.A .vit .big{font:800 58px/.85 'Barlow Condensed';color:var(--a1)}
+.A .vit .lab{font:600 12px 'Barlow Condensed';letter-spacing:.18em;color:rgba(223,249,255,.7)}
+.A .vit .row{display:grid;grid-template-columns:118px 1fr 58px;gap:8px;align-items:center;margin-top:8px;font:600 12px 'Barlow Condensed';letter-spacing:.16em;color:rgba(223,249,255,.75)}
+.A .vit .row b{font:700 16px 'JetBrains Mono';color:#fff;text-align:right}
+.A .vit.hurt{border-left-color:var(--red);background:linear-gradient(90deg,rgba(255,42,58,.35),rgba(2,10,14,.2))}
+.A .integ{right:30px;top:44px;width:400px;padding:10px 14px;background:linear-gradient(270deg,var(--glass),rgba(2,10,14,.2));border-right:2px solid var(--a1)}
+.A .integ .t{display:flex;justify-content:space-between;font:700 13px 'Barlow Condensed';letter-spacing:.16em;color:rgba(223,249,255,.8)}
+.A .integ .body{display:grid;grid-template-columns:180px 1fr;gap:8px;margin-top:6px}
+.A .integ svg{width:180px;height:130px}
+.A .integ .pct{font:800 74px/.85 'Barlow Condensed';text-align:right;color:#fff}
+.A .integ .pct small{font-size:26px}
+.A .integ .rk{text-align:right;margin-top:8px}
+.A .integ .rk span{display:inline-block;font:800 19px/1 'Barlow Condensed';letter-spacing:.14em;padding:4px 8px;border:1.5px solid var(--a1);color:var(--a1)}
+.A .integ .rk .jp{border:0;padding:0 8px 0 0;font-size:15px}
+.A .integ.warn{border-right-color:var(--or)}.A .integ.warn .rk span{color:var(--or);border-color:var(--or)}.A .integ.warn .pct{color:var(--or)}
+.A .integ.alert{border-right-color:var(--red)}.A .integ.alert .rk span{color:#fff;background:var(--red);border-color:var(--red)}.A .integ.alert .rk .jp{background:none;color:var(--red)}.A .integ.alert .pct{color:var(--red)}
+.A .combo{right:34px;top:268px;text-align:right}
+.A .combo b{font:800 104px/.8 'Barlow Condensed';color:#fff}
+.A .combo div{font:700 15px 'Barlow Condensed';letter-spacing:.2em;color:var(--a1)}
+.A .combo .air{color:var(--or);font-size:22px}
+.A .combo .dec{height:2px;background:var(--dim2);margin-top:6px;width:200px;margin-left:auto}.A .combo .dec i{display:block;height:100%;background:var(--a1);margin-left:auto}
+.A .bottom{left:30px;right:30px;bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+.A .bottom .st{font:700 14px 'Barlow Condensed';letter-spacing:.18em;color:rgba(223,249,255,.75)}
+.A .bottom .st b{color:#fff;font-size:21px;margin-right:18px}
+.A .ko{font:800 56px/.9 'Barlow Condensed';text-align:right}.A .ko small{display:block;font:700 13px 'Barlow Condensed';letter-spacing:.2em;color:var(--a1)}
+.A .ret .tag{background:rgba(2,10,14,.8);border-left:2px solid var(--a1)}.A .ret .tag b{color:var(--a1)}
+.A .call{background:rgba(2,10,14,.85);border-left:3px solid var(--or)}.A .call b{color:var(--or)}
+.A .num{color:var(--a1);border:1px solid var(--a1);background:rgba(2,10,14,.8)}
+.A .wave{left:0;right:0;top:250px;height:150px;background:rgba(2,10,14,.82);border-top:2px solid var(--or);border-bottom:2px solid var(--or)}
+.A .wave .a{position:absolute;left:110px;top:16px;font-size:96px;line-height:1;color:var(--or)}
+.A .wave .b{position:absolute;left:500px;top:28px;font:800 42px/1 'Barlow Condensed';letter-spacing:.2em}
+.A .wave .c{position:absolute;left:502px;top:84px;font:700 17px 'Barlow Condensed';letter-spacing:.2em;color:var(--a1)}
+.A .wipe{background:linear-gradient(90deg,#000 0 40%,var(--a1) 40% 41%,#000 41%)}
+/* A: clear */
+.A .c-black{inset:0;background:#000;opacity:0}
+.A .c-t1{left:130px;top:110px;font-size:180px;line-height:1;color:#dff9ff;opacity:0}
+.A .c-t2{left:250px;top:310px;font-size:180px;line-height:1;color:#dff9ff;opacity:0}
+.A .c-t3{left:1140px;top:100px;writing-mode:vertical-rl;font:900 56px/1 'Noto Sans JP';color:var(--or);opacity:0}
+.A .c-t4{left:134px;top:540px;font:700 20px 'Barlow Condensed';letter-spacing:.4em;color:var(--a1);opacity:0}
+.A .c-net{left:0;top:0;width:1280px;height:720px;opacity:0}
+.A .c-res{left:90px;right:90px;top:470px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;opacity:0}
+.A .c-res > div{background:rgba(2,10,14,.85);border-left:2px solid var(--a1);padding:8px 12px}
+.A .c-res span{font:700 13px 'Barlow Condensed';letter-spacing:.18em;color:var(--a1)}
+.A .c-res b{display:block;font:800 54px/1 'Barlow Condensed';text-align:right}
+.A .c-after{left:0;right:0;top:170px;text-align:center;opacity:0}
+.A .c-after .serif{font-size:120px;transform-origin:50% 50%;color:#dff9ff}
+.A .c-after div{font:700 18px 'Barlow Condensed';letter-spacing:.4em;color:var(--or)}
+.play .A .wipe{animation:wipe .45s cubic-bezier(.7,0,.3,1) 0s both}
+@keyframes wipe{0%{transform:translateX(-2000px) skewX(-18deg)}100%{transform:translateX(2200px) skewX(-18deg)}}
+.play .A .c-black{animation:hold 2.3s steps(1) .2s both}
+.play .A .c-t1{animation:hold 2.1s steps(1) .35s both}
+.play .A .c-t2{animation:hold 1.95s steps(1) .5s both}
+.play .A .c-t3{animation:hold 1.8s steps(1) .65s both}
+.play .A .c-t4{animation:hold 1.6s steps(1) .85s both}
+@keyframes hold{0%{opacity:1}99%{opacity:1}100%{opacity:0}}
+.A .c-dim2{inset:0;background:rgba(2,8,10,.72);opacity:0}
+.play .A .c-dim2{animation:fadeIn .01s linear 2.5s both}
+.play .A .c-net{animation:fadeIn .01s linear 2.5s both}
+.play .A .c-after{animation:fadeIn .01s linear 2.5s both}
+.play .A .c-res{animation:reveal .5s steps(5) 2.8s both}
+@keyframes reveal{0%{opacity:0;clip-path:inset(0 100% 0 0)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+/* A: title + pause */
+.A .t-bg{inset:0;background:linear-gradient(90deg,rgba(2,8,10,.94),rgba(2,8,10,.7) 55%,rgba(2,8,10,.35))}
+.A .t1{left:84px;top:120px;font-size:150px;line-height:1}
+.A .t2{left:88px;top:290px;font-size:54px;color:var(--a1)}
+.A .t3{left:90px;top:370px;font:900 26px 'Noto Sans JP';letter-spacing:.3em;color:var(--or)}
+.A .t4{left:90px;top:84px}
+.A .menu{left:90px;top:440px;width:380px}
+.A .menu div,.A .ps-menu div{display:grid;grid-template-columns:44px 1fr auto;align-items:center;height:42px;margin-bottom:4px;font:700 20px 'Barlow Condensed';letter-spacing:.2em;padding:0 10px;border-left:2px solid rgba(95,240,255,.2);cursor:pointer;transition:background .12s}
+.A .menu div span:first-child,.A .ps-menu div span:first-child{color:var(--a1);font-size:15px}
+.A .menu .jp,.A .ps-menu .jp{font-size:12px;color:rgba(223,249,255,.6)}
+.A .menu div.sel,.A .ps-menu div.sel{border-left-color:var(--or);background:linear-gradient(90deg,rgba(255,138,0,.28),transparent)}
+.A .press{right:50px;bottom:40px;font:700 18px 'Barlow Condensed';letter-spacing:.3em;color:var(--a1);animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.25}}
+.A .t-hex{left:760px;top:60px;width:460px;height:560px;opacity:.55}
+.A .ps-bg{inset:0;background:rgba(2,8,10,.82)}
+.A .ps-head{left:70px;top:44px}.A .ps-head .serif{font-size:92px;line-height:1;color:var(--or)}
+.A .ps-head div{font:700 15px 'Barlow Condensed';letter-spacing:.4em;color:var(--a1);margin-top:4px}
+.A .ps-menu{left:70px;top:220px;width:360px}
+.A .ps-panel{left:470px;top:220px;width:740px;background:rgba(2,10,14,.8);border-top:2px solid var(--a1);padding:12px 16px}
+.A .ps-panel h6{margin:0 0 10px;font:700 14px 'Barlow Condensed';letter-spacing:.3em;color:var(--a1)}
+.A .ctl,.A .opt,.B .ctl,.B .opt,.C .ctl,.C .opt{display:grid;grid-template-columns:230px 1fr;gap:8px 18px;font:700 18px 'Barlow Condensed';letter-spacing:.1em}
+.A .ctl > span:nth-child(odd),.B .ctl > span:nth-child(odd),.C .ctl > span:nth-child(odd){display:flex;gap:8px;align-items:center;font-size:21px}
+.h .ctl .jp,.h .opt .jp{font-size:12px;margin-left:8px;opacity:.75}
+.h .opt .v{cursor:pointer;color:var(--live)}
+.A .ps-foot,.B .ps-foot,.C .ps-foot{left:70px;bottom:28px;display:flex;gap:24px;font:700 16px 'Barlow Condensed';letter-spacing:.16em;align-items:center}
+
+/* ================= B: INCIDENT PROTOCOL (Death Stranding × High Water, Eva alerts) ================= */
+.B{--tx:#eceae4;--a1:#eceae4;--or:#ff7a00;--red:#e0252b;--live:#62f0ff;--dim2:rgba(236,234,228,.18);--paper:#eceae4;--graph:#15181a}
+.B .rule{position:absolute;background:rgba(236,234,228,.35)}
+.B .slab{background:var(--paper);color:#111}
+.B .vit{left:30px;top:44px;width:380px}
+.B .vit .hd{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--paper);color:#111;font:800 13px/1 'Barlow Condensed';letter-spacing:.22em}
+.B .vit .bd{padding:10px 10px 8px;background:rgba(21,24,26,.72);border:1px solid rgba(236,234,228,.35);border-top:0}
+.B .vit .line{display:grid;grid-template-columns:110px 1fr 70px;gap:10px;align-items:center;height:26px;font:600 12px 'JetBrains Mono';letter-spacing:.12em;color:rgba(236,234,228,.7)}
+.B .vit .line b{font:700 15px 'JetBrains Mono';color:#fff;text-align:right}
+.B .vit .bars{height:12px}.B .vit .bars i.off{height:100%}
+.B .vit.hurt .hd{background:var(--red);color:#fff}
+.B .integ{right:30px;top:44px;width:410px}
+.B .integ .hd{display:flex;justify-content:space-between;padding:6px 10px;background:var(--paper);color:#111;font:800 13px/1 'Barlow Condensed';letter-spacing:.2em}
+.B .integ .bd{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:10px;background:rgba(21,24,26,.72);border:1px solid rgba(236,234,228,.35);border-top:0}
+.B .integ svg{width:170px;height:124px}
+.B .integ .pct{font:300 64px/.9 'Barlow';text-align:right;letter-spacing:-.02em}
+.B .integ .pct small{font-size:22px}
+.B .integ .rk{text-align:right;margin-top:6px}
+.B .integ .rk span{display:inline-block;font:800 17px/1 'Barlow Condensed';letter-spacing:.16em;padding:4px 8px;background:var(--paper);color:#111}
+.B .integ .rk .jp{background:none;color:var(--paper);font-size:14px}
+.B .integ .sev{font:600 11px 'JetBrains Mono';letter-spacing:.14em;color:rgba(236,234,228,.6);text-align:right;margin-top:6px}
+.B .integ.warn .hd,.B .integ.warn .rk span:not(.jp){background:var(--or);color:#111}
+.B .integ.alert .hd,.B .integ.alert .rk span:not(.jp){background:var(--red);color:#fff}
+.B .integ.alert .pct{color:var(--red)}
+.B .log{left:560px;bottom:104px;width:480px;background:rgba(21,24,26,.6);padding:4px 10px;font:500 12px/1.7 'JetBrains Mono';letter-spacing:.06em;color:rgba(236,234,228,.75)}
+.B .log div{white-space:nowrap;overflow:hidden}
+.B .log .i{color:var(--or)}
+.B .combo{left:30px;top:200px}
+.B .combo b{font:800 96px/.8 'Barlow Condensed'}
+.B .combo div{font:700 14px 'JetBrains Mono';letter-spacing:.16em;color:rgba(236,234,228,.75)}
+.B .combo .air{color:var(--or);font-size:18px}
+.B .combo .dec{height:2px;width:150px;background:var(--dim2);margin-top:6px}.B .combo .dec i{display:block;height:100%;background:var(--paper)}
+.B .bottom{left:30px;right:30px;bottom:20px;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(236,234,228,.35);padding-top:8px}
+.B .bottom .st{font:600 13px 'JetBrains Mono';letter-spacing:.12em;color:rgba(236,234,228,.75)}
+.B .bottom .st b{color:#fff;margin-right:14px}
+.B .ko{font:300 50px/.9 'Barlow';text-align:right}.B .ko small{display:block;font:600 12px 'JetBrains Mono';letter-spacing:.18em;color:rgba(236,234,228,.7)}
+.B .ret .tag{background:var(--paper);color:#111}.B .ret .tag b{color:#111}
+.B .call{background:var(--paper);color:#111;border-left:6px solid var(--or)}.B .call b{color:#111}
+.B .num{background:var(--paper);color:#111}
+.B .wave{left:0;right:0;top:240px;height:170px}
+.B .wave .tape{position:absolute;left:0;right:0;height:26px;background:repeating-linear-gradient(-45deg,var(--or) 0 18px,#111 18px 36px)}
+.B .wave .box{position:absolute;left:0;right:0;top:26px;height:118px;background:rgba(236,234,228,.94);color:#111}
+.B .wave .a{position:absolute;left:100px;top:6px;font-size:92px;line-height:1;color:#111}
+.B .wave .b{position:absolute;left:480px;top:16px;font:800 38px/1 'Barlow Condensed';letter-spacing:.16em}
+.B .wave .c{position:absolute;left:482px;top:66px;font:600 14px/1.6 'JetBrains Mono';letter-spacing:.1em}
+.B .wipe{background:var(--paper)}
+/* B: clear */
+.B .c-dim{inset:0;background:rgba(10,12,13,.8);opacity:0}
+.B .c-tape{left:0;right:0;top:80px;height:34px;background:repeating-linear-gradient(-45deg,var(--or) 0 22px,#111 22px 44px);transform:scaleX(0);transform-origin:0 50%}
+.B .c-tape span{position:absolute;left:40px;top:5px;background:#111;color:#fff;padding:2px 12px;font:800 20px/1.2 'Barlow Condensed';letter-spacing:.3em}
+.B .c-doc{left:170px;top:150px;width:940px;background:var(--paper);color:#111;padding:26px 34px 22px;transform:translateY(60px);opacity:0}
+.B .c-doc .k{display:flex;justify-content:space-between;font:600 12px 'JetBrains Mono';letter-spacing:.14em}
+.B .c-doc .serif{font-size:104px;line-height:1;margin:6px 0 0}
+.B .c-doc .jp{font-size:18px;letter-spacing:.5em}
+.B .c-doc table{margin-top:16px;font:600 15px 'JetBrains Mono';color:#111}
+.B .c-doc td,.B .c-doc th{border-bottom:1px solid #111a;color:#111;padding:6px 8px}
+.B .c-doc td:last-child{text-align:right;font-weight:700}
+.B .c-stamp{left:830px;top:430px;width:270px;white-space:nowrap;height:90px;border:5px solid var(--red);color:var(--red);font:800 30px/1 'Barlow Condensed';letter-spacing:.14em;display:flex;align-items:center;justify-content:center;flex-direction:column;transform:rotate(-12deg) scale(3);opacity:0}
+.B .c-stamp small{font:700 11px 'JetBrains Mono';letter-spacing:.12em;margin-top:4px}
+.play .B .wipe{animation:wipe .4s cubic-bezier(.7,0,.3,1) 0s both}
+.play .B .c-dim{animation:fadeIn .01s linear .2s both}
+.play .B .c-tape{animation:tape .35s cubic-bezier(.2,1,.3,1) .25s both}
+@keyframes tape{to{transform:scaleX(1)}}
+.play .B .c-doc{animation:docIn .45s cubic-bezier(.2,1.4,.4,1) .4s both}
+@keyframes docIn{to{transform:none;opacity:1}}
+.play .B .c-stamp{animation:stamp .22s cubic-bezier(.3,1.6,.5,1) 1.9s both}
+@keyframes stamp{to{transform:rotate(-12deg) scale(1);opacity:1}}
+/* B: title + pause */
+.B .t-bg{inset:0;background:linear-gradient(90deg,rgba(12,14,15,.95),rgba(12,14,15,.8) 55%,rgba(12,14,15,.4))}
+.B .t-sheet{left:70px;top:60px;width:620px;height:600px;border:1px solid rgba(236,234,228,.4)}
+.B .t-sheet .hd{display:flex;justify-content:space-between;background:var(--paper);color:#111;padding:8px 12px;font:800 14px 'Barlow Condensed';letter-spacing:.22em}
+.B .t-sheet .fields{padding:10px 14px;font:500 12px/1.9 'JetBrains Mono';letter-spacing:.1em;color:rgba(236,234,228,.75)}
+.B .t-sheet .fields b{color:#fff}
+.B .t1{left:92px;top:190px;font-size:130px;line-height:1}
+.B .t2{left:96px;top:330px;font:800 24px 'Barlow Condensed';letter-spacing:.2em;color:var(--or)}
+.B .menu{left:92px;top:410px;width:560px}
+.B .menu div,.B .ps-menu div{display:grid;grid-template-columns:54px 1fr auto;align-items:center;height:40px;border-bottom:1px solid rgba(236,234,228,.25);font:700 19px 'Barlow Condensed';letter-spacing:.2em;padding:0 10px;cursor:pointer}
+.B .menu div span:first-child,.B .ps-menu div span:first-child{font:600 12px 'JetBrains Mono';opacity:.7}
+.B .menu .jp,.B .ps-menu .jp{font-size:12px;opacity:.6}
+.B .menu div.sel,.B .ps-menu div.sel{background:var(--paper);color:#111}
+.B .press{right:60px;bottom:40px;font:600 14px 'JetBrains Mono';letter-spacing:.24em;animation:blink 1.4s steps(2) infinite}
+.B .t-tape{right:0;top:0;width:34px;bottom:0;background:repeating-linear-gradient(-45deg,var(--or) 0 18px,#111 18px 36px)}
+.B .ps-bg{inset:0;background:rgba(12,14,15,.85)}
+.B .ps-head{left:70px;top:40px;right:70px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(236,234,228,.4);padding-bottom:10px}
+.B .ps-head .serif{font-size:84px;line-height:1}
+.B .ps-head div.k{font:600 12px/1.8 'JetBrains Mono';letter-spacing:.12em;text-align:right;color:rgba(236,234,228,.75)}
+.B .ps-menu{left:70px;top:210px;width:380px}
+.B .ps-panel{left:490px;top:210px;width:720px;border:1px solid rgba(236,234,228,.35)}
+.B .ps-panel h6{margin:0;padding:6px 12px;background:var(--paper);color:#111;font:800 13px 'Barlow Condensed';letter-spacing:.24em}
+.B .ps-panel .pc{padding:12px 14px;background:rgba(21,24,26,.8)}
+
+/* ================= C: REPLICANT AMBER (Blade Runner × Evangelion) ================= */
+.C{--tx:#ffd9a0;--a1:#ffb347;--or:#ffb347;--red:#ff3b2f;--live:#39d0c0;--dim2:rgba(255,179,71,.16);--teal:#39d0c0;--monof:'Share Tech Mono'}
+.C .glow{text-shadow:0 0 6px rgba(255,160,60,.75),0 0 18px rgba(255,120,30,.35)}
+.C .crt{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px),radial-gradient(130% 110% at 50% 50%,transparent 55%,rgba(20,8,0,.75) 100%)}
+.C .tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,120,30,.10),rgba(20,120,120,.12));mix-blend-mode:screen}
+.C .rain{position:absolute;inset:-40px;pointer-events:none;opacity:.5;
+  background-image:repeating-linear-gradient(100deg,transparent 0 22px,rgba(190,230,255,.22) 22px 23px,transparent 23px 61px),repeating-linear-gradient(97deg,transparent 0 37px,rgba(190,230,255,.15) 37px 38px,transparent 38px 90px);
+  background-size:100% 180px,100% 260px;animation:rain .6s linear infinite}
+@keyframes rain{to{background-position:0 180px,0 260px}}
+.C .bleed{position:absolute;inset:0;pointer-events:none;background:radial-gradient(18% 10% at 20% 8%,rgba(255,60,160,.35),transparent),radial-gradient(14% 8% at 45% 12%,rgba(60,220,255,.3),transparent),radial-gradient(14% 8% at 78% 14%,rgba(255,200,60,.28),transparent);filter:blur(8px);mix-blend-mode:screen}
+.C .vit{left:30px;top:44px;width:370px;padding:10px 14px;background:rgba(18,8,2,.75);border:1px solid rgba(255,179,71,.5)}
+.C .vit .top{display:flex;justify-content:space-between;font:400 14px 'Share Tech Mono';letter-spacing:.14em;color:var(--a1)}
+.C .vit .mid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:end;margin-top:4px}
+.C .vit .big{font:800 60px/.85 'Barlow Condensed';color:var(--a1)}
+.C .vit .row{display:grid;grid-template-columns:120px 1fr 64px;gap:8px;align-items:center;margin-top:7px;font:400 14px 'Share Tech Mono';letter-spacing:.08em;color:rgba(255,217,160,.8)}
+.C .vit .row b{font:400 17px 'Share Tech Mono';color:var(--teal);text-align:right}
+.C .vit.hurt{border-color:var(--red);box-shadow:0 0 30px rgba(255,59,47,.5) inset}
+.C .integ{right:30px;top:44px;width:410px;padding:10px 14px;background:rgba(18,8,2,.75);border:1px solid rgba(255,179,71,.5)}
+.C .integ .t{display:flex;justify-content:space-between;font:400 14px 'Share Tech Mono';letter-spacing:.12em;color:var(--a1)}
+.C .integ .body{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-top:6px}
+.C .integ .scope{width:150px;height:150px}
+.C .integ .pct{font:800 76px/.85 'Barlow Condensed';color:var(--a1);text-align:right}
+.C .integ .pct small{font-size:26px}
+.C .integ .rk{text-align:right;margin-top:6px}
+.C .integ .rk span{display:inline-block;font:400 18px/1 'Share Tech Mono';letter-spacing:.14em;padding:4px 8px;border:1px solid var(--a1)}
+.C .integ .rk .jp{border:0;font:700 14px 'Noto Sans JP'}
+.C .integ .hexs{width:230px;height:40px;margin-top:8px;margin-left:auto;display:block}
+.C .integ.alert{border-color:var(--red)}.C .integ.alert .pct,.C .integ.alert .rk span{color:var(--red);border-color:var(--red)}
+.C .combo{right:34px;top:300px;text-align:right}
+.C .combo b{font:800 100px/.8 'Barlow Condensed';color:var(--a1)}
+.C .combo div{font:400 15px 'Share Tech Mono';letter-spacing:.18em;color:rgba(255,217,160,.85)}
+.C .combo .air{color:var(--teal);font-size:21px}
+.C .combo .dec{height:2px;width:200px;background:var(--dim2);margin:6px 0 0 auto}.C .combo .dec i{display:block;height:100%;background:var(--a1);margin-left:auto}
+.C .bottom{left:30px;right:30px;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end}
+.C .bottom .st{font:400 15px 'Share Tech Mono';letter-spacing:.14em;color:rgba(255,217,160,.8)}
+.C .bottom .st b{color:var(--a1);font-size:20px;margin-right:16px}
+.C .ko{font:800 56px/.9 'Barlow Condensed';color:var(--a1);text-align:right}.C .ko small{display:block;font:400 14px 'Share Tech Mono';letter-spacing:.16em}
+.C .ret .tag{background:rgba(18,8,2,.85);border:1px solid var(--a1)}.C .ret .tag b{color:var(--teal)}.C .ret .tag span{font-family:'Share Tech Mono';font-weight:400}
+.C .call{background:rgba(18,8,2,.9);border:1px solid var(--a1)}.C .call b{color:var(--teal)}
+.C .num{color:var(--teal);border:1px solid var(--teal);background:rgba(18,8,2,.85)}
+.C .wave{left:0;right:0;top:250px;height:150px;background:rgba(18,8,2,.86);border-top:2px solid var(--red);border-bottom:2px solid var(--red)}
+.C .wave .a{position:absolute;left:110px;top:16px;font-size:96px;line-height:1;color:var(--red)}
+.C .wave .b{position:absolute;left:500px;top:26px;font:800 42px/1 'Barlow Condensed';letter-spacing:.18em;color:var(--a1)}
+.C .wave .c{position:absolute;left:502px;top:84px;font:400 17px 'Share Tech Mono';letter-spacing:.14em;color:var(--teal)}
+.C .wipe{background:linear-gradient(90deg,#120804 0 60%,var(--a1) 60% 61%,#120804 61%)}
+/* C: clear */
+.C .c-flash{inset:0;background:#ffd9a0;opacity:0}
+.C .c-dark{inset:0;background:rgba(10,4,0,.86);opacity:0}
+.C .c-grid{inset:0;opacity:0;background-image:linear-gradient(rgba(255,179,71,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,179,71,.14) 1px,transparent 1px);background-size:64px 64px}
+.C .c-enh{left:640px;top:360px;width:10px;height:10px;border:1px solid var(--a1);opacity:0}
+.C .c-t1{left:120px;top:100px;font-size:180px;line-height:1;color:var(--a1);opacity:0}
+.C .c-t2{left:250px;top:290px;font-size:180px;line-height:1;color:var(--a1);opacity:0}
+.C .c-t3{left:124px;top:500px;font:900 34px 'Noto Sans JP';letter-spacing:.5em;color:var(--teal);opacity:0}
+.C .c-res{left:120px;right:120px;top:570px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;font:400 15px 'Share Tech Mono';letter-spacing:.12em;opacity:0}
+.C .c-res b{display:block;font:800 46px/1 'Barlow Condensed';color:var(--a1)}
+.play .C .wipe{animation:wipe .4s cubic-bezier(.7,0,.3,1) .0s both}
+.play .C .c-flash{animation:flash .5s ease-out .1s both}
+@keyframes flash{0%{opacity:.95}100%{opacity:0}}
+.play .C .c-dark{animation:fadeIn .3s ease .2s both}
+.play .C .c-grid{animation:fadeIn .5s ease .3s both}
+.play .C .c-enh{animation:enh 1s cubic-bezier(.6,0,.2,1) .4s both}
+@keyframes enh{0%{opacity:1;width:10px;height:10px;left:640px;top:360px}60%{opacity:1;width:1100px;height:560px;left:90px;top:80px}100%{opacity:0;width:1100px;height:560px;left:90px;top:80px}}
+.play .C .c-t1{animation:crtOn .5s steps(6) 1.1s both}
+.play .C .c-t2{animation:crtOn .5s steps(6) 1.3s both}
+.play .C .c-t3{animation:crtOn .4s steps(4) 1.7s both}
+.play .C .c-res{animation:crtOn .5s steps(5) 2.1s both}
+@keyframes crtOn{0%{opacity:0;clip-path:inset(49% 0 49% 0)}40%{opacity:1;clip-path:inset(40% 0 40% 0)}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+/* C: title + pause */
+.C .t-bg{inset:0;background:linear-gradient(90deg,rgba(14,6,1,.9),rgba(14,6,1,.6) 60%,rgba(14,6,1,.35))}
+.C .t1{left:80px;top:110px;font-size:160px;line-height:1;color:var(--a1)}
+.C .t2{left:84px;top:290px;font-size:56px;color:var(--teal)}
+.C .t3{left:86px;top:372px;font:900 26px 'Noto Sans JP';letter-spacing:.35em;color:var(--a1)}
+.C .t4{left:86px;top:80px;font:400 14px 'Share Tech Mono';letter-spacing:.22em;color:rgba(255,217,160,.8)}
+.C .menu{left:86px;top:440px;width:380px}
+.C .menu div,.C .ps-menu div{display:grid;grid-template-columns:44px 1fr auto;align-items:center;height:42px;margin-bottom:4px;font:400 20px 'Share Tech Mono';letter-spacing:.16em;padding:0 10px;cursor:pointer;border:1px solid transparent}
+.C .menu div span:first-child,.C .ps-menu div span:first-child{color:var(--teal);font-size:15px}
+.C .menu .jp,.C .ps-menu .jp{font-size:12px;color:var(--teal)}
+.C .menu div.sel,.C .ps-menu div.sel{border-color:var(--a1);background:rgba(255,179,71,.14);box-shadow:0 0 18px rgba(255,150,40,.25)}
+.C .press{right:54px;bottom:40px;font:400 18px 'Share Tech Mono';letter-spacing:.24em;color:var(--a1);animation:blink 1.2s steps(2) infinite}
+.C .t-scope{left:820px;top:130px;width:380px;height:380px}
+.C .ps-bg{inset:0;background:rgba(14,6,1,.84)}
+.C .ps-head{left:70px;top:44px}.C .ps-head .serif{font-size:92px;line-height:1;color:var(--a1)}
+.C .ps-head div{font:400 15px 'Share Tech Mono';letter-spacing:.3em;color:var(--teal);margin-top:4px}
+.C .ps-menu{left:70px;top:220px;width:360px}
+.C .ps-panel{left:470px;top:220px;width:740px;background:rgba(18,8,2,.82);border:1px solid rgba(255,179,71,.5);padding:12px 16px}
+.C .ps-panel h6{margin:0 0 10px;font:400 14px 'Share Tech Mono';letter-spacing:.3em;color:var(--teal)}
+.C .ctl,.C .opt{font-family:'Share Tech Mono';font-weight:400}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Direction A, Section Alert (Ghost in the Shell × Evangelion), which became the game's UI. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<header class="top"><div class="wrap">
+  <b>READOUT · UI BOARD · ROUND 2</b>
+  <nav><a href="../index.html">← Archive</a><a href="#core">Core</a><a href="#A">A · GitS</a><a href="#B">B · DS</a><a href="#C">C · Blade Runner</a><a href="#refs">References</a><a href="#q">Recommendation</a></nav>
+  <div class="glyphpick">GLYPHS <button data-g="xbox" class="on">Xbox</button><button data-g="ps">PlayStation</button><button data-g="kb">Keyboard</button></div>
+</div></header>
+
+<main class="wrap">
+<h1>Round 2: Evangelion, made by High Water</h1>
+<p class="kicker">Studio Hitstop · UI lane · Readout · 2026-09-28</p>
+<p class="lede">Jonas's review of round 1: Persona 5 was too literal; Evangelion fits the setting; Contract Optics fits High Water. So the core of every direction here is Eva's screen language (emergency states, heavy condensed serif, hexagon grids, warning banners, big numerals, bilingual labels, pattern alerts), as if High Water's own defence-tech design team had shipped it: a wordmark, contract IDs, serial stencils, clinical discipline. Three explorations on top of that core, all live over the same arena frames. Round 1's decisions carry over unchanged: the system-integrity meter, the reticle rules, no damage numbers, the hybrid resolution (round 1 resolution test, not archived).</p>
+
+<section id="core">
+<h2>The shared core</h2>
+<div class="grid3">
+  <div class="card"><h3>Eva grammar</h3><p style="margin:0">Compressed Mincho for alerts and title cards (Shippori Mincho B1 ExtraBold at 72 % width, standing in for Matisse EB); huge condensed numerals (Barlow Condensed 800); hexagon grids for the PV-NET integrity meter; hazard-tape EMERGENCY bands at CRITICAL; bilingual JP/EN on every label that matters; the wave banner is a pattern alert: <i>警告 · PATTERN CYAN · HIGH WATER</i>.</p></div>
+  <div class="card"><h3>High Water discipline</h3><p style="margin:0">The HUD is a product: a wave-mark wordmark, the operator serial (HW-07 · SN 4F-2210), the contract ID (CTR-2070-T3) and a fixed grid of panels that never moves. Only the <i>enemy's</i> system alarms and breaks; High Water's own readouts stay calm. That contrast is where "Destroy the System" shows.</p></div>
+  <div class="card"><h3>Persona's lessons, not its look</h3><p style="margin:0">Kept from round 1's Cut-Up: callouts <b>slam</b> in with overshoot and leave fast; the combo numeral kicks on every hit; the wave clear opens with one <b>confident full-screen wipe</b>; everything big happens on a hard cut. Dropped: the ransom letters, the tilt, the red-black-white palette.</p></div>
+</div>
+</section>
+
+<section id="A">
+<div class="stage-wrap" data-dir="A">
+  <div class="dirhead"><span class="kicker">Direction A</span><h2 style="margin:0">Section Alert: Ghost in the Shell × Evangelion</h2></div>
+  <div class="tabs"><button data-v="combat" class="on">Combat HUD</button><button data-v="clear">Wave clear</button><button data-v="title">Title</button><button data-v="pause">Pause + controls</button><button class="btn replay" style="margin-left:auto">Replay</button></div>
+  <div class="stage-outer" tabindex="0"><div class="stage"></div></div>
+  <div class="dirnotes">
+    <div><b>Idea</b>The HUD is the enforcer's visor optics. Section 9's cyberbrain layer (curved vignette, scan texture, data columns, a thermoptic shimmer sweeping the visor on damage and rank changes) carries Eva's alert grammar.</div>
+    <div><b>Palette</b>Cyan #5FF0FF for everything High Water; Eva orange #FF8A00 when PV-NET degrades; red #FF2A3A only at CRITICAL/BREACH.</div>
+    <div><b>Integrity</b>PV-NET drawn as a hex network: cells linked by lines, going dark as you break it, the link lines dropping out with them.</div>
+    <div><b>From Persona</b>Callouts slam in (scale overshoot); a black-and-cyan diagonal wipe opens the wave clear; the combo numeral kicks on hits.</div>
+    <div><b>Risk</b>The optics layer (vignette, scanlines, shimmer) is the costly part on the Web; it belongs in the 640 × 360 world viewport, not at native resolution.</div>
+  </div>
+</div>
+</section>
+
+<section id="B">
+<div class="stage-wrap" data-dir="B">
+  <div class="dirhead"><span class="kicker">Direction B</span><h2 style="margin:0">Incident Protocol: Death Stranding × High Water (Eva alerts)</h2></div>
+  <div class="tabs"><button data-v="combat" class="on">Combat HUD</button><button data-v="clear">Wave clear</button><button data-v="title">Title</button><button data-v="pause">Pause + controls</button><button class="btn replay" style="margin-left:auto">Replay</button></div>
+  <div class="stage-outer" tabindex="0"><div class="stage"></div></div>
+  <div class="dirnotes">
+    <div><b>Idea</b>The most corporate one. BRIDGES-style branded logistics UI turned military: bone-white header slabs, hairline rules, mono field labels, the held object as <i>cargo</i>. Eva's warnings become the company's incident protocol: hazard tape, severity levels, an incident log that writes itself as you fight.</div>
+    <div><b>Palette</b>Bone white #ECEAE4 on graphite; cyan only for live instrument values; safety orange #FF7A00 for incidents; red #E0252B at severity 4–5.</div>
+    <div><b>Integrity</b>A hex site map of PV-NET sectors; the rank is an incident severity (SEV 1–5). The wave clear is a signed contract milestone, stamped.</div>
+    <div><b>From Persona</b>A bone-white wipe, the report card dropping in with overshoot, the stamp slamming at 3× scale, callouts that punch in.</div>
+    <div><b>Risk</b>Light slabs are loud over a dark arena; they must stay small. The log is flavour and should cut first.</div>
+  </div>
+</div>
+</section>
+
+<section id="C">
+<div class="stage-wrap" data-dir="C">
+  <div class="dirhead"><span class="kicker">Direction C</span><h2 style="margin:0">Replicant Amber: Blade Runner × Evangelion</h2></div>
+  <div class="tabs"><button data-v="combat" class="on">Combat HUD</button><button data-v="clear">Wave clear</button><button data-v="title">Title</button><button data-v="pause">Pause + controls</button><button class="btn replay" style="margin-left:auto">Replay</button></div>
+  <div class="stage-outer" tabindex="0"><div class="stage"></div></div>
+  <div class="dirnotes">
+    <div><b>Idea</b>Analogue futurism: amber phosphor on a warm black CRT, teal secondaries, rain and neon bleed across the glass, a Voight-Kampff scope as the integrity meter, and Eva's big compressed type and alerts on top.</div>
+    <div><b>Palette</b>Amber #FFB347 with glow, teal #39D0C0 for live values, red #FF3B2F for alerts. It departs furthest from High Water's cyan.</div>
+    <div><b>Type</b>Share Tech Mono (OFL) for the CRT readouts, plus the shared Mincho and Barlow Condensed.</div>
+    <div><b>From Persona</b>The wipe, then an "enhance" box zooming out from the centre before the title card switches on like a CRT; callouts overshoot.</div>
+    <div><b>Risk</b>The strongest mood but the weakest fit for a clinical PMC, and the rain and CRT over the whole screen add fill cost and haze over the play field.</div>
+  </div>
+</div>
+</section>
+
+<section id="refs">
+<h2>New references (links only)</h2>
+<div class="refs">
+<div class="ref"><span class="tag">ANIME · CORE</span><h4>Neon Genesis Evangelion: type and NERV screens</h4><div class="links"><a href="https://fontsinuse.com/uses/28760/neon-genesis-evangelion">Fonts In Use</a> · <a href="https://arthistory.hku.hk/index.php/typography-and-cultural-intersections-a-case-study-on-neon-genesis-evangelion-part-one/">HKU Art History</a> · <a href="https://en.fontworks.co.jp/products/evamatisse/">Matisse EB (commercial)</a></div><p><b>Take:</b> compressed title cards, hex status grids, bilingual warnings, pattern alerts. The core of all three.</p></div>
+<div class="ref"><span class="tag">A</span><h4>Ghost in the Shell (1995), SAC; Territory Studio's GitS (2017)</h4><div class="links"><a href="https://en.wikipedia.org/wiki/Ghost_in_the_Shell_(1995_film)">Wikipedia</a> · <a href="https://en.wikipedia.org/wiki/Ghost_in_the_Shell:_Stand_Alone_Complex">SAC</a> · <a href="https://territorystudio.com/project/ghost-in-the-shell/">Territory Studio</a></div><p><b>Take:</b> the optics layer: visor curvature, data as texture, thermoptic shimmer, network views of a system being entered.</p></div>
+<div class="ref"><span class="tag">B</span><h4>Death Stranding</h4><div class="links"><a href="https://interfaceingame.com/games/death-stranding/">Interface In Game</a></div><p><b>Take:</b> branded logistics UI: cargo with weight and condition, header slabs, delivery reports as documents.</p></div>
+<div class="ref"><span class="tag">B</span><h4>Anduril Lattice · Palantir Gotham</h4><div class="links"><a href="https://www.anduril.com/lattice">Lattice</a> · <a href="https://www.palantir.com/platforms/gotham/">Gotham</a></div><p><b>Take:</b> defence-tech sobriety, track IDs, incident and object framing: High Water's house style.</p></div>
+<div class="ref"><span class="tag">C</span><h4>Blade Runner (1982), Blade Runner 2049</h4><div class="links"><a href="https://en.wikipedia.org/wiki/Blade_Runner">Wikipedia</a> · <a href="https://en.wikipedia.org/wiki/Blade_Runner_2049">2049</a> · <a href="https://www.artofthetitle.com/title/blade-runner/">Art of the Title</a></div><p><b>Take:</b> the Voight-Kampff machine's analogue readouts, the ESPER "enhance", amber and teal light, rain and neon bleed.</p></div>
+<div class="ref"><span class="tag">C</span><h4>Territory Studio: Blade Runner 2049 screen graphics</h4><div class="links"><a href="https://territorystudio.com/project/blade-runner-2049/">territorystudio.com</a></div><p><b>Take:</b> analogue-futurist interfaces with physical texture; how CRT artefacts can stay legible.</p></div>
+</div>
+</section>
+
+<section id="q" style="border-bottom:0;padding-bottom:60px">
+<h2>Recommendation</h2>
+<div class="rec">
+<p><b>Build A (Section Alert), with B's incident framing for the wave clear and the title sheet.</b> A is the only one where the Eva alarms read as the <i>enemy's</i> system failing inside High Water's own optics, which is exactly the theme; it keeps the play field darkest and clearest, and its cyan stays High Water's colour from the character art. B's signed contract milestone ("SYSTEM BREACHED" stamped over a report) is the best wave-clear payoff on the board and fits A's world as its end-of-wave paperwork. C has the strongest mood but pulls the game towards noir detective rather than a PMC wrecking a tower; keep its CRT "enhance" as a possible boss intro.</p>
+</div>
+<p>Open questions for Jonas: (1) A + B's clear and title, as above? (2) How much Japanese: labels on every panel as mocked, or only on alerts and title cards? Recommended: alerts, rank words and title cards only, which also keeps the subset font small.</p>
+<p style="color:var(--mute);font-size:14px">Board by Readout (Studio Hitstop). Plates: engine renders from <code>tools/ui_shots.tscn</code> on <code>ui-lab</code>. Fonts from Google Fonts (SIL OFL 1.1). No AI imagery.</p>
+</section>
+</main>
+
+<script>
+/* ---------- shared data and fight timeline (same as round 1, with the kick string) ---------- */
+const ANCH={"foe_0_feet":[0.558,0.6706],"foe_0_head":[0.558,0.5228],"foe_1_feet":[0.6264,0.6877],"foe_1_head":[0.6264,0.54],"foe_2_feet":[0.7103,0.644],"foe_2_head":[0.7103,0.4963],"foe_3_feet":[0.3441,0.7004],"foe_3_head":[0.3441,0.5526],"foe_4_feet":[0.8131,0.7136],"foe_4_head":[0.8131,0.5658],"glove":[0.5281,0.5791],"held":[0.4995,0.4941],"prop_0_crate":[0.8281,0.6494]};
+const W=1280,H=720;
+const pt=k=>({x:ANCH[k][0]*W,y:ANCH[k][1]*H});
+function tgt(k){ if(!k) return null; if(k.startsWith('foe')){const a=pt(k+'_head'),b=pt(k+'_feet');return {x:(a.x+b.x)/2,y:(a.y+b.y)/2};} return pt(k); }
+const G=pt('glove');
+const dist=k=>{const p=tgt(k);return Math.hypot(p.x-G.x,(p.y-G.y)*1.4)/60;};
+const LOOP=10;
+const EV=[
+ {t:0.00,type:'wave'},{t:0.10,type:'aim',target:'foe_3',mode:'throw'},{t:0.60,type:'aim',target:'foe_0',mode:'throw'},
+ {t:1.00,type:'chargeStart'},{t:2.50,type:'throw'},
+ {t:2.62,type:'hit',target:'foe_0',kind:'throw',d:7},{t:2.80,type:'hit',target:'foe_1',kind:'ricochet',n:1,d:8},
+ {t:2.98,type:'hit',target:'foe_2',kind:'ricochet',n:2,d:8},{t:3.16,type:'hit',target:'foe_4',kind:'ricochet',n:3,d:8},
+ {t:3.30,type:'ko',target:'foe_2',d:6},{t:3.42,type:'ko',target:'foe_4',d:6},
+ {t:3.75,type:'aim',target:'prop_0_crate',mode:'pull'},{t:4.05,type:'pull'},{t:4.55,type:'catch'},
+ {t:4.60,type:'aim',target:'foe_1',mode:'throw'},{t:5.05,type:'throw'},
+ {t:5.15,type:'hit',target:'foe_1',kind:'throw',d:7},{t:5.33,type:'hit',target:'foe_0',kind:'ricochet',n:1,d:8},
+ {t:5.55,type:'hurt'},{t:5.80,type:'aim',target:'foe_0',mode:'strike'},
+ {t:5.95,type:'hit',target:'foe_0',kind:'launch',d:8},{t:6.20,type:'hit',target:'foe_0',kind:'air',d:8},
+ {t:6.38,type:'hit',target:'foe_0',kind:'air',d:8},{t:6.62,type:'hit',target:'foe_0',kind:'spike',d:14},
+ {t:6.80,type:'ko',target:'foe_0',d:6},{t:7.00,type:'aim',target:null},
+];
+EV.forEach((e,i)=>e.id=i);
+const RANKS=[['NOMINAL','正常','SEV 1'],['ANOMALY','異常','SEV 2'],['FAULT','障害','SEV 3'],['CRITICAL','臨界','SEV 4'],['BREACH','崩壊','SEV 5']];
+const rankOf=v=>v>=80?0:v>=60?1:v>=40?2:v>=20?3:4;
+function sim(t){
+  const s={t,hp:9,ko:8,held:'CRATE',mode:null,target:null,targetT:0,charge:0,full:false,combo:0,air:0,lastHit:-99,hostiles:5,pulling:false,hurtAge:99,waveAge:t,events:[],log:[]};
+  let integ=100,lastDrop=-99,rep=0,cs=null;
+  const repairTo=time=>{const st=Math.max(rep,lastDrop+0.8); if(time>st) integ=Math.min(100,integ+22*(time-st)); rep=Math.max(rep,time);};
+  for(const e of EV){ if(e.t>t) break; repairTo(e.t);
+    if(s.combo && e.t-s.lastHit>1.5) s.combo=0;
+    switch(e.type){
+      case 'aim': s.mode=e.mode; s.target=e.target; s.targetT=e.t; break;
+      case 'chargeStart': cs=e.t; break;
+      case 'throw': cs=null; s.held=null; break;
+      case 'pull': s.pulling=true; break;
+      case 'catch': s.pulling=false; s.held='CRATE'; break;
+      case 'hurt': s.hp-=1; break;
+      case 'hit': s.combo++; s.lastHit=e.t; integ=Math.max(0,integ-e.d); lastDrop=e.t; if(e.kind==='launch') s.air=0; if(e.kind==='air'||e.kind==='spike') s.air++; break;
+      case 'ko': s.ko++; s.hostiles--; integ=Math.max(0,integ-e.d); lastDrop=e.t; break;
+    }
+    if(['hit','ko','hurt','pull','catch'].includes(e.type)) s.log.push(e);
+    if(t-e.t<1.3 && e.type!=='aim') s.events.push({...e,age:t-e.t});
+  }
+  repairTo(t);
+  if(s.combo && t-s.lastHit>1.5){s.combo=0;s.air=0;}
+  if(t-s.lastHit>0.9) s.air=0;
+  if(t>=5.55) s.hurtAge=t-5.55;
+  if(cs!==null){ s.charge=Math.min((t-cs)/1.3,1); s.full=s.charge>=1; }
+  s.integ=integ; s.rank=rankOf(integ); s.decay=s.combo?Math.max(0,1-(t-s.lastHit)/1.5):0; s.lockAge=t-s.targetT;
+  if(s.mode==='throw'&&s.held==null) s.mode=null;
+  return s;
+}
+const chainAfter={foe_0:['foe_1','foe_2','foe_4'],foe_1:['foe_0','foe_2','foe_4'],foe_3:['foe_0','foe_1','foe_2']};
+const $=(r,s)=>r.querySelector(s);
+const el=h=>{const d=document.createElement('div');d.innerHTML=h.trim();return d.firstElementChild;};
+const ease=x=>1-Math.pow(1-Math.min(Math.max(x,0),1),3);
+const back=x=>{x=Math.min(Math.max(x,0),1);const c=2.4;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+
+/* ---------- glyphs, controls, options ---------- */
+let GSET='xbox';
+const GLY={
+ xbox:{move:['LS','#ccc',1],jump:['A','#6fcf3a'],attack:['X','#3b8ee8'],kick:['Y','#f2c200'],grab:['B','#e8473b'],grab2:['RB','#ccc',1],aim:['RS','#ccc',1],pause:['☰','#ccc'],ok:['A','#6fcf3a'],back:['B','#e8473b']},
+ ps:{move:['L','#ccc',1],jump:['✕','#7aa7ff'],attack:['□','#ff7ad9'],kick:['△','#43d6b5'],grab:['○','#ff5a5a'],grab2:['R1','#ccc',1],aim:['R','#ccc',1],pause:['OPT','#ccc',1],ok:['✕','#7aa7ff'],back:['○','#ff5a5a']},
+ kb:{move:['WASD'],jump:['SPACE'],attack:['X'],kick:['V'],grab:['C'],grab2:['SHIFT'],aim:['MOUSE'],pause:['ESC'],ok:['ENTER'],back:['ESC']}
+};
+function gly(a){const g=GLY[GSET][a]; if(!g) return ''; if(GSET==='kb') return `<span class="gly kb">${g[0]}</span>`; return `<span class="gly ${g[2]?'sh':''} ${GSET==='ps'?'ps':''}" style="--gc:${g[1]}">${g[0]}</span>`;}
+function refreshGlyphs(){document.querySelectorAll('[data-gly]').forEach(n=>{n.innerHTML=n.dataset.gly.split(' ').map(gly).join(' ');});}
+const CONTROLS=[['move','Move','移動'],['jump','Jump','跳躍'],['attack','Punch · hold: charge · throw when holding','打撃'],['kick','Kick · launcher · air string · spike','蹴撃'],['grab grab2','Grab · gravity pull · drop','重力'],['aim','Aim throws and pulls','照準'],['pause','Pause','中断']];
+const ctlRows=()=>CONTROLS.map(c=>`<span data-gly="${c[0]}"></span><span>${c[1]}<span class="jp">${c[2]}</span></span>`).join('');
+const OPTS=[['Screen shake','画面振動',['FULL','REDUCED','OFF']],['Flashes','閃光',['ON','DIMMED']],['HUD size','表示',['100%','125%','150%']],['Japanese labels','日本語',['ALERTS ONLY','ALL','OFF']],['Rumble','振動',['ON','OFF']],['Glyphs','記号',['AUTO','XBOX','PLAYSTATION','KEYBOARD']]];
+const optRows=()=>OPTS.map((o,i)=>`<span>${o[0]}<span class="jp">${o[1]}</span></span><span class="v" data-opt="${i}" data-i="0">${o[2][0]}</span>`).join('');
+
+/* ---------- geometry helpers ---------- */
+function hexes(cx,cy,r,cols,rows){const out=[];const w=r*Math.sqrt(3),h=r*1.5;for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const x=cx+i*w+(j%2?w/2:0),y=cy+j*h;out.push({x,y,d:Array.from({length:6},(_,k)=>{const a=Math.PI/180*(60*k-30);return (x+r*0.9*Math.cos(a)).toFixed(1)+','+(y+r*0.9*Math.sin(a)).toFixed(1);}).join(' ')});}return out;}
+const WAVEMARK=c=>`<svg viewBox="0 0 30 18"><path d="M1 5 Q8 1 15 5 T29 5 M1 11 Q8 7 15 11 T29 11 M1 17 L29 17" stroke="${c}" stroke-width="1.6" fill="none"/></svg>`;
+const retSVG=`<svg viewBox="0 0 110 110"><polygon class="hx" points="55,6 98,31 98,79 55,104 12,79 12,31" fill="none" stroke-width="2"/><g class="tri"><polygon points="55,0 61,12 49,12"/><polygon points="102,86 90,86 96,75"/><polygon points="8,86 14,75 20,86"/></g><line x1="55" y1="42" x2="55" y2="68" stroke="#fff"/><line x1="42" y1="55" x2="68" y2="55" stroke="#fff"/></svg>`;
+
+/* ---------- shared HUD update (each direction supplies markup + a few hooks) ---------- */
+function commonUpdate(R,s,now,D){
+  R.hv.textContent=String(s.hp).padStart(2,'0');
+  R.bars.forEach((b,i)=>b.className=i<s.hp?'':(i===s.hp&&s.hurtAge<0.5?'lost':'off'));
+  R.vit.classList.toggle('hurt',s.hurtAge<0.45);
+  const on=Math.round(s.charge*20); R.gi.forEach((g,i)=>g.className=i<on?'on':''); R.gm.classList.toggle('full',s.full&&(now*10|0)%2===0);
+  R.gv.textContent=(s.charge*100).toFixed(0).padStart(3,'0')+'%';
+  R.pay.textContent=s.pulling?D.txt.tether:s.held?D.txt.cargo:D.txt.none;
+  R.disp+=(s.integ-R.disp)*Math.min(1,Math.max(0,now-R.prevT)*10); R.prevT=now;
+  R.iv.textContent=String(Math.round(R.disp)).padStart(3,'0');
+  R.rj.textContent=RANKS[s.rank][1]; R.rw.textContent=D.rankWord(s.rank);
+  R.integ.classList.toggle('warn',s.rank===1||s.rank===2);
+  R.integ.classList.toggle('alert',s.rank>=3&&((now*3|0)%2===0||s.rank===4));
+  if(R.emerg) R.emerg.style.opacity=s.rank>=3?1:0;
+  R.cb.textContent=String(s.combo).padStart(3,'0'); R.cb.style.opacity=s.combo?1:.3;
+  const kick=Math.max(0,1-(s.t-s.lastHit)/0.14); R.cb.style.transform=`scale(${1+0.3*kick})`; R.cb.style.transformOrigin='100% 100%';
+  R.air.textContent=s.air?D.txt.air(s.air):'';
+  R.dec.style.width=(s.decay*100)+'%';
+  R.kov.textContent=String(s.ko).padStart(3,'0'); R.hos.textContent=s.hostiles;
+  const wa=s.waveAge; R.wave.style.display=wa<1.5&&((wa*8|0)%2===0||wa>0.4)?'block':'none';
+  // reticle
+  const T=tgt(s.target);
+  if(T){R.rp.x+=(T.x-R.rp.x)*0.45;R.rp.y+=(T.y-R.rp.y)*0.45; const locking=s.lockAge<0.3;
+    R.ret.style.opacity=locking&&(s.lockAge*20|0)%2?0.35:1;
+    R.ret.style.transform=`translate(${R.rp.x-55}px,${R.rp.y-55}px) scale(${locking?1.3-0.3*Math.floor(s.lockAge/0.1)/3:1})`;
+    const col=s.mode==='pull'?D.col.pull:s.mode==='strike'?D.col.strike:D.col.throw;
+    R.hx.setAttribute('stroke',col); R.tri.setAttribute('fill',col); R.hx.setAttribute('stroke-dasharray',s.mode==='pull'?'8 6':'none');
+    R.tri.style.transform=`rotate(${Math.floor(now*4)*30}deg)`; R.tri.style.transformOrigin='55px 55px';
+    R.rj2.textContent=locking?'捕捉中':(s.mode==='pull'?'引寄':s.mode==='strike'?'打撃':'目標捕捉');
+    R.ri.textContent=(s.mode==='pull'?'PULL':s.mode==='strike'?'STRIKE':s.mode==='throw'?'THROW':'TARGET')+' · '+dist(s.target).toFixed(1)+' M'+(s.mode==='throw'?' · RICOCHET ×'+Math.round(1+2*s.charge):'');
+  } else R.ret.style.opacity=0;
+  if(s.mode==='pull'&&T){R.teth.setAttribute('x1',G.x);R.teth.setAttribute('y1',G.y);R.teth.setAttribute('x2',T.x);R.teth.setAttribute('y2',T.y);R.teth.style.opacity=s.pulling?1:.5;R.teth.style.strokeDashoffset=-now*80;} else R.teth.style.opacity=0;
+  let chainN=0;
+  if(s.mode==='throw'&&s.charge>0&&chainAfter[s.target]){chainN=Math.round(1+2*s.charge);const pts=[G,tgt(s.target),...chainAfter[s.target].slice(0,chainN).map(tgt)];R.chain.setAttribute('points',pts.map(p=>p.x.toFixed(0)+','+p.y.toFixed(0)).join(' '));R.chain.style.opacity=.9;} else R.chain.style.opacity=0;
+  // transients
+  const live={};
+  if(chainN) chainAfter[s.target].slice(0,chainN).forEach((f,i)=>live['n'+i]={kind:'num',i,f});
+  for(const e of s.events){
+    if(e.type==='hit'&&e.age<0.3) live['h'+e.id]={kind:'hit',e};
+    if(e.type==='hit'&&['ricochet','launch','spike'].includes(e.kind)&&e.age<0.9) live['c'+e.id]={kind:'call',e};
+    if(e.type==='ko'&&e.age<1.0) live['k'+e.id]={kind:'ko',e};
+  }
+  const calls=Object.keys(live).filter(k=>live[k].kind==='call'||live[k].kind==='ko').sort((a,b)=>live[a].e.t-live[b].e.t);
+  calls.slice(0,Math.max(0,calls.length-2)).forEach(k=>delete live[k]);
+  const kept=calls.slice(-2); const older=kept.length===2?kept[0]:null;
+  for(const k in R.pool) if(!live[k]){R.pool[k].remove();delete R.pool[k];}
+  for(const k in live){const o=live[k];
+    if(!R.pool[k]){let n;
+      if(o.kind==='num') n=el(`<div class="num">0${o.i+1}</div>`);
+      else if(o.kind==='hit') n=el(`<div class="abs hit"><svg viewBox="0 0 80 80"><polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="none" stroke="${D.col.hit}" stroke-width="3"/></svg></div>`);
+      else {const m={ricochet:['跳弾','RICOCHET '+String(o.e.n||0).padStart(2,'0')],launch:['打上','LAUNCH'],spike:['叩落','SPIKE'],ko:['撃破','NEUTRALISED']}[o.kind==='ko'?'ko':o.e.kind];
+        n=el(`<div class="abs call"><b>${m[0]}</b><span>${m[1]}</span></div>`);}
+      n.style.left='0';n.style.top='0';R.tr.appendChild(n);R.pool[k]=n;}
+    const n=R.pool[k];
+    if(o.kind==='num'){const p=pt(o.f+'_head');n.style.transform=`translate(${p.x-12}px,${p.y-28}px)`;continue;}
+    const p=tgt(o.e.target),a=o.e.age;
+    if(o.kind==='hit'){n.style.transform=`translate(${p.x}px,${p.y}px) scale(${0.6+Math.floor(a/0.06)*0.3})`;n.style.opacity=(a*20|0)%2?0.4:1;continue;}
+    // Persona lesson: slam in with overshoot, hold, cut out
+    const sc=back(a/0.14); const up=k===older?62:0; n.style.transform=`translate(${p.x-190}px,${p.y-105-up}px) scale(${sc*(up?0.85:1)})`; n.style.transformOrigin='100% 100%'; n.style.opacity=a>0.8?0:(up?0.6:1);
+  }
+  if(D.extra) D.extra(R,s,now);
+}
+function grabRefs(r){
+  return {r,hv:$(r,'.hv'),bars:[...r.querySelectorAll('.bars i')],gm:$(r,'.gm'),gi:[...r.querySelectorAll('.gm i')],gv:$(r,'.gv'),pay:$(r,'.pay'),vit:$(r,'.vit'),
+   integ:$(r,'.integ'),iv:$(r,'.iv'),rj:$(r,'.rj'),rw:$(r,'.rw'),cb:$(r,'.cb'),air:$(r,'.air'),dec:$(r,'.dec i'),kov:$(r,'.kov'),hos:$(r,'.hos'),emerg:$(r,'.emerg'),
+   ret:$(r,'.ret'),hx:$(r,'.ret .hx'),tri:$(r,'.ret .tri'),rj2:$(r,'.ret .tag b'),ri:$(r,'.ret .tag span'),teth:$(r,'.tether'),chain:$(r,'.chainline'),wave:$(r,'.wave'),tr:$(r,'.tr'),
+   pool:{},disp:100,prevT:0,rp:{x:640,y:400}};
+}
+const FX=(teth,chain)=>`<svg class="fx" viewBox="0 0 1280 720"><line class="tether" stroke="${teth}" stroke-width="2" stroke-dasharray="7 5" opacity="0"/><polyline class="chainline" fill="none" stroke="${chain}" stroke-width="1.5" stroke-dasharray="3 5" opacity="0"/></svg>`;
+const EMERG=txt=>`<div class="abs emerg"><div class="mq">${txt.repeat(4)}</div></div>`;
+const RET=`<div class="abs ret">${retSVG}<div class="tag"><b>目標捕捉</b><span>TARGET</span></div></div>`;
+
+/* ================= Direction A ================= */
+const HEXA=hexes(20,18,15,6,5), HEXA_ORD=HEXA.map((_,i)=>i).sort((a,b)=>((a*37)%29)-((b*37)%29));
+const SK={};
+SK.A={
+ plate:{combat:'shots/plate_640.png',clear:'shots/breach_640.png',title:'shots/hero_640.png',pause:'shots/plate_640.png'},
+ txt:{cargo:'CRATE · 38 KG',tether:'TETHER · 16 M/S',none:'—',air:n=>'空中 AIR ×'+n},
+ col:{throw:'#5ff0ff',pull:'#dff9ff',strike:'#ff8a00',hit:'#5ff0ff'},
+ rankWord:r=>RANKS[r][0],
+ combat(v){
+  const links=[];HEXA.forEach((h,i)=>{HEXA.forEach((g,j)=>{if(j>i&&Math.hypot(h.x-g.x,h.y-g.y)<28)links.push([i,j]);});});
+  v.insertAdjacentHTML('beforeend',`<div class="h A"><div class="optics"></div><div class="scan"></div><div class="abs datacol"></div><div class="thermo"></div>
+   ${FX('#dff9ff','#5ff0ff')}
+   ${EMERG('緊急事態 EMERGENCY · PV-NET INTEGRITY CRITICAL · 警告 FLOOR 72 SECURITY FAILURE · ')}
+   <div class="abs vit"><div class="top"><span class="hw">${WAVEMARK('#5ff0ff')}HIGH WATER</span><span class="stencil">HW-07 · SN 4F-2210</span></div>
+     <div class="mid"><div class="big hv">09</div><div><div class="bars">${'<i></i>'.repeat(12)}</div><div class="lab">装甲 ARMOUR · 12 MAX</div></div></div>
+     <div class="row"><span>重力 GRAV-GLOVE</span><div class="gm">${'<i></i>'.repeat(20)}</div><b class="gv">000%</b></div>
+     <div class="row"><span>搭載 PAYLOAD</span><span class="pay" style="grid-column:span 2;color:#fff;font:600 14px 'JetBrains Mono'">CRATE · 38 KG</span></div></div>
+   <div class="abs integ"><div class="t"><span>PV-NET · システム完全性</span><span>FL.72 · 侵入中</span></div>
+     <div class="body"><svg viewBox="0 0 180 130"><g class="lk" stroke="#5ff0ff" stroke-width="1" opacity=".5">${links.map(([i,j])=>`<line data-a="${i}" data-b="${j}" x1="${HEXA[i].x}" y1="${HEXA[i].y}" x2="${HEXA[j].x}" y2="${HEXA[j].y}"/>`).join('')}</g>${HEXA.map((h,i)=>`<polygon points="${h.d}" data-i="${i}" fill="none" stroke="#5ff0ff" stroke-width="1.5"/>`).join('')}</svg>
+     <div><div class="pct"><span class="iv">100</span><small>%</small></div><div class="rk"><span class="jp rj">正常</span><span class="rw">NOMINAL</span></div></div></div></div>
+   <div class="abs combo"><b class="cb">000</b><div>連撃 CHAIN</div><div class="air"></div><div class="dec"><i></i></div></div>
+   <div class="abs bottom"><div class="st"><b>第72階</b>CTR-2070-T3 · WAVE <b>03</b>HOSTILES <b class="hos">5</b></div><div class="ko"><small>撃破 NEUTRALISED</small><span class="kov">008</span></div></div>
+   ${RET}
+   <div class="abs wave"><div class="a serif">警告</div><div class="b">PATTERN CYAN · HIGH WATER</div><div class="c">パターン青 · PV-NET DETECTS HOSTILE CONTRACTOR · FLOOR 72 · WAVE 03</div></div>
+   <div class="tr"></div></div>`);
+  const r=v.querySelector('.h'); const R=grabRefs(r);
+  R.hexp=[...r.querySelectorAll('.integ polygon')]; R.links=[...r.querySelectorAll('.integ .lk line')]; R.thermo=$(r,'.thermo'); R.lastRank=0; R.rankT=-9;
+  $(r,'.datacol').textContent=Array.from({length:44},(_,i)=>(0x3f00+i*977).toString(16).toUpperCase().padStart(4,'0')+' '+((i*7919)%10000).toString().padStart(4,'0')+' '+['SYNC','ACK','T3','HW','NET','Ω'][i%6]).join('\n');
+  return R;
+ },
+ extra(R,s,now){
+  const dead=Math.round((1-R.disp/100)*HEXA.length); const deadSet=new Set(HEXA_ORD.slice(0,dead));
+  const col=s.rank>=3?'#ff2a3a':s.rank>=1?'#ff8a00':'#5ff0ff';
+  R.hexp.forEach((h,i)=>{const d=deadSet.has(i); h.setAttribute('stroke',d?'rgba(95,240,255,.15)':col); h.setAttribute('fill',d?'none':(i%5===0?col:'none')); h.setAttribute('fill-opacity','.35');});
+  R.links.forEach(l=>{l.style.opacity=(deadSet.has(+l.dataset.a)||deadSet.has(+l.dataset.b))?0:1; l.setAttribute('stroke',col);});
+  if(s.rank!==R.lastRank){R.lastRank=s.rank;R.rankT=now;}
+  const th=Math.min(now-R.rankT,s.hurtAge); R.thermo.style.opacity=th<0.5?1:0; R.thermo.style.top=(-100+ease(th/0.5)*900)+'px';
+ },
+ clear(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h A"><div class="optics"></div><div class="abs c-dim2"></div>
+   <svg class="abs c-net" viewBox="0 0 1280 720">${hexes(80,60,46,15,11).map((h,i)=>`<polygon points="${h.d}" fill="none" stroke="${i%9===4?'#ff8a00':'#5ff0ff'}" stroke-opacity="${i%9===4?.8:.18}"/>`).join('')}</svg>
+   <div class="abs c-after"><div class="serif">システム崩壊</div><div>PV-NET · FLOOR 72 · ALL NODES OFFLINE · 侵入完了</div></div>
+   <div class="abs c-res"><div><span>撃破 NEUTRALISED</span><b>011</b></div><div><span>最大連撃 CHAIN</span><b>014</b></div><div><span>時間 TIME</span><b>01:32</b></div><div><span>評価 EVAL</span><b style="color:#5ff0ff">A</b></div></div>
+   <div class="abs c-black"></div><div class="scan"></div>
+   <div class="abs c-t1 serif">SYSTEM</div><div class="abs c-t2 serif">BREACHED</div><div class="abs c-t3">第七十二階</div><div class="abs c-t4">HIGH WATER · CTR-2070-T3 · WAVE 03 CLEARED</div>
+   <div class="wipe"></div></div>`);
+ },
+ title(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h A"><div class="abs t-bg"></div><div class="optics"></div><div class="scan"></div>
+   <svg class="abs t-hex" viewBox="0 0 460 560">${hexes(40,40,38,6,9).map((h,i)=>`<polygon points="${h.d}" fill="${i%7===2?'#5ff0ff':'none'}" fill-opacity=".12" stroke="#5ff0ff" stroke-opacity=".45"/>`).join('')}</svg>
+   <div class="abs t4"><span class="hw">${WAVEMARK('#5ff0ff')}HIGH WATER</span> <span class="stencil" style="margin-left:14px">OPTICAL LINK · HW-07 · SN 4F-2210</span></div>
+   <div class="abs t1 serif">HIGH WATER</div><div class="abs t2 serif">DESTROY THE SYSTEM</div><div class="abs t3">システムを破壊せよ</div>
+   <div class="abs menu"><div><span>01</span>DEPLOY<span class="jp">出撃</span></div><div><span>02</span>CONTROLS<span class="jp">操作</span></div><div><span>03</span>OPTIONS<span class="jp">設定</span></div><div><span>04</span>CREDITS<span class="jp">協力</span></div></div>
+   <div class="abs press">PRESS <span data-gly="ok"></span> · 接続</div></div>`);
+ },
+ pause(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h A"><div class="abs ps-bg"></div><div class="optics"></div><div class="scan"></div>
+   <div class="abs ps-head"><div class="serif">作戦中断</div><div>OPERATION SUSPENDED · CTR-2070-T3 · FLOOR 72 · WAVE 03</div></div>
+   <div class="abs ps-menu"><div><span>01</span>RESUME<span class="jp">再開</span></div><div><span>02</span>CONTROLS<span class="jp">操作</span></div><div><span>03</span>OPTIONS<span class="jp">設定</span></div><div><span>04</span>RESTART<span class="jp">再試行</span></div><div><span>05</span>ABORT<span class="jp">撤退</span></div></div>
+   <div class="abs ps-panel"><h6 class="ph">CONTROLS 操作</h6><div class="pc"></div></div>
+   <div class="abs ps-foot" style="color:#5ff0ff"><span><span data-gly="ok"></span> 決定 SELECT</span><span><span data-gly="back"></span> 戻る BACK</span></div></div>`);
+ },
+};
+
+/* ================= Direction B ================= */
+const HEXB=hexes(18,16,14,6,5), HEXB_ORD=HEXB.map((_,i)=>i).sort((a,b)=>((a*53)%31)-((b*53)%31));
+SK.B={
+ plate:SK.A.plate,
+ txt:{cargo:'CRATE · 38 KG · COND 100%',tether:'TETHER ACTIVE · 16 M/S',none:'NO CARGO',air:n=>'AIR ×'+n+' · 空中'},
+ col:{throw:'#eceae4',pull:'#62f0ff',strike:'#ff7a00',hit:'#eceae4'},
+ rankWord:r=>RANKS[r][0],
+ combat(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h B">
+   ${FX('#62f0ff','#eceae4')}
+   ${EMERG('INCIDENT 72-0413 · SEVERITY 4 · 緊急 · CLIENT NETWORK FAILURE IN PROGRESS · HIGH WATER INCIDENT PROTOCOL 7 · ')}
+   <div class="abs vit"><div class="hd"><span class="hw" style="font-size:13px">${WAVEMARK('#111')}HIGH WATER</span><span>OPERATOR HW-07</span></div>
+     <div class="bd"><div class="line"><span>ARMOUR 装甲</span><div class="bars">${'<i></i>'.repeat(12)}</div><b class="hv">09</b></div>
+     <div class="line"><span>GRAV-GLOVE</span><div class="gm">${'<i></i>'.repeat(20)}</div><b class="gv">000%</b></div>
+     <div class="line"><span>CARGO 積荷</span><span class="pay" style="grid-column:span 2;color:#fff">CRATE · 38 KG · COND 100%</span></div>
+     <div class="line" style="height:18px"><span class="stencil" style="grid-column:span 3">SN 4F-2210 · CTR-2070-T3 · CLASS C</span></div></div></div>
+   <div class="abs integ"><div class="hd"><span>CLIENT SYSTEM PV-NET · FL.72</span><span class="sv">SEV 1</span></div>
+     <div class="bd"><svg viewBox="0 0 170 124">${HEXB.map((h,i)=>`<polygon points="${h.d}" data-i="${i}" fill="#eceae4" stroke="#15181a" stroke-width="1.5"/><text x="${h.x}" y="${h.y+3}" font-size="7" text-anchor="middle" font-family="JetBrains Mono" fill="#15181a">${'ABCDE'[Math.floor(i/6)]}${i%6+1}</text>`).join('')}</svg>
+     <div><div class="pct"><span class="iv">100</span><small>%</small></div><div class="rk"><span class="jp rj">正常</span><span class="rw">NOMINAL</span></div><div class="sev">SELF-REPAIR ON</div></div></div></div>
+   <div class="abs log"></div>
+   <div class="abs combo"><b class="cb">000</b><div>CHAIN · 連撃</div><div class="air"></div><div class="dec"><i></i></div></div>
+   <div class="abs bottom"><div class="st"><b>FLOOR 72</b>WAVE <b>03</b>HOSTILES <b class="hos">5</b>MILESTONE <b>3/6</b></div><div class="ko"><small>NEUTRALISED 撃破</small><span class="kov">008</span></div></div>
+   ${RET}
+   <div class="abs wave"><div class="tape"></div><div class="box"><div class="a serif">警告</div><div class="b">INCIDENT 72-0413 OPENED</div><div class="c">CLIENT SYSTEM PV-NET HAS DETECTED HIGH WATER · PATTERN CYAN<br>WAVE 03 · 5 HOSTILES · PROTOCOL 7 IN EFFECT</div></div><div class="tape" style="top:144px"></div></div>
+   <div class="tr"></div></div>`);
+  const r=v.querySelector('.h'); const R=grabRefs(r); R.hexp=[...r.querySelectorAll('.integ polygon')]; R.sv=$(r,'.sv'); R.log=$(r,'.log'); R.logN=-1; return R;
+ },
+ extra(R,s,now){
+  const dead=Math.round((1-R.disp/100)*HEXB.length); const deadSet=new Set(HEXB_ORD.slice(0,dead));
+  R.hexp.forEach((h,i)=>{const d=deadSet.has(i); h.setAttribute('fill',d?(s.rank>=3?'#e0252b':'#ff7a00'):'#eceae4'); h.setAttribute('fill-opacity',d?'.85':'.9');});
+  R.sv.textContent=RANKS[s.rank][2];
+  if(s.log.length!==R.logN){R.logN=s.log.length; const lines=s.log.slice(-3).map(e=>{const ts=(71+e.t).toFixed(2).padStart(6,'0');
+     const m={hit:e.kind==='ricochet'?'RICOCHET '+e.n+' · PV-UNIT':e.kind==='launch'?'LAUNCH · PV-UNIT AIRBORNE':e.kind==='spike'?'SPIKE · PV-UNIT GROUNDED':'CONTACT · PV-UNIT',ko:'PV-UNIT NEUTRALISED',hurt:'OPERATOR DAMAGE · ARMOUR −1',pull:'TETHER ENGAGED',catch:'CARGO SECURED'}[e.type];
+     return `<div${e.type==='ko'||e.type==='hurt'?' class="i"':''}>${ts} ${m}</div>`;}); R.log.innerHTML=lines.join('');}
+ },
+ clear(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h B"><div class="abs c-dim"></div>
+   <div class="abs c-tape"><span>INCIDENT 72-0413 CLOSED · 事件終了</span></div>
+   <div class="abs c-doc"><div class="k"><span>HIGH WATER · CONTRACT MILESTONE REPORT</span><span>CTR-2070-T3 · 3/6</span></div>
+     <div class="serif">SYSTEM BREACHED</div><div class="jp">システム崩壊 · 第七十二階</div>
+     <table><tr><td>PV-UNITS NEUTRALISED 撃破</td><td>011</td></tr><tr><td>BEST CHAIN 連撃</td><td>014</td></tr><tr><td>TIME ON FLOOR</td><td>01:32</td></tr><tr><td>COLLATERAL (CLIENT PROPERTY)</td><td>¥ 1,204,000</td></tr></table></div>
+   <div class="abs c-stamp">MILESTONE MET<small>HW-07 · 28.09.2070</small></div>
+   <div class="wipe"></div></div>`);
+ },
+ title(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h B"><div class="abs t-bg"></div><div class="abs t-tape"></div>
+   <div class="abs t-sheet"><div class="hd"><span class="hw" style="font-size:14px">${WAVEMARK('#111')}HIGH WATER</span><span>STATEMENT OF WORK</span></div>
+     <div class="fields">CONTRACT <b>CTR-2070-T3</b> · SITE <b>TOWER 3, FLOORS 70–75</b><br>CLIENT <b>[REDACTED]</b> · OPERATOR <b>HW-07 / SN 4F-2210</b></div></div>
+   <div class="abs t1 serif">HIGH WATER</div><div class="abs t2">DESTROY THE SYSTEM · システムを破壊せよ</div>
+   <div class="abs menu"><div><span>§1</span>ACCEPT CONTRACT<span class="jp">受諾</span></div><div><span>§2</span>CONTROLS<span class="jp">操作</span></div><div><span>§3</span>OPTIONS<span class="jp">設定</span></div><div><span>§4</span>CREDITS<span class="jp">協力</span></div></div>
+   <div class="abs press">PRESS <span data-gly="ok"></span> TO SIGN</div></div>`);
+ },
+ pause(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h B"><div class="abs ps-bg"></div>
+   <div class="abs ps-head"><div class="serif">作戦中断 SUSPENDED</div><div class="k">CTR-2070-T3 · FLOOR 72 · WAVE 03<br>INCIDENT 72-0413 · CLOCK STOPPED</div></div>
+   <div class="abs ps-menu"><div><span>01</span>RESUME<span class="jp">再開</span></div><div><span>02</span>CONTROLS<span class="jp">操作</span></div><div><span>03</span>OPTIONS<span class="jp">設定</span></div><div><span>04</span>RESTART FLOOR<span class="jp">再試行</span></div><div><span>05</span>ABORT CONTRACT<span class="jp">撤退</span></div></div>
+   <div class="abs ps-panel"><h6 class="ph">CONTROLS 操作</h6><div class="pc"></div></div>
+   <div class="abs ps-foot"><span><span data-gly="ok"></span> SELECT 決定</span><span><span data-gly="back"></span> BACK 戻る</span></div></div>`);
+ },
+};
+
+/* ================= Direction C ================= */
+const HEXC=hexes(12,12,10,11,2);
+SK.C={
+ plate:SK.A.plate,
+ txt:{cargo:'CRATE 38KG',tether:'TETHER 16M/S',none:'----',air:n=>'AIR x'+n+' 空中'},
+ col:{throw:'#ffb347',pull:'#39d0c0',strike:'#ff3b2f',hit:'#ffb347'},
+ rankWord:r=>RANKS[r][0],
+ combat(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h C"><div class="tint"></div><div class="bleed"></div><div class="rain"></div>
+   ${FX('#39d0c0','#ffb347')}
+   ${EMERG('緊急事態 EMERGENCY · PV-NET INTEGRITY CRITICAL · 警告 FLOOR 72 · ')}
+   <div class="abs vit glow"><div class="top"><span class="hw" style="color:#ffb347">${WAVEMARK('#ffb347')}HIGH WATER</span><span>HW-07</span></div>
+     <div class="mid"><div class="big hv">09</div><div><div class="bars">${'<i></i>'.repeat(12)}</div><div style="font:400 13px 'Share Tech Mono';letter-spacing:.12em">装甲 ARMOUR</div></div></div>
+     <div class="row"><span>GRAV-GLOVE</span><div class="gm">${'<i></i>'.repeat(20)}</div><b class="gv">000%</b></div>
+     <div class="row"><span>PAYLOAD 搭載</span><span class="pay" style="grid-column:span 2;color:#39d0c0">CRATE 38KG</span></div></div>
+   <div class="abs integ glow"><div class="t"><span>PV-NET EMPATHY SCAN</span><span>FL.72</span></div>
+     <div class="body"><svg class="scope" viewBox="0 0 150 150"><circle cx="75" cy="75" r="70" fill="none" stroke="#ffb347" stroke-opacity=".5"/><circle cx="75" cy="75" r="46" fill="none" stroke="#ffb347" stroke-opacity=".3"/><circle class="iris" cx="75" cy="75" r="30" fill="none" stroke="#39d0c0" stroke-width="2"/><circle class="pupil" cx="75" cy="75" r="10" fill="#ffb347"/><polyline class="osc" fill="none" stroke="#ffb347" stroke-width="1.5"/><line x1="5" y1="75" x2="145" y2="75" stroke="#ffb347" stroke-opacity=".25"/><line x1="75" y1="5" x2="75" y2="145" stroke="#ffb347" stroke-opacity=".25"/></svg>
+     <div><div class="pct"><span class="iv">100</span><small>%</small></div><div class="rk"><span class="jp rj">正常</span><span class="rw">NOMINAL</span></div>
+     <svg class="hexs" viewBox="0 0 230 40">${HEXC.map((h,i)=>`<polygon points="${h.d}" data-i="${i}" fill="#ffb347" stroke="#120804"/>`).join('')}</svg></div></div></div>
+   <div class="abs combo glow"><b class="cb">000</b><div>連撃 CHAIN</div><div class="air"></div><div class="dec"><i></i></div></div>
+   <div class="abs bottom glow"><div class="st"><b>第72階</b>WAVE <b>03</b>HOSTILES <b class="hos">5</b></div><div class="ko"><small>撃破 RETIRED</small><span class="kov">008</span></div></div>
+   ${RET}
+   <div class="abs wave glow"><div class="a serif">警告</div><div class="b">PATTERN CYAN · HIGH WATER</div><div class="c">パターン青 · CONTRACTOR ON FLOOR 72 · WAVE 03</div></div>
+   <div class="crt"></div>
+   <div class="tr"></div></div>`);
+  const r=v.querySelector('.h'); const R=grabRefs(r); R.hexp=[...r.querySelectorAll('.hexs polygon')]; R.iris=$(r,'.iris'); R.pupil=$(r,'.pupil'); R.osc=$(r,'.osc'); return R;
+ },
+ extra(R,s,now){
+  const dead=Math.round((1-R.disp/100)*HEXC.length);
+  R.hexp.forEach((h,i)=>h.setAttribute('fill',i<HEXC.length-dead?(s.rank>=3?'#ff3b2f':'#ffb347'):'#2a1406'));
+  const stress=1-R.disp/100; R.iris.setAttribute('r',(30-12*stress+Math.sin(now*9)*stress*3).toFixed(1)); R.pupil.setAttribute('r',(10+10*stress).toFixed(1));
+  let pts=''; for(let x=0;x<=140;x+=4){const y=75+Math.sin(x*0.15+now*6)*(4+30*stress)*Math.sin(x*0.03+now);pts+=`${x+5},${y.toFixed(1)} `;} R.osc.setAttribute('points',pts);
+ },
+ clear(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h C"><div class="tint"></div><div class="rain"></div>
+   <div class="abs c-dark"></div><div class="abs c-grid"></div><div class="abs c-enh"></div>
+   <div class="abs c-t1 serif glow">SYSTEM</div><div class="abs c-t2 serif glow">BREACHED</div><div class="abs c-t3 glow">システム崩壊 · 第七十二階</div>
+   <div class="abs c-res glow"><div>撃破 RETIRED<b>011</b></div><div>連撃 CHAIN<b>014</b></div><div>時間 TIME<b>01:32</b></div><div>評価 RATING<b style="color:#39d0c0">A</b></div></div>
+   <div class="abs c-flash"></div><div class="crt"></div><div class="wipe"></div></div>`);
+ },
+ title(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h C"><div class="abs t-bg"></div><div class="bleed"></div><div class="rain"></div>
+   <div class="abs t4 glow">HIGH WATER PRIVATE SECURITY · TOWER 3 · FLOORS 70–75 · 2070</div>
+   <div class="abs t1 serif glow">HIGH WATER</div><div class="abs t2 serif glow">DESTROY THE SYSTEM</div><div class="abs t3 glow">システムを破壊せよ</div>
+   <svg class="abs t-scope" viewBox="0 0 380 380"><circle cx="190" cy="190" r="180" fill="none" stroke="#ffb347" stroke-opacity=".4"/><circle cx="190" cy="190" r="120" fill="none" stroke="#ffb347" stroke-opacity=".25"/><circle cx="190" cy="190" r="70" fill="none" stroke="#39d0c0" stroke-width="2"><animate attributeName="r" values="70;58;70" dur="3s" repeatCount="indefinite"/></circle><circle cx="190" cy="190" r="24" fill="#ffb347" fill-opacity=".8"/><line x1="0" y1="190" x2="380" y2="190" stroke="#ffb347" stroke-opacity=".3"/><line x1="190" y1="0" x2="190" y2="380" stroke="#ffb347" stroke-opacity=".3"/></svg>
+   <div class="abs menu glow"><div><span>01</span>DEPLOY<span class="jp">出撃</span></div><div><span>02</span>CONTROLS<span class="jp">操作</span></div><div><span>03</span>OPTIONS<span class="jp">設定</span></div><div><span>04</span>CREDITS<span class="jp">協力</span></div></div>
+   <div class="abs press glow">PRESS <span data-gly="ok"></span> · 起動</div><div class="crt"></div></div>`);
+ },
+ pause(v){
+  v.insertAdjacentHTML('beforeend',`<div class="h C"><div class="abs ps-bg"></div><div class="rain" style="opacity:.25"></div>
+   <div class="abs ps-head glow"><div class="serif">作戦中断</div><div>OPERATION SUSPENDED · FLOOR 72 · WAVE 03</div></div>
+   <div class="abs ps-menu glow"><div><span>01</span>RESUME<span class="jp">再開</span></div><div><span>02</span>CONTROLS<span class="jp">操作</span></div><div><span>03</span>OPTIONS<span class="jp">設定</span></div><div><span>04</span>RESTART<span class="jp">再試行</span></div><div><span>05</span>ABORT<span class="jp">撤退</span></div></div>
+   <div class="abs ps-panel"><h6 class="ph">CONTROLS 操作</h6><div class="pc"></div></div>
+   <div class="abs ps-foot glow" style="color:#ffb347"><span><span data-gly="ok"></span> 決定 SELECT</span><span><span data-gly="back"></span> 戻る BACK</span></div><div class="crt"></div></div>`);
+ },
+};
+for(const k in SK){ SK[k].panel=sel=>sel===2?['OPTIONS 設定',`<div class="opt">${optRows()}</div>`]:sel===3||sel===4?['CONFIRM 確認',`<p style="margin:0;font:700 20px 'Barlow Condensed';letter-spacing:.12em">PRESS <span data-gly="ok"></span> AGAIN WITHIN 1 S TO ${sel===3?'RESTART FLOOR 72':'ABORT THE CONTRACT'}</p>`]:['CONTROLS 操作',`<div class="ctl">${ctlRows()}</div>`]; }
+
+/* ---------- stage machinery ---------- */
+const stages=[];
+function fit(outer,stage){stage.style.transform=`scale(${outer.clientWidth/1280})`;}
+function initStage(wrap){
+  const dir=wrap.dataset.dir, sk=SK[dir], outer=$(wrap,'.stage-outer'), stage=$(wrap,'.stage'), views={};
+  for(const name of ['combat','clear','title','pause']){const v=document.createElement('div');v.className='view';v.innerHTML=`<img class="plate" src="${sk.plate[name]}" alt="">`;stage.appendChild(v);views[name]=v;}
+  const S={dir,sk,wrap,outer,stage,views,view:'combat',visible:false,t0:performance.now()/1000,menuSel:{title:0,pause:0},auto:true};
+  S.refs=sk.combat(views.combat); sk.clear(views.clear); sk.title(views.title); sk.pause(views.pause);
+  views.pause.querySelector('.plate').style.filter='blur(2px) saturate(.4)';
+  S.menus={title:[...views.title.querySelectorAll('.menu > div')],pause:[...views.pause.querySelectorAll('.ps-menu > div')]};
+  for(const k of ['title','pause']) S.menus[k].forEach((d,i)=>d.addEventListener('mouseenter',()=>{S.menuSel[k]=i;S.auto=false;renderMenu(S);}));
+  views.pause.addEventListener('click',e=>{const o=e.target.closest('[data-opt]'); if(o){const opts=OPTS[+o.dataset.opt][2];const i=(+o.dataset.i+1)%opts.length;o.dataset.i=i;o.textContent=opts[i];}});
+  function replay(){S.t0=performance.now()/1000;S.clearT=S.t0;const v=views[S.view];v.classList.remove('play');void v.offsetWidth;v.classList.add('play');}
+  function show(name){S.view=name;for(const n in views) views[n].classList.toggle('on',n===name);wrap.querySelectorAll('.tabs button[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===name));replay();renderMenu(S);}
+  S.replay=replay;
+  wrap.querySelectorAll('.tabs button[data-v]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.v)));
+  $(wrap,'.replay').addEventListener('click',replay);
+  outer.addEventListener('click',()=>outer.focus());
+  outer.addEventListener('keydown',e=>{if(S.view!=='title'&&S.view!=='pause')return;const m=S.menus[S.view];
+    if(e.key==='ArrowDown'){S.menuSel[S.view]=(S.menuSel[S.view]+1)%m.length;S.auto=false;renderMenu(S);e.preventDefault();}
+    if(e.key==='ArrowUp'){S.menuSel[S.view]=(S.menuSel[S.view]+m.length-1)%m.length;S.auto=false;renderMenu(S);e.preventDefault();}});
+  new ResizeObserver(()=>fit(outer,stage)).observe(outer); fit(outer,stage);
+  new IntersectionObserver(es=>{S.visible=es[0].isIntersecting;},{threshold:0.05}).observe(outer);
+  show('combat'); return S;
+}
+function renderMenu(S){
+  for(const k of ['title','pause']) S.menus[k].forEach((d,i)=>d.classList.toggle('sel',i===S.menuSel[k]));
+  const [h,body]=S.sk.panel(S.menuSel.pause); const pv=S.views.pause; pv.querySelector('.ph').textContent=h; const pc=pv.querySelector('.pc'); if(pc.dataset.k!==String(S.menuSel.pause)){pc.innerHTML=body;pc.dataset.k=S.menuSel.pause;}
+  refreshGlyphs();
+}
+document.querySelectorAll('.stage-wrap').forEach(w=>stages.push(initStage(w)));
+let lastAuto=0;
+function frame(ms){const now=ms/1000;
+  for(const S of stages){ if(!S.visible) continue;
+    if(S.view==='combat'){const t=window.FREEZE!=null?window.FREEZE:(now-S.t0)%LOOP; commonUpdate(S.refs,sim(t),now,S.sk);}
+    else if(S.view==='clear'){ if(now-S.clearT>6.5) S.replay(); }
+    else if(S.view==='title'&&S.auto&&now-lastAuto>1.4){S.menuSel.title=(S.menuSel.title+1)%S.menus.title.length;renderMenu(S);}
+  }
+  if(now-lastAuto>1.4) lastAuto=now;
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+document.querySelectorAll('.glyphpick button').forEach(b=>b.addEventListener('click',()=>{GSET=b.dataset.g;document.querySelectorAll('.glyphpick button').forEach(x=>x.classList.toggle('on',x===b));refreshGlyphs();}));
+refreshGlyphs();
+</script>
+</body>
+</html>

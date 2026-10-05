@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floor 70 Finish Schedule</title>
+<style>
+:root {
+  --paper: #ebe5d8; --paper-2: #e1dacb; --sheet: #f4f0e7; --ink: #26272b; --ink-2: #55565c; --rule: #b9b1a1; --hair: #cfc7b7;
+  --pv: #e2601f; --pv-dk: #8c3b1f; --hw: #1fb4c9; --ranger: #4f6b3a; --amber: #d98e12;
+  --title: "Bahnschrift", "DIN Alternate", "DIN 2014", "Arial Narrow", system-ui, sans-serif;
+  --mono: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+  --body: "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1d1e22; --paper-2: #24252a; --sheet: #191a1d; --ink: #e4ddce; --ink-2: #a8a295; --rule: #4a4a50; --hair: #35363b;
+    --pv: #f07436; --pv-dk: #c4592b; --hw: #3fd0e4; --ranger: #8fb070; --amber: #f0a830;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1d1e22; --paper-2: #24252a; --sheet: #191a1d; --ink: #e4ddce; --ink-2: #a8a295; --rule: #4a4a50; --hair: #35363b;
+  --pv: #f07436; --pv-dk: #c4592b; --hw: #3fd0e4; --ranger: #8fb070; --amber: #f0a830;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--body); }
+body { padding: 0 16px 90px; }
+main { max-width: 1340px; margin: 0 auto; }
+a { color: inherit; text-decoration-color: var(--pv); }
+h1, h2, h3, h4 { font-family: var(--title); font-weight: 600; margin: 0; letter-spacing: .01em; }
+p { margin: .4em 0 .8em; max-width: 92ch; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.px { image-rendering: pixelated; }
+img { max-width: 100%; display: block; }
+
+/* title block: the drawing sheet's corner */
+.sheet-head { position: relative; margin: 22px 0 0; border: 2px solid var(--ink); background: var(--sheet); display: grid; grid-template-columns: 1.6fr 1fr; }
+.sheet-head .t { padding: 18px 20px 16px; border-right: 1px solid var(--ink); }
+.sheet-head .t .div { font: 600 12px var(--mono); letter-spacing: .12em; color: var(--ink-2); }
+.sheet-head h1 { font-size: clamp(30px, 5vw, 54px); line-height: .95; margin: 8px 0 8px; text-transform: uppercase; }
+.sheet-head .t p { color: var(--ink-2); margin: 0; }
+.tb { display: grid; grid-template-columns: 1fr 1fr; font-size: 12.5px; }
+.tb div { border-bottom: 1px solid var(--rule); border-right: 1px solid var(--rule); padding: 6px 10px; }
+.tb div:nth-child(2n) { border-right: 0; }
+.tb b { display: block; font: 600 10.5px var(--mono); letter-spacing: .1em; color: var(--ink-2); text-transform: uppercase; }
+.tb .wide { grid-column: span 2; border-right: 0; }
+.tag { position: absolute; right: 44%; top: 10px; width: 130px; transform: rotate(-9deg); pointer-events: none; }
+.stamp { display: inline-block; border: 2px solid var(--hw); color: var(--hw); font: 700 11px var(--mono); letter-spacing: .14em; padding: 3px 8px; transform: rotate(-2deg); text-transform: uppercase; }
+@media (max-width: 820px) { .sheet-head { grid-template-columns: 1fr; } .sheet-head .t { border-right: 0; border-bottom: 1px solid var(--ink); } .tag { right: 8px; width: 110px; } }
+
+nav { display: flex; flex-wrap: wrap; gap: 4px 18px; padding: 10px 2px; border-bottom: 1px solid var(--ink); font: 12.5px var(--mono); }
+nav a { text-decoration: none; color: var(--ink-2); }
+nav a:hover { color: var(--pv); }
+
+section { padding: 34px 0 12px; border-bottom: 1px solid var(--rule); }
+.sec { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+.sec .no { font: 600 13px var(--mono); color: var(--paper); background: var(--ink); padding: 2px 8px; letter-spacing: .08em; }
+.sec h2 { font-size: 27px; text-transform: uppercase; }
+.sec .csi { font: 12px var(--mono); color: var(--ink-2); }
+.lead { color: var(--ink-2); max-width: 94ch; }
+h3 { font-size: 18px; margin: 22px 0 8px; text-transform: uppercase; letter-spacing: .03em; }
+h3 .k { font: 600 11px var(--mono); color: var(--ink-2); letter-spacing: .1em; margin-right: 8px; }
+
+.answer { border: 2px solid var(--ink); background: var(--sheet); padding: 16px 20px; margin: 10px 0 8px; max-width: 110ch; }
+.answer h3 { margin-top: 0; }
+.answer .pick { font: 600 20px var(--title); text-transform: uppercase; }
+.answer ul { margin: 6px 0; padding-left: 20px; }
+
+.routes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 14px 0; }
+@media (max-width: 900px) { .routes { grid-template-columns: 1fr; } }
+.rcard { border: 1px solid var(--ink); background: var(--sheet); }
+.rcard header { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 12px; border-bottom: 1px solid var(--ink); }
+.rcard header h4 { font-size: 20px; text-transform: uppercase; }
+.rcard header .l { font: 700 22px var(--title); }
+.rcard .body { padding: 8px 12px 12px; font-size: 14px; }
+.rcard .body p { margin: .2em 0 .6em; }
+.rcard dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 6px 0 0; font-size: 13px; }
+.rcard dt { font: 600 11px var(--mono); color: var(--ink-2); text-transform: uppercase; padding-top: 2px; }
+.rcard dd { margin: 0; }
+.rcard.rec { outline: 3px solid var(--ranger); outline-offset: 3px; }
+.rec-flag { font: 700 11px var(--mono); letter-spacing: .12em; color: var(--ranger); text-transform: uppercase; }
+
+figure { margin: 0; background: var(--sheet); border: 1px solid var(--ink); }
+figure > img { width: 100%; height: auto; image-rendering: pixelated; }
+figcaption { padding: 6px 10px 9px; font-size: 13px; border-top: 1px solid var(--hair); }
+figcaption .ref { font: 600 11px var(--mono); color: var(--ink-2); margin-right: 8px; letter-spacing: .06em; }
+.g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+@media (max-width: 900px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
+.hero { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+.loupe { aspect-ratio: 16 / 9; background-repeat: no-repeat; image-rendering: pixelated; background-size: 300%; border-bottom: 1px solid var(--hair); }
+
+.spec { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 28px; margin-top: 10px; }
+@media (max-width: 900px) { .spec { grid-template-columns: 1fr; } }
+.spec h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--ink); padding-bottom: 3px; margin: 16px 0 6px; }
+.spec ul { margin: 0; padding-left: 18px; font-size: 14px; }
+.spec li { margin: 2px 0; }
+.meter { display: flex; gap: 18px; flex-wrap: wrap; margin: 12px 0 0; font: 13px var(--mono); }
+.meter span b { font: 700 20px var(--title); margin-right: 4px; }
+.risk-low { color: var(--ranger); } .risk-med { color: var(--amber); } .risk-high { color: var(--pv); }
+
+.tablewrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--ink); background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 720px; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--hair); }
+th { font: 600 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); background: var(--paper-2); border-bottom: 1px solid var(--ink); }
+td.k { font: 600 12.5px var(--mono); white-space: nowrap; }
+tr.good td:first-child { box-shadow: inset 4px 0 0 var(--ranger); }
+.pvnote { color: var(--pv-dk); font-weight: 600; }
+.hwnote { color: var(--hw); font-weight: 600; }
+
+.pano { border: 1px solid var(--ink); overflow-x: auto; background: #000; }
+.pano img { max-width: none; height: clamp(200px, 30vw, 400px); width: auto; image-rendering: auto; }
+.strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.qa { counter-reset: q; list-style: none; padding: 0; margin: 8px 0; }
+.qa li { counter-increment: q; padding: 8px 0 8px 44px; position: relative; border-bottom: 1px solid var(--hair); max-width: 100ch; }
+.qa li::before { content: "Q" counter(q); position: absolute; left: 0; top: 8px; font: 700 14px var(--mono); color: var(--pv); }
+footer { padding: 26px 0; font-size: 12.5px; color: var(--ink-2); max-width: 110ch; }
+.theme { float: right; font: 11px var(--mono); background: none; border: 1px solid var(--rule); color: var(--ink-2); padding: 2px 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Route A, Blockwork, for the environment. For the tower select, D1, the voxel dollhouse, “with extra love and detail”: real exterior architecture and a security camera per floor. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<main>
+
+<div class="sheet-head">
+  <div class="t">
+    <div class="div">TOWER 3 · LEVEL 70 · SKY LOBBY · INTERIOR FINISH SCHEDULE</div>
+    <h1>Floor 70<br>finish schedule</h1>
+    <p>Three style submittals for the environment, each rendered from the game camera at 640 × 360 with the real voxel rigs, the real masonry and the real Kit: materials, props, signs, destruction, light and the city outside the curtain wall.</p>
+  </div>
+  <div class="tb">
+    <div><b>Submittal</b>09-70 A · B · C</div>
+    <div><b>Date</b>2026-09-28</div>
+    <div><b>For</b>Jonas (owner's pick) · Cornerman</div>
+    <div><b>Prepared by</b>PLUMB, art direction &amp; environment, Studio Hitstop</div>
+    <div class="wide"><b>Status</b><span class="stamp">route A in production</span> · city backdrop live (DIV 00-B) · prop pass (DIV 00-C)</div>
+    <div class="wide"><b>Jam rule</b>Every model, texture and backdrop here is written as code (Blender and Godot scripts) or rendered from the Dark City Shining Babel setting data. No generators, no downloads.</div>
+    <div class="wide"><b>Source</b><span class="mono">art-lab</span>: <span class="mono">tools/art/</span></div>
+  </div>
+  <svg class="tag" viewBox="0 0 200 110" aria-hidden="true">
+    <g fill="none" stroke="var(--pv)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".92">
+      <path d="M18 96 L30 16 C62 8 84 24 70 46 C60 60 40 58 30 54"/>
+      <path d="M96 18 L122 92 L160 12"/>
+    </g>
+    <path d="M168 20 l2 22 M171 50 l1 9" stroke="var(--pv)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M30 60 l-1 26" stroke="var(--pv)" stroke-width="3" opacity=".7"/>
+  </svg>
+</div>
+
+<nav>
+  <a href="#look">00-B city look test</a><a href="#props">00-C props</a><a href="#crisp">00-D crisp text</a><a href="#floors">00-E F70/F71 props</a><a href="#answer">00 the answer</a><a href="#scale">01 scale</a><a href="#a">09-A blockwork</a><a href="#b">09-B trim &amp; bake</a><a href="#c">09-C ink &amp; grain</a>
+  <a href="#compare">side by side</a><a href="#light">26 light &amp; city</a><a href="#source">sourcing</a><a href="#hero">hero assets</a><a href="#q">questions</a>
+  <button class="theme" id="theme" type="button">night print</button>
+</nav>
+
+
+<!-- 00-B LOOK TEST ======================================================= -->
+<section id="look">
+  <div class="sec"><span class="no">DIV 00-B</span><h2>Look test: Babel at 06:02</h2><span class="csi">Blockwork room, Cycles city through the glass · Jonas's picks: route A, blue morning</span></div>
+  <p class="lead">Jonas asked for a city "super sick and realistic" behind the pixel room. The room still renders at 640 × 360 and is scaled 3× with nearest filtering. The city is pre-rendered in Blender Cycles from Babel's own data and drawn at <b>native resolution behind</b> the world view. The world SubViewport is transparent where the curtain-wall glass is, so the city is sharp and the room is pixel art. Both frames below are single 1920 × 1080 captures of that composite from Godot (<span class="mono">tools/art/look_city.tscn</span>).</p>
+  <figure><img src="img/look_lookout.webp" alt="Sho lookout gallery, Blockwork interior at night, realistic dawn city through the glass" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">L-1</span><b>Shō, the lookout.</b> The gang's gallery runs along the west curtain wall on three cinder piers. Two bottle throwers stand on it with Babel behind them. The room is in its night mood; outside it is 06:02, and first light is catching the tower crowns.</figcaption></figure>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/look_toll.webp" alt="The Toll collapsed, blackout, dawn city through the glass" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">L-2</span><b>Ketsu, after the Toll falls.</b> The toll booth comes down, the lamps die (blackout plus emergency red), and the only daylight in the room is the city.</figcaption></figure>
+    <figure><img src="img/city_dawn_crop.jpg" alt="Detail crop of the city plate" width="1400" height="700" style="image-rendering:auto"><figcaption><span class="ref">L-3</span>The plate at 1:1: sun on the crowns, tower shadows across the facades, windows at 60 % of night, glass reflecting the sky, antenna beacons.</figcaption></figure>
+  </div>
+  <h3><span class="k">L-4</span>Parallax: the camera moves ±3 m</h3>
+  <div class="g2">
+    <figure><img src="img/look_lookout_pan0.jpg" alt="Camera 3 m left" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">x − 3</span></figcaption></figure>
+    <figure><img src="img/look_lookout_pan2.jpg" alt="Camera 3 m right" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">x + 3</span>The mullions travel at world speed. The near towers keep 80 % of their screen position, the mid city 90 % and the sky and sea 97 %, so the city sits far behind the glass.</figcaption></figure>
+  </div>
+  <h3><span class="k">L-5</span>The plate: one strip, three depth layers</h3>
+  <div class="pano"><img src="img/city_dawn_strip.jpg" alt="Full city strip at dawn, 140 degrees" width="3072" height="1185" style="height:clamp(220px,32vw,460px)"></div>
+  <div class="g3" style="margin-top:8px">
+    <figure><img src="img/city_dawn_far.jpg" alt="Far layer" width="1400" height="540" style="image-rendering:auto"><figcaption><span class="ref">far</span>Sky and storm deck, sea, ridge, and the city beyond 1.15 km.</figcaption></figure>
+    <figure><img src="img/city_dawn_mid.jpg" alt="Mid layer" width="1400" height="540" style="image-rendering:auto"><figcaption><span class="ref">mid</span>380 m to 1.15 km, with alpha (shown on a checkerboard).</figcaption></figure>
+    <figure><img src="img/city_dawn_near.jpg" alt="Near layer" width="1400" height="540" style="image-rendering:auto"><figcaption><span class="ref">near</span>110–380 m, with alpha.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>What the plate is made of</h4>
+      <ul>
+        <li><span class="mono">tools/art/city_blender.py</span> (Blender 5.0, Cycles, headless) reads the Dark City Shining Babel setting data: 42 named buildings, 1,219 procgen buildings, streets, roads, tramway, sea wall, ridge and sea.</li>
+        <li>Buildings: tall towers get setbacks and crowns; the Pinnacle gets its spire and strobe.</li>
+        <li>Facades: a procedural window grid in world metres, per building type. Each window is lit or dark, with a room colour, a ceiling-to-floor gradient, blinds, a lamp pool or a TV. Temperature, tone and how many rooms are lit are set per building (a face attribute). Dark glass reflects the sky, and each floor has a spandrel band.</li>
+        <li>Roofs: AC units, water tanks, antennas with red beacons, rooftop billboards.</li>
+        <li>Neon: blade signs and strips on the Town and Lux faces. Holo ads carry Opticals' CODEX copy (OH-DI, NERPS!, KODAMA, HIGH WATER WE ARE HIRING).</li>
+        <li>Streets and roads glow sodium, with head- and tail-light dashes. The tramway is lit, and the sea wall carries lamps; boats sit on the sea.</li>
+        <li>Air and water: height and distance fog computed per camera ray (street mist low, violet haze high), a storm cloud deck in the world shader, and a glossy sea with wave bumps.</li>
+        <li>Afterwards <span class="mono">city_post.py</span> adds bloom (Pillow).</li>
+        <li>No image textures, no downloads, no generators; the only font is the DejaVu the game already ships.</li>
+      </ul>
+      <h4>One colour script with the film (agreed with Opticals)</h4>
+      <ul>
+        <li>06:02, sun 2.5° up at bearing 120°, colour #ffb070. The camera looks west-north-west over the core, away from the sun, in both the film and the game.</li>
+        <li>Earth shadow #1c2436 under a Belt of Venus #b5687e, storm blue #22386a, zenith #0b1733. Clouds are dark storm blue with undersides lit #ffb070.</li>
+        <li>Windows are three parts sodium #ffb35c to one part #bfe6ff. Neon is PV orange #ff6a1f and magenta #ff3d8b. HW cyan #1fd6ea appears only on Tower 3 and High Water ads.</li>
+        <li>The room's section moods (night, flicker, blackout) are unchanged; only the city is at dawn.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Budgets</h4>
+      <ul>
+        <li><b>Dev PC GPU:</b> one layer per Blender process, 4096 × 1580, 64 samples with the OptiX denoiser, and a pause between runs. Times: far 17 s, mid 23 s, near 15 s, composite 37 s. The whole city set takes about 1.5 min of GPU time. There were no long batches.</li>
+        <li><b>Web (computed, not yet measured in an export):</b> in the frame, one plate pixel is 0.9 native px at 1080p, so a <b>3072-wide</b> strip covers 1080p. In VRAM-compressed form (S3TC/BPTC on desktop Web), the three layers come to about <b>11 MB</b> of VRAM and a similar download before pck compression. As lossy WebP, the download is about <b>0.5 MB</b>, but each 3072 layer takes about 19 MB of VRAM once decoded (RGBA8). The mid and near layers crop to their alpha bounds. I'll measure both in the Web export before choosing.</li>
+        <li><b>Frame cost:</b> three textured quads behind the world view, plus the transparent SubViewport. The look test drew 241–454 calls in the 3D view.</li>
+      </ul>
+      <h4>Next, on art-lab, in steps</h4>
+      <ol style="padding-left:18px;margin:0">
+        <li>The backdrop node for <span class="mono">game_root</span> (Readout's hybrid already draws the world as a scaled SubViewport): plate layers behind it, parallax from the level camera, transparent where there is glass. Web export measurement.</li>
+        <li>Animated overlays at native resolution: traffic streams on the roads, aircraft and drone lights, beacon blinks, window flicker through a mask, holo-ad loops, a searchlight, rain in front. These shaders join the Warmup.</li>
+        <li>Blockwork production: <span class="mono">blockwork.gdshader</span> into <span class="mono">Pal</span>/<span class="mono">LevelKit</span>, Debris and BrickWall in local space, the prop kit into the level, the <span class="mono">Kit.sign()</span> restyle, PV orange in one line of <span class="mono">Pal</span>, and the section moods.</li>
+      </ol>
+      <h4>Rulings needed</h4>
+      <ul>
+        <li><b>Tower 3's height.</b> The data has Tower 3 at 160 m (32 units), which can't hold Floors 70–75. The plate puts Floor 70 at about 255 m, above the Lux towers around it, so the view clears them. The data should raise Tower 3 to about 275 m; Opticals flagged the same.</li>
+        <li><b>The horizon is placed artistically.</b> It sits about 60 % up the glass so the skyline clears the gallery deck. Physically it would sit at eye height, about 1.6 m.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- 00-C PROPS ========================================================== -->
+<section id="props">
+  <div class="sec"><span class="no">DIV 00-C</span><h2>Prop pass: before and after</h2><span class="csi">Jonas: "no plain yellow squares or plain red exploding cylinders"</span></div>
+  <p class="lead">Every breakable box and piece of set dressing in Floor 70 and the training arena is now a voxel model on the characters' own grid (0.064 m, 2 screen pixels per voxel), so props and people read as one hand. Details are voxel paint: planks and gaps, steel straps, stencils, shipping labels, dents, rust runs, PV tags. The physics is unchanged, with the same box collider, hp and mass. When a prop breaks, the pieces are Blockwork blocks in the prop's own colour. Built by <span class="mono">tools/vox/env_props.py</span> with Armature's sculpt helpers.</p>
+  <div class="g2">
+    <figure><img src="img/props_before.jpg" alt="Placeholder boxes" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">P-1</span><b>Before:</b> the level's placeholder boxes, same sizes and positions, with Blockwork on.</figcaption></figure>
+    <figure><img src="img/props_after.jpg" alt="Modelled props" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">P-2</span><b>After</b>, left to right. Back row: stall counter, count table, cash bundle, turnstile, PV vending machine, karaoke lounge, shrine, plant. Front row: High Water crate, Cronus crate, fuel drum, luggage, barricade desk, dice table, newsstand.</figcaption></figure>
+  </div>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/props_game.png" alt="Props at game scale" width="1280" height="720"><figcaption><span class="ref">P-3</span>At game scale: 640 × 360, shown at 2× with nearest filtering.</figcaption></figure>
+    <figure><img src="img/props_break.png" alt="Crates and drum breaking" width="1280" height="720"><figcaption><span class="ref">P-4</span>Three crates and a fuel drum breaking. The pieces are plywood blocks, and the drum's blast is unchanged.</figcaption></figure>
+  </div>
+  <h3><span class="k">P-5</span>In the game: Ki, Shō, the lookout, Ketsu (1920 × 1080 captures of the real main scene)</h3>
+  <div class="g2">
+    <figure><img src="img/game_ki.jpg" alt="Ki" width="1920" height="1000" style="image-rendering:auto"><figcaption><span class="ref">Ki</span>Luggage and the Cronus and High Water crates on the stub.</figcaption></figure>
+    <figure><img src="img/game_sho.jpg" alt="Sho" width="1920" height="1000" style="image-rendering:auto"><figcaption><span class="ref">Shō</span>The karaoke lounge on the gallery, the newsstand, the fuel drum at the middle pier, a planter plant.</figcaption></figure>
+    <figure><img src="img/game_lookout.jpg" alt="Lookout" width="1920" height="1000" style="image-rendering:auto"><figcaption><span class="ref">Lookout</span>The dawn city through the glass (DIV 00-B), with overlays and rain.</figcaption></figure>
+    <figure><img src="img/game_ketsu.jpg" alt="Ketsu" width="1920" height="1000" style="image-rendering:auto"><figcaption><span class="ref">Ketsu</span>The PV vending machine, the count table and the fuel drum at the gate.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>What changed in the code</h4>
+      <ul>
+        <li><span class="mono">Props.dress(debris, name)</span> swaps a Debris box's look for the model and fits it to the box. Crates and drums keep their colours, so their sounds and blasts don't change.</li>
+        <li><span class="mono">Props.node(name)</span> handles static dressing.</li>
+        <li>The props are hooked into <span class="mono">LevelKit</span> (crates, drums, cash, turnstiles), <span class="mono">level_70</span> and the arena.</li>
+        <li>The meshes are baked to <span class="mono">.mesh.res</span> by <span class="mono">tools/art/bake_props.gd</span>.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Web cost (2560 × 1440, Chrome)</h4>
+      <ul>
+        <li>Paired A/B with the models and the boxes on the same bodies: Ki +0.03 / −0.03 ms, market +0.10 / +0.07 ms, Ketsu +0.55 / +0.00 ms. That is noise, and the draw calls are unchanged.</li>
+        <li>Level build: meshing the .vox files at load cost about 300 ms on the Web. Baking the meshes brought that down to 11 ms.</li>
+      </ul>
+      <h4>Still placeholder</h4>
+      <ul><li>The booth's bus tokens are 4 px coins.</li><li>The stall canopies are plain colour.</li><li>The doorman's dropped door is Armature's and Hitlag's.</li><li>The sign housings are Drywall's.</li></ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- 00-D CRISP ========================================================== -->
+<section id="crisp">
+  <div class="sec"><span class="no">DIV 00-D</span><h2>Crisp lettering, and where the blur was</h2><span class="csi">Jonas: "the pixelation makes fonts rough and a few things blur"</span></div>
+  <p class="lead">Captured at 2560 × 1440 (a 3× world) and at 1700 × 1000 (a non-integer window, 2× world). The world scale is always a whole number with nearest filtering, no MSAA, FXAA or TAA is on, and Blockwork, the props and the rigs are crisp. <b>The blur was the lettering.</b> Signs and posters baked their text into 64 px/m textures inside the 640 × 360 world, where a linear filter shrank them to 30 px/m before the 3–4× scale-up. Now the world keeps each sign's panel, frame and housing (pixel art) plus an invisible text mark, and <span class="mono">SignText</span> sets the lettering at native resolution in the sign's own font, projected onto the sign by the level camera. The mark decides per pixel whether the text shows, so a thug in front hides the lettering along with the panel. Lit signs take their light from the world pixel under each glyph.</p>
+  <div class="g2">
+    <figure><img src="img/crisp_before_ki.png" alt="Before: Ki at 1:1" width="800" height="500"><figcaption><span class="ref">Before</span>1:1 crop at 2560 × 1440: the plate, the poster and the chalk mark are mush.</figcaption></figure>
+    <figure><img src="img/crisp_after_ki.png" alt="After: Ki at 1:1" width="800" height="500"><figcaption><span class="ref">After</span>The same crop: SKY LOBBY, HIGH WATER / NOW HIRING / DROWNING and the chalk <span class="mono">OK ×</span> are sharp, while the panels stay pixel art.</figcaption></figure>
+    <figure><img src="img/crisp_before_lookout.webp" alt="Before: lookout at 1:1" width="800" height="500"><figcaption><span class="ref">Before</span>The lookout.</figcaption></figure>
+    <figure><img src="img/crisp_after_lookout.webp" alt="After: lookout at 1:1" width="800" height="500"><figcaption><span class="ref">After</span>NOTICE is crisp. The city plates are now 120 px/m, so they sit 1:1 at a 4× world instead of being scaled up 1.2×.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>Blur audit</h4>
+      <ul>
+        <li><b>World scale:</b> a whole number with nearest filtering at every window size, crisp. At a non-integer window the world drops to the next whole scale and centres.</li>
+        <li><b>AA:</b> none set, so no MSAA, FXAA or TAA.</li>
+        <li><b>Sign and poster text:</b> <b>fixed</b> (above).</li>
+        <li><b>Blockwork:</b> the only derivative it takes is the one-pixel rim, with no texture sampling; crisp.</li>
+        <li><b>Prop meshes:</b> greedy quads carry one colour each, so nothing interpolates; crisp.</li>
+        <li><b>City plates:</b> they were scaled 1.2× up at 4×. <b>Fixed</b>: re-exported at 120 px/m, +1.6 MB S3TC.</li>
+        <li><b>Not ours:</b> the HUD at fractional UI scales (Readout's layout).</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Web cost (Chrome, 2560 × 1440)</h4>
+      <ul>
+        <li>Video memory dropped from 191 to 125 MB, because the baked sign viewports are gone from the game.</li>
+        <li>Frame time, paired A/B with the lettering on and off (20 windows): −0.16, −0.85, +0.47, +0.14, +0.17, −2.44 ms. A control with no crisp signs moved +1.15, +0.45, −0.15 ms, so the lettering sits inside the noise. The machine was shared during these runs.</li>
+        <li>Per frame the cost is three unprojections per sign on screen, and one shared material per kind of light, so the labels batch.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- 00-E FLOORS ========================================================= -->
+<section id="floors">
+  <div class="sec"><span class="no">DIV 00-E</span><h2>F70 Village Lobby, F71 Labelling Farm</h2><span class="csi">props from Jonas's floor picks · same voxel pipeline</span></div>
+  <p class="lead">Fourteen new models from Jonas's floor picks, made with <span class="mono">tools/vox/floor_props.py</span> at the sizes of Drywall's tagged boxes. The tagged boxes switch to the models automatically (<span class="mono">Props.dress_tagged</span> runs in Stage before static batching, and the level batches the props one MultiMesh per model). Server racks alternate: every third one has the laundry out on its exhaust.</p>
+  <div class="g2">
+    <figure><img src="img/floors_before.jpg" alt="Placeholder boxes" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">E-1</span><b>Before:</b> the tagged boxes.</figcaption></figure>
+    <figure><img src="img/floors_after.jpg" alt="Modelled props" width="1920" height="1080" style="image-rendering:auto"><figcaption><span class="ref">E-2</span><b>After</b>, left to right:
+      <ul>
+        <li>server rack, with nail-polish cable tags and the colour key taped on (71.2.01)</li>
+        <li>the rack with laundry on the exhaust (71.2.05)</li>
+        <li>labelling desk (a green box drawn round a thing in a picture)</li>
+        <li>cable spool, 19 L water bottle</li>
+        <li>routers in a biscuit tin and a rice cooker (71.2.04), badge printer</li>
+        <li>back row: the PV-NET core's frame (the glass glows inside it in the level), CRT stack, security arch with a bead curtain (70.2.05), the stove, the whiteboard, a world clock (70.2.04)</li>
+      </ul></figcaption></figure>
+  </div>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/floor70_lobby.webp" alt="Floor 70 lobby" width="1280" height="720"><figcaption><span class="ref">F70</span>The lobby at game scale: world clocks stopped at different times, the badge printer on the dais, the arch into the kitchen, water bottles.</figcaption></figure>
+    <figure><img src="img/floor71_b0.webp" alt="Floor 71 farm" width="1280" height="720"><figcaption><span class="ref">F71 A</span>The farm: labelling desks in rows under the grey-morning office tubes.</figcaption></figure>
+    <figure><img src="img/floor71_b2.png" alt="Floor 71 cold aisles" width="1280" height="720"><figcaption><span class="ref">F71 B</span>The cold aisles in server blue, with laundry on the rack exhausts.</figcaption></figure>
+    <figure><img src="img/floor71_b3.webp" alt="Floor 71 patch room" width="1280" height="720"><figcaption><span class="ref">F71 C</span>The Wire Aunties' patch room in warm tungsten.</figcaption></figure>
+  </div>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/floor71_10_window.webp" alt="Floor 71 cooling plant" width="1280" height="720"><figcaption><span class="ref">F71 D</span>The cooling plant: the mezzanine coming down, racks, the cable spool.</figcaption></figure>
+    <figure><img src="img/floor71_11_core_cage.png" alt="Floor 71 core cage" width="1280" height="720"><figcaption><span class="ref">F71 E</span>The core cage: the PV-NET core's frame (caps, posts, looms) round Drywall's glowing glass, which still pulses and breaks as before.</figcaption></figure>
+  </div>
+  <p><b>F71 moods:</b> the floor is one level up and a few minutes later than F70, so the city plate stays at dawn throughout. The rooms run through:</p>
+  <ul>
+    <li>the farm: cool office tubes in grey morning light</li>
+    <li>the cold aisles: server blue</li>
+    <li>the patch room: warm tungsten</li>
+    <li>the cooling plant: steam cyan</li>
+    <li>the window: first sun raking in low</li>
+    <li>the core cage: lit cyan by the core, then blacked out when the core breaks (Drywall's blackout)</li>
+  </ul>
+</section>
+
+<section id="cast">
+  <div class="sec"><span class="no">DIV 00-F</span><h2>The cast: light, crews, heads</h2><span class="csi">Gallery's lookbook, Jonas's picks L1, C2, H1 · all frames 640 &times; 360, nearest-neighbour</span></div>
+  <p class="lead"><b>L1.</b> The characters get their own key and rim light, on a render layer that only the cast draws on. It follows Guilty Gear Xrd's per-character light and TF2's rims. The key is a weak warm light from the camera side. The rim is a cool light from behind and above, and it lands on the tops of heads, shoulders and fists. The floors keep their mood, and the gang stops sinking into the brick. On the Web at 1440p the paired A/B is within noise: &minus;0.33 to +0.35 ms per spot over three runs, with no draw calls added. <span class="mono">?nocharlight</span> switches it off.</p>
+  <figure><img src="img/cast_L1.webp" alt="L1 before and after" width="1000" height="1812"><figcaption><span class="ref">F-1</span>Before and after the light rig on F70 (market), F71 (cold aisles) and F71 (cooling plant). The lineup, left to right: the enforcer, Soldier, Runner, Ballast, Doorman with his door, Doorman without it, Lookout, Netter, Big Rat.</figcaption></figure>
+  <p class="lead" style="margin-top:14px"><b>C2 and H1.</b> The garment is the crew, and one orange item marks the gang. Each role keeps its shape in every crew. The spawn tag is Hitlag's <span class="mono">Enemy.crew</span>, and <span class="mono">VoxelRig.set_crew</span> swaps in <span class="mono">&lt;model&gt;_&lt;crew&gt;.vox</span> at spawn.
+    <ul>
+      <li><b>Toll Crew (F70):</b> hi-vis lime over black hoodies, bone stripes, an orange beanie, a VISITOR lanyard.</li>
+      <li><b>Karaoke Committee (the F70 Doorman and gallery):</b> plum satin, gold piping, headphones round the neck, an orange rag.</li>
+      <li><b>Netters (F71):</b> utility orange, a bone band, white hard hats, cable coils in nail-polish colours.</li>
+    </ul>
+    The Stairwell Kings, Tower Three and the Shaft Boys are authored too, ready for the later floors. The hood is round, with no ear points. Soldiers take their crew's head set: beanie, hood or bare; slicked, grey or bare; hard hat, grey or hood. The rust pauldrons turn grey on crew models, so that orange means only the gang.</p>
+  <figure><img src="img/cast_crews.webp" alt="Six crews" width="1000" height="1224"><figcaption><span class="ref">F-2</span>The six crews on F71 at 2&times;. Each row is the enforcer, three soldiers (the head variety), then the Runner, Ballast, Doorman and Netter. From the top: Toll Crew, Karaoke Committee, Netters, Stairwell Kings, Tower Three, Shaft Boys.</figcaption></figure>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/cast_C2.webp" alt="C2 before and after, with silhouettes" width="1000" height="2416"><figcaption><span class="ref">F-3</span>The lineup before and after the crews, in colour and in black at 1&times;. The silhouettes barely change, and that is expected: C2 is colour. The shape pass (Gallery's round 2) is the next step, and it changes the black test.</figcaption></figure>
+    <figure><img src="img/cast_ingame70.webp" alt="In game, F70" width="1280" height="1440"><figcaption><span class="ref">F-4</span>In the game on F70, with real spawns and the level's own crew tags. The Karaoke Committee is up on the gallery and the Toll Crew is on the floor. Below them, the plum Doorman works the queue lanes.</figcaption></figure>
+  </div>
+  <p class="lead" style="margin-top:14px"><b>Shape pass</b> (Gallery's round 2; Jonas asked for "a circle guy, a triangle guy, a square guy"). Each role now has one primary shape that should read in solid black at 1&times;:
+    <ul>
+      <li><b>Soldier ▲:</b> narrow at the top, the hoodie's hem flaring, baggy cuffed trousers, long feet.</li>
+      <li><b>Runner ▶:</b> a short, 3-deep body leaning 25&deg; even at rest, with the gold bag twice its old size as the broad end.</li>
+      <li><b>Ballast ●:</b> a ball of a body on short legs with a sunk head, concrete paint-tin fists and cement sacks.</li>
+      <li><b>Doorman ■:</b> a square torso under a flat white riot helmet with a smoked visor, on pillar legs. He stays square without the door.</li>
+      <li><b>Netter ⌒:</b> the hunch is built into the model and the head is pushed out. The pack is 1.4&times; as the hump, and the mast is the highest point.</li>
+      <li><b>Lookout ⚲:</b> a new model, with a big round head in headphones on a thin body and long legs.</li>
+      <li><b>Big Rat ▮ (R2):</b> the coat hangs open on a white vest with lapels, and its edges drop straight. The bone trophy is a hump on the far shoulder, and the forearms are taped.</li>
+      <li><b>Enforcer ▼:</b> pauldrons 1.2&times;, and the waist a row in on each side. The gloves are unchanged.</li>
+    </ul>
+    The camera sees each figure mostly side-on, turned 25&deg; towards it, so the depth of the model carries most of the width on screen.</p>
+  <figure><img src="img/cast_shapes.webp" alt="Shape pass" width="1410" height="1380"><figcaption><span class="ref">F-5</span>F71 cold aisles at 3&times;. Top: the crews before the shape pass. Second: after. Then both lineups in black at 1&times;, and the lineup after the pass on F70. From left: enforcer, Soldier, Runner, Ballast (in his guard pose), Doorman with and without the door, Lookout, Netter, Big Rat.
+    <br><b>Black test:</b> the Runner, Doorman, Netter, Big Rat and Lookout name themselves. Ballast's ball is clearer in colour than in black, because his guard pose lifts the tins; that is Armature's to judge. The Soldier's triangle is the mildest shape of the set.</figcaption></figure>
+  <figure style="margin-top:12px"><img src="img/cast_shapes_ingame.webp" alt="Shapes in game" width="1280" height="1440"><figcaption><span class="ref">F-6</span>In the game on F70: the square plum Doorman in the queue lanes, and the Toll Crew at the TEN bank.</figcaption></figure>
+  <p class="lead" style="margin-top:14px"><b>Saki and the Collector.</b> Saki &#x29D7; is the hourglass. The top is a slate coat worn over the shoulders like a cape: a square yoke, a bone 3 on the back, and it hangs to the knee behind her. It is a prop, so she can shrug it off. Her waist is where the boiler suit's arms are knotted, and the suit's legs flare to wide cuffs. She has bone hand wraps, a scar, and her hair pulled back with a grey streak. Her one orange item is the vault key's lanyard. She is built on the ganger skeleton, so Armature's saki_* poses fit as authored. The Collector &#x25C6; wears a slate puffer that is widest at the middle, with his head sunk into the collar and the hood lined in orange. He carries THE BOOK, an oxblood ledger, under his near arm.</p>
+  <figure><img src="img/cast_saki.png" alt="Saki and the Collector" width="1680" height="812"><figcaption><span class="ref">F-7</span>F71 cold aisles at 4&times;. From left: the enforcer, Saki in her coat, Saki in her guard (<span class="mono">saki_up</span>) and bare, the Collector with the Book, and Big Rat. The same frame in black is below.</figcaption></figure>
+</section>
+
+<section id="upper">
+  <div class="sec"><span class="no">DIV 00-G</span><h2>F73 The Wet Market, F75 Saki's Crown</h2><span class="csi">Tidewater's and Drywall's tagged boxes, modelled · the F73 light and water</span></div>
+  <p class="lead"><b>F73.</b> Fifteen models are written in <span class="mono">tools/vox/market_props.py</span> and baked, from the F73 picks:
+    <ul>
+      <li>the fish stall carrying the three-token price board (lift credit, Toll tokens and bus tokens)</li>
+      <li>the ice bed and the gutting table</li>
+      <li>the Stairwell Kings' landing desk and their water pump</li>
+      <li>the hawker's cart</li>
+      <li>the rice cooker, remade as one older than the tower and repaired many times (F71's router cooker is now the same model)</li>
+      <li>a washer with the lift-credit reader</li>
+      <li>the Nerps! oxygen bar and its cylinders</li>
+      <li>the prayer-app shrine with its QR code and real incense</li>
+      <li>a drone mail slot</li>
+      <li>a fish crate, a fish and a hen</li>
+    </ul>
+    Most take the place of their boxes by themselves. The cylinder, the crates on the gutting line, the mail slots that are not bricked up, and the fish and hens from burst tanks are dressed where they spawn.</p>
+  <figure><img src="img/props_market.webp" alt="F73 props" width="1920" height="1080"><figcaption><span class="ref">G-1</span>The F73 set under a neutral key. Back row: the Nerps! bar, a cylinder, the washer, the pump, the shrine, the mail slot, a hen. Front row: the stall and its price board, the ice bed, the hawker cart, the gutting table, the landing desk, the rice cooker, a fish crate, a fish.</figcaption></figure>
+  <p class="lead" style="margin-top:14px"><b>F73 light and water</b> (Afterimage's note). The water takes the room's light, and its patches came in three greens. Under warm light they read as <i>camouflage</i>, and the sluice's teal made the foam mint, a cyan that belongs to High Water. Two changes fix it:
+    <ul>
+      <li><b>The light:</b> the mood keys move towards neutral, the warmth stays in the lamps' pools, and the sluice is slate grey-blue.</li>
+      <li><b>The water:</b> its palette uses close values in a grey drain green with bone-grey foam, so the streaks of the current carry the read.</li>
+    </ul></p>
+  <figure><img src="img/floor73_water.webp" alt="F73 water before and after" width="1806" height="1008"><figcaption><span class="ref">G-2</span>Before (top) and after (bottom), 2&ndash;3&times;: the landing under warm light, the window and the sluice.</figcaption></figure>
+  <figure style="margin-top:12px"><img src="img/floor73_sheet.webp" alt="F73 at game scale" width="1280" height="1080"><figcaption><span class="ref">G-3</span>F73 at game scale, 1&times;: the landing, fish row, the laundromat and QUIET ROOM, the smoking room's Nerps! bar in pink, the window, and the sluice with the Kings' pump.</figcaption></figure>
+  <p class="lead" style="margin-top:14px"><b>F75.</b> These models are written in <span class="mono">tools/vox/crown_props.py</span>:
+    <ul>
+      <li><b>The vault door:</b> stepped steel with twelve bolt heads and a maker's plate. VaultDoor still spins the brass handwheel a notch at every hard hit, and the dents darken the model.</li>
+      <li><b>The security wall's steel door:</b> riveted, with a vision slot, push bar, kick plate, hazard strip and lock block.</li>
+      <li><b>The ledger room:</b> shelves of the old ledgers and THE BOOK's lectern.</li>
+      <li><b>Saki's desk:</b> black walnut, a blotter with a Final Notice on it, a banker's lamp, a note counter, cash, ledgers and a phone.</li>
+      <li><b>Saki's chair:</b> black leather with a high back.</li>
+    </ul></p>
+  <figure><img src="img/floor75_sheet.webp" alt="F75" width="1920" height="1080"><figcaption><span class="ref">G-4</span>F75 at 1.5&times;: the counting room with the steel wall, the ledger room and the vault door, the vault, and Saki's office with her desk and chair against the city.</figcaption></figure>
+  <p class="lead" style="margin-top:14px"><b>F74, the gang's own street</b> (<span class="mono">tools/vox/street_props.py</span>, on Drywall's level-lab tags):
+    <ul>
+      <li><b>The garden:</b> raised beds with greens, chillies and bean canes, the rain tank, a bench, trellises with vines and hanging pots.</li>
+      <li><b>The hot-bed capsules:</b> round hatches, a lamp inside, the rota taped on.</li>
+      <li><b>The mall directory.</b></li>
+      <li><b>The food court:</b> tables with dinner left on them, and the bolted seat rows. One seat model repeats at a 0.6 m pitch along any row.</li>
+      <li><b>The pachinko hall:</b> the islands, the back bank, and the dead machine turned shrine.</li>
+      <li><b>The gym:</b> paint-tin weights, benches and the heavy bag.</li>
+      <li><b>The ring:</b> an off-white canvas with PV-orange ropes on the near side and Tower Three slate at the back, under its lighting truss.</li>
+      <li><b>The cinema:</b> the torn screen and the champion's belt.</li>
+    </ul></p>
+  <figure><img src="img/floor74_sheet.webp" alt="F74" width="1280" height="1080"><figcaption><span class="ref">G-5</span>F74 at 1&times;: the garden, the escalator seats, the food court, the pachinko hall, the gym, and the ring in the old cinema.</figcaption></figure>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/floor74_courts.webp" alt="F74 food court, pachinko, gym" width="1920" height="360"><figcaption><span class="ref">G-6</span>The tiled seat rows, the food tables, the pachinko islands, and the tin weights with the bag.</figcaption></figure>
+    <figure><img src="img/floor74_ring.webp" alt="F74 ring and garden" width="1920" height="540"><figcaption><span class="ref">G-7</span>The ring under its truss beside the capsules, and the garden.</figcaption></figure>
+  </div>
+</section>
+
+<section id="dollhouse">
+  <div class="sec"><span class="no">DIV 00-L</span><h2>D1 built · the voxel dollhouse</h2><span class="csi">Jonas picked D1 "with extra love and detail" · art-lab · Opticals' monitor and dive · Readout wires it in</span></div>
+  <p class="lead">This is the select running live. The tower is built in code from voxels.
+  <ul>
+    <li><b>Inside:</b> each floor's own level sits on its back wall, people walk the floors, and a small CCTV camera with a blinking REC lamp is bolted where Opticals' feed looks from.</li>
+    <li><b>Outside:</b> the gangs' build-outs are bolted onto the core's wings, in faded paint, with lit windows, AC units, awnings, dishes and tanks. There is scaffolding with people on it, gangways, laundry, drain pipes and cable sags. The signs are the Oh-Di clinic, a TOWER 3 blade sign and the 水位上升中 ticker. On the crown are water tanks, antennae with blinking tips, red beacons and the HIGH WATER billboard. Rain falls, the drowned city stands behind, and foam marks where the sea meets the tower.</li>
+    <li><b>Selecting:</b> the selected floor slides out like a drawer, and Opticals' CRT swings out on its arm to show that floor's feed: infrared when the floor is dark, torn when it is flooded. Confirm dives the camera into the tube.</li>
+    <li><b>The finale:</b> the sea rises floor by floor over the crown.</li>
+  </ul>
+  C6 is objects here: F73's flood standing in its slot with the burn's char and embers mid-floor, F70 dark under its one red lamp, and F74's rubble.</p>
+  <div class="g2">
+    <figure><img src="img/dollhouse_still.webp" alt="The dollhouse select, F73 out" width="1920" height="1080"><figcaption><span class="ref">L-1</span>F73 slid out, its CRT showing the flooded feed. The card and floor labels are a stand-in until Readout wires his own over it.</figcaption></figure>
+    <figure><video src="img/dollhouse_clip.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">L-2</span>The selection steps F70 (dark, IR feed), F73, F74 and the crown, while the monitor follows along the frame.</figcaption></figure>
+    <figure><video src="img/dollhouse_dive.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">L-3</span>Confirm on F73: Opticals' dive into the tube, which then collapses to black, where the briefing takes over.</figcaption></figure>
+    <figure><video src="img/dollhouse_finale.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">L-4</span>The finale: from the floors High Water holds, the sea climbs over F74 and the crown until only the antenna lamps are left.</figcaption></figure>
+  </div>
+  <p><b>Web cost</b> (cold headless Chrome, 1904&times;985, RTX 3070 via ANGLE/D3D11, <span class="mono">tools/art/dollhouse_bench.tscn</span>):
+    <ul>
+      <li><b>Open versus closed</b> (paired A/B): &minus;0.00 to +0.03 ms of frame interval.</li>
+      <li><b>One-time cost:</b> the build takes 90&ndash;110 ms and opening takes 1.6 ms. The first draw spends 1.7 s compiling shaders, down from 6 s once everything moved onto one self-lit voxel shader with no scene lights. Readout will create the dollhouse where that stall can't be seen.</li>
+      <li><b>Desktop:</b> about 100 draw calls and 1.0 ms of GPU at 1080p.</li>
+    </ul>
+    Glow is off on the Web. This machine's GPU hides the GPU cost in Chrome, so an integrated-GPU check is still open.</p>
+</section>
+
+<section id="tower">
+  <div class="sec"><span class="no">DIV 00-K</span><h2>The Tower 3 cutaway, four new looks</h2><span class="csi">Jonas: "very svg drawn by the venerable early model generations" · in-engine renders · 2026-10-02</span></div>
+  <div class="answer">
+    <h3><span class="k">RECOMMENDED</span>D1, the voxel dollhouse, with D3's monitor as its card</h3>
+    <p class="pick">The tower becomes a real voxel model, sliced open at the front. Each floor is its own level seen through the cut, and the floor you pick slides out like a drawer.</p>
+    <ul>
+      <li><b>Why D1:</b> it is the only direction where the select is made of the same stuff as the game. Voxel slabs, lit rooms, people moving and the drowned city around it all say Tower 3 before any text does. C6 turns into objects: water standing in the floor slot, a char heap with embers, the blacked-out floor under its one red lamp, rubble where the rig fell.</li>
+      <li><b>Why with D3:</b> Opticals' CCTV feeds are the strongest moving image on this board. The selected floor's feed can sit in the contract card on the right, so you see the model and the live floor together. D3 also stands on its own as a whole screen (see below), and is the safer pick if the 3D menu worries you on Web.</li>
+      <li><b>What stays:</b> Readout's selection, input and crown finale stay as they are. In the finale the sea rises up the model and over the crown.</li>
+    </ul>
+    <p style="margin-bottom:0">D1 needs about <b>8 h</b>, D1 with the D3 card about <b>10 h</b> (Opticals' part included), and it can land Sunday morning. <b>Pick D1, D2, D3, D4 or a cross.</b> I build nothing until then.</p>
+  </div>
+  <div class="routes" style="grid-template-columns: repeat(2, 1fr)">
+    <div class="rcard rec"><header><h4>Voxel dollhouse</h4><span class="l">D1</span></header><div class="body">
+      <span class="rec-flag">recommended</span>
+      <p>A 3D voxel tower in a SubViewport behind the labels. Each floor's plate is its back wall, with slabs, end bays and ducts built from cubes in front. People move as specks, the camera drifts slowly, and the drowned floors below F70 run into a sea that reflects the lit floors.</p>
+      <dl><dt>Cost</dt><dd>≈ 8 h</dd><dt>Web</dt><dd class="risk-med">medium · ~7,700 cubes in 14 MultiMeshes, about 100 draws, glow off on Web; a bench is still to run</dd><dt>Fits</dt><dd>the game's voxels, C6 as objects</dd></dl></div></div>
+    <div class="rcard"><header><h4>Orange schematic</h4><span class="l">D2</span></header><div class="body">
+      <p>Contract Optics on paper: each plate dithered to 1-bit orange, huge floor numbers, hazard chevrons under the selection, a scanline wipe on each move. C6 shows as marks in the same ink: ruled water, a black burn blot, a crossed-out collapse, a DARK stamp.</p>
+      <dl><dt>Cost</dt><dd>≈ 4 h</dd><dt>Web</dt><dd class="risk-low">low · 6 textured rects with one shader, canvas text</dd><dt>Fits</dt><dd>NERV and MAGI screens, the HUD's orange</dd></dl></div></div>
+    <div class="rcard"><header><h4>Monitor wall</h4><span class="l">D3</span></header><div class="body">
+      <p>Opticals' build: Tower 3's security office. Six CRTs show baked CCTV loops of the real floors with their crews at their posts. The selected feed fills the big monitor over the contract card. Dark floors drop to IR, flooded floors lose hold, F72 shows NO SIGNAL. On confirm the camera zooms in and the tube collapses.</p>
+      <dl><dt>Cost</dt><dd>≈ 6–8 h (Opticals, with Readout's hook)</dd><dt>Web</dt><dd class="risk-low">low · 7 rects with one CRT shader; desktop &lt; 0.1 ms (within noise), Web ≤ 0.3 ms (about 0.5 ms on an integrated GPU, estimated); about 0.36 MB of feed strips</dd><dt>Fits</dt><dd>the codec, the optics, the found-footage voice</dd></dl></div></div>
+    <div class="rcard"><header><h4>Split-flap board</h4><span class="l">D4 · wild card</span></header><div class="body">
+      <p>The lobby departures board: every floor is a row of flaps (name, contract, state) over a slot showing its level. Moving the selection rattles the rows over to the new state, in orange. The mundane future, made literal.</p>
+      <dl><dt>Cost</dt><dd>≈ 3–4 h</dd><dt>Web</dt><dd class="risk-low">low · about 250 cells drawn per frame; static rows can be cached</dd><dt>Fits</dt><dd>the lobby, the Toll, the queue hall</dd></dl></div></div>
+  </div>
+  <div class="g2">
+    <figure><img src="img/tower_d1_still.webp" alt="D1 voxel dollhouse" width="1920" height="1080"><figcaption><span class="ref">K-1</span>D1, the voxel dollhouse, with F73 slid out: the flood standing at the sluice, the burn's embers mid-floor, F70 dark under its red lamp, the waterline ring at F74, the crown's beacons.</figcaption></figure>
+    <figure><video src="img/tower_d1_clip.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">K-2</span>D1 in motion: the selection steps F70, F73, F74 while the camera drifts and the people walk.</figcaption></figure>
+    <figure><img src="img/tower_d2_still.png" alt="D2 orange schematic" width="1920" height="1080"><figcaption><span class="ref">K-3</span>D2, the orange schematic, with F74 selected: chevrons under it, the rig crossed out, F73's water and burn marks, F70 stamped DARK.</figcaption></figure>
+    <figure><video src="img/tower_d2_clip.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">K-4</span>D2 in motion: the scanline wipe tears through each newly selected floor.</figcaption></figure>
+    <figure><img src="img/tower_d3_still.webp" alt="D3 monitor wall" width="1920" height="1080"><figcaption><span class="ref">K-5</span>D3, the monitor wall (Opticals), with F70 selected: its feed on IR after the power cut, F73's feed flooded, F72 with no signal.</figcaption></figure>
+    <figure><video src="img/tower_d3_clip.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">K-6</span>D3 in motion: F73, F71 through channel static, F70 on IR, then confirm, a zoom into the tube and the briefing typing on.</figcaption></figure>
+    <figure><img src="img/tower_d4_still.webp" alt="D4 split-flap board" width="1920" height="1080"><figcaption><span class="ref">K-7</span>D4, the split-flap board, with F74 selected. Every row carries its floor in a slot under its flaps.</figcaption></figure>
+    <figure><video src="img/tower_d4_clip.mp4" width="1280" height="720" autoplay loop muted playsinline style="width:100%;height:auto;display:block"></video><figcaption><span class="ref">K-8</span>D4 in motion: the rows rattle over as the selection moves.</figcaption></figure>
+  </div>
+  <p class="lead">All four are in-engine renders (<span class="mono">tools/art/tower_lab.tscn -- look=voxel|schematic|flap</span>; D3 is Opticals' <span class="mono">monitor_wall</span> on optics-lab). They use the real plates and the C6 states of a demo run: F70 dark, F73 flooded and burnt, F74's rig down. None of them touches <span class="mono">tower_select.gd</span> yet. The pick becomes a visual layer behind Readout's selection, with one hook from him.</p>
+</section>
+
+<section id="route">
+  <div class="sec"><span class="no">DIV 00-J</span><h2>C6 · Your route on the cutaway</h2><span class="csi">tier 3 · what you did to each floor, drawn on its plate · built on art-lab</span></div>
+  <p class="lead">When a contract ends, the floor is boiled down into a small record kept with its LEVEL REGISTER entry. The record holds four things. First, where water stands or has left tide marks, and where soot and blast scorch are, all read off Sim's cells and scar grid in 5-pixel slices along the floor. Second, whether the power is out, and where the emergency red hangs. Third, what came down: dropped decks and breached walls. The cutaway draws that record over the floor's plate. Flooded floors hold water to a tide line. Burnt floors carry char along the floor, flame tongues up the walls and soot pooled under the ceiling, with a few embers still in it. Blacked-out floors stay dark except for the one red lamp. Collapses show as ragged holes with their rubble heaped below. Each floor's overlay is baked once into one texture, about 1.5 ms, one floor per frame as the cutaway opens. After that it costs one textured rect a frame, plus a dim and a pulse on dark floors. The newest run's damage replaces the last.</p>
+  <figure><img src="img/route_bands.webp" alt="F70 dark, F73 flooded and burnt, F74 collapsed" width="2280" height="896"><figcaption><span class="ref">J-1</span>A test run, each floor selected. F70: the booth's blackout, the red lamp at the Toll, and the lookout gallery's first span down with its rubble on the lobby floor. F73: the cistern burst, its flood standing in the sluice on the right; the smoking room's cylinder left char and soot mid-floor. F74: the lighting rig over the ring is down, its gap torn under the ceiling and its wreck on the canvas; breach wall 1 is cut. (F74 has no fire source.)</figcaption></figure>
+  <figure><img src="img/route_cutaway.jpg" alt="The cutaway after the run" width="1920" height="1080"><figcaption><span class="ref">J-2</span>The whole select after the run, with F73 selected; the other floors sit dimmed as usual.</figcaption></figure>
+</section>
+
+<section id="cutaway">
+  <div class="sec"><span class="no">DIV 00-I</span><h2>Tower 3 cutaway plates</h2><span class="csi">for Readout's level select · each floor rendered as a true section</span></div>
+  <p class="lead">Every playable floor is rendered from the level itself: orthographic, straight on, end to end at one scale. The floor is shot in eight segments so the moods follow along the lane, and it's transparent above the ceiling and through the glass. Each plate is 1520 &times; 184, twice Readout's 760 &times; 92 band. The floor fills the lower half, and his line art keeps the ceiling above it. F72 has no level, so it stays his drawing. The plates are in <span class="mono">assets/ui/cutaway/f70&ndash;f75.png</span>, made by <span class="mono">tools/art/cutaway_plates.tscn</span>.</p>
+  <figure><img src="img/cutaway_stack.webp" alt="The tower's plates stacked" width="1560" height="1144"><figcaption><span class="ref">I-1</span>The plates stacked in tower order on the select's dark: the crown F75 (the vault door and the office), F74 (the garden to the ring), F73 (the market), F72 (locked), F71 (the farm to the core cage), F70 (the lobby to the Toll).</figcaption></figure>
+</section>
+
+<section id="floor-remembers">
+  <div class="sec"><span class="no">DIV 00-H</span><h2>A4 · The floor remembers</h2><span class="csi">Jonas picked B for every state (2026-10-01) · built</span></div>
+  <p class="lead">The Sim's cell state is a 0.5 m RGBA8 texture: wet, charge, heat and fuel gas. Blockwork samples it on every floor block, and the rules read the same cells, so <b>what you see is what the rules read</b>. The Sim binds it at floor start. The states live in value and texture, never in a new hue. Charge is a cold white, and embers are a warm white; night vision keeps both.
+    <ul>
+      <li><b>Wet:</b> blocky mirror puddles with a lit lip and glints, damp round them.</li>
+      <li><b>Charge:</b> single blocks flash for one 12 Hz frame, and the seams hum, shimmering block by block. The flashes are dense enough, and the hum bright enough, to hold up under the night-vision grade.</li>
+      <li><b>Heat:</b> char with a grey ash rim round the burn, and a few glowing seams in the hottest cells.</li>
+      <li><b>Gas:</b> drifting bands at knee height, in a 4 &times; 4 ordered dither.</li>
+    </ul></p>
+  <figure><img src="img/sim_picked.webp" alt="The picked looks" width="1422" height="968"><figcaption><span class="ref">H-1</span>The picked looks on a hand-painted state, 3&times; crops. From left: wet, charge, heat, gas. Top row F73, bottom row F71.</figcaption></figure>
+  <div class="g2" style="margin-top:12px">
+    <figure><img src="img/sim_nv.webp" alt="Under night vision" width="1160" height="1590"><figcaption><span class="ref">H-2</span><b>Night vision</b> (Opticals' pass, Bone), in the real main scene with the blackout. For F73 and then F71: lit, then two night-vision frames half a 12 Hz tick apart. Left of the enforcer are wet and charge; right of him, heat and gas. Charge reads as a shimmering field with cold-white flashes and no full-field strobe. The embers keep their warm white. The wet sheen and gas dither survive as value.</figcaption></figure>
+    <figure><img src="img/sim_scars.png" alt="The scars" width="1410" height="908"><figcaption><span class="ref">H-3</span><b>The scars</b> (Hitlag's scar texture, which never fades). From left: soot, a charcoal film with ash flecks; dried water, a pale bloom with a lighter tide line; blast scorch, jagged dark streaks. Top F73, bottom F71.</figcaption></figure>
+  </div>
+  <p><b>Web cost</b> (headless Chrome at 2560 &times; 1440, a cold browser per run, <span class="mono">?quiet</span>, and Slipway's wall-clock frame timing). It's a paired A/B at three beats per floor, with states bound and unbound in alternating 2 s windows:
+    <ul>
+      <li><b>F73:</b> +0.18, &minus;0.07, &minus;0.13 ms. With every cell at 0.8 in every channel (the worst case): +0.13, &minus;0.30, +0.17.</li>
+      <li><b>F71:</b> +0.07, +0.23, 0.00 ms. Worst case: +0.27, +0.06, &minus;0.10.</li>
+    </ul>
+    Every delta is under the 0.3 ms ceiling and within the noise.</p>
+</section>
+
+<!-- 00 ================================================================= -->
+<section id="answer">
+  <div class="sec"><span class="no">DIV 00</span><h2>The answer first</h2><span class="csi">recommendation and what you pick</span></div>
+  <div class="answer">
+    <h3><span class="k">RECOMMENDED</span>Route A, Blockwork, with one pipeline for every prop</h3>
+    <p class="pick">The world is built of 0.125 m blocks, as the people are built of voxels.</p>
+    <ul>
+      <li><b>One shader gives every box a block pattern.</b> Formwork concrete, carpet tile, steel plate, terrazzo, plywood and cladding are chosen per 0.125 m block (two character voxels, 4 screen pixels). A brick, a pier or a fracture piece carries the same blocks, so destruction matches the world with no extra work. It adds no triangles and no textures.</li>
+      <li><b>Props are modelled by code in Blender, once.</b> <span class="mono">props_blender.py</span> writes 8 props now, and each exports three finishes: remeshed into blocks for route A, chamfered with baked AO for route B, flat for route C. The film uses the same source files, so Opticals' recruitment film and the game share the pipeline (see <a href="#hero">hero assets</a>).</li>
+      <li><b>Light:</b> the window is the one shadow-caster. It draws the mullion bars across the floor. The scene uses at most six unshadowed OmniLights, additive light pools, emissive signs and neon, and a mood per section. No LightmapGI: baked light cannot follow a floor that falls down.</li>
+      <li><b>The city:</b> a panorama rendered from Babel's own 1,260-building data for the far city, shader-lit towers for the middle distance, and an interior-mapped facade across the street. All three are parallax layers on the camera.</li>
+    </ul>
+    <p style="margin-bottom:0">About <b>18 h</b> to production for Floor 70. No downloads are needed. Web risk is low: every route held 60 fps in Chrome on this machine, and route A costs no more draw calls than the greybox. <b>Pick A, B or C</b> (or say what to cross); I build nothing until then.</p>
+  </div>
+  <div class="routes">
+    <div class="rcard rec"><header><h4>Blockwork</h4><span class="l">A</span></header><div class="body">
+      <span class="rec-flag">recommended</span>
+      <p>A voxel-scale environment with procedural block materials. The world reads as the characters do; every piece that breaks is a box, and boxes are native here.</p>
+      <dl><dt>Cost</dt><dd>≈ 18 h</dd><dt>Web</dt><dd class="risk-low">low · 369 draws in the mock</dd><dt>Fits</dt><dd>voxel rigs, masonry, Kit boxes</dd></dl></div></div>
+    <div class="rcard"><header><h4>Trim &amp; Bake</h4><span class="l">B</span></header><div class="body">
+      <p>Low-poly hard-surface: chamfered Blender props with baked AO, and 32 px/m trim textures drawn in code. It looks the cleanest, but at 30 px/m the bevels are under one pixel.</p>
+      <dl><dt>Cost</dt><dd>≈ 22 h</dd><dt>Web</dt><dd class="risk-low">low-medium · textures, 372 draws</dd><dt>Fits</dt><dd>the intro's close-ups more than the game</dd></dl></div></div>
+    <div class="rcard"><header><h4>Ink &amp; Grain</h4><span class="l">C</span></header><div class="body">
+      <p>Flat colour, light in three dithered bands, a one-pixel ink outline on everything, characters included. It has the strongest graphic identity, next to Shinkawa and Opticals' Cut-Out.</p>
+      <dl><dt>Cost</dt><dd>≈ 17 h</dd><dt>Web</dt><dd class="risk-med">medium · outlines double the draw calls (679)</dd><dt>Fits</dt><dd>High Water's ink brand; touches the rig materials</dd></dl></div></div>
+  </div>
+</section>
+
+<!-- 01 ================================================================= -->
+<section id="scale">
+  <div class="sec"><span class="no">DIV 01</span><h2>What 640 × 360 can hold</h2><span class="csi">the numbers every route answers to</span></div>
+  <div class="tablewrap"><table>
+    <tr><th>Measure</th><th>Value</th><th>Consequence</th></tr>
+    <tr><td class="k">screen density</td><td>30 px per metre (orthographic size 12 over 360 px)</td><td>A 2 m vending machine is 60 px tall and a 0.3 m sign letter is 9 px. Detail below 0.07 m (2 px) does not survive.</td></tr>
+    <tr><td class="k">character voxel</td><td>0.066 m = 2 px</td><td>The enforcer is about 29 voxels tall. The environment must stay coarser, or the people stop being the sharpest things on screen.</td></tr>
+    <tr><td class="k">environment block (A)</td><td>0.125 m = about 4 px</td><td>Bricks (1.0 × 0.5), cinder courses (0.5) and their shatter pieces (halves) all divide into it, so fracture lands on block boundaries.</td></tr>
+    <tr><td class="k">bevel (B)</td><td>0.02–0.03 m = under 1 px</td><td>Chamfers vanish at game scale. Only the baked AO and silhouettes read. B pays off in the intro's close-ups.</td></tr>
+    <tr><td class="k">texel density (B)</td><td>128 px over 4 m = 32 px/m</td><td>One texel per screen pixel. Photo textures (ambientCG, Poly Haven) at 1K would shimmer and read as a different game.</td></tr>
+    <tr><td class="k">outline (C)</td><td>0.034 m hull = 1 px</td><td>Readable on every box, but every mesh draws twice.</td></tr>
+  </table></div>
+</section>
+
+<!-- ROUTE A ============================================================ -->
+<section id="a">
+  <div class="sec"><span class="no">DIV 09-A</span><h2>Blockwork</h2><span class="csi">voxel-scale environment · procedural block materials · recommended</span></div>
+  <p class="lead">Every surface is sampled in 0.125 m blocks. The shader picks each block's colour from a pattern: board-formed concrete with joints and tie holes, carpet tile with a quarter-turned pile and a corporate band every 6 m, terrazzo chips, plywood grain rows, steel plate with seams and rust. A one-pixel rim is lit on top edges and dark on side edges, from the BoxMesh UVs, and draws every brick's mortar line and every fracture piece's outline. Blender props arrive already remeshed into blocks, with AO baked per block.</p>
+  <div class="hero">
+    <figure><img src="img/a_floor70.png" alt="Route A: Floor 70 at night at game scale" width="640" height="360"><figcaption><span class="ref">A-1</span>Floor 70, night, game camera, the 640 × 360 frame enlarged with nearest-neighbour. The Toll's deck on four cinder piers, the voxel kiosk and cash cage on it, the PV neon, rain on the curtain wall, and Babel beyond.</figcaption></figure>
+    <div style="display:grid;gap:12px">
+      <figure><div class="loupe" style="background-image:url(img/a_floor70.png);background-position:80% 22%"></div><figcaption><span class="ref">A-1 ×3</span>Blocks on the piers, the formwork and the terrazzo. The rigs stay the finest grain on screen.</figcaption></figure>
+      <figure><div class="loupe" style="background-image:url(img/a_wreck.webp);background-position:78% 40%"></div><figcaption><span class="ref">A-2 ×3</span>Collapse: pieces keep their blocks and rims.</figcaption></figure>
+    </div>
+  </div>
+  <h3><span class="k">A-2 · A-3 · A-4</span>Destruction and mood</h3>
+  <div class="g3">
+    <figure><img src="img/a_wreck.webp" alt="Route A: the Toll collapsing" width="640" height="360"><figcaption><span class="ref">A-2</span>0.55 s after two piers are cut and the barrel goes. The deck sags and drops with the kiosk riding it; crates burst into eighths, and the rubble is cinder blocks. 131 live pieces.</figcaption></figure>
+    <figure><img src="img/a_dusk.png" alt="Route A at dusk" width="640" height="360"><figcaption><span class="ref">A-3</span>Dusk: a low sun through the curtain wall lays mullion shadows across the lane. The only change is one light and one uniform.</figcaption></figure>
+    <figure><img src="img/a_blackout.png" alt="Route A blackout" width="640" height="360"><figcaption><span class="ref">A-4</span>Blackout (the Tap floor's twist): an emergency red omni and its pool, lamps dead, and the city still lit outside.</figcaption></figure>
+  </div>
+  <h3><span class="k">A-5 · A-6 · A-7</span>Style tiles, prop kit, signs</h3>
+  <div class="g3">
+    <figure><img src="img/a_tiles.png" alt="Route A style tiles" width="640" height="360"><figcaption><span class="ref">A-5</span>Style tiles at 2× game scale: concrete, curtain wall, carpet, steel, signage, graffiti, cable runs, lighting.</figcaption></figure>
+    <figure><img src="img/a_props.png" alt="Route A prop kit" width="640" height="360"><figcaption><span class="ref">A-6</span>The prop kit's voxel finish next to the enforcer: vending machine, server rack, desk and chair, planter, jersey barrier, toll kiosk, turnstile, cash cage.</figcaption></figure>
+    <figure><img src="img/a_signs.png" alt="Route A sign set" width="640" height="360"><figcaption><span class="ref">A-7</span>The sign set in DotGothic16 at one font pixel per screen pixel. Neon is glowing blocks on the grid.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>How destruction reads</h4>
+      <ul><li>Bricks, cinder cells, slabs and crates are boxes, and every box gets the block pattern in its own space, so a loose piece keeps its look while it tumbles.</li>
+      <li>The one-pixel rim outlines every piece in flight, which is what makes a debris storm read at 640 × 360.</li>
+      <li>Blender props (vending machine, kiosk) are already blocks. When one shatters, Debris spawns box chunks in the prop's key colour, and they look the same.</li></ul>
+      <h4>Shader list (Web-safe, Compatibility)</h4>
+      <ul><li><span class="mono">blockwork.gdshader</span>: 11 patterns, rim, floor grime, local or world space, vertex colour. ALU only, no textures, no screen reads. At 230k pixels, fragment cost is not the constraint.</li>
+      <li><span class="mono">glass</span>, <span class="mono">pool</span> (banded in 5 steps), <span class="mono">card</span> (the pano posterised to blocks), <span class="mono">city_building</span>, <span class="mono">interior</span> (quantised to 0.125 m): shared with the other routes.</li></ul>
+      <h4>Sign system</h4>
+      <ul><li>DotGothic16 (OFL, already shipped) at 1/30 m per font pixel, so glyphs are exact pixels. Signs are wide and chunky, and plates auto-fit their text.</li>
+      <li>Neon letters are built from glowing 0.125 m blocks on a stroke font, with a banded halo quad.</li></ul>
+    </div>
+    <div>
+      <h4>Prop kit</h4>
+      <ul><li>Done by code: vending machine, server rack, desk + chair, planter, jersey barrier, toll kiosk, turnstile, cash cage.</li>
+      <li>Next: water cooler, copier, filing cabinet, office sofa, lift call panel, hanging blade sign frame, fluorescent pendant, cable tray and junction box, sandbag and pallet barricade, mattress and cot for the cubicle homes.</li>
+      <li>Kenney Furniture Kit (CC0, on H:) can be fed through the same remesh for anything we don't write.</li></ul>
+      <h4>Cost</h4>
+      <ul><li>Productionise the shader and material table in <span class="mono">Pal</span>/<span class="mono">LevelKit</span>, and hook Debris/BrickWall to local space: 3 h.</li>
+      <li>Ten more props through <span class="mono">props_blender.py</span>: 5 h. Restyle <span class="mono">Kit.sign()</span>: 2 h.</li>
+      <li>Window wall, backdrop and lighting pass: 4 h. Dressing Floor 70: 3 h. Web check: 1 h.</li></ul>
+      <div class="meter"><span><b>≈ 18</b>hours</span><span class="risk-low"><b>low</b>Web risk</span><span><b>369</b>draws (mock, unbatched)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE B ============================================================ -->
+<section id="b">
+  <div class="sec"><span class="no">DIV 09-B</span><h2>Trim &amp; Bake</h2><span class="csi">low-poly hard surface · baked AO · trim textures</span></div>
+  <p class="lead">The same Blender props, chamfered (0.02–0.03 m, two segments) with Cycles AO baked into the vertex colours. Structure uses StandardMaterial with object- or world-space triplanar trim textures drawn in GDScript: formwork with drips, carpet tiles, panel seams with rivets, stone chips. They are 128 px over 4 m, so one texel covers one screen pixel. This route is the intro's pipeline, run at game scale.</p>
+  <div class="hero">
+    <figure><img src="img/b_floor70.webp" alt="Route B: Floor 70 at night" width="640" height="360"><figcaption><span class="ref">B-1</span>Floor 70, night, game camera. Cleaner and softer; the desks and barriers read as manufactured.</figcaption></figure>
+    <div style="display:grid;gap:12px">
+      <figure><div class="loupe" style="background-image:url(img/b_floor70.webp);background-position:80% 22%"></div><figcaption><span class="ref">B-1 ×3</span>The AO reads and the bevels don't. Next to the voxel rigs, the props start to look like a different kit.</figcaption></figure>
+      <figure><div class="loupe" style="background-image:url(img/b_wreck.webp);background-position:78% 40%"></div><figcaption><span class="ref">B-2 ×3</span>Fracture pieces are plain boxes against chamfered props, which is the mismatch this route would have to pay to fix.</figcaption></figure>
+    </div>
+  </div>
+  <div class="g3">
+    <figure><img src="img/b_wreck.webp" alt="Route B collapse" width="640" height="360"><figcaption><span class="ref">B-2</span>The collapse. The masonry is fine, but a chamfered kiosk breaking into square chunks will show.</figcaption></figure>
+    <figure><img src="img/b_dusk.webp" alt="Route B dusk" width="640" height="360"><figcaption><span class="ref">B-3</span>Dusk. Metal and GGX pick up the low sun; this route handles specular best.</figcaption></figure>
+    <figure><img src="img/b_blackout.png" alt="Route B blackout" width="640" height="360"><figcaption><span class="ref">B-4</span>Blackout.</figcaption></figure>
+  </div>
+  <div class="g3" style="margin-top:12px">
+    <figure><img src="img/b_tiles.png" alt="Route B style tiles" width="640" height="360"><figcaption><span class="ref">B-5</span>Style tiles (2×): trim textures at 32 px/m.</figcaption></figure>
+    <figure><img src="img/b_props.png" alt="Route B prop kit" width="640" height="360"><figcaption><span class="ref">B-6</span>The prop kit, trim finish: 130–880 faces per prop, 26–170 KB per GLB.</figcaption></figure>
+    <figure><img src="img/b_signs.png" alt="Route B signs" width="640" height="360"><figcaption><span class="ref">B-7</span>Signs in DejaVu Sans Condensed Bold (Tower 3 wayfinding) and JetBrains Mono (the stencils), with bevelled plates.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>How destruction reads</h4>
+      <ul><li>Masonry and slabs stay boxes; object-space triplanar keeps each piece's texture fixed to it.</li>
+      <li>Props need a pre-fractured variant or an inner "core" material (concrete aggregate, rebar ends) to avoid clean cubes coming out of chamfered shells: +4 h.</li></ul>
+      <h4>Shader list</h4>
+      <ul><li>StandardMaterial3D: triplanar, nearest-with-mipmaps, vertex colour for props, metallic for steel. Four 128² textures generated at load (about 200 KB of VRAM, zero download).</li>
+      <li>Decals are not available in Compatibility (Godot's Decal node needs Forward+/Mobile), so graffiti and hazard tape become alpha quads.</li></ul>
+    </div>
+    <div>
+      <h4>Prop kit and signs</h4>
+      <ul><li>The same 8 props plus the same ten more; each needs a bevel check and an AO bake (about 1 min each, headless).</li>
+      <li>Corporate wayfinding plates carry the Tower 3 brand; the gang signs are hand-painted plywood and lightboxes.</li></ul>
+      <h4>Cost</h4>
+      <ul><li>Trim set and material table: 3 h · ten more props: 6 h · fracture variants and inner material: 4 h · decals as quads: 2 h · light and backdrop: 3 h · dressing: 3 h · Web: 1 h.</li></ul>
+      <div class="meter"><span><b>≈ 22</b>hours</span><span class="risk-low"><b>low-med</b>Web risk</span><span><b>372</b>draws</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROUTE C ============================================================ -->
+<section id="c">
+  <div class="sec"><span class="no">DIV 09-C</span><h2>Ink &amp; Grain</h2><span class="csi">flat colour · dithered light bands · one-pixel outline</span></div>
+  <p class="lead">A custom <span class="mono">light()</span> quantises light into three bands and breaks the band edges with a 4 × 4 Bayer dither on the 640 × 360 grid. Shade is tinted cool, light warm. Every mesh gets an ink hull one pixel wide: boxes grow along <span class="mono">sign(VERTEX)</span> so their corners stay closed, and other meshes grow along their normals. The voxel rigs are switched to the same ink shader, so the characters and the world are drawn in one hand.</p>
+  <div class="hero">
+    <figure><img src="img/c_floor70.png" alt="Route C: Floor 70 at night" width="640" height="360"><figcaption><span class="ref">C-1</span>Floor 70, night. Reads as a drawing: the outlines separate every prop, and the dither turns light into pixel texture.</figcaption></figure>
+    <div style="display:grid;gap:12px">
+      <figure><div class="loupe" style="background-image:url(img/c_floor70.png);background-position:80% 22%"></div><figcaption><span class="ref">C-1 ×3</span>Ink hull and dithered band edges. The rigs in ink.</figcaption></figure>
+      <figure><div class="loupe" style="background-image:url(img/c_wreck.png);background-position:78% 40%"></div><figcaption><span class="ref">C-2 ×3</span>Every fragment outlined: the storm is readable, but busy.</figcaption></figure>
+    </div>
+  </div>
+  <div class="g3">
+    <figure><img src="img/c_wreck.png" alt="Route C collapse" width="640" height="360"><figcaption><span class="ref">C-2</span>The collapse. The outlines draw the rubble like a comic panel; 871 draw calls at this moment.</figcaption></figure>
+    <figure><img src="img/c_dusk.png" alt="Route C dusk" width="640" height="360"><figcaption><span class="ref">C-3</span>Dusk, in bands.</figcaption></figure>
+    <figure><img src="img/c_blackout.png" alt="Route C blackout" width="640" height="360"><figcaption><span class="ref">C-4</span>Blackout: the red pool dithers into the floor.</figcaption></figure>
+  </div>
+  <div class="g3" style="margin-top:12px">
+    <figure><img src="img/c_tiles.png" alt="Route C style tiles" width="640" height="360"><figcaption><span class="ref">C-5</span>Style tiles (2×). Texture is replaced by colour, band and line.</figcaption></figure>
+    <figure><img src="img/c_props.png" alt="Route C prop kit" width="640" height="360"><figcaption><span class="ref">C-6</span>The prop kit, flat finish (34–258 faces).</figcaption></figure>
+    <figure><img src="img/c_signs.png" alt="Route C signs" width="640" height="360"><figcaption><span class="ref">C-7</span>Signs in DejaVu Serif Condensed, lettered and outlined.</figcaption></figure>
+  </div>
+  <div class="spec">
+    <div>
+      <h4>How destruction reads</h4>
+      <ul><li>The best-separated pieces of any route, because every fragment is outlined. The risk is noise: the 131-piece burst becomes a line-drawing storm. Outlines could be dropped on pieces under 0.03 m³.</li></ul>
+      <h4>Shader list</h4>
+      <ul><li><span class="mono">ink.gdshader</span> (custom light, Bayer), <span class="mono">ink_outline.gdshader</span> (next_pass, cull_front, unshaded); pools banded and dithered, the pano dithered to 5 levels.</li>
+      <li>Cost: each mesh draws twice (679 vs 369 draws). Fix it by merging static dressing into one mesh per room and using MultiMesh walls, which Drywall has already proposed.</li></ul>
+    </div>
+    <div>
+      <h4>Sign system and characters</h4>
+      <ul><li>Lettered signs, outlined plates, flat neon with dithered halos.</li>
+      <li>The rigs need their materials swapped (Armature's lane). It is a one-line override here, but it changes the character look Jonas approved.</li></ul>
+      <h4>Cost</h4>
+      <ul><li>Shaders to production: 2 h · rig material hook: 1 h · ten more props: 4 h · signs: 2 h · band and light tuning: 3 h · dressing: 3 h · batching for the outline cost: 2 h.</li></ul>
+      <div class="meter"><span><b>≈ 17</b>hours</span><span class="risk-med"><b>medium</b>Web risk</span><span><b>679</b>draws</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE ============================================================ -->
+<section id="compare">
+  <div class="sec"><span class="no">DIV 09-X</span><h2>Side by side</h2><span class="csi">the same frame, three finishes</span></div>
+  <div class="g3">
+    <figure><div class="loupe" style="background-image:url(img/a_floor70.png);background-position:26% 45%;background-size:250%"></div><figcaption><span class="ref">A</span>Blockwork</figcaption></figure>
+    <figure><div class="loupe" style="background-image:url(img/b_floor70.webp);background-position:26% 45%;background-size:250%"></div><figcaption><span class="ref">B</span>Trim &amp; Bake</figcaption></figure>
+    <figure><div class="loupe" style="background-image:url(img/c_floor70.png);background-position:26% 45%;background-size:250%"></div><figcaption><span class="ref">C</span>Ink &amp; Grain</figcaption></figure>
+  </div>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>A · Blockwork</th><th>B · Trim &amp; Bake</th><th>C · Ink &amp; Grain</th></tr>
+    <tr><td class="k">sits with voxel rigs</td><td>Best: the same language, a coarser grain</td><td>Weakest: smooth props next to blocky people</td><td>Good, once the rigs are inked too</td></tr>
+    <tr><td class="k">destruction</td><td>Native: pieces are blocks</td><td>Masonry fine; props need fracture variants</td><td>Clearest pieces, but noisy in bursts</td></tr>
+    <tr><td class="k">detail at 30 px/m</td><td>Block patterns, 4 px grain</td><td>AO only; bevels lost</td><td>Line and band</td></tr>
+    <tr><td class="k">authoring</td><td>Code (shader + Blender remesh)</td><td>Code (Blender bevel + AO bake + trim)</td><td>Code (shaders), fewest props details</td></tr>
+    <tr><td class="k">intro link</td><td>Same sources; the film uses B's finish</td><td>Identical pipeline</td><td>Matches Cut-Out's ink</td></tr>
+    <tr><td class="k">draws · primitives (mock)</td><td>369 · 60 k</td><td>372 · 53 k</td><td>679 · 51 k</td></tr>
+    <tr><td class="k">hours</td><td>≈ 18</td><td>≈ 22</td><td>≈ 17</td></tr>
+    <tr><td class="k">Web risk</td><td class="risk-low">low</td><td class="risk-low">low-medium</td><td class="risk-med">medium</td></tr>
+  </table></div>
+</section>
+
+<!-- LIGHT & CITY ======================================================= -->
+<section id="light">
+  <div class="sec"><span class="no">DIV 26</span><h2>Light and the city beyond</h2><span class="csi">Compatibility renderer · Web · windows onto Babel</span></div>
+  <p class="lead">Jonas: "we could start adding lighting, it'd add a lot too, windows and a city parallax in the background". This section compares the techniques in route A's frame (the other routes use the same layers: B raw, C dithered).</p>
+
+  <h3><span class="k">26-1</span>Lighting on Compatibility and the Web</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Technique</th><th>Verdict</th><th>Why</th></tr>
+    <tr><td class="k">LightmapGI</td><td class="risk-high">no</td><td>Rendering baked lightmaps works on Web, but the Web editor cannot bake them. Baking in Compatibility has open bugs, including a 4.6-dev regression (<a href="https://github.com/godotengine/godot/issues/111465">#111465</a>; the workaround is to bake in Forward+ and switch back). The real problem is ours: a bake records shadows of piers and decks the player will knock down. After the first collapse, the baked light lies. At most, bake the indestructible shell (floor, core, RC columns); even that leaves baked shadow under a gallery that has fallen. File size grows with texel scale and directional mode; not measured, because we would not ship it.</td></tr>
+    <tr class="good"><td class="k">one shadowed directional</td><td class="risk-low">yes</td><td>City light (night) or low sun (dusk) through the curtain wall is the only shadow caster. It gives mullion bars across the lane and correct shadows from falling pieces, for one shadow pass.</td></tr>
+    <tr class="good"><td class="k">OmniLights, budget ≤ 6 per screen, no shadows</td><td class="risk-low">yes</td><td>The fluorescent pendant, the Toll's sodium lamp, the vending machine's face, the PV neon. Compatibility shades up to 8 lights per object by default; adding 8 more omni lights cost desktop about 0.1 ms and stayed at 60 fps on Web (bench below). The fallback for weak devices is to drop the omnis and keep the pools.</td></tr>
+    <tr class="good"><td class="k">fake pools (additive quads)</td><td class="risk-low">yes</td><td><span class="mono">pool.gdshader</span>: one quad, <span class="mono">blend_add</span>, no light slot, no shadow. Banded in A, dithered in C. The pools do most of the visible work (compare 26-2).</td></tr>
+    <tr class="good"><td class="k">emissive signage and neon</td><td class="risk-low">yes</td><td>Unshaded materials plus a halo pool. Glow (bloom) is not relied on; the halo quad is the bloom.</td></tr>
+    <tr class="good"><td class="k">mood per section</td><td class="risk-low">yes</td><td>Night, dusk and blackout are one function of four values: ambient, the directional light's angle and colour, the lamps on or off, and the pano's time of day. Proposal for Floor 70: Ki at night, Shō at night, Ten flickering (the Wrecker hits the lamps), Ketsu blackout after the Toll falls, then the city lights stay on outside.</td></tr>
+  </table></div>
+  <div class="g3">
+    <figure><img src="img/a_lt_omni.png" alt="Omni lights only" width="640" height="360"><figcaption><span class="ref">26-2a</span>OmniLights only: pools off.</figcaption></figure>
+    <figure><img src="img/a_lt_fake.png" alt="Fake light only" width="640" height="360"><figcaption><span class="ref">26-2b</span>Fake only: pools and emissives, no omni. Most of the look survives, which is the low-end fallback.</figcaption></figure>
+    <figure><img src="img/a_floor70.png" alt="Both" width="640" height="360"><figcaption><span class="ref">26-2c</span>Both: the recommended setup.</figcaption></figure>
+  </div>
+
+  <h3><span class="k">26-3</span>Measured cost (Web export, Chrome, and desktop)</h3>
+  <p>A bench build of this mock (<span class="mono">art_mock.tscn</span> as the main scene through an <span class="mono">art_bench</span> feature tag) runs each configuration for 5 s while the camera pans ±4 m. The machine is the dev PC (RTX 3070) in Chrome via ANGLE/D3D11. On the Web, frame time is locked to vsync, so the useful columns there are whether it holds 60 and its worst frame. The desktop run is uncapped (vsync off) and shows the headroom.</p>
+  <div class="tablewrap"><table id="bench">
+    <tr><th>Config</th><th>Web fps (run 1 / run 2)</th><th>Web worst frame</th><th>Desktop uncapped, mean</th><th>Desktop worst</th><th>Draws</th></tr>
+    <tr><td class="k">A floor70</td><td>60.0 / 60.0</td><td>16.7 ms</td><td>1.68 ms (594 fps)</td><td>3.2 ms</td><td>382</td></tr>
+    <tr><td class="k">B floor70</td><td>58.7 / 60.0</td><td>125 ms in run 1 (a first-use shader compile), 16.7 in run 2</td><td>1.87 ms</td><td>4.9 ms</td><td>386</td></tr>
+    <tr><td class="k">C floor70</td><td>60.0 / 60.1</td><td>16.7 ms</td><td>2.17 ms</td><td>6.1 ms</td><td>702</td></tr>
+    <tr><td class="k">A + 8 extra omni</td><td>60.0 / 60.0</td><td>16.7 ms</td><td>1.78 ms</td><td>4.5 ms</td><td>383</td></tr>
+    <tr><td class="k">A fake light only</td><td>60.0 / 60.0</td><td>16.7 ms</td><td>2.18 ms</td><td>7.1 ms</td><td>383</td></tr>
+    <tr><td class="k">A collapse (110 pieces)</td><td>60.4 / 60.1</td><td>18.8 / 21.4 ms</td><td>2.28 ms</td><td>9.4 ms</td><td>464</td></tr>
+    <tr><td class="k">C collapse</td><td>60.6 / 60.1</td><td>20.8 / 21.9 ms</td><td>2.85 ms</td><td>10.5 ms</td><td>864</td></tr>
+  </table></div>
+  <p class="mono">Web frames are vsync-locked, so 16.7 ms means "made it". I also tried to read main-thread render CPU time on the Web (<span class="mono">viewport_get_measured_render_time_cpu</span>), but it returned implausible values (tens to hundreds of ms at a steady 60 fps), so those numbers are not reported.</p>
+  <p>The shading choice does not decide Web performance. Draw calls and first-use shader compiles do: B's 125 ms hitch is the same problem as the known 1.5 s freeze at the first collapse. Whatever route is picked, its shaders join Drywall's <span class="mono">Warmup</span>. An integrated-GPU laptop has not been measured; that is the next check once a route is chosen.</p>
+
+  <h3><span class="k">26-4</span>Windows and the city: five techniques</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Technique</th><th>What it is here</th><th>Cost</th><th>Verdict</th></tr>
+    <tr class="good"><td class="k">panorama from Babel's data</td><td><span class="mono">tools/art/babel_pano.tscn</span> reads the Dark City Shining Babel setting data (42 named buildings, 1,219 procgen buildings, streets, roads, mountains, sea) and builds it as boxes with the window shader. It renders a 140° strip from Tower 3 at floor-70 height (about 255 m), looking at the Pinnacle, in 10 slices, stitched to 2560 × 720. Night and dusk versions exist. It is our own asset, made from the setting data.</td><td>One quad, one 2.5k texture (about 100 KB PNG)</td><td class="risk-low">far layer</td></tr>
+    <tr class="good"><td class="k">shader city</td><td>An earlier project's <span class="mono">building.gdshader</span>, adapted: hash-lit window grids, lit fraction per time of day from one uniform, haze. It runs on one merged mesh of about 12 towers in layer space.</td><td>One draw</td><td class="risk-low">mid layer</td></tr>
+    <tr class="good"><td class="k">interior mapping</td><td><span class="mono">interior.gdshader</span>: each window cell is a fake room (back wall, floor, lit ceiling panel, desk silhouette, blinds), traced from a virtual eye set per frame. The rooms shift as the camera pans, even though the camera is orthographic.</td><td>One quad, ALU only</td><td class="risk-low">near facade</td></tr>
+    <tr class="good"><td class="k">parallax layers</td><td>All layers are children of the camera and slide back against its travel. <span class="mono">follow</span> is 0.95 far, 0.8 mid and 0.55 near. An orthographic camera gives no parallax for free, so this is what gives depth.</td><td>A few lines per frame</td><td class="risk-low">yes</td></tr>
+    <tr><td class="k">glass: rain, reflection, haze</td><td><span class="mono">glass.gdshader</span>: a tint, a soft reflection band and the lamps behind the camera reflected low, rain streaks (night only), and per-layer haze toward the sky colour.</td><td>One transparent quad per wall</td><td class="risk-low">yes, subtle</td></tr>
+    <tr><td class="k">skybox / cubemap</td><td>A cubemap needs a perspective camera to show parallax. Under our orthographic camera the pano card gives the same view for less.</td><td>—</td><td>no</td></tr>
+  </table></div>
+  <div class="g4">
+    <figure><img src="img/a_bd_far.webp" alt="Far layer only" width="640" height="360"><figcaption><span class="ref">26-5a</span>Far: the Babel panorama alone.</figcaption></figure>
+    <figure><img src="img/a_bd_mid.png" alt="Mid layer only" width="640" height="360"><figcaption><span class="ref">26-5b</span>Mid: the shader city alone.</figcaption></figure>
+    <figure><img src="img/a_bd_near.png" alt="Near layer only" width="640" height="360"><figcaption><span class="ref">26-5c</span>Near: the interior-mapped facade alone.</figcaption></figure>
+    <figure><img src="img/a_bd_all.png" alt="All layers" width="640" height="360"><figcaption><span class="ref">26-5d</span>All three: the recommendation.</figcaption></figure>
+  </div>
+  <h3><span class="k">26-6</span>Parallax: the camera pans 8 m</h3>
+  <div class="strip">
+    <figure><div class="loupe" style="background-image:url(img/a_pan_0.png);background-position:12% 20%;background-size:200%"></div><figcaption><span class="ref">x − 4</span></figcaption></figure>
+    <figure><div class="loupe" style="background-image:url(img/a_pan_1.png);background-position:4% 20%;background-size:200%"></div><figcaption><span class="ref">x</span></figcaption></figure>
+    <figure><div class="loupe" style="background-image:url(img/a_pan_2.png);background-position:0% 20%;background-size:200%"></div><figcaption><span class="ref">x + 4</span>The facade slides slower than the mullions, and the far city barely moves.</figcaption></figure>
+  </div>
+  <h3><span class="k">26-7</span>The view from Tower 3, rendered from Babel's data</h3>
+  <div class="pano"><img src="img/babel_pano_night.webp" alt="Babel panorama, night, 140 degrees from Tower 3" width="2560" height="720"></div>
+  <div class="pano" style="margin-top:6px"><img src="img/babel_pano_dusk.webp" alt="Babel panorama, dusk" width="2560" height="720"></div>
+  <p class="mono">Scroll sideways. Night and dusk, 140°, the Pinnacle (Takam Tower, 700 m) left of centre, and the ridge on the right. It is boxes and one window shader, lit by one uniform. Neighbours closer than 160 m are left out; the interior-mapped near layer plays them.</p>
+</section>
+
+<!-- SOURCING =========================================================== -->
+<section id="source">
+  <div class="sec"><span class="no">DIV 01 60</span><h2>Asset sourcing</h2><span class="csi">what exists, what could come in, what we write</span></div>
+  <p class="lead">I searched the local asset library first. <b>Proposed download list: none.</b> Every route is buildable from code plus what is already in the local library. Drywall's round-1 finding holds: kit meshes as they come "read as two games" next to the voxel rigs. The useful way to bring a pack in is as geometry fed through our own finish (remesh, flat or bake), never as-is.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Source</th><th>Licence</th><th>Covers</th><th>Use</th></tr>
+    <tr class="good"><td class="k">tools/art/props_blender.py (ours)</td><td>our code</td><td>vending, server rack, desk + chair, planter, jersey barrier, toll kiosk, turnstile, cash cage; next: cooler, copier, filing cabinet, sofa, lift panel, sign frames, pendants, cable tray, barricades, cots</td><td>primary: three finishes per prop</td></tr>
+    <tr class="good"><td class="k">Kit / BrickWall / Slab (Drywall)</td><td>our code</td><td>piers, decks, catwalks, partitions, breach walls, gate, crates, barrels</td><td>structure; restyled by the route material</td></tr>
+    <tr><td class="k">kenney/furniture-kit/2.0 (H:)</td><td>CC0 (License.txt in pack)</td><td>desk, deskCorner, chairDesk, computerScreen, pottedPlant, trashcan, lounge sofas, lampSquareCeiling, bookcases</td><td>optional geometry source for the remesh; credit Kenney if shipped</td></tr>
+    <tr><td class="k">kenney/retro-urban-kit, city-kit-roads (H:)</td><td>CC0</td><td>detail-barrier-strong, construction barrier/cone/light, detail-cables</td><td>optional, same way</td></tr>
+    <tr><td class="k">quaternius/modular-scifi-megakit (H:)</td><td>Quaternius licence (QAL 1.0; keep out of public repos)</td><td>vents, pipes, cables, crates, computers</td><td>optional for the service core; heavy pack, pick single meshes</td></tr>
+    <tr><td class="k">ambientcg rooftop materials, polyhaven street props (H:)</td><td>CC0</td><td>photo PBR concrete, steel, fabric</td><td>no: photo texture at 32 px/m clashes; at most a colour-sampling reference</td></tr>
+    <tr><td class="k">synty/polygon-office (H:)</td><td>Synty EULA, purchased</td><td>the ideal subject</td><td>no: not an open free-to-use licence (jam rule), and a different style</td></tr>
+    <tr class="good"><td class="k">setting city data</td><td>Dark City Shining Babel</td><td>the city outside every window</td><td>rendered by us (panorama)</td></tr>
+    <tr class="good"><td class="k">building.gdshader</td><td>earlier in-house code</td><td>hash-lit window grids</td><td>adapted for the mid layer</td></tr>
+    <tr><td class="k">fonts in assets/fonts</td><td>OFL / Bitstream-DejaVu, already credited</td><td>DotGothic16, DejaVu Sans/Serif Condensed Bold, JetBrains Mono</td><td>sign faces per route; no new fonts</td></tr>
+  </table></div>
+  <p><b>Provenance.</b> Once a route is picked, the asset provenance list gets a section "Environment (tools/art/)". It lists the props (authored by Claude as Plumb, written as code in <span class="mono">props_blender.py</span>, Blender 5.0 headless, primitives, bevel, remesh and AO bake, no image or 3D generation), the shaders, the Babel panorama (rendered from the setting data by <span class="mono">babel_pano.gd</span>), and any Kenney geometry with its credit. Like the voxel characters, these are written as code by an AI assistant.</p>
+</section>
+
+<!-- HERO =============================================================== -->
+<section id="hero">
+  <div class="sec"><span class="no">DIV 01 90</span><h2>Hero assets for the recruitment film</h2><span class="csi">one pipeline with Opticals (boards/intro, treatment C)</span></div>
+  <p class="lead">Jonas picked C, the High Water recruitment film, and asked for better assets than voxel ("clashes with the brand look"). The proposal already on the table is glossy code-modelled CGI for the ad with a closing cut to "actual footage". That fits one pipeline: <b>every hero asset is a Blender script, and each script exports a glossy finish for the film and a block finish for the game.</b> The ad and the game then show the same object, which makes the cut to "actual footage" a joke about the same thing.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Asset</th><th>Film (glossy, trim finish)</th><th>Game (block finish)</th><th>Hours</th></tr>
+    <tr><td class="k">HW enforcer "product" body</td><td>Hard-surface plates modelled per bone on the voxel rig's joint list (<span class="mono">.rig.json</span>), so the rig's poses drive it: graphite shell, bone-white panels, ranger-green webbing, cyan only on the emitters</td><td>stays Armature's voxel enforcer (the reference)</td><td>6</td></tr>
+    <tr><td class="k">gravity glove, macro</td><td>Close-up hero with emitter rings and serials</td><td>voxel glove exists</td><td>2</td></tr>
+    <tr><td class="k">railgun</td><td>Rails, capacitor cells, stencils</td><td>voxel railgun exists</td><td>2</td></tr>
+    <tr><td class="k">"liabilities" (Vermin)</td><td>Stay voxel, frozen, shot flat on a halftone card: the ad sees people as inventory</td><td>as is</td><td>0</td></tr>
+    <tr><td class="k">Toll kiosk + cash cage</td><td>Already written (trim finish); product-lit as the "grievance"</td><td>block finish</td><td>0.5</td></tr>
+    <tr><td class="k">studio set</td><td>Black floor, turntable, a key and rim card, done in Godot with a "product" shader (matcap-style rim and key in <span class="mono">light()</span>, since Compatibility has no SSR or GI)</td><td>—</td><td>2</td></tr>
+    <tr><td class="k">Babel skyline</td><td>The panorama above, at dusk, as the ad's backdrop</td><td>the window layer</td><td>0</td></tr>
+  </table></div>
+  <p>Pipeline: <span class="mono">tools/art/*.py</span> (Blender headless, <span class="mono">-b --python</span>, about 20 s for 8 props × 3 finishes) → <span class="mono">build/art/props/*.glb</span> → Godot. The blender MCP bridge was not running, so everything here ran headless. The Hyper3D and Hunyuan generators on that bridge are never used. About 12.5 h for the film's heroes, shared with Opticals: they own shots and lighting, and Plumb owns models.</p>
+</section>
+
+<!-- QUESTIONS ========================================================== -->
+<section id="q">
+  <div class="sec"><span class="no">DIV 01 31</span><h2>For Jonas</h2><span class="csi">picks and rulings</span></div>
+  <ol class="qa">
+    <li><b>Route:</b> A, B or C, or a cross (for example A with C's outline only on characters and thrown bodies). I recommend A.</li>
+    <li><b>Gang colour:</b> the brief says Petty Vermin are orange and rust. The level greybox uses PV pink neon. I used orange throughout; confirm, and Drywall's <span class="mono">Pal.NEON[0]</span> changes with it.</li>
+    <li><b>Moods per section:</b> night, flicker, blackout after the Toll, as proposed in 26-1? Dusk could instead be Floor 75's (Saki's glass floor).</li>
+    <li><b>Hero pipeline:</b> may Plumb model the film's enforcer body per bone, as above, with Opticals owning shots?</li>
+    <li><b>Kenney geometry through the remesh:</b> allowed (CC0, credited), or strictly our own props?</li>
+  </ol>
+</section>
+
+<footer>
+  <p><b>PLUMB</b> · art direction &amp; environment modelling · Studio Hitstop · reports to Cornerman.</p>
+  <p>Renders: <span class="mono">tools/art/art_mock.tscn</span> (Godot 4.6, Compatibility, 640 × 360, one frame each). Props: <span class="mono">props_blender.py</span>. Panorama: <span class="mono">babel_pano.tscn</span>. Nothing on this board ships until a route is picked.</p>
+</footer>
+</main>
+<script>
+(() => {
+  const btn = document.getElementById('theme');
+  const root = document.documentElement;
+  let saved = null;
+  try { saved = localStorage.getItem('plumb-theme'); } catch (e) {}
+  if (saved) root.dataset.theme = saved;
+  const label = () => { btn.textContent = (root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark' ? 'day print' : 'night print'; };
+  label();
+  btn.addEventListener('click', () => {
+    const dark = (root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('plumb-theme', root.dataset.theme); } catch (e) {}
+    label();
+  });
+})();
+</script>
+</body>
+</html>

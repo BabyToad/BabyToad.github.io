@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Services Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f10; --panel:#15181a; --line:#2c3236; --text:#e4e0d7; --dim:#9a9d9a;
+  --amber:#ffb000; --red:#ff3b2f; --blue:#6fb4ff; --cyan:#5ff0ff; --green:#7fe07a; --ochre:#c9a54a; --violet:#b58cff;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:18px/1.5 var(--sans)}
+body{padding:0 16px 120px}
+main{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1;text-wrap:balance}
+.band{height:10px;margin:0 -16px;background:repeating-linear-gradient(135deg,var(--cyan) 0 14px,#1b1b1b 14px 28px)}
+header{padding:56px 0 36px}
+header .doc{font:500 13px var(--mono);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+header h1{font-size:clamp(48px,9vw,96px);margin:10px 0 18px}
+header h1 em{font-style:normal;color:var(--cyan)}
+header p{font-size:clamp(19px,2.4vw,24px);line-height:1.45;max-width:34em;margin:0 0 12px}
+blockquote{margin:18px 0 0;padding:6px 16px;border-left:4px solid var(--cyan);font-size:20px;max-width:40em}
+blockquote cite{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:6px;font-style:normal}
+section{padding:52px 0;border-top:1px solid var(--line)}
+section>h2{font-size:clamp(32px,5vw,50px);margin-bottom:10px}
+section>h2 small{font:500 13px var(--mono);letter-spacing:.14em;color:var(--cyan);display:block;margin-bottom:8px}
+section>.sub{color:var(--dim);margin:0 0 26px;font-size:18px;max-width:46em}
+code{font:500 14px var(--mono);color:var(--cyan)}
+/* findings */
+.finds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.find{background:var(--panel);border:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.find b{font:800 26px/1.05 var(--cond);text-transform:uppercase;color:var(--cyan)}
+.find .n{font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+.who{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.who span{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--line);color:var(--dim)}
+.find.trap b{color:var(--red)}
+/* matrix */
+.mwrap{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table.m{border-collapse:collapse;min-width:760px;width:100%}
+.m th,.m td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+.m th{font:800 20px/1 var(--cond);text-transform:uppercase;background:#101315;white-space:nowrap}
+.m th i{display:block;font:500 11px var(--mono);font-style:normal;letter-spacing:.08em;color:var(--dim);margin-top:4px;text-transform:uppercase}
+.m td{font-size:14px;line-height:1.35;width:15%}
+.m td b{display:block;font:800 17px/1.1 var(--cond);text-transform:uppercase;margin-bottom:2px}
+.m td.x{background:repeating-linear-gradient(135deg,#121517 0 6px,#15181a 6px 12px)}
+.m td.has b{color:var(--green)} .m td.pkg b{color:var(--cyan)} .m td.later b{color:var(--dim)}
+.m td .s{display:block;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-top:5px;color:var(--dim)}
+.m td.has .s{color:var(--green)} .m td.pkg .s{color:var(--cyan)}
+.w{color:var(--blue)} .p{color:var(--cyan)} .g{color:var(--ochre)} .f{color:var(--red)} .mt{color:#b8bcc0} .bd{color:#e8a88a}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font:500 13px var(--mono);color:var(--dim);margin:14px 0 0}
+.legend .has{color:var(--green)} .legend .pkg{color:var(--cyan)}
+/* riser */
+.riser{background:var(--panel);border:1px solid var(--line);padding:14px;overflow-x:auto}
+.riser svg{display:block;min-width:720px;width:100%;height:auto}
+.call{margin-top:18px;font-size:19px;border-left:4px solid var(--cyan);padding:6px 14px;max-width:48em}
+.call b{color:var(--cyan)}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-content:start}
+.card.mine{border-color:#1f6a70}
+.card h3{font-size:32px}
+.card h3 small{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.card .tags{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.tag{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);color:var(--dim)}
+.tag.h{color:var(--cyan);border-color:#1f6a70}
+.tag.ok{color:var(--green);border-color:#2f5a2c}
+.tag.warn{color:var(--red);border-color:#6a2a24}
+.tag.perf{color:var(--blue);border-color:#2a4a6a}
+.card dl{grid-column:1 / -1;margin:6px 0 0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 14px;font-size:17px}
+.card dt{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding-top:4px}
+.card dd{margin:0}
+.card .say{grid-column:1 / -1;margin-top:10px;font-size:17px;border-left:3px solid var(--cyan);padding:2px 12px}
+.card .say b{color:var(--cyan)}
+input[type=checkbox]{accent-color:var(--cyan);width:24px;height:24px;cursor:pointer}
+/* traps */
+.traps{display:grid;gap:10px;max-width:52em}
+.traps div{border-left:4px solid var(--red);padding:4px 14px;background:var(--panel)}
+.traps b{font:800 22px/1.1 var(--cond);text-transform:uppercase;color:var(--red);display:block}
+/* package */
+.pkgl{margin:0;padding-left:26px;display:grid;gap:14px;font-size:19px;max-width:50em}
+.pkgl li b{font:800 24px/1.1 var(--cond);text-transform:uppercase;color:var(--cyan)}
+.pkgl .h{font:500 13px var(--mono);color:var(--dim)}
+.sum{margin-top:22px;color:var(--dim);font-size:17px;max-width:50em}
+.pickbar{position:fixed;left:0;right:0;bottom:0;background:#111416f0;border-top:2px solid var(--cyan);display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));font-size:16px;z-index:5}
+.pickbar b{color:var(--cyan);font-size:20px}
+.pickbar button{font:600 15px var(--sans);background:var(--cyan);color:#0b1011;border:0;padding:10px 16px;cursor:pointer}
+.pickbar button.ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media (max-width:560px){.card dl{grid-template-columns:1fr}.card dt{padding-top:0}}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> 16 of 18 cards; only B4 (damage invoice) and B6 (noise AI) left out. Jonas: “a great freaking stack”. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="band"></div>
+<main>
+<header>
+  <div class="doc">High Water · Sim board · all 14 lanes · for Jonas's picks</div>
+  <h1>The building is<br>the <em>weapon</em></h1>
+  <p>You asked the whole team how far the physics can go: destruction, electricity, fire, gas, explosions and fluids. Fourteen lanes answered independently. They agreed more than I expected, and on the same thing: the simulation is the arcology's <b>building services</b> (power, water, gas), in a few states you can read at a glance.</p>
+  <blockquote>“If a tenant can't see it happen, don't simulate it.”<cite>Stencil, lore</cite></blockquote>
+</header>
+
+<section>
+  <h2><small>What the team agreed on</small>Three findings</h2>
+  <p class="sub">Nobody saw anyone else's answer. The chips show who argued for each finding.</p>
+  <div class="finds">
+    <div class="find"><span class="n">11 of 14</span><b>Services are the sim</b>Power risers, water mains and gas lines, each with discrete states and a small rules table. A cut riser blacks a room out, a burst main floods it, a gas line fills it.
+      <div class="who"><span>Cornerman</span><span>Hitlag</span><span>Slipway</span><span>Tidewater</span><span>Stencil</span><span>Downbeat</span><span>Opticals</span><span>Afterimage</span><span>Drywall</span><span>Plumb</span><span>Gallery</span></div></div>
+    <div class="find"><span class="n">14 of 14</span><b>Legibility beats fidelity</b>Each lane named its own version: every link in a chain announces itself, the building gets the kill, the lights are the readout, the floor listens, the Vermin teach the chemistry.
+      <div class="who"><span>every lane</span></div></div>
+    <div class="find trap"><span class="n">14 of 14</span><b>No real solvers</b>No fluid, fire or gas solver, and no GPU simulation that gameplay reads back. On Web at 640×360 it reads as noise, makes outcomes random, and stalls the frame.
+      <div class="who"><span>unanimous</span></div></div>
+  </div>
+</section>
+
+<section>
+  <h2><small>The rules table</small>What meets what</h2>
+  <p class="sub">The BotW chemistry for Tower 3: six materials, one rule per pair. Green rules already ship on main, cyan rules come with my recommended package, and grey ones wait until later. Every rule gets one colour and one silhouette.</p>
+  <div class="mwrap">
+  <table class="m">
+    <thead><tr><th></th><th class="w">Water<i>canals, mains</i></th><th class="p">Power<i>risers, cables</i></th><th class="g">Gas<i>LPG, O2, lines</i></th><th class="f">Fire<i>oil, stalls</i></th><th class="mt">Metal<i>grating, racks</i></th><th class="bd">Bodies<i>Vermin, you</i></th></tr></thead>
+    <tbody>
+      <tr><th class="w">Water</th>
+        <td>Flow<b>Floods</b>Mains burst, drains pull, the bore runs.<span class="s">on main · F73</span></td>
+        <td class="has"><b>Shock</b>Current runs through every wet cell.<span class="s">on main · Sparker</span></td>
+        <td class="later"><b>Bubbles</b>Gas vents up through canals and gives away the leak.<span class="s">later</span></td>
+        <td class="pkg"><b>Steam</b>Sprinklers and floods put fire out and leave a white screen of steam.<span class="s">package</span></td>
+        <td class="x"></td>
+        <td class="has"><b>Wade</b>Slows everyone. A wet body conducts.<span class="s">on main · wet body in package</span></td></tr>
+      <tr><th class="p">Power</th><td class="x"></td>
+        <td class="pkg"><b>Blackout</b>Cut the riser and everything downstream dies.<span class="s">package</span></td>
+        <td class="pkg"><b>Ignite</b>One spark in a gassed room makes a flash fire.<span class="s">package</span></td>
+        <td class="later"><b>Arc fire</b>A live cable on oil starts a smoulder.<span class="s">later</span></td>
+        <td class="has"><b>Conducts</b>Rails, grating, the conveyor.<span class="s">on main</span></td>
+        <td class="has"><b>Lock</b>A stun. Next: a tetanus lock with X-ray frames.<span class="s">on main · lock later</span></td></tr>
+      <tr><th class="g">Gas</th><td class="x"></td><td class="x"></td>
+        <td class="pkg"><b>Fills</b>A room gasses up behind a visible low haze.<span class="s">package</span></td>
+        <td class="pkg"><b>Deflagrate</b>A fire front rolls, then the blast juggle.<span class="s">package</span></td>
+        <td class="later"><b>Rocket</b>A punctured O2 canister flies.<span class="s">later</span></td>
+        <td class="pkg"><b>Flee</b>Vermin cough and shout, then run for the exit.<span class="s">package · AI</span></td></tr>
+      <tr><th class="f">Fire</th><td class="x"></td><td class="x"></td><td class="x"></td>
+        <td class="later"><b>Spread</b>Smoulder, burn, char, from prop to prop.<span class="s">later · authored only</span></td>
+        <td class="x"></td>
+        <td class="later"><b>Burning</b>He runs, pats himself down and dives for a canal.<span class="s">later</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend"><span class="has">■ on main</span><span class="pkg">■ recommended package</span><span>■ later</span></div>
+</section>
+
+<section>
+  <h2><small>The one real debate</small>Graph or grid?</h2>
+  <p class="sub">Stencil, Opticals, Downbeat and Drywall want a <b>graph</b>: a riser feeds taps, and taps feed consumers. Slipway, Tidewater and Afterimage want a <b>coarse cell grid</b> of about 0.5 m, holding wet, live, heat and gas.</p>
+  <div class="riser">
+  <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Mono, Consolas, monospace" font-size="12">
+    <rect x="0" y="0" width="900" height="250" fill="#101416"/>
+    <!-- riser -->
+    <rect x="40" y="20" width="26" height="210" fill="#2a3139"/><rect x="50" y="20" width="6" height="210" fill="#5ff0ff"/>
+    <text x="30" y="244" fill="#9a9d9a">RISER 3B</text>
+    <!-- break -->
+    <line x1="66" y1="120" x2="160" y2="120" stroke="#5ff0ff" stroke-width="3"/>
+    <line x1="66" y1="60" x2="160" y2="60" stroke="#5ff0ff" stroke-width="3"/>
+    <line x1="66" y1="185" x2="160" y2="185" stroke="#5ff0ff" stroke-width="3"/>
+    <g transform="translate(112 120)"><polygon points="0,-12 4,-4 12,0 4,4 0,12 -4,4 -12,0 -4,-4" fill="#fff4c2" stroke="#111"/></g>
+    <text x="84" y="108" fill="#ffb000">BREAK</text>
+    <!-- taps -->
+    <rect x="160" y="46" width="90" height="28" fill="#15181a" stroke="#2c3236"/><text x="170" y="65" fill="#e4e0d7">TAP 3B-1</text>
+    <rect x="160" y="106" width="90" height="28" fill="#15181a" stroke="#ff3b2f"/><text x="170" y="125" fill="#e4e0d7">TAP 3B-2</text>
+    <rect x="160" y="171" width="90" height="28" fill="#15181a" stroke="#2c3236"/><text x="170" y="190" fill="#e4e0d7">TAP 3B-3</text>
+    <text x="160" y="152" fill="#9a9d9a">label says “KARAOKE”, it isn't</text>
+    <!-- consumers lit -->
+    <line x1="250" y1="60" x2="330" y2="60" stroke="#5ff0ff" stroke-width="2"/>
+    <text x="340" y="56" fill="#ffd27a">▮▮▮ sodium strips</text><text x="340" y="72" fill="#9a9d9a">lit</text>
+    <!-- dead downstream -->
+    <line x1="250" y1="120" x2="330" y2="120" stroke="#3a3f45" stroke-width="2" stroke-dasharray="5 4"/>
+    <line x1="330" y1="120" x2="330" y2="95" stroke="#3a3f45" stroke-width="2" stroke-dasharray="5 4"/>
+    <line x1="330" y1="120" x2="330" y2="145" stroke="#3a3f45" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="340" y="99" fill="#6b6f72">▮▮▮ lights → exit reds</text>
+    <text x="340" y="124" fill="#6b6f72">♪ powered stem drops on the beat</text>
+    <text x="340" y="149" fill="#6b6f72">⌂ PV-NET router dies, BREACH jumps</text>
+    <text x="620" y="99" fill="#ff3b2f">lookouts blind</text>
+    <text x="620" y="124" fill="#ff3b2f">conveyor stops</text>
+    <text x="620" y="149" fill="#5ff0ff">High Water's optics: the only lamp</text>
+    <line x1="250" y1="185" x2="330" y2="185" stroke="#5ff0ff" stroke-width="2"/>
+    <text x="340" y="189" fill="#7fe07a">✚ Oh-Di clinic (UPS) + 水位上升中 ticker stay lit</text>
+    <text x="620" y="40" fill="#9a9d9a">GRAPH: who has power</text>
+    <text x="620" y="222" fill="#9a9d9a">FLOOR TEXTURE: where it's wet, live, gassed</text>
+  </svg>
+  </div>
+  <div class="call"><b>My call: both, and neither simulates flow.</b> Power is a graph, because blackouts are discrete and authored. Wet, soot, charge and gas live in Plumb's per-floor state texture: events write it, the floor shader shows it, and the shock reads it. Only gas drifts, slowly and cell by cell toward vents. That gives Slipway's grid its one upload and Tidewater's one colour per medium, without a solver.</div>
+</section>
+
+<section>
+  <h2><small>Group A · the services</small>The simulation itself</h2>
+  <p class="sub">Hours are the lanes' own estimates, summed across lanes, and the work runs in parallel. The cyan border marks my recommended package.</p>
+  <div class="cards" id="ca"></div>
+</section>
+
+<section>
+  <h2><small>Group B · legibility</small>Make every link read</h2>
+  <p class="sub">In a brawler at 640×360, an effect you can't read might as well not have happened. This layer is what turns the services into fights.</p>
+  <div class="cards" id="cb"></div>
+</section>
+
+<section>
+  <h2><small>Group C · bodies, structure, score</small>Later, or if a lane frees up</h2>
+  <p class="sub">All good. None of it is needed to make the services land this week.</p>
+  <div class="cards" id="cc"></div>
+</section>
+
+<section>
+  <h2><small>Traps</small>What we won't build</h2>
+  <div class="traps">
+    <div><b>Fluid, fire or gas solvers</b>All fourteen lanes said this. At 640×360 they read as noise and make outcomes random.</div>
+    <div><b>GPU simulation read back by gameplay</b>Compatibility has no compute shaders, and a readback stalls the frame (Slipway).</div>
+    <div><b>Real active ragdoll</b>It turns 300 bodies to mush and fights “mass, not rubber” (Armature).</div>
+    <div><b>An always-on scanner or detective mode</b>The forecast shows only while you commit to an action (Readout).</div>
+    <div><b>A new saturated hue per state</b>The combat tells already own amber, red, blue, cyan and violet, so states live in value and texture (Plumb).</div>
+    <div><b>Beat-quantised gameplay</b>Punches would feel late. Only the music follows the sim (Downbeat).</div>
+  </div>
+</section>
+
+<section class="pk">
+  <h2><small>Cornerman's recommendation</small>Package for Thu–Sat</h2>
+  <ol class="pkgl">
+    <li><b>Power graph and blackout</b> <span class="h">A1 · ~14 h</span><br>The headline. It uses lights, music, AI and optics we already have, and it sells the setting.</li>
+    <li><b>Utilities in the walls</b> <span class="h">A2 · ~10 h</span><br>Destruction becomes the way into the other systems. It reuses flood and conduction.</li>
+    <li><b>Gas as a room state</b> <span class="h">A3 · ~6 h</span><br>A fuse you can see, set off by the Sparker or your rail. It pays out in the blast juggle.</li>
+    <li><b>The floor remembers</b> <span class="h">A4 · ~8 h</span><br>A single state texture that is both what you see and what the rules read.</li>
+    <li><b>Chain beats and incident cards</b> <span class="h">B1 + B2 · ~15 h</span><br>The payoff. The building gets the kill, and you get the credit.</li>
+    <li><b>The Vermin know their floor</b> <span class="h">B5 · ~7 h</span><br>Enemies teach the chemistry before you use it.</li>
+  </ol>
+  <p class="sum">About 60 h across ten lanes, roughly 6 h each, which fits Thursday and Friday. That leaves Saturday for tuning and Sunday for release. F73 and F71 get the full set first; F74 and F75 get power and walls. Whatever you pick, it is still all in-house.</p>
+</section>
+</main>
+
+<div class="pickbar"><span><b id="pc">0</b> picked</span><button id="mine">Pick my package</button><button id="copy">Copy picks</button><button class="ghost" id="clear">Clear</button><span id="msg" role="status"></span></div>
+
+<script>
+/* [id, group, title, from, hours, tags [[text,cls]], see, needs, say, mine] */
+const C=[
+ ["A1","a","Power graph and blackout","Stencil · Opticals · Downbeat · Drywall","~14 h",[["headline","h"],["uses Sparker + Water","ok"],["omni lights: perf check","perf"]],
+  "Break a riser and everything downstream dies in sequence. Sodium strips go out, emergency reds come on, and the backdrop windows become the key light. The powered music stem drops on the next beat. Lookouts go blind and the conveyor stops. Only the Oh-Di clinic and the 水位上升中 ticker stay lit, and High Water's cyan optics are the brightest thing in the room.",
+  "<code>Power</code> autoload with riser → tap → consumer; <code>Events.power_changed(zone, on, cause)</code>; emissive swaps; stems from Downbeat.",
+  "<b>The class system told in light.</b> Blackouts are also a stealth beat: lookouts can't see you, but your optics still work.",1],
+ ["A2","a","Utilities in the walls","Hitlag (2nd take) · Drywall","~10 h",[["destruction pays","h"],["reuses flood + conduction","ok"]],
+  "Some walls carry a conduit, a water main or a gas line, marked with a stencil on the face. Break the wall and it releases what's inside: the conduit sparks into water and metal, the main floods the room, the gas line hisses before it ignites.",
+  "A wall flag per piece in Drywall's layouts; release hooks into <code>Water</code>, <code>Power</code>, <code>Gas</code>.",
+  "<b>The bridge between destruction and the services.</b> It also works with the charged-only reinforced walls: a charged hit cracks the main.",1],
+ ["A3","a","Gas as a room state","Tidewater · Drywall · Plumb · Stencil","~6 h",[["fuse","h"],["blast juggle exists","ok"]],
+  "LPG bottles, Nerps! O2 canisters and gas lines fill a room behind a low, dithered ochre haze and a hiss that climbs. One spark, from the Sparker, a rail shot or a cut conduit, sends a fire front rolling along the ceiling into the blast juggle. O2 makes it worse.",
+  "Per-room gas level; drift toward vents; ignition via <code>Events.zap</code>.",
+  "<b>The explosion we skipped as an asset comes back as a system.</b> One room, one fuse, one big payoff.",1],
+ ["A4","a","The floor remembers","Plumb (Slipway's grid, simplified)","~8 h",[["what you see is the rule","h"],["one texture upload","perf"]],
+  "A per-floor state texture with wet, soot, charge and gas channels. Floods, the Sparker, blasts and burst pipes write to it. The Blockwork floor shader draws it as wet sheen, char with ember pixels, a white crawl along block edges and low haze. Gameplay reads the same texture, so a shock conducts wherever the floor looks wet.",
+  "Writes on events; reads in <code>Water.shock</code>; 15 Hz upload.",
+  "<b>This settles graph versus grid.</b> The grid holds state and never runs a simulation.",1],
+ ["A5","a","Full coarse medium grid","Slipway · Tidewater · Afterimage","~12–16 h",[["the maximal version","warn"],["benchmark first","perf"]],
+  "A 0.5 m cell grid simulating water, oil, gas and charge. Water runs to drains, oil floats and burns, gas pools and drifts, charge follows wet cells. It is the most emergent option and the most expensive.",
+  "WorkerThreadPool, active cells only, one overlay pass.",
+  "<b>Not this week.</b> A4 gets 80 % of the effect for half the cost. Pick it if you want the maximal version.",0],
+ ["B1","b","Every link announces itself","Hitlag","~6 h",[["game feel","h"]],
+  "Each link in a chain adds 1 frame of hitstop, draws a traced line from source to victim, and plays a sound one step higher in pitch. Links are about 0.25 s apart, capped at 3, and the chain ends in a big stop.",
+  "Hooks in the chain code; Afterimage traces; Foley pitch steps.",
+  "<b>Chains become something you watch happen, not something you're told about.</b>",1],
+ ["B2","b","The building gets the kill","Slate · Readout · Foley","~9 h",[["payoff","h"],["no input lock","ok"]],
+  "A Witness grades kills done by the building: several victims, the environment as the killer, a chain. The top grade gets a short world stop and a push-in, then an incident card (“UTILITY INCIDENT · WATER/240V · 3 TENANTS”) and a DOOM-style armour refund. At most one every 6 s.",
+  "<code>Events.env_kill(victim, cause, source)</code>; card copy placeholder until you write it.",
+  "<b>Hitman accident scoring in DOOM's voice.</b> The card copy stays a placeholder for your pen.",1],
+ ["B3","b","Consequence forecast","Readout","~7 h",[["Into the Breach","h"]],
+  "Only while you commit (a charged throw, aiming the rail), Contract Optics brackets price the chain, up to 3 tags: “WET · CONDUCTS ×4”, “GAS 38 % · IGNITES”. The rail PIERCE ×n forecast is the precedent.",
+  "“What would happen” queries from each system.",
+  "<b>Strong, but only after A1–A4 exist.</b> A Saturday stretch goal.",0],
+ ["B4","b","Damage invoice","Readout","~3 h",[["cheap","ok"],["tone","h"]],
+  "The results screen itemises the destruction as an invoice: 3 × risers, 1 × water main, 14 × panes, 1 × Toll booth. Liability sits in the corner.",
+  "Counters on existing events.",
+  "<b>Cheap and on theme.</b> Pairs well with B2.",0],
+ ["B5","b","The Vermin know their floor","Gallery · Hitlag","~7 h",[["AI","h"],["teaches the rules","ok"]],
+  "Thugs shout “WATER'S LIVE!” and hop onto crates, step around cracked glass, and cough and bolt from gas. Netters splice live cables into puddles as traps. A witness flinches when a friend gets shocked.",
+  "<code>Hazards.state_at(pos)</code> over A1/A4; barks as placeholders.",
+  "<b>Enemies teach the chemistry before you use it</b>, which is Spelunky's rule.",1],
+ ["B6","b","The floor listens","Foley · Hitlag","~8 h",[["stealth option","h"]],
+  "Every physics sound is also a noise event. A shattered pane pulls the whole room, a body in the canal brings the Lookout to the glass. Loud or surgical becomes a choice.",
+  "A <code>Noise</code> autoload on the loudness tiers; reaction states.",
+  "<b>Good, but it pulls toward stealth.</b> We are a brawler. Later.",0],
+ ["B7","b","Danger announces itself","Foley","~3 h",[["cheap","ok"]],
+  "Live canals buzz, cables crackle, gas hisses and a flood gurgles higher as it rises. Every hazard has its own loop.",
+  "Loops keyed on A1/A3/A4 states.",
+  "<b>Nearly free once the states exist.</b> Foley can do it alongside the package.",0],
+ ["C1","c","Bodies that try","Armature","~14 h",[["Euphoria-lite","h"]],
+  "A tumbling rig looks ahead and picks a behaviour: brace for a wall, grab at the frame at an open facade, flail over water, tuck from a blast. You see the thug know the window is death half a second before.",
+  "Look-ahead ray; four reaction poses.",
+  "<b>Beautiful, and the biggest single job on the board.</b> Pick it if animation is your priority.",0],
+ ["C2","c","Readable load paths","Drywall","~7 h",[["Red Faction","h"]],
+  "Gang structures carry weight: a tank, a cash cage, a crowd. They sag, creak and trickle dust before they fail, then the whole chain drops. Lure four thugs onto a mezzanine.",
+  "Load on existing Slab/pier rules.",
+  "<b>Great with A2.</b> Tank drops, bursts, floods, then a Sparker shot.",0],
+ ["C3","c","Powered stems and flood muffle","Downbeat","part of A1",[["score","h"]],
+  "Beyond A1: floods put a low-pass on the music bus and the drips become the hats, and collapses answer on the next 16th. The mains hum is tuned to F, the tonic of all our music.",
+  "Music bus filters.",
+  "<b>The stem drop comes with A1. The rest is polish.</b>",0],
+ ["C4","c","Fire as authored states","Cornerman · Afterimage","~6 h",[["authored only","warn"]],
+  "Smoulder, burn and char on flagged props (hawker oil, stalls), spreading only along authored links. Sprinklers answer with water.",
+  "Prop flags; voxel flame cubes.",
+  "<b>After gas, if time allows.</b> Never spreading fire in general.",0],
+ ["C5","c","F70 tank floor","Stencil","~5 h",[["lore","h"],["F70 change","warn"]],
+  "Every tenth floor is a tank floor. The Toll taxes the water, and the finale bursts the tank into a flood plus shock.",
+  "F70 rework; ties to Drywall's 7a Big Rat tease.",
+  "<b>Decide together with 7a.</b>",0],
+ ["C6","c","Route on the cutaway","Plumb","~3 h",[["meta","h"]],
+  "The Tower 3 cutaway shows the floors you flooded or burnt, Dishonored-style.",
+  "Per-floor summary from A4.",
+  "<b>A nice closer for the results screen.</b>",0]
+];
+const host={a:document.getElementById("ca"),b:document.getElementById("cb"),c:document.getElementById("cc")};
+for(const [id,g,t,from,h,tags,see,needs,say,mine] of C){
+  const el=document.createElement("article");el.className="card"+(mine?" mine":"");
+  el.innerHTML=`<h3><small>${id} · ${from}</small>${t}</h3><input type="checkbox" id="pk-${id}" aria-label="Pick ${id}" data-pick="${id} ${t}" data-mine="${mine}">
+  <div class="tags"><span class="tag">${h}</span>${mine?'<span class="tag h">package</span>':''}${tags.map(([x,c])=>`<span class="tag ${c}">${x}</span>`).join("")}</div>
+  <dl><dt>You see</dt><dd>${see}</dd><dt>Needs</dt><dd>${needs}</dd></dl>
+  <div class="say">${say}</div>`;
+  host[g].appendChild(el);
+}
+const KEY="hw-archive-sim-picks";
+const load=()=>{try{const s=localStorage.getItem(KEY);return s===null?null:JSON.parse(s)}catch(e){return null}};
+// Archive: with nothing stored, the boxes show Jonas's recorded picks.
+const JONAS_PICKS=["A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B5", "B7", "C1", "C2", "C3", "C4", "C5", "C6"];
+const save=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}};
+const boxes=[...document.querySelectorAll("input[data-pick]")];const st0=load();const saved=new Set(st0||[]);boxes.forEach(b=>b.checked=st0===null?JONAS_PICKS.some(p=>b.dataset.pick.startsWith(p+" ")):saved.has(b.dataset.pick));
+function update(){const v=boxes.filter(b=>b.checked).map(b=>b.dataset.pick);document.getElementById("pc").textContent=v.length;save(v);return v}
+boxes.forEach(b=>b.addEventListener("change",update));update();
+document.getElementById("mine").onclick=()=>{boxes.forEach(b=>b.checked=b.dataset.mine==="1");update()};
+document.getElementById("copy").onclick=async()=>{const v=update();const t="Sim board picks:\n"+(v.length?v.map(x=>"- "+x).join("\n"):"- (none)");const m=document.getElementById("msg");try{await navigator.clipboard.writeText(t);m.textContent="Copied"}catch(e){m.textContent="Copy blocked; see console";console.log(t)}};
+document.getElementById("clear").onclick=()=>{boxes.forEach(b=>b.checked=false);update()};
+</script>
+</body>
+</html>

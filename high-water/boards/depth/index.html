@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Depth Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f10; --panel:#15181a; --line:#2c3236; --text:#e4e0d7; --dim:#9a9d9a;
+  --amber:#ffb000; --red:#ff3b2f; --blue:#6fb4ff; --cyan:#5ff0ff; --green:#7fe07a; --rust:#b0492a;
+  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:18px/1.5 var(--sans)}
+body{padding:0 16px 120px}
+main{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--cond);font-weight:800;text-transform:uppercase;letter-spacing:.02em;margin:0;line-height:1}
+.band{height:10px;margin:0 -16px;background:repeating-linear-gradient(135deg,var(--amber) 0 14px,#1b1b1b 14px 28px)}
+header{padding:56px 0 36px}
+header .doc{font:500 13px var(--mono);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+header h1{font-size:clamp(48px,9vw,96px);margin:10px 0 18px}
+header h1 em{font-style:normal;color:var(--amber)}
+header p{font-size:clamp(19px,2.4vw,24px);line-height:1.45;max-width:34em;margin:0 0 12px}
+blockquote{margin:18px 0 0;padding:6px 16px;border-left:4px solid var(--amber);font-size:20px;color:var(--text);max-width:40em}
+blockquote cite{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:6px;font-style:normal}
+section{padding:52px 0;border-top:1px solid var(--line)}
+section>h2{font-size:clamp(32px,5vw,50px);margin-bottom:10px}
+section>h2 small{font:500 13px var(--mono);letter-spacing:.14em;color:var(--amber);display:block;margin-bottom:8px}
+section>.sub{color:var(--dim);margin:0 0 26px;font-size:18px;max-width:46em}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.fact{background:var(--panel);border:1px solid var(--line);padding:16px 18px}
+.fact b{display:block;font:800 26px/1.05 var(--cond);text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.fact code,.card code{font:500 14px var(--mono);color:var(--cyan)}
+.rule{margin-top:18px;font-size:20px;border-left:4px solid var(--cyan);padding:6px 14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-content:start}
+.card.mine{border-color:#6e5a1c}
+.card h3{font-size:34px}
+.card h3 small{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.card .tags{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 2px}
+.tag{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);color:var(--dim)}
+.tag.h{color:var(--amber);border-color:#6e5a1c}
+.tag.ok{color:var(--green);border-color:#2f5a2c}
+.tag.warn{color:var(--red);border-color:#6a2a24}
+.tag.perf{color:var(--blue);border-color:#2a4a6a}
+.card dl{grid-column:1 / -1;margin:6px 0 0;display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 14px;font-size:17px}
+.card dt{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding-top:4px}
+.card dd{margin:0}
+.card .call{grid-column:1 / -1;margin-top:10px;font-size:17px;border-left:3px solid var(--amber);padding:2px 12px}
+.card .call b{color:var(--amber)}
+.pk{justify-self:end}
+input[type=checkbox]{accent-color:var(--amber);width:24px;height:24px;cursor:pointer}
+/* routes */
+.route{background:var(--panel);border:1px solid var(--line);padding:22px;margin-bottom:18px}
+.route header{padding:0;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.route h3{font-size:40px}
+.route h3 small{display:block;font:500 12px var(--mono);letter-spacing:.12em;color:var(--dim);margin-bottom:6px}
+.route .gist{margin:8px 0 16px;color:var(--dim);font-size:18px;max-width:46em}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,1fr);gap:8px;overflow-x:auto;padding-bottom:6px}
+.beat{background:#0f1214;border:1px solid var(--line);display:flex;flex-direction:column}
+.beat.new{border-color:#6a2a24}
+.beat svg{display:block;width:100%;height:auto;background:#101416}
+.beat .f{font:500 12px var(--mono);color:var(--amber);padding:6px 8px 0}
+.beat .t{font-size:15px;line-height:1.35;padding:2px 8px 8px;flex:1}
+.beat .t b{font:800 18px/1.1 var(--cond);text-transform:uppercase;display:block}
+.beat .k{font:500 11px var(--mono);letter-spacing:.08em;padding:4px 8px;border-top:1px solid var(--line);text-transform:uppercase}
+.beat .k.ok{color:var(--green)} .beat .k.new{color:var(--red)} .beat .k.tune{color:var(--amber)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font:500 13px var(--mono);color:var(--dim);margin-bottom:18px}
+.legend span b{font-weight:500}
+.picks ol{margin:0;padding-left:26px;display:grid;gap:14px;font-size:19px}
+.picks li b{font:800 24px/1.1 var(--cond);text-transform:uppercase;color:var(--amber)}
+.picks .later{margin-top:22px;color:var(--dim);font-size:17px}
+.pickbar{position:fixed;left:0;right:0;bottom:0;background:#111416f0;border-top:2px solid var(--amber);display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px 16px;font-size:16px;z-index:5}
+.pickbar b{color:var(--amber);font-size:20px}
+.pickbar button{font:600 15px var(--sans);background:var(--amber);color:#111;border:0;padding:10px 16px;cursor:pointer}
+.pickbar button.ghost{background:none;color:var(--dim);border:1px solid var(--line)}
+@media (max-width:560px){.card dl{grid-template-columns:1fr}.card dt{padding-top:0}}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> T0, T1, T2, T4, T5 with P2, T6, P1, P4, P5, P6 and flipbooks of all five routes. P3 left out; T3 “absolutely the vision”, but later. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="band"></div>
+<main>
+<header>
+  <div class="doc">High Water · Depth board · Hitlag · for Jonas's picks</div>
+  <h1>Mash <em>floor</em>,<br>skill ceiling</h1>
+  <p>Keep mashing fun and add places where timing, variety and physics pay more. Nothing on this board takes a move away or makes a press worse. Three groups follow: timing, physics, and five combo routes storyboarded beat by beat. My picks are at the end.</p>
+  <blockquote>"i am mostly kinda button mashing which tbf is fun"<cite>Jonas, day-2 playtest</cite></blockquote>
+</header>
+
+<section>
+  <h2><small>00 · diagnosis</small>Why it mashes today</h2>
+  <p class="sub">Read from <code>player.gd</code> on main. None of this is a bug; it's the floor we keep.</p>
+  <div class="facts">
+    <div class="fact"><b>Any rhythm works</b>The string continues on any press within <code>COMBO_WINDOW</code> 0.3 s, and the buffer holds presses for 0.15 s. Fast, slow and uneven all produce the same three hits.</div>
+    <div class="fact"><b>Same press, same result</b>X X X is always jab, cross, drive. Nothing changes if you wait, hold a direction or press on the beat. The only branches are X X Y and holding for the charge.</div>
+    <div class="fact"><b>Income ignores choice</b>BREACH and the rail capacitor fill per connected hit (rail 1/12 per strike). A mashed jab pays the same as a wall-splat relaunch.</div>
+  </div>
+  <p class="rule">The rule for everything below: <b>the mashed version still works; the timed, varied or physical version pays more</b>. DMC's style meter, Bayonetta's pause combos and Smash's stale-move negation all work this way. Sakurai frames it as risk and reward sitting close together.</p>
+</section>
+
+<section>
+  <h2><small>01 · timing and depth</small>Reward skill, never punish the mash</h2>
+  <p class="sub">Each card: what it is, the reference, our numbers (60 fps), the cost in hours, and whether mashing is still safe.</p>
+  <div class="cards">
+
+    <div class="card mine"><h3><small>T1</small>Pause combo: HOOK</h3><div class="pk"><input type="checkbox" data-pick="T1 Pause combo: X X (pause) X = HOOK wall-splat ender (3 h)"></div>
+      <div class="tags"><span class="tag h">3 h</span><span class="tag ok">mash-safe</span><span class="tag">1 new pose</span></div>
+      <dl><dt>What</dt><dd>X, X, then <b>wait</b> 12–30 f before the third X. Instead of the drive you get a HOOK: a sideways haymaker that sends the thug flat along the lane into the nearest wall or body.</dd>
+      <dt>Reference</dt><dd>Bayonetta's pause combos (a gap in the input picks a different branch); DMC's delayed Rebellion strings.</dd>
+      <dt>Numbers</dt><dd>Mashing (a gap under 12 f) still gives the drive. A gap of 12–30 f gives the HOOK, which is readable because the cross's follow-through holds. Past 30 f the string resets as now (<code>COMBO_WINDOW</code> becomes 0.5 s for the cross only). HOOK push (11, 1.5) with 110 ms of hitstop.</dd></dl>
+      <p class="call"><b>My call: yes.</b> It adds a timing branch to the string you already use, and it feeds the wall splat (P2).</p>
+    </div>
+
+    <div class="card"><h3><small>T2</small>Just-frame drive</h3><div class="pk"><input type="checkbox" data-pick="T2 Just-frame drive: third X on the cross's first cancel frames = CRIT (1.5 h)"></div>
+      <div class="tags"><span class="tag h">1.5 h</span><span class="tag ok">mash-safe</span></div>
+      <dl><dt>What</dt><dd>Press the third X in the first 3 f after the cross's hitstop ends and the drive CRITs: ×1.3 damage, a red spark, the sound pitched up, and a small BREACH bump.</dd>
+      <dt>Reference</dt><dd>Tekken's just frames (the Electric Wind God Fist), Nero's Exceed in DMC; the chime is the reward.</dd>
+      <dt>Numbers</dt><dd>A 3 f window (50 ms). Mashers land it by accident now and then, which is a nice surprise rather than a flaw.</dd></dl>
+      <p class="call"><b>My call: later.</b> It's cheap, but the payoff is cosmetic until players know the window exists. Pick it if T1 feels good.</p>
+    </div>
+
+    <div class="card"><h3><small>T3</small>Directional enders</h3><div class="pk"><input type="checkbox" data-pick="T3 Directional enders: back+X spin backfist, depth+X lane sweep (4 h + anims)"></div>
+      <div class="tags"><span class="tag h">4 h</span><span class="tag ok">mash-safe</span><span class="tag warn">2 new anims</span></div>
+      <dl><dt>What</dt><dd>On the third hit, back + X is a spin backfist that turns you and hits behind; up/down (depth) + X is a lane sweep that launches across the belt.</dd>
+      <dt>Reference</dt><dd>DMC's directional commands, SoR4's back attack.</dd>
+      <dt>Numbers</dt><dd>Stick direction read on the third press; neutral or forward is the drive, as now.</dd></dl>
+      <p class="call"><b>My call: not this week.</b> The animation cost is highest here, and T1 gives the string its variety cheaper.</p>
+    </div>
+
+    <div class="card mine"><h3><small>T4</small>Fresh moves pay</h3><div class="pk"><input type="checkbox" data-pick="T4 Fresh-move reward: repeats earn less BREACH/rail, fresh moves x1.25 (1.5 h)"></div>
+      <div class="tags"><span class="tag h">1.5 h</span><span class="tag ok">mash-safe: damage untouched</span></div>
+      <dl><dt>What</dt><dd>Moves earn BREACH and rail charge by variety. A move repeated in your last 6 earns less; one not used recently earns ×1.25. <b>Damage never changes</b>, so mashing still kills; variety fills the meters faster.</dd>
+      <dt>Reference</dt><dd>Smash's stale-move negation (a 9-move queue, 9 % off the latest, ×1.05 when fresh); DMC's style rank, which stalls on repeats.</dd>
+      <dt>Numbers</dt><dd>gain × max(0.4, 1 − 0.15 × repeats in last 6); fresh ×1.25. A small FRESH tick on the BREACH gauge makes it readable.</dd></dl>
+      <p class="call"><b>My call: yes, first.</b> It's the cheapest real depth: it changes what players choose without taking anything away.</p>
+    </div>
+
+    <div class="card mine"><h3><small>T5</small>Wall and floor extensions</h3><div class="pk"><input type="checkbox" data-pick="T5 Wall splat + one ground bounce per combo, max 3 wall bounces (3 h, with P2)"></div>
+      <div class="tags"><span class="tag h">3 h (shared with P2)</span><span class="tag ok">mash-safe</span></div>
+      <dl><dt>What</dt><dd>A thug hitting a wall that holds at ≥ 8 m/s <b>splats</b>: he sticks for 12 f (hitstop, dust, shake), then peels off toward you at 3 m/s up. Hit him in that window to juggle. Keep the existing one ground bounce per combo.</dd>
+      <dt>Reference</dt><dd>SoR4 (at most 3 wall bounces per combo; one OTG); Tekken's wall splat and screw once per combo.</dd>
+      <dt>Numbers</dt><dd>At most 3 splats per combo, then he just drops. Brick walls that break still let him plough through, as now.</dd></dl>
+      <p class="call"><b>My call: yes</b>, as the physics pillar's centrepiece (see P2).</p>
+    </div>
+
+    <div class="card mine"><h3><small>T6</small>Perfect dodge</h3><div class="pk"><input type="checkbox" data-pick="T6 Perfect dodge on the back dash/sidestep: 0.3 s slow + free crit counter (2 h)"></div>
+      <div class="tags"><span class="tag h">2 h</span><span class="tag ok">mash-safe</span></div>
+      <dl><dt>What</dt><dd>A back dash or sidestep that starts within 6 f before an amber/red swing's active frame: blue flash, world at 0.5× for 0.3 s, and your next hit within 0.5 s is a crit that ignores armour.</dd>
+      <dt>Reference</dt><dd>Bayonetta's Witch Time; the tells already use the colour grammar (amber, red).</dd>
+      <dt>Numbers</dt><dd>A 6 f window (100 ms); it uses <code>Juice.slowmo</code>, which slows you too. That's the cheap variant, and the counter crit is the reward. A late dodge is still a normal dodge.</dd></dl>
+      <p class="call"><b>My call: yes.</b> The new back dash is only defence today; this makes it a reason to read the tells.</p>
+    </div>
+
+    <div class="card"><h3><small>T0</small>Fix first: air apex sync</h3><div class="pk"><input type="checkbox" data-pick="T0 Fix: launcher/jump-cancel apex sync + equal air stall (1 h tune, SAKURAI J1-J2)"></div>
+      <div class="tags"><span class="tag h">1 h</span><span class="tag">tuning, not a feature</span></div>
+      <dl><dt>What</dt><dd>The launched thug and the jump-cancel must peak together, at the same height. Air hits then stall both bodies by the same amount, so air strings stop whiffing.</dd>
+      <dt>Reference</dt><dd>The Sakurai and Smash research, §5, J1–J2; DMC's jump-cancel reset.</dd>
+      <dt>Numbers</dt><dd>Juggle gravity 25 m/s² (in), launcher push up about 10 m/s, and an equal stall of +3.5 m/s that shrinks 25 % per hit. Check the apex again after the double jump landed.</dd></dl>
+      <p class="call"><b>My call: do it regardless.</b> Every air route below depends on it.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><small>02 · physics emergence</small>Let the physics make the combo</h2>
+  <p class="sub">Costed against the debris budget (150 live bodies; <code>Wreck</code> caps destruction per frame). "Bodies" is the worst case each adds.</p>
+  <div class="cards">
+
+    <div class="card mine"><h3><small>P1</small>Newton's cradle</h3><div class="pk"><input type="checkbox" data-pick="P1 Chain collisions: a flying body knocks struck thugs into tumble, depth 3 (1.5 h)"></div>
+      <div class="tags"><span class="tag h">1.5 h</span><span class="tag perf">+0 bodies · contacts only</span><span class="tag">extends R10</span></div>
+      <dl><dt>What</dt><dd>A thug hit by a flying body at ≥ 7 m/s doesn't just flinch: he tumbles on at 60 % of the speed and can hit the next one. Bowling lines of thugs becomes a plan.</dd>
+      <dt>Exists</dt><dd>Bodies already deal impact damage and ricochet (Captain America). New: pass the tumble on, with a chain depth cap of 3 and +1 f of hitstop per link.</dd></dl>
+      <p class="call"><b>My call: yes.</b> Cheapest emergence there is: the bodies are already in the scene.</p>
+    </div>
+
+    <div class="card mine"><h3><small>P2</small>Wall splat, wall through</h3><div class="pk"><input type="checkbox" data-pick="P2 Wall splat off walls that hold, plough through walls that break (3 h, with T5)"></div>
+      <div class="tags"><span class="tag h">3 h</span><span class="tag perf">+0 bodies (splat) · bricks already budgeted</span></div>
+      <dl><dt>What</dt><dd>The wall decides: a strong wall splats and returns the thug to you (T5); a brick wall breaks, he goes through, and the rubble keeps him airborne a beat.</dd>
+      <dt>Exists</dt><dd>Brick walls break and bodies plough through them. New: the splat state (12 f stick, peel-off), capped at 3 per combo.</dd></dl>
+      <p class="call"><b>My call: yes.</b> It turns every room's walls into combo tools, and T1's HOOK aims at them.</p>
+    </div>
+
+    <div class="card"><h3><small>P3</small>Quake pop</h3><div class="pk"><input type="checkbox" data-pick="P3 Quake pop: slams pop nearby debris, debris hits refresh a juggle (2 h)"></div>
+      <div class="tags"><span class="tag h">2 h</span><span class="tag perf">wakes ≤ 12 sleeping bodies per quake</span></div>
+      <dl><dt>What</dt><dd>A spike, dive or stomp landing near loose debris pops it up; popped debris hitting an airborne thug refreshes his juggle float.</dd>
+      <dt>Exists</dt><dd>The stomp already throws debris up. New: pops from spike and dive landings, and the debris-hit juggle refresh.</dd>
+      <dt>Perf</dt><dd>Awake bodies cost the solver. Cap at 12 pieces within 4 m, prefer small pieces, and skip it at the Web frame budget.</dd></dl>
+      <p class="call"><b>My call: later.</b> Spectacular but costly, and it overlaps P1.</p>
+    </div>
+
+    <div class="card"><h3><small>P4</small>Blast juggle</h3><div class="pk"><input type="checkbox" data-pick="P4 Blast juggle: barrel explosions launch bodies into a juggle, not away (1 h)"></div>
+      <div class="tags"><span class="tag h">1 h</span><span class="tag perf">+0 bodies</span></div>
+      <dl><dt>What</dt><dd>Explosive barrels push mostly up (70 %) instead of out, so a blast is a group launcher you can follow up.</dd>
+      <dt>Exists</dt><dd>Barrels explode when thrown or hit hard. New: the push direction, plus the juggle state on everyone caught.</dd></dl>
+      <p class="call"><b>My call: cheap yes if there's time.</b> It's a tuning change with a big payoff.</p>
+    </div>
+
+    <div class="card"><h3><small>P5</small>Environmental kills</h3><div class="pk"><input type="checkbox" data-pick="P5 Environmental kills: rack and slab crush, core throw (2 h, with Drywall)"></div>
+      <div class="tags"><span class="tag h">2 h</span><span class="tag perf">racks already bodies (≤ 9 per domino run)</span><span class="tag">Drywall's lane</span></div>
+      <dl><dt>What</dt><dd>Toppling racks and falling slabs crush whoever is under them: a knockdown, damage by mass × speed, and an "ENVIRONMENTAL" tag on the KO feed. The core throw already exists (Big Rat through the core).</dd>
+      <dt>Exists</dt><dd>Racks domino, slabs drop, the core breaks. New: crush damage on thugs and a KO label.</dd></dl>
+      <p class="call"><b>My call: yes on F71 racks only</b>, with Drywall; slabs next if cheap.</p>
+    </div>
+
+    <div class="card mine"><h3><small>P6</small>Skewer</h3><div class="pk"><input type="checkbox" data-pick="P6 Skewer: a rail through 3+ airborne bodies = BREACH bonus + slow-mo beat (1 h)"></div>
+      <div class="tags"><span class="tag h">1 h</span><span class="tag perf">+0 bodies · existing ray</span></div>
+      <dl><dt>What</dt><dd>A rail shot through three or more airborne bodies is a SKEWER: +0.2 BREACH, a 200 ms slow-mo beat, and a refunded cell. Juggles and chain collisions line bodies up; the rail cashes them in.</dd>
+      <dt>Exists</dt><dd>The rail already pierces every thug in line. New: counting the airborne ones and the payoff.</dd></dl>
+      <p class="call"><b>My call: yes.</b> It ties the physics pillar to the gun you pay for with combos.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><small>03 · signature routes</small>Five combos, beat by beat</h2>
+  <p class="sub">Frames at 60 fps from the current constants. Green beats chain today; amber needs tuning; red needs a new link, with the option that adds it. Once you pick, Armature's <code>tools/anim_study.tscn</code> can render the routes as flipbooks.</p>
+  <div class="legend"><span><b style="color:var(--green)">■</b> exists</span><span><b style="color:var(--amber)">■</b> tune</span><span><b style="color:var(--red)">■</b> new link</span></div>
+  <div id="routes"></div>
+</section>
+
+<section class="picks">
+  <h2><small>04 · my picks</small>What I'd build, in order</h2>
+  <ol>
+    <li><b>T0 apex sync</b> (1 h). It's a fix, and routes 1, 3 and 5 need it.</li>
+    <li><b>T4 fresh moves pay</b> (1.5 h). Depth for the price of a multiplier; mashing keeps its damage.</li>
+    <li><b>P1 Newton's cradle + P6 skewer</b> (2.5 h). Physics becomes the combo, and the rail cashes it in. No new bodies.</li>
+    <li><b>T1 HOOK + T5/P2 wall splat</b> (6 h). One timing branch aimed at the walls: that's the signature. It also opens routes 1 and 5.</li>
+    <li><b>T6 perfect dodge</b> (2 h). It gives the new back dash a reason to exist.</li>
+  </ol>
+  <p class="later">About 13 h in total. Later: T2 just-frame (after T1 proves itself), P3 quake pop (perf), P4 blast juggle (1 h, whenever), P5 on F71 racks with Drywall. Not this week: T3 directional enders (animation cost).</p>
+</section>
+</main>
+
+<div class="pickbar"><span><b id="pc">0</b> picked</span><button id="copy">Copy picks</button><button class="ghost" id="clear">Clear</button><span id="msg"></span></div>
+
+<script>
+/* Pictograms: a lane seen from the game camera. P = the enforcer, T = a thug
+   (angle a: tumbling), W = wall, R = rack, B = brick wall, a = arrow, o = impact,
+   d = debris, s = slow-mo ring, g = glove line. Units: a 160 x 90 box, floor at y 78. */
+function pic(ops){
+  let s='<svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" aria-hidden="true">';
+  s+='<rect x="0" y="78" width="160" height="12" fill="#1c2226"/><rect x="0" y="78" width="160" height="1" fill="#2e373c"/>';
+  for(const o of ops){
+    const [k,x,y,a,b]=o;
+    if(k==="P"){s+=`<g transform="translate(${x} ${y})"><rect x="-6" y="-24" width="12" height="16" fill="#3b4652"/><rect x="-5" y="-31" width="9" height="8" fill="#5a6672"/><rect x="2" y="-29" width="3" height="2" fill="#5ff0ff"/><rect x="-5" y="-8" width="4" height="8" fill="#2a3139"/><rect x="1" y="-8" width="4" height="8" fill="#2a3139"/><rect x="${a<0?-13:6}" y="-22" width="7" height="7" fill="#5ff0ff"/></g>`}
+    if(k==="T"){s+=`<g transform="translate(${x} ${y}) rotate(${a||0})"><rect x="-5" y="-22" width="10" height="13" fill="#b0492a"/><rect x="-4" y="-29" width="8" height="7" fill="#c99a78"/><rect x="-4" y="-9" width="3" height="9" fill="#2e333b"/><rect x="1" y="-9" width="3" height="9" fill="#2e333b"/></g>`}
+    if(k==="W"){s+=`<rect x="${x}" y="10" width="8" height="68" fill="#3a3f45"/><rect x="${x}" y="10" width="2" height="68" fill="#4c535a"/>`}
+    if(k==="B"){for(let j=0;j<6;j++)for(let i=0;i<2;i++)s+=`<rect x="${x+i*5+(j%2?2:0)}" y="${48+j*5}" width="4.4" height="4.4" fill="#8c4a3a"/>`}
+    if(k==="R"){s+=`<g transform="translate(${x} 78) rotate(${a||0})"><rect x="-5" y="-40" width="10" height="40" fill="#2a3038"/><rect x="-3" y="-36" width="1.5" height="30" fill="#7fe07a"/></g>`}
+    if(k==="a"){const dx=a-x,dy=b-y,l=Math.hypot(dx,dy)||1,ux=dx/l,uy=dy/l;s+=`<line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="#ffb000" stroke-width="2.4" shape-rendering="auto"/><polygon points="${a},${b} ${a-ux*7-uy*4},${b-uy*7+ux*4} ${a-ux*7+uy*4},${b-uy*7-ux*4}" fill="#ffb000" shape-rendering="auto"/>`}
+    if(k==="o"){s+=`<polygon points="${x},${y-9} ${x+3},${y-3} ${x+9},${y} ${x+3},${y+3} ${x},${y+9} ${x-3},${y+3} ${x-9},${y} ${x-3},${y-3}" fill="#fff4c2" stroke="#111" stroke-width="1" shape-rendering="auto"/>`}
+    if(k==="d"){for(let i=0;i<6;i++)s+=`<rect x="${x+(i*7)%18-9}" y="${y-(i*11)%16}" width="3" height="3" fill="#8c8f92"/>`}
+    if(k==="s"){s+=`<circle cx="${x}" cy="${y}" r="${a||14}" fill="none" stroke="#6fb4ff" stroke-width="2" stroke-dasharray="4 3" shape-rendering="auto"/>`}
+    if(k==="g"){s+=`<line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="#5ff0ff" stroke-width="1.6" stroke-dasharray="3 2" shape-rendering="auto"/>`}
+    if(k==="r"){s+=`<line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="#5ff0ff" stroke-width="3" shape-rendering="auto"/><line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="#ffffff" stroke-width="1" shape-rendering="auto"/>`}
+  }
+  return s+"</svg>";
+}
+/* A beat: [frame, title, text, status ok|tune|new, key text, pictogram ops] */
+const ROUTES=[
+ {id:"R1",name:"Slam dunk",tag:"Jonas's example",gist:"Dash in, slam him into the floor, bounce, juggle, snatch him out of the air, throw him into the wall.",
+  beats:[
+   ["f0","Dash","Glove thrusters, 10 f.","ok","exists",[["P",30,78,1],["a",40,62,70,62],["T",110,78]]],
+   ["f10","Rush punch","Out of the dash: 2 f startup, push (7, 2.5): he tumbles.","ok","exists: dash attack",[["P",88,78,1],["o",102,58],["T",116,70,40],["a",118,56,146,46]]],
+   ["f17","Dash-cancel","Cancel on hit, chase him.","ok","exists",[["P",100,78,1],["a",108,62,134,62],["T",140,56,70]]],
+   ["f27","Jump · dive kick","Tap kick in the air: (9, −12) slams him down.","ok","exists: dive",[["P",110,40,1],["a",118,44,138,70],["T",142,74,90],["o",140,70]]],
+   ["f44","Floor bounce","Once per combo; apex 1.2 m.","tune","tune: J4 height",[["T",120,52,160],["a",120,74,120,50],["d",120,76],["P",92,78,1]]],
+   ["f52","X X Y relaunch","The string juggles him; the launcher sends him up.","tune","tune: T0 apex sync",[["P",100,78,1],["o",112,40],["T",114,34,200],["a",114,64,114,24]]],
+   ["f90","Air grab","Grab snatches him mid-air.","new","new: air pull",[["P",96,34,1],["g",104,28,126,24],["T",130,26,120]]],
+   ["f110","Throw → wall splat","The wall holds: he sticks 12 f and peels back to you.","new","new: T5/P2 splat",[["P",60,78,1],["a",70,50,132,50],["W",140],["T",132,58,0],["o",138,50]]]
+  ]},
+ {id:"R2",name:"Newton's cradle",tag:"bowling",gist:"Grab one, soften him up, and bowl him down the line. The survivors are lined up in the air for the rail.",
+  beats:[
+   ["f0","Grab","Glove grab: he's held.","ok","exists",[["P",40,78,1],["T",56,52,0],["T",100,78],["T",124,78]]],
+   ["f4","Pummel ×2","X on a held thug: 55 ms stop each, BREACH ticks.","ok","exists (Jonas)",[["P",40,78,1],["T",56,52,0],["o",56,46]]],
+   ["f40","Charged throw","Hold, then release at full: 3 ricochets.","ok","exists",[["P",40,78,1],["a",54,54,98,60],["T",104,70,70],["T",124,78]]],
+   ["f52","Boost","Attack within 11 f of the ricochet boosts it.","ok","exists: 180 ms window",[["o",104,60],["a",108,58,128,60],["T",132,70,60]]],
+   ["f64","Chain","The struck thug tumbles on into the next one.","new","new: P1 cradle",[["T",100,62,80],["a",106,62,132,62],["T",138,64,50],["o",136,58]]],
+   ["f84","Skewer","Rail through 3 airborne bodies: slow beat, cell back.","new","new: P6 skewer",[["P",24,78,1],["r",34,56,158,40],["T",80,50,100],["T",110,46,140],["T",140,42,60],["s",110,46,22]]]
+  ]},
+ {id:"R3",name:"Sky line",tag:"air",gist:"Launcher, jump-cancel, air string, double jump, second air string, spike, bounce, slide relaunch.",
+  beats:[
+   ["f0","X X Y","Jab, cross, launcher (5 f startup).","ok","exists",[["P",70,78,1],["o",86,50],["T",88,52,160],["a",88,74,88,30]]],
+   ["f40","Jump-cancel","11 m/s off a connected launcher.","tune","tune: T0 apex",[["P",70,44,1],["T",90,30,200],["a",70,76,70,52]]],
+   ["f55","Air punch ×2","Each one stalls you both.","tune","tune: equal stall",[["P",72,34,1],["o",86,28],["T",90,28,200]]],
+   ["f80","Double jump","Glove thrusters, once per air time.","ok","exists (Jonas)",[["P",72,22,1],["a",72,48,72,26],["T",92,26,210]]],
+   ["f90","Second air string","One reset per juggle after the double jump.","new","new: DMC-style reset",[["P",74,20,1],["o",88,16],["T",92,16,220]]],
+   ["f120","Air spike","(2, −14) into the floor.","ok","exists",[["P",78,26,1],["a",92,28,104,70],["T",106,74,90],["o",104,70]]],
+   ["f132","Bounce · slide kick","The slide sweeps him back up; kill him in the air and he stays juggleable.","ok","exists: doomed juggles",[["P",86,78,1],["T",104,56,170],["a",104,76,104,48],["d",104,76]]]
+  ]},
+ {id:"R4",name:"Domino",tag:"F71 environment",gist:"Kick a thug into a rack row, let the row fall on his friends, pull one out, throw him into a pier, stomp the rest.",
+  beats:[
+   ["f0","Kick","Push (5, 2) into the rack.","ok","exists",[["P",30,78,1],["o",48,58],["T",62,72,30],["R",78,0],["R",92,0],["T",112,78]]],
+   ["f10","Racks go","The row topples like dominoes.","ok","exists (Drywall)",[["R",70,50],["R",86,40],["R",102,20],["T",116,78]]],
+   ["f40","Crush","A rack lands on him: knockdown and damage.","new","new: P5 crush",[["R",100,80],["T",118,80,90],["o",112,62]]],
+   ["f60","Pull","Glove pull drags a pinned thug out.","ok","exists",[["P",30,78,1],["g",40,58,110,72],["T",114,76,80]]],
+   ["f80","Throw into pier","Pier breaks, the mezzanine slab drops.","ok","exists: Slab rule",[["P",30,78,1],["a",44,56,110,56],["B",112],["T",104,60,60],["o",112,54]]],
+   ["f110","Air stomp","The quake launches everyone left.","ok","exists",[["P",80,48,1],["a",80,50,80,74],["T",50,60,160],["T",112,60,200],["d",80,78]]]
+  ]},
+ {id:"R5",name:"Counterpunch",tag:"timing",gist:"Read the amber tell, dodge on the last frames, get the slow beat, then hook him into the wall with the pause combo.",
+  beats:[
+   ["f0","Amber tell","A thug winds up (amber flicker).","ok","exists: Tell",[["P",60,78,1],["T",84,78],["s",84,58,16]]],
+   ["f24","Perfect dodge","A back dash within 6 f of his active frame.","new","new: T6",[["P",40,78,1],["a",56,62,40,62],["T",78,78],["s",60,56,26]]],
+   ["f28","Slow beat","0.5× for 0.3 s; the next hit is a crit.","new","new: T6",[["P",60,78,1],["T",80,78],["s",70,52,34]]],
+   ["f40","X, X, wait, X","A 12–30 f pause before the third hit: HOOK.","new","new: T1 HOOK",[["P",60,78,1],["o",78,56],["T",90,70,-60],["a",94,58,140,58]]],
+   ["f60","Splat","Into the wall: stick 12 f, peel off to you.","new","new: T5/P2",[["W",146],["T",138,60,0],["o",144,52],["P",70,78,1]]],
+   ["f80","Kick relaunch · execute","Juggle him off the wall, pull, Y executes.","ok","exists: pull, execute (Jonas)",[["P",100,78,1],["T",122,52,170],["a",122,74,122,40]]]
+  ]}
+];
+const host=document.getElementById("routes");
+for(const r of ROUTES){
+  const el=document.createElement("article");el.className="route";
+  const nNew=r.beats.filter(b=>b[3]==="new").length,nTune=r.beats.filter(b=>b[3]==="tune").length;
+  el.innerHTML=`<header><h3><small>${r.id} · ${r.tag}</small>${r.name}</h3><input type="checkbox" data-pick="Route ${r.id} ${r.name}: storyboard it as a flipbook"></header>
+  <p class="gist">${r.gist} <b style="color:var(--dim)">${r.beats.length} beats · ${nNew} new link${nNew===1?"":"s"} · ${nTune} to tune.</b></p>
+  <div class="strip">${r.beats.map(b=>`<div class="beat ${b[3]==="new"?"new":""}">${pic(b[5])}<div class="f">${b[0]}</div><div class="t"><b>${b[1]}</b>${b[2]}</div><div class="k ${b[3]}">${b[4]}</div></div>`).join("")}</div>`;
+  host.appendChild(el);
+}
+/* picks: a per-viewer convenience */
+const KEY="hw-archive-depth-picks";
+const load=()=>{try{const s=localStorage.getItem(KEY);return s===null?null:JSON.parse(s)}catch(e){return null}};
+// Archive: with nothing stored, the boxes show Jonas's recorded picks.
+const JONAS_PICKS=["T0", "T1", "T2", "T4", "T5", "T6", "P1", "P2", "P4", "P5", "P6", "Route"];
+const save=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}};
+const boxes=[...document.querySelectorAll("input[data-pick]")];const st0=load();const saved=new Set(st0||[]);boxes.forEach(b=>b.checked=st0===null?JONAS_PICKS.some(p=>b.dataset.pick.startsWith(p+" ")):saved.has(b.dataset.pick));
+function update(){const v=boxes.filter(b=>b.checked).map(b=>b.dataset.pick);document.getElementById("pc").textContent=v.length;save(v);return v}
+boxes.forEach(b=>b.addEventListener("change",update));update();
+document.getElementById("copy").onclick=async()=>{const v=update();const t="Depth board picks:\n"+(v.length?v.map(x=>"- "+x).join("\n"):"- (none)");const m=document.getElementById("msg");try{await navigator.clipboard.writeText(t);m.textContent="Copied"}catch(e){m.textContent="Copy blocked; see console";console.log(t)}};
+document.getElementById("clear").onclick=()=>{boxes.forEach(b=>b.checked=false);update()};
+</script>
+</body>
+</html>

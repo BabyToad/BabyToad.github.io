@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blackout Optics</title>
+<!-- Opticals (Studio Hitstop), 2026-09-30. Captures from the game (Floor 70, KETSU, the scripted pad). -->
+<style>
+@font-face{font-family:HWMono;font-weight:400;src:url(../intro/assets/fonts/JetBrainsMono-Regular.ttf)}
+@font-face{font-family:HWMono;font-weight:700;src:url(../intro/assets/fonts/JetBrainsMono-Bold.ttf)}
+@font-face{font-family:HWDisplay;src:url(../intro/assets/fonts/BarlowCondensed-Bold.ttf)}
+:root{--bg:#050708;--panel:#0b1012;--ink:#d9e6e8;--mute:#7d8b8f;--rule:#1b2528;--cy:#5ff0ff;--amber:#ffb84d;--red:#ff4d3a;color-scheme:dark}
+:root[data-theme="light"]{--bg:#050708}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Segoe UI",system-ui,sans-serif}
+.page{max-width:1240px;margin:0 auto;padding:0 16px 80px}
+header{padding:34px 0 16px;border-bottom:1px solid var(--rule)}
+.kick{font:700 11px HWMono;letter-spacing:.24em;text-transform:uppercase;color:var(--cy)}
+h1{font:400 clamp(38px,6vw,72px)/.95 HWDisplay;letter-spacing:.02em;margin:8px 0 6px;text-transform:uppercase}
+h2{font:400 28px/1.1 HWDisplay;letter-spacing:.06em;text-transform:uppercase;margin:34px 0 10px}
+h3{font:700 12px HWMono;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin:18px 0 6px}
+p,li{max-width:80ch}
+.lede{font-size:18px}
+code{font-family:HWMono;font-size:.88em;background:var(--panel);padding:1px 4px}
+.seq{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:8px}
+.seq figure,.opt figure{margin:0}
+.seq img,.opt img,.opt video{width:100%;display:block;background:#000;border:1px solid var(--rule)}
+figcaption{font:400 12px/1.4 HWMono;color:var(--mute);padding:4px 2px}
+figcaption b{color:var(--ink)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+.opt{background:var(--panel);border:1px solid var(--rule);padding:12px}
+.opt h3{color:var(--cy);margin-top:0}
+.opt.pick{outline:2px solid var(--cy)}
+.opt .row{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+th{font:700 11px HWMono;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.swatch{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:4px;border:1px solid #0006}
+</style>
+</head>
+<body>
+<div id="hw-archive-banner" role="note" style="all:initial;display:block;box-sizing:border-box;width:100%;position:relative;z-index:2147483000;margin:0 0 12px;padding:8px 16px;background:#0a0c0e;color:#cfd8dc;border-bottom:2px solid #ff7a2f;font:13px/1.45 system-ui,'Segoe UI',sans-serif;text-align:left">Archived decision board from <b style="all:unset;font-weight:700;color:#5ff0ff">HIGH WATER</b> (2026). <b style="all:unset;font-weight:700;color:#ff7a2f">Picked:</b> Night vision comes online after the blackout. The palette became a setting: Bone (the default, Jonas's favourite), Phosphor and Green. <a href="../index.html" style="all:unset;cursor:pointer;color:#5ff0ff;text-decoration:underline;white-space:nowrap">← back to the archive</a></div>
+
+<div class="page">
+<header>
+  <div class="kick">Opticals · A1 blackout · Bone is the default</div>
+  <h1>Blackout, then the optics come online</h1>
+  <p class="lede">Jonas: "dude blackout with a cool effect and then night vision coming online for the player perspective would be soo sick". These are captures from the game on Floor 70 (the KETSU fight, played by the scripted pad), with the power cut by the debug trigger and restored four seconds later. The HUD, tells and objective brackets are live. The boot text is placeholder copy.</p>
+</header>
+
+<h2>The sequence (about 1.6 s)</h2>
+<div class="seq" id="seq"></div>
+<ol>
+  <li><b>The riser dies.</b> The lamps go out outward from the break, each tube stuttering off and turning to dead glass. A soft dark front rides the same way across the view, and the floor's ambient falls with it.</li>
+  <li><b>Five frames of near-black</b> (the DOOM / Raid beat).</li>
+  <li><b>Emergency red.</b> The Stage's emergency light (on the UPS circuit) comes up on the black beat, with the tubes around it glowing red. The sun through the windows becomes the key light.</li>
+  <li><b>High Water's optics boot.</b> A collapse line opens (CRT-style), a sweep runs down the frame, and the grade comes up under <code>OPTICS // LOW-LIGHT</code> (placeholder). The Vermin fumble out phones and torches: small pale glows that the optics flare. Hitlag makes lookouts blind in the dark.</li>
+  <li><b>Power back.</b> The lamps return and the optics hand back through a short overexposure.</li>
+</ol>
+
+<h2>In the game: the real blackouts</h2>
+<p>These are the floors' own triggers, going through Sim's power graph rather than a debug emit. On Floor 70, <code>Stage._black_out(the booth)</code> runs when the collector's booth drops. On Floor 71, the PV core breaks. The look follows <code>Sim.floor_dark_changed</code>, the floor's main lighting as a whole. A local circuit, such as training's services, only stutters its own lamps out, with no optics. The lit props (vending, washers, pachinko, turnstiles and the rest) are on the floor circuit and go dark with the lamps. The palette is Bone, the new default.</p>
+<h3>Floor 70 · the booth drops</h3>
+<div class="seq" id="f70"></div>
+<h3>Floor 71 · the PV core breaks (the first frame is the core's own impact flash)</h3>
+<div class="seq" id="f71"></div>
+
+<h2>The palette is a setting</h2>
+<p>Jonas: bone first, green second, phosphor as the vision. It is now <b>Options · Night vision: Bone / Phosphor / Green</b>, with Bone as the default. Each option shows a swatch of its ramp, and <code>?optics=phosphor|bone|green</code> still overrides it for QA. After the jam it moves to the operative's loadout page.</p>
+<div class="seq" id="setting"></div>
+
+<h2>The three palettes</h2>
+<div class="opts" id="opts"></div>
+
+<h2>The readability rule</h2>
+<p>Night vision desaturates the world, never the rules:</p>
+<ul>
+  <li><b>Kept explicitly by colour:</b> the tells, the hazard states and High Water's emitters. The pass keeps any pixel whose chroma matches one of these and that is bright enough to be emitted light rather than lit paint. That includes Plumb's charge crawl (cold white) and embers (warm white), kept apart.</li>
+  <li><b>Kept as value and texture:</b> wet sheen and gas haze, which the grade preserves.</li>
+  <li><b>Never touched:</b> the HUD and the objective brackets, which draw outside the world view.</li>
+  <li><b>Signs:</b> the sign alpha marker passes through unchanged.</li>
+</ul>
+<p id="keep"></p>
+
+<h2>Cost</h2>
+<table>
+  <tr><th>What</th><th>Where</th><th>Result</th></tr>
+  <tr><td>The pass alone (the blackout held, the pass toggled)</td><td>Web, threaded build, 2560×1440, world 640×360, Playwright on the RTX 3070</td><td>frame mean 13.02 → 13.16 ms (+0.14), p95 16.04 → 16.67 ms</td></tr>
+  <tr><td>The whole blackout state against power on</td><td>the same</td><td>mean +0.8 to +1.0 ms over two runs; p95 is noisy on the shared machine (16.7–20.4 ms with the power on)</td></tr>
+  <tr><td>World view GPU time with the pass</td><td>desktop, Compatibility renderer, 2560×1421</td><td>0.37 → 0.51 ms (+0.14)</td></tr>
+</table>
+<ul style="font-size:14px">
+  <li><b>How it's built:</b> one pass at world resolution. There are no extra viewports, no blur and no new lights. It is hidden (zero cost) while the power is on.</li>
+  <li><b>Sizing:</b> grain and scanlines are sized in world pixels read from the viewport, so they follow the adaptive world height.</li>
+  <li><b>Next:</b> Astra's <code>web_bench70</code> run is the gate.</li>
+</ul>
+</div>
+<script>
+const seq = [['0028', 'Power on'], ['0032', 'The riser dies: the dark front moves outward'], ['0036', 'Lamps out, ambient falling'], ['0039', 'Near-black (5 frames)'], ['0041', 'Boot: the collapse line'], ['0043', 'Boot: the line opens'], ['0045', 'Boot: the sweep'], ['0050', 'The grade settles'], ['0110', 'Night vision (phosphor), tells in colour'], ['0151', 'Power back: overexposure'], ['0156', 'The optics hand back']];
+const s = document.getElementById('seq');
+for (const [f, c] of seq) s.insertAdjacentHTML('beforeend', `<figure><img loading="lazy" src="img/seq_${f}.jpg" alt="${c}"><figcaption><b>${(+f / 30).toFixed(2)} s</b> · ${c}</figcaption></figure>`);
+const opts = [
+  ['bone', 'Bone (Jonas\'s pick, the default)', 'A white-hot monochrome in the brand\'s bone, with only the deepest shadows cold. It is the most "corporate" and has the most contrast for every tell colour, cyan included.'],
+  ['phosphor', 'Phosphor', 'High Water\'s own optics: a cyan-leaning phosphor ramp from deep teal to a white-cyan top, fine grain and scanlines, and a lens falloff. It sits in the company palette, so the tells read against it, amber and red above all. One risk: the cyan tell and High Water\'s emitters sit close to the grade, and are told apart by brightness.'],
+  ['green', 'Green', 'The genre\'s Gen-3 tube, for comparison. It is the most instantly legible as night vision, but it is not High Water\'s colour, and green fights the gas haze and a future gas state.'],
+];
+const shots = ['0000', '0200', '0400', '0600', '0800', '1000', '1300', '1800', '2600'];
+for (const [id, k] of [['f70', 'deploy'], ['f71', 'core']]) {
+  const el = document.getElementById(id);
+  for (const t of shots) el.insertAdjacentHTML('beforeend', `<figure><img loading="lazy" src="img/real_${k}_${t}.jpg" alt="${id} ${+t / 1000} s after the cut"><figcaption><b>${(+t / 1000).toFixed(1)} s</b> after the cut</figcaption></figure>`);
+}
+const st = document.getElementById('setting');
+['Bone (default)', 'Phosphor', 'Green'].forEach((n, i) => st.insertAdjacentHTML('beforeend', `<figure><img loading="lazy" src="img/setting_${i}.jpg" alt="Options, night vision ${n}"><figcaption><b>${n}</b></figcaption></figure>`));
+const o = document.getElementById('opts');
+for (const [k, t, d] of opts) o.insertAdjacentHTML('beforeend', `<div class="opt${k === 'bone' ? ' pick' : ''}"><h3>${t}</h3><video src="img/${k}.webm" controls muted loop playsinline preload="metadata" poster="img/${k}_0110.jpg"></video><div class="row"><img loading="lazy" src="img/${k}_0110.jpg" alt="${k} night vision"><img loading="lazy" src="img/${k}_0151.jpg" alt="${k} power back"></div><p style="font-size:14px">${d}</p></div>`);
+const keep = [['amber', '#ffd94d'], ['red', '#ff4733'], ['blue', '#73b8ff'], ['cyan', '#5ff0ff'], ['violet', '#b873ff'], ['spark', '#d1edff'], ['fire', '#ff6b1c'], ['spark stroke', '#6b85ff'], ['orange', '#ff7a21'], ['energy rim', '#7ae9f7'], ['charge (cold white)', '#dbe6ff'], ['embers (warm white)', '#ffdbb8']];
+document.getElementById('keep').innerHTML = 'Kept colours: ' + keep.map(([n, c]) => `<span class="swatch" style="background:${c}"></span>${n}`).join(' · ');
+</script>
+</body>
+</html>

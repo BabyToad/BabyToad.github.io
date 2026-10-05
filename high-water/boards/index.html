@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HIGH WATER Decision Boards</title>
+<meta name="description" content="An archive of thirteen HTML decision boards from HIGH WATER, a Godot brawler built in one jam week by Jonas Heinke with a studio of AI agents: the options each board offered and what was picked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08090b; --panel: #101317; --panel-2: #151a1f; --line: #232a31; --ink: #dde4e8; --dim: #8b979f;
+  --cyan: #5ff0ff; --orange: #ff7a2f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 16px/1.55 Barlow, system-ui, "Segoe UI", sans-serif; padding: 0 16px 64px; }
+main { max-width: 1180px; margin: 0 auto; }
+a { color: var(--cyan); }
+header.top { padding: 48px 0 28px; border-bottom: 1px solid var(--line); }
+.kicker { font: 600 13px/1 "Barlow Condensed", sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--orange); }
+h1 { font: 800 clamp(44px, 8vw, 88px)/.9 "Barlow Condensed", sans-serif; letter-spacing: .01em; text-transform: uppercase; margin: 12px 0 18px; }
+h1 span { color: var(--cyan); }
+.intro { max-width: 72ch; color: #c3ccd1; margin: 0; }
+.meta { margin: 14px 0 0; font-size: 14px; color: var(--dim); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; margin-top: 30px; }
+.card { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--cyan); text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+.card:hover, .card:focus-visible { border-color: var(--orange); transform: translateY(-2px); outline: none; }
+.thumb { aspect-ratio: 16 / 9; background: #000 center / cover no-repeat; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb.px img { image-rendering: pixelated; }
+.thumb.badge { display: grid; place-items: center; background: var(--panel-2); }
+.thumb.badge img { width: 96px; height: 96px; object-fit: contain; image-rendering: pixelated; }
+.thumb.type { display: grid; place-items: center; background: repeating-linear-gradient(-45deg, #0c0f12 0 14px, #0f1317 14px 28px); }
+.thumb.type b { font: 800 clamp(34px, 6vw, 54px)/1 "Barlow Condensed", sans-serif; letter-spacing: .04em; color: var(--cyan); text-transform: uppercase; }
+.thumb.type b i { font-style: normal; color: var(--orange); }
+.body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.tag { font: 600 12px/1 "Barlow Condensed", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.tag em { font-style: normal; color: var(--orange); }
+h2 { font: 700 26px/1.05 "Barlow Condensed", sans-serif; margin: 0; text-transform: uppercase; letter-spacing: .01em; }
+dl { margin: 0; display: grid; gap: 6px; font-size: 15px; }
+dt { font: 600 12px/1 "Barlow Condensed", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-top: 4px; }
+dt.p { color: var(--orange); }
+dd { margin: 0; }
+.go { margin-top: auto; padding-top: 8px; font: 600 14px "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
+footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+  <div class="kicker">Archive · 2026 · Godot · one jam week</div>
+  <h1>High <span>Water</span><br>decision boards</h1>
+  <p class="intro">HIGH WATER is a 3D-physics brawler Jonas Heinke built in Godot during one jam week, from 28 September to 4 October 2026, with a studio of about twenty named AI agents (Claude and Codex), each with its own lane. When a question needed his call, the agent responsible built an HTML board for it: the options side by side, real captures from the game, a recommendation, and checkboxes whose picks could be copied back to the team. Jonas answered on the board, the team built what he picked, and some boards went round again. The week produced 39 boards. These 13 are kept as they were, with local paths, internal file names and other private details removed. Each one opens with what was picked.</p>
+  <p class="meta">Pick boxes and radio buttons still work and start on Jonas's recorded picks where the board had them; "copy picks" only copies to your clipboard. Large images and videos were re-encoded to keep the archive small.</p>
+</header>
+
+<section class="grid" aria-label="Archived boards">
+
+<a class="card" href="ui/round2.html">
+  <div class="thumb px"><img src="ui/shots/hero_640.png" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>UI</em> · Readout · 28 Sep</div>
+    <h2>UI round 2: Evangelion, made by High Water</h2>
+    <dl><dt>Decision</dt><dd>Which of three live HUD directions to build, all on Evangelion's screen language: GitS × Eva, Death Stranding × High Water, Blade Runner × Eva.</dd>
+    <dt class="p">Picked</dt><dd>A, Section Alert (Ghost in the Shell × Evangelion). It became the game's UI.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="art/index.html">
+  <div class="thumb"><img src="art/img/dollhouse_still.webp" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Art</em> · Plumb · 28 Sep – 3 Oct</div>
+    <h2>Floor 70 finish schedule and the tower cutaway</h2>
+    <dl><dt>Decision</dt><dd>The environment style (three routes rendered from the game camera), then how the Tower 3 level select should look. The first cutaway "looked SVG-drawn", so four new looks followed, and then the dollhouse was built.</dd>
+    <dt class="p">Picked</dt><dd>Route A, Blockwork. For the tower select, D1, the voxel dollhouse, "with extra love and detail", plus a security camera per floor whose feed swings out on a CRT monitor.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="ui/meta.html">
+  <div class="thumb"><img src="ui/hub/city.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Meta</em> · Readout · 29 Sep</div>
+    <h2>Between missions: map, hub or turf war</h2>
+    <dl><dt>Decision</dt><dd>Whether the game needs a hub, a world map or a level register between missions, scoped against a deadline five days out.</dd>
+    <dt class="p">Picked</dt><dd>Option S, a level select. It became a Tower 3 cutaway with five floors, each floor a city block, and led to the art board's tower looks.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="finishers/index.html">
+  <div class="thumb px"><img src="finishers/shots/moment_640.png" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Combat</em> · Slate · 28 Sep</div>
+    <h2>Execution menu</h2>
+    <dl><dt>Decision</dt><dd>How a finisher is chosen without breaking the flow of the fight, and what each one pays.</dd>
+    <dt class="p">Picked</dt><dd>Time slows almost to a stop and three rolled finishers sit on the face buttons, each with a benefit tag. The GRAB and EXECUTE prompts show only for the first three.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="depth/index.html">
+  <div class="thumb type"><b>Mash <i>floor</i></b></div>
+  <div class="body">
+    <div class="tag"><em>Combat</em> · Hitlag · 29 Sep</div>
+    <h2>Depth: mash floor, skill ceiling</h2>
+    <dl><dt>Decision</dt><dd>Which timing and physics additions reward skill without punishing button mashing ("i am mostly kinda button mashing which tbf is fun").</dd>
+    <dt class="p">Picked</dt><dd>T0, T1, T2, T4, T5 with P2, T6, P1, P4, P5, P6 and flipbooks of all five routes. P3 left out. Directional enders: "absolutely the vision", but later.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="codex/floors.html">
+  <div class="thumb type"><b>F70<i>–</i>F74</b></div>
+  <div class="body">
+    <div class="tag"><em>World</em> · Stencil · 29 Sep</div>
+    <h2>Tower 3 blocks: site survey</h2>
+    <dl><dt>Decision</dt><dd>Which identity, details and holding crew each floor gets, so the tower reads as a stack of lived-in city blocks.</dd>
+    <dt class="p">Picked</dt><dd>78 of 99 lines. F70 The Village Lobby, F71 The Labelling Farm, F72 Three-Shift School, F73 The Wet Market, F74 The Gang's Own Street.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="music/index.html">
+  <div class="thumb"><img src="music/img/op_mirrorshades_v4.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Music</em> · Downbeat · 28 Sep onward</div>
+    <h2>Music board: the operator</h2>
+    <dl><dt>Decision</dt><dd>Title theme, menu, pause and stage music, written as MML for a code-built FM engine, over five rounds with every take playable.</dd>
+    <dt class="p">Picked</dt><dd>Title: Mirrorshades v4. Pause: Server Room v3. Stage: The Toll and Floor 70. Black ICE as the credits candidate. No jazz.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="sim/index.html">
+  <div class="thumb type"><b>Building <i>services</i></b></div>
+  <div class="body">
+    <div class="tag"><em>Systems</em> · all 14 lanes · 30 Sep</div>
+    <h2>The building is the weapon</h2>
+    <dl><dt>Decision</dt><dd>How far the physics simulation goes. Fourteen agents answered independently; the board sorts their ideas into three tiers of cards.</dd>
+    <dt class="p">Picked</dt><dd>16 of 18 cards; only B4 (damage invoice) and B6 (noise AI) left out. Jonas: "a great freaking stack".</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="blackout/index.html">
+  <div class="thumb"><img src="blackout/img/bone_0151.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Optics</em> · Opticals · 30 Sep</div>
+    <h2>Blackout, then night vision</h2>
+    <dl><dt>Decision</dt><dd>How a power cut looks from the enforcer's view, and which night-vision palette keeps the tells readable.</dd>
+    <dt class="p">Picked</dt><dd>The blackout ends with night vision coming online. The palette became a setting: Bone (the default, Jonas's favourite), Phosphor and Green.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="ui/loading.html">
+  <div class="thumb"><img src="ui/loading/c_f73_72.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>UI</em> · Readout · 30 Sep – 2 Oct</div>
+    <h2>Loading: the floor warms up</h2>
+    <dl><dt>Decision</dt><dd>Three looks for the screen that covers the Web build's shader warm-up: Waterline, Section scan, Numeral.</dd>
+    <dt class="p">Picked</dt><dd>C, Numeral, made more fluid: a wave surface, a meniscus, bubbles and a surge on each progress step.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="ui/breached.html">
+  <div class="thumb"><img src="ui/breached/clear_a_070.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>UI</em> · Readout · 2 Oct</div>
+    <h2>System breached: smaller</h2>
+    <dl><dt>Decision</dt><dd>The section-clear card was full-screen and far too big. Three smaller motion designs, captured from the game.</dd>
+    <dt class="p">Picked</dt><dd>A, the slam strip: a band 21 % of the screen tall across the lower third, cleared in 1.8 s.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="credits/index.html">
+  <div class="thumb"><img src="credits/jonas/art_opticals.jpg" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Credits</em> · Readout · 2 Oct</div>
+    <h2>Contractor register</h2>
+    <dl><dt>Decision</dt><dd>How the credits roll is staged. Every member chose their own ID card, and several pitched an idea for the roll as a whole.</dd>
+    <dt class="p">Picked</dt><dd>S1–S6: a bar-mapped score, hit grammar per card, a stamp and the ring bell, the register's power failing into night vision, the roster lineup and REGISTER ISSUED.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+<a class="card" href="credits/jonas.html">
+  <div class="thumb badge"><img src="credits/jonas/opt_badge_C_knife.png" alt="" loading="lazy"></div>
+  <div class="body">
+    <div class="tag"><em>Credits</em> · Readout · 3 Oct</div>
+    <h2>Jonas's ID card</h2>
+    <dl><dt>Decision</dt><dd>The badge and the signature artifact for Jonas's own card, drawn in code from motifs of his titles and this site.</dd>
+    <dt class="p">Picked</dt><dd>Badge C, the knife ("All knives, no bagel"), and artifact 2, the Boggle tray. Readout had recommended the monk and the slot machine.</dd></dl>
+    <span class="go">Open board →</span>
+  </div>
+</a>
+
+</section>
+
+<footer>The boards are shown as the agents wrote them, including placeholder copy, proposals that were never built and recommendations Jonas overruled. Studio names (Cornerman, Astra, Readout and the others) are the agents' own. The setting is Dark City Shining Babel.</footer>
+</main>
+</body>
+</html>
