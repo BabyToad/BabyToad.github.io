@@ -12,489 +12,491 @@
 /* ============================================================
    HIGH WATER: A STUDIO OF AGENTS
    The deck speaks the game's own UI: a contractor register.
-   Near-black, waterline cyan, hazard orange, condensed type.
+   Readability rules: one claim per slide (the headline),
+   at most four cards (heading + one line), one takeaway bar.
+   Minimum text size on a 1600x900 slide: 26px.
    ============================================================ */
 :root {
-  --ink: #e9eef2;
-  --dim: rgba(233,238,242,0.62);
-  --faint: rgba(233,238,242,0.32);
-  --hair: rgba(233,238,242,0.14);
+  --ink: #eef2f5;
+  --dim: rgba(238,242,245,0.72);
+  --faint: rgba(238,242,245,0.45);
+  --hair: rgba(238,242,245,0.16);
   --bg: #07090c;
-  --panel: #0e1319;
+  --panel: #10161d;
   --cyan: #3fe0e8;
   --orange: #ff8a1f;
-  --red: #ff4a3d;
   --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --body: 'Barlow', 'Helvetica Neue', sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 html, body { background: var(--bg); }
-.reveal { font-family: var(--body); font-size: 30px; color: var(--ink); background: var(--bg); }
+.reveal { font-family: var(--body); font-size: 38px; color: var(--ink); background: var(--bg); }
 .reveal .slides { text-align: left; }
-.reveal .slides section { height: 100%; box-sizing: border-box; padding: 64px 72px 56px; }
-.reveal .slides section.stack { padding: 0; }
-.reveal h1, .reveal h2, .reveal h3 {
-  font-family: var(--display); font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.01em; line-height: 0.95; color: var(--ink); margin: 0 0 0.35em;
-}
-.reveal h1 { font-size: 3.4em; }
-.reveal h2 { font-size: 2.1em; }
-.reveal h3 { font-size: 1.15em; color: var(--cyan); letter-spacing: 0.06em; }
-.reveal p, .reveal li { line-height: 1.32; }
-.reveal ul { margin: 0; padding-left: 1.05em; }
-.reveal li { margin: 0.28em 0; }
-.reveal li::marker { color: var(--orange); }
-.reveal a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(63,224,232,0.4); }
-.reveal strong { color: var(--ink); font-weight: 600; }
+.reveal .slides > section { height: 100%; box-sizing: border-box; padding: 92px 88px 150px; display: flex !important; flex-direction: column; }
+.reveal p { line-height: 1.3; margin: 0 0 0.5em; }
+.reveal a { color: var(--cyan); text-decoration: none; border-bottom: 2px solid rgba(63,224,232,0.45); }
 .reveal em { color: var(--orange); font-style: normal; }
+.reveal strong { font-weight: 600; }
+.reveal code { font-family: var(--mono); font-size: 0.9em; color: var(--ink); }
 
-/* register chrome on every slide */
+/* --- type --- */
+.reveal h1, .reveal h2 {
+  font-family: var(--display); font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.005em; line-height: 0.95; color: var(--ink); margin: 0 0 0.5em;
+}
+.reveal h1 { font-size: 3.6em; }
+.reveal h2 { font-size: 2.05em; max-width: 17em; }
+.kicker { font-family: var(--mono); font-size: 0.62em; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.7em; }
+
+/* --- register chrome: section + position --- */
 .tag {
-  position: absolute; top: 24px; left: 72px; right: 72px;
+  position: absolute; top: 30px; left: 88px; right: 88px;
   display: flex; justify-content: space-between;
-  font-family: var(--mono); font-size: 0.42em; letter-spacing: 0.18em;
+  font-family: var(--mono); font-size: 0.5em; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--faint);
-  border-bottom: 1px solid var(--hair); padding-bottom: 8px;
+  border-bottom: 1px solid var(--hair); padding-bottom: 10px;
 }
 .tag b { color: var(--cyan); font-weight: 600; }
-.label { font-family: var(--mono); font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.6em; display: block; }
-.dim { color: var(--dim); }
-.small { font-size: 0.72em; }
-.mono { font-family: var(--mono); }
 
-/* section dividers: hazard stripe */
-section.divider { background: var(--bg); }
+/* --- cards: the main structure --- */
+.cards { display: grid; gap: 28px; margin-top: 0.2em; }
+.cards.c3 { grid-template-columns: repeat(3, 1fr); }
+.cards.c4 { grid-template-columns: 1fr 1fr; }
+.cards.c5 { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.card { background: var(--panel); border-top: 5px solid var(--cyan); padding: 26px 30px 28px; }
+.card.o { border-top-color: var(--orange); }
+.card .n { font-family: var(--mono); font-size: 0.55em; color: var(--faint); letter-spacing: 0.14em; }
+.card .k { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: 1.15em; line-height: 1; margin: 6px 0 12px; }
+.card .v { font-size: 0.82em; line-height: 1.3; color: rgba(238,242,245,0.82); }
+/* body block sits centred between headline and takeaway */
+.cards, .stats, .roster, .pair, .trio, .chart { margin-top: auto !important; margin-bottom: auto !important; }
+.pair + .steps, .trio + .steps { margin-top: -10px; margin-bottom: auto; }
+
+/* --- takeaway bar --- */
+.take {
+  position: absolute; left: 88px; right: 88px; bottom: 46px;
+  border-left: 8px solid var(--orange); padding: 14px 0 14px 26px;
+  font-family: var(--display); font-weight: 700; font-size: 1.05em; line-height: 1.1; color: var(--ink);
+}
+.take .who { display: block; font-family: var(--mono); font-weight: 400; font-size: 0.5em; color: var(--faint); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px; }
+
+/* --- dividers --- */
 section.divider::before {
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22px;
-  background: repeating-linear-gradient(-45deg, var(--orange) 0 18px, #0b0d10 18px 36px);
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 24px;
+  background: repeating-linear-gradient(-45deg, var(--orange) 0 20px, #0b0d10 20px 40px);
 }
-section.divider .num { font-family: var(--display); font-weight: 800; font-size: 9em; color: var(--orange); line-height: 0.8; margin-bottom: 0.08em; }
-section.divider h2 { font-size: 2.6em; max-width: 14em; }
-section.divider p { font-size: 1.05em; max-width: 30em; color: var(--dim); }
+.reveal .slides > section.divider { justify-content: center; }
+section.divider .num { font-family: var(--display); font-weight: 800; font-size: 7em; color: var(--orange); line-height: 0.8; margin-bottom: 0.15em; }
+section.divider h2 { font-size: 2.5em; }
+section.divider p { font-size: 1em; max-width: 30em; color: var(--dim); }
 
-/* full-bleed image slides */
+/* --- images --- */
 .bleed { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,9,12,0.92) 0%, rgba(7,9,12,0.55) 42%, rgba(7,9,12,0) 70%); }
-.over { position: relative; z-index: 2; max-width: 16em; }
-
-/* stats */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 48px; margin-top: 0.6em; }
-.stat .n { font-family: var(--display); font-weight: 800; font-size: 3.1em; line-height: 0.9; color: var(--cyan); }
-.stat .n.o { color: var(--orange); }
-.stat .t { font-family: var(--mono); font-size: 0.48em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-top: 6px; }
-
-/* roster */
-.roster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px 26px; margin-top: 0.8em; font-size: 0.78em; }
-.roster div { border-left: 3px solid var(--hair); padding: 4px 0 4px 10px; }
-.roster div.cx { border-left-color: var(--orange); }
-.roster div.cl { border-left-color: var(--cyan); }
-.roster div.jh { border-left-color: var(--ink); }
-.roster b { font-family: var(--display); font-weight: 700; font-size: 1.35em; text-transform: uppercase; display: block; letter-spacing: 0.03em; }
-.roster span { color: var(--dim); }
-
-/* quotes */
-blockquote.q {
-  margin: 0.4em 0; padding: 0 0 0 0.6em; border-left: 6px solid var(--orange);
-  font-family: var(--display); font-weight: 700; font-size: 1.7em; line-height: 1.05;
-  text-transform: none; color: var(--ink); width: auto; box-shadow: none; background: none; font-style: normal;
-}
-.who { font-family: var(--mono); font-size: 0.5em; color: var(--faint); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.4em; }
-
-/* two-column + figure */
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-.cols.w { grid-template-columns: 1.25fr 1fr; }
+.scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,9,12,0.94) 0%, rgba(7,9,12,0.7) 40%, rgba(7,9,12,0) 68%); }
+.over { position: relative; z-index: 2; max-width: 15em; margin-top: auto; margin-bottom: auto; }
 figure { margin: 0; }
 figure img { width: 100%; display: block; border: 1px solid var(--hair); }
-figcaption { font-family: var(--mono); font-size: 0.42em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-top: 6px; }
-figcaption b { color: var(--orange); font-weight: 600; }
-.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.picked img { border: 2px solid var(--orange); }
+figcaption { font-family: var(--mono); font-size: 0.55em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-top: 10px; }
+figcaption b { color: var(--orange); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.picked img { outline: 5px solid var(--orange); outline-offset: -5px; }
 
-/* loop diagram */
-.loop { display: flex; align-items: center; gap: 14px; margin: 0.9em 0 0.6em; font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: 1.05em; }
-.loop span.n { padding: 10px 16px; border: 1px solid var(--hair); background: var(--panel); }
-.loop span.a { color: var(--orange); font-family: var(--mono); font-weight: 400; }
+/* --- steps (a process in one row) --- */
+.steps { display: flex; margin-top: 30px; font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: 0.8em; }
+.steps span { flex: 1; padding: 14px 16px; background: var(--panel); border-right: 4px solid var(--bg); line-height: 1.05; }
+.steps span:last-child { background: var(--orange); color: #111; }
+.steps span i { display: block; font-style: normal; font-family: var(--mono); font-weight: 400; font-size: 0.6em; color: var(--faint); margin-bottom: 4px; }
+.steps span:last-child i { color: rgba(0,0,0,0.55); }
 
-/* chart */
-.chart text { font-family: var(--mono); fill: var(--dim); font-size: 13px; }
-.chart .val { fill: var(--ink); font-size: 15px; font-weight: 600; }
-.chart .gate { stroke: var(--orange); stroke-dasharray: 6 6; stroke-width: 2; }
-.chart .line { fill: none; stroke: var(--cyan); stroke-width: 3; }
+/* --- stats --- */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 60px; }
+.stat .n { font-family: var(--display); font-weight: 800; font-size: 3.2em; line-height: 0.85; color: var(--cyan); }
+.stat .t { font-size: 0.7em; color: var(--dim); margin-top: 8px; }
+
+/* --- roster --- */
+.roster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 30px; }
+.roster div { border-left: 5px solid var(--cyan); padding: 2px 0 2px 14px; }
+.roster div.cx { border-left-color: var(--orange); }
+.roster div.jh { border-left-color: var(--ink); }
+.roster b { font-family: var(--display); font-weight: 800; font-size: 1.05em; text-transform: uppercase; display: block; line-height: 1; }
+.roster span { font-size: 0.66em; color: var(--dim); }
+.legend { font-size: 0.66em; color: var(--dim); margin-top: 26px; }
+.legend i { display: inline-block; width: 16px; height: 16px; margin: 0 8px 0 0; vertical-align: -1px; }
+
+/* --- big quote --- */
+.bigq { font-family: var(--display); font-weight: 800; font-size: 2.2em; line-height: 1; margin: auto 0 0.4em; max-width: 15em; }
+.bigq-who { font-family: var(--mono); font-size: 0.6em; color: var(--faint); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: auto; }
+
+/* --- chart --- */
+.chart text { font-family: var(--mono); fill: var(--dim); font-size: 19px; }
+.chart .val { fill: var(--ink); font-size: 24px; font-weight: 600; }
+.chart .gate { stroke: var(--orange); stroke-dasharray: 8 8; stroke-width: 3; }
+.chart .line { fill: none; stroke: var(--cyan); stroke-width: 5; }
 .chart .grid { stroke: var(--hair); }
 
-/* list of fails */
-.ledger { display: grid; grid-template-columns: 11em 1fr; gap: 14px 28px; font-size: 0.82em; margin-top: 0.4em; }
-.ledger dt { font-family: var(--display); font-weight: 700; text-transform: uppercase; color: var(--orange); font-size: 1.15em; }
-.ledger dd { margin: 0; color: var(--dim); }
-.ledger dd strong { color: var(--ink); }
-
-.reveal .progress { color: var(--cyan); height: 4px; }
+.reveal .progress { color: var(--cyan); height: 5px; }
 .reveal .controls { color: var(--orange); }
-.reveal .slide-number { background: transparent; font-family: var(--mono); color: var(--faint); font-size: 14px; }
-@media (prefers-reduced-motion: reduce) { .reveal .slides section { transition: none !important; } }
+.reveal .slide-number { background: transparent; font-family: var(--mono); color: var(--faint); font-size: 18px; right: 20px; bottom: 14px; }
+.reveal .slides section .fragment { transition: opacity 0.2s ease; }
+@media (prefers-reduced-motion: reduce) { .reveal .slides section .fragment { transition: none; } }
 </style>
 </head>
 <body>
 <div class="reveal"><div class="slides">
 
-<!-- 1 TITLE -->
-<section data-background-image="img/dollhouse.jpg" data-background-opacity="0.35">
+<!-- TITLE -->
+<section data-background-image="img/dollhouse.jpg" data-background-opacity="0.32" style="justify-content:center">
   <div class="tag"><span><b>CTR-2070-T3</b> · retrospective</span><span>Vierfacher Questpresso · 2026</span></div>
-  <span class="label">A retrospective</span>
+  <div class="kicker">A retrospective for game developers</div>
   <h1>High Water</h1>
-  <h2 style="color:var(--cyan);font-size:1.6em">A studio of agents</h2>
-  <p class="dim" style="max-width:24em">Building a Godot physics brawler with a crew of about twenty AI agents and one human, in one jam week.</p>
-  <p class="mono small dim" style="margin-top:2em">Jonas Heinke · allknivesnobagel.com</p>
+  <h2 style="color:var(--cyan);font-size:1.7em;margin-bottom:0.6em">A studio of agents</h2>
+  <p style="max-width:22em;color:var(--dim)">How one human and about twenty AI agents built a Godot physics brawler in one jam week.</p>
+  <p style="font-family:var(--mono);font-size:0.6em;color:var(--faint);margin-top:1.4em">Jonas Heinke · allknivesnobagel.com</p>
 </section>
 
-<!-- 2 COLD OPEN -->
+<!-- COLD OPEN -->
 <section>
   <img class="bleed" src="img/gas.jpg" alt="A gas flashfire tearing through a floor of HIGH WATER, thugs thrown by the blast">
   <div class="scrim"></div>
-  <div class="tag"><span><b>§0</b> Cold open</span><span>Field conditions may vary</span></div>
+  <div class="tag"><span><b>§0</b> Cold open</span><span>Play it first</span></div>
   <div class="over">
-    <span class="label">Play it first</span>
+    <div class="kicker">The game</div>
     <h2>A physics brawler. The building is the other enemy.</h2>
-    <p class="dim">Streets of Rage with Smash physics. Every wall is masonry, every pier holds something up, every thug is a projectile.</p>
-    <p class="mono small"><a href="https://limeminister.itch.io/high-water">limeminister.itch.io/high-water</a></p>
+    <p style="color:var(--dim)">Streets of Rage meets Smash physics. Every wall is masonry, every pier holds something up, every thug is a projectile.</p>
+    <p style="font-family:var(--mono);font-size:0.62em"><a href="https://limeminister.itch.io/high-water">limeminister.itch.io/high-water</a></p>
   </div>
-  <aside class="notes">Live demo, F73 the wet market: staff Sparker into the canal, chain, floor goes up. Process only after the room has seen it's fun.</aside>
+  <aside class="notes">Live demo, F73 the wet market: staff Sparker into the canal, chain, floor goes up.</aside>
 </section>
 
-<!-- 3 NUMBERS -->
+<!-- NUMBERS -->
 <section>
-  <div class="tag"><span><b>§0</b> The site report</span><span>28 Sep – 4 Oct 2026</span></div>
+  <div class="tag"><span><b>§0</b> The week</span><span>28 Sep – 4 Oct 2026</span></div>
   <h2>One week, by the numbers</h2>
   <div class="stats">
     <div class="stat"><div class="n">1,036</div><div class="t">commits in 6 working days</div></div>
-    <div class="stat"><div class="n">~20</div><div class="t">named members, 2 model families</div></div>
+    <div class="stat"><div class="n">~20</div><div class="t">AI agents, 2 model families</div></div>
     <div class="stat"><div class="n">1</div><div class="t">human making the calls</div></div>
-    <div class="stat"><div class="n">39</div><div class="t">HTML decision boards</div></div>
-    <div class="stat"><div class="n">24</div><div class="t">independent review rounds</div></div>
-    <div class="stat"><div class="n">~140</div><div class="t">headless check &amp; capture scenes</div></div>
+    <div class="stat"><div class="n">39</div><div class="t">decision boards</div></div>
+    <div class="stat"><div class="n">24</div><div class="t">code review rounds</div></div>
+    <div class="stat"><div class="n">~140</div><div class="t">automated test scenes</div></div>
   </div>
-  <p class="dim small" style="margin-top:1.4em">And one disqualification. We'll get to that.</p>
+  <div class="take">And one disqualification. We'll get to that.</div>
 </section>
 
-<!-- 4 THESIS -->
+<!-- AGENDA -->
+<section>
+  <div class="tag"><span><b>§0</b> Agenda</span><span>Five parts</span></div>
+  <h2>What this talk covers</h2>
+  <div class="cards c5">
+    <div class="card"><div class="n">01</div><div class="k">Organisation</div><div class="v">How to run a team of agents</div></div>
+    <div class="card"><div class="n">02</div><div class="k">Artifacts</div><div class="v">How we decided things together</div></div>
+    <div class="card"><div class="n">03</div><div class="k">Documents</div><div class="v">How everyone stayed on track</div></div>
+    <div class="card"><div class="n">04</div><div class="k">Quality</div><div class="v">How we kept it working</div></div>
+    <div class="card o"><div class="n">05</div><div class="k">Failures</div><div class="v">What went wrong</div></div>
+  </div>
+  <div class="take">Plus a short Godot appendix for the technical crowd.</div>
+</section>
+
+<!-- 01 DIVIDER -->
 <section class="divider">
-  <div class="tag"><span><b>§1</b> Thesis</span><span>Organisation</span></div>
+  <div class="tag"><span><b>§1</b> of 5</span><span>Organisation</span></div>
   <div class="num">01</div>
   <h2>The models aren't the bottleneck any more. Organisation is.</h2>
-  <p>Once humans and agents work as a group, it scales and improves only if you treat it like a team: structure, ownership, channels, management.</p>
+  <p>Humans and agents working as a group only scale if you treat them like a team.</p>
 </section>
 
-<!-- 5 THE STUDIO -->
+<!-- ROSTER -->
 <section>
-  <div class="tag"><span><b>§1</b> The studio</span><span>Studio Hitstop · roster</span></div>
+  <div class="tag"><span><b>§1</b> Organisation</span><span>The roster</span></div>
   <h2>A studio, not a chatbot</h2>
   <div class="roster">
-    <div class="jh"><b>Jonas</b><span>client · direction, feel, final say</span></div>
-    <div class="cl"><b>Cornerman</b><span>lead · integration, merges</span></div>
-    <div class="cx"><b>Astra</b><span>Codex · independent review</span></div>
-    <div class="cx"><b>Flywheel</b><span>Codex · Web performance</span></div>
-    <div class="cl"><b>Hitlag</b><span>enemies, building sim</span></div>
-    <div class="cl"><b>Armature</b><span>voxel rigs &amp; IK</span></div>
-    <div class="cl"><b>Readout</b><span>UI &amp; HUD</span></div>
-    <div class="cl"><b>Drywall</b><span>levels</span></div>
-    <div class="cl"><b>Tidewater</b><span>water</span></div>
-    <div class="cl"><b>Slate</b><span>finishers &amp; cinema</span></div>
-    <div class="cl"><b>Plumb</b><span>art direction</span></div>
-    <div class="cl"><b>Afterimage</b><span>VFX</span></div>
-    <div class="cl"><b>Foley</b><span>sound, synthesised</span></div>
-    <div class="cl"><b>Downbeat</b><span>FM music</span></div>
-    <div class="cl"><b>Opticals</b><span>title sequence</span></div>
-    <div class="cl"><b>Slipway</b><span>release &amp; QA</span></div>
+    <div class="jh"><b>Jonas</b><span>direction, final say</span></div>
+    <div><b>Cornerman</b><span>lead, integration</span></div>
+    <div class="cx"><b>Astra</b><span>code review</span></div>
+    <div class="cx"><b>Flywheel</b><span>Web performance</span></div>
+    <div><b>Hitlag</b><span>enemies, simulation</span></div>
+    <div><b>Armature</b><span>characters &amp; animation</span></div>
+    <div><b>Readout</b><span>UI &amp; HUD</span></div>
+    <div><b>Drywall</b><span>levels</span></div>
+    <div><b>Tidewater</b><span>water</span></div>
+    <div><b>Slate</b><span>finishers &amp; camera</span></div>
+    <div><b>Plumb</b><span>art direction</span></div>
+    <div><b>Afterimage</b><span>visual effects</span></div>
+    <div><b>Foley</b><span>sound</span></div>
+    <div><b>Downbeat</b><span>music</span></div>
+    <div><b>Opticals</b><span>title sequence</span></div>
+    <div><b>Slipway</b><span>release &amp; testing</span></div>
   </div>
-  <p class="dim small" style="margin-top:0.8em"><span style="color:var(--cyan)">▌</span> Claude <span style="color:var(--orange);margin-left:1em">▌</span> Codex. Plus Stencil, Barker, Gallery and Scout on names, the itch page and research.</p>
+  <div class="legend"><i style="background:var(--cyan)"></i>Claude agents <i style="background:var(--orange);margin-left:28px"></i>Codex agents <i style="background:var(--ink);margin-left:28px"></i>human · plus four more on names, research and the store page</div>
 </section>
 
-<!-- 6 OWNERS -->
+<!-- OWNERSHIP -->
 <section>
-  <div class="tag"><span><b>§1</b> Ownership</span><span>One file, one owner</span></div>
-  <div class="cols w">
-    <div>
-      <h2>Lanes with skin in the game</h2>
-      <ul>
-        <li>Every file has exactly one owner. <span class="dim">Collisions between ~20 parallel workers stayed rare.</span></li>
-        <li>A role makes an agent defend its lane: patches were <em>sent to the owner</em>, not committed over them.</li>
-        <li>Identity carries weight: each member chose how to appear in the credits.</li>
-      </ul>
-    </div>
-    <div>
-      <blockquote class="q">"It's his file, so I haven't touched it."</blockquote>
-      <div class="who">Hitlag, sending Armature a rig patch</div>
-    </div>
+  <div class="tag"><span><b>§1</b> Organisation</span><span>Ownership</span></div>
+  <h2>Every file has exactly one owner</h2>
+  <div class="cards c3">
+    <div class="card fragment"><div class="n">01</div><div class="k">Few collisions</div><div class="v">~20 agents worked in parallel and rarely overwrote each other.</div></div>
+    <div class="card fragment"><div class="n">02</div><div class="k">Lanes get defended</div><div class="v">Fixes for someone else's file were sent to its owner, not pushed over them.</div></div>
+    <div class="card fragment"><div class="n">03</div><div class="k">Roles create care</div><div class="v">Each agent even chose how it appears in the game's credits.</div></div>
   </div>
+  <div class="take fragment">"It's his file, so I haven't touched it."<span class="who">Hitlag, the enemy agent, about the animation agent's code</span></div>
 </section>
 
-<!-- 7 MANAGEMENT -->
+<!-- MANAGEMENT -->
 <section>
-  <div class="tag"><span><b>§1</b> Management</span><span>The skills transfer</span></div>
-  <h2>Project management is the job now</h2>
-  <div class="cols">
-    <ul>
-      <li><strong>Briefs:</strong> date, branch, commit, task, rules. The repo is the ground truth.</li>
-      <li><strong>Freezes:</strong> features by Saturday 22:00, Sunday for tuning and release.</li>
-      <li><strong>Handoffs</strong> at real boundaries, through a shared board.</li>
-      <li><strong>Shared resources:</strong> one PC, one Godot at a time. A queue in plain words.</li>
-    </ul>
-    <div>
-      <div class="loop" style="flex-direction:column;align-items:flex-start;gap:8px">
-        <span class="n">"machine yours"</span>
-        <span class="a">↓ one headless run, foreground</span>
-        <span class="n">"machine free" + figures + hash</span>
-      </div>
-      <p class="dim small">The lead's work is integration and judgement, not typing.</p>
-    </div>
+  <div class="tag"><span><b>§1</b> Organisation</span><span>Management</span></div>
+  <h2>Running agents is project management</h2>
+  <div class="cards c4">
+    <div class="card fragment"><div class="k">Briefs</div><div class="v">Every task states date, branch, goal and rules.</div></div>
+    <div class="card fragment"><div class="k">Freezes</div><div class="v">No new features after Saturday 22:00. Sunday is for polish.</div></div>
+    <div class="card fragment"><div class="k">Handoffs</div><div class="v">Work changes hands through a shared message board.</div></div>
+    <div class="card fragment"><div class="k">Shared resources</div><div class="v">One PC: agents queue for it with "machine yours" / "machine free".</div></div>
   </div>
+  <div class="take fragment">The lead's job is integration and judgement, not typing.</div>
 </section>
 
-<!-- 8 ONE MEMBER ONE MODEL -->
+<!-- ONE MODEL -->
 <section>
-  <div class="tag"><span><b>§1</b> Identity</span><span>Constancy</span></div>
+  <div class="tag"><span><b>§1</b> Organisation</span><span>Identity</span></div>
   <h2>One member, one model</h2>
-  <ul>
-    <li>A name only means something if the same model stands behind it all week: authorship, consistent review standards, an honest retro.</li>
-    <li>Mid-jam the coding CLI silently changed its default model. Resuming a member without pinning the model would have swapped who it was.</li>
-    <li>Rule: <em>pin the model on every call</em>, and record each member's model in the team table.</li>
-  </ul>
-</section>
-
-<!-- 9 SECTION 2 -->
-<section class="divider">
-  <div class="tag"><span><b>§2</b> Thesis</span><span>Artifacts</span></div>
-  <div class="num">02</div>
-  <h2>Make whatever artifact makes the decision easy. Then iterate on it together.</h2>
-  <p>The insight isn't HTML. It's that agents can create artifacts of any kind for communication, that those artifacts can change, and that it has to run both ways. HTML is just very convenient.</p>
-</section>
-
-<!-- 10 CUTAWAY CASE -->
-<section>
-  <div class="tag"><span><b>§2</b> Case</span><span>The tower select</span></div>
-  <div class="cols">
-    <figure><img src="img/cutaway_old.jpg" alt="The first tower select: a flat 2D cutaway of floors 73 to 75"><figcaption>Before · "looks very SVG drawn"</figcaption></figure>
-    <figure><img src="img/dollhouse.jpg" alt="The final tower select: a voxel dollhouse of the tower at night, with a CRT monitor showing the floor's CCTV feed"><figcaption><b>After</b> · voxel dollhouse + CCTV monitor</figcaption></figure>
+  <div class="cards c3">
+    <div class="card fragment"><div class="k">Why</div><div class="v">A name only means something if the same model stands behind it all week.</div></div>
+    <div class="card o fragment"><div class="k">What happened</div><div class="v">Mid-jam, a tool quietly switched its default model. Members could have been swapped unnoticed.</div></div>
+    <div class="card fragment"><div class="k">The rule</div><div class="v">Pin the model on every call. Write each member's model down.</div></div>
   </div>
-  <div class="loop small"><span class="n">feedback</span><span class="a">→</span><span class="n">options board</span><span class="a">→</span><span class="n">"dollhouse, with extra love"</span><span class="a">→</span><span class="n">"+ the camera idea"</span><span class="a">→</span><span class="n">build</span></div>
+  <div class="take fragment">Consistent identity makes credit, review standards and the retrospective honest.</div>
 </section>
 
-<!-- 11 BREACHED -->
+<!-- 02 DIVIDER -->
+<section class="divider">
+  <div class="tag"><span><b>§2</b> of 5</span><span>Artifacts</span></div>
+  <div class="num">02</div>
+  <h2>Build whatever artifact makes the decision easy</h2>
+  <p>Then iterate on it together, in both directions. Our medium was HTML, but the medium isn't the point.</p>
+</section>
+
+<!-- CUTAWAY -->
 <section>
-  <div class="tag"><span><b>§2</b> Case</span><span>System breached</span></div>
+  <div class="tag"><span><b>§2</b> Artifacts</span><span>Example: the level select</span></div>
+  <h2>"It looks very SVG-drawn"</h2>
+  <div class="pair">
+    <figure><img src="img/cutaway_old.jpg" alt="The first level select: a flat 2D cutaway of the tower floors"><figcaption>Before · flat cutaway</figcaption></figure>
+    <figure class="fragment"><img src="img/dollhouse.jpg" alt="The final level select: a voxel dollhouse of the tower at night, with a CRT monitor showing the floor's camera feed"><figcaption><b>After</b> · voxel dollhouse + camera monitor</figcaption></figure>
+  </div>
+  <div class="steps fragment">
+    <span><i>1</i>Jonas: feedback</span><span><i>2</i>Agents: options board</span><span><i>3</i>Jonas picks + adds an idea</span><span><i>4</i>Built</span>
+  </div>
+</section>
+
+<!-- BREACHED -->
+<section>
+  <div class="tag"><span><b>§2</b> Artifacts</span><span>Example: a UI card</span></div>
   <h2>"Fullscreen and way too big"</h2>
   <div class="trio">
-    <figure class="picked"><img src="img/breach_a.jpg" alt="Option A: a slam strip across the screen"><figcaption><b>A · slam strip, picked</b></figcaption></figure>
+    <figure class="picked"><img src="img/breach_a.jpg" alt="Option A: a slam strip across the screen"><figcaption><b>A · picked</b></figcaption></figure>
     <figure><img src="img/breach_b.jpg" alt="Option B"><figcaption>B</figcaption></figure>
     <figure><img src="img/breach_c.jpg" alt="Option C"><figcaption>C</figcaption></figure>
   </div>
-  <p class="dim small" style="margin-top:0.6em">Playtest note → three rendered options with motion → "A it is." → shipped the same evening.</p>
-</section>
-
-<!-- 12 SPECTRUM -->
-<section>
-  <div class="tag"><span><b>§2</b> The medium</span><span>Two-way</span></div>
-  <div class="cols w">
-    <div>
-      <h2>A spectrum of artifacts</h2>
-      <ul>
-        <li>Option boards: A/B/C with renders, clips and a recommendation</li>
-        <li>Before/after captures of every visual fix</li>
-        <li>A playable build deployed after every merge</li>
-        <li>Numbers side by side: part timers, budgets, review verdicts</li>
-        <li>The human answers <em>on</em> the artifact: picks, checkboxes, a pasted answer block</li>
-      </ul>
-      <p class="small" style="margin-top:0.8em"><a href="../boards/">Browse the archived boards →</a></p>
-    </div>
-    <figure><img src="img/card_jonas.jpg" alt="Jonas's credits card in the game: a knife badge and a Boggle tray that spells HIGH and WATER"><figcaption>Even the credits: options board → pick → in the game</figcaption></figure>
+  <div class="steps fragment">
+    <span><i>1</i>Playtest note</span><span><i>2</i>Three rendered options</span><span><i>3</i>"A it is."</span><span><i>4</i>Shipped that evening</span>
   </div>
 </section>
 
-<!-- 13 SECTION 3 -->
+<!-- SPECTRUM -->
+<section>
+  <div class="tag"><span><b>§2</b> Artifacts</span><span>The toolbox</span></div>
+  <h2>Artifacts we used to decide</h2>
+  <div class="cards c4">
+    <div class="card fragment"><div class="k">Option boards</div><div class="v">A, B, C with images, clips and a recommendation.</div></div>
+    <div class="card fragment"><div class="k">Before / after</div><div class="v">Screenshots for every visual fix.</div></div>
+    <div class="card fragment"><div class="k">A playable build</div><div class="v">Online after every merge, so feedback comes from playing.</div></div>
+    <div class="card fragment"><div class="k">Numbers side by side</div><div class="v">Timings, budgets and review verdicts in one view.</div></div>
+  </div>
+  <div class="take fragment">Two-way: the human answers on the artifact, it changes, the human looks again. <a href="../boards/" style="font-size:0.7em">Browse the boards →</a></div>
+</section>
+
+<!-- 03 DIVIDER -->
 <section class="divider">
-  <div class="tag"><span><b>§3</b> Thesis</span><span>Canon</span></div>
+  <div class="tag"><span><b>§3</b> of 5</span><span>Documents</span></div>
   <div class="num">03</div>
-  <h2>Canonical documents are shared memory</h2>
-  <p>Detailed, owned documents let anyone, human or agent, orient themselves, see the trajectory and past decisions, and avoid misunderstandings.</p>
+  <h2>Shared documents are the team's memory</h2>
+  <p>Anyone, human or agent, can catch up on where we are, why we decided things, and where we're going.</p>
 </section>
 
-<!-- 14 DOCS -->
+<!-- DOCS -->
 <section>
-  <div class="tag"><span><b>§3</b> Canon</span><span>Owned documents</span></div>
+  <div class="tag"><span><b>§3</b> Documents</span><span>The four documents</span></div>
   <h2>Four documents held the project</h2>
-  <dl class="ledger">
-    <dt>Design notebook</dt><dd>Every decision <strong>with its reason</strong>: "Jonas: A it is." Not a spec; a record.</dd>
-    <dt>Handoff</dt><dd>"Resume here": what's live, what's open, who's on what, the machine rules.</dd>
-    <dt>Devlog</dt><dd>The jam facts and the checklist. One owner per state.</dd>
-    <dt>Review files</dt><dd>24 rounds, verbatim, kept in the repo so fixes can cite them.</dd>
-  </dl>
-</section>
-
-<!-- 15 ROT -->
-<section>
-  <div class="tag"><span><b>§3</b> Canon</span><span>The failure mode</span></div>
-  <div class="cols w">
-    <div>
-      <h2>Documents rot. Agents forget.</h2>
-      <ul>
-        <li>On Saturday morning the handoff still described Friday night.</li>
-        <li>Our enemy lead lost its memory to context compaction three times in one day.</li>
-        <li>Fix: one owner and an update ritual per document; <em>the repo beats memory</em>; give long-lived agents a fresh session with a written brief at natural breaks.</li>
-      </ul>
-    </div>
-    <div>
-      <blockquote class="q" style="font-size:1.35em">"Another copy of me has clearly been doing that work."</blockquote>
-      <div class="who">Hitlag, after compaction, about its own commits from minutes earlier</div>
-      <p class="dim small" style="margin-top:1em">For non-technical listeners: it's a shift handover. The handover note is the whole game.</p>
-    </div>
+  <div class="cards c4">
+    <div class="card fragment"><div class="k">Design notebook</div><div class="v">Every decision and the reason for it.</div></div>
+    <div class="card fragment"><div class="k">Handoff</div><div class="v">"Resume here": what's live, what's open, who does what.</div></div>
+    <div class="card fragment"><div class="k">Devlog</div><div class="v">Jam rules, deadlines and the release checklist.</div></div>
+    <div class="card fragment"><div class="k">Review files</div><div class="v">Every code review, kept so fixes can point to them.</div></div>
   </div>
+  <div class="take fragment">Each document has exactly one owner.</div>
 </section>
 
-<!-- 16 SECTION 4 -->
+<!-- ROT -->
+<section>
+  <div class="tag"><span><b>§3</b> Documents</span><span>The failure mode</span></div>
+  <h2>Documents go stale. Agents forget.</h2>
+  <div class="cards c3">
+    <div class="card o fragment"><div class="k">Stale notes</div><div class="v">Saturday morning, the handoff still described Friday night.</div></div>
+    <div class="card o fragment"><div class="k">Lost memory</div><div class="v">Long-running agents compress their memory. One did so three times in a day.</div></div>
+    <div class="card fragment"><div class="k">The fix</div><div class="v">The code is the truth. Restart long-running agents with a written brief.</div></div>
+  </div>
+  <div class="take fragment">"Another copy of me has clearly been doing that work."<span class="who">An agent after memory loss, about its own work from minutes earlier</span></div>
+  <aside class="notes">For non-technical listeners: it's a shift handover in a hospital. The handover note is everything.</aside>
+</section>
+
+<!-- 04 DIVIDER -->
 <section class="divider">
-  <div class="tag"><span><b>§4</b> Thesis</span><span>Quality</span></div>
+  <div class="tag"><span><b>§4</b> of 5</span><span>Quality</span></div>
   <div class="num">04</div>
   <h2>If agents make code cheap, review has to be expensive</h2>
-  <p>With agent-driven development there's no excuse for anything but the highest process and QA standards.</p>
+  <p>With agents doing the typing, there's no excuse for low standards.</p>
 </section>
 
-<!-- 17 ASTRA -->
+<!-- REVIEW PROCESS -->
 <section>
-  <div class="tag"><span><b>§4</b> Review</span><span>Another model family</span></div>
-  <h2>An independent reviewer</h2>
-  <div class="cols">
-    <ul>
-      <li>Claude built, <strong>Codex reviewed</strong>: Astra, read-only, a verdict on every batch (MERGE / MERGE WITH FIXES / HOLD).</li>
-      <li>Merges stayed local until review cleared them. The public branch always held a reviewed state.</li>
-      <li>Agents can't play, so checks play for them: about 140 headless scenes, a serial 45-minute suite.</li>
-    </ul>
-    <div>
-      <span class="label">Caught by review, missed by tests</span>
-      <ul class="small">
-        <li>A tumbling enemy's centre 1.27 m off, so zaps hit the wrong thugs</li>
-        <li>Sprinkler wetting that could starve forever</li>
-        <li>Kills lost from the incident grade when a body was freed early</li>
-        <li>Two chains each queuing the same thug, dropping one hit</li>
-      </ul>
-    </div>
+  <div class="tag"><span><b>§4</b> Quality</span><span>The process</span></div>
+  <h2>A second AI checks every change</h2>
+  <div class="cards c3">
+    <div class="card fragment"><div class="k">Different model</div><div class="v">Claude agents wrote the code. A Codex agent reviewed it.</div></div>
+    <div class="card fragment"><div class="k">Three verdicts</div><div class="v">Merge, merge with fixes, or hold. Nothing went public on hold.</div></div>
+    <div class="card fragment"><div class="k">Tests that play</div><div class="v">Agents can't play the game, so ~140 automated scenes play it for them.</div></div>
+  </div>
+  <div class="take fragment">24 review rounds in one week.</div>
+</section>
+
+<!-- BUGS FOUND -->
+<section>
+  <div class="tag"><span><b>§4</b> Quality</span><span>What it caught</span></div>
+  <h2>Bugs the reviewer caught and the tests missed</h2>
+  <div class="cards c4">
+    <div class="card o fragment"><div class="k">Wrong target</div><div class="v">A tumbling enemy was measured from the wrong point, 1.3 m off.</div></div>
+    <div class="card o fragment"><div class="k">Wetting that stalls</div><div class="v">The sprinklers could stop wetting the floor forever.</div></div>
+    <div class="card o fragment"><div class="k">Lost score</div><div class="v">Kills vanished from the score when a body disappeared early.</div></div>
+    <div class="card o fragment"><div class="k">Missing hit</div><div class="v">Two explosions reaching one enemy could drop a hit.</div></div>
   </div>
 </section>
 
-<!-- 18 DISCHARGE CHART -->
+<!-- CHART -->
 <section>
-  <div class="tag"><span><b>§4</b> Case</span><span>The Sparker discharge</span></div>
-  <h2>2.2 ms → 0.92 ms, one review at a time</h2>
-  <svg class="chart" viewBox="0 0 1100 380" width="100%" role="img" aria-label="Cost of one Sparker discharge per review step: 2181, 1676, 1257, 1144, 949, 916 microseconds, against a 1000 microsecond gate">
-    <line class="grid" x1="80" y1="40" x2="1060" y2="40"/><line class="grid" x1="80" y1="140" x2="1060" y2="140"/><line class="grid" x1="80" y1="240" x2="1060" y2="240"/><line class="grid" x1="80" y1="320" x2="1060" y2="320"/>
-    <text x="70" y="44" text-anchor="end">2400 µs</text><text x="70" y="144" text-anchor="end">1600</text><text x="70" y="244" text-anchor="end">800</text><text x="70" y="324" text-anchor="end">0</text>
-    <!-- y = 320 - us*280/2400 -->
-    <line class="gate" x1="80" y1="203.3" x2="1060" y2="203.3"/><text x="1060" y="196" text-anchor="end" style="fill:var(--orange)">gate 1000 µs</text>
-    <polyline class="line" points="140,65.5 320,124.5 500,173.4 680,186.5 860,209.3 1000,213.1"/>
-    <g style="fill:var(--cyan)"><circle cx="140" cy="65.5" r="6"/><circle cx="320" cy="124.5" r="6"/><circle cx="500" cy="173.4" r="6"/><circle cx="680" cy="186.5" r="6"/><circle cx="860" cy="209.3" r="6"/><circle cx="1000" cy="213.1" r="7" style="fill:var(--orange)"/></g>
-    <text class="val" x="140" y="52" text-anchor="middle">2181</text><text class="val" x="320" y="111" text-anchor="middle">1676</text><text class="val" x="500" y="160" text-anchor="middle">1257</text><text class="val" x="680" y="173" text-anchor="middle">1144</text><text class="val" x="860" y="234" text-anchor="middle">949</text><text class="val" x="1000" y="240" text-anchor="middle">916</text>
-    <text x="140" y="350" text-anchor="middle">first measure</text><text x="320" y="350" text-anchor="middle">water tell only</text><text x="500" y="350" text-anchor="middle">hitstop deferred</text><text x="680" y="350" text-anchor="middle">lazy pose</text><text x="860" y="350" text-anchor="middle">plan tables</text><text x="1000" y="350" text-anchor="middle">r22 fixes</text>
+  <div class="tag"><span><b>§4</b> Quality</span><span>Example: one expensive attack</span></div>
+  <h2>Making one attack 2.4× cheaper</h2>
+  <svg class="chart" viewBox="0 0 1400 470" width="100%" role="img" aria-label="Cost of one electric attack per review step: 2.18, 1.68, 1.26, 1.14, 0.95, 0.92 milliseconds, against a budget of 1.0">
+    <line class="grid" x1="110" y1="30" x2="1380" y2="30"/><line class="grid" x1="110" y1="150" x2="1380" y2="150"/><line class="grid" x1="110" y1="270" x2="1380" y2="270"/><line class="grid" x1="110" y1="390" x2="1380" y2="390"/>
+    <text x="96" y="36" text-anchor="end">2.4 ms</text><text x="96" y="156" text-anchor="end">1.6</text><text x="96" y="276" text-anchor="end">0.8</text><text x="96" y="396" text-anchor="end">0</text>
+    <!-- y = 390 - us*360/2400 -->
+    <line class="gate" x1="110" y1="240" x2="1380" y2="240"/><text x="1380" y="228" text-anchor="end" style="fill:var(--orange)">budget 1.0 ms</text>
+    <polyline class="line" points="190,62.8 420,138.6 650,201.5 880,218.4 1110,247.6 1300,252.6"/>
+    <g style="fill:var(--cyan)"><circle cx="190" cy="62.8" r="9"/><circle cx="420" cy="138.6" r="9"/><circle cx="650" cy="201.5" r="9"/><circle cx="880" cy="218.4" r="9"/><circle cx="1110" cy="247.6" r="9"/><circle cx="1300" cy="252.6" r="11" style="fill:var(--orange)"/></g>
+    <text class="val" x="190" y="46" text-anchor="middle">2.18</text><text class="val" x="420" y="122" text-anchor="middle">1.68</text><text class="val" x="650" y="185" text-anchor="middle">1.26</text><text class="val" x="880" y="202" text-anchor="middle">1.14</text><text class="val" x="1110" y="282" text-anchor="middle">0.95</text><text class="val" x="1300" y="290" text-anchor="middle">0.92</text>
+    <text x="190" y="440" text-anchor="middle">start</text><text x="420" y="440" text-anchor="middle">step 1</text><text x="650" y="440" text-anchor="middle">step 2</text><text x="880" y="440" text-anchor="middle">step 3</text><text x="1110" y="440" text-anchor="middle">step 4</text><text x="1300" y="440" text-anchor="middle">final</text>
   </svg>
-  <p class="dim small">Desktop, one staff discharge into a canal with three thugs. Every speed-up introduced a subtle bug; each was caught in review before it shipped. Eight rounds.</p>
+  <div class="take">Every speed-up introduced a subtle bug. Review caught each one before players did.</div>
+  <aside class="notes">Desktop, one staff discharge into a canal with three thugs. Steps: water tell only; hitstop deferred; lazy pose; plan tables; r22 fixes. Eight review rounds.</aside>
 </section>
 
-<!-- 19 HONEST GATES -->
+<!-- HONEST GATES -->
 <section>
-  <div class="tag"><span><b>§4</b> Honesty</span><span>Gates</span></div>
-  <blockquote class="q">"The row would then pass the exact cost it was built to catch."</blockquote>
-  <div class="who">Hitlag, refusing to set the gate to the measured worst case</div>
-  <ul style="margin-top:1em">
-    <li>A red row that stays red is information. A gate calibrated to today's number is decoration.</li>
-    <li>Measure on a quiet machine: one strategy game running alongside doubled every timing.</li>
-  </ul>
+  <div class="tag"><span><b>§4</b> Quality</span><span>Honest tests</span></div>
+  <div class="bigq">"The [test] would then pass the exact cost it was built to catch."</div>
+  <div class="bigq-who">An agent, refusing to loosen a failing performance test</div>
+  <div class="take fragment">A failing test is information. A test adjusted until it passes is decoration.</div>
 </section>
 
-<!-- 20 SECTION 5 -->
+<!-- 05 DIVIDER -->
 <section class="divider">
-  <div class="tag"><span><b>§5</b> Post-mortem</span><span>Plain language</span></div>
+  <div class="tag"><span><b>§5</b> of 5</span><span>Failures</span></div>
   <div class="num">05</div>
   <h2>What went wrong</h2>
-  <p>Explained for people who don't live in terminals.</p>
+  <p>In plain language.</p>
 </section>
 
-<!-- 21 WRONG -->
+<!-- WRONG -->
 <section>
-  <div class="tag"><span><b>§5</b> Post-mortem</span><span>Incident log</span></div>
-  <dl class="ledger">
-    <dt>Forgetting</dt><dd>Long-running agents compress their memory and come back with an old picture. <strong>Handover notes, not hope.</strong></dd>
-    <dt>Rules in prose</dt><dd>"One Godot at a time" and "ask before killing a process" were written down and still bent: time-limit wrappers, overlapping runs. <strong>Enforce with tools, not paragraphs.</strong></dd>
-    <dt>One machine</dt><dd>About twenty workers, one PC: hard resets, a hand-run queue, skewed timings.</dd>
-    <dt>Scope</dt><dd>"Total coverage, no halfway sim" in a jam week. It worked, and it was expensive.</dd>
-  </dl>
+  <div class="tag"><span><b>§5</b> Failures</span><span>Incident log</span></div>
+  <h2>Four things that went wrong</h2>
+  <div class="cards c4">
+    <div class="card o fragment"><div class="k">Forgetting</div><div class="v">Agents lose their memory over long sessions. Handover notes, not hope.</div></div>
+    <div class="card o fragment"><div class="k">Rules on paper</div><div class="v">Written rules got bent. Enforce them with tools, not paragraphs.</div></div>
+    <div class="card o fragment"><div class="k">One computer</div><div class="v">Twenty workers, one PC: crashes, queues, skewed measurements.</div></div>
+    <div class="card o fragment"><div class="k">Scope</div><div class="v">A full building simulation in a jam week. It worked, and it was expensive.</div></div>
+  </div>
 </section>
 
-<!-- 22 THE JAM -->
+<!-- THE JAM -->
 <section>
-  <div class="tag"><span><b>§5</b> Post-mortem</span><span>The jam</span></div>
+  <div class="tag"><span><b>§5</b> Failures</span><span>The jam</span></div>
   <h2>Disqualified, and that was fair</h2>
-  <div class="cols">
-    <ul>
-      <li>The jam banned AI-generated assets. Ours were written as code by AI assistants, and we disclosed all of it on the page and in the credits.</li>
-      <li>The jam exists to keep the field even for amateurs. A studio of agents isn't that.</li>
-      <li>The lesson: the organiser question sat on our checklist all week. <em>Ask before you build on it.</em></li>
-    </ul>
-    <div>
-      <span class="label">The disclosure we shipped</span>
-      <p class="small dim">"No generative image, audio or voice models were used anywhere in HIGH WATER. … Jonas built the game together with Claude and Codex, the AI coding assistants that wrote that code with him. He made the calls and takes responsibility for the result."</p>
-    </div>
+  <div class="cards c3">
+    <div class="card fragment"><div class="k">The rule</div><div class="v">The jam banned AI-generated assets, to keep it fair for amateurs.</div></div>
+    <div class="card fragment"><div class="k">What we did</div><div class="v">Our assets were written as code by AI. We disclosed all of it.</div></div>
+    <div class="card o fragment"><div class="k">The lesson</div><div class="v">The "ask the organisers" item sat on our checklist all week.</div></div>
+  </div>
+  <div class="take fragment">Clarify the rules before you build on them.</div>
+</section>
+
+<!-- GODOT 1 -->
+<section>
+  <div class="tag"><span><b>Appendix</b> Godot</span><span>1 of 2 · testing</span></div>
+  <h2>Godot: testing with agents</h2>
+  <div class="cards c3">
+    <div class="card fragment"><div class="k">Headless scenes</div><div class="v">Small test scenes that play, check and print one line. Run them one at a time.</div></div>
+    <div class="card o fragment"><div class="k">The clock trap</div><div class="v"><code>--fixed-fps</code> runs game time unpaced. Don't mix it with real time in a test.</div></div>
+    <div class="card fragment"><div class="k">Defer the extras</div><div class="v">Show the hit this frame. Build the extra effects next frame, before drawing.</div></div>
   </div>
 </section>
 
-<!-- 23 GODOT APPENDIX -->
+<!-- GODOT 2 -->
 <section>
-  <div class="tag"><span><b>§6</b> Appendix</span><span>Godot specifics</span></div>
-  <h2>Godot notes, dense</h2>
-  <div class="cols small">
-    <ul>
-      <li><strong>Headless checks are the agents' eyes.</strong> Scene scripts that play, assert and print one line. Run them serially.</li>
-      <li><strong>The <span class="mono">--fixed-fps</span> trap:</strong> game time runs unpaced, so checks mixing wall-clock or audio time go flaky under load. Assert on the clock the code uses.</li>
-      <li><strong>Everything as code:</strong> voxel models, FM music, synthesised SFX, UI. That gave us a creative constraint, and it got us disqualified.</li>
-    </ul>
-    <ul>
-      <li><strong>Web first draw:</strong> shader compiles stall. The dollhouse went from 6 s to 1.7 s with one voxel shader and no scene lights; warm-up hidden behind black frames.</li>
-      <li><strong>The pck ships every JSON file.</strong> Exclude internal data explicitly; the uid cache still lists tool file names.</li>
-      <li><strong>Deferred work keeps the tell:</strong> link 1 presents in the call; everything else lands a frame later, before the draw.</li>
-    </ul>
+  <div class="tag"><span><b>Appendix</b> Godot</span><span>2 of 2 · Web</span></div>
+  <h2>Godot: shipping to the Web</h2>
+  <div class="cards c3">
+    <div class="card fragment"><div class="k">First draw</div><div class="v">Shader compiles stall the browser. One shader and a warm-up took the level select from 6 s to 1.7 s.</div></div>
+    <div class="card o fragment"><div class="k">What ships</div><div class="v">The export bundles every JSON file. Exclude internal data on purpose.</div></div>
+    <div class="card fragment"><div class="k">All as code</div><div class="v">Models, music, sound, UI: all written as code. A great constraint, and why we were disqualified.</div></div>
   </div>
 </section>
 
-<!-- 24 BLOCKOUT -->
+<!-- BLOCKOUT -->
 <section>
-  <div class="tag"><span><b>§6</b> Appendix</span><span>Floor 70</span></div>
-  <h2>Greybox to final, one day apart</h2>
-  <div class="cols">
+  <div class="tag"><span><b>Appendix</b> Process</span><span>Floor 70</span></div>
+  <h2>Greybox to art in one day</h2>
+  <div class="pair">
     <figure><img src="img/greybox.jpg" alt="Floor 70 greybox: grey blocks and placeholder figures"><figcaption>28 Sep · greybox</figcaption></figure>
-    <figure><img src="img/lobby_art.jpg" alt="Floor 70 the same beat with art: the village lobby"><figcaption>29 Sep · same beat, art pass</figcaption></figure>
+    <figure class="fragment"><img src="img/lobby_art.jpg" alt="Floor 70, the same moment with art: the village lobby"><figcaption><b>29 Sep</b> · same spot, art pass</figcaption></figure>
   </div>
 </section>
 
-<!-- 25 NEXT TIME -->
+<!-- NEXT TIME -->
 <section>
-  <div class="tag"><span><b>§7</b> Close</span><span>Next time</span></div>
-  <h2>Next time</h2>
-  <ul>
-    <li>Clarify the rules before building on them.</li>
-    <li>Give long-lived agents a fresh session at natural breaks, with a brief.</li>
-    <li>Enforce process with tools; keep prose for intent.</li>
-    <li>Keep the boards, the canon and the reviewer. Those were the multipliers.</li>
-  </ul>
-  <p class="dim" style="margin-top:1em">Open question for the room: where does AI belong in amateur jams?</p>
+  <div class="tag"><span><b>Close</b></span><span>Next time</span></div>
+  <h2>What I'd do next time</h2>
+  <div class="cards c4">
+    <div class="card fragment"><div class="k">Ask first</div><div class="v">Clarify the rules before building on them.</div></div>
+    <div class="card fragment"><div class="k">Fresh sessions</div><div class="v">Restart long-running agents at natural breaks, with a brief.</div></div>
+    <div class="card fragment"><div class="k">Tools, not prose</div><div class="v">Enforce process with tools. Keep writing for intent.</div></div>
+    <div class="card fragment"><div class="k">Keep the core</div><div class="v">Boards, shared documents and the reviewer were the multipliers.</div></div>
+  </div>
+  <div class="take fragment">Open question: where does AI belong in amateur game jams?</div>
 </section>
 
-<!-- 26 END -->
+<!-- END -->
 <section>
-  <img class="bleed" src="img/nv.jpg" alt="Blackout with night vision coming online, thugs in green-bone tones">
+  <img class="bleed" src="img/nv.jpg" alt="Blackout with night vision coming online">
   <div class="scrim"></div>
   <div class="tag"><span><b>CTR-2070-T3</b> · register closed</span><span>Thank you</span></div>
   <div class="over">
     <h2>Play it. Read the boards.</h2>
-    <p class="mono small"><a href="https://limeminister.itch.io/high-water">limeminister.itch.io/high-water</a></p>
-    <p class="mono small"><a href="../boards/">allknivesnobagel.com/high-water/boards</a></p>
-    <p class="mono small"><a href="/projects/high-water.html">allknivesnobagel.com/projects/high-water</a></p>
+    <p style="font-family:var(--mono);font-size:0.62em;line-height:1.8">
+      <a href="https://limeminister.itch.io/high-water">limeminister.itch.io/high-water</a><br>
+      <a href="../boards/">allknivesnobagel.com/high-water/boards</a><br>
+      <a href="/projects/high-water.html">allknivesnobagel.com/projects/high-water</a>
+    </p>
   </div>
 </section>
 
@@ -504,7 +506,7 @@ figcaption b { color: var(--orange); font-weight: 600; }
 <script>
 Reveal.initialize({
   hash: true, slideNumber: 'c/t', width: 1600, height: 900, margin: 0,
-  transition: 'fade', transitionSpeed: 'fast', backgroundTransition: 'fade',
+  transition: 'none', backgroundTransition: 'none',
   center: false, plugins: [ RevealNotes ]
 });
 </script>
