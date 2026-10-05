@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Playtest-Karte · GEC1</title>
+<style>
+/* Zwei Seiten pro Person: Seite 1 = zwei Playtest-Karten (ausfüllen beim Spielen anderer, schneiden,
+   abgeben), Seite 2 = Beobachtungsbogen fürs eigene Spiel. Bei 24 Personen: 24 × drucken. */
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10.5pt/1.35 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #1a1a1a; background: #fff; }
+.sheet { width: 190mm; height: 277mm; margin: 0 auto; page-break-after: always; break-after: page; }
+.sheet:last-child { page-break-after: auto; break-after: auto; }
+.zwei { display: grid; grid-template-rows: 1fr 1fr; gap: 8mm; }
+.card { border: 0.4mm solid #1a1a1a; padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2.5mm; }
+.head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.3mm solid #1a1a1a; padding-bottom: 2mm; }
+.head b { font-size: 12pt; letter-spacing: .02em; }
+.head span { font-size: 8.5pt; }
+.field { flex: 1; display: flex; flex-direction: column; }
+.field p { margin: 0 0 1mm; font-weight: 700; }
+.field small { font-weight: 400; color: #444; }
+.lines { flex: 1; background-image: linear-gradient(to bottom, transparent calc(100% - 0.35mm), #8a8a8a calc(100% - 0.35mm)); background-size: 100% 6.5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.namen { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; flex: none; font-size: 9pt; }
+.namen .lines, .fest .lines { height: 7mm; flex: none; }
+.fest { flex: none; }
+.kasten { font-size: 9pt; flex: none; }
+.kasten::before { content: ""; display: inline-block; width: 3.2mm; height: 3.2mm; border: 0.3mm solid #1a1a1a; margin-right: 2mm; vertical-align: -0.4mm; }
+.regeln { font-size: 9pt; border: 0.3mm solid #1a1a1a; padding: 2mm 3mm; flex: none; }
+.regeln b { display: block; margin-bottom: 0.5mm; }
+.regeln ol { margin: 0; padding-left: 4.5mm; }
+.spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; flex: 1.6; }
+.spalte { display: flex; flex-direction: column; gap: 2mm; }
+.spalte h3 { margin: 0; font-size: 10.5pt; border-bottom: 0.3mm solid #1a1a1a; padding-bottom: 1mm; }
+.wahl { font-weight: 400; margin-left: 4mm; }
+.wahl::before { content: ""; display: inline-block; width: 3.2mm; height: 3.2mm; border: 0.3mm solid #1a1a1a; margin-right: 1.5mm; vertical-align: -0.4mm; }
+.striche { flex: none; font-size: 9pt; display: flex; gap: 2mm; align-items: baseline; }
+.striche span { flex: 1; border-bottom: 0.35mm solid #8a8a8a; height: 6mm; }
+.spec { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; flex: 1; }
+.beob { height: 277mm; }
+@media screen { body { background: #ddd; padding: 10mm 0; } .sheet { background: #fff; padding: 10mm; height: auto; min-height: 297mm; margin-bottom: 10mm; } .zwei { height: 277mm; } }
+</style>
+</head>
+<body>
+<!-- Seite 1: zwei Playtest-Karten. Wer spielt, füllt eine aus und gibt sie der Person, die das Spiel gebaut hat. -->
+<div class="sheet zwei">
+  <section class="card"><div class="head"><b>Playtest-Karte</b><span>GEC1 · 27.11.2026 · nach dem Spielen ausfüllen</span></div>
+    <div class="namen"><div class="field"><p>Spiel von</p><div class="lines"></div></div><div class="field"><p>Gespielt von</p><div class="lines"></div></div></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute, bevor ich wusste, worum es geht.</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo im Raum, und was hätte mir geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich.</small></p><div class="lines"></div></div>
+    <div class="kasten">Der Build lief nicht: Ich habe zugeschaut statt gespielt.</div>
+  </section>
+  <section class="card"><div class="head"><b>Playtest-Karte</b><span>GEC1 · 27.11.2026 · nach dem Spielen ausfüllen</span></div>
+    <div class="namen"><div class="field"><p>Spiel von</p><div class="lines"></div></div><div class="field"><p>Gespielt von</p><div class="lines"></div></div></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute, bevor ich wusste, worum es geht.</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo im Raum, und was hätte mir geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich.</small></p><div class="lines"></div></div>
+    <div class="kasten">Der Build lief nicht: Ich habe zugeschaut statt gespielt.</div>
+  </section>
+</div>
+
+<!-- Seite 2: Beobachtungsbogen. Bleibt bei der Person, die das Spiel gebaut hat. -->
+<div class="sheet">
+  <section class="card beob"><div class="head"><b>Beobachtung: mein Spiel</b><span>GEC1 · 27.11.2026 · behalten</span></div>
+    <div class="namen"><div class="field"><p>Name</p><div class="lines"></div></div><div class="field"><p>Commit, der getestet wurde</p><div class="lines"></div></div></div>
+    <div class="field fest"><p>Meine Designfrage <small>Vor dem Test eintragen, nicht vorlesen.</small></p><div class="lines"></div></div>
+    <div class="regeln"><b>Während jemand spielt</b><ol>
+      <li>Nur ein Satz zum Start: „Bitte einfach spielen und dabei laut denken.“</li>
+      <li>Nichts erklären, nicht eingreifen, nicht verteidigen.</li>
+      <li>Hilfe erst nach einer Minute Feststecken. Jede Hilfe ist ein Befund: unten einen Strich machen.</li>
+      <li>Schon durch? Notieren, wo die Person zuerst hingeschaut hat; dann ein zweites Mal spielen lassen, ohne Hinweis.</li>
+      <li>Nach acht Minuten ist Schluss, auch mitten im Satz.</li>
+    </ol></div>
+    <div class="spalten">
+      <div class="spalte"><h3>Test 1</h3>
+        <div class="field"><p>Erste Handlung</p><div class="lines"></div></div>
+        <div class="field"><p>Gezögert bei</p><div class="lines"></div></div>
+        <div class="field"><p>Anders gemacht als gedacht</p><div class="lines"></div></div>
+        <div class="striche">Hilfe gegeben: <span></span></div>
+      </div>
+      <div class="spalte"><h3>Test 2</h3>
+        <div class="field"><p>Erste Handlung</p><div class="lines"></div></div>
+        <div class="field"><p>Gezögert bei</p><div class="lines"></div></div>
+        <div class="field"><p>Anders gemacht als gedacht</p><div class="lines"></div></div>
+        <div class="striche">Hilfe gegeben: <span></span></div>
+      </div>
+    </div>
+    <div class="field fest"><p>Kam in beiden Tests vor <small>Mit beiden Karten zusammen lesen.</small></p><div class="lines" style="height: 13mm"></div></div>
+    <div class="field fest"><p>Designfrage: <span class="wahl">beantwortet</span> <span class="wahl">offen</span> <small>Beleg:</small></p><div class="lines" style="height: 13mm"></div></div>
+    <div class="field fest"><p>Entscheidung: <span class="wahl">Spec geändert</span> <span class="wahl">begründet beibehalten</span></p></div>
+    <div class="spec">
+      <div class="field"><p>Spec vorher <small>oder: Warum sie bleibt</small></p><div class="lines"></div></div>
+      <div class="field"><p>Spec nachher <small>oder: Was der nächste Test prüft</small></p><div class="lines"></div></div>
+    </div>
+    <div class="field fest"><p>Devlog <small>Getestet mit … Designfrage: … Beobachtet: … Entschieden: …, weil …</small></p><div class="lines" style="height: 13mm"></div></div>
+  </section>
+</div>
+</body>
+</html>

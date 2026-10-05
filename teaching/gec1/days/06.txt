@@ -1,0 +1,293 @@
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/06/ · Stand 2026-10-05T13:39Z · 21cef83 -->
+
+# Tag 6: Ship
+
+08.01.2027 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/06/slides/
+
+Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.
+
+Begriffe: [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/), [ai-register](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/)
+
+Bis zum nächsten Termin: Abgabe am 22.01.2027: ein ZIP mit Projekt-ZIP, Build-ZIP und PDF, höchstens 2,5 GB. Aufwand: etwa 10 Stunden mit gepflegtem Devlog, bis zu 20 ohne. Bis 10.01. (2 h): den Abgabe-Check einmal ganz durchgehen, Lücken notieren. Bis 15.01. (4 bis 8 h): die Kapitel der PDF; im Blackboard-Thread das Inhaltsverzeichnis, ein fertiges Kapitel, der Stand des Builds, ein Hindernis. Bis 21.01. (3 h): letzter Build, Test auf einem fremden Windows-Rechner, Tag abgabe, PDF, ZIP, hochladen. Nach dem Feature-Freeze nur Reparaturen, und was zu den zwei Pflicht-Interaktionen noch fehlt.
+
+## Vier Wochen später
+
+Wer hat heute einen Build dabei, der auf einem anderen Rechner lief?
+
+Beta: Der Inhalt ist komplett, der [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) lief auf einem fremden Rechner, die Dokumentation steht als Entwurf.
+
+Abgabe in 14 Tagen: 22.01.2027
+
+**Die Check-ins am 18.12. und 04.01.** waren freiwillig. Für alle, die sie nachholen oder beim nächsten Projekt so arbeiten wollen: Ein guter Post hat drei Teile.
+
+1. **Ein lauffähiger Stand.** Ein Clip von 30 bis 60 Sekunden, aufgenommen im Build, nicht im Play-Modus des Editors. Wer kann, hängt den Build an.
+2. **Drei offene Aufgaben**, jede so klein, dass sie an einem Nachmittag fertig wird, in der Reihenfolge, in der sie drankommen.
+3. **Höchstens eine Frage**, mit dem, was schon versucht wurde.
+
+Schwach: „Läuft so halb, muss noch einiges machen.“
+
+Stark: „Clip im Anhang: Der Raum ist komplett, die Tür geht mit dem Schlüssel auf. Offen: 1. Die Falle setzt noch nicht zurück. 2. Neustart per Taste R. 3. Ein Ton für die Tür. Frage: Der Build startet mit schwarzem Bild, die Szene steht in der Scene List. Was fehlt noch?“
+
+Am 04.01. kommt eine Zeile dazu: Welche der drei Aufgaben vom 18.12. sind erledigt?
+
+Wer heute weder einen getesteten Build noch einen Doku-Entwurf hat, macht trotzdem überall mit: Im zweiten Block wird notfalls im Play-Modus des Editors gespielt, und der Abgabe-Check zeigt, was in den nächsten 14 Tagen zuerst drankommt.
+
+## Wo 40 Punkte liegen
+
+**Tafelbild:** Balken je Kriterium: Idee und Konzept 30 Punkte, Audio-visuell 20, Funktionalität 20, Struktur und Build 10, Implementierung 10, Dokumentation 10.
+
+Idee und Konzept 30, Dokumentation 10: so viel wie Grafik, Ton und Funktion zusammen.
+
+## Was 30 Punkte für die Idee zeigen
+
+- Das Erlebnis ist benannt, das Spiel erzeugt es
+- Zwei Alternativen und warum diese Idee
+- Die Designfrage, im Test beantwortet
+- Specs, nach denen andere bauen könnten
+
+Die Idee steht im Spiel, das PDF belegt sie.
+
+Die Aufgabenstellung nennt nur die Überschrift „Idee und Konzept“. So lese ich sie: Zählt, wie klar die Idee ist und wie gut das Spiel sie einlöst. Das PDF belegt, dass das Erlebnis geplant war: Was sollten die Spielenden erleben, welche anderen Wege gab es, welche Frage wurde im Test beantwortet? Die Kapitel 1 bis 4 aus `DOKUMENTATION.md` (Idee, Alternativen, Designfrage, Spec) tragen diesen Teil.
+
+## Was 10 Punkte für die Dokumentation zeigen
+
+- Ein Making-of: was sich geändert hat und warum
+- Verworfene Entwürfe mit Bild und Datum
+- Ein System, in eigenen Worten erklärt
+- Das [KI-Verzeichnis](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/), vollständig
+
+Keine Seitenzahl. „500 Seiten sind zu viel, eine Seite ist zu wenig.“
+
+Das Zitat stammt aus der Aufgabenstellung. Bilder sind ausdrücklich erwünscht, Konzeptzeichnungen auch. Die Kapitel 5 bis 9 aus `DOKUMENTATION.md` (Tests, Überarbeitungen, ein System, Reflexion, Quellen und KI) tragen diesen Teil.
+
+## Woraus das Making-of entsteht
+
+1. Das [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/) unten in `DOKUMENTATION.md`
+2. Der [Verlauf](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/): Commits mit Datum
+3. Playtest-Karten von Tag 4 und heute
+4. Screenshots mit Datum in `bilder/`
+
+Das Making-of liegt schon da. Es muss nur noch sortiert werden.
+
+Wer kein Devlog geführt hat: Der Verlauf ist das Gerüst. Jeder Commit hat ein Datum, und aus den Nachrichten lässt sich rekonstruieren, wann sich was geändert hat. Die Playtest-Karten werden in Kapitel 5 ausgewertet (Tabelle: Datum, wer, Beobachtung, Änderung); Fotos der Karten kommen in den Anhang.
+
+## Was gestrichen wurde, gehört hinein
+
+HIGH WATER
+
+1. Vorher festgelegt, in welcher Reihenfolge gestrichen wird
+2. Zuerst weitere Gegnertypen, dann Räume
+3. Dann das große Finale, zuletzt Grafik-Feinschliff
+4. Nie gestrichen: Hitstop, Wackeln, Ton bei jedem Treffer
+
+Jeder Strich hat einen Grund. Der Grund gehört ins Making-of.
+
+HIGH WATER entstand in einer Game Jam. Vor dem Start stand fest, was zuerst wegfällt, wenn die Zeit knapp wird, und was nie wegfällt: das Gefühl jedes Treffers. Gestrichen oder verschoben wurden unter anderem die höhere Auflösung (sie hätte etwa 1,78-mal so viel Rechenarbeit pro Bild gekostet), Charaktermodelle aus Polygonen (ersetzt durch Voxel-Figuren), eine Ausrüstungsseite und eigene Zug- und Fabriklevel, die nur als einzelne Momente blieben.
+
+Ein zweites Stück Making-of steckt in den Zahlen. Das Designdokument plante für den dritten Schlag einen Stoß von 11 nach vorn und 5 nach oben. Im Code steht nach dem Tuning 8,5 und 4,5, dazu ein Anteil aus dem Tempo der Spielfigur. Das Dokument hält die erste Absicht fest, der Code den getunten Wert. Beides gehört ins Making-of: was geplant war und was der Test daraus gemacht hat.
+
+Spiel: [limeminister.itch.io/high-water](https://limeminister.itch.io/high-water).
+
+## Ein Eintrag im Making-of
+
+1. Datum und Bild
+2. Was war geplant?
+3. Was habt ihr beobachtet?
+4. Was habt ihr geändert, und in welchem Commit?
+
+Drei, vier solche Einträge tragen ein ganzes Kapitel.
+
+## Ein System, laut erklärt
+
+**Tafelbild:** Drei Kästen: Auslöser, Prüfung, Änderung. Beispiel: Die Spielerin betritt den Trigger. Hat sie den Schlüssel? Ja: Die Tür schwingt auf, dazu ein Ton. Nein: „Verschlossen.“ erscheint.
+
+Zu zweit, je zwei Minuten. Wer zuhört, fragt nach, sobald es unklar wird.
+
+## Dann aufschreiben
+
+Fünf Minuten: das Gesagte als Stichworte für Kapitel 7.
+
+Wo nachgefragt wurde, fehlt etwas im Text.
+
+Kapitel 7 in `DOKUMENTATION.md`: ein System so erklären, dass jemand ohne Unity-Erfahrung versteht, was es auslöst, was es prüft und was es verändert. Das System darf mit einem Agenten gebaut sein. Die Erklärung kommt von euch. Ein Screenshot des Graphen oder des Inspectors hilft.
+
+## Lasst den Entwurf prüfen
+
+„Lies DOKUMENTATION.md und die Checkliste. Liste als Fragen auf, was fehlt oder unklar ist. Schreib keinen Text für mich.“
+
+Ihr entscheidet, welche Fragen stimmen, und schreibt selbst.
+
+Der vollständige Auftrag zum Kopieren:
+
+> Lies `DOKUMENTATION.md` und `KI-VERZEICHNIS.md` in diesem Projekt und die Checkliste unter https://www.allknivesnobagel.com/teaching/gec1/druck/abgabe-check.html. Liste als Fragen auf, was in der Dokumentation fehlt oder für eine fremde Person unklar ist. Ordne nach Wichtigkeit. Schreib keinen Text für die Dokumentation und ändere keine Datei.
+
+Danach drei Fragen auswählen, die stimmen, und die Antworten selbst schreiben. Fragen, die nicht stimmen, streichen. Wer keinen Agenten zur Hand hat, tauscht den Entwurf mit der Person daneben und stellt dieselben Fragen von Hand.
+
+## Auch die Prüfung bekommt eine Zeile
+
+Die Antworten gehen in die Arbeit ein. Also gehört der Auftrag ins [KI-Verzeichnis](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/).
+
+**Tafelbild:** Eine Zeile im KI-Verzeichnis: Werkzeug Claude Code, Zweck Doku auf Lücken geprüft, Datei DOKUMENTATION.md, Notiz: Text selbst geschrieben.
+
+Dazu Datum, Modell und Anbieter, wie in jeder Zeile.
+
+Die Regel: Eine Zeile bekommt jeder Auftrag, dessen Antwort in die Arbeit eingeht. Das gilt auch, wenn der Agent nur eine Diagnose stellt und ihr die Änderung selbst ausführt, und hier, wenn er Lücken findet und ihr den Text selbst schreibt. Die Notiz sagt, was von euch ist.
+
+## Das KI-Verzeichnis im PDF
+
+1. Die ganze Tabelle in den Anhang
+2. Zeile für Zeile lesen: Stimmen Modell, Zweck und Datei?
+3. Generierte Bilder oder Texte im PDF: Quelle und Verweis auf den Prompt
+
+Etwa so: Abb. 3 (ChatGPT, Version …, 2027; Prompt P2)
+
+Die Richtlinie der Hochschule vom 28.04.2025 verlangt für generierte Elemente, die in die Arbeit übernommen werden, eine Quellenangabe an der Stelle mit Verweis auf den Prompt, auch nach eigener Überarbeitung. Dafür die verwendeten Prompts unter einer Nummer aufheben, am einfachsten in einem Abschnitt „Prompts“ unten in `KI-VERZEICHNIS.md`: P1, P2 … mit Datum, Werkzeug und Wortlaut. Die Zeile in der Tabelle nennt die Nummer, die Quellenangabe im Text auch.
+
+Auch Kürzen, Glätten und Rechtschreibprüfung durch eine KI bekommen eine Zeile, sobald das Ergebnis in der PDF steht. Generierte Inhalte im Spiel (Bilder, Ton, Texte) brauchen außerdem einen Credit im Spiel oder im Abspann.
+
+## Ein sauberer Stand
+
+1. Szenen speichern, committen, pushen
+2. Aus genau diesem Stand bauen, auf einem fremden Rechner testen
+3. History › Rechtsklick auf diesen Commit › Create Tag › `beta`
+4. Push origin: Der [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/) geht mit
+
+Danach noch committet? Der Tag bleibt am Build-Commit.
+
+Dieselbe Reihenfolge gilt zur Abgabe mit dem Tag `abgabe`: speichern, committen, bauen, den Build auf einem fremden Rechner testen, dann genau diesen Commit taggen und pushen. Wer heute keinen getesteten Build hat, setzt den Tag `beta` erst, wenn ein Build woanders gelaufen ist.
+
+Im Terminal geht es auch. Die Kennung des Build-Commits steht in GitHub Desktop unter History:
+
+```
+git tag beta 7c1e0a2
+git push origin beta
+```
+
+Auf GitHub liegt zu jedem Tag unter **Code › Tags** ein Download **Source code (zip)**. Er enthält genau den gepushten Stand des Tags, ohne `Library/` und ohne `Temp/`. Das ist das sauberste Projekt-ZIP für die Abgabe. Was nicht gespeichert, committet und gepusht ist, fehlt darin.
+
+## Der Verlauf als Beleg
+
+**Tafelbild:** Eine Zeitleiste mit Commits: 13.11. Blockout, 27.11. Tür geht auf, 04.12. Falle raus, 11.12. Freeze mit Tag alpha, 08.01. heute mit Tag beta, 22.01. Abgabe mit Tag abgabe. Ein Pfeil führt vom Commit am 04.12. ins Making-of: „Am 04.12. habe ich die Falle gestrichen, weil …“, mit der Commit-Kennung.
+
+Im Making-of einen Commit so zitieren: Datum, Nachricht, die ersten sieben Zeichen der Kennung, etwa „04.12., Falle entfernt (`7c1e0a2`)“. Ein Screenshot aus dem Reiter History in GitHub Desktop zeigt einen Abschnitt des Verlaufs auf einen Blick. Wer Jonas Zugriff auf das Repository gegeben hat (freiwillig, auf GitHub unter Settings › Collaborators), kann zusätzlich den Link angeben; nötig ist das nicht.
+
+## Der Abgabe-Check
+
+**Tafelbild:** Die Abgabe als Baum: Nachname\_Vorname\_GEC1.zip, höchstens 2,5 GB, darin das Projekt-ZIP mit Assets, Packages und ProjectSettings, das Build-ZIP mit dem ganzen Build-Ordner und die PDF mit Konzept, Dokumentation und KI-Verzeichnis. Library und Temp sind durchgestrichen.
+
+Liegt gedruckt aus. Die Liste reicht für die nächsten 14 Tage.
+
+Die Checkliste zum Ausdrucken: [Abgabe-Check](/teaching/gec1/druck/abgabe-check.html). Sie führt durch alles, was bis zum 22.01. zu prüfen ist: Dateinamen, Inhalt der beiden ZIPs, Build-Test auf einem fremden Rechner, Teile der PDF, Größe.
+
+## Zu zweit prüfen
+
+1. Build-ZIP auf den anderen Laptop, entpacken, starten
+2. Einmal ganz durchspielen
+3. Die Checkliste gemeinsam abhaken
+4. Was offen bleibt, ist eure Liste für 14 Tage
+
+Jedes Paar hat einen Windows-Laptop. Sonst: zwei Stationen für alle, mit Zeitliste.
+
+Paare werden so gebildet, dass in jedem ein Windows-Laptop ist; sie bleiben für den zweiten Block zusammen. Wer einen Mac hat, testet den eigenen Build auf dem Windows-Laptop der anderen Person. Der Build reist per USB-Stick oder Cloud-Link, am besten schon vor 14:15 fertig gezippt. Der entpackte Build bleibt für den zweiten Block auf dem Laptop liegen.
+
+Gibt es weniger Windows-Laptops als Paare, stehen zwei Gemeinschaftsstationen bereit. Paare ohne Windows-Gerät tragen sich dort in die Zeitliste ein: je 10 Minuten für Entpacken, Starten und einmal Durchspielen.
+
+## Aus Markdown wird PDF
+
+1. Pandoc macht aus Doku und KI-Verzeichnis eine Word-Datei
+2. Öffnen in Word, LibreOffice oder Pages
+3. Titelseite ergänzen, Bilder prüfen, als PDF exportieren
+
+Pandoc ist kostenlos und läuft ohne Installation. Download und Befehl stehen im Handout.
+
+Pandoc ist ein kostenloses Umwandlungsprogramm, das ohne Installation und ohne Administratorrechte läuft. Getestet mit Pandoc 3.12: Bilder aus `bilder/` und Tabellen kommen mit.
+
+1. Auf [github.com/jgm/pandoc/releases/latest](https://github.com/jgm/pandoc/releases/latest) das ZIP laden: Windows `pandoc-…-windows-x86_64.zip`, Mac mit Apple-Chip `pandoc-…-arm64-macOS.zip`, ältere Macs `pandoc-…-x86_64-macOS.zip`.
+2. Entpacken, etwa nach `Dokumente/pandoc`.
+3. Im Projektordner ein Terminal öffnen (GitHub Desktop: Repository › Open in Command Prompt bzw. Open in Terminal) und den Befehl in einer Zeile ausführen, mit dem Pfad zu Pandoc vorn, etwa `C:\Users\Name\Documents\pandoc\pandoc-3.12\pandoc.exe` oder `~/Documents/pandoc/pandoc-3.12-arm64/bin/pandoc`:
+   `pandoc DOKUMENTATION.md KI-VERZEICHNIS.md -o Dokumentation.docx`
+   Den Befehl kann auch der Agent ausführen.
+4. `Dokumentation.docx` öffnen, Titelseite ergänzen, Bilder und Tabellen ansehen, als PDF exportieren. Word: Datei › Speichern unter › PDF. LibreOffice: Datei › Als PDF exportieren. Pages: Ablage › Exportieren › PDF.
+
+Wer lieber in Word, InDesign oder Google Docs gestaltet, übernimmt den Text von Hand. Am Ende zählt eine PDF mit allen Teilen aus dem Abgabe-Check.
+
+## Show and Tell
+
+**Tafelbild:** Fünf Stationen A mit laufendem Build. Unter jeder steht eine Person B. Pfeile zeigen: B wandert alle 7 Minuten eine Station weiter, die letzte springt zur ersten. 6 Minuten spielen, 1 Minute Zettel. Nach drei Stationen tauschen A und B.
+
+Aus jedem Paar ist eine Person A, eine B.
+
+Wer einen Mac hat, zeigt den eigenen Build am Windows-Laptop der anderen Person aus dem Paar; dort liegt er seit dem ersten Block. Wer einen Windows-Laptop hat, zeigt am eigenen oder am Laptop der anderen Person. Ohne Windows-Gerät im Paar: An den zwei Gemeinschaftsstationen zeigt in jedem 7-Minuten-Abschnitt eine andere Person ihren Build, nach der Zeitliste.
+
+## An der Station
+
+A
+
+Der Build läuft, nicht der Editor. Ihr erklärt nichts, bevor gespielt wird. Helfen erst, wenn jemand eine Minute festhängt.
+
+B
+
+Spielen, dann den Zettel ausfüllen und dalassen.
+
+## Der Spielzettel
+
+1. Startet der Build? Bild, Ton, Steuerung?
+2. Was habe ich zuerst versucht?
+3. Wo wusste ich nicht weiter?
+4. Was hat sich gut angefühlt?
+
+Drei Zettel pro Station sind ein Playtest: Auswertung in Kapitel 5, Fotos in den Anhang.
+
+## Runde 1
+
+3 × 7:00
+
+A sitzt am Build, B spielt. Nach sechs Minuten der Zettel, dann eine Station weiter.
+
+## Runde 2
+
+3 × 7:00
+
+Jetzt sitzt B am Build, A spielt.
+
+## Fragen zur Abgabe
+
+- Was darf sich jetzt noch ändern?
+- Der Build startet woanders nicht
+- Das ZIP ist zu groß
+- Was gehört in die PDF?
+
+Die Antworten stehen auch im Handout.
+
+**Was darf sich jetzt noch ändern?** Der Feature-Freeze war am 11.12. Erlaubt sind Reparaturen an dem, was schon da ist, dazu Ton, Licht, Texte und die Dokumentation. Neue Interaktionen kommen nicht mehr dazu. Die einzige Ausnahme: Fehlt noch eine der zwei Pflicht-Interaktionen aus der Aufgabenstellung, wird sie fertig gebaut. Nach jeder Änderung den Build noch einmal auf einem fremden Rechner testen.
+
+**Der Build startet woanders nicht.** Der Reihe nach prüfen: Wurde das ZIP entpackt, oder läuft die `.exe` aus der ZIP-Vorschau heraus? Liegt der ganze Ordner bei, mit dem Ordner, der auf `_Data` endet? Stehen alle Szenen in der Scene List, die Startszene oben? Windows zeigt bei Spielen ohne Signatur „Der Computer wurde durch Windows geschützt“: **Weitere Informationen › Trotzdem ausführen**. Das ist normal und gehört als Hinweis in die PDF.
+
+**Das ZIP ist zu groß.** Meist liegt `Library/` im Projekt-ZIP; das Source-ZIP von GitHub hat das Problem nicht. Danach große Rohdateien in `Assets/` prüfen (`.wav`, `.psd`, `.blend`, Videos). Im Build helfen kleinere Max Size bei Texturen und komprimierte Audioformate.
+
+**Was gehört in die PDF?** Siehe Abgabe-Check, Teil F. Dazu eine kurze Spielanleitung: wie man das Spiel startet, die Steuerung, das Ziel.
+
+**Fremde Assets?** Kostenlose sind erlaubt, mit Quelle und Lizenz in der PDF. Kostenpflichtige Pakete sind ausgeschlossen. Selbst gemachte Assets bewertet die Aufgabenstellung besser.
+
+## Die nächsten 14 Tage
+
+1. Bis 10.01. (2 h): Abgabe-Check, Lücken notieren
+2. Bis 15.01. (4–8 h): Kapitel schreiben, Stand in den Thread
+3. 30 Minuten fest? Fragen.
+4. Bis 21.01. (3 h): Build, fremder Test, Tag `abgabe`, hochladen
+
+Etwa 10 h mit [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/), bis 20 ohne.
+
+Der Post am 15.01. im Blackboard-Thread enthält: das Inhaltsverzeichnis der PDF, ein fertiges Kapitel, den Stand des Builds und ein Hindernis.
+
+Die Stunden sind Richtwerte für Dokumentation und Abgabe; Reparaturen am Spiel kommen dazu. Wer neben dem Studium arbeitet, trägt die drei Blöcke fest in den Kalender ein, den letzten nicht auf den 22.01.
+
+Nicht in der letzten Stunde hochladen. Über ein Gigabyte kann im Hochschul-WLAN lange dauern, und ein Fehler beim Upload lässt sich dann nicht mehr beheben. Die Abgabe geht als ein ZIP in den Prüfungsraum auf Blackboard. Das Devlog bekommt am Abgabetag einen letzten Eintrag.
+
+## Abspann
+
+**Bild:** Kreidezeichnung eines handbetriebenen Projektors, aus dem eine Folge von Rampe, Würfel, Schlüssel und Tür nach oben über die Tafel läuft. (KI-generiert).
+
+Ein Satz pro Person.
+
+Was ändert ihr bis zum 22.01. noch an eurem Spiel?

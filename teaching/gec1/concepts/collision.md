@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/ · Stand 2026-10-05T12:36Z · 9fcef5f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/ · Stand 2026-10-05T13:39Z · 21cef83 -->
 
 # Kollision
 
@@ -32,7 +32,7 @@ Unity meldet nicht jede Berührung. Mindestens eines der beiden Objekte braucht 
 - **Aufprall-Meldungen** gibt es nur, wenn mindestens ein Objekt einen Rigidbody hat, bei dem **Is Kinematic** aus ist. Zwei Wände ohne Rigidbody melden sich nie, auch wenn sie sich überlappen.
 - **Trigger-Meldungen** gibt es, wenn mindestens eines der Objekte einen Rigidbody hat, auch einen kinematischen. Meist ist der Trigger fest und das Objekt, das hindurchgeht, hat den Rigidbody.
 
-Die Spielfigur des Kits hat keinen Rigidbody, sondern einen **CharacterController**. Der löst Trigger trotzdem aus.
+Die Spielfigur des Kits hat keinen Rigidbody, sondern einen **CharacterController**. Der löst Trigger aus, aber keine Aufprall-Meldung: Läuft die Figur gegen eine Wand, kommt kein `OnCollisionEnter`. Dafür hat der CharacterController eine eigene Meldung, `OnControllerColliderHit`, auf dem Objekt der Spielfigur.
 
 ```csharp
 void OnTriggerEnter(Collider other)   // auf dem Objekt mit dem Trigger
@@ -54,4 +54,5 @@ void OnTriggerEnter(Collider other)   // auf dem Objekt mit dem Trigger
 - [Unity Manual: Interaction between collider types](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-types-interaction.html) – die vollständige Tabelle, welche Kombination welche Meldung auslöst (Unity 6.3, englisch).
 - [Unity Manual: OnTrigger events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-ontrigger.html) und [OnCollision events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-oncollision.html) – Enter, Stay, Exit mit Beispielskript.
 - [Unity Manual: Create and configure a trigger collider](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-create-trigger.html) – Schritt für Schritt.
+- [Unity Scripting API: CharacterController.OnControllerColliderHit](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/CharacterController.OnControllerColliderHit.html) – die Meldung der Spielfigur beim Anstoßen (englisch).
 - [Unity Manual: Character Controller](https://docs.unity3d.com/6000.3/Documentation/Manual/class-CharacterController.html) – warum Spielfiguren oft keinen Rigidbody haben.

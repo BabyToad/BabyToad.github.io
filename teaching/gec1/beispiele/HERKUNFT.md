@@ -19,3 +19,13 @@ the AI coding assistants that wrote that code with him. He made the calls and ta
 responsibility for the result."
 
 Inhaltshinweis: Blut und Gewalt gegen menschliche Figuren; Gore lässt sich in den Optionen abschalten.
+
+## Kit (Kurs-Paket)
+
+Bildschirmfotos aus Unity 6000.3.15f1 mit dem Kurs-Paket 0.3.1, aufgenommen von Weiche (Studio Δt)
+am 05.10.2026 in einer Wegwerf-Kopie der Kursvorlage. Nur Unitys eigene Fenster, kein Desktop.
+Ausschnitte auf 1280 × 720 eingepasst.
+
+- `graph`, `auswahl-schluessel`, `bindungen`, `play-tuer`, `code-wenn`: das Beispiel „Schlüssel und Tür“.
+- `drehkreuz`: der eigene Knoten „Drehmoment“ aus dem Handout von Tag 3, im Play-Modus.
+- `werkstatt-zone`, `werkstatt-console`: ein Prototyp der kaputten Werkstatt (Tag 3), noch nicht im Paket.

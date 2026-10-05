@@ -1,6 +1,6 @@
 # Herkunft der Schlüsselbilder
 
-Stand: 04.10.2026. Alle zwölf Bilder wurden mit dem integrierten OpenAI-ImageGen-Werkzeug neu als transparente Kreidezeichnungen erzeugt. Die konkrete Modellbezeichnung weist das Werkzeug nicht aus. Die ausgewählten PNGs wurden mit FFmpeg auf 4:3 eingepasst und als WebP mit Alphakanal komprimiert. `prefab.webp` und `scene.webp` messen 1000 × 750 Pixel, alle anderen 1200 × 900 Pixel; jede Datei bleibt unter 250 kB.
+Stand: 05.10.2026. Alle 21 Bilder wurden mit dem integrierten OpenAI-ImageGen-Werkzeug neu als transparente Kreidezeichnungen erzeugt. Die konkrete Modellbezeichnung weist das Werkzeug nicht aus. Die ausgewählten PNGs wurden mit FFmpeg auf 4:3 eingepasst und als WebP mit Alphakanal komprimiert. `prefab.webp` und `scene.webp` messen 1000 × 750 Pixel, alle anderen 1200 × 900 Pixel; jede Datei bleibt unter 250 kB.
 
 ## Gemeinsame Vorgaben
 
@@ -74,3 +74,60 @@ Ausgeschlossen waren insbesondere: Café- oder Menüschrift, ornamentale Rahmen 
 - Versuche: 2
 - Finaler Prompt-Kern: Leicht gekippte Sanduhr mit blasser Drehkontur. Oben verbleibt gelber Sand, ein einzelner Strom fällt sichtbar in den wachsenden unteren Haufen; Rahmen und Glas bleiben weißes offenes Linienwerk.
 - Verworfen: Lauf 1 war zu dicht mit dunkler Kohleschattierung gefüllt und stand dadurch nicht in derselben Hand wie die Tafelbilder.
+
+## Runde Tage 3–6 · 05.10.2026
+
+Für diese Runde galten dieselben gemeinsamen Vorgaben. Die Bilder tragen Stimmung, Metapher oder ein großes Gesamtbild; die vorhandenen Tafelbilder erklären weiterhin die Mechanismen.
+
+### Graph · `graph.webp`
+
+- Versuche: 1
+- Finaler Prompt-Kern: Isometrischer kleiner Spielraum mit hebender Tür und springender Kiste. Ein offenes mechanisches Schaltgerät speist den Raum über einen orange gestrichelten Event-Draht, einen violetten Datendraht und zwei blaugrüne Referenzleitungen. Bewegung bleibt gelb betont.
+
+### Kaputte Werkstatt · `werkstatt.webp`
+
+- Versuche: 3
+- Finaler Prompt-Kern: Ein einziger offener isometrischer Werkstattraum, in dem eine Kiste schwebt, das Windrad neben seiner Welle steht, die Lampe nicht eingesteckt ist und eine Kapsel an einer gestrichelten unsichtbaren Wand stoppt.
+- Verworfen: Lauf 1 zerfiel in einzelne Symbole; Lauf 2 füllte die Fläche zu dicht. Lauf 3 bindet die Fehler in einen lesbaren Raum.
+
+### Playtest · `playtest.webp`
+
+- Versuche: 3
+- Finaler Prompt-Kern: Zwei Studierende von hinten am Laptop. Eine Person spielt, die andere beobachtet mit einer leeren gelben Karte in der Hand. Der Bildschirm bleibt ein schlichtes Kreidefenster ohne Schrift.
+- Verworfen: Lauf 1 wirkte durch breite Flächen zu fotografisch; Lauf 2 machte Geste und Karte nicht eindeutig genug. Lauf 3 ist offener gezeichnet und liest sich auf Distanz als Spieler–Beobachter-Situation.
+
+### Material · `material.webp`
+
+- Versuche: 2
+- Finaler Prompt-Kern: Drei exakt gleiche Würfel unter derselben Lampe. Nur Kreidestrich, Glanzkante und Reflex unterscheiden matte, lackierte und metallische Oberfläche; wenige gelbe Lichtstrahlen halten die Vergleichsbedingung fest.
+- Verworfen: Lauf 1 ergänzte eine fotorealistisch schattierte Hand und einen zu großen gefüllten Lichtkegel.
+
+### Licht · `light.webp`
+
+- Versuche: 2
+- Finaler Prompt-Kern: Derselbe kleine Raum als Diptychon: links flach und orientierungslos, rechts führt ein einziges gelbes Hauptlicht den Blick klar zur Tür. Architektur und Kamera bleiben Kreideweiß.
+- Verworfen: Lauf 1 arbeitete mit zu breiten weißen und schwarzen Flächen. Lauf 2 lässt mehr Tafel stehen und führt den Blick mit Linien und Lichtkanten.
+
+### Animation · `animation.webp`
+
+- Versuche: 2
+- Finaler Prompt-Kern: Ein Truhendeckel in drei klaren Stellungen, geschlossen, halb offen und offen. Eine violette Datenkurve verbindet zwei violette Keyframe-Rauten; nur der Endzustand ist gelb hervorgehoben.
+- Verworfen: Lauf 1 färbte die Kurve blaugrün und benutzte Gelb für Bewegungspfeile; beides widersprach der Bedeutungsfarbregel.
+
+### Feedback · `feedback.webp`
+
+- Versuche: 2
+- Finaler Prompt-Kern: Eine Hand drückt einen großen weißen Knopf. Orange markiert nur den auslösenden Kontakt; ein gelber Funke und die unmittelbare Bewegung eines schlichten weißen Würfels zeigen die Reaktion.
+- Verworfen: Lauf 1 erfand eine violette Schallwelle und ein blaugrünes Gerät und setzte die Bedeutungsfarben damit dekorativ ein.
+
+### Tag 6 · `tag-06.webp`
+
+- Versuche: 1
+- Finaler Prompt-Kern: Perspektivisch gezeichnetes, verschnürtes Abgabepaket. Diskette, Papierstapel und kleiner Würfel ragen heraus; ein leerer gelber Anhänger setzt den Terminakzent, ohne Schrift im Bild.
+
+### Abspann · `abspann.webp`
+
+- Versuche: 1
+- Finaler Prompt-Kern: Handbetriebener Projektor in Perspektive. Aus ihm läuft eine vertikale Bildfolge aus Rampe, Würfel, Schlüssel und Tür nach oben; eine gelbe Kreidelinie schließt die Sequenz ab.
+
+Alle neun neuen Dateien wurden auf 1200 × 900 Pixel mit transparentem Hintergrund eingepasst und als WebP mit Alphakanal ausgegeben. Die Qualitätsstufe wurde pro Motiv so weit reduziert, dass jede Datei unter 250 kB bleibt, ohne die für die Projektion wichtigen Kreidekanten zu verlieren.

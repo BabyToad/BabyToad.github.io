@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Alpha-Werkstatt · GEC1</title>
+<style>
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 9.3pt/1.22 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #181818; background: #fff; }
+main { width: 190mm; min-height: 277mm; margin: 0 auto; display: grid; grid-template-rows: auto auto 1fr auto; gap: 3.2mm; }
+header { display: flex; justify-content: space-between; align-items: end; border-bottom: .55mm solid #181818; padding-bottom: 2mm; }
+h1 { margin: 0; font-size: 20pt; line-height: 1; }
+header p { margin: 0; text-align: right; font-size: 8.5pt; }
+.meta { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+.line { display: inline-block; min-width: 58mm; height: 4mm; border-bottom: .25mm solid #555; }
+.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+section { border: .32mm solid #222; padding: 2.7mm 3.2mm; break-inside: avoid; margin-bottom: 3mm; }
+h2 { margin: 0 0 1.5mm; font-size: 12pt; }
+h3 { margin: 2mm 0 .7mm; font-size: 9.6pt; }
+ol, ul { margin: 1mm 0 0; padding-left: 4.5mm; }
+li { margin: .8mm 0; }
+.check { list-style: none; padding-left: 0; }
+.check li::before { content: "□"; display: inline-block; width: 4.5mm; font-size: 11pt; vertical-align: -1px; }
+.lines { min-height: 12mm; background-image: linear-gradient(to bottom, transparent calc(100% - .25mm), #aaa calc(100% - .25mm)); background-size: 100% 5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.cut { border-style: dashed; }
+.small { font-size: 8.5pt; }
+.sessions { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 3mm; margin-top: 1mm; }
+.sessions div { border-top: .2mm solid #999; padding-top: .8mm; }
+footer { border-top: .35mm solid #222; padding-top: 1.8mm; font-size: 8pt; display: flex; justify-content: space-between; gap: 5mm; }
+footer a { color: inherit; }
+@media screen { body { background: #ddd; padding: 10mm 0; } main { background: #fff; padding: 10mm; width: 210mm; min-height: 297mm; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Alpha-Werkstatt</h1>
+    <p>GEC1 · Tag 5 · 11.12.2026<br>Feature Freeze</p>
+  </header>
+
+  <div class="meta">
+    <div>Projekt: <span class="line"></span></div>
+    <div>Getesteter Commit: <span class="line"></span></div>
+  </div>
+
+  <div class="columns">
+    <div>
+      <section>
+        <h2>A · Alpha und Freeze</h2>
+        <ul class="check">
+          <li>Zwei Pflichtinteraktionen funktionieren.</li>
+          <li>Alle weiteren geplanten Interaktionen laufen oder Extras sind aus der Spec gestrichen.</li>
+          <li>Grafik und Ton sind erstmals überarbeitet.</li>
+          <li>Aktueller Windows-Build läuft – oder Fehler, Versuch und nächster Test stehen im Devlog.</li>
+        </ul>
+        <strong>Nach dem Freeze:</strong> Reparaturen und ein noch unerfülltes Aufgabenminimum; keine neuen Extras.
+      </section>
+
+      <section>
+        <h2>B · Look, Bilder, Ton</h2>
+        <ul class="check">
+          <li>Zwei Materialien und ein Hauptlicht sind lesbar.</li>
+          <li>Realtime, Baked oder Mixed ist begründet.</li>
+          <li>Kamera: Post Processing an; Global Volume mit Profil.</li>
+          <li>Override und Parameter-Häkchen an; `Post Exposure +3` ist als Kontrolltest deutlich sichtbar.</li>
+          <li>Eigene PNG: `Default` für Material oder `Sprite (2D and UI)` für Canvas.</li>
+          <li>Sound: Quelle, Person, URL und Lizenz notiert; CC BY genannt.</li>
+          <li>Musik und SFX in getrennte Mixer-Gruppen geroutet.</li>
+        </ul>
+        <h3>Entscheidung + Prüfkriterium</h3>
+        <div class="lines"></div>
+      </section>
+
+      <section class="cut">
+        <h2>Wenn die Zeit kippt</h2>
+        <ol>
+          <li>Partikel-Demo</li>
+          <li>Lightmap-Verfahren</li>
+          <li>vollständiges Drei-Screen-UI</li>
+          <li>Audio-Snapshot</li>
+        </ol>
+        <strong>Nicht kürzen:</strong> eine UI-Handlung, Probe-Build, Alpha-Build, Test.
+      </section>
+    </div>
+
+    <div>
+      <section>
+        <h2>C · UI mit dem Kit</h2>
+        <ul class="check">
+          <li>Eine Handlung aus der Spec läuft: Start, Hinweis, Ziel oder Scheitern.</li>
+          <li>Passende Knoten: HUD-Anzeige, An/Aus, Szene laden, Lebenspunkte oder Checkpoint.</li>
+          <li>Optional: Start → Spiel → Geschafft/Scheitern → Neustart.</li>
+          <li>Dreimal getestet: öffnen, klicken, spielen, zurückkehren.</li>
+          <li>Cursor im UI frei, Blick im Spiel wieder gefangen.</li>
+        </ul>
+        <strong>Kein Scheitern im Spiel?</strong> Dann kein Game Over erzwingen.
+      </section>
+
+      <section>
+        <h2>D · Zwei Builds, zwei Zwecke</h2>
+        <p><strong>Früh:</strong> Probe-Build in einen leeren Ordner. Fehler finden; kein Tag.</p>
+        <p><strong>Nach der Werkstatt:</strong></p>
+        <ol>
+          <li>Szene und Projekt speichern.</li>
+          <li>Fertigen Stand in GitHub Desktop committen.</li>
+          <li>Aus genau diesem Commit frisch bauen.</li>
+          <li>Ganzen Build-Ordner zippen; per USB/Cloud auf anderen Windows-Rechner.</li>
+          <li>Start, UI/Cursor, zwei Interaktionen, Ziel/Scheitern, Ton, Neustart, Beenden testen.</li>
+          <li>History: Rechtsklick auf den getesteten Commit → `Create Tag` → `alpha`; mit Tags pushen.</li>
+        </ol>
+        <p class="small">Kein GitHub Release für Tester: Private Kurs-Repositories liefern die ZIP per USB oder Cloud-Link.</p>
+      </section>
+
+      <section>
+        <h2>E · Bis Beta: 16 Stunden</h2>
+        <div class="sessions small">
+          <div><strong>4 h · bis 17.12.</strong><br>Alpha reparieren, extern testen</div>
+          <div><strong>4 h · bis 22.12.</strong><br>Inhalt schließen, keine Extras</div>
+          <div><strong>4 h · 27.12.–03.01.</strong><br>`DOKUMENTATION.md`, Kapitel 1–5</div>
+          <div><strong>4 h · 04.–07.01.</strong><br>Beta-Commit, Build, externer Test</div>
+        </div>
+        <ul class="check">
+          <li>KI-Verzeichnis: Auftrag/Prompt-ID, Dateien, Übernahme, Prüfung.</li>
+          <li>Optionaler Post am 18.12. und 04.01.: Build/Clip, drei Aufgaben, eine Frage.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <span>Nach 30 Minuten Feststecken: konkrete Frage mit Screenshot oder Fehlermeldung.</span>
+    <span><a href="../days/06/#vier-wochen-spater">Check-in-Muster: Tag 6, Folie 1</a> · Beta 08.01.2027</span>
+  </footer>
+</main>
+</body>
+</html>

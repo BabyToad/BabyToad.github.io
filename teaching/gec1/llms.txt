@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-05T12:36Z · 9fcef5f
+Stand: 2026-10-05T13:39Z · 21cef83
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md). Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), für Werkzeuge, die text/markdown ablehnen. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
@@ -10,21 +10,35 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 
 - [Tag 1: Was macht eine Engine?](https://www.allknivesnobagel.com/teaching/gec1/days/01.md): 09.10.2026. Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 - [Tag 2: Pitch und Blockout](https://www.allknivesnobagel.com/teaching/gec1/days/02.md): 23.10.2026. Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
+- [Tag 3: Interaktion von Hand](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 13.11.2026. Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
+- [Tag 4: Vertical Slice: spielen lassen](https://www.allknivesnobagel.com/teaching/gec1/days/04.md): 27.11.2026. Andere spielen euer Spiel, ihr schaut zu. Danach bekommt eure Welt ihre erste eigene Animation.
+- [Tag 5: Look, Ton, Oberfläche](https://www.allknivesnobagel.com/teaching/gec1/days/05.md): 11.12.2026. Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
+- [Tag 6: Ship](https://www.allknivesnobagel.com/teaching/gec1/days/06.md): 08.01.2027. Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.
 
 ## Begriffe
 
+- [KI-Verzeichnis](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register.md): Die Tabelle aller Aufgaben, bei denen eine KI am Projekt etwas geändert oder erzeugt hat. Pflicht in jeder Projektarbeit der Hochschule, auch ohne KI-Nutzung. Sie kommt in den Anhang der PDF.
+- [Animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation.md): Ein Animation Clip hält fest, wie sich Werte über die Zeit ändern, etwa Drehung, Position oder Farbe. Gesetzt werden nur einzelne Keyframes; die Frames dazwischen rechnet Unity aus.
+- [Animator](https://www.allknivesnobagel.com/teaching/gec1/concepts/animator.md): Die Komponente, die entscheidet, welcher Animation Clip gerade läuft. Ihr Animator Controller ist ein Zustandsautomat aus Zuständen, Übergängen und Parametern, die von außen gesetzt werden.
 - [Branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch.md): Eine eigene Linie im Verlauf, auf der sich etwas ausprobieren lässt, ohne den Hauptstand zu gefährden. Gelingt es, wird der Branch zurückgeführt (Merge); sonst bleibt er liegen oder wird gelöscht.
 - [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build.md): Das fertige Programm, das ohne Unity läuft. Unity packt dafür die Szenen aus der Scene List und alles, was sie brauchen, in einen Ordner mit einer startbaren Datei.
 - [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision.md): Zwei Collider berühren sich. Ein normaler Collider ist fest, Dinge prallen ab. Ein Trigger ist durchlässig und meldet nur, dass etwas hineinkommt oder hinausgeht.
 - [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit.md): Ein gespeicherter Stand des ganzen Projekts mit einer kurzen Beschreibung. Commits reihen sich zum Verlauf; zu jedem lässt sich später zurückkehren.
 - [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component.md): Ein Baustein an einem GameObject mit eigenen Einstellungen. Transform, Renderer, Collider und eigene Skripte sind Komponenten.
 - [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition.md): Eine Frage mit der Antwort ja oder nein, etwa „Hat die Spielfigur den Schlüssel?“. Je nach Antwort geht es auf dem einen oder dem anderen Weg weiter.
+- [Console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console.md): Das Fenster, in dem Unity und eure Skripte melden, was passiert und was schiefgeht. Rot sind Fehler, gelb Warnungen, weiß Hinweise. Ein Doppelklick führt zur Zeile im Code.
 - [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time.md): Die Zeit seit dem letzten Frame, in Sekunden. Damit multipliziert, gilt Bewegung pro Sekunde statt pro Frame.
+- [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog.md): Das Entwicklungstagebuch des Projekts, mindestens zwei Sätze pro Woche. Daraus entsteht am Ende das Making-of der Dokumentation.
 - [Diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff.md): Die Gegenüberstellung zweier Stände, Zeile für Zeile: was weggefallen ist und was dazukam. Vor dem Commit gelesen, zeigt der Diff, was tatsächlich gespeichert wird.
 - [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event.md): Ein Moment, in dem etwas passiert, zum Beispiel ein Tastendruck, ein Betreten oder ein Aufprall. Das Spiel reagiert genau dann, statt in jedem Frame nachzusehen.
+- [Feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback.md): Alles, woran Spielende merken, dass ihre Handlung angekommen ist, etwa ein Ton, eine Bewegung, ein Aufblitzen oder ein kurzes Anhalten des Bildes. Ohne Rückmeldung wirkt auch eine funktionierende Mechanik kaputt.
 - [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame.md): Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
 - [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object.md): Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen seine Komponenten.
 - [Git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git.md): Ein Programm, das den Verlauf eines Projekts speichert. Jeder gespeicherte Stand lässt sich ansehen, vergleichen und zurückholen. GitHub ist ein Dienst, der Git-Projekte online aufbewahrt.
+- [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph.md): Eine Interaktion des Kurs-Pakets, gezeichnet aus Knoten und Drähten. Events laufen durch die Drähte von Knoten zu Knoten; im Play-Modus zeigt jeder Knoten, was er gerade tut.
+- [Licht](https://www.allknivesnobagel.com/teaching/gec1/concepts/light.md): Licht macht Form, Tiefe und Blickführung sichtbar. Realtime wird in jedem Frame berechnet; Baked steckt vorberechnet in Lightmaps; Mixed verbindet beides.
+- [Material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material.md): Ein Material legt fest, wie eine Oberfläche gezeichnet wird. Der Shader ist das Rechenverfahren; das Material liefert Werte wie Farbe, Textur, Metallanteil und Rauheit.
+- [Playtest](https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest.md): Jemand anderes spielt, wer das Spiel gebaut hat, schaut zu und schweigt. Was die Person zuerst versucht, wo sie hängen bleibt und was ihr gefällt, zeigt, ob die Spec im Spiel ankommt.
 - [Prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab.md): Ein gespeichertes GameObject als Vorlage im Projekt. In der Szene stehen Instanzen davon. Eine Änderung am Prefab erreicht alle Instanzen, außer an Stellen, die eine Instanz selbst überschreibt.
 - [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference.md): Ein Verweis auf ein anderes Objekt statt einer Kopie davon. Ein Skript, das eine Tür öffnen soll, braucht eine Referenz auf genau diese Tür. Leere Referenzen sind die häufigste Fehlerquelle.
 - [Repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository.md): Ein Projektordner, dessen Verlauf Git aufzeichnet. Lokal liegt er auf dem eigenen Rechner, eine Kopie davon meist auf GitHub. Was nicht hineingehört, regelt die Datei .gitignore.
@@ -33,7 +47,9 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 - [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene.md): Eine Datei, die eine Welt oder einen Teil davon enthält: alle GameObjects mit ihren Einstellungen. Ein Spiel kann aus einer Szene bestehen oder aus vielen, etwa einer pro Level.
 - [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state.md): Was sich das Spiel von einem Frame zum nächsten merkt. Ist die Tür offen? Wie viele Münzen sind gesammelt? Events ändern den Zustand, Bedingungen fragen ihn ab.
 - [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag.md): Ein fester Name für einen bestimmten Commit, etwa „alpha“ oder „abgabe“. Anders als ein Branch rückt ein Tag nie weiter. Releases auf GitHub bauen auf Tags auf.
+- [Drehmoment](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque.md): Eine Kraft, die einen Rigidbody um eine Achse dreht, statt ihn zu verschieben. In Unity heißt das AddTorque. Richtung und Länge des Vektors geben Achse und Stärke.
 - [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform.md): Die Component, die Position, Drehung und Größe eines GameObjects hält. Jedes GameObject hat genau eine. Bei Kindobjekten gelten die Werte relativ zum Elternobjekt.
+- [UI](https://www.allknivesnobagel.com/teaching/gec1/concepts/ui.md): Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Kit-Graphen.
 - [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update.md): Die Methode, die Unity in jedem Frame auf jedem aktiven Skript aufruft. Hier passiert alles, was laufend geschehen soll.
 - [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector.md): Drei Zahlen x, y, z. Sie beschreiben einen Punkt im Raum oder eine Richtung mit Länge, etwa eine Bewegung oder eine Kraft. In Unity heißt der Typ Vector3.
 

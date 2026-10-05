@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abgabe-Check · GEC1</title>
+<style>
+@page { size: A4; margin: 12mm 13mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10pt/1.38 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #1a1a1a; background: #fff; }
+.page { width: 184mm; margin: 0 auto; }
+.page + .page { break-before: page; }
+header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.4mm solid #1a1a1a; padding-bottom: 2mm; margin-bottom: 3mm; }
+header b { font-size: 15pt; }
+header span { font-size: 9pt; }
+.name { display: flex; gap: 3mm; align-items: baseline; margin: 0 0 3mm; font-size: 9.5pt; }
+.name i { font-style: normal; flex: 1; border-bottom: 0.3mm solid #8a8a8a; height: 5mm; }
+h2 { font-size: 11pt; margin: 2.6mm 0 1.2mm; padding: 0.8mm 2mm; background: #ececec; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+h2 small { font-weight: 400; font-size: 8.5pt; color: #444; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { position: relative; padding: 0.7mm 0 0.7mm 7mm; break-inside: avoid; }
+li::before { content: ""; position: absolute; left: 0.5mm; top: 1.5mm; width: 3.4mm; height: 3.4mm; border: 0.35mm solid #1a1a1a; }
+li small { color: #444; font-size: 8.8pt; }
+code, pre { font-family: "Atkinson Hyperlegible Mono", Consolas, monospace; font-size: 8.8pt; }
+pre { margin: 1mm 0 1.5mm; padding: 2mm 3mm; border: 0.3mm solid #8a8a8a; line-height: 1.35; }
+p { margin: 1mm 0; }
+.hinweis { font-size: 8.8pt; color: #333; }
+table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 1mm; }
+td, th { border: 0.3mm solid #8a8a8a; padding: 0.7mm 2mm; text-align: left; vertical-align: top; }
+th { background: #ececec; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+td.box { width: 8mm; }
+.lines { height: 13mm; background-image: linear-gradient(to bottom, transparent calc(100% - 0.3mm), #8a8a8a calc(100% - 0.3mm)); background-size: 100% 6.5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media screen { body { background: #ddd; padding: 10mm 0; } .page { background: #fff; padding: 12mm 13mm; width: 210mm; min-height: 297mm; margin-bottom: 8mm; } }
+@media screen and (max-width: 220mm) { body { padding: 0; } .page { width: auto; min-height: 0; padding: 16px; } }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <header><b>Abgabe-Check</b><span>GEC1 · WiSe 2026/27 · Abgabe 22.01.2027</span></header>
+  <div class="name">Name <i></i> Spiel <i></i></div>
+  <p class="hinweis">Allein durchgehen, am besten zweimal: nach dem 08.01. und am Tag vor dem Hochladen. Jedes leere Kästchen ist eine Aufgabe. Seit dem Feature-Freeze (11.12.) nur noch Reparaturen; neu gebaut wird nur, was zu den zwei Pflicht-Interaktionen fehlt.</p>
+
+  <h2>A · Das Paket <small>ein ZIP, höchstens 2,5 GB, Name und Kurs im Dateinamen</small></h2>
+<pre>Nachname_Vorname_GEC1.zip
+├─ Nachname_Vorname_GEC1_Projekt.zip
+├─ Nachname_Vorname_GEC1_Build.zip
+└─ Nachname_Vorname_GEC1_Dokumentation.pdf</pre>
+  <ul>
+    <li>Alle drei Teile liegen in <b>einem</b> ZIP. Nur ZIP: kein .rar, kein .7z, kein .tar.</li>
+    <li>Dateinamen mit eigenem Namen und Kurs, wie oben.</li>
+    <li>Gesamtgröße höchstens 2,5 GB. <small>Windows: Rechtsklick › Eigenschaften. macOS: Rechtsklick › Informationen.</small></li>
+    <li>Hochgeladen in den Prüfungsraum auf Blackboard, nicht erst in der letzten Stunde.</li>
+  </ul>
+
+  <h2>B · Git <small>in dieser Reihenfolge</small></h2>
+  <ul>
+    <li>Szenen in Unity gespeichert, committet, gepusht. GitHub Desktop zeigt <i>No local changes</i>, kein <i>Push origin</i> offen. <code>KI-VERZEICHNIS.md</code> ist aktuell.</li>
+    <li>Aus genau diesem Stand gebaut (D) und auf einem fremden Rechner getestet (E).</li>
+    <li>Dann diesen Commit taggen: GitHub Desktop › History › Rechtsklick auf den Commit › <i>Create Tag</i> › <code>abgabe</code> › <i>Push origin</i>. <small>Terminal: <code>git tag abgabe &lt;Kennung&gt;</code>, <code>git push origin abgabe</code></small></li>
+  </ul>
+
+  <h2>C · Projekt-ZIP <small>der Stand, den jemand anderes öffnen kann</small></h2>
+  <ul>
+    <li>Am einfachsten: auf GitHub <b>Code › Tags › abgabe › Source code (zip)</b> herunterladen und umbenennen. Enthält genau den Stand des Tags.</li>
+    <li>Im ZIP ein Projektordner mit <code>Assets/</code>, <code>Packages/</code>, <code>ProjectSettings/</code>.</li>
+    <li>Dabei liegen <code>DOKUMENTATION.md</code>, <code>KI-VERZEICHNIS.md</code>, <code>AGENTS.md</code>.</li>
+    <li>Nicht im ZIP: <code>Library/</code>, <code>Temp/</code>, <code>Logs/</code>, <code>UserSettings/</code>, <code>obj/</code>, der Build-Ordner.</li>
+    <li><b>Probe:</b> Das ZIP in einen neuen, leeren Ordner entpacken. Unity Hub › <i>Add › Add project from disk</i>. Öffnen (dauert beim ersten Mal), Startszene öffnen, Play. Die Console zeigt keine roten Fehler.</li>
+    <li>Eigene Dateien liegen in benannten Ordnern (<code>Scripts</code>, <code>Scenes</code>, …). Keine Reste wie <code>New Material (3)</code> oder leere Testszenen.</li>
+    <li>Jedes Skript im Projekt hat oben den Kopfkommentar aus Tag 3: was es tut. Bei Skripten vom Agenten ist er geprüft und verstanden.</li>
+    <li>Keine kostenpflichtigen Assets. Fremde Assets stehen mit Quelle und Lizenz in der PDF.</li>
+  </ul>
+
+  <h2>D · Build-ZIP <small>das Spiel ohne Unity</small></h2>
+  <ul>
+    <li>Ein Windows-Build aus <b>File › Build Profiles › Windows</b>, gebaut aus dem committeten und gepushten Stand (B).</li>
+    <li>Der ganze Ordner ist im ZIP: die <code>.exe</code>, der Ordner, der auf <code>_Data</code> endet, <code>UnityPlayer.dll</code> und alles daneben.</li>
+    <li>Ordner, deren Name auf <code>DoNotShip</code> oder <code>ButDontShipItWithYourGame</code> endet, sind <b>nicht</b> im ZIP.</li>
+    <li>Alle Szenen stehen angehakt in der Scene List, die Startszene oben. Development Build ist aus.</li>
+  </ul>
+
+  <h2>Lücken</h2>
+  <div class="lines"></div>
+</section>
+
+<section class="page">
+  <header><b>Abgabe-Check</b><span>Seite 2</span></header>
+
+  <h2>E · Build-Test auf einem fremden Windows-Rechner <small>nicht auf dem eigenen</small></h2>
+  <ul>
+    <li>Das Build-ZIP per USB-Stick oder Cloud-Link auf den fremden Rechner bringen und in einen Ordner <b>entpacken</b>. Nicht aus der ZIP-Vorschau heraus starten.</li>
+    <li>Die <code>.exe</code> startet. <small>Meldet Windows „Der Computer wurde durch Windows geschützt“: Weitere Informationen › Trotzdem ausführen.</small></li>
+    <li>Bild, Ton und Steuerung funktionieren. Der Mauszeiger ist da, wo er gebraucht wird.</li>
+    <li>Das Spiel lässt sich von Anfang bis Ende spielen, beide Interaktionen eingeschlossen.</li>
+    <li>Neustart möglich, und das Spiel lässt sich beenden (Menü oder Taste, nicht nur Alt+F4).</li>
+    <li>Getestet am <span style="display:inline-block;width:28mm;border-bottom:0.3mm solid #8a8a8a"></span> auf dem Rechner von <span style="display:inline-block;width:52mm;border-bottom:0.3mm solid #8a8a8a"></span></li>
+  </ul>
+
+  <h2>F · Die PDF <small>Konzept und Dokumentation in einer Datei</small></h2>
+  <table>
+    <tr><th class="box"></th><th>Teil</th><th>Was hinein gehört</th></tr>
+    <tr><td class="box">☐</td><td>Titelseite</td><td>Titel des Spiels, Name, Kurs GEC1, WiSe 2026/27, Datum</td></tr>
+    <tr><td class="box">☐</td><td>Spielanleitung</td><td>Start (inkl. Windows-Hinweis), Steuerung, Ziel, Dauer, bekannte Fehler</td></tr>
+    <tr><td class="box">☐</td><td>Idee</td><td>Worum es geht, was die Spielenden tun, wofür sie belohnt werden, das angestrebte Erlebnis</td></tr>
+    <tr><td class="box">☐</td><td>Alternativen</td><td>Mindestens zwei andere Ideen, und warum diese</td></tr>
+    <tr><td class="box">☐</td><td>Designfrage</td><td>Die Frage und was die Tests darauf geantwortet haben</td></tr>
+    <tr><td class="box">☐</td><td>Spec</td><td>Je Interaktion: Verb, Regel, Rückmeldung, Scheitern</td></tr>
+    <tr><td class="box">☐</td><td>Tests</td><td>Datum, wer, Aufgabe, Beobachtung, Änderung; Playtest-Karten (27.11.) und Spielzettel (08.01.) ausgewertet, Fotos davon im Anhang</td></tr>
+    <tr><td class="box">☐</td><td>Making-of</td><td>Drei, vier Wendepunkte: Datum, Bild, geplant, beobachtet, geändert, mit Commit-Kennung. Verworfene Entwürfe mit Bild</td></tr>
+    <tr><td class="box">☐</td><td>Ein System</td><td>In eigenen Worten: was es auslöst, was es prüft, was es verändert</td></tr>
+    <tr><td class="box">☐</td><td>Reflexion</td><td>Was funktioniert hat, was nicht, was beim nächsten Mal anders läuft</td></tr>
+    <tr><td class="box">☐</td><td>Quellen</td><td>Fremde Assets, Schriften, Töne mit Quelle und Lizenz</td></tr>
+    <tr><td class="box">☐</td><td>Anhang: KI-Verzeichnis</td><td>Die ganze Tabelle, Zeile für Zeile geprüft, mit den Prompts unter Nummern (P1, P2 …). Generierte Bilder oder Texte in der PDF tragen an der Stelle Quelle und Prompt-Verweis, etwa „(ChatGPT, Version …, 2027; Prompt P2)“</td></tr>
+    <tr><td class="box">☐</td><td>Erklärung</td><td>Eigenständigkeitserklärung nach den Richtlinien für Projektarbeiten; Wortlaut und Vorlage kommen über Blackboard</td></tr>
+  </table>
+  <ul style="margin-top:1.5mm">
+    <li>Bilder sind lesbar und haben ein Datum. Die PDF ist keine Bildersammlung: Zu jedem Bild gehört ein Satz.</li>
+    <li>Als PDF exportiert, nicht als .docx oder .md. Weg: <code>pandoc DOKUMENTATION.md KI-VERZEICHNIS.md -o Dokumentation.docx</code>, in Word, LibreOffice oder Pages öffnen, als PDF exportieren (Anleitung: Tag 6, „Aus Markdown wird PDF“).</li>
+    <li>Eine andere Person oder ein Agent hat die PDF auf Lücken geprüft, der Text ist selbst geschrieben. Jede Agenten-Antwort, die in die Arbeit eingeht, hat eine Zeile im KI-Verzeichnis.</li>
+  </ul>
+
+  <h2>G · Die letzten 14 Tage <small>etwa 10 h mit gepflegtem Devlog, bis 20 h ohne; Reparaturen kommen dazu</small></h2>
+  <table>
+    <tr><td style="width:30mm">bis 10.01. · 2 h</td><td>Diesen Check einmal ganz durchgehen. Lücken auf Seite 1 notieren.</td></tr>
+    <tr><td>bis 15.01. · 4–8 h</td><td>Kapitel schreiben. Blackboard-Thread: Inhaltsverzeichnis der PDF, ein fertiges Kapitel, Stand des Builds, ein Hindernis.</td></tr>
+    <tr><td>bis 21.01. · 3 h</td><td>Build (D), fremder Test (E), Tag <code>abgabe</code> (B), Projekt-ZIP frisch öffnen (C), PDF exportieren, ZIP packen, Größe prüfen, hochladen.</td></tr>
+    <tr><td>22.01.</td><td>Spätester Abgabetag. Letzter Eintrag im Devlog.</td></tr>
+  </table>
+  <p class="hinweis">30 Minuten fest? Dann fragen, im Blackboard-Thread oder per Mail, mit dem, was schon versucht wurde.</p>
+
+</section>
+
+</body>
+</html>

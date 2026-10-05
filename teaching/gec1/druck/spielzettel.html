@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spielzettel · GEC1</title>
+<style>
+@page { size: A4; margin: 10mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10.5pt/1.35 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #1a1a1a; background: #fff; }
+.sheet { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6mm; width: 190mm; height: 277mm; margin: 0 auto; }
+.card { border: 0.4mm solid #1a1a1a; padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2.5mm; }
+.head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.3mm solid #1a1a1a; padding-bottom: 2mm; }
+.head b { font-size: 12pt; letter-spacing: .02em; }
+.head span { font-size: 8.5pt; }
+.field { flex: 1; display: flex; flex-direction: column; }
+.field p { margin: 0 0 1mm; font-weight: 700; }
+.field small { font-weight: 400; color: #444; }
+.lines { flex: 1; background-image: linear-gradient(to bottom, transparent calc(100% - 0.35mm), #8a8a8a calc(100% - 0.35mm)); background-size: 100% 6.5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.name { font-size: 9pt; flex: none; }
+.name .lines { height: 7mm; flex: none; }
+.ja { flex: none; font-size: 9.5pt; }
+.ja p { margin: 0; font-weight: 700; }
+.ja span { display: inline-block; margin-right: 4mm; font-weight: 400; }
+.ja span::before { content: ""; display: inline-block; width: 3mm; height: 3mm; border: 0.3mm solid #1a1a1a; margin-right: 1.2mm; vertical-align: -0.3mm; }
+@media screen { body { background: #ddd; padding: 10mm 0; } .sheet { background: #fff; padding: 10mm; height: auto; min-height: 297mm; } }
+@media screen and (max-width: 210mm) { body { padding: 0; } .sheet { width: auto; grid-template-columns: 1fr; grid-template-rows: none; padding: 16px; } .card { min-height: 120mm; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <!-- vier gleiche Zettel pro Blatt; je Person drei -->
+  <section class="card"><div class="head"><b>Spielzettel</b><span>GEC1 · 08.01.2027</span></div>
+    <div class="field name"><p>Spiel von <small>/ gespielt von</small></p><div class="lines"></div></div>
+    <div class="ja"><p>Startet der Build?</p><span>ja</span><span>nein</span> Bild <span>ok</span> Ton <span>ok</span> Steuerung <span>ok</span></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo, was hätte geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Spielzettel</b><span>GEC1 · 08.01.2027</span></div>
+    <div class="field name"><p>Spiel von <small>/ gespielt von</small></p><div class="lines"></div></div>
+    <div class="ja"><p>Startet der Build?</p><span>ja</span><span>nein</span> Bild <span>ok</span> Ton <span>ok</span> Steuerung <span>ok</span></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo, was hätte geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Spielzettel</b><span>GEC1 · 08.01.2027</span></div>
+    <div class="field name"><p>Spiel von <small>/ gespielt von</small></p><div class="lines"></div></div>
+    <div class="ja"><p>Startet der Build?</p><span>ja</span><span>nein</span> Bild <span>ok</span> Ton <span>ok</span> Steuerung <span>ok</span></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo, was hätte geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich</small></p><div class="lines"></div></div>
+  </section>
+  <section class="card"><div class="head"><b>Spielzettel</b><span>GEC1 · 08.01.2027</span></div>
+    <div class="field name"><p>Spiel von <small>/ gespielt von</small></p><div class="lines"></div></div>
+    <div class="ja"><p>Startet der Build?</p><span>ja</span><span>nein</span> Bild <span>ok</span> Ton <span>ok</span> Steuerung <span>ok</span></div>
+    <div class="field"><p>Was habe ich zuerst versucht? <small>In der ersten Minute</small></p><div class="lines"></div></div>
+    <div class="field"><p>Wo wusste ich nicht weiter? <small>Wann, wo, was hätte geholfen?</small></p><div class="lines"></div></div>
+    <div class="field"><p>Was hat sich gut angefühlt? <small>Ein Moment, so genau wie möglich</small></p><div class="lines"></div></div>
+  </section>
+</div>
+</body>
+</html>

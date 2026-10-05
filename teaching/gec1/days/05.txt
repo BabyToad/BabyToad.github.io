@@ -1,0 +1,317 @@
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/05/ · Stand 2026-10-05T13:39Z · 21cef83 -->
+
+# Tag 5: Look, Ton, Oberfläche
+
+11.12.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/05/slides/
+
+Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
+
+Begriffe: [material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material/), [light](https://www.allknivesnobagel.com/teaching/gec1/concepts/light/), [ui](https://www.allknivesnobagel.com/teaching/gec1/concepts/ui/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/)
+
+Bis zum nächsten Termin: Meilenstein Beta bis 08.01.: Inhalt vollständig, Windows-Build auf einem anderen Rechner getestet, Kapitel 1–5 in DOKUMENTATION.md als Entwurf. Dafür vier begrenzte Vier-Stunden-Sessions einplanen; der externe Windows-Test findet spätestens am 17.12. statt. Optional am 18.12. und 04.01.: lauffähiger Stand und drei offene Aufgaben im Blackboard-Thread. Nach 30 Minuten Feststecken eine konkrete Frage stellen.
+
+## Heute ist Alpha
+
+Alle geplanten Interaktionen sind drin.
+
+Grafik und Ton sind erstmals überarbeitet. Ein aktueller Windows-[Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) ist versucht.
+
+## Was heißt Feature Freeze?
+
+1. Zwei Pflichtinteraktionen bleiben
+2. Aufgabenminimum erfüllen, Fehler reparieren
+3. Extras aus der Spec streichen
+4. Look, Ton, UI, Build und Doku verbessern
+
+Nach dem Freeze sind nur Reparaturen und ein noch unerfülltes Aufgabenminimum offen. Kein neues Extra.
+
+## Was fliegt heute zuerst raus?
+
+1. Partikel-Demo → Handout
+2. Lightmap-Verfahren → Handout
+3. vollständiges Drei-Screen-UI → Werkstatt, optional
+4. Audio-Snapshot → Handout
+
+Nicht kürzen: eine projektbezogene UI-Handlung, Probe-Build, Alpha-Build und Test.
+
+## Woraus entsteht eine Oberfläche?
+
+**Tafelbild:** Geometrie, Material und Licht stehen getrennt nebeneinander. Pfeile führen zum fertigen Bild: Der Shader berechnet aus Form, Materialwerten und Licht die sichtbaren Pixel.
+
+Die Geometrie gibt die Form. Das [Material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material/) beschreibt die Oberfläche. [Licht](https://www.allknivesnobagel.com/teaching/gec1/concepts/light/) macht beides sichtbar.
+
+## Drei Regler reichen für den Anfang
+
+URP/Lit
+
+- **Base Map:** Farbe oder Textur
+- **Metallic:** Metall oder Nichtmetall
+- **Smoothness:** glatter oder rauer Reflex
+
+Normal Map erst danach. Sie verändert kleine Lichtdetails, nicht die Form.
+
+**Bild:** Kreidezeichnung von drei gleichen Würfeln unter derselben Lampe: matt, lackiert und metallisch. (KI-generiert).
+
+Im Project-Fenster `Create › Material`, dann den Shader `Universal Render Pipeline/Lit` verwenden. Ein magentafarbenes Objekt weist häufig auf einen Shader hin, der nicht zur aktiven Render Pipeline passt.
+
+## Eigene Zeichnung: Textur oder UI-Bild?
+
+PNG → `Assets/Art`
+
+- **Material:** `Default` → Base Map
+- **Canvas:** `Sprite (2D and UI)` → `Image › Source Image`
+- Import prüfen: `Max Size`, Alpha, Filterung
+
+Quelldatei behalten; Werkzeug und Datum ins Devlog.
+
+## Wann wird Licht berechnet?
+
+**Tafelbild:** Drei Felder vergleichen Realtime, Baked und Mixed: Realtime berechnet Licht jeden Frame, Baked schreibt feste Beleuchtung vorher in eine Lightmap, Mixed verbindet gebackene Umgebung mit beweglichen Objekten.
+
+**Realtime** passt zu bewegten, flackernden oder zerstörbaren Lichtern. **Baked** passt zu fester Architektur. **Mixed** verbindet gebackene Anteile mit Realtime-Anteilen und kostet weiterhin Rechenzeit im Spiel.
+
+Lightmap in Unity 6: feste Mesh Renderer unter `Mesh Renderer › Lighting › Contribute Global Illumination` markieren, Lichter auf Baked oder Mixed, dann `Window › Rendering › Lighting` und `Generate Lighting`. Nicht im Plenum auf einen großen Bake warten.
+
+Aktives URP Asset: `Edit › Project Settings › Graphics › Default Render Pipeline`. Eine Qualitätsstufe kann es unter `Edit › Project Settings › Quality › Rendering › Render Pipeline Asset` überschreiben.
+
+## Post-Processing: erst einschalten
+
+1. Kamera: `Rendering › Post Processing` an
+2. `Global Volume` anlegen, Profil mit `New`
+3. `Add Override › Post-processing › Color Adjustments`
+4. `Post Exposure` anhaken, zum Kontrolltest auf `+3`
+
+Kontrolle: unübersehbar heller. Sonst Volume Layer und Volume Mask prüfen.
+
+URP bringt Post-Processing mit; kein zweites Post-Processing-Paket installieren. Ein Override-Wert gilt erst, wenn sein Häkchen aktiv ist. Ein Global Volume wirkt über die ganze Szene, sofern die Kamera seine Ebene in der Volume Mask berücksichtigt.
+
+**Partikel, falls Zeit bleibt:** Ein Particle System für einen kurzen Moment verwenden, `Emission › Rate over Time` auf 0 und unter `Bursts` wenige Partikel auslösen. Lebensdauer kurz halten. `URP/Particles/Unlit` genügt, wenn der Effekt nicht auf Licht reagieren muss. Im Build prüfen.
+
+## Wofür lohnt sich der Aufwand?
+
+- ein klares Hauptlicht
+- lesbare Hell-Dunkel-Trennung
+- zwei unterscheidbare Materialien
+- ein deutlicher Volume-Eingriff mit Grund
+
+Default verschicken
+
+Eigener Shader, volumetrischer Nebel, Effekt auf jedem Objekt.
+
+Eine Entscheidung, die jemand im Spiel bemerkt. Dann testen.
+
+## Freie Sounds sind nicht lizenzfrei
+
+- **Kenney:** Asset-Seite und enthaltene CC0-Datei aufheben
+- **Freesound:** CC0 oder CC BY filtern; Titel, Person, URL und Lizenz notieren
+- **eigene Aufnahme:** Datei, Datum und Urheberschaft ins Devlog
+
+„Kostenlos heruntergeladen“ ist keine Lizenz. CC BY braucht Namensnennung.
+
+[Kenney: Lizenzhilfe](https://kenney.nl/support) · [Freesound: Lizenz-FAQ](https://freesound.org/help/faq/). Bei Freesound nicht pauschal von „frei“ ausgehen: Die Lizenz steht am einzelnen Sound. CC BY-NC für dieses Kursprojekt vermeiden, damit eine spätere Veröffentlichung nicht blockiert wird.
+
+## Wie kommt Ton zum Lautsprecher?
+
+**Tafelbild:** Audio Sources für Musik, Treffer und Schritte führen in die Mixer-Gruppen Musik und SFX. Beide Gruppen führen in Master und von dort zum Audio Listener.
+
+Audio Sources erzeugen Signale; Mixer-Gruppen ordnen und mischen sie. Master setzt den Gesamtpegel.
+
+## Ein kleiner Mixer reicht
+
+1. `Create › Audio Mixer`
+2. Unter Master `Musik` und `SFX` anlegen
+3. Bei jeder Audio Source `Output` auf die passende Gruppe stellen
+4. Im Play-Modus VU-Pegel ansehen und gegeneinander mischen
+
+Ein Snapshot speichert Mixer-Parameter, ist für Alpha aber optional. Zuerst müssen wichtige Signale hörbar bleiben und dürfen nicht dauerhaft übersteuern.
+
+## Look-und-Ton-Werkstatt: 35 Minuten
+
+1. Einen Raum oder Moment wählen
+2. Zwei Materialien und ein Hauptlicht lesbar machen
+3. Realtime, Baked oder Mixed begründen
+4. Einen eigenen Bild- oder Soundbaustein korrekt importieren
+5. Play, Screenshot, Lizenznotiz, Commit
+
+Optional: genau ein Volume-Override oder kurzer Partikel-Burst.
+
+[Alpha-Werkstatt als A4-Druckvorlage](../../druck/alpha-werkstatt.html)
+
+## Erklärt eine Entscheidung
+
+Zu zweit, je eine Minute:
+
+„Ich ändere \_\_\_. Das soll \_\_\_ lesbarer machen. Im Build prüfe ich \_\_\_.“
+
+## Pause: Windows-Modul prüfen
+
+Mac: Im Unity Hub zur installierten Editorversion **Windows Build Support (Mono)** hinzufügen.
+
+Windows: Windows-Profil vorhanden?
+
+Alle: freier Build-Ordner außerhalb von **Assets**.
+
+## Jetzt nur ein Probe-Build
+
+1. `File › Build Profiles`: Windows, `Switch Profile`
+2. Scene List: Startszene oben, nötige Szenen an
+3. Mac: `Scripting Backend: Mono`
+4. In leeren Ordner außerhalb des Projekts bauen
+
+Dieser frühe Build findet Fehler. Er bekommt noch keinen `alpha`-Tag.
+
+## Welche Zustände braucht dieses Spiel?
+
+**Tafelbild:** Drei Ansichten eines Schlüssel-und-Tür-Spiels: Ein Startbildschirm führt über Spielen ins Spiel. Das Öffnen der Zieltür führt zum Bildschirm Geschafft. Neustart lädt die Spielszene erneut.
+
+Pflicht ist eine projektbezogene UI-Handlung. Der vollständige Ablauf Start → Spiel → Geschafft → Neustart ist optional.
+
+Der Kurs verwendet uGUI: Canvas, GameObjects und Komponenten passen zum Kit, zu Hierarchy und Inspector. UI Toolkit ist ebenfalls für Runtime-UI geeignet, würde hier aber UXML, Stylesheets und UI Builder als zweites Modell einführen. Darum lernt der Kurs nicht beide parallel.
+
+## Kit-Beispiel: Start und Spiel
+
+Für das Schlüssel-und-Tür-Spiel:
+
+- Start: `Beginn → An/Aus (Start an) → Pause`
+- Spielen: `Knopf gedrückt` `→ An/Aus (Start aus) → Weiter`
+
+Button → Graph, ohne Skript.
+
+## Kit-Beispiel: Ziel und Neustart
+
+- Ziel: `Tür offen → An/Aus (Geschafft an) → Pause`
+- Neustart: `Knopf gedrückt` `→ Szene laden`
+
+Szenenname exakt; Szene in der Scene List.
+
+## Der kleinste UI-Vertrag
+
+1. Spec-Handlung wählen: Start, Hinweis, Ziel oder Scheitern
+2. Mit vorhandenen Kit-Knoten verdrahten
+3. Öffnen → klicken → spielen → zurückkehren, dreimal
+4. Cursor im UI frei, Blick im Spiel gefangen
+
+Kein Scheiterzustand? Kein Game Over erzwingen.
+
+Für den vollständigen Ablauf hält `Pause` den Kit-Spieler an und gibt den Cursor frei; `Weiter` setzt beides zurück. `Knopf gedrückt` (Gruppe Auslöser) bekommt im ◆-Feld „Knopf“ den Button aus der Hierarchy; `Pause` und `Weiter` stehen unter Spielsysteme. Die drei Knoten gibt es ab Kurs-Paket 0.3.2. Nach jedem Menüwechsel den Cursor sichtbar anklicken und danach wieder laufen und umsehen.
+
+## Welcher Kit-Knoten passt?
+
+- Zahl im HUD → `HUD-Anzeige`
+- Panel zeigen → `An/Aus`
+- Tod bei null → `Lebenspunkte`
+- Respawn-Punkt → `Checkpoint`
+- Neustart-Szene → `Szene laden`
+
+`HUD-Anzeige` liest `Zahl` laufend. `An/Aus` schaltet ein gebundenes GameObject. `Lebenspunkte` feuert `Tot` einmal beim Fall auf null. `Checkpoint` merkt oder lädt einen Respawn-Punkt. `Szene laden` akzeptiert nur Szenen aus der Scene List.
+
+## Der Agent liest den Graph, ihr verdrahtet
+
+> „Lies meinen `.kit`-Graph. Plane \_\_\_ mit vorhandenen Kit-Knoten. Ändere keine Szene, Prefab oder Skript. Nenne Knoten, Ports, Bindungen und drei Tests.“
+
+Kit-Palette prüfen → selbst verdrahten → jeden Weg testen
+
+## Projektwerkstatt: 30 Minuten
+
+1. **UI-Pflicht:** eine Spec-Handlung läuft
+2. **Optional:** Start → Spiel → Ende → Neustart
+3. **Ton:** Musik und SFX routen
+4. **Build:** öffnen oder vollständigen Fehler notieren
+5. **Test:** Cursor, Kernschleife, Ton, Neustart, Beenden
+
+Agent: Graph-Verdrahtung oder Build-Fehler; ein Auftrag.
+
+## Wenn der Probe-Build fehlschlägt
+
+Kopiert den ersten vollständigen Fehler.
+
+> „Der Windows-Build scheitert hier. Nenne Ursache und kleinsten Test. Ändere nichts.“
+
+Behauptung prüfen → kleinsten Test ausführen → erst dann ändern → erneut bauen
+
+Ein „versucht“ ohne Fehlertext und nächsten Test erfüllt den Meilenstein nicht.
+
+## Jetzt entsteht der Alpha-Build
+
+1. Szene und Projekt speichern
+2. In GitHub Desktop den fertigen Werkstattstand committen
+3. Aus genau diesem Commit neu in einen leeren Ordner bauen
+
+Erst committen, dann frisch bauen.
+
+## Testen, dann `alpha` taggen
+
+4. Ganzen Build-Ordner zippen
+5. Per USB oder Cloud auf anderem Windows-Rechner testen
+6. GitHub Desktop, History: Rechtsklick auf den getesteten Commit → `Create Tag` → `alpha`
+7. Commit und Tag pushen
+
+Nur der tatsächlich getestete Commit bekommt `alpha`.
+
+## Was wird tatsächlich getestet?
+
+- startet ohne Unity; Startszene stimmt
+- Eingabe, UI-Klick und Cursorwechsel reagieren
+- zwei Pflichtinteraktionen laufen
+- Ziel oder Scheitern und Neustart funktionieren
+- Ton hörbar; Fenster schließbar
+
+Die `.exe` allein ist kein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/). Ganzen Ordner testen.
+
+## Welcher Stand bekommt `alpha`?
+
+**Tafelbild:** Ein gespeicherter Stand wird committet und daraus als Windows-Build gebaut. Nach dem Test auf einem anderen Rechner bekommt genau dieser Commit den Tag alpha; der Build-Ordner reist als ZIP per USB oder Cloud.
+
+Der [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/) markiert den Commit, aus dem der getestete Build entstand.
+
+Private Kurs-Repositories liefern Testerinnen und Testern keinen GitHub-Release-Link. Der vollständige Build-Ordner wird gezippt und per USB oder Cloud-Link übergeben. GitHub Releases sind erst später eine mögliche öffentliche Übergabeform; sie gehören nicht in den heutigen Testweg.
+
+## KI-Verzeichnis prüfen
+
+Für Graph-Verdrahtung und Build-Diagnose jeweils ein Eintrag:
+
+- Werkzeug und Modell
+- Auftrag oder Prompt-ID
+- betroffene Dateien
+- was übernommen, geändert oder verworfen wurde
+- wie das Ergebnis geprüft wurde
+
+Auch eine verwendete Diagnose bekommt eine Zeile, wenn ihr die Änderung selbst ausführt.
+
+## Bis spätestens 17.12.
+
+1. Alpha-Build auf einem anderen Windows-Rechner starten
+2. Kernschleife mit zwei Pflichtinteraktionen vollständig spielen
+3. Ergebnis, Rechner und Commit im Devlog notieren
+4. Bei Fehler: reparieren → committen → neu bauen → erneut fremd testen
+
+Der externe Test liegt vor dem freiwilligen Check-in am 18.12.
+
+## Vier Sessions bis Beta: 16 Stunden
+
+1. **bis 17.12. · 4 h:** Alpha reparieren, extern testen
+2. **bis 22.12. · 4 h:** Inhalt schließen
+3. **bis 03.01. · 4 h:** `DOKUMENTATION.md`, Kapitel 1–5
+4. **bis 07.01. · 4 h:** Beta-Build extern testen
+
+Nach 4 h prüfbaren Stand sichern.
+
+Erwartbar sind etwa 15–20 Stunden, nicht vier Wochen Dauerarbeit.
+
+## Zwei freiwillige Weihnachts-Check-ins
+
+18.12. und 04.01.
+
+Im Blackboard-Thread:
+
+- ein lauffähiger Build oder ein 30–60-Sekunden-Clip aus dem Build
+- drei Aufgaben, jede höchstens ein Nachmittag
+- höchstens eine konkrete Frage mit bisherigen Versuchen
+
+Die Check-ins sind ein Angebot, keine zusätzliche Pflicht. Über die Feiertage ist keine durchgehende Betreuung versprochen. Das vollständige Muster steht im Handout von [Tag 6, Folie 1: „Vier Wochen später“](../06/#vier-wochen-spater).
+
+## Beta am 08.01.
+
+Inhalt vollständig. Build auf einem anderen Rechner getestet. Kapitel 1–5 stehen als Entwurf.
+
+Danach wird nicht mehr erfunden, sondern geprüft, erklärt und abgegeben.

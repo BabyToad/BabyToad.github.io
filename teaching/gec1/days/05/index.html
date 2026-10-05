@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><link rel="canonical" href="https://www.allknivesnobagel.com/teaching/gec1/days/05/"><title>Tag 5: Look, Ton, Oberfläche · GEC1</title><meta name="description" content="Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build."><link rel="alternate" type="text/markdown" href="/teaching/gec1/days/05.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.BtejABop.css"><style>.tafel{margin:0}.tafel-svg{width:100%;height:auto;font-family:var(--font-text);display:block;overflow:visible}.tafel-svg .d{fill:none;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-flaeche{fill:#eeece414;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-voll{fill:#eeece438;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-linie{fill:none;stroke:var(--chalk-dim);stroke-width:2px}.tafel-svg .d-raster{fill:none;stroke:#eeece41f;stroke-width:1.5px}.tafel-svg .gestrichelt{stroke-dasharray:12 9}.tafel-svg .k,.tafel-svg .k-hi,.tafel-svg .k-ev,.tafel-svg .k-da,.tafel-svg .k-rf{fill:none;stroke-width:7px;stroke-linecap:round;stroke-linejoin:round;filter:url(#kreide-tafel)}.tafel-svg .k{stroke:var(--chalk)}.tafel-svg .k-hi{stroke:var(--hi)}.tafel-svg .k-ev{stroke:var(--ev);stroke-dasharray:18 14}.tafel-svg .k-da{stroke:var(--da)}.tafel-svg .k-rf{stroke:var(--rf)}.tafel-svg text{fill:var(--chalk)}.tafel-svg .t{font:600 36px var(--font-text)}.tafel-svg .t-text{font:400 36px var(--font-text)}.tafel-svg .t-gross{font:750 46px var(--font-text)}.tafel-svg .t-30{font:400 30px var(--font-text)}.tafel-svg .t-klein{font:400 30px var(--font-text);fill:var(--chalk-dim)}.tafel-svg .t-mono{font:400 30px var(--font-mono);fill:var(--chalk-dim)}.tafel-svg .t-hell{fill:var(--chalk)}.tafel-svg .t-da{fill:var(--da)}.tafel-svg .schild-r{fill:var(--paper);stroke:none}.tafel-svg .schild-t{fill:var(--ink);font:700 30px var(--font-text)}.tafel-svg .papier{fill:var(--paper);stroke:none}.tafel-svg .tinte{fill:var(--ink)}.tafel-svg .tinte-matt{fill:var(--ink-dim)}.tafel-svg .tinte-linie{fill:none;stroke:var(--ink-dim);stroke-width:2px}.tafel-svg .verborgen{visibility:hidden}.handout .tafel{background:var(--board);max-width:760px;margin:10px 0 14px;padding:22px 24px}.handout .tafel .verborgen{visibility:visible}.handout .tafel [data-kreide-bis]{display:none}
+</style></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/days/05.md" data-titel="Tag 5: Look, Ton, Oberfläche">Für KI kopieren</button><a href="/teaching/gec1/days/05.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nehmt den Link „Markdown“.`))})});</script><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article class="handout"><div class="label">Tag 5 · 11.12.2026</div><h1>Look, Ton, Oberfläche</h1><p class="untertitel">Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.</p><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="kreide" x="-10%" y="-50%" width="120%" height="200%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter></defs></svg><section class="folie" id="heute-ist-alpha" data-nr="1"><h2 id="heute-ist-alpha">Heute ist Alpha</h2><div class="gross"><p>Alle geplanten Interaktionen sind drin.</p></div><p>Grafik und Ton sind erstmals überarbeitet. Ein aktueller Windows-<a href="/teaching/gec1/concepts/build/" class="begriff art-daten" data-begriff="build">Build</a> ist versucht.</p></section>
+<section class="folie" id="was-heisst-feature-freeze" data-nr="2"><h2 id="was-heißt-feature-freeze">Was heißt Feature Freeze?</h2><div class="schritte"><ol>
+<li>Zwei Pflichtinteraktionen bleiben</li>
+<li>Aufgabenminimum erfüllen, Fehler reparieren</li>
+<li>Extras aus der Spec streichen</li>
+<li>Look, Ton, UI, Build und Doku verbessern</li>
+</ol></div><div class="merke"><p>Nach dem Freeze sind nur Reparaturen und ein noch unerfülltes Aufgabenminimum offen. Kein neues Extra.</p></div></section>
+<section class="folie" id="was-fliegt-heute-zuerst-raus" data-nr="3"><h2 id="was-fliegt-heute-zuerst-raus">Was fliegt heute zuerst raus?</h2><div class="schritte"><ol>
+<li>Partikel-Demo → Handout</li>
+<li>Lightmap-Verfahren → Handout</li>
+<li>vollständiges Drei-Screen-UI → Werkstatt, optional</li>
+<li>Audio-Snapshot → Handout</li>
+</ol></div><div class="merke"><p>Nicht kürzen: eine projektbezogene UI-Handlung, Probe-Build, Alpha-Build und Test.</p></div></section>
+<section class="folie" id="woraus-entsteht-eine-oberflaeche" data-nr="4"><h2 id="woraus-entsteht-eine-oberfläche">Woraus entsteht eine Oberfläche?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Geometrie, Material und Licht stehen getrennt nebeneinander. Pfeile führen zum fertigen Bild: Der Shader berechnet aus Form, Materialwerten und Licht die sichtbaren Pixel."><svg class="tafel-svg" role="img" aria-label="Geometrie, Material und Licht stehen getrennt nebeneinander. Pfeile führen zum fertigen Bild: Der Shader berechnet aus Form, Materialwerten und Licht die sichtbaren Pixel." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 450" width="1080" height="450"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="530"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="d" x="20" y="92" width="220" height="260"/>
+<path class="d-flaeche" d="M72 236 L130 190 L188 236 L130 282 Z M72 236 V302 L130 346 L188 302 V236 M130 282 V346"/>
+<text class="t" x="130" y="72" text-anchor="middle">Geometrie</text>
+<rect class="d" x="310" y="92" width="220" height="260"/>
+<circle class="d-flaeche" cx="420" cy="223" r="74"/>
+<path class="d-linie" d="M370 190 C410 160 459 174 478 213 M360 232 C397 211 451 226 475 261"/>
+<text class="t" x="420" y="72" text-anchor="middle">Material</text>
+<rect class="d" x="600" y="92" width="200" height="260"/>
+<circle class="d-voll" cx="700" cy="176" r="34"/>
+<path class="d" d="M700 118 V86 M700 266 V298 M642 176 H610 M790 176 H758 M659 135 L636 112 M764 240 L741 217 M741 135 L764 112 M636 240 L659 217"/>
+<text class="t" x="700" y="72" text-anchor="middle">Licht</text>
+<rect class="d-voll" x="870" y="128" width="190" height="190"/>
+<circle class="d" cx="965" cy="223" r="64"/>
+<path class="d-flaeche" d="M965 159 A64 64 0 0 1 1029 223 A64 64 0 0 1 965 287 Z"/>
+<text class="t" x="965" y="72" text-anchor="middle">Bild</text>
+<g data-kreide-schritt="1"><path class="k" d="M245 223 H292"/><path class="k" d="M278 211 L292 223 L278 235"/><path class="k" d="M535 223 H582"/><path class="k" d="M568 211 L582 223 L568 235"/></g>
+<g data-kreide-schritt="2"><path class="k-hi" d="M805 223 H852"/><path class="k-hi" d="M838 211 L852 223 L838 235"/><rect class="schild-r" x="857" y="337" width="208" height="48"/><text class="schild-t" x="873" y="371">Pixel für Pixel</text></g>
+</svg>
+
+</button></figure><div class="merke"><p>Die Geometrie gibt die Form. Das <a href="/teaching/gec1/concepts/material/" class="begriff art-daten" data-begriff="material">Material</a> beschreibt die Oberfläche. <a href="/teaching/gec1/concepts/light/" class="begriff art-daten" data-begriff="light">Licht</a> macht beides sichtbar.</p></div></section>
+<section class="folie" id="drei-regler-reichen-fuer-den-anfang" data-nr="5"><h2 id="drei-regler-reichen-für-den-anfang">Drei Regler reichen für den Anfang</h2><p><span class="schild">URP/Lit</span></p><div class="schritte"><ul>
+<li><strong>Base Map:</strong> Farbe oder Textur</li>
+<li><strong>Metallic:</strong> Metall oder Nichtmetall</li>
+<li><strong>Smoothness:</strong> glatter oder rauer Reflex</li>
+</ul></div><div class="rechts"><p>Normal Map erst danach. Sie verändert kleine Lichtdetails, nicht die Form.</p><figure class="bild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Kreidezeichnung von drei gleichen Würfeln unter derselben Lampe: matt, lackiert und metallisch."><img src="/teaching/gec1/schluesselbilder/material.webp" alt="Kreidezeichnung von drei gleichen Würfeln unter derselben Lampe: matt, lackiert und metallisch." width="1200" height="900" loading="lazy"></button><figcaption>KI-generiert</figcaption></figure></div><div class="nur-handout"><p>Im Project-Fenster <code>Create › Material</code>, dann den Shader <code>Universal Render Pipeline/Lit</code> verwenden. Ein magentafarbenes Objekt weist häufig auf einen Shader hin, der nicht zur aktiven Render Pipeline passt.</p></div></section>
+<section class="folie" id="eigene-zeichnung-textur-oder-ui-bild" data-nr="6"><h2 id="eigene-zeichnung-textur-oder-ui-bild">Eigene Zeichnung: Textur oder UI-Bild?</h2><p>PNG → <code>Assets/Art</code></p><div class="schritte"><ul>
+<li><strong>Material:</strong> <code>Default</code> → Base Map</li>
+<li><strong>Canvas:</strong> <code>Sprite (2D and UI)</code> → <code>Image › Source Image</code></li>
+<li>Import prüfen: <code>Max Size</code>, Alpha, Filterung</li>
+</ul></div><div class="merke"><p>Quelldatei behalten; Werkzeug und Datum ins Devlog.</p></div></section>
+<section class="folie" id="wann-wird-licht-berechnet" data-nr="7"><h2 id="wann-wird-licht-berechnet">Wann wird Licht berechnet?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Drei Felder vergleichen Realtime, Baked und Mixed: Realtime berechnet Licht jeden Frame, Baked schreibt feste Beleuchtung vorher in eine Lightmap, Mixed verbindet gebackene Umgebung mit beweglichen Objekten."><svg class="tafel-svg" role="img" aria-label="Drei Felder vergleichen Realtime, Baked und Mixed: Realtime berechnet Licht jeden Frame, Baked schreibt feste Beleuchtung vorher in eine Lightmap, Mixed verbindet gebackene Umgebung mit beweglichen Objekten." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470" width="1080" height="470"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="550"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="d" x="10" y="82" width="330" height="330"/>
+<rect class="d" x="375" y="82" width="330" height="330"/>
+<rect class="d" x="740" y="82" width="330" height="330"/>
+<text class="t-gross" x="175" y="56" text-anchor="middle">Realtime</text>
+<text class="t-gross" x="540" y="56" text-anchor="middle">Baked</text>
+<text class="t-gross" x="905" y="56" text-anchor="middle">Mixed</text>
+<circle class="d-voll" cx="110" cy="160" r="28"/><path class="d" d="M110 198 L176 282 H44 Z"/>
+<rect class="d-flaeche" x="70" y="282" width="110" height="70"/>
+<path class="d" d="M230 136 V342 M258 136 V342"/>
+<text class="t-klein" x="175" y="392" text-anchor="middle">jeder Frame</text>
+<circle class="d-voll" cx="470" cy="160" r="28"/><path class="d" d="M470 198 L536 282 H404 Z"/>
+<rect class="d-flaeche" x="430" y="282" width="110" height="70"/>
+<rect class="d" x="570" y="130" width="92" height="152"/>
+<path class="d-raster" d="M593 130 V282 M616 130 V282 M639 130 V282 M570 168 H662 M570 206 H662 M570 244 H662"/>
+<text class="t-klein" x="540" y="392" text-anchor="middle">Lightmap vorher</text>
+<circle class="d-voll" cx="835" cy="160" r="28"/><path class="d" d="M835 198 L901 282 H769 Z"/>
+<rect class="d-flaeche" x="795" y="282" width="110" height="70"/>
+<circle class="d" cx="974" cy="292" r="34"/><path class="d" d="M974 258 V226 M950 316 L925 341 M998 316 L1023 341"/>
+<text class="t-klein" x="905" y="392" text-anchor="middle">fest + beweglich</text>
+<g data-kreide-schritt="1"><path class="k-ev" d="M207 166 C260 190 273 248 229 282"/><path class="k-ev" d="M218 265 L229 282 L208 279"/></g>
+<g data-kreide-schritt="2"><path class="k-hi" d="M551 299 H650"/><path class="k-hi" d="M634 287 L650 299 L634 311"/></g>
+<g data-kreide-schritt="3"><path class="k" d="M913 238 C944 231 970 243 980 262"/><path class="k" d="M968 250 L980 262 L963 265"/></g>
+</svg>
+
+</button></figure><div class="nur-handout"><p><strong>Realtime</strong> passt zu bewegten, flackernden oder zerstörbaren Lichtern. <strong>Baked</strong> passt zu fester Architektur. <strong>Mixed</strong> verbindet gebackene Anteile mit Realtime-Anteilen und kostet weiterhin Rechenzeit im Spiel.</p><p>Lightmap in Unity 6: feste Mesh Renderer unter <code>Mesh Renderer › Lighting › Contribute Global Illumination</code> markieren, Lichter auf Baked oder Mixed, dann <code>Window › Rendering › Lighting</code> und <code>Generate Lighting</code>. Nicht im Plenum auf einen großen Bake warten.</p><p>Aktives URP Asset: <code>Edit › Project Settings › Graphics › Default Render Pipeline</code>. Eine Qualitätsstufe kann es unter <code>Edit › Project Settings › Quality › Rendering › Render Pipeline Asset</code> überschreiben.</p></div></section>
+<section class="folie" id="post-processing-erst-einschalten" data-nr="8"><h2 id="post-processing-erst-einschalten">Post-Processing: erst einschalten</h2><div class="schritte"><ol>
+<li>Kamera: <code>Rendering › Post Processing</code> an</li>
+<li><code>Global Volume</code> anlegen, Profil mit <code>New</code></li>
+<li><code>Add Override › Post-processing › Color Adjustments</code></li>
+<li><code>Post Exposure</code> anhaken, zum Kontrolltest auf <code>+3</code></li>
+</ol></div><div class="merke"><p>Kontrolle: unübersehbar heller. Sonst Volume Layer und Volume Mask prüfen.</p></div><div class="nur-handout"><p>URP bringt Post-Processing mit; kein zweites Post-Processing-Paket installieren. Ein Override-Wert gilt erst, wenn sein Häkchen aktiv ist. Ein Global Volume wirkt über die ganze Szene, sofern die Kamera seine Ebene in der Volume Mask berücksichtigt.</p><p><strong>Partikel, falls Zeit bleibt:</strong> Ein Particle System für einen kurzen Moment verwenden, <code>Emission › Rate over Time</code> auf 0 und unter <code>Bursts</code> wenige Partikel auslösen. Lebensdauer kurz halten. <code>URP/Particles/Unlit</code> genügt, wenn der Effekt nicht auf Licht reagieren muss. Im Build prüfen.</p></div></section>
+<section class="folie" id="wofuer-lohnt-sich-der-aufwand" data-nr="9"><h2 id="wofür-lohnt-sich-der-aufwand">Wofür lohnt sich der Aufwand?</h2><div class="schritte"><ul>
+<li>ein klares Hauptlicht</li>
+<li>lesbare Hell-Dunkel-Trennung</li>
+<li>zwei unterscheidbare Materialien</li>
+<li>ein deutlicher Volume-Eingriff mit Grund</li>
+</ul></div><div class="rechts"><p><span class="schild">Default verschicken</span></p><p>Eigener Shader, volumetrischer Nebel, Effekt auf jedem Objekt.</p></div><div class="merke"><p>Eine Entscheidung, die jemand im Spiel bemerkt. Dann testen.</p></div></section>
+<section class="folie" id="freie-sounds-sind-nicht-lizenzfrei" data-nr="10"><h2 id="freie-sounds-sind-nicht-lizenzfrei">Freie Sounds sind nicht lizenzfrei</h2><div class="schritte"><ul>
+<li><strong>Kenney:</strong> Asset-Seite und enthaltene CC0-Datei aufheben</li>
+<li><strong>Freesound:</strong> CC0 oder CC BY filtern; Titel, Person, URL und Lizenz notieren</li>
+<li><strong>eigene Aufnahme:</strong> Datei, Datum und Urheberschaft ins Devlog</li>
+</ul></div><div class="rechts"><p>„Kostenlos heruntergeladen“ ist keine Lizenz. CC BY braucht Namensnennung.</p></div><div class="nur-handout"><p><a href="https://kenney.nl/support">Kenney: Lizenzhilfe</a> · <a href="https://freesound.org/help/faq/">Freesound: Lizenz-FAQ</a>. Bei Freesound nicht pauschal von „frei“ ausgehen: Die Lizenz steht am einzelnen Sound. CC BY-NC für dieses Kursprojekt vermeiden, damit eine spätere Veröffentlichung nicht blockiert wird.</p></div></section>
+<section class="folie" id="wie-kommt-ton-zum-lautsprecher" data-nr="11"><h2 id="wie-kommt-ton-zum-lautsprecher">Wie kommt Ton zum Lautsprecher?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Audio Sources für Musik, Treffer und Schritte führen in die Mixer-Gruppen Musik und SFX. Beide Gruppen führen in Master und von dort zum Audio Listener."><svg class="tafel-svg" role="img" aria-label="Audio Sources für Musik, Treffer und Schritte führen in die Mixer-Gruppen Musik und SFX. Beide Gruppen führen in Master und von dort zum Audio Listener." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470" width="1080" height="470"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="550"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<text class="t" x="135" y="52" text-anchor="middle">Audio Sources</text>
+<text class="t" x="482" y="52" text-anchor="middle">Mixer-Gruppen</text>
+<text class="t" x="760" y="52" text-anchor="middle">Master</text>
+<text class="t" x="970" y="52" text-anchor="middle">Audio Listener</text>
+<rect class="d" x="20" y="92" width="230" height="92"/><text class="t" x="135" y="150" text-anchor="middle">Musik</text>
+<rect class="d" x="20" y="210" width="230" height="92"/><text class="t" x="135" y="268" text-anchor="middle">Treffer</text>
+<rect class="d" x="20" y="328" width="230" height="92"/><text class="t" x="135" y="386" text-anchor="middle">Schritte</text>
+<rect class="d-flaeche" x="380" y="92" width="205" height="92"/><text class="t" x="482" y="150" text-anchor="middle">Musik</text>
+<rect class="d-flaeche" x="380" y="250" width="205" height="122"/><text class="t" x="482" y="320" text-anchor="middle">SFX</text>
+<rect class="d-voll" x="675" y="180" width="170" height="130"/><text class="t-gross" x="760" y="258" text-anchor="middle">Master</text>
+<circle class="d" cx="970" cy="245" r="72"/><path class="d" d="M940 221 V269 L980 293 V197 Z M995 220 C1018 235 1018 255 995 270"/>
+<g data-kreide-schritt="1"><path class="k" d="M260 138 H360"/><path class="k" d="M344 126 L360 138 L344 150"/><path class="k" d="M260 256 C315 256 320 296 360 304"/><path class="k" d="M344 289 L360 304 L339 310"/><path class="k" d="M260 374 C315 374 320 332 360 320"/><path class="k" d="M340 316 L360 320 L347 336"/></g>
+<g data-kreide-schritt="2"><path class="k-hi" d="M595 138 C640 138 640 205 658 220"/><path class="k-hi" d="M646 210 L658 220 L642 224"/><path class="k-hi" d="M595 311 C640 311 642 278 658 266"/><path class="k-hi" d="M641 265 L658 266 L647 280"/></g>
+<g data-kreide-schritt="3"><path class="k-ev" d="M855 245 H882"/><path class="k-ev" d="M868 233 L882 245 L868 257"/><rect class="schild-r" x="669" y="333" width="182" height="48"/><text class="schild-t" x="685" y="367">ein Gesamtpegel</text></g>
+</svg>
+
+</button></figure><div class="nur-handout"><p>Audio Sources erzeugen Signale; Mixer-Gruppen ordnen und mischen sie. Master setzt den Gesamtpegel.</p></div></section>
+<section class="folie" id="ein-kleiner-mixer-reicht" data-nr="12"><h2 id="ein-kleiner-mixer-reicht">Ein kleiner Mixer reicht</h2><div class="schritte"><ol>
+<li><code>Create › Audio Mixer</code></li>
+<li>Unter Master <code>Musik</code> und <code>SFX</code> anlegen</li>
+<li>Bei jeder Audio Source <code>Output</code> auf die passende Gruppe stellen</li>
+<li>Im Play-Modus VU-Pegel ansehen und gegeneinander mischen</li>
+</ol></div><div class="nur-handout"><p>Ein Snapshot speichert Mixer-Parameter, ist für Alpha aber optional. Zuerst müssen wichtige Signale hörbar bleiben und dürfen nicht dauerhaft übersteuern.</p></div></section>
+<section class="folie" id="look-und-ton-werkstatt-35-minuten" data-nr="13"><h2 id="look-und-ton-werkstatt-35-minuten">Look-und-Ton-Werkstatt: 35 Minuten</h2><div class="schritte"><ol>
+<li>Einen Raum oder Moment wählen</li>
+<li>Zwei Materialien und ein Hauptlicht lesbar machen</li>
+<li>Realtime, Baked oder Mixed begründen</li>
+<li>Einen eigenen Bild- oder Soundbaustein korrekt importieren</li>
+<li>Play, Screenshot, Lizenznotiz, Commit</li>
+</ol></div><div class="rechts"><p>Optional: genau ein Volume-Override oder kurzer Partikel-Burst.</p></div><div class="nur-handout"><p><a href="../../druck/alpha-werkstatt.html">Alpha-Werkstatt als A4-Druckvorlage</a></p></div></section>
+<section class="folie" id="erklaert-eine-entscheidung" data-nr="14"><h2 id="erklärt-eine-entscheidung">Erklärt eine Entscheidung</h2><p>Zu zweit, je eine Minute:</p><div class="gross"><p>„Ich ändere ___. Das soll ___ lesbarer machen. Im Build prüfe ich ___.“</p></div></section>
+<section class="folie" id="pause-windows-modul-pruefen" data-nr="15"><h2 id="pause-windows-modul-prüfen">Pause: Windows-Modul prüfen</h2><p>Mac: Im Unity Hub zur installierten Editorversion <strong>Windows Build Support (Mono)</strong> hinzufügen.</p><div class="rechts"><p>Windows: Windows-Profil vorhanden?</p><p>Alle: freier Build-Ordner außerhalb von <strong>Assets</strong>.</p></div></section>
+<section class="folie" id="jetzt-nur-ein-probe-build" data-nr="16"><h2 id="jetzt-nur-ein-probe-build">Jetzt nur ein Probe-Build</h2><div class="schritte"><ol>
+<li><code>File › Build Profiles</code>: Windows, <code>Switch Profile</code></li>
+<li>Scene List: Startszene oben, nötige Szenen an</li>
+<li>Mac: <code>Scripting Backend: Mono</code></li>
+<li>In leeren Ordner außerhalb des Projekts bauen</li>
+</ol></div><div class="merke"><p>Dieser frühe Build findet Fehler. Er bekommt noch keinen <code>alpha</code>-Tag.</p></div></section>
+<section class="folie" id="welche-zustaende-braucht-dieses-spiel" data-nr="17"><h2 id="welche-zustände-braucht-dieses-spiel">Welche Zustände braucht dieses Spiel?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Drei Ansichten eines Schlüssel-und-Tür-Spiels: Ein Startbildschirm führt über Spielen ins Spiel. Das Öffnen der Zieltür führt zum Bildschirm Geschafft. Neustart lädt die Spielszene erneut."><svg class="tafel-svg" role="img" aria-label="Drei Ansichten eines Schlüssel-und-Tür-Spiels: Ein Startbildschirm führt über Spielen ins Spiel. Das Öffnen der Zieltür führt zum Bildschirm Geschafft. Neustart lädt die Spielszene erneut." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470" width="1080" height="470"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="550"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="d" x="25" y="92" width="280" height="290" rx="8"/>
+<rect class="d" x="400" y="92" width="280" height="290" rx="8"/>
+<rect class="d" x="775" y="92" width="280" height="290" rx="8"/>
+<text class="t-gross" x="165" y="62" text-anchor="middle">Start</text>
+<text class="t-gross" x="540" y="62" text-anchor="middle">Spiel</text>
+<text class="t-gross" x="915" y="62" text-anchor="middle">Geschafft</text>
+<rect class="d-flaeche" x="74" y="167" width="182" height="62"/><text class="t" x="165" y="209" text-anchor="middle">Spielen</text>
+<rect class="d" x="74" y="251" width="182" height="62"/><text class="t" x="165" y="293" text-anchor="middle">Hinweis</text>
+<circle class="d-flaeche" cx="480" cy="180" r="28"/><path class="d" d="M480 152 V128 M480 208 V236 M452 180 H424 M508 180 H536"/>
+<rect class="d" x="545" y="242" width="76" height="118"/><path class="d" d="M545 242 H621 M565 302 H603"/>
+<text class="t-gross" x="915" y="190" text-anchor="middle">Tür offen!</text>
+<rect class="d-flaeche" x="824" y="242" width="182" height="62"/><text class="t" x="915" y="284" text-anchor="middle">Nochmal</text>
+<g data-kreide-schritt="1"><path class="k-ev" d="M315 214 H380"/><path class="k-ev" d="M364 200 L380 214 L364 228"/><text class="t-klein" x="347" y="190" text-anchor="middle">Klick</text></g>
+<g data-kreide-schritt="2"><path class="k-ev" d="M690 214 H755"/><path class="k-ev" d="M739 200 L755 214 L739 228"/><text class="t-klein" x="722" y="190" text-anchor="middle">Ziel</text></g>
+<g data-kreide-schritt="3"><path class="k-ev" d="M838 403 C706 452 305 452 174 403"/><path class="k-ev" d="M189 393 L174 403 L191 413"/><text class="t-klein" x="510" y="456" text-anchor="middle">Neustart lädt die Spielszene</text></g>
+</svg>
+</button></figure><div class="nur-handout"><p>Pflicht ist eine projektbezogene UI-Handlung. Der vollständige Ablauf Start → Spiel → Geschafft → Neustart ist optional.</p><p>Der Kurs verwendet uGUI: Canvas, GameObjects und Komponenten passen zum Kit, zu Hierarchy und Inspector. UI Toolkit ist ebenfalls für Runtime-UI geeignet, würde hier aber UXML, Stylesheets und UI Builder als zweites Modell einführen. Darum lernt der Kurs nicht beide parallel.</p></div></section>
+<section class="folie" id="kit-beispiel-start-und-spiel" data-nr="18"><h2 id="kit-beispiel-start-und-spiel">Kit-Beispiel: Start und Spiel</h2><p>Für das Schlüssel-und-Tür-Spiel:</p><div class="schritte"><ul>
+<li>Start: <code>Beginn → An/Aus (Start an) → Pause</code></li>
+<li>Spielen: <code>Knopf gedrückt</code> <code>→ An/Aus (Start aus) → Weiter</code></li>
+</ul></div><div class="merke"><p>Button → Graph, ohne Skript.</p></div></section>
+<section class="folie" id="kit-beispiel-ziel-und-neustart" data-nr="19"><h2 id="kit-beispiel-ziel-und-neustart">Kit-Beispiel: Ziel und Neustart</h2><div class="schritte"><ul>
+<li>Ziel: <code>Tür offen → An/Aus (Geschafft an) → Pause</code></li>
+<li>Neustart: <code>Knopf gedrückt</code> <code>→ Szene laden</code></li>
+</ul></div><div class="merke"><p>Szenenname exakt; Szene in der Scene List.</p></div></section>
+<section class="folie" id="der-kleinste-ui-vertrag" data-nr="20"><h2 id="der-kleinste-ui-vertrag">Der kleinste UI-Vertrag</h2><div class="schritte"><ol>
+<li>Spec-Handlung wählen: Start, Hinweis, Ziel oder Scheitern</li>
+<li>Mit vorhandenen Kit-Knoten verdrahten</li>
+<li>Öffnen → klicken → spielen → zurückkehren, dreimal</li>
+<li>Cursor im UI frei, Blick im Spiel gefangen</li>
+</ol></div><div class="merke"><p>Kein Scheiterzustand? Kein Game Over erzwingen.</p></div><div class="nur-handout"><p>Für den vollständigen Ablauf hält <code>Pause</code> den Kit-Spieler an und gibt den Cursor frei; <code>Weiter</code> setzt beides zurück. <code>Knopf gedrückt</code> (Gruppe Auslöser) bekommt im ◆-Feld „Knopf“ den Button aus der Hierarchy; <code>Pause</code> und <code>Weiter</code> stehen unter Spielsysteme. Die drei Knoten gibt es ab Kurs-Paket 0.3.2. Nach jedem Menüwechsel den Cursor sichtbar anklicken und danach wieder laufen und umsehen.</p></div></section>
+<section class="folie" id="welcher-kit-knoten-passt" data-nr="21"><h2 id="welcher-kit-knoten-passt">Welcher Kit-Knoten passt?</h2><div class="schritte"><ul>
+<li>Zahl im HUD → <code>HUD-Anzeige</code></li>
+<li>Panel zeigen → <code>An/Aus</code></li>
+<li>Tod bei null → <code>Lebenspunkte</code></li>
+<li>Respawn-Punkt → <code>Checkpoint</code></li>
+<li>Neustart-Szene → <code>Szene laden</code></li>
+</ul></div><div class="nur-handout"><p><code>HUD-Anzeige</code> liest <code>Zahl</code> laufend. <code>An/Aus</code> schaltet ein gebundenes GameObject. <code>Lebenspunkte</code> feuert <code>Tot</code> einmal beim Fall auf null. <code>Checkpoint</code> merkt oder lädt einen Respawn-Punkt. <code>Szene laden</code> akzeptiert nur Szenen aus der Scene List.</p></div></section>
+<section class="folie" id="der-agent-liest-den-graph-ihr-verdrahtet" data-nr="22"><h2 id="der-agent-liest-den-graph-ihr-verdrahtet">Der Agent liest den Graph, ihr verdrahtet</h2><blockquote>
+<p>„Lies meinen <code>.kit</code>-Graph. Plane ___ mit vorhandenen Kit-Knoten. Ändere keine Szene, Prefab oder Skript. Nenne Knoten, Ports, Bindungen und drei Tests.“</p>
+</blockquote><div class="schritte"><p>Kit-Palette prüfen → selbst verdrahten → jeden Weg testen</p></div></section>
+<section class="folie" id="projektwerkstatt-30-minuten" data-nr="23"><h2 id="projektwerkstatt-30-minuten">Projektwerkstatt: 30 Minuten</h2><div class="schritte"><ol>
+<li><strong>UI-Pflicht:</strong> eine Spec-Handlung läuft</li>
+<li><strong>Optional:</strong> Start → Spiel → Ende → Neustart</li>
+<li><strong>Ton:</strong> Musik und SFX routen</li>
+<li><strong>Build:</strong> öffnen oder vollständigen Fehler notieren</li>
+<li><strong>Test:</strong> Cursor, Kernschleife, Ton, Neustart, Beenden</li>
+</ol></div><div class="rechts"><p>Agent: Graph-Verdrahtung oder Build-Fehler; ein Auftrag.</p></div></section>
+<section class="folie" id="wenn-der-probe-build-fehlschlaegt" data-nr="24"><h2 id="wenn-der-probe-build-fehlschlägt">Wenn der Probe-Build fehlschlägt</h2><p>Kopiert den ersten vollständigen Fehler.</p><blockquote>
+<p>„Der Windows-Build scheitert hier. Nenne Ursache und kleinsten Test. Ändere nichts.“</p>
+</blockquote><div class="schritte"><p>Behauptung prüfen → kleinsten Test ausführen → erst dann ändern → erneut bauen</p></div><div class="merke"><p>Ein „versucht“ ohne Fehlertext und nächsten Test erfüllt den Meilenstein nicht.</p></div></section>
+<section class="folie" id="jetzt-entsteht-der-alpha-build" data-nr="25"><h2 id="jetzt-entsteht-der-alpha-build">Jetzt entsteht der Alpha-Build</h2><div class="schritte"><ol>
+<li>Szene und Projekt speichern</li>
+<li>In GitHub Desktop den fertigen Werkstattstand committen</li>
+<li>Aus genau diesem Commit neu in einen leeren Ordner bauen</li>
+</ol></div><div class="merke"><p>Erst committen, dann frisch bauen.</p></div></section>
+<section class="folie" id="testen-dann-alpha-taggen" data-nr="26"><h2 id="testen-dann-alpha-taggen">Testen, dann <code>alpha</code> taggen</h2><div class="schritte"><ol start="4">
+<li>Ganzen Build-Ordner zippen</li>
+<li>Per USB oder Cloud auf anderem Windows-Rechner testen</li>
+<li>GitHub Desktop, History: Rechtsklick auf den getesteten Commit → <code>Create Tag</code> → <code>alpha</code></li>
+<li>Commit und Tag pushen</li>
+</ol></div><div class="merke"><p>Nur der tatsächlich getestete Commit bekommt <code>alpha</code>.</p></div></section>
+<section class="folie" id="was-wird-tatsaechlich-getestet" data-nr="27"><h2 id="was-wird-tatsächlich-getestet">Was wird tatsächlich getestet?</h2><div class="schritte"><ul>
+<li>startet ohne Unity; Startszene stimmt</li>
+<li>Eingabe, UI-Klick und Cursorwechsel reagieren</li>
+<li>zwei Pflichtinteraktionen laufen</li>
+<li>Ziel oder Scheitern und Neustart funktionieren</li>
+<li>Ton hörbar; Fenster schließbar</li>
+</ul></div><div class="merke"><p>Die <code>.exe</code> allein ist kein <a href="/teaching/gec1/concepts/build/" class="begriff art-daten" data-begriff="build">Build</a>. Ganzen Ordner testen.</p></div></section>
+<section class="folie" id="welcher-stand-bekommt-alpha" data-nr="28"><h2 id="welcher-stand-bekommt-alpha">Welcher Stand bekommt <code>alpha</code>?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Ein gespeicherter Stand wird committet und daraus als Windows-Build gebaut. Nach dem Test auf einem anderen Rechner bekommt genau dieser Commit den Tag alpha; der Build-Ordner reist als ZIP per USB oder Cloud."><svg class="tafel-svg" role="img" aria-label="Ein gespeicherter Stand wird committet und daraus als Windows-Build gebaut. Nach dem Test auf einem anderen Rechner bekommt genau dieser Commit den Tag alpha; der Build-Ordner reist als ZIP per USB oder Cloud." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 450" width="1080" height="450"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="530"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<text class="t" x="120" y="62" text-anchor="middle">Commit</text>
+<text class="t" x="380" y="62" text-anchor="middle">Windows-Build</text>
+<text class="t" x="655" y="62" text-anchor="middle">Test</text>
+<text class="t" x="930" y="62" text-anchor="middle">ZIP weitergeben</text>
+<circle class="d-voll" cx="120" cy="220" r="58"/><text class="t-mono" x="120" y="230" text-anchor="middle">a31c</text>
+<path class="d-flaeche" d="M290 132 H430 L470 172 V322 H290 Z M430 132 V172 H470"/>
+<text class="t" x="380" y="228" text-anchor="middle">Spiel.exe</text><text class="t-klein" x="380" y="274" text-anchor="middle">+ _Data</text>
+<rect class="d" x="570" y="132" width="170" height="190" rx="12"/><path class="d" d="M607 230 L640 263 L706 190"/><text class="t-klein" x="655" y="356" text-anchor="middle">anderer Rechner</text>
+<path class="d-flaeche" d="M850 150 H995 V300 H850 Z M886 150 V128 H959 V150 M880 203 H965 M880 244 H965"/>
+<text class="t-klein" x="922" y="337" text-anchor="middle">USB / Cloud</text>
+<g data-kreide-schritt="1"><path class="k" d="M188 220 H270"/><path class="k" d="M254 207 L270 220 L254 233"/><path class="k" d="M490 220 H550"/><path class="k" d="M534 207 L550 220 L534 233"/></g>
+<g data-kreide-schritt="2"><rect class="schild-r" x="72" y="315" width="135" height="48"/><text class="schild-t" x="88" y="349">Tag: alpha</text><path class="k-hi" d="M132 300 L132 280"/></g>
+<g data-kreide-schritt="3"><path class="k-ev" d="M760 220 H810"/><path class="k-ev" d="M794 207 L810 220 L794 233"/><rect class="schild-r" x="846" y="360" width="154" height="48"/><text class="schild-t" x="862" y="394">Build.zip</text></g>
+</svg>
+</button></figure><div class="merke"><p>Der <a href="/teaching/gec1/concepts/tag/" class="begriff art-daten" data-begriff="tag">Tag</a> markiert den Commit, aus dem der getestete Build entstand.</p></div><div class="nur-handout"><p>Private Kurs-Repositories liefern Testerinnen und Testern keinen GitHub-Release-Link. Der vollständige Build-Ordner wird gezippt und per USB oder Cloud-Link übergeben. GitHub Releases sind erst später eine mögliche öffentliche Übergabeform; sie gehören nicht in den heutigen Testweg.</p></div></section>
+<section class="folie" id="ki-verzeichnis-pruefen" data-nr="29"><h2 id="ki-verzeichnis-prüfen">KI-Verzeichnis prüfen</h2><p>Für Graph-Verdrahtung und Build-Diagnose jeweils ein Eintrag:</p><div class="schritte"><ul>
+<li>Werkzeug und Modell</li>
+<li>Auftrag oder Prompt-ID</li>
+<li>betroffene Dateien</li>
+<li>was übernommen, geändert oder verworfen wurde</li>
+<li>wie das Ergebnis geprüft wurde</li>
+</ul></div><div class="merke"><p>Auch eine verwendete Diagnose bekommt eine Zeile, wenn ihr die Änderung selbst ausführt.</p></div></section>
+<section class="folie" id="bis-spaetestens-17-12" data-nr="30"><h2 id="bis-spätestens-1712">Bis spätestens 17.12.</h2><div class="schritte"><ol>
+<li>Alpha-Build auf einem anderen Windows-Rechner starten</li>
+<li>Kernschleife mit zwei Pflichtinteraktionen vollständig spielen</li>
+<li>Ergebnis, Rechner und Commit im Devlog notieren</li>
+<li>Bei Fehler: reparieren → committen → neu bauen → erneut fremd testen</li>
+</ol></div><div class="rechts"><p>Der externe Test liegt vor dem freiwilligen Check-in am 18.12.</p></div></section>
+<section class="folie" id="vier-sessions-bis-beta-16-stunden" data-nr="31"><h2 id="vier-sessions-bis-beta-16-stunden">Vier Sessions bis Beta: 16 Stunden</h2><div class="schritte"><ol>
+<li><strong>bis 17.12. · 4 h:</strong> Alpha reparieren, extern testen</li>
+<li><strong>bis 22.12. · 4 h:</strong> Inhalt schließen</li>
+<li><strong>bis 03.01. · 4 h:</strong> <code>DOKUMENTATION.md</code>, Kapitel 1–5</li>
+<li><strong>bis 07.01. · 4 h:</strong> Beta-Build extern testen</li>
+</ol></div><div class="merke"><p>Nach 4 h prüfbaren Stand sichern.</p></div><div class="nur-handout"><p>Erwartbar sind etwa 15–20 Stunden, nicht vier Wochen Dauerarbeit.</p></div></section>
+<section class="folie" id="zwei-freiwillige-weihnachts-check-ins" data-nr="32"><h2 id="zwei-freiwillige-weihnachts-check-ins">Zwei freiwillige Weihnachts-Check-ins</h2><p><span class="schild">18.12. und 04.01.</span></p><p>Im Blackboard-Thread:</p><div class="schritte"><ul>
+<li>ein lauffähiger Build oder ein 30–60-Sekunden-Clip aus dem Build</li>
+<li>drei Aufgaben, jede höchstens ein Nachmittag</li>
+<li>höchstens eine konkrete Frage mit bisherigen Versuchen</li>
+</ul></div><div class="nur-handout"><p>Die Check-ins sind ein Angebot, keine zusätzliche Pflicht. Über die Feiertage ist keine durchgehende Betreuung versprochen. Das vollständige Muster steht im Handout von <a href="../06/#vier-wochen-spater">Tag 6, Folie 1: „Vier Wochen später“</a>.</p></div></section>
+<section class="folie" id="beta-am-08-01" data-nr="33"><h2 id="beta-am-0801">Beta am 08.01.</h2><div class="gross"><p>Inhalt vollständig. Build auf einem anderen Rechner getestet. Kapitel 1–5 stehen als Entwurf.</p></div><div class="schritte"><p>Danach wird nicht mehr erfunden, sondern geprüft, erklärt und abgegeben.</p></div></section></article><aside class="rand"><div><b>Begriffe heute</b><ul><li><a class="begriff" href="/teaching/gec1/concepts/material/">Material</a></li><li><a class="begriff" href="/teaching/gec1/concepts/light/">Licht</a></li><li><a class="begriff" href="/teaching/gec1/concepts/ui/">UI</a></li><li><a class="begriff" href="/teaching/gec1/concepts/build/">Build</a></li><li><a class="begriff" href="/teaching/gec1/concepts/tag/">Tag</a></li></ul></div><div><b>Bis zum nächsten Termin</b><p>Meilenstein Beta bis 08.01.: Inhalt vollständig, Windows-Build auf einem anderen Rechner getestet, Kapitel 1–5 in DOKUMENTATION.md als Entwurf. Dafür vier begrenzte Vier-Stunden-Sessions einplanen; der externe Windows-Test findet spätestens am 17.12. statt. Optional am 18.12. und 04.01.: lauffähiger Stand und drei offene Aufgaben im Blackboard-Thread. Nach 30 Minuten Feststecken eine konkrete Frage stellen.</p></div><div><b>Folien</b><p><a href="/teaching/gec1/days/05/slides/">Foliensatz öffnen</a>. Taste ? zeigt die Bedienung.</p></div></aside></div><script type="module">document.querySelectorAll(`.handout section.folie`).forEach(e=>{let t=document.createElement(`a`);t.className=`folie-anker`,t.href=`slides/#/${e.id}`,t.textContent=`Folie ${Number(e.dataset.nr)+1}`,e.prepend(t)});</script></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-05T13:39Z · 21cef83</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

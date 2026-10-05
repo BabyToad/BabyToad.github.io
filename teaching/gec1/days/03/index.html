@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/teaching/gec1/favicon.svg"><link rel="canonical" href="https://www.allknivesnobagel.com/teaching/gec1/days/03/"><title>Tag 3: Interaktion von Hand · GEC1</title><meta name="description" content="Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen."><link rel="alternate" type="text/markdown" href="/teaching/gec1/days/03.md" title="Markdown-Fassung"><link rel="alternate" type="text/plain" href="/teaching/gec1/llms.txt" title="llms.txt"><script>
+    try { var t = localStorage.getItem("gec1-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script><style>@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Mono;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-mono-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin-ext.woff2)format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Atkinson Hyperlegible Next;font-style:normal;font-weight:200 800;font-display:swap;src:url(/teaching/gec1/fonts/atkinson-hyperlegible-next-latin.woff2)format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}:root{--board:#1d2a25;--wing:#1f2d28;--hinge:#121a17;--chalk:#eeece4;--chalk-dim:#b7beb5;--hi:#f7f09c;--ev:#f6a54e;--da:#cfa9f7;--rf:#72d5c0;--device-grat:#33403a;--device:#25292e;--device-screen:#111315;--paper:#f4f4ef;--paper-raised:#e9eae3;--ink:#161714;--ink-dim:#55594f;--rule:#c8cac1;--pev:#a64b00;--pda:#6a3fb5;--prf:#006b55;--mark:#f3e27a;--font-text:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, sans-serif;--font-mono:"Atkinson Hyperlegible Mono", Consolas, monospace;--font-sans:var(--font-text);--font-label:var(--font-text);--radius:0;--font-titel:var(--font-text);--paper-soft:var(--paper-raised);--draht-event:var(--pev);--draht-daten:var(--pda);--bg:var(--paper);--bg-raised:var(--paper-raised);--fg:var(--ink);--fg-dim:var(--ink-dim);--line:var(--rule);--link-ev:var(--pev);--link-da:var(--pda);--link-rf:var(--prf);--marker:var(--mark)}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}}:root[data-theme=dark]{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf);--marker:#5f5a1c;--draht-event:var(--ev);--draht-daten:var(--da);--paper-soft:var(--wing)}.board-surface{--bg:var(--board);--bg-raised:var(--wing);--fg:var(--chalk);--fg-dim:var(--chalk-dim);--line:#3a4a43;--link-ev:var(--ev);--link-da:var(--da);--link-rf:var(--rf)}.geraet{--paper:var(--device-screen);--ink:var(--chalk);--ink-dim:var(--chalk-dim);--paper-soft:var(--device);--draht-event:var(--ev);--draht-daten:var(--da)}
+</style><link rel="stylesheet" href="/teaching/gec1/assets/Seite.BtejABop.css"><style>.tafel{margin:0}.tafel-svg{width:100%;height:auto;font-family:var(--font-text);display:block;overflow:visible}.tafel-svg .d{fill:none;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-flaeche{fill:#eeece414;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-voll{fill:#eeece438;stroke:var(--chalk-dim);stroke-width:3px}.tafel-svg .d-linie{fill:none;stroke:var(--chalk-dim);stroke-width:2px}.tafel-svg .d-raster{fill:none;stroke:#eeece41f;stroke-width:1.5px}.tafel-svg .gestrichelt{stroke-dasharray:12 9}.tafel-svg .k,.tafel-svg .k-hi,.tafel-svg .k-ev,.tafel-svg .k-da,.tafel-svg .k-rf{fill:none;stroke-width:7px;stroke-linecap:round;stroke-linejoin:round;filter:url(#kreide-tafel)}.tafel-svg .k{stroke:var(--chalk)}.tafel-svg .k-hi{stroke:var(--hi)}.tafel-svg .k-ev{stroke:var(--ev);stroke-dasharray:18 14}.tafel-svg .k-da{stroke:var(--da)}.tafel-svg .k-rf{stroke:var(--rf)}.tafel-svg text{fill:var(--chalk)}.tafel-svg .t{font:600 36px var(--font-text)}.tafel-svg .t-text{font:400 36px var(--font-text)}.tafel-svg .t-gross{font:750 46px var(--font-text)}.tafel-svg .t-30{font:400 30px var(--font-text)}.tafel-svg .t-klein{font:400 30px var(--font-text);fill:var(--chalk-dim)}.tafel-svg .t-mono{font:400 30px var(--font-mono);fill:var(--chalk-dim)}.tafel-svg .t-hell{fill:var(--chalk)}.tafel-svg .t-da{fill:var(--da)}.tafel-svg .schild-r{fill:var(--paper);stroke:none}.tafel-svg .schild-t{fill:var(--ink);font:700 30px var(--font-text)}.tafel-svg .papier{fill:var(--paper);stroke:none}.tafel-svg .tinte{fill:var(--ink)}.tafel-svg .tinte-matt{fill:var(--ink-dim)}.tafel-svg .tinte-linie{fill:none;stroke:var(--ink-dim);stroke-width:2px}.tafel-svg .verborgen{visibility:hidden}.handout .tafel{background:var(--board);max-width:760px;margin:10px 0 14px;padding:22px 24px}.handout .tafel .verborgen{visibility:visible}.handout .tafel [data-kreide-bis]{display:none}
+</style></head><body><a class="skip" href="#inhalt">Zum Inhalt</a><header class="kopf"><a class="marke" href="/teaching/gec1/">GEC1</a><nav aria-label="Kurs"><a href="/teaching/gec1/#termine">Termine</a><a href="/teaching/gec1/concepts/">Begriffe</a><a href="/teaching/gec1/guides/">Anleitungen</a></nav><nav class="ki-leiste" aria-label="Diese Seite für KI"><button type="button" class="ki-kopieren" data-md="/teaching/gec1/days/03.md" data-titel="Tag 3: Interaktion von Hand">Für KI kopieren</button><a href="/teaching/gec1/days/03.md" type="text/plain">Markdown</a><span class="ki-status" role="status" aria-live="polite"></span></nav><script type="module">function e(e,t,n){return`Kontext: Kursmaterial „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27).\nSeite: ${t}\nQuelle: ${n}\n\n${e}`}document.querySelectorAll(`.ki-kopieren`).forEach(t=>{t.addEventListener(`click`,()=>{let n=t.parentElement?.querySelector(`.ki-status`),r=e=>{n&&(n.textContent=e),setTimeout(()=>n&&(n.textContent=``),3e3)},i=new URL(t.dataset.md,location.href).href,a=fetch(i).then(e=>e.ok?e.text():Promise.reject(Error(String(e.status)))).then(n=>e(n,t.dataset.titel??``,i)),o;if(typeof ClipboardItem<`u`&&navigator.clipboard?.write){let e=new ClipboardItem({"text/plain":a.then(e=>new Blob([e],{type:`text/plain`}))});o=navigator.clipboard.write([e]).catch(()=>a.then(e=>navigator.clipboard.writeText(e)))}else o=a.then(e=>navigator.clipboard.writeText(e));o.then(()=>r(`Kopiert.`),()=>r(`Kopieren ging nicht. Nehmt den Link „Markdown“.`))})});</script><button type="button" class="thema" aria-label="Hell oder dunkel umschalten">Hell / Dunkel</button></header><main id="inhalt"><div class="seite"><article class="handout"><div class="label">Tag 3 · 13.11.2026</div><h1>Interaktion von Hand</h1><p class="untertitel">Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.</p><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="kreide" x="-10%" y="-50%" width="120%" height="200%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"></feColorMatrix><feComposite in="d" in2="m" operator="in"></feComposite></filter></defs></svg><section class="folie" id="was-laeuft-schon" data-nr="1"><h2 id="was-läuft-schon">Was läuft schon?</h2><div class="schritte"><ol>
+<li>Ein grauer Raum, durch den die Spielfigur läuft</li>
+<li>Der Build läuft auf einem fremden Windows-Rechner</li>
+<li>Die Spec der ersten Interaktion steht</li>
+<li>Das <a href="/teaching/gec1/concepts/devlog/" class="begriff art-daten" data-begriff="devlog">Devlog</a> unten in <code>DOKUMENTATION.md</code> hat einen Eintrag</li>
+</ol></div><div class="rechts"><p>Noch nicht so weit? Nehmt das Blatt „Rettungsweg“.</p></div><div class="nur-handout"><p>Jetzt wird der Probe-Build getauscht: den Build-Ordner als ZIP per USB-Stick oder Cloud-Link an eine Person mit Windows-Rechner geben, dort entpacken und die <code>.exe</code> starten. Der Rettungsweg steht auch online: <a href="/teaching/gec1/druck/rettungsweg.html">Rettungsweg als Blatt</a>. Er zeigt, wie ihr heute im Kurs mitkommt und in der Woche danach aufholt.</p></div></section>
+<section class="folie" id="kurs-paket-pruefen" data-nr="2"><h2 id="kurs-paket-prüfen">Kurs-Paket prüfen</h2><div class="schritte"><ol>
+<li>Kurs › Setup prüfen: Steht beim Kurs-Paket 0.3.2 oder höher? Dann ist alles gut.</li>
+<li>Älter? GitHub Desktop: erst committen</li>
+<li>Window › Package Manager › + › Install package from git URL…, Adresse einfügen, Install</li>
+<li>Commit: „Kurs-Paket auf 0.3.2“</li>
+</ol></div><div class="rechts"><pre><code>https://
+github.com/
+BabyToad/
+macromedia-
+gec1-kit.git
+#v0.3.2
+</code></pre></div><div class="nur-handout"><p>Die Kursvorlage bringt 0.3.2 seit dem 09.10. mit; aktualisieren müssen nur Projekte, die älter sind oder ohne Vorlage entstanden. Die Adresse am Stück: <code>https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2</code>. Version 0.3.2 bringt die kaputte Werkstatt für heute, das Menü <strong>Tools › Kit › Eigener Knoten (C#)</strong> und zwei Korrekturen im Kit: Warnungen „Vor Play“ bleiben in der Console stehen, und <strong>Kraft › Dauerkraft</strong> schiebt jetzt so lange, bis der Eingang <strong>Stopp</strong> kommt. Ausführlich steht das in der Anleitung „Kurs-Paket aktualisieren“. Kontrolle: <strong>Kurs › Setup prüfen</strong> zeigt beim Kurs-Paket 0.3.2.</p></div></section>
+<section class="folie" id="heute-reagiert-die-welt" data-nr="3"><h2 id="heute-reagiert-die-welt">Heute reagiert die Welt</h2><p>Bisher läuft man durch den Raum. Ab heute antwortet er.</p><div class="gross"><p>Wenn ich die Türzone betrete und den Schlüssel habe, fährt die Tür hoch. Sonst steht auf dem Schild: Verschlossen.</p></div></section>
+<section class="folie" id="event-bedingung-aktion" data-nr="4"><h2 id="event-bedingung-aktion">Event, Bedingung, Aktion</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Die Tür als Kette in drei Spalten. Event: Zone, Betreten. Bedingung: Wenn, Schlüssel da?, gespeist vom Merker „Schlüssel vorhanden“. Aktion: bei Ja Bewegen, die Tür fährt hoch; bei Nein Text setzen, „Verschlossen.“"><svg class="tafel-svg" role="img" aria-label="Die Tür als Kette in drei Spalten. Event: Zone, Betreten. Bedingung: Wenn, Schlüssel da?, gespeist vom Merker „Schlüssel vorhanden“. Aktion: bei Ja Bewegen, die Tür fährt hoch; bei Nein Text setzen, „Verschlossen.“" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 460" width="1080" height="460"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="540"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="schild-r" x="0" y="0" width="140" height="48"/><text class="schild-t" x="16" y="34">Event</text><rect class="schild-r" x="330" y="0" width="190" height="48"/><text class="schild-t" x="346" y="34">Bedingung</text><rect class="schild-r" x="780" y="0" width="150" height="48"/><text class="schild-t" x="796" y="34">Aktion</text>
+<rect class="d-flaeche" x="0" y="140" width="240" height="120"/><text class="t" x="24" y="192">Zone</text><text class="t-klein" x="24" y="236">Betreten</text>
+<rect class="d-flaeche" x="330" y="140" width="330" height="120"/><text class="t" x="354" y="192">Wenn</text><text class="t-klein" x="354" y="236">Schlüssel da?</text>
+<rect class="d-flaeche" x="780" y="80" width="300" height="110"/><text class="t" x="804" y="128">Bewegen</text><text class="t-klein" x="804" y="170">Tür fährt hoch</text>
+<rect class="d-flaeche" x="780" y="250" width="300" height="110"/><text class="t" x="804" y="298">Text setzen</text><text class="t-klein" x="804" y="340">„Verschlossen.“</text>
+<rect class="d-flaeche" x="330" y="350" width="330" height="100"/><text class="t" x="354" y="394">Merker</text><text class="t-klein" x="354" y="434">Schlüssel vorhanden</text>
+<g data-kreide-schritt="1"><path class="k-ev" d="M246 200 H322"/><path class="k-ev" d="M302 184 L324 200 L302 216"/></g>
+<g data-kreide-schritt="2"><path class="k-da" d="M495 346 V268"/><path class="k-da" d="M479 288 L495 266 L511 288"/></g>
+<g data-kreide-schritt="3"><path class="k-ev" d="M666 180 C 720 180, 720 135, 772 135"/><path class="k-ev" d="M752 121 L774 135 L752 149"/><text class="t" x="690" y="116">Ja</text><path class="k-ev" d="M666 222 C 720 222, 720 305, 772 305"/><path class="k-ev" d="M752 291 L774 305 L752 319"/><text class="t" x="670" y="362">Nein</text></g>
+</svg>
+</button></figure><div class="rechts"><p><a href="/teaching/gec1/concepts/event/" class="begriff art-event" data-begriff="event">Event</a>: ein Moment</p><p><a href="/teaching/gec1/concepts/state/" class="begriff art-daten" data-begriff="state">Zustand</a>: was das Spiel sich merkt</p><p><a href="/teaching/gec1/concepts/condition/" class="begriff art-daten" data-begriff="condition">Bedingung</a>: ja oder nein</p></div><div class="nur-handout"><p>Ein <a href="/teaching/gec1/concepts/event/" class="begriff art-event" data-begriff="event">Event</a> ist ein Zeitpunkt, an dem etwas passiert: Betreten, Drücken, Aufprall. Ein <a href="/teaching/gec1/concepts/state/" class="begriff art-daten" data-begriff="state">Zustand</a> bleibt von Frame zu Frame erhalten, etwa ob der Schlüssel schon aufgehoben ist. Eine <a href="/teaching/gec1/concepts/condition/" class="begriff art-daten" data-begriff="condition">Bedingung</a> fragt diesen Zustand in dem Moment ab, in dem das Event ankommt, und schickt es auf den einen oder den anderen Weg.</p></div></section>
+<section class="folie" id="drei-arten-von-draehten" data-nr="5"><h2 id="drei-arten-von-drähten">Drei Arten von Drähten</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Drei Drahtarten. Event, gestrichelt: wann etwas passiert, etwa Betreten zu Prüfen. Daten, durchgezogen: ein Wert, der gelesen wird, etwa Wert zu Bedingung. Referenz, doppelt: welches Objekt gemeint ist, etwa Schlüssel zu An/Aus."><svg class="tafel-svg" role="img" aria-label="Drei Drahtarten. Event, gestrichelt: wann etwas passiert, etwa Betreten zu Prüfen. Daten, durchgezogen: ein Wert, der gelesen wird, etwa Wert zu Bedingung. Referenz, doppelt: welches Objekt gemeint ist, etwa Schlüssel zu An/Aus." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 390" width="1080" height="390"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="470"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<text class="t-gross" x="0" y="70">▶ Event</text><text class="t-klein" x="0" y="112">wann etwas passiert</text><path class="k-ev" d="M420 60 H760"/><path class="k-ev" d="M738 44 L762 60 L738 76"/><text class="t-mono" x="800" y="70">Betreten → Prüfen</text>
+<text class="t-gross" x="0" y="200">● Daten</text><text class="t-klein" x="0" y="242">ein Wert, der gelesen wird</text><path class="k-da" d="M420 190 H760"/><circle class="k-da" cx="760" cy="190" r="8"/><text class="t-mono" x="800" y="200">Wert → Bedingung</text>
+<text class="t-gross" x="0" y="330">◆ Referenz</text><text class="t-klein" x="0" y="372">welches Objekt gemeint ist</text><path class="k-rf" d="M420 312 H760 M420 336 H760"/><text class="t-mono" x="800" y="330">Schlüssel → An/Aus</text>
+</svg>
+</button></figure><div class="nur-handout"><p>Der <a href="/teaching/gec1/concepts/graph/" class="begriff art-daten" data-begriff="graph">Graph</a> des Kits kennt drei Drahtarten. ▶ Events laufen von links nach rechts durch die Kette. ● Daten werden gelesen, wenn ein Knoten sie braucht. ◆ Referenzen sagen einem Knoten, mit welchem Objekt in der Szene er arbeitet. Hängen an einem Event-Ausgang mehrere Drähte, tragen sie Nummern: Nr. 1 läuft zuerst. Falsche Verbindungen lassen sich gar nicht ziehen: Ein Event-Ausgang passt nur auf einen Event-Eingang.</p></div></section>
+<section class="folie" id="das-beispiel-holen" data-nr="6"><h2 id="das-beispiel-holen">Das Beispiel holen</h2><p>Tools › Kit › Beispiel „Schlüssel und Tür“ bauen</p><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Das Graph-Fenster mit dem Beispiel Schlüssel und Tür: neun Knoten auf dunkler Tafel, darunter Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen und Ton abspielen, verbunden mit orangen, violetten und blaugrünen Drähten."><img src="/teaching/gec1/beispiele/kit/graph.webp" alt="Das Graph-Fenster mit dem Beispiel Schlüssel und Tür: neun Knoten auf dunkler Tafel, darunter Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen und Ton abspielen, verbunden mit orangen, violetten und blaugrünen Drähten." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1</figcaption></figure><div class="rechts"><p>Doppelklick auf die Datei „Schlüssel und Tür.kit“ öffnet den Graph.</p></div><div class="nur-handout"><p>Das Menü legt den Ordner <code>Assets/Kit Beispiel</code> an, mit dem Graph <code>Schlüssel und Tür.kit</code> und der Szene <code>Keller</code>. Gibt es das Beispiel schon, fragt Unity nach, bevor etwas überschrieben wird. Beispiele holt ihr immer über dieses Menü. Ist alles rosa, ist das Kurs-Paket zu alt: oben aktualisieren. Den Graph öffnet ein Doppelklick auf die <code>.kit</code>-Datei oder im Inspector der Interaktion der Knopf <strong>Graph öffnen</strong>.</p></div></section>
+<section class="folie" id="ein-graph-viele-tueren" data-nr="7"><h2 id="ein-graph-viele-türen">Ein Graph, viele Türen</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Ein Graph mit dem Knoten Bewegen und einem leeren Platz ◆ Objekt. Zwei Interaktionen in der Szene, Keller und Dachboden, füllen diesen Platz verschieden: die eine mit Tür A, die andere mit Tür B."><svg class="tafel-svg" role="img" aria-label="Ein Graph mit dem Knoten Bewegen und einem leeren Platz ◆ Objekt. Zwei Interaktionen in der Szene, Keller und Dachboden, füllen diesen Platz verschieden: die eine mit Tür A, die andere mit Tür B." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 460" width="1080" height="460"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="540"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="schild-r" x="0" y="0" width="120" height="48"/><text class="schild-t" x="16" y="34">Graph</text>
+<rect class="d-flaeche" x="0" y="150" width="280" height="150"/><text class="t" x="24" y="200">Bewegen</text><text class="t-30" x="24" y="268">◆ Objekt: ?</text>
+<rect class="schild-r" x="400" y="0" width="210" height="48"/><text class="schild-t" x="416" y="34">Interaktion</text>
+<rect class="d" x="400" y="80" width="330" height="130"/><text class="t" x="424" y="126">„Keller“</text><text class="t-30" x="424" y="182">◆ Objekt = Tür A</text>
+<rect class="d" x="400" y="260" width="330" height="130"/><text class="t" x="424" y="306">„Dachboden“</text><text class="t-30" x="424" y="362">◆ Objekt = Tür B</text>
+<rect class="schild-r" x="860" y="0" width="120" height="48"/><text class="schild-t" x="876" y="34">Szene</text>
+<rect class="d-voll" x="880" y="90" width="80" height="120"/><text class="t" x="980" y="170">A</text>
+<rect class="d-voll" x="880" y="270" width="80" height="120"/><text class="t" x="980" y="350">B</text>
+<g data-kreide-schritt="1"><path class="k-rf" d="M286 214 L392 150 M290 230 L396 166"/><path class="k-rf" d="M286 236 L392 310 M290 220 L396 294"/></g>
+<g data-kreide-schritt="2"><path class="k-rf" d="M738 138 H872 M738 160 H872"/><path class="k-rf" d="M738 318 H872 M738 340 H872"/></g>
+</svg>
+</button></figure><div class="rechts"><p>Der <a href="/teaching/gec1/concepts/graph/" class="begriff art-daten" data-begriff="graph">Graph</a> sagt, was passiert. Die Interaktion sagt, mit welchen Objekten: je Platz eine <a href="/teaching/gec1/concepts/reference/" class="begriff art-referenz" data-begriff="reference">Referenz</a>.</p></div><div class="nur-handout"><p>Der Graph ist eine Datei im Projekt. Er kennt keine Objekte der Szene, nur Plätze für sie (◆). Die Component <strong>Interaktion</strong> an einem GameObject verbindet beides: Sie zeigt auf einen Graph und hält eine Tabelle, welches Objekt welchen Platz füllt. Das ist eine <a href="/teaching/gec1/concepts/reference/" class="begriff art-referenz" data-begriff="reference">Referenz</a>. Umbenennen oder Verschieben bricht sie nicht. Ein leerer Platz ist ein Fehler, und das Kit meldet ihn schon vor Play. Jede Interaktion hat ihren eigenen Merker: Zwei kopierte Türen öffnen sich nicht gegenseitig.</p></div></section>
+<section class="folie" id="die-plaetze-im-inspector" data-nr="8"><h2 id="die-plätze-im-inspector">Die Plätze im Inspector</h2><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Die Liste Objekte (◆) im Inspector der Interaktion: Schlüssel = Schlüssel, Benutzen: Kamera = leer, Zone: Zone = Türzone, Bewegen: Objekt = Tür, Text setzen: Textfeld = Schild, Ton abspielen: Quelle = Tür-Klack. Neben jedem Platz eine Lupe."><img src="/teaching/gec1/beispiele/kit/bindungen.webp" alt="Die Liste Objekte (◆) im Inspector der Interaktion: Schlüssel = Schlüssel, Benutzen: Kamera = leer, Zone: Zone = Türzone, Bewegen: Objekt = Tür, Text setzen: Textfeld = Schild, Ton abspielen: Quelle = Tür-Klack. Neben jedem Platz eine Lupe." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1</figcaption></figure><div class="rechts"><p>Objekte (◆): hineinziehen, was gemeint ist.</p></div><div class="nur-handout"><p>Die Lupe neben jedem Platz springt in den Graph zum passenden Knoten. <strong>Benutzen: Kamera</strong> darf leer bleiben: Dann nimmt der Knoten die Hauptkamera, also die der Spielfigur.</p></div></section>
+<section class="folie" id="zuschauen-waehrend-es-laeuft" data-nr="9"><h2 id="zuschauen-während-es-läuft">Zuschauen, während es läuft</h2><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Der Graph im Play-Modus: Wenn trägt ein Häkchen mit „Ja, weil Schlüssel vorhanden: ja“, Bewegen ist gelb hinterlegt und meldet „läuft: 0,5 / 1,0 s“, Ton abspielen steht auf „noch nicht erreicht“."><img src="/teaching/gec1/beispiele/kit/play-tuer.webp" alt="Der Graph im Play-Modus: Wenn trägt ein Häkchen mit „Ja, weil Schlüssel vorhanden: ja“, Bewegen ist gelb hinterlegt und meldet „läuft: 0,5 / 1,0 s“, Ton abspielen steht auf „noch nicht erreicht“." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1</figcaption></figure><div class="rechts"><p>○ empfangen</p><p>▬ läuft</p><p>✓ fertig</p><p>⛔ blockiert</p><p>! Fehler</p></div><div class="nur-handout"><p>Zum Ausprobieren: Play, ohne Schlüssel zur Tür laufen. Wenn zeigt „Nein, weil Schlüssel vorhanden: nein“, das Schild sagt „Verschlossen.“. Dann den Schlüssel anschauen und E drücken, zurück zur Tür: Bewegen läuft. Graph-Fenster und Game-Fenster nebeneinander legen hilft. Jeder Knoten zeigt im Play-Modus, was er gerade tut, und warum. Ein Knoten mit Fehler feuert nie seinen Erfolgs-Ausgang; der Grund steht am Knoten und in der Console. Die Leiste unten im Graph-Fenster zählt zusammen, wie viele Knoten laufen, fertig sind oder noch nicht erreicht wurden.</p></div></section>
+<section class="folie" id="vom-knoten-zum-objekt" data-nr="10"><h2 id="vom-knoten-zum-objekt">Vom Knoten zum Objekt</h2><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Links die Hierarchy: Schlüssel ist ausgewählt; er und die anderen Objekte der Interaktion tragen das Abzeichen ◆1. Rechts der Graph: Der Knoten „Objekt: Schlüssel“ ist hervorgehoben, seine blaugrünen Drähte führen zu Benutzen und An/Aus."><img src="/teaching/gec1/beispiele/kit/auswahl-schluessel.webp" alt="Links die Hierarchy: Schlüssel ist ausgewählt; er und die anderen Objekte der Interaktion tragen das Abzeichen ◆1. Rechts der Graph: Der Knoten „Objekt: Schlüssel“ ist hervorgehoben, seine blaugrünen Drähte führen zu Benutzen und An/Aus." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1</figcaption></figure><div class="rechts"><p>Doppelklick auf einen Knoten: Das Objekt leuchtet in der Hierarchy.</p><p>Objekt auswählen: Seine Knoten leuchten im Graph.</p></div><div class="nur-handout"><p>Ein Klick auf einen Knoten zeigt unten im Graph-Fenster, was er tut, und die Knöpfe <strong>In der Hierarchy zeigen</strong>, <strong>Komponente öffnen</strong> und <strong>Code ansehen</strong>. Ein Doppelklick wählt das gebundene Objekt aus. Umgekehrt leuchten alle Knoten auf, die ein in der Hierarchy ausgewähltes Objekt benutzen. Das Abzeichen ◆1 in der Hierarchy zählt, wie viele Plätze ein Objekt füllt; mit der Maus darauf steht da, welche.</p></div></section>
+<section class="folie" id="was-steckt-in-einem-knoten" data-nr="11"><h2 id="was-steckt-in-einem-knoten">Was steckt in einem Knoten?</h2><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Das Fenster Code ansehen für den Knoten Wenn, Branch.cs mit 32 Zeilen. Zeile 28, chosen.Fire(signal), ist orange markiert: Dort feuert der Knoten Ja oder Nein."><img src="/teaching/gec1/beispiele/kit/code-wenn.webp" alt="Das Fenster Code ansehen für den Knoten Wenn, Branch.cs mit 32 Zeilen. Zeile 28, chosen.Fire(signal), ist orange markiert: Dort feuert der Knoten Ja oder Nein." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1</figcaption></figure><div class="rechts"><p>&lt;/&gt; am Knoten</p><p>Orange: Hier feuert ein Ausgang.</p></div><div class="nur-handout"><p>Jeder Knoten ist eine kleine C#-Datei. <strong>Code ansehen</strong> zeigt sie schreibgeschützt und markiert die Stellen, die zählen: orange, wo ein Ausgang feuert; gelb, wo der Knoten „läuft“ meldet; rot, wo er einen Fehler meldet; blaugrün, wo ein ◆-Platz steht. <strong>Im Code-Editor öffnen</strong> zeigt dieselbe Datei in VS Code. Lesen genügt; niemand muss das schreiben können.</p></div></section>
+<section class="folie" id="jetzt-baut-ihr-sie-nach" data-nr="12"><h2 id="jetzt-baut-ihr-sie-nach">Jetzt baut ihr sie nach</h2><p><span class="schild">In eurem Blockout</span></p><div class="schritte"><ol>
+<li>Würfel „Schlüssel“ und Würfel „Tür“</li>
+<li>Schild: 3D Object › Text - TextMeshPro</li>
+<li>Türzone: leeres GameObject vor der Tür, Box Collider, Is Trigger</li>
+<li>GameObject › Kit › Interaktion, dann Neuer Graph …</li>
+</ol></div><div class="nur-handout"><p>So entstehen die Objekte, alle als Kinder einer leeren „Tür-Gruppe“ oder lose in der Szene:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Objekt</th><th>Anlegen</th><th>Maße und Lage</th></tr></thead><tbody><tr><td>Schlüssel</td><td>3D Object › Cube</td><td>Scale 0,2 × 0,2 × 0,6, auf den Boden, ein paar Meter von der Tür</td></tr><tr><td>Tür</td><td>3D Object › Cube</td><td>Scale 3 × 3 × 0,2, steht im Türdurchgang auf dem Boden</td></tr><tr><td>Schild</td><td>3D Object › Text - TextMeshPro</td><td>neben die Tür, auf Augenhöhe; beim ersten Mal fragt Unity nach <strong>Import TMP Essentials</strong>: bestätigen</td></tr><tr><td>Türzone</td><td>Create Empty, dann Add Component › Box Collider, <strong>Is Trigger</strong> an</td><td><strong>Size</strong> 3 × 2 × 2, Mitte etwa 1,5 m vor der Tür und 1 m über dem Boden, so dass man auf dem Weg zur Tür hineinläuft</td></tr></tbody></table><p>Ein leeres GameObject entsteht dort, wo die Scene-Ansicht gerade hinschaut, und sein Box Collider ist 1 × 1 × 1 m. Darum die Türzone bewusst verschieben und vergrößern; der grüne Drahtrahmen zeigt, wo sie liegt. Dann <strong>GameObject › Kit › Interaktion</strong> und im Inspector <strong>Neuer Graph …</strong>: Unity fragt, wo die <code>.kit</code>-Datei liegen soll.</p></div></section>
+<section class="folie" id="acht-knoten-holen" data-nr="13"><h2 id="acht-knoten-holen">Acht Knoten holen</h2><div class="schritte"><ol>
+<li>„+ Knoten“: Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen</li>
+<li>Den Schlüssel aus der Hierarchy auf die Leinwand ziehen: Objekt „Schlüssel“</li>
+<li>Unten links: Instanz wählen</li>
+</ol></div><div class="rechts"><p>Ohne Instanz bleiben die ◆-Felder grau.</p></div><div class="nur-handout"><p>„+ Knoten“ unten links im Graph-Fenster öffnet die deutsche Liste mit den Gruppen Auslöser, Ablauf, Zustand, Aktion, Spielsysteme und Erweiterung. Die Leertaste im Graph öffnet die Liste des Graph Toolkits mit englischen Klassennamen; beide legen dieselben Knoten an. Den Schlüssel brauchen zwei Knoten, Benutzen und An/Aus. Darum bekommt er einen eigenen Knoten <strong>Objekt</strong>: Zieht ihn aus der Hierarchy direkt auf die Leinwand. <strong>Instanz</strong> heißt: welche Interaktion in der Szene dieses Fenster gerade bearbeitet. Der Knopf unten links im Graph-Fenster wählt sie; erst dann lassen sich Objekte auf die ◆-Felder ziehen. Der Ton aus dem Beispiel ist für den Nachbau nicht nötig.</p></div></section>
+<section class="folie" id="die-draehte" data-nr="14"><h2 id="die-drähte">Die Drähte</h2><div class="schritte"><ol>
+<li>Objekt ◆ → Benutzen, An/Aus</li>
+<li>Benutzt ▶ → 1. Ja setzen, 2. Ausschalten</li>
+<li>Betreten ▶ → Prüfen</li>
+<li>Wert ● → Bedingung</li>
+<li>Ja ▶ → Hin. Nein ▶ → Setzen</li>
+</ol></div><div class="nur-handout"><p>Die vollständige Liste für den Nachbau. Links der Ausgang, rechts der Eingang:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Von</th><th>Nach</th><th>Draht</th></tr></thead><tbody><tr><td>Objekt „Schlüssel“ · ◆ Objekt</td><td>Benutzen · ◆ Objekt</td><td>◆</td></tr><tr><td>Objekt „Schlüssel“ · ◆ Objekt</td><td>An/Aus · ◆ Objekt</td><td>◆</td></tr><tr><td>Benutzen · Benutzt</td><td>Merker · Ja setzen (Nr. 1)</td><td>▶</td></tr><tr><td>Benutzen · Benutzt</td><td>An/Aus · Ausschalten (Nr. 2)</td><td>▶</td></tr><tr><td>Zone · Betreten</td><td>Wenn · Prüfen</td><td>▶</td></tr><tr><td>Merker · Wert</td><td>Wenn · Bedingung</td><td>●</td></tr><tr><td>Wenn · Ja</td><td>Bewegen · Hin</td><td>▶</td></tr><tr><td>Wenn · Nein</td><td>Text setzen · Setzen</td><td>▶</td></tr></tbody></table><p>Einstellungen an den Knoten: Merker <strong>Name</strong> „Schlüssel vorhanden“, <strong>Startwert</strong> aus. Bewegen <strong>Was</strong> Position, <strong>Weg</strong> 0, 3, 0, <strong>Dauer</strong> 1. Text setzen <strong>Text</strong> „Verschlossen.“. Zone <strong>Nur Tag</strong> Player (so ist es voreingestellt).</p><p>Was auf die ◆-Felder der Knoten kommt, aus der Hierarchy hineingezogen:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Knoten · Platz</th><th>Objekt</th></tr></thead><tbody><tr><td>Objekt „Schlüssel“</td><td>Schlüssel</td></tr><tr><td>Zone · ◆ Zone</td><td>Türzone</td></tr><tr><td>Bewegen · ◆ Objekt</td><td>Tür</td></tr><tr><td>Text setzen · ◆ Textfeld</td><td>Schild</td></tr><tr><td>Benutzen · ◆ Kamera</td><td>leer lassen (Hauptkamera)</td></tr></tbody></table><p>Dann Play. Gespeichert wird von selbst: Vor jedem Play speichert das Kit offene Graphen und prüft alle Interaktionen; was fehlt, steht als Warnung in der Console.</p><p><strong>Wenn es hängt:</strong></p><ul>
+<li>Die ◆-Felder sind grau und nehmen nichts an: unten links im Graph-Fenster die Instanz wählen.</li>
+<li>Wenn sagt immer Nein: Der Draht von Merker · Wert zu Wenn · Bedingung fehlt.</li>
+<li>Zone zeigt nie ✓: Is Trigger fehlt, die Zone liegt nicht im Weg, oder sie ist zu klein (grüner Rahmen in der Scene-Ansicht).</li>
+<li>Der Schlüssel reagiert nicht auf E: näher als 3 m herangehen und ihn ansehen; er braucht seinen Box Collider.</li>
+</ul></div></section>
+<section class="folie" id="die-interaktion-als-satz" data-nr="15"><h2 id="die-interaktion-als-satz">Die Interaktion als Satz</h2><p>Sagt den Satz zu eurer Tür laut, bevor ihr Play drückt.</p><div class="merke"><p>Wenn [Event] und [Bedingung], dann [Aktion]. Sonst [andere Aktion].</p></div><div class="nur-handout"><p>Wer den Satz nicht sagen kann, hat noch keine klare Interaktion. Das gilt auch für die eigene Spec.</p></div></section>
+<section class="folie" id="laeuft-nicht-so-sucht-ihr" data-nr="16"><h2 id="läuft-nicht-so-sucht-ihr">Läuft nicht? So sucht ihr</h2><div class="schritte"><ol>
+<li>Steht ein ! an einem Knoten? Grund lesen.</li>
+<li>⛔ blockiert? Dort endet die Kette, mit Begründung.</li>
+<li>Gar nichts passiert? Hat der Auslöser ✓? Sonst Zone oder Tag prüfen.</li>
+</ol></div><div class="nur-handout"><p>Der Graph sagt, wo es hängt. Gesucht wird von links nach rechts, vom Auslöser zur Aktion.</p></div></section>
+<section class="folie" id="eure-variation" data-nr="17"><h2 id="eure-variation">Eure Variation</h2><p><span class="schild">10 Minuten</span></p><ul>
+<li>Drei Schlüssel: <a href="/teaching/gec1/concepts/state/" class="begriff art-daten" data-begriff="state">Zähler</a> mit Ziel 3</li>
+<li>Die Tür fällt nach 5 s wieder zu: Warten, dann Bewegen › Zurück</li>
+<li>Das Schild spricht nur beim ersten Mal: Einmal</li>
+</ul><div class="rechts"><p>Erst den Satz sagen, dann bauen.</p></div><div class="nur-handout"><p>Eine Variante reicht; wer fertig ist, nimmt die nächste. Die Falle mit einer Kiste kommt nach der Pause, weil sie einen Rigidbody braucht.</p></div></section>
+<section class="folie" id="pause" data-nr="18"><h2 id="pause">Pause</h2><div class="gross"><p>10 Minuten</p></div></section>
+<section class="folie" id="collider-oder-trigger" data-nr="19"><h2 id="collider-oder-trigger">Collider oder Trigger?</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Links eine feste Wand: Die Kugel prallt ab, Unity meldet OnCollisionEnter. Rechts eine gestrichelte Zone: Die Kugel rollt hindurch, Unity meldet OnTriggerEnter."><svg class="tafel-svg" role="img" aria-label="Links eine feste Wand: Die Kugel prallt ab, Unity meldet OnCollisionEnter. Rechts eine gestrichelte Zone: Die Kugel rollt hindurch, Unity meldet OnTriggerEnter." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 440" width="1080" height="440"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="520"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="schild-r" x="0" y="0" width="160" height="48"/><text class="schild-t" x="16" y="34">Collider</text>
+<rect class="d-voll" x="400" y="80" width="44" height="240"/><circle class="d-voll" cx="70" cy="200" r="34"/>
+<text class="t-text" x="0" y="372">prallt ab</text><text class="t-mono" x="0" y="420">OnCollisionEnter</text>
+<rect class="schild-r" x="580" y="0" width="140" height="48"/><text class="schild-t" x="596" y="34">Trigger</text>
+<rect class="d gestrichelt" x="880" y="80" width="110" height="240"/><circle class="d-voll" cx="650" cy="200" r="34"/>
+<text class="t-text" x="580" y="372">geht durch, meldet</text><text class="t-mono" x="580" y="420">OnTriggerEnter</text>
+<g data-kreide-schritt="1"><path class="k" d="M114 200 H388"/><path class="k" d="M366 184 L390 200 L366 216"/><path class="k" d="M388 220 C 330 250, 250 270, 180 280"/><path class="k" d="M204 266 L178 281 L204 294"/><path class="k-hi" d="M378 170 L360 150 M384 200 L356 200 M378 230 L360 250"/></g>
+<g data-kreide-schritt="2"><path class="k" d="M694 200 H1060"/><path class="k" d="M1038 184 L1062 200 L1038 216"/><path class="k-hi" d="M935 120 L935 96 M915 128 L900 110 M955 128 L970 110"/></g>
+</svg>
+</button></figure><div class="rechts"><p><a href="/teaching/gec1/concepts/collision/" class="begriff art-event" data-begriff="collision">Kollision</a>: fest oder durchlässig.</p><p>Is Trigger ist ein Haken am Collider.</p></div><div class="nur-handout"><p>Ein Collider ist die unsichtbare Form, mit der ein Objekt an der <a href="/teaching/gec1/concepts/collision/" class="begriff art-event" data-begriff="collision">Kollision</a> teilnimmt. Ein normaler Collider ist fest. Mit <strong>Is Trigger</strong> wird er durchlässig und meldet nur noch, dass etwas hinein- oder hinauskommt. Die beiden Meldungen haben verschiedene Voraussetzungen:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Meldung</th><th>im Kit</th><th>wann sie kommt</th></tr></thead><tbody><tr><td>Trigger: <code>OnTriggerEnter</code></td><td><strong>Zone</strong></td><td>eines der beiden Objekte hat einen <a href="/teaching/gec1/concepts/rigidbody/" class="begriff art-daten" data-begriff="rigidbody">Rigidbody</a> (auch kinematisch) oder einen CharacterController, wie die Spielfigur</td></tr><tr><td>Aufprall: <code>OnCollisionEnter</code></td><td><strong>Zusammenstoß</strong></td><td>mindestens eines der beiden hat einen Rigidbody, bei dem Is Kinematic aus ist</td></tr></tbody></table><p>Darum meldet die Spielfigur Zonen zuverlässig, aber keinen Aufprall: Läuft sie gegen eine Wand, gibt es kein <code>OnCollisionEnter</code> und der Knoten Zusammenstoß bleibt still. Der CharacterController hat dafür eine eigene Meldung, <code>OnControllerColliderHit</code>, die das Kit nicht als Knoten anbietet. Zusammenstoß gehört an Dinge mit Rigidbody: eine Kiste, die auf den Boden fällt, ein Ball, der gegen eine Wand rollt.</p></div></section>
+<section class="folie" id="ein-rigidbody-uebergibt-an-die-physik" data-nr="20"><h2 id="ein-rigidbody-übergibt-an-die-physik">Ein Rigidbody übergibt an die Physik</h2><p>Mit <a href="/teaching/gec1/concepts/rigidbody/" class="begriff art-daten" data-begriff="rigidbody">Rigidbody</a> fällt der Würfel.</p><div class="schritte"><ol>
+<li>Kiste in die Luft, Add Component › Rigidbody, Play</li>
+<li>Die Falle: Zone, dann Kraft auf die Kiste</li>
+<li>Kraft: Richtung 0, 1, 0, Stärke 6, Stoß</li>
+</ol></div><div class="rechts"><p>Felder: Mass, Use Gravity, Is Kinematic</p></div><div class="nur-handout"><p>Mit Rigidbody bestimmt die Physik die Position. Wer die Transform trotzdem direkt verschiebt, arbeitet gegen sie; das Objekt ruckelt oder rutscht durch Wände. <strong>Is Kinematic</strong> heißt: Die Physik bewegt das Objekt nicht, ein Skript oder eine Animation tut es. Auf einen kinematischen Körper wirkt auch der Knoten Kraft nicht; er meldet das. <strong>Constraints</strong> sperren einzelne Achsen, etwa damit eine Figur nicht umkippt.</p><p>Ein Aufprall lässt sich jetzt auch hören: Eine neue Interaktion mit <strong>Zusammenstoß</strong> (◆ Körper: der Collider der Kiste) · Getroffen → <strong>Notiz in Konsole</strong>. Fällt die Kiste auf den Boden, steht die Notiz in der Console. Das geht, weil die Kiste einen Rigidbody hat; an der Spielfigur bliebe Zusammenstoß still.</p><p>Die Falle als Graph: eine neue Interaktion, <strong>Zone</strong> (◆ Zone: eine Türzone-artige Trigger-Box vor der Kiste) · Betreten → <strong>Kraft</strong> · Anstoßen, ◆ Körper = Kiste. <strong>Stoß</strong> wirkt einmal, wenn das Event ankommt. <strong>Dauerkraft</strong> schiebt ab Kurs-Paket 0.3.2 so lange, bis der Eingang <strong>Stopp</strong> kommt, etwa von Zone · Verlassen.</p><p>Wie so etwas in einem fertigen Spiel aussieht: In HIGH WATER (gebaut in Godot) ist jeder Gegner ein Rigidbody mit 3 kg. Im Stehen sind seine Drehachsen gesperrt, damit er aufrecht läuft; ein harter Treffer hebt die Sperre auf, und aus dem Läufer wird ein Geschoss, das beim Aufprall andere trifft. In Unity hieße das <strong>Constraints › Freeze Rotation</strong>, im Code wieder freigegeben mit <code>rb.constraints = RigidbodyConstraints.None</code>.</p></div></section>
+<section class="folie" id="kraft-und-drehmoment" data-nr="21"><h2 id="kraft-und-drehmoment">Kraft und Drehmoment</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Links: Eine Kraft am Schwerpunkt schiebt eine Kiste in eine Richtung, AddForce. Rechts: Ein Drehmoment dreht einen Balken um seine Achse, von oben gesehen, AddTorque."><svg class="tafel-svg" role="img" aria-label="Links: Eine Kraft am Schwerpunkt schiebt eine Kiste in eine Richtung, AddForce. Rechts: Ein Drehmoment dreht einen Balken um seine Achse, von oben gesehen, AddTorque." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 420" width="1080" height="420"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="500"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<rect class="schild-r" x="0" y="0" width="120" height="48"/><text class="schild-t" x="16" y="34">Kraft</text>
+<rect class="d-voll" x="40" y="140" width="140" height="140"/><rect class="d gestrichelt" x="300" y="140" width="140" height="140"/>
+<text class="t-text" x="0" y="350">schiebt in eine Richtung</text><text class="t-mono" x="0" y="400">rb.AddForce(…)</text>
+<rect class="schild-r" x="600" y="0" width="210" height="48"/><text class="schild-t" x="616" y="34">Drehmoment</text>
+<rect class="d-voll" x="640" y="190" width="360" height="40" transform="rotate(-20 820 210)"/><circle class="d-voll" cx="820" cy="210" r="10"/>
+<text class="t-text" x="600" y="350">dreht um eine Achse</text><text class="t-mono" x="600" y="400">rb.AddTorque(…)</text>
+<g data-kreide-schritt="1"><path class="k-hi" d="M110 210 H330"/><path class="k-hi" d="M306 192 L332 210 L306 228"/></g>
+<g data-kreide-schritt="2"><path class="k-hi" d="M920 100 A 130 130 0 0 1 950 300"/><path class="k-hi" d="M928 288 L952 304 L962 276"/><text class="t-klein" x="836" y="252">Achse</text></g>
+</svg>
+</button></figure><div class="rechts"><p>Kraft: Knoten im Kit</p><p><a href="/teaching/gec1/concepts/torque/" class="begriff art-daten" data-begriff="torque">Drehmoment</a>: fehlt im Kit</p></div><div class="nur-handout"><p>Eine Kraft ist ein <a href="/teaching/gec1/concepts/vector/" class="begriff art-daten" data-begriff="vector">Vektor</a>: Richtung und Stärke. <code>AddForce</code> schiebt den ganzen Körper, <code>AddTorque</code> dreht ihn um eine Achse. Beide gibt es als Stoß (<code>ForceMode.Impulse</code>, ein einzelner Moment, etwa ein Tritt) oder als gleichmäßiges Schieben (<code>ForceMode.Force</code>, in jedem Physik-Schritt, also in <code>FixedUpdate()</code>). Masse zählt: Die gleiche Kraft bewegt eine schwere Kiste weniger.</p></div></section>
+<section class="folie" id="die-console-liest-man-von-oben" data-nr="22"><h2 id="die-console-liest-man-von-oben">Die Console liest man von oben</h2><div class="schritte"><ol>
+<li>Rot: Fehler. Gelb: Warnung. Weiß: Hinweis.</li>
+<li>Den obersten Fehler zuerst: Die anderen folgen oft aus ihm.</li>
+<li>Doppelklick führt zur Zeile im Code.</li>
+<li>Collapse fasst gleiche Meldungen zusammen.</li>
+</ol></div><div class="rechts"><p><a href="/teaching/gec1/concepts/console/" class="begriff art-daten" data-begriff="console">Console</a>: Window › General › Console</p><p>Strg + Umschalt + C</p></div><div class="nur-handout"><p>Die <a href="/teaching/gec1/concepts/console/" class="begriff art-daten" data-begriff="console">Console</a> sammelt, was Unity und eure Skripte melden. Ein roter Kompilierfehler (<code>error CS…</code>) blockiert Play ganz, bis er behoben ist; Unity sagt dann „All compiler errors have to be fixed before you can enter playmode!“. Ein Laufzeitfehler (Exception) bricht nur das Skript an dieser Stelle ab, das Spiel läuft weiter. Steht dieselbe Meldung hundertmal da, kommt sie aus <code>Update()</code> oder <code>FixedUpdate()</code>: in jedem Frame einmal. <strong>Clear</strong> leert die Liste (Kompilierfehler bleiben stehen), <strong>Error Pause</strong> hält das Spiel an, sobald ein Skript einen Fehler meldet.</p></div></section>
+<section class="folie" id="die-kaputte-werkstatt" data-nr="23"><h2 id="die-kaputte-werkstatt">Die kaputte Werkstatt</h2><p><span class="schild">10 Minuten</span></p><p>Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen</p><p>Fünf Fehler. Play drücken, Console lesen, einen beheben, wieder Play.</p><figure class="bild zoombar bild--mitte"><button type="button" class="zoom" aria-label="Vergrößern: Isometrische Kreidezeichnung einer kaputten Werkstatt: Eine Kiste schwebt, das Windrad sitzt nicht auf seiner Welle, eine Lampe ist nicht eingesteckt und eine Figur läuft gegen eine unsichtbare Wand."><img src="/teaching/gec1/schluesselbilder/werkstatt.webp" alt="Isometrische Kreidezeichnung einer kaputten Werkstatt: Eine Kiste schwebt, das Windrad sitzt nicht auf seiner Welle, eine Lampe ist nicht eingesteckt und eine Figur läuft gegen eine unsichtbare Wand." width="1200" height="900" loading="lazy"></button><figcaption>KI-generiert</figcaption></figure><div class="rechts"><p>Ab Kurs-Paket 0.3.2</p><p>Szene: Assets › Kit Beispiel › Werkstatt</p></div><div class="nur-handout"><p>Die Werkstatt ist eine Beispiel-Szene im Kurs-Paket ab Version 0.3.2, absichtlich kaputt. Bauen: <strong>Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen</strong>. Das legt <code>Assets/Kit Beispiel/Werkstatt/</code> an, darin die Szene <code>Werkstatt.unity</code>; per Doppelklick öffnen. Fehlt der Menüpunkt, ist das Kurs-Paket noch auf 0.3.1: oben unter „Kurs-Paket prüfen“ aktualisieren.</p><p>So sieht die Console nach dem ersten Play aus, mit Collapse:</p><pre><code>[Kit] Lampe › An/Aus: ◆ Objekt fehlt (Slot „An/Aus: Objekt“ ist leer)            1
+UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.  356
+</code></pre><details><summary>Auflösung, erst nach dem eigenen Versuch</summary><ol>
+<li><strong>Knopfzone</strong>: Is Trigger fehlt. Die Spielfigur läuft gegen eine unsichtbare Wand. Das Kit warnt vor Play: „„Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken)“, und der Graph „Knopf und Kiste“ markiert die Zone rot.</li>
+<li><strong>Kiste</strong>: Is Kinematic ist an. Erst wenn Fehler 1 behoben ist, meldet der Knoten Kraft: „„Kiste“ ist kinematisch: Kräfte wirken nicht“. Ein Fehler kann den nächsten verdecken.</li>
+<li><strong>Lampe</strong>: Der ◆-Platz von An/Aus ist leer. Lampenschirm hineinziehen, dann schaltet L das Licht.</li>
+<li><strong>Kiste (soll fallen)</strong>: Ihr fehlt ein Rigidbody. Keine Meldung, sie schwebt einfach.</li>
+<li><strong>Windrad</strong>: Im Skript ist das Feld Fluegel leer, in jedem Physik-Schritt kommt die Meldung neu. Doppelklick zeigt die Zeile mit <code>AddTorque</code>; die Lösung liegt im Inspector: Flügel hineinziehen.</li>
+</ol><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Der Graph Knopf und Kiste: Der Knoten Zone ist rot hinterlegt und meldet: „Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken). Daneben der Knoten Kraft mit Richtung 0, 1, 0, Stärke 6, Art Stoß, Körper = Kiste."><img src="/teaching/gec1/beispiele/kit/werkstatt-zone.webp" alt="Der Graph Knopf und Kiste: Der Knoten Zone ist rot hinterlegt und meldet: „Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken). Daneben der Knoten Kraft mit Richtung 0, 1, 0, Stärke 6, Art Stoß, Körper = Kiste." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Prototyp der Werkstatt</figcaption></figure></details></div></section>
+<section class="folie" id="eine-meldung-ist-ein-hinweis" data-nr="24"><h2 id="eine-meldung-ist-ein-hinweis">Eine Meldung ist ein Hinweis</h2><div class="gross"><p>Die Console sagt, wo es kracht. Warum, findet ihr in der Szene.</p></div><div class="nur-handout"><p>Fehler 5 der Werkstatt ist der Normalfall in Unity: Die Zeile im Code ist richtig, das Feld im Inspector ist leer. Fehler 4 zeigt, dass nicht jeder Fehler eine Meldung hat.</p></div></section>
+<section class="folie" id="interaktion-1-in-eurem-blockout" data-nr="25"><h2 id="interaktion-1-in-eurem-blockout">Interaktion 1 in eurem Blockout</h2><div class="schritte"><ol>
+<li>Den Satz aus eurer Spec sagen</li>
+<li>Event, Bedingung und Aktion darin markieren</li>
+<li>Bauen, Play, beobachten</li>
+<li>Commit</li>
+</ol></div><div class="rechts"><p>Bis 17:00. Ich komme rum.</p></div><div class="nur-handout"><p>Wer noch keine Spec hat, schreibt sie jetzt in fünf Minuten: Verb, Regel, Rückmeldung, Scheitern. Vor dem ersten Knoten ein Commit.</p></div></section>
+<section class="folie" id="ein-knoten-den-es-nicht-gibt" data-nr="26"><h2 id="ein-knoten-den-es-nicht-gibt">Ein Knoten, den es nicht gibt</h2><p>Kein Drehmoment im Kit? Tools › Kit › Eigener Knoten (C#), dann füllt ein Agent die Dateien.</p><div class="rechts"><pre><code>Knoten „Drehmoment“
+füllen, wie Kraft
+(Push.cs).
+◆ Körper: Rigidbody.
+Achse, Stärke.
+Drehen → Angewendet.
+Kopfkommentar.
+Nur diese zwei
+Dateien ändern.
+</code></pre></div><div class="nur-handout"><p>Agenten-Übung Tag 3: Spec → Agent schreibt einen kleinen Knoten im Vertrag des Kits → Diff lesen → spielen → committen oder verwerfen. Im Kurs lesen wir einen vorbereiteten Diff. Zu Hause selbst ausprobieren ist freiwillig. Zuerst <strong>Tools › Kit › Eigener Knoten (C#)</strong> mit dem Namen „Drehmoment“ ausführen; das legt die beiden Dateien in <code>Assets/Eigene Knoten</code> an. Dann committen. Dann der Auftrag an den Agenten: „Fülle den Kit-Knoten in <code>Assets/Eigene Knoten/Drehmoment.cs</code> und <code>Assets/Eigene Knoten/Editor/DrehmomentNode.cs</code> nach dem Muster von Kraft (Push.cs im Kurs-Paket). ◆ Körper: Rigidbody. Einstellungen Achse und Stärke. Eingang Drehen, Ausgang Angewendet. Ist der Körper kinematisch, soll der Knoten mit Grund scheitern (Fail). Beide Dateien bekommen oben einen Kopfkommentar. Nur diese zwei Dateien ändern, nicht committen.“ Danach eine Zeile ins KI-Verzeichnis.</p></div></section>
+<section class="folie" id="was-ein-knoten-braucht" data-nr="27"><h2 id="was-ein-knoten-braucht">Was ein Knoten braucht</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Links fünf Markierungen aus dem C#-Code, rechts der Knoten, der daraus entsteht. NodeInfo gibt Titel und Gruppe, Input den Eingang Drehen, Ref den Platz ◆ Körper, Setting die Einstellung Stärke, Output den Ausgang Angewendet."><svg class="tafel-svg" role="img" aria-label="Links fünf Markierungen aus dem C#-Code, rechts der Knoten, der daraus entsteht. NodeInfo gibt Titel und Gruppe, Input den Eingang Drehen, Ref den Platz ◆ Körper, Setting die Einstellung Stärke, Output den Ausgang Angewendet." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 470" width="1080" height="470"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="550"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<text class="t-mono" x="0" y="60">[NodeInfo("Drehmoment", …)]</text>
+<text class="t-mono" x="0" y="150">[Input("Drehen")]</text>
+<text class="t-mono" x="0" y="240">[Ref("Körper")]</text>
+<text class="t-mono" x="0" y="330">[Setting("Stärke")]</text>
+<text class="t-mono" x="0" y="420">[Output("Angewendet")]</text>
+<rect class="d-flaeche" x="660" y="20" width="420" height="430"/><path class="d-linie" d="M660 84 H1080"/>
+<text class="t" x="684" y="66">Drehmoment</text>
+<text class="t-30" x="684" y="160">▶ Drehen</text>
+<text class="t-30" x="684" y="250">◆ Körper</text>
+<text class="t-30" x="684" y="340">Stärke  5</text>
+<text class="t-30" x="1056" y="430" text-anchor="end">Angewendet ▶</text>
+<g data-kreide-schritt="1"><path class="k" d="M540 52 H650"/><path class="k-ev" d="M340 142 H670"/></g>
+<g data-kreide-schritt="2"><path class="k-rf" d="M310 228 H670 M310 248 H670"/><path class="k" d="M380 322 H670"/></g>
+<g data-kreide-schritt="3"><path class="k-ev" d="M420 412 C 600 412, 700 400, 830 420"/></g>
+</svg>
+</button></figure><div class="rechts"><p>Zwei Dateien in Assets › Eigene Knoten. Das Menü legt sie an.</p></div><div class="nur-handout"><p>Ein eigener Knoten besteht aus zwei Dateien, beide unter <code>Assets/Eigene Knoten</code>: <code>Drehmoment.cs</code> (der Knoten) und <code>Editor/DrehmomentNode.cs</code> (sein Gesicht im Graph-Editor). Das Menü <strong>Tools › Kit › Eigener Knoten (C#)</strong> legt beide an, dazu die Assembly-Dateien des Ordners; dasselbe gibt es unter <strong>Assets › Create › Kit › Eigener Knoten (C#)</strong>. Danach steht der Knoten unter „+ Knoten“ › Aktion › Drehmoment. Ohne <code>NodeInfo</code> landet er in der Gruppe „Eigene“ unter seinem Klassennamen.</p><details><summary>So sollte der Diff aussehen</summary><p><code>Assets/Eigene Knoten/Drehmoment.cs</code>:</p><pre><code class="language-csharp">// Drehmoment: ein eigener Kit-Knoten, der einen Rigidbody um eine Achse dreht.
+// Herkunft: geschrieben von einem Agenten (Werkzeug und Modell siehe KI-Verzeichnis),
+// geprüft und getestet von &lt;Name&gt;, 13.11.2026.
+using System;
+using UnityEngine;
+using Kit;
+
+[Serializable]
+[NodeInfo(&quot;Drehmoment&quot;, &quot;Aktion&quot;, &quot;Rigidbody um eine Achse drehen&quot;)]
+public class Drehmoment : KitNode
+{
+    [Ref(&quot;Körper&quot;)] public Rigidbody body;
+    [Setting(&quot;Achse&quot;)] public Vector3 axis = Vector3.up;
+    [Setting(&quot;Stärke&quot;)] public float strength = 5f;
+
+    [Output(&quot;Angewendet&quot;)] [NonSerialized] public Output applied;
+
+    [Input(&quot;Drehen&quot;)]
+    public void Spin(Signal s)
+    {
+        if (body.isKinematic) { Fail($&quot;„{body.name}“ ist kinematisch: Drehmoment wirkt nicht&quot;); return; }
+        body.AddTorque(axis.normalized * strength, ForceMode.Impulse);
+        applied.Fire(s);
+    }
+}
+</code></pre><p><code>Assets/Eigene Knoten/Editor/DrehmomentNode.cs</code>:</p><pre><code class="language-csharp">// DrehmomentNode: zeigt den Knoten Drehmoment im Graph-Editor des Kits.
+// Herkunft: wie Drehmoment.cs.
+using System;
+using Kit.Editor;
+
+[Serializable]
+public class DrehmomentNode : KitEditorNode
+{
+    public override Type RuntimeType =&gt; typeof(Drehmoment);
+}
+</code></pre></details></div></section>
+<section class="folie" id="diff-lesen-spielen-entscheiden" data-nr="28"><h2 id="diff-lesen-spielen-entscheiden">Diff lesen, spielen, entscheiden</h2><div class="schritte"><ol>
+<li>Diff: Nur die zwei Dateien in Eigene Knoten?</li>
+<li>Steht oben ein Kopfkommentar? Feuert <code>Angewendet</code>?</li>
+<li>Drehkreuz bauen, Taste → Drehmoment, Play</li>
+<li>Dreht es? Commit. Sonst verwerfen.</li>
+</ol></div><div class="nur-handout"><p>In GitHub Desktop zeigt der Reiter <strong>Changes</strong> den Diff. Hat der Agent andere Dateien als die zwei in <code>Assets/Eigene Knoten</code> angefasst, ist das ein Grund zum Verwerfen, auch wenn es läuft.</p><p>Das Drehkreuz zum Testen: ein Würfel „Arm“, Scale 2,4 × 0,12 × 0,25, auf etwa 1 m Höhe. Dazu Add Component › Rigidbody mit <strong>Use Gravity</strong> aus, <strong>Angular Damping</strong> 0,6 und unter <strong>Constraints</strong> Freeze Position X, Y und Z sowie Freeze Rotation X und Z. Ohne diese Sperren fällt der Arm herunter und rollt weg; das ist dann kein Fehler des Knotens. Graph: <strong>Taste</strong> (Taste R) · Gedrückt → <strong>Drehmoment</strong> · Drehen, Achse 0, 1, 0, Stärke 4, ◆ Körper = Arm.</p></div></section>
+<section class="folie" id="jedes-skript-sagt-was-es-ist" data-nr="29"><h2 id="jedes-skript-sagt-was-es-ist">Jedes Skript sagt, was es ist</h2><p>Ab heute beginnt jedes eigene Skript mit einem Kopfkommentar.</p><pre><code class="language-csharp">// Drehmoment: dreht einen Rigidbody.
+// Herkunft: Agent, geprüft von &lt;Name&gt;, 13.11.2026.
+</code></pre><div class="rechts"><p>Der Agent darf ihn schreiben. Ihr prüft, ob er stimmt.</p></div><div class="nur-handout"><p>Der Kopfkommentar steht oben in jedem Skript, das ihr selbst oder mit einem Agenten schreibt: in einem Satz, was es tut, und woher es kommt (selbst geschrieben, oder von welchem Agenten, geprüft von wem). Stellen, an denen das Warum nicht offensichtlich ist, bekommen ebenfalls einen Kommentar. Der Abgabe-Check am Ende des Semesters fragt genau danach. Die Zeile im KI-Verzeichnis ersetzt er nicht.</p></div></section>
+<section class="folie" id="der-neue-knoten-im-graph" data-nr="30"><h2 id="der-neue-knoten-im-graph">Der neue Knoten im Graph</h2><figure class="spielbild zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Ein Graph mit zwei Knoten im Play-Modus: Taste R, Ausgang Gedrückt, führt zu Drehmoment, Eingang Drehen. Drehmoment hat Achse 0, 1, 0, Stärke 4 und den Platz ◆ Körper = Arm (Rigidbody); darunter ein Häkchen: Angewendet."><img src="/teaching/gec1/beispiele/kit/drehkreuz.webp" alt="Ein Graph mit zwei Knoten im Play-Modus: Taste R, Ausgang Gedrückt, führt zu Drehmoment, Eingang Drehen. Drehmoment hat Achse 0, 1, 0, Stärke 4 und den Platz ◆ Körper = Arm (Rigidbody); darunter ein Häkchen: Angewendet." width="1280" height="720" loading="lazy"></button><figcaption>Unity 6.3 · Kurs-Paket 0.3.1, eigener Knoten</figcaption></figure><div class="rechts"><p>Taste R, und der Arm des Drehkreuzes dreht sich.</p></div><div class="nur-handout"><p>Der eigene Knoten steht unter „+ Knoten“ › Aktion und hat <strong>Code ansehen</strong> wie die eingebauten.</p></div></section>
+<section class="folie" id="kaputt-zurueck-zum-letzten-guten-stand" data-nr="31"><h2 id="kaputt-zurück-zum-letzten-guten-stand">Kaputt? Zurück zum letzten guten Stand</h2><figure class="tafel zoombar"><button type="button" class="zoom" aria-label="Vergrößern: Eine Zeitleiste mit Commits: Blockout begehbar, Tür geht auf, Agent: Drehmoment. Der dritte ist kaputt. Ein neuer Commit Revert nimmt ihn zurück; der Fehler bleibt im Verlauf sichtbar."><svg class="tafel-svg" role="img" aria-label="Eine Zeitleiste mit Commits: Blockout begehbar, Tür geht auf, Agent: Drehmoment. Der dritte ist kaputt. Ein neuer Commit Revert nimmt ihn zurück; der Fehler bleibt im Verlauf sichtbar." xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300" width="1080" height="300"><defs><filter id="kreide-tafel" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1160" height="380"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="11" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 1.95" result="m"/><feComposite in="d" in2="m" operator="in"/></filter></defs>
+
+<path class="d-linie" d="M40 150 H1040"/>
+<circle class="d-voll" cx="110" cy="150" r="24"/><text class="t-klein" x="110" y="226" text-anchor="middle">Blockout</text><text class="t-klein" x="110" y="262" text-anchor="middle">begehbar</text>
+<circle class="d-voll" cx="380" cy="150" r="24"/><text class="t-klein" x="380" y="226" text-anchor="middle">Tür geht auf</text>
+<circle class="d-voll" cx="650" cy="150" r="24"/><text class="t-klein" x="650" y="226" text-anchor="middle">Agent:</text><text class="t-klein" x="650" y="262" text-anchor="middle">Drehmoment</text>
+<g data-kreide-schritt="1"><path class="k" d="M622 122 L678 178 M678 122 L622 178"/><text class="t" x="600" y="100" text-anchor="end">kaputt</text></g>
+<g data-kreide-schritt="2"><circle class="d-voll" cx="920" cy="150" r="24"/><text class="t-klein" x="920" y="226" text-anchor="middle">Revert</text><text class="t-klein" x="920" y="262" text-anchor="middle">„Drehmoment“</text><path class="k-hi" d="M908 112 C 860 40, 710 40, 664 110"/><path class="k-hi" d="M656 86 L662 114 L688 98"/><text class="t" x="790" y="40" text-anchor="middle">nimmt zurück</text></g>
+</svg>
+</button></figure><div class="rechts"><p>Noch nicht committet: Discard changes</p><p>Committet: Revert Changes in Commit, ein <a href="/teaching/gec1/concepts/revert/" class="begriff art-daten" data-begriff="revert">Revert</a></p></div><div class="nur-handout"><p>In GitHub Desktop: Reiter <strong>History</strong>, Rechtsklick auf den Commit, <strong>Revert Changes in Commit</strong>, dann <strong>Push origin</strong>. Ein <a href="/teaching/gec1/concepts/revert/" class="begriff art-daten" data-begriff="revert">Revert</a> löscht nichts. Git legt einen neuen Commit an, der die Änderungen eines alten zurücknimmt; beide bleiben im Verlauf. Das ist sicher, auch wenn der kaputte Stand schon gepusht ist. Noch nicht committete Änderungen verwirft in GitHub Desktop <strong>Discard changes</strong> (Rechtsklick auf die Datei). Vor dem Revert in Unity alles speichern; danach lädt Unity die geänderten Dateien neu. Im Terminal: <code>git revert &lt;Kennung&gt;</code>.</p></div></section>
+<section class="folie" id="vor-jedem-experiment-ein-commit" data-nr="32"><h2 id="vor-jedem-experiment-ein-commit">Vor jedem Experiment ein Commit</h2><div class="merke"><p>Commit vor dem Agenten, Commit vor dem Experiment. Dann kostet ein Fehlschlag einen Klick.</p></div></section>
+<section class="folie" id="erklaert-eure-interaktion" data-nr="33"><h2 id="erklärt-eure-interaktion">Erklärt eure Interaktion</h2><p>Zu zweit: Satz sagen, dann im Graph auf jeden Knoten zeigen, der darin vorkommt.</p><div class="rechts"><p>Die andere Person fragt: „Und wenn nicht?“</p></div><div class="nur-handout"><p>Ab heute jeden Freitag: ein System des eigenen Spiels laut erklären. Das ist die Übung für das Kapitel „ein System in eigenen Worten“ in der Dokumentation.</p></div></section>
+<section class="folie" id="checkpoint" data-nr="34"><h2 id="checkpoint">Checkpoint</h2><ol>
+<li>Interaktion 1 läuft im Blockout</li>
+<li>Committet und gepusht</li>
+<li>Zwei Sätze im Devlog unten in <code>DOKUMENTATION.md</code></li>
+<li>Antwort eines Agenten übernommen? Zeile im KI-Verzeichnis</li>
+</ol><div class="rechts"><p>Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.</p></div><div class="nur-handout"><p>Ins KI-Verzeichnis kommt eine Zeile, sobald die Antwort eines Agenten in die Arbeit eingeht: Code, eine Diagnose, die ihr anwendet, ein Text. Werkzeug, Modell, Zweck, Datei oder System, eine Notiz.</p></div></section>
+<section class="folie" id="die-naechsten-14-tage" data-nr="35"><h2 id="die-nächsten-14-tage">Die nächsten 14 Tage</h2><div class="schritte"><ol>
+<li>Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt, Werkstatt repariert</li>
+<li>Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread</li>
+<li>Wer 30 Minuten feststeckt, fragt</li>
+<li>Bis zum 27.11.: zwei Interaktionen und ein aktueller Build</li>
+</ol></div><div class="rechts"><p>Am 27.11. spielen andere euren Stand.</p></div><div class="nur-handout"><p>Meilenstein Vertical Slice am 27.11.: zwei Interaktionen aus der Liste der Aufgabenstellung laufen im Blockout, das KI-Verzeichnis hat Einträge, und ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner. Reihenfolge für den Build: speichern, committen, aus genau diesem Stand bauen, die <code>.exe</code> auf einem anderen Windows-Rechner testen (ZIP per USB-Stick oder Cloud-Link). Ab Tag 5 bekommt der getestete Commit zusätzlich einen Tag.</p><p>Aufwand bis zum 27.11., ehrlich gerechnet: etwa 10 bis 13 Stunden.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Was</th><th>Mindestens</th><th>Zeit</th></tr></thead><tbody><tr><td>Schlüssel und Tür im eigenen Projekt</td><td>läuft, committet</td><td>2–3 h</td></tr><tr><td>Werkstatt</td><td>alle fünf Fehler behoben</td><td>1 h</td></tr><tr><td>Spec der zweiten Interaktion</td><td>vier Zeilen und der Satz</td><td>0,5 h</td></tr><tr><td>Interaktion 2</td><td>läuft im Blockout, mit Knoten, die ihr kennt</td><td>4–6 h</td></tr><tr><td>Build und Test auf fremdem Rechner</td><td><code>.exe</code> startet, beide Interaktionen gehen</td><td>1 h</td></tr><tr><td>Clip, Post, Devlog</td><td>30 s, ein Hindernis, zwei Sätze</td><td>1 h</td></tr></tbody></table><p>Wird Interaktion 2 größer als sechs Stunden, wird sie kleiner: weniger Schritte, bekannte Knoten. Wer den Rettungsweg geht, rechnet etwa vier Stunden dazu. Wer feststeckt: 30 Minuten selbst suchen (Graph, Console, Konzeptseiten), dann im Blackboard-Thread fragen, mit Bild der Console und des Graphs.</p></div></section></article><aside class="rand"><div><b>Begriffe heute</b><ul><li><a class="begriff" href="/teaching/gec1/concepts/event/">Event</a></li><li><a class="begriff" href="/teaching/gec1/concepts/state/">Zustand</a></li><li><a class="begriff" href="/teaching/gec1/concepts/condition/">Bedingung</a></li><li><a class="begriff" href="/teaching/gec1/concepts/reference/">Referenz</a></li><li><a class="begriff" href="/teaching/gec1/concepts/graph/">Graph</a></li><li><a class="begriff" href="/teaching/gec1/concepts/collision/">Kollision</a></li><li><a class="begriff" href="/teaching/gec1/concepts/rigidbody/">Rigidbody</a></li><li><a class="begriff" href="/teaching/gec1/concepts/torque/">Drehmoment</a></li><li><a class="begriff" href="/teaching/gec1/concepts/console/">Console</a></li><li><a class="begriff" href="/teaching/gec1/concepts/revert/">Revert</a></li></ul></div><div><b>Bis zum nächsten Termin</b><p>Meilenstein Vertical Slice bis 27.11.: zwei Interaktionen laufen im Blockout, ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner, das KI-Verzeichnis hat Einträge. Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt nachgebaut und die Werkstatt aus Kurs-Paket 0.3.2 repariert. Eine Woche später im Blackboard-Thread: 30-Sekunden-Clip von Interaktion 1, ein Hindernis, der nächste Schritt. Dazu die Spec der zweiten Interaktion. Aufwand: etwa 10 bis 13 Stunden.</p></div><div><b>Folien</b><p><a href="/teaching/gec1/days/03/slides/">Foliensatz öffnen</a>. Taste ? zeigt die Bedienung.</p></div></aside></div><script type="module">document.querySelectorAll(`.handout section.folie`).forEach(e=>{let t=document.createElement(`a`);t.className=`folie-anker`,t.href=`slides/#/${e.id}`,t.textContent=`Folie ${Number(e.dataset.nr)+1}`,e.prepend(t)});</script></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-10-05T13:39Z · 21cef83</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

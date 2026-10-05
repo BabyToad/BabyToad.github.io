@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Rettungsweg · GEC1</title>
+<style>
+@page { size: A4; margin: 12mm; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 10pt/1.32 "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Arial, sans-serif; color: #1a1a1a; background: #fff; }
+.sheet { width: 186mm; height: 271mm; margin: 0 auto; display: flex; flex-direction: column; gap: 3.5mm; overflow: hidden; }
+header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.5mm solid #1a1a1a; padding-bottom: 2mm; }
+header h1 { margin: 0; font-size: 20pt; letter-spacing: .01em; }
+header span { font-size: 9pt; }
+.wer { margin: 0; font-size: 11pt; }
+section { border: 0.4mm solid #1a1a1a; padding: 3mm 5mm; }
+section h2 { margin: 0 0 2.5mm; font-size: 12.5pt; display: flex; justify-content: space-between; align-items: baseline; }
+section h2 small { font-size: 9pt; font-weight: 400; }
+ol { margin: 0; padding: 0; list-style: none; counter-reset: s; }
+li { counter-increment: s; display: grid; grid-template-columns: 6mm 1fr 30mm; gap: 2mm; padding: 1.2mm 0; border-top: 0.2mm solid #b5b5b5; }
+li:first-child { border-top: 0; }
+li::before { content: ""; width: 4mm; height: 4mm; border: 0.35mm solid #1a1a1a; margin-top: 0.6mm; }
+li b { font-weight: 700; }
+li .wann { font-size: 9pt; text-align: right; color: #444; }
+.hinweis { font-size: 9.5pt; color: #333; margin: 1.5mm 0 0; }
+code { font-family: "Atkinson Hyperlegible Mono", Consolas, monospace; font-size: 9.5pt; }
+.felder { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; }
+.feld p { margin: 0 0 1mm; font-weight: 700; font-size: 9.5pt; }
+.linie { height: 7mm; border-bottom: 0.3mm solid #8a8a8a; }
+footer { margin-top: auto; font-size: 8.5pt; color: #444; display: flex; justify-content: space-between; }
+@media screen { body { background: #ddd; padding: 10mm 0; } .sheet { background: #fff; padding: 12mm; width: 210mm; height: 297mm; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header><h1>Rettungsweg</h1><span>GEC1 · Tag 3 · 13.11.2026</span></header>
+  <p class="wer">Für alle, bei denen heute etwas fehlt: kein begehbarer Blockout, kein Build, oder das Projekt öffnet gar nicht. Das ist aufzuholen. Dieses Blatt zeigt den kürzesten Weg.</p>
+
+  <section>
+    <h2>Heute im Kurs <small>bis 14:30, dann wie alle weiter</small></h2>
+    <ol>
+      <li><span><b>Projekt öffnet nicht?</b> Im Unity Hub die Version 6000.3.15f1 wählen. Hilft das nicht: das eigene Repository in GitHub Desktop frisch klonen (File › Clone repository) und im Hub hinzufügen. Ohne Repository: auf GitHub die Vorlage <code>macromedia-gec1-ws26</code> neu verwenden (Use this template).</span><span class="wann">10 min</span></li>
+      <li><span><b>Läuft das Paket?</b> Kurs-Paket auf 0.3.2 bringen wie auf der Folie, dann Menü Kurs › Setup prüfen. Rote Zeilen jetzt zeigen, nicht später.</span><span class="wann">5 min</span></li>
+      <li><span><b>Kein Blockout?</b> Tools › Kit › Beispiel „Schlüssel und Tür“ bauen. Die Szene <code>Keller</code> im Project-Fenster mit Strg + D duplizieren und nach dem eigenen Spiel benennen. Sie ist heute der Ersatz-Blockout: ein Boden, eine Tür, eine Spielfigur.</span><span class="wann">3 min</span></li>
+      <li><span><b>Commit</b> mit der Nachricht „Ersatz-Blockout“, dann Push. Ab hier wird mit allen zusammen gebaut.</span><span class="wann">2 min</span></li>
+    </ol>
+    <p class="hinweis">Heute zählt, dass Schlüssel und Tür im eigenen Projekt laufen. Den eigenen Raum gibt es in der Woche danach.</p>
+  </section>
+
+  <section>
+    <h2>In der Woche danach <small>bis Fr 20.11., zusammen etwa 4 Stunden zusätzlich</small></h2>
+    <ol>
+      <li><span><b>Der eigene Raum, grau und begehbar.</b> Boden, Wände, eine Tür, der Weg der Spielfigur. Eine Einheit ist ein Meter, eine Tür etwa 2 m hoch. Würfel reichen.</span><span class="wann">bis So 15.11.<br>90 min</span></li>
+      <li><span><b>Die Spec der ersten Interaktion.</b> Vier Zeilen: Verb, Regel, Rückmeldung, Scheitern. Dazu der Satz: Wenn …, und …, dann …</span><span class="wann">bis So 15.11.<br>20 min</span></li>
+      <li><span><b>Interaktion 1 als Graph</b> im eigenen Raum, nach der Drahtliste von Schlüssel und Tür (Handout Tag 3). Vor jedem Experiment ein Commit.</span><span class="wann">bis Mi 18.11.<br>60 min</span></li>
+      <li><span><b>Der Build.</b> File › Build Profiles › Windows › Build. Den Ordner auf den Windows-Rechner der Tauschperson bringen und dort starten. Auf dem Mac: im Hub das Windows-Modul nachinstallieren, Backend Mono.</span><span class="wann">bis Do 19.11.<br>30 min</span></li>
+      <li><span><b>Im Blackboard-Thread:</b> 30-Sekunden-Clip, ein Hindernis, der nächste Schritt. Zwei Sätze ins Devlog, unten in <code>DOKUMENTATION.md</code>.</span><span class="wann">bis Fr 20.11.<br>15 min</span></li>
+    </ol>
+    <p class="hinweis">Damit ist der Meilenstein Blockout eine Woche später erreicht, und der Vertical Slice am 27.11. bleibt in Reichweite: zwei Interaktionen im Blockout.</p>
+  </section>
+
+  <p class="wer"><b>Wenn es hakt:</b> 30 Minuten selbst suchen (Console von oben lesen, Graph ansehen, Kursseite), dann im Blackboard-Thread fragen, mit Bild der Console und des Graphs: Was wurde versucht, was passiert, was sollte passieren?</p>
+
+  <section>
+    <div class="felder">
+      <div class="feld"><p>Name</p><div class="linie"></div></div>
+      <div class="feld"><p>Tauschperson für den Build (Windows)</p><div class="linie"></div></div>
+      <div class="feld"><p>Was heute fehlt</p><div class="linie"></div></div>
+      <div class="feld"><p>Mein erster Schritt nach dem Kurs</p><div class="linie"></div></div>
+    </div>
+  </section>
+
+  <footer><span>allknivesnobagel.com/teaching/gec1 · Anleitungen und Tag 3</span><span>Antwortzeit im Thread: ______</span></footer>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-05T12:36Z · 9fcef5f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-05T13:39Z · 21cef83 -->
 
 Dauer: ca. 5 Min
 

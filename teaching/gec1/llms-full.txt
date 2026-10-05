@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-05T12:36Z · 9fcef5f. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-05T13:39Z · 21cef83. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -452,6 +452,1625 @@ Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
 
+## Tag 3: Interaktion von Hand
+
+13.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
+
+Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
+
+Begriffe: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/), [graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), [torque](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/), [console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)
+
+Bis zum nächsten Termin: Meilenstein Vertical Slice bis 27.11.: zwei Interaktionen laufen im Blockout, ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner, das KI-Verzeichnis hat Einträge. Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt nachgebaut und die Werkstatt aus Kurs-Paket 0.3.2 repariert. Eine Woche später im Blackboard-Thread: 30-Sekunden-Clip von Interaktion 1, ein Hindernis, der nächste Schritt. Dazu die Spec der zweiten Interaktion. Aufwand: etwa 10 bis 13 Stunden.
+
+### Was läuft schon?
+
+1. Ein grauer Raum, durch den die Spielfigur läuft
+2. Der Build läuft auf einem fremden Windows-Rechner
+3. Die Spec der ersten Interaktion steht
+4. Das [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/) unten in `DOKUMENTATION.md` hat einen Eintrag
+
+Noch nicht so weit? Nehmt das Blatt „Rettungsweg“.
+
+Jetzt wird der Probe-Build getauscht: den Build-Ordner als ZIP per USB-Stick oder Cloud-Link an eine Person mit Windows-Rechner geben, dort entpacken und die `.exe` starten. Der Rettungsweg steht auch online: [Rettungsweg als Blatt](/teaching/gec1/druck/rettungsweg.html). Er zeigt, wie ihr heute im Kurs mitkommt und in der Woche danach aufholt.
+
+### Kurs-Paket prüfen
+
+1. Kurs › Setup prüfen: Steht beim Kurs-Paket 0.3.2 oder höher? Dann ist alles gut.
+2. Älter? GitHub Desktop: erst committen
+3. Window › Package Manager › + › Install package from git URL…, Adresse einfügen, Install
+4. Commit: „Kurs-Paket auf 0.3.2“
+
+```
+https://
+github.com/
+BabyToad/
+macromedia-
+gec1-kit.git
+#v0.3.2
+```
+
+Die Kursvorlage bringt 0.3.2 seit dem 09.10. mit; aktualisieren müssen nur Projekte, die älter sind oder ohne Vorlage entstanden. Die Adresse am Stück: `https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2`. Version 0.3.2 bringt die kaputte Werkstatt für heute, das Menü **Tools › Kit › Eigener Knoten (C#)** und zwei Korrekturen im Kit: Warnungen „Vor Play“ bleiben in der Console stehen, und **Kraft › Dauerkraft** schiebt jetzt so lange, bis der Eingang **Stopp** kommt. Ausführlich steht das in der Anleitung „Kurs-Paket aktualisieren“. Kontrolle: **Kurs › Setup prüfen** zeigt beim Kurs-Paket 0.3.2.
+
+### Heute reagiert die Welt
+
+Bisher läuft man durch den Raum. Ab heute antwortet er.
+
+Wenn ich die Türzone betrete und den Schlüssel habe, fährt die Tür hoch. Sonst steht auf dem Schild: Verschlossen.
+
+### Event, Bedingung, Aktion
+
+**Tafelbild:** Die Tür als Kette in drei Spalten. Event: Zone, Betreten. Bedingung: Wenn, Schlüssel da?, gespeist vom Merker „Schlüssel vorhanden“. Aktion: bei Ja Bewegen, die Tür fährt hoch; bei Nein Text setzen, „Verschlossen.“
+
+[Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/): ein Moment
+
+[Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): was das Spiel sich merkt
+
+[Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/): ja oder nein
+
+Ein [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/) ist ein Zeitpunkt, an dem etwas passiert: Betreten, Drücken, Aufprall. Ein [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) bleibt von Frame zu Frame erhalten, etwa ob der Schlüssel schon aufgehoben ist. Eine [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/) fragt diesen Zustand in dem Moment ab, in dem das Event ankommt, und schickt es auf den einen oder den anderen Weg.
+
+### Drei Arten von Drähten
+
+**Tafelbild:** Drei Drahtarten. Event, gestrichelt: wann etwas passiert, etwa Betreten zu Prüfen. Daten, durchgezogen: ein Wert, der gelesen wird, etwa Wert zu Bedingung. Referenz, doppelt: welches Objekt gemeint ist, etwa Schlüssel zu An/Aus.
+
+Der [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/) des Kits kennt drei Drahtarten. ▶ Events laufen von links nach rechts durch die Kette. ● Daten werden gelesen, wenn ein Knoten sie braucht. ◆ Referenzen sagen einem Knoten, mit welchem Objekt in der Szene er arbeitet. Hängen an einem Event-Ausgang mehrere Drähte, tragen sie Nummern: Nr. 1 läuft zuerst. Falsche Verbindungen lassen sich gar nicht ziehen: Ein Event-Ausgang passt nur auf einen Event-Eingang.
+
+### Das Beispiel holen
+
+Tools › Kit › Beispiel „Schlüssel und Tür“ bauen
+
+**Screenshot:** Das Graph-Fenster mit dem Beispiel Schlüssel und Tür: neun Knoten auf dunkler Tafel, darunter Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen und Ton abspielen, verbunden mit orangen, violetten und blaugrünen Drähten. (Unity 6.3 · Kurs-Paket 0.3.1).
+
+Doppelklick auf die Datei „Schlüssel und Tür.kit“ öffnet den Graph.
+
+Das Menü legt den Ordner `Assets/Kit Beispiel` an, mit dem Graph `Schlüssel und Tür.kit` und der Szene `Keller`. Gibt es das Beispiel schon, fragt Unity nach, bevor etwas überschrieben wird. Beispiele holt ihr immer über dieses Menü. Ist alles rosa, ist das Kurs-Paket zu alt: oben aktualisieren. Den Graph öffnet ein Doppelklick auf die `.kit`-Datei oder im Inspector der Interaktion der Knopf **Graph öffnen**.
+
+### Ein Graph, viele Türen
+
+**Tafelbild:** Ein Graph mit dem Knoten Bewegen und einem leeren Platz ◆ Objekt. Zwei Interaktionen in der Szene, Keller und Dachboden, füllen diesen Platz verschieden: die eine mit Tür A, die andere mit Tür B.
+
+Der [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/) sagt, was passiert. Die Interaktion sagt, mit welchen Objekten: je Platz eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/).
+
+Der Graph ist eine Datei im Projekt. Er kennt keine Objekte der Szene, nur Plätze für sie (◆). Die Component **Interaktion** an einem GameObject verbindet beides: Sie zeigt auf einen Graph und hält eine Tabelle, welches Objekt welchen Platz füllt. Das ist eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/). Umbenennen oder Verschieben bricht sie nicht. Ein leerer Platz ist ein Fehler, und das Kit meldet ihn schon vor Play. Jede Interaktion hat ihren eigenen Merker: Zwei kopierte Türen öffnen sich nicht gegenseitig.
+
+### Die Plätze im Inspector
+
+**Screenshot:** Die Liste Objekte (◆) im Inspector der Interaktion: Schlüssel = Schlüssel, Benutzen: Kamera = leer, Zone: Zone = Türzone, Bewegen: Objekt = Tür, Text setzen: Textfeld = Schild, Ton abspielen: Quelle = Tür-Klack. Neben jedem Platz eine Lupe. (Unity 6.3 · Kurs-Paket 0.3.1).
+
+Objekte (◆): hineinziehen, was gemeint ist.
+
+Die Lupe neben jedem Platz springt in den Graph zum passenden Knoten. **Benutzen: Kamera** darf leer bleiben: Dann nimmt der Knoten die Hauptkamera, also die der Spielfigur.
+
+### Zuschauen, während es läuft
+
+**Screenshot:** Der Graph im Play-Modus: Wenn trägt ein Häkchen mit „Ja, weil Schlüssel vorhanden: ja“, Bewegen ist gelb hinterlegt und meldet „läuft: 0,5 / 1,0 s“, Ton abspielen steht auf „noch nicht erreicht“. (Unity 6.3 · Kurs-Paket 0.3.1).
+
+○ empfangen
+
+▬ läuft
+
+✓ fertig
+
+⛔ blockiert
+
+! Fehler
+
+Zum Ausprobieren: Play, ohne Schlüssel zur Tür laufen. Wenn zeigt „Nein, weil Schlüssel vorhanden: nein“, das Schild sagt „Verschlossen.“. Dann den Schlüssel anschauen und E drücken, zurück zur Tür: Bewegen läuft. Graph-Fenster und Game-Fenster nebeneinander legen hilft. Jeder Knoten zeigt im Play-Modus, was er gerade tut, und warum. Ein Knoten mit Fehler feuert nie seinen Erfolgs-Ausgang; der Grund steht am Knoten und in der Console. Die Leiste unten im Graph-Fenster zählt zusammen, wie viele Knoten laufen, fertig sind oder noch nicht erreicht wurden.
+
+### Vom Knoten zum Objekt
+
+**Screenshot:** Links die Hierarchy: Schlüssel ist ausgewählt; er und die anderen Objekte der Interaktion tragen das Abzeichen ◆1. Rechts der Graph: Der Knoten „Objekt: Schlüssel“ ist hervorgehoben, seine blaugrünen Drähte führen zu Benutzen und An/Aus. (Unity 6.3 · Kurs-Paket 0.3.1).
+
+Doppelklick auf einen Knoten: Das Objekt leuchtet in der Hierarchy.
+
+Objekt auswählen: Seine Knoten leuchten im Graph.
+
+Ein Klick auf einen Knoten zeigt unten im Graph-Fenster, was er tut, und die Knöpfe **In der Hierarchy zeigen**, **Komponente öffnen** und **Code ansehen**. Ein Doppelklick wählt das gebundene Objekt aus. Umgekehrt leuchten alle Knoten auf, die ein in der Hierarchy ausgewähltes Objekt benutzen. Das Abzeichen ◆1 in der Hierarchy zählt, wie viele Plätze ein Objekt füllt; mit der Maus darauf steht da, welche.
+
+### Was steckt in einem Knoten?
+
+**Screenshot:** Das Fenster Code ansehen für den Knoten Wenn, Branch.cs mit 32 Zeilen. Zeile 28, chosen.Fire(signal), ist orange markiert: Dort feuert der Knoten Ja oder Nein. (Unity 6.3 · Kurs-Paket 0.3.1).
+
+&#x20;am Knoten
+
+Orange: Hier feuert ein Ausgang.
+
+Jeder Knoten ist eine kleine C#-Datei. **Code ansehen** zeigt sie schreibgeschützt und markiert die Stellen, die zählen: orange, wo ein Ausgang feuert; gelb, wo der Knoten „läuft“ meldet; rot, wo er einen Fehler meldet; blaugrün, wo ein ◆-Platz steht. **Im Code-Editor öffnen** zeigt dieselbe Datei in VS Code. Lesen genügt; niemand muss das schreiben können.
+
+### Jetzt baut ihr sie nach
+
+In eurem Blockout
+
+1. Würfel „Schlüssel“ und Würfel „Tür“
+2. Schild: 3D Object › Text - TextMeshPro
+3. Türzone: leeres GameObject vor der Tür, Box Collider, Is Trigger
+4. GameObject › Kit › Interaktion, dann Neuer Graph …
+
+So entstehen die Objekte, alle als Kinder einer leeren „Tür-Gruppe“ oder lose in der Szene:
+
+| Objekt | Anlegen | Maße und Lage |
+|---|---|---|
+| Schlüssel | 3D Object › Cube | Scale 0,2 × 0,2 × 0,6, auf den Boden, ein paar Meter von der Tür |
+| Tür | 3D Object › Cube | Scale 3 × 3 × 0,2, steht im Türdurchgang auf dem Boden |
+| Schild | 3D Object › Text - TextMeshPro | neben die Tür, auf Augenhöhe; beim ersten Mal fragt Unity nach **Import TMP Essentials**: bestätigen |
+| Türzone | Create Empty, dann Add Component › Box Collider, **Is Trigger** an | **Size** 3 × 2 × 2, Mitte etwa 1,5 m vor der Tür und 1 m über dem Boden, so dass man auf dem Weg zur Tür hineinläuft |
+
+Ein leeres GameObject entsteht dort, wo die Scene-Ansicht gerade hinschaut, und sein Box Collider ist 1 × 1 × 1 m. Darum die Türzone bewusst verschieben und vergrößern; der grüne Drahtrahmen zeigt, wo sie liegt. Dann **GameObject › Kit › Interaktion** und im Inspector **Neuer Graph …**: Unity fragt, wo die `.kit`-Datei liegen soll.
+
+### Acht Knoten holen
+
+1. „+ Knoten“: Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen
+2. Den Schlüssel aus der Hierarchy auf die Leinwand ziehen: Objekt „Schlüssel“
+3. Unten links: Instanz wählen
+
+Ohne Instanz bleiben die ◆-Felder grau.
+
+„+ Knoten“ unten links im Graph-Fenster öffnet die deutsche Liste mit den Gruppen Auslöser, Ablauf, Zustand, Aktion, Spielsysteme und Erweiterung. Die Leertaste im Graph öffnet die Liste des Graph Toolkits mit englischen Klassennamen; beide legen dieselben Knoten an. Den Schlüssel brauchen zwei Knoten, Benutzen und An/Aus. Darum bekommt er einen eigenen Knoten **Objekt**: Zieht ihn aus der Hierarchy direkt auf die Leinwand. **Instanz** heißt: welche Interaktion in der Szene dieses Fenster gerade bearbeitet. Der Knopf unten links im Graph-Fenster wählt sie; erst dann lassen sich Objekte auf die ◆-Felder ziehen. Der Ton aus dem Beispiel ist für den Nachbau nicht nötig.
+
+### Die Drähte
+
+1. Objekt ◆ → Benutzen, An/Aus
+2. Benutzt ▶ → 1. Ja setzen, 2. Ausschalten
+3. Betreten ▶ → Prüfen
+4. Wert ● → Bedingung
+5. Ja ▶ → Hin. Nein ▶ → Setzen
+
+Die vollständige Liste für den Nachbau. Links der Ausgang, rechts der Eingang:
+
+| Von | Nach | Draht |
+|---|---|---|
+| Objekt „Schlüssel“ · ◆ Objekt | Benutzen · ◆ Objekt | ◆ |
+| Objekt „Schlüssel“ · ◆ Objekt | An/Aus · ◆ Objekt | ◆ |
+| Benutzen · Benutzt | Merker · Ja setzen (Nr. 1) | ▶ |
+| Benutzen · Benutzt | An/Aus · Ausschalten (Nr. 2) | ▶ |
+| Zone · Betreten | Wenn · Prüfen | ▶ |
+| Merker · Wert | Wenn · Bedingung | ● |
+| Wenn · Ja | Bewegen · Hin | ▶ |
+| Wenn · Nein | Text setzen · Setzen | ▶ |
+
+Einstellungen an den Knoten: Merker **Name** „Schlüssel vorhanden“, **Startwert** aus. Bewegen **Was** Position, **Weg** 0, 3, 0, **Dauer** 1. Text setzen **Text** „Verschlossen.“. Zone **Nur Tag** Player (so ist es voreingestellt).
+
+Was auf die ◆-Felder der Knoten kommt, aus der Hierarchy hineingezogen:
+
+| Knoten · Platz | Objekt |
+|---|---|
+| Objekt „Schlüssel“ | Schlüssel |
+| Zone · ◆ Zone | Türzone |
+| Bewegen · ◆ Objekt | Tür |
+| Text setzen · ◆ Textfeld | Schild |
+| Benutzen · ◆ Kamera | leer lassen (Hauptkamera) |
+
+Dann Play. Gespeichert wird von selbst: Vor jedem Play speichert das Kit offene Graphen und prüft alle Interaktionen; was fehlt, steht als Warnung in der Console.
+
+**Wenn es hängt:**
+
+- Die ◆-Felder sind grau und nehmen nichts an: unten links im Graph-Fenster die Instanz wählen.
+- Wenn sagt immer Nein: Der Draht von Merker · Wert zu Wenn · Bedingung fehlt.
+- Zone zeigt nie ✓: Is Trigger fehlt, die Zone liegt nicht im Weg, oder sie ist zu klein (grüner Rahmen in der Scene-Ansicht).
+- Der Schlüssel reagiert nicht auf E: näher als 3 m herangehen und ihn ansehen; er braucht seinen Box Collider.
+
+### Die Interaktion als Satz
+
+Sagt den Satz zu eurer Tür laut, bevor ihr Play drückt.
+
+Wenn \[Event] und \[Bedingung], dann \[Aktion]. Sonst \[andere Aktion].
+
+Wer den Satz nicht sagen kann, hat noch keine klare Interaktion. Das gilt auch für die eigene Spec.
+
+### Läuft nicht? So sucht ihr
+
+1. Steht ein ! an einem Knoten? Grund lesen.
+2. ⛔ blockiert? Dort endet die Kette, mit Begründung.
+3. Gar nichts passiert? Hat der Auslöser ✓? Sonst Zone oder Tag prüfen.
+
+Der Graph sagt, wo es hängt. Gesucht wird von links nach rechts, vom Auslöser zur Aktion.
+
+### Eure Variation
+
+10 Minuten
+
+- Drei Schlüssel: [Zähler](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) mit Ziel 3
+- Die Tür fällt nach 5 s wieder zu: Warten, dann Bewegen › Zurück
+- Das Schild spricht nur beim ersten Mal: Einmal
+
+Erst den Satz sagen, dann bauen.
+
+Eine Variante reicht; wer fertig ist, nimmt die nächste. Die Falle mit einer Kiste kommt nach der Pause, weil sie einen Rigidbody braucht.
+
+### Pause
+
+10 Minuten
+
+### Collider oder Trigger?
+
+**Tafelbild:** Links eine feste Wand: Die Kugel prallt ab, Unity meldet OnCollisionEnter. Rechts eine gestrichelte Zone: Die Kugel rollt hindurch, Unity meldet OnTriggerEnter.
+
+[Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/): fest oder durchlässig.
+
+Is Trigger ist ein Haken am Collider.
+
+Ein Collider ist die unsichtbare Form, mit der ein Objekt an der [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/) teilnimmt. Ein normaler Collider ist fest. Mit **Is Trigger** wird er durchlässig und meldet nur noch, dass etwas hinein- oder hinauskommt. Die beiden Meldungen haben verschiedene Voraussetzungen:
+
+| Meldung | im Kit | wann sie kommt |
+|---|---|---|
+| Trigger: `OnTriggerEnter` | **Zone** | eines der beiden Objekte hat einen [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/) (auch kinematisch) oder einen CharacterController, wie die Spielfigur |
+| Aufprall: `OnCollisionEnter` | **Zusammenstoß** | mindestens eines der beiden hat einen Rigidbody, bei dem Is Kinematic aus ist |
+
+Darum meldet die Spielfigur Zonen zuverlässig, aber keinen Aufprall: Läuft sie gegen eine Wand, gibt es kein `OnCollisionEnter` und der Knoten Zusammenstoß bleibt still. Der CharacterController hat dafür eine eigene Meldung, `OnControllerColliderHit`, die das Kit nicht als Knoten anbietet. Zusammenstoß gehört an Dinge mit Rigidbody: eine Kiste, die auf den Boden fällt, ein Ball, der gegen eine Wand rollt.
+
+### Ein Rigidbody übergibt an die Physik
+
+Mit [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/) fällt der Würfel.
+
+1. Kiste in die Luft, Add Component › Rigidbody, Play
+2. Die Falle: Zone, dann Kraft auf die Kiste
+3. Kraft: Richtung 0, 1, 0, Stärke 6, Stoß
+
+Felder: Mass, Use Gravity, Is Kinematic
+
+Mit Rigidbody bestimmt die Physik die Position. Wer die Transform trotzdem direkt verschiebt, arbeitet gegen sie; das Objekt ruckelt oder rutscht durch Wände. **Is Kinematic** heißt: Die Physik bewegt das Objekt nicht, ein Skript oder eine Animation tut es. Auf einen kinematischen Körper wirkt auch der Knoten Kraft nicht; er meldet das. **Constraints** sperren einzelne Achsen, etwa damit eine Figur nicht umkippt.
+
+Ein Aufprall lässt sich jetzt auch hören: Eine neue Interaktion mit **Zusammenstoß** (◆ Körper: der Collider der Kiste) · Getroffen → **Notiz in Konsole**. Fällt die Kiste auf den Boden, steht die Notiz in der Console. Das geht, weil die Kiste einen Rigidbody hat; an der Spielfigur bliebe Zusammenstoß still.
+
+Die Falle als Graph: eine neue Interaktion, **Zone** (◆ Zone: eine Türzone-artige Trigger-Box vor der Kiste) · Betreten → **Kraft** · Anstoßen, ◆ Körper = Kiste. **Stoß** wirkt einmal, wenn das Event ankommt. **Dauerkraft** schiebt ab Kurs-Paket 0.3.2 so lange, bis der Eingang **Stopp** kommt, etwa von Zone · Verlassen.
+
+Wie so etwas in einem fertigen Spiel aussieht: In HIGH WATER (gebaut in Godot) ist jeder Gegner ein Rigidbody mit 3 kg. Im Stehen sind seine Drehachsen gesperrt, damit er aufrecht läuft; ein harter Treffer hebt die Sperre auf, und aus dem Läufer wird ein Geschoss, das beim Aufprall andere trifft. In Unity hieße das **Constraints › Freeze Rotation**, im Code wieder freigegeben mit `rb.constraints = RigidbodyConstraints.None`.
+
+### Kraft und Drehmoment
+
+**Tafelbild:** Links: Eine Kraft am Schwerpunkt schiebt eine Kiste in eine Richtung, AddForce. Rechts: Ein Drehmoment dreht einen Balken um seine Achse, von oben gesehen, AddTorque.
+
+Kraft: Knoten im Kit
+
+[Drehmoment](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/): fehlt im Kit
+
+Eine Kraft ist ein [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/): Richtung und Stärke. `AddForce` schiebt den ganzen Körper, `AddTorque` dreht ihn um eine Achse. Beide gibt es als Stoß (`ForceMode.Impulse`, ein einzelner Moment, etwa ein Tritt) oder als gleichmäßiges Schieben (`ForceMode.Force`, in jedem Physik-Schritt, also in `FixedUpdate()`). Masse zählt: Die gleiche Kraft bewegt eine schwere Kiste weniger.
+
+### Die Console liest man von oben
+
+1. Rot: Fehler. Gelb: Warnung. Weiß: Hinweis.
+2. Den obersten Fehler zuerst: Die anderen folgen oft aus ihm.
+3. Doppelklick führt zur Zeile im Code.
+4. Collapse fasst gleiche Meldungen zusammen.
+
+[Console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/): Window › General › Console
+
+Strg + Umschalt + C
+
+Die [Console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/) sammelt, was Unity und eure Skripte melden. Ein roter Kompilierfehler (`error CS…`) blockiert Play ganz, bis er behoben ist; Unity sagt dann „All compiler errors have to be fixed before you can enter playmode!“. Ein Laufzeitfehler (Exception) bricht nur das Skript an dieser Stelle ab, das Spiel läuft weiter. Steht dieselbe Meldung hundertmal da, kommt sie aus `Update()` oder `FixedUpdate()`: in jedem Frame einmal. **Clear** leert die Liste (Kompilierfehler bleiben stehen), **Error Pause** hält das Spiel an, sobald ein Skript einen Fehler meldet.
+
+### Die kaputte Werkstatt
+
+10 Minuten
+
+Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen
+
+Fünf Fehler. Play drücken, Console lesen, einen beheben, wieder Play.
+
+**Bild:** Isometrische Kreidezeichnung einer kaputten Werkstatt: Eine Kiste schwebt, das Windrad sitzt nicht auf seiner Welle, eine Lampe ist nicht eingesteckt und eine Figur läuft gegen eine unsichtbare Wand. (KI-generiert).
+
+Ab Kurs-Paket 0.3.2
+
+Szene: Assets › Kit Beispiel › Werkstatt
+
+Die Werkstatt ist eine Beispiel-Szene im Kurs-Paket ab Version 0.3.2, absichtlich kaputt. Bauen: **Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen**. Das legt `Assets/Kit Beispiel/Werkstatt/` an, darin die Szene `Werkstatt.unity`; per Doppelklick öffnen. Fehlt der Menüpunkt, ist das Kurs-Paket noch auf 0.3.1: oben unter „Kurs-Paket prüfen“ aktualisieren.
+
+So sieht die Console nach dem ersten Play aus, mit Collapse:
+
+```
+[Kit] Lampe › An/Aus: ◆ Objekt fehlt (Slot „An/Aus: Objekt“ ist leer)            1
+UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.  356
+```
+
+Auflösung, erst nach dem eigenen Versuch
+
+1. **Knopfzone**: Is Trigger fehlt. Die Spielfigur läuft gegen eine unsichtbare Wand. Das Kit warnt vor Play: „„Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken)“, und der Graph „Knopf und Kiste“ markiert die Zone rot.
+2. **Kiste**: Is Kinematic ist an. Erst wenn Fehler 1 behoben ist, meldet der Knoten Kraft: „„Kiste“ ist kinematisch: Kräfte wirken nicht“. Ein Fehler kann den nächsten verdecken.
+3. **Lampe**: Der ◆-Platz von An/Aus ist leer. Lampenschirm hineinziehen, dann schaltet L das Licht.
+4. **Kiste (soll fallen)**: Ihr fehlt ein Rigidbody. Keine Meldung, sie schwebt einfach.
+5. **Windrad**: Im Skript ist das Feld Fluegel leer, in jedem Physik-Schritt kommt die Meldung neu. Doppelklick zeigt die Zeile mit `AddTorque`; die Lösung liegt im Inspector: Flügel hineinziehen.
+
+**Screenshot:** Der Graph Knopf und Kiste: Der Knoten Zone ist rot hinterlegt und meldet: „Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken). Daneben der Knoten Kraft mit Richtung 0, 1, 0, Stärke 6, Art Stoß, Körper = Kiste. (Unity 6.3 · Prototyp der Werkstatt).
+
+### Eine Meldung ist ein Hinweis
+
+Die Console sagt, wo es kracht. Warum, findet ihr in der Szene.
+
+Fehler 5 der Werkstatt ist der Normalfall in Unity: Die Zeile im Code ist richtig, das Feld im Inspector ist leer. Fehler 4 zeigt, dass nicht jeder Fehler eine Meldung hat.
+
+### Interaktion 1 in eurem Blockout
+
+1. Den Satz aus eurer Spec sagen
+2. Event, Bedingung und Aktion darin markieren
+3. Bauen, Play, beobachten
+4. Commit
+
+Bis 17:00. Ich komme rum.
+
+Wer noch keine Spec hat, schreibt sie jetzt in fünf Minuten: Verb, Regel, Rückmeldung, Scheitern. Vor dem ersten Knoten ein Commit.
+
+### Ein Knoten, den es nicht gibt
+
+Kein Drehmoment im Kit? Tools › Kit › Eigener Knoten (C#), dann füllt ein Agent die Dateien.
+
+```
+Knoten „Drehmoment“
+füllen, wie Kraft
+(Push.cs).
+◆ Körper: Rigidbody.
+Achse, Stärke.
+Drehen → Angewendet.
+Kopfkommentar.
+Nur diese zwei
+Dateien ändern.
+```
+
+Agenten-Übung Tag 3: Spec → Agent schreibt einen kleinen Knoten im Vertrag des Kits → Diff lesen → spielen → committen oder verwerfen. Im Kurs lesen wir einen vorbereiteten Diff. Zu Hause selbst ausprobieren ist freiwillig. Zuerst **Tools › Kit › Eigener Knoten (C#)** mit dem Namen „Drehmoment“ ausführen; das legt die beiden Dateien in `Assets/Eigene Knoten` an. Dann committen. Dann der Auftrag an den Agenten: „Fülle den Kit-Knoten in `Assets/Eigene Knoten/Drehmoment.cs` und `Assets/Eigene Knoten/Editor/DrehmomentNode.cs` nach dem Muster von Kraft (Push.cs im Kurs-Paket). ◆ Körper: Rigidbody. Einstellungen Achse und Stärke. Eingang Drehen, Ausgang Angewendet. Ist der Körper kinematisch, soll der Knoten mit Grund scheitern (Fail). Beide Dateien bekommen oben einen Kopfkommentar. Nur diese zwei Dateien ändern, nicht committen.“ Danach eine Zeile ins KI-Verzeichnis.
+
+### Was ein Knoten braucht
+
+**Tafelbild:** Links fünf Markierungen aus dem C#-Code, rechts der Knoten, der daraus entsteht. NodeInfo gibt Titel und Gruppe, Input den Eingang Drehen, Ref den Platz ◆ Körper, Setting die Einstellung Stärke, Output den Ausgang Angewendet.
+
+Zwei Dateien in Assets › Eigene Knoten. Das Menü legt sie an.
+
+Ein eigener Knoten besteht aus zwei Dateien, beide unter `Assets/Eigene Knoten`: `Drehmoment.cs` (der Knoten) und `Editor/DrehmomentNode.cs` (sein Gesicht im Graph-Editor). Das Menü **Tools › Kit › Eigener Knoten (C#)** legt beide an, dazu die Assembly-Dateien des Ordners; dasselbe gibt es unter **Assets › Create › Kit › Eigener Knoten (C#)**. Danach steht der Knoten unter „+ Knoten“ › Aktion › Drehmoment. Ohne `NodeInfo` landet er in der Gruppe „Eigene“ unter seinem Klassennamen.
+
+So sollte der Diff aussehen
+
+`Assets/Eigene Knoten/Drehmoment.cs`:
+
+```csharp
+// Drehmoment: ein eigener Kit-Knoten, der einen Rigidbody um eine Achse dreht.
+// Herkunft: geschrieben von einem Agenten (Werkzeug und Modell siehe KI-Verzeichnis),
+// geprüft und getestet von <Name>, 13.11.2026.
+using System;
+using UnityEngine;
+using Kit;
+
+[Serializable]
+[NodeInfo("Drehmoment", "Aktion", "Rigidbody um eine Achse drehen")]
+public class Drehmoment : KitNode
+{
+    [Ref("Körper")] public Rigidbody body;
+    [Setting("Achse")] public Vector3 axis = Vector3.up;
+    [Setting("Stärke")] public float strength = 5f;
+
+    [Output("Angewendet")] [NonSerialized] public Output applied;
+
+    [Input("Drehen")]
+    public void Spin(Signal s)
+    {
+        if (body.isKinematic) { Fail($"„{body.name}“ ist kinematisch: Drehmoment wirkt nicht"); return; }
+        body.AddTorque(axis.normalized * strength, ForceMode.Impulse);
+        applied.Fire(s);
+    }
+}
+```
+
+`Assets/Eigene Knoten/Editor/DrehmomentNode.cs`:
+
+```csharp
+// DrehmomentNode: zeigt den Knoten Drehmoment im Graph-Editor des Kits.
+// Herkunft: wie Drehmoment.cs.
+using System;
+using Kit.Editor;
+
+[Serializable]
+public class DrehmomentNode : KitEditorNode
+{
+    public override Type RuntimeType => typeof(Drehmoment);
+}
+```
+
+### Diff lesen, spielen, entscheiden
+
+1. Diff: Nur die zwei Dateien in Eigene Knoten?
+2. Steht oben ein Kopfkommentar? Feuert `Angewendet`?
+3. Drehkreuz bauen, Taste → Drehmoment, Play
+4. Dreht es? Commit. Sonst verwerfen.
+
+In GitHub Desktop zeigt der Reiter **Changes** den Diff. Hat der Agent andere Dateien als die zwei in `Assets/Eigene Knoten` angefasst, ist das ein Grund zum Verwerfen, auch wenn es läuft.
+
+Das Drehkreuz zum Testen: ein Würfel „Arm“, Scale 2,4 × 0,12 × 0,25, auf etwa 1 m Höhe. Dazu Add Component › Rigidbody mit **Use Gravity** aus, **Angular Damping** 0,6 und unter **Constraints** Freeze Position X, Y und Z sowie Freeze Rotation X und Z. Ohne diese Sperren fällt der Arm herunter und rollt weg; das ist dann kein Fehler des Knotens. Graph: **Taste** (Taste R) · Gedrückt → **Drehmoment** · Drehen, Achse 0, 1, 0, Stärke 4, ◆ Körper = Arm.
+
+### Jedes Skript sagt, was es ist
+
+Ab heute beginnt jedes eigene Skript mit einem Kopfkommentar.
+
+```csharp
+// Drehmoment: dreht einen Rigidbody.
+// Herkunft: Agent, geprüft von <Name>, 13.11.2026.
+```
+
+Der Agent darf ihn schreiben. Ihr prüft, ob er stimmt.
+
+Der Kopfkommentar steht oben in jedem Skript, das ihr selbst oder mit einem Agenten schreibt: in einem Satz, was es tut, und woher es kommt (selbst geschrieben, oder von welchem Agenten, geprüft von wem). Stellen, an denen das Warum nicht offensichtlich ist, bekommen ebenfalls einen Kommentar. Der Abgabe-Check am Ende des Semesters fragt genau danach. Die Zeile im KI-Verzeichnis ersetzt er nicht.
+
+### Der neue Knoten im Graph
+
+**Screenshot:** Ein Graph mit zwei Knoten im Play-Modus: Taste R, Ausgang Gedrückt, führt zu Drehmoment, Eingang Drehen. Drehmoment hat Achse 0, 1, 0, Stärke 4 und den Platz ◆ Körper = Arm (Rigidbody); darunter ein Häkchen: Angewendet. (Unity 6.3 · Kurs-Paket 0.3.1, eigener Knoten).
+
+Taste R, und der Arm des Drehkreuzes dreht sich.
+
+Der eigene Knoten steht unter „+ Knoten“ › Aktion und hat **Code ansehen** wie die eingebauten.
+
+### Kaputt? Zurück zum letzten guten Stand
+
+**Tafelbild:** Eine Zeitleiste mit Commits: Blockout begehbar, Tür geht auf, Agent: Drehmoment. Der dritte ist kaputt. Ein neuer Commit Revert nimmt ihn zurück; der Fehler bleibt im Verlauf sichtbar.
+
+Noch nicht committet: Discard changes
+
+Committet: Revert Changes in Commit, ein [Revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)
+
+In GitHub Desktop: Reiter **History**, Rechtsklick auf den Commit, **Revert Changes in Commit**, dann **Push origin**. Ein [Revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/) löscht nichts. Git legt einen neuen Commit an, der die Änderungen eines alten zurücknimmt; beide bleiben im Verlauf. Das ist sicher, auch wenn der kaputte Stand schon gepusht ist. Noch nicht committete Änderungen verwirft in GitHub Desktop **Discard changes** (Rechtsklick auf die Datei). Vor dem Revert in Unity alles speichern; danach lädt Unity die geänderten Dateien neu. Im Terminal: `git revert <Kennung>`.
+
+### Vor jedem Experiment ein Commit
+
+Commit vor dem Agenten, Commit vor dem Experiment. Dann kostet ein Fehlschlag einen Klick.
+
+### Erklärt eure Interaktion
+
+Zu zweit: Satz sagen, dann im Graph auf jeden Knoten zeigen, der darin vorkommt.
+
+Die andere Person fragt: „Und wenn nicht?“
+
+Ab heute jeden Freitag: ein System des eigenen Spiels laut erklären. Das ist die Übung für das Kapitel „ein System in eigenen Worten“ in der Dokumentation.
+
+### Checkpoint
+
+1. Interaktion 1 läuft im Blockout
+2. Committet und gepusht
+3. Zwei Sätze im Devlog unten in `DOKUMENTATION.md`
+4. Antwort eines Agenten übernommen? Zeile im KI-Verzeichnis
+
+Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
+
+Ins KI-Verzeichnis kommt eine Zeile, sobald die Antwort eines Agenten in die Arbeit eingeht: Code, eine Diagnose, die ihr anwendet, ein Text. Werkzeug, Modell, Zweck, Datei oder System, eine Notiz.
+
+### Die nächsten 14 Tage
+
+1. Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt, Werkstatt repariert
+2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+3. Wer 30 Minuten feststeckt, fragt
+4. Bis zum 27.11.: zwei Interaktionen und ein aktueller Build
+
+Am 27.11. spielen andere euren Stand.
+
+Meilenstein Vertical Slice am 27.11.: zwei Interaktionen aus der Liste der Aufgabenstellung laufen im Blockout, das KI-Verzeichnis hat Einträge, und ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner. Reihenfolge für den Build: speichern, committen, aus genau diesem Stand bauen, die `.exe` auf einem anderen Windows-Rechner testen (ZIP per USB-Stick oder Cloud-Link). Ab Tag 5 bekommt der getestete Commit zusätzlich einen Tag.
+
+Aufwand bis zum 27.11., ehrlich gerechnet: etwa 10 bis 13 Stunden.
+
+| Was | Mindestens | Zeit |
+|---|---|---|
+| Schlüssel und Tür im eigenen Projekt | läuft, committet | 2–3 h |
+| Werkstatt | alle fünf Fehler behoben | 1 h |
+| Spec der zweiten Interaktion | vier Zeilen und der Satz | 0,5 h |
+| Interaktion 2 | läuft im Blockout, mit Knoten, die ihr kennt | 4–6 h |
+| Build und Test auf fremdem Rechner | `.exe` startet, beide Interaktionen gehen | 1 h |
+| Clip, Post, Devlog | 30 s, ein Hindernis, zwei Sätze | 1 h |
+
+Wird Interaktion 2 größer als sechs Stunden, wird sie kleiner: weniger Schritte, bekannte Knoten. Wer den Rettungsweg geht, rechnet etwa vier Stunden dazu. Wer feststeckt: 30 Minuten selbst suchen (Graph, Console, Konzeptseiten), dann im Blackboard-Thread fragen, mit Bild der Console und des Graphs.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/03/
+
+## Tag 4: Vertical Slice: spielen lassen
+
+27.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/04/slides/
+
+Andere spielen euer Spiel, ihr schaut zu. Danach bekommt eure Welt ihre erste eigene Animation.
+
+Begriffe: [playtest](https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest/), [feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/), [animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/), [animator](https://www.allknivesnobagel.com/teaching/gec1/concepts/animator/), [branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/)
+
+Bis zum nächsten Termin: Meilenstein Alpha bis 11.12., zugleich Feature-Freeze: Alle geplanten Interaktionen sind eingebaut, mindestens zwei aus der Aufgabenstellung. Grafik und Ton sind erstmals überarbeitet. Ein aktueller Windows-Build dieses Stands läuft auf einem anderen Rechner. Aufwand: etwa 12–16 Stunden in 14 Tagen. Nach 48 Stunden: die Entscheidung aus dem Playtest umgesetzt, die Animation von heute in die eigene Welt übertragen. Eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt. Vor dem 11.12.: ein zweiter Playtest mit jemandem außerhalb des Kurses, mit der Playtest-Karte.
+
+### Heute wird gespielt
+
+Meilenstein Vertical Slice
+
+Zwei Interaktionen laufen im Blockout, als Windows-Build dieses Stands. Das KI-Verzeichnis hat Einträge.
+
+Heute spielen andere euer Spiel.
+
+Wer erst eine Interaktion hat, testet trotzdem mit: Eine reicht für einen Test. Ein Build, der nicht zustande kam, ist ein Rettungsfall: Fehlermeldung in den Devlog und in den Blackboard-Thread, dann gemeinsam lösen. Der Meilenstein gilt damit noch nicht als erreicht.
+
+### Ihr seht euer Spiel nie wieder zum ersten Mal
+
+Andere schon.
+
+Ein [Playtest](https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest/) leiht sich fremde Augen: Eine Person spielt und denkt laut. Ihr schaut zu.
+
+### Drei Fragen an jeden Test
+
+1. Was habe ich zuerst versucht?
+2. Wo wusste ich nicht weiter?
+3. Was hat sich gut angefühlt?
+
+Die Fragen beantwortet, wer gespielt hat, auf der Karte.
+
+### Wer gebaut hat, schweigt
+
+Ein Satz zum Start: „Bitte einfach spielen und dabei laut denken.“
+
+Nichts erklären, nichts verteidigen. Hilfe erst nach einer Minute Feststecken; jede Hilfe gibt einen Strich auf dem Bogen.
+
+Jeder Strich: Hier müsste das Spiel selbst etwas sagen.
+
+### Die Playtest-Karte
+
+**Tafelbild:** Die gedruckte Playtest-Karte: Spiel von, gespielt von; Was habe ich zuerst versucht? In der ersten Minute. Wo wusste ich nicht weiter? Wann, wo, was hätte geholfen? Was hat sich gut angefühlt? Ein Moment, so genau wie möglich.
+
+Zwei Karten pro Person: für die zwei Spiele, die ihr testet. Dazu ein Bogen fürs eigene Spiel.
+
+### Eine Runde, 22 Minuten
+
+**Tafelbild:** Zeitleiste einer Runde: 0 bis 8 Minuten spielt B bei A, 8 bis 11 Karte, 11 bis 19 spielt A bei B, 19 bis 22 Karte. Die Kartenzeiten sind gelb umrandet: erst schreiben, dann reden. Wer gebaut hat, schweigt und notiert.
+
+Schon fertig? Noch einmal von vorn spielen, ohne Hinweis.
+
+Nach acht Minuten wird abgebrochen, auch mitten im Level. Kleine Slices sind nach zwei Minuten durchgespielt; das ist der Normalfall. Dann notiert, wer gebaut hat, auf dem Bogen, wo die Person zuerst hingeschaut hat, und die Person spielt ein zweites Mal, ohne Hinweis. Was beim zweiten Durchgang schneller geht, hat das Spiel beim ersten Mal erklärt.
+
+### Wer spielt bei wem?
+
+**Tafelbild:** Vier Tische mit je zwei Plätzen, A und B, C und D, E und F, G und H. Runde 1: Am eigenen Tisch spielt erst links, dann rechts. Runde 2: Wer rechts sitzt, zieht mit dem Laptop zwei Tische weiter; von den letzten Tischen geht es vorn weiter.
+
+Der Laptop wandert mit. Das Spiel läuft dort, wo es gebaut wurde.
+
+**Runde 1** spielt am eigenen Tisch. In **Runde 2** zieht, wer rechts sitzt, mit dem eigenen Laptop zwei Tische weiter; wer an den letzten beiden Tischen rechts sitzt, geht nach vorn an Tisch 1 oder 2. Ab drei Tischen trifft so jede Person in Runde 2 jemand Neues.
+
+**Ungerade Zahl:** Der letzte Tisch ist ein Dreiertisch mit den Plätzen links, Mitte, rechts. Dort dauert jede Spielzeit 5 Minuten plus 2 Minuten Karte, dreimal hintereinander, also 21 Minuten.
+
+- Runde 1: Mitte spielt bei links, dann rechts bei Mitte, dann links bei rechts.
+- Runde 2: Wer rechts sitzt, zieht wie alle anderen zwei Tische weiter; die ankommende Person setzt sich nach rechts. Dann spielt rechts bei links, links bei Mitte, Mitte bei rechts.
+
+**Kein lauffähiges Spiel dabei:** an einen Zweiertisch setzen, bei beiden Tests zuschauen und für beide Spiele eine Karte ausfüllen, mit Kreuz bei „zugeschaut“.
+
+### Wenn das Spiel nicht startet
+
+Zwei Minuten Rettungsversuch, dann gilt: vorspielen statt spielen lassen.
+
+Auf der Karte „zugeschaut“ ankreuzen.
+
+Ich notiere euren Namen und komme in Block 2 zu euch.
+
+Startet ein Spiel nach zwei Minuten nicht, spielt die Person, die es gebaut hat, es selbst vor, und die andere füllt die Karte als Zuschauerin aus. Auch das zeigt, ob man versteht, was passiert. Ein Spiel, das nur im Editor läuft, darf heute im Editor gespielt werden: im Game-Fenster **Play Maximized** wählen, und wer testet, klickt nur ins Spiel. Während der Runde wird nicht repariert; das kostet beide ihre Testzeit.
+
+### Ein Test, eine Änderung
+
+HIGH WATER
+
+**Tafelbild:** Links: Die Karte SYSTEM BREACHED füllt fast das ganze Bild. Rechts, nach dem Test: ein Streifen, 21 % hoch, im unteren Drittel, nach 1,8 Sekunden wieder weg.
+
+Beim Spielen notiert: „viel zu groß“. Am selben Nachmittag: drei Varianten, eine gewählt, committet.
+
+### Startklar?
+
+1. Spiel offen, Szene gespeichert, Play funktioniert
+2. Auf dem Bogen: eure Designfrage, nicht vorlesen
+3. Auf dem Bogen: der Commit, der getestet wird
+
+Die Designfrage stammt aus der ersten Hausaufgabe und steht in Kapitel 3 von `DOKUMENTATION.md`. Den Commit findet ihr in GitHub Desktop unter History: Nachricht oder Kennung abschreiben.
+
+### Runde 1: am eigenen Tisch
+
+8 + 3 + 8 + 3
+
+Erst spielt, wer links sitzt.
+
+### Runde 2: zwei Tische weiter
+
+8 + 3 + 8 + 3
+
+Wer rechts sitzt, nimmt den Laptop und zieht zwei Tische weiter.
+
+### Was folgt aus dem Test?
+
+1. Beide Karten und den eigenen Bogen nebeneinanderlegen
+2. Designfrage: beantwortet oder offen? Mit Beleg.
+3. Eine Zeile der Spec ändern, oder begründet beibehalten und den nächsten Test planen
+
+Was zwei Personen bemerken, ist ein Muster. Was eine bemerkt, ist ein Hinweis.
+
+### Vom Befund zur Spec
+
+Befund „Ich habe die Truhe dreimal benutzt. Ich wusste nicht, dass sie offen war.“
+
+Vorher Rückmeldung: Die Truhe ist offen.
+
+Nachher Rückmeldung: Der Deckel klappt auf, es klackt, innen leuchtet es.
+
+Ein ausgedachtes Beispiel, passend zur Werkstatt in Block 2. Hat sich die Spec im Test bewährt, ist auch das ein Ergebnis: Dann steht im Devlog, welcher Beleg dafür spricht und was der nächste Test prüfen soll.
+
+### Devlog und Commit
+
+„Getestet mit zwei Personen. Designfrage: … Beobachtet: … Entschieden: …, weil …“
+
+Ins Entwicklungstagebuch unten in `DOKUMENTATION.md`.
+
+Commit-Nachricht zum Beispiel: „Spec nach Playtest: Rückmeldung Truhe“. Im Januar wird aus diesen Einträgen der Prozessteil der Dokumentation: Was beobachtet und was daraufhin entschieden wurde, zeigt Designarbeit besser als jede fertige Beschreibung. Die Karten fotografieren; die Fotos gehören in Kapitel 5 (Tests).
+
+### Ein Branch für das Experiment
+
+**Tafelbild:** Die Linie main mit zwei Commits, beim zweiten läuft der Slice. Davon zweigt die Linie experiment ab, mit drei Commits. Geklappt: Ein gelber Pfeil führt zurück in main (mergen). Verworfen: Das Ende von experiment ist durchgestrichen, main bleibt, wie es war.
+
+Ein [Branch](https://www.allknivesnobagel.com/teaching/gec1/concepts/branch/) in GitHub Desktop: Current Branch › New Branch › `experiment-animation`
+
+Ein Branch ist eine eigene Linie im Verlauf. Alles, was heute in Block 2 entsteht, landet auf `experiment-animation`; der getestete Slice auf `main` bleibt unberührt. Vorher die Szene speichern und den Stand aus Block 1 committen. Unity darf dabei offen bleiben: Beim Anlegen eines Branches ändert sich keine Datei. Im Terminal: `git switch -c experiment-animation`.
+
+### Ein Clip hält Werte über die Zeit
+
+**Tafelbild:** Eine Truhe, zu bei 0 Sekunden und auf bei 1 Sekunde. Darunter die Kurve der Rotation x: ein Keyframe bei 0 s mit 0 Grad, einer bei 1 s mit 100 Grad. Dazwischen rechnet Unity jeden Frame aus.
+
+[Animation Clip](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/): zwei Keyframes reichen.
+
+### Der Animator wählt den Clip
+
+**Tafelbild:** Animator Controller als Zustandsautomat: Entry führt zum Standardzustand Zu. Ein Übergang führt von Zu nach Auf; an ihm hängt das Schild Öffnen, ein Trigger. Has Exit Time ist aus: Der Übergang wartet nur auf Öffnen.
+
+Der [Animator](https://www.allknivesnobagel.com/teaching/gec1/concepts/animator/) ist ein [Zustandsautomat](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), fertig eingebaut.
+
+Der Animator ist eine Komponente. Sein Animator Controller enthält Zustände, Übergänge und Parameter. Ein Trigger ist ein Parameter für einen Moment: Er wird gesetzt, ein Übergang verbraucht ihn. Neue Übergänge warten zunächst, bis der Clip des aktuellen Zustands fast durch ist (Has Exit Time); für eine Reaktion auf eine Handlung wird das ausgeschaltet.
+
+### Vom Graphen zum Clip
+
+**Tafelbild:** Im Graphen: Benutzen (Taste E) feuert ein Event an Animator-Wert mit dem Parameter Öffnen. Animator-Wert setzt den Trigger im Animator. Dort wechselt der Zustand von Zu nach Auf, und der Clip läuft.
+
+Der Graph sagt, wann. Der Animator weiß, wie.
+
+Den Knoten **Animator-Wert** gibt es im Kit in der Gruppe **Erweiterung**. Passen Parametername oder Art nicht zum Animator Controller, meldet er das im Graphen und in der Console.
+
+### Bewegen oder Clip?
+
+Bewegen Ein Wert, von A nach B, über eine einstellbare Dauer.
+
+Clip Mehrere Werte, eine eigene Kurve, eine Wiederholung.
+
+Eine Eigenschaft, die ein Clip animiert, kann Bewegen nicht mehr bewegen.
+
+Der Kit-Knoten **Bewegen** verschiebt, dreht oder skaliert ein Objekt über eine einstellbare Dauer: ein kleiner Tween ohne eigene Datei. Ein Clip lohnt sich, sobald mehrere Eigenschaften zusammenspielen, die Kurve eine eigene Form braucht (langsam anlaufen, überschwingen) oder sich etwas wiederholt, etwa eine flackernde Lampe. Animiert ein Clip eine Eigenschaft, etwa die Drehung des Scharniers, schreibt der Animator sie in jedem Frame neu; ein Bewegen-Knoten auf derselben Eigenschaft desselben Objekts hat dann keine Wirkung. Andere Eigenschaften und andere Objekte bleiben frei.
+
+### Werkstatt: eine Animation, selbst gebaut
+
+42 Minuten
+
+Etwas aus eurer Welt bewegt sich, weil die Spielfigur etwas tut. Am Beispiel: eine Truhe.
+
+Ziel für alle: Der Graph löst eure Animation aus.
+
+Unterwegs gibt es drei Zwischenstände: Der Clip läuft von allein (Stufe 1), der Animator wartet (Stufe 2), der Graph löst aus (Stufe 3). Stufe 3 ist das Ziel für alle. Wer statt der Truhe eine Tür, eine Lampe oder eine Plattform animiert, folgt denselben Schritten. Wer schnell fertig ist, baut eine zweite Animation, die zur Entscheidung aus dem Playtest passt.
+
+**Rettungsweg:** Wer beim Bauen der Truhe hängen bleibt, nimmt den fertigen Rohling: **Tools › Kit › Rohling „Truhe“ bauen** (ab Kit v0.3.2). Er legt die Truhe mit Kiste, Scharnier und Deckel in die Szene, ohne Animation. Clip, Animator und Graph baut ihr dann selbst ab Schritt 2.
+
+### Schritt 1–4: Truhe und Clip
+
+1. Truhe bauen: leeres Objekt, darin Kiste, Scharnier und Deckel (Werte im Handout)
+2. „Truhe“ auswählen: Window › Animation › Animation › Create › „Auf“
+3. Add Property: Scharnier › Rotation
+4. Abspielkopf ans Ende, Aufnahme, Scharnier drehen, Aufnahme aus, Play
+
+**Die Truhe.** In der Hierarchy gilt: Was ihr per Rechtsklick _auf_ ein Objekt anlegt, wird sein Kind. Alternativ ein Objekt in der Hierarchy auf ein anderes ziehen.
+
+| Objekt | Anlegen | Position | Scale |
+|---|---|---|---|
+| Truhe | Rechtsklick auf die freie Fläche der Hierarchy › Create Empty | dort, wo sie stehen soll | 1, 1, 1 |
+| Kiste | Rechtsklick auf **Truhe** › 3D Object › Cube | 0, 0.3, 0 | 1, 0.6, 0.6 |
+| Scharnier | Rechtsklick auf **Truhe** › Create Empty | 0, 0.6, 0.3 | 1, 1, 1 |
+| Deckel | Rechtsklick auf **Scharnier** › 3D Object › Cube | 0, 0.05, −0.3 | 1, 0.1, 0.6 |
+
+Kiste und Scharnier sind Geschwister, beide Kinder der Truhe; der Deckel ist ein Kind des Scharniers. Das Scharnier sitzt an der oberen Hinterkante der Kiste. Gedreht wird das Scharnier, also klappt der Deckel um diese Kante. Der Animator kommt auf die Truhe, eine Ebene höher, damit sich die Truhe später noch frei im Raum verschieben lässt: Ein Clip schreibt feste Werte und würde ein animiertes Wurzelobjekt immer an die aufgenommene Stelle zurücksetzen.
+
+**Clip anlegen.** Mit „Truhe“ ausgewählt im Animation-Fenster **Create** klicken und den Clip als `Auf.anim` speichern. Unity legt dabei einen Animator Controller `Truhe.controller` an, setzt eine Animator-Komponente auf „Truhe“ und trägt „Auf“ als Standardzustand ein.
+
+**Keyframes.** **Add Property** › Scharnier › Transform › Rotation, mit **+** hinzufügen. Unity setzt Keyframes bei 0:00 und am Ende, beide mit der aktuellen Drehung. Den Abspielkopf auf den letzten Keyframe ziehen, den roten Aufnahmeknopf drücken und beim Scharnier Rotation x auf 100 setzen. Klappt der Deckel dabei in die Kiste hinein, −100 nehmen. Aufnahme beenden.
+
+**Stufe 1:** Play drücken. Der Deckel klappt auf, springt zu und klappt wieder auf, endlos. Das ist Absicht: Mit genau diesem Symptom übt ihr gleich das Debugging mit dem Agenten.
+
+### Wenn es nicht läuft: Agent als Zweitmeinung
+
+1. Symptom beschreiben: was ihr tut, was passiert, was passieren sollte
+2. Agent liest Console, Editor-Log und Dateien. Er ändert nichts.
+3. Er nennt eine Ursache mit Beleg
+4. Ihr prüft den Beleg selbst
+5. Erst dann ändern
+
+### Das Symptom, genau beschrieben
+
+„Ich drücke Play. Der Deckel der Truhe klappt auf, springt zu und klappt wieder auf, endlos. Lies Console, Editor-Log, `Auf.anim` und `Truhe.controller`. Nenne die Ursache mit der Zeile, die sie belegt. Ändere nichts.“
+
+Das Editor-Log liegt unter Windows in `%LOCALAPPDATA%\Unity\Editor\Editor.log`, auf dem Mac in `~/Library/Logs/Unity/Editor.log`; in der Console führt das Menü oben rechts zu **Open Editor Log**. Weil die Datei außerhalb des Projektordners liegt, fragt der Agent vorher um Erlaubnis. Lesen zu erlauben ist in Ordnung. Clips und Animator Controller speichert Unity als Text, ein Agent kann sie also lesen.
+
+### Behauptung prüfen
+
+Agent „In `Auf.anim` steht `m_LoopTime: 1`. Der Clip wiederholt sich.“
+
+Prüfen: Clip im Project-Fenster anklicken. Ist **Loop Time** angehakt? Erst dann abhaken, dann Play.
+
+Verwendet ihr die Diagnose, bekommt sie eine Zeile im KI-Verzeichnis, auch wenn ihr selbst ändert.
+
+Die Zeile in `KI-VERZEICHNIS.md` nennt Werkzeug, Version, Zweck und Stelle in der Arbeit, zum Beispiel: Claude Code, Modell laut Chat, „Diagnose: Deckel wiederholt sich (Loop Time)“, `Auf.anim`. Stimmt die Behauptung nicht, zurück zu Schritt 1, mit dem, was ihr beim Prüfen gesehen habt.
+
+### Schritt 5–8: Animator und Graph
+
+5. Clip „Auf“: Loop Time aus (falls noch nicht geschehen)
+6. Animator: neuer Zustand „Zu“, als Standard setzen, Übergang zu „Auf“
+7. Trigger „Öffnen“; am Übergang: Has Exit Time aus, Condition „Öffnen“
+8. Graph: Benutzen (Truhe) → Animator-Wert (Truhe, „Öffnen“, Trigger)
+
+**Animator.** Window › Animation › Animator, „Truhe“ ausgewählt. Rechtsklick auf die freie Fläche › **Create State › Empty**, den Zustand „Zu“ nennen. Rechtsklick auf „Zu“ › **Set as Layer Default State**: Er wird orange. Rechtsklick auf „Zu“ › **Make Transition**, dann auf „Auf“ klicken.
+
+**Parameter.** Links im Reiter **Parameters** auf **+** › **Trigger**, Name „Öffnen“. Den Pfeil von „Zu“ nach „Auf“ anklicken; im Inspector **Has Exit Time** abhaken, unter **Conditions** mit **+** „Öffnen“ wählen. **Stufe 2:** Im Play-Modus bleibt der Deckel jetzt zu.
+
+**Graph.** In der Interaktion wie am 13.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
+
+**Häufige Fehler:** Animator auf dem Deckel statt auf der Truhe. Parametername im Knoten anders geschrieben als im Animator (der Knoten meldet das). Has Exit Time noch an: Der Deckel öffnet verspätet. Deckel klappt in die falsche Richtung: Vorzeichen der Rotation x umdrehen.
+
+Commit auf `experiment-animation`: „Truhe klappt beim Benutzen auf“.
+
+### Eine Handlung, mehrere Rückmeldungen
+
+**Tafelbild:** Zeitachse von 0 bis 0,5 Sekunden ab dem Moment Benutzt. Darunter vier Balken, die alle bei 0 beginnen: Ton bis 0,4 s, Größe kurz größer und zurück bis 0,08 s, Material blitzt auf bis 0,06 s, Animation bis 0,5 s.
+
+[Feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/) beginnt im selben Frame wie die Handlung.
+
+Im Kit, jeweils an „Benutzt“ angeschlossen:
+
+- **Ton abspielen** (nächste Folie).
+- **Kurz größer und zurück** mit zwei Bewegen-Knoten auf dasselbe Objekt, beide mit Was: Größe. Der erste: Weg (0.1, 0.1, 0.1), Dauer 0.08 s, „Benutzt“ an „Hin“. Der zweite: Dauer 0.08 s, „Angekommen“ des ersten an „Zurück“ des zweiten. Der zweite Knoten bekommt keine ausgehende Verbindung; sonst stößt jede Rückfahrt die nächste an. Bewegt wird ein Objekt, das kein Clip animiert, hier die Kiste.
+- **Material tauschen** für ein kurzes Aufblitzen, mit **Warten** und „Zurück“.
+- **Erzeugen** für ein Prefab mit Partikelsystem.
+
+„Kamera wackeln“ (Spielsysteme) rüttelt die Kamera des Spielers kurz, „Anhalten“ (Aktion) hält das Spiel für ein paar Millisekunden an. Erinnert euch an den Dreier-Schlag vom 23.10.: 55, 65 und 130 ms Anhalten sind dort die stärkste Rückmeldung. Beide Knoten gibt es ab Kurs-Paket 0.3.2.
+
+### Ton zuerst
+
+Ein Ton bestätigt eine Handlung, auch wenn niemand hinschaut.
+
+AudioSource an die Truhe, Play On Awake aus, Spatial Blend 3D.
+
+Im Graphen: Ton abspielen.
+
+**Woher ein „Klack“ kommt:**
+
+- [Kenney, Kategorie Audio](https://kenney.nl/assets/category:Audio): Tonpakete unter CC0, ohne Namensnennung nutzbar.
+- [freesound.org](https://freesound.org/): bei der Suche nach Lizenz filtern, CC0 oder CC-BY. CC-BY heißt: Name und Link in die Quellen der Dokumentation.
+- [sfxr.me](https://sfxr.me/): Töne selbst erzeugen und als WAV laden. Selbst erzeugt heißt selbst gemacht.
+
+**Importieren:** die WAV- oder OGG-Datei in einen Ordner `Assets/Audio` ziehen. Unity macht daraus einen Audio Clip; den ins Feld **Audio Generator** der AudioSource (so heißt es in Unity 6.3) ziehen oder im Knoten **Ton abspielen** eintragen.
+
+**Einstellen:** Die AudioSource gehört an das Objekt, von dem der Ton kommt. **Play On Awake** abschalten, sonst klingt sie beim Start. **Spatial Blend** auf 3D: Der Ton kommt aus der Richtung der Truhe und wird mit Abstand leiser. Derselbe Ton bei jedem Benutzen nutzt sich ab; zwei oder drei Varianten lassen sich mit dem Knoten **Zufällig** abwechseln. Für alle fremden Töne gelten die Regeln der nächsten Folie.
+
+### Lizenzen
+
+- CC0 (Kenney): frei, ohne Namensnennung
+- CC-BY (oft auf freesound): frei, mit Namensnennung
+- Asset Store: im Spiel ja, Dateien weitergeben nein
+- Mixamo: im eigenen Projekt frei, Dateien weitergeben verboten
+
+Jede fremde Datei: Quelle und Lizenz in Kapitel 9 der Doku.
+
+Kapitel 9 von `DOKUMENTATION.md` heißt „Quellen und KI“. Mixamo und Asset-Store-Pakete erlauben die Nutzung im eigenen Projekt, aber nicht die Weitergabe der Dateien selbst, auch nicht kostenlos. Ein öffentliches Repository mit solchen Dateien wäre genau das; euer Kursprojekt bleibt deshalb privat.
+
+### Mergen oder verwerfen
+
+Geklappt Auf `main` wechseln, Branch › Merge into current branch… › `experiment-animation`
+
+Verworfen Auf `main` wechseln. Der Slice ist, wie er war.
+
+Vorher: Szene speichern, committen. Nach dem Wechsel lädt Unity die Dateien neu.
+
+Ein verworfener Branch kann liegen bleiben oder über Branch › Delete gelöscht werden. Fragt Unity nach dem Wechsel, ob die geänderte Szene neu geladen werden soll: ja. Im Terminal: `git switch main`, dann `git merge experiment-animation`.
+
+### Erklärt euren Animator
+
+Zu zweit, eine Minute pro Person: Welche Zustände hat er, und was löst den Übergang aus?
+
+### Checkpoint
+
+1. Nach dem Playtest: Spec geändert oder begründet beibehalten
+2. Devlog-Eintrag zum Test
+3. Eine eigene Animation, vom Graphen ausgelöst
+4. Branch gemergt oder bewusst verworfen
+
+Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
+
+### Bis zum 11.12.: Alpha
+
+Feature-Freeze
+
+Alles, was das Spiel können soll, ist eingebaut. Danach wird nur noch repariert und verbessert.
+
+Grafik und Ton sind erstmals überarbeitet.
+
+Windows-Build dieses Stands, auf einem anderen Rechner getestet.
+
+Feature-Freeze heißt: Was am 11.12. nicht drin ist, kommt nicht mehr hinein. Gestrichen werden nur zusätzliche Ideen; mindestens zwei Interaktionen aus der Aufgabenstellung bleiben. Wer zu viel geplant hat, streicht jetzt, nicht im Januar.
+
+Der Build in dieser Reihenfolge: Szene speichern, committen, aus genau diesem Stand bauen, die .exe auf einem anderen Windows-Rechner starten. Den Build-Ordner als ZIP per USB-Stick oder Cloud-Link weitergeben; das Repository ist privat. Klappt der Build nicht, kommt die Fehlermeldung in den Devlog und in den Blackboard-Thread. Das ist ein Rettungsfall, kein erreichter Meilenstein.
+
+### Die nächsten 14 Tage
+
+1. Nach 48 Stunden: Playtest-Entscheidung umgesetzt, Animation in der eigenen Welt
+2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+3. Wer 30 Minuten feststeckt, fragt
+4. Vor dem 11.12.: ein Playtest mit jemandem außerhalb des Kurses
+
+12–16 Stunden, fünf Sitzungen.
+
+**Aufwand, ehrlich geschätzt: 12–16 Stunden.** So verteilt:
+
+| Sitzung | Dauer | Ergebnis |
+|---|---|---|
+| 1 | 2 h | Entscheidung aus dem Playtest umgesetzt, Truhen-Animation (oder eine eigene) in der eigenen Welt, Commit |
+| 2 | 3–4 h | Die fehlenden Interaktionen eingebaut, mindestens zwei aus der Aufgabenstellung laufen |
+| 3 | 3–4 h | Grafik und Ton erstmals überarbeitet: Materialien, Licht, drei bis fünf Töne |
+| 4 | 1–2 h | Playtest außerhalb des Kurses mit der Karte, Devlog-Eintrag |
+| 5 | 2 h | Windows-Build, auf einem anderen Rechner getestet, Commit |
+
+Reicht die Zeit nicht, wird in dieser Reihenfolge gekürzt: zweite Animation weglassen, Grafik auf Materialien und Licht beschränken, ein Ton statt fünf. Die zwei Pflichtinteraktionen und der Build bleiben.
+
+Ein Test mit Mitbewohnerin oder Geschwistern ist ausdrücklich gemeint: Wer keine Spiele spielt, findet andere Stellen als wir. Die Playtest-Karte gibt es als Druckvorlage: [druck/playtest-karte.html](/teaching/gec1/druck/playtest-karte.html).
+
+### Für Neugierige: fertige Animationen
+
+Optional
+
+Laufen, springen, winken: Für Figuren mit Skelett gibt es fertige Animationen, etwa bei Mixamo. Unser Spieler ist eine Kapsel ohne Skelett.
+
+**Mixamo** (Adobe, kostenlos mit Adobe-Konto) bietet Figuren und Animationen. Export als **FBX for Unity**; Laufanimationen mit **In Place**, sonst läuft die Figur aus ihrem Collider. In Unity die FBX-Datei anklicken, im Inspector den Reiter **Rig** öffnen und **Animation Type: Humanoid** einstellen. Eine solche Figur ersetzt nicht den Spieler aus dem Kurs-Paket, sie kann aber eine Nebenfigur sein. Wer das ausprobiert: auf einem eigenen Branch, nach dem Alpha-Minimum. Lizenz: siehe Folie „Lizenzen“; mehr auf der Seite [Animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/04/
+
+## Tag 5: Look, Ton, Oberfläche
+
+11.12.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/05/slides/
+
+Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
+
+Begriffe: [material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material/), [light](https://www.allknivesnobagel.com/teaching/gec1/concepts/light/), [ui](https://www.allknivesnobagel.com/teaching/gec1/concepts/ui/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/)
+
+Bis zum nächsten Termin: Meilenstein Beta bis 08.01.: Inhalt vollständig, Windows-Build auf einem anderen Rechner getestet, Kapitel 1–5 in DOKUMENTATION.md als Entwurf. Dafür vier begrenzte Vier-Stunden-Sessions einplanen; der externe Windows-Test findet spätestens am 17.12. statt. Optional am 18.12. und 04.01.: lauffähiger Stand und drei offene Aufgaben im Blackboard-Thread. Nach 30 Minuten Feststecken eine konkrete Frage stellen.
+
+### Heute ist Alpha
+
+Alle geplanten Interaktionen sind drin.
+
+Grafik und Ton sind erstmals überarbeitet. Ein aktueller Windows-[Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) ist versucht.
+
+### Was heißt Feature Freeze?
+
+1. Zwei Pflichtinteraktionen bleiben
+2. Aufgabenminimum erfüllen, Fehler reparieren
+3. Extras aus der Spec streichen
+4. Look, Ton, UI, Build und Doku verbessern
+
+Nach dem Freeze sind nur Reparaturen und ein noch unerfülltes Aufgabenminimum offen. Kein neues Extra.
+
+### Was fliegt heute zuerst raus?
+
+1. Partikel-Demo → Handout
+2. Lightmap-Verfahren → Handout
+3. vollständiges Drei-Screen-UI → Werkstatt, optional
+4. Audio-Snapshot → Handout
+
+Nicht kürzen: eine projektbezogene UI-Handlung, Probe-Build, Alpha-Build und Test.
+
+### Woraus entsteht eine Oberfläche?
+
+**Tafelbild:** Geometrie, Material und Licht stehen getrennt nebeneinander. Pfeile führen zum fertigen Bild: Der Shader berechnet aus Form, Materialwerten und Licht die sichtbaren Pixel.
+
+Die Geometrie gibt die Form. Das [Material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material/) beschreibt die Oberfläche. [Licht](https://www.allknivesnobagel.com/teaching/gec1/concepts/light/) macht beides sichtbar.
+
+### Drei Regler reichen für den Anfang
+
+URP/Lit
+
+- **Base Map:** Farbe oder Textur
+- **Metallic:** Metall oder Nichtmetall
+- **Smoothness:** glatter oder rauer Reflex
+
+Normal Map erst danach. Sie verändert kleine Lichtdetails, nicht die Form.
+
+**Bild:** Kreidezeichnung von drei gleichen Würfeln unter derselben Lampe: matt, lackiert und metallisch. (KI-generiert).
+
+Im Project-Fenster `Create › Material`, dann den Shader `Universal Render Pipeline/Lit` verwenden. Ein magentafarbenes Objekt weist häufig auf einen Shader hin, der nicht zur aktiven Render Pipeline passt.
+
+### Eigene Zeichnung: Textur oder UI-Bild?
+
+PNG → `Assets/Art`
+
+- **Material:** `Default` → Base Map
+- **Canvas:** `Sprite (2D and UI)` → `Image › Source Image`
+- Import prüfen: `Max Size`, Alpha, Filterung
+
+Quelldatei behalten; Werkzeug und Datum ins Devlog.
+
+### Wann wird Licht berechnet?
+
+**Tafelbild:** Drei Felder vergleichen Realtime, Baked und Mixed: Realtime berechnet Licht jeden Frame, Baked schreibt feste Beleuchtung vorher in eine Lightmap, Mixed verbindet gebackene Umgebung mit beweglichen Objekten.
+
+**Realtime** passt zu bewegten, flackernden oder zerstörbaren Lichtern. **Baked** passt zu fester Architektur. **Mixed** verbindet gebackene Anteile mit Realtime-Anteilen und kostet weiterhin Rechenzeit im Spiel.
+
+Lightmap in Unity 6: feste Mesh Renderer unter `Mesh Renderer › Lighting › Contribute Global Illumination` markieren, Lichter auf Baked oder Mixed, dann `Window › Rendering › Lighting` und `Generate Lighting`. Nicht im Plenum auf einen großen Bake warten.
+
+Aktives URP Asset: `Edit › Project Settings › Graphics › Default Render Pipeline`. Eine Qualitätsstufe kann es unter `Edit › Project Settings › Quality › Rendering › Render Pipeline Asset` überschreiben.
+
+### Post-Processing: erst einschalten
+
+1. Kamera: `Rendering › Post Processing` an
+2. `Global Volume` anlegen, Profil mit `New`
+3. `Add Override › Post-processing › Color Adjustments`
+4. `Post Exposure` anhaken, zum Kontrolltest auf `+3`
+
+Kontrolle: unübersehbar heller. Sonst Volume Layer und Volume Mask prüfen.
+
+URP bringt Post-Processing mit; kein zweites Post-Processing-Paket installieren. Ein Override-Wert gilt erst, wenn sein Häkchen aktiv ist. Ein Global Volume wirkt über die ganze Szene, sofern die Kamera seine Ebene in der Volume Mask berücksichtigt.
+
+**Partikel, falls Zeit bleibt:** Ein Particle System für einen kurzen Moment verwenden, `Emission › Rate over Time` auf 0 und unter `Bursts` wenige Partikel auslösen. Lebensdauer kurz halten. `URP/Particles/Unlit` genügt, wenn der Effekt nicht auf Licht reagieren muss. Im Build prüfen.
+
+### Wofür lohnt sich der Aufwand?
+
+- ein klares Hauptlicht
+- lesbare Hell-Dunkel-Trennung
+- zwei unterscheidbare Materialien
+- ein deutlicher Volume-Eingriff mit Grund
+
+Default verschicken
+
+Eigener Shader, volumetrischer Nebel, Effekt auf jedem Objekt.
+
+Eine Entscheidung, die jemand im Spiel bemerkt. Dann testen.
+
+### Freie Sounds sind nicht lizenzfrei
+
+- **Kenney:** Asset-Seite und enthaltene CC0-Datei aufheben
+- **Freesound:** CC0 oder CC BY filtern; Titel, Person, URL und Lizenz notieren
+- **eigene Aufnahme:** Datei, Datum und Urheberschaft ins Devlog
+
+„Kostenlos heruntergeladen“ ist keine Lizenz. CC BY braucht Namensnennung.
+
+[Kenney: Lizenzhilfe](https://kenney.nl/support) · [Freesound: Lizenz-FAQ](https://freesound.org/help/faq/). Bei Freesound nicht pauschal von „frei“ ausgehen: Die Lizenz steht am einzelnen Sound. CC BY-NC für dieses Kursprojekt vermeiden, damit eine spätere Veröffentlichung nicht blockiert wird.
+
+### Wie kommt Ton zum Lautsprecher?
+
+**Tafelbild:** Audio Sources für Musik, Treffer und Schritte führen in die Mixer-Gruppen Musik und SFX. Beide Gruppen führen in Master und von dort zum Audio Listener.
+
+Audio Sources erzeugen Signale; Mixer-Gruppen ordnen und mischen sie. Master setzt den Gesamtpegel.
+
+### Ein kleiner Mixer reicht
+
+1. `Create › Audio Mixer`
+2. Unter Master `Musik` und `SFX` anlegen
+3. Bei jeder Audio Source `Output` auf die passende Gruppe stellen
+4. Im Play-Modus VU-Pegel ansehen und gegeneinander mischen
+
+Ein Snapshot speichert Mixer-Parameter, ist für Alpha aber optional. Zuerst müssen wichtige Signale hörbar bleiben und dürfen nicht dauerhaft übersteuern.
+
+### Look-und-Ton-Werkstatt: 35 Minuten
+
+1. Einen Raum oder Moment wählen
+2. Zwei Materialien und ein Hauptlicht lesbar machen
+3. Realtime, Baked oder Mixed begründen
+4. Einen eigenen Bild- oder Soundbaustein korrekt importieren
+5. Play, Screenshot, Lizenznotiz, Commit
+
+Optional: genau ein Volume-Override oder kurzer Partikel-Burst.
+
+[Alpha-Werkstatt als A4-Druckvorlage](../../druck/alpha-werkstatt.html)
+
+### Erklärt eine Entscheidung
+
+Zu zweit, je eine Minute:
+
+„Ich ändere \_\_\_. Das soll \_\_\_ lesbarer machen. Im Build prüfe ich \_\_\_.“
+
+### Pause: Windows-Modul prüfen
+
+Mac: Im Unity Hub zur installierten Editorversion **Windows Build Support (Mono)** hinzufügen.
+
+Windows: Windows-Profil vorhanden?
+
+Alle: freier Build-Ordner außerhalb von **Assets**.
+
+### Jetzt nur ein Probe-Build
+
+1. `File › Build Profiles`: Windows, `Switch Profile`
+2. Scene List: Startszene oben, nötige Szenen an
+3. Mac: `Scripting Backend: Mono`
+4. In leeren Ordner außerhalb des Projekts bauen
+
+Dieser frühe Build findet Fehler. Er bekommt noch keinen `alpha`-Tag.
+
+### Welche Zustände braucht dieses Spiel?
+
+**Tafelbild:** Drei Ansichten eines Schlüssel-und-Tür-Spiels: Ein Startbildschirm führt über Spielen ins Spiel. Das Öffnen der Zieltür führt zum Bildschirm Geschafft. Neustart lädt die Spielszene erneut.
+
+Pflicht ist eine projektbezogene UI-Handlung. Der vollständige Ablauf Start → Spiel → Geschafft → Neustart ist optional.
+
+Der Kurs verwendet uGUI: Canvas, GameObjects und Komponenten passen zum Kit, zu Hierarchy und Inspector. UI Toolkit ist ebenfalls für Runtime-UI geeignet, würde hier aber UXML, Stylesheets und UI Builder als zweites Modell einführen. Darum lernt der Kurs nicht beide parallel.
+
+### Kit-Beispiel: Start und Spiel
+
+Für das Schlüssel-und-Tür-Spiel:
+
+- Start: `Beginn → An/Aus (Start an) → Pause`
+- Spielen: `Knopf gedrückt` `→ An/Aus (Start aus) → Weiter`
+
+Button → Graph, ohne Skript.
+
+### Kit-Beispiel: Ziel und Neustart
+
+- Ziel: `Tür offen → An/Aus (Geschafft an) → Pause`
+- Neustart: `Knopf gedrückt` `→ Szene laden`
+
+Szenenname exakt; Szene in der Scene List.
+
+### Der kleinste UI-Vertrag
+
+1. Spec-Handlung wählen: Start, Hinweis, Ziel oder Scheitern
+2. Mit vorhandenen Kit-Knoten verdrahten
+3. Öffnen → klicken → spielen → zurückkehren, dreimal
+4. Cursor im UI frei, Blick im Spiel gefangen
+
+Kein Scheiterzustand? Kein Game Over erzwingen.
+
+Für den vollständigen Ablauf hält `Pause` den Kit-Spieler an und gibt den Cursor frei; `Weiter` setzt beides zurück. `Knopf gedrückt` (Gruppe Auslöser) bekommt im ◆-Feld „Knopf“ den Button aus der Hierarchy; `Pause` und `Weiter` stehen unter Spielsysteme. Die drei Knoten gibt es ab Kurs-Paket 0.3.2. Nach jedem Menüwechsel den Cursor sichtbar anklicken und danach wieder laufen und umsehen.
+
+### Welcher Kit-Knoten passt?
+
+- Zahl im HUD → `HUD-Anzeige`
+- Panel zeigen → `An/Aus`
+- Tod bei null → `Lebenspunkte`
+- Respawn-Punkt → `Checkpoint`
+- Neustart-Szene → `Szene laden`
+
+`HUD-Anzeige` liest `Zahl` laufend. `An/Aus` schaltet ein gebundenes GameObject. `Lebenspunkte` feuert `Tot` einmal beim Fall auf null. `Checkpoint` merkt oder lädt einen Respawn-Punkt. `Szene laden` akzeptiert nur Szenen aus der Scene List.
+
+### Der Agent liest den Graph, ihr verdrahtet
+
+> „Lies meinen `.kit`-Graph. Plane \_\_\_ mit vorhandenen Kit-Knoten. Ändere keine Szene, Prefab oder Skript. Nenne Knoten, Ports, Bindungen und drei Tests.“
+
+Kit-Palette prüfen → selbst verdrahten → jeden Weg testen
+
+### Projektwerkstatt: 30 Minuten
+
+1. **UI-Pflicht:** eine Spec-Handlung läuft
+2. **Optional:** Start → Spiel → Ende → Neustart
+3. **Ton:** Musik und SFX routen
+4. **Build:** öffnen oder vollständigen Fehler notieren
+5. **Test:** Cursor, Kernschleife, Ton, Neustart, Beenden
+
+Agent: Graph-Verdrahtung oder Build-Fehler; ein Auftrag.
+
+### Wenn der Probe-Build fehlschlägt
+
+Kopiert den ersten vollständigen Fehler.
+
+> „Der Windows-Build scheitert hier. Nenne Ursache und kleinsten Test. Ändere nichts.“
+
+Behauptung prüfen → kleinsten Test ausführen → erst dann ändern → erneut bauen
+
+Ein „versucht“ ohne Fehlertext und nächsten Test erfüllt den Meilenstein nicht.
+
+### Jetzt entsteht der Alpha-Build
+
+1. Szene und Projekt speichern
+2. In GitHub Desktop den fertigen Werkstattstand committen
+3. Aus genau diesem Commit neu in einen leeren Ordner bauen
+
+Erst committen, dann frisch bauen.
+
+### Testen, dann `alpha` taggen
+
+4. Ganzen Build-Ordner zippen
+5. Per USB oder Cloud auf anderem Windows-Rechner testen
+6. GitHub Desktop, History: Rechtsklick auf den getesteten Commit → `Create Tag` → `alpha`
+7. Commit und Tag pushen
+
+Nur der tatsächlich getestete Commit bekommt `alpha`.
+
+### Was wird tatsächlich getestet?
+
+- startet ohne Unity; Startszene stimmt
+- Eingabe, UI-Klick und Cursorwechsel reagieren
+- zwei Pflichtinteraktionen laufen
+- Ziel oder Scheitern und Neustart funktionieren
+- Ton hörbar; Fenster schließbar
+
+Die `.exe` allein ist kein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/). Ganzen Ordner testen.
+
+### Welcher Stand bekommt `alpha`?
+
+**Tafelbild:** Ein gespeicherter Stand wird committet und daraus als Windows-Build gebaut. Nach dem Test auf einem anderen Rechner bekommt genau dieser Commit den Tag alpha; der Build-Ordner reist als ZIP per USB oder Cloud.
+
+Der [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/) markiert den Commit, aus dem der getestete Build entstand.
+
+Private Kurs-Repositories liefern Testerinnen und Testern keinen GitHub-Release-Link. Der vollständige Build-Ordner wird gezippt und per USB oder Cloud-Link übergeben. GitHub Releases sind erst später eine mögliche öffentliche Übergabeform; sie gehören nicht in den heutigen Testweg.
+
+### KI-Verzeichnis prüfen
+
+Für Graph-Verdrahtung und Build-Diagnose jeweils ein Eintrag:
+
+- Werkzeug und Modell
+- Auftrag oder Prompt-ID
+- betroffene Dateien
+- was übernommen, geändert oder verworfen wurde
+- wie das Ergebnis geprüft wurde
+
+Auch eine verwendete Diagnose bekommt eine Zeile, wenn ihr die Änderung selbst ausführt.
+
+### Bis spätestens 17.12.
+
+1. Alpha-Build auf einem anderen Windows-Rechner starten
+2. Kernschleife mit zwei Pflichtinteraktionen vollständig spielen
+3. Ergebnis, Rechner und Commit im Devlog notieren
+4. Bei Fehler: reparieren → committen → neu bauen → erneut fremd testen
+
+Der externe Test liegt vor dem freiwilligen Check-in am 18.12.
+
+### Vier Sessions bis Beta: 16 Stunden
+
+1. **bis 17.12. · 4 h:** Alpha reparieren, extern testen
+2. **bis 22.12. · 4 h:** Inhalt schließen
+3. **bis 03.01. · 4 h:** `DOKUMENTATION.md`, Kapitel 1–5
+4. **bis 07.01. · 4 h:** Beta-Build extern testen
+
+Nach 4 h prüfbaren Stand sichern.
+
+Erwartbar sind etwa 15–20 Stunden, nicht vier Wochen Dauerarbeit.
+
+### Zwei freiwillige Weihnachts-Check-ins
+
+18.12. und 04.01.
+
+Im Blackboard-Thread:
+
+- ein lauffähiger Build oder ein 30–60-Sekunden-Clip aus dem Build
+- drei Aufgaben, jede höchstens ein Nachmittag
+- höchstens eine konkrete Frage mit bisherigen Versuchen
+
+Die Check-ins sind ein Angebot, keine zusätzliche Pflicht. Über die Feiertage ist keine durchgehende Betreuung versprochen. Das vollständige Muster steht im Handout von [Tag 6, Folie 1: „Vier Wochen später“](../06/#vier-wochen-spater).
+
+### Beta am 08.01.
+
+Inhalt vollständig. Build auf einem anderen Rechner getestet. Kapitel 1–5 stehen als Entwurf.
+
+Danach wird nicht mehr erfunden, sondern geprüft, erklärt und abgegeben.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/05/
+
+## Tag 6: Ship
+
+08.01.2027 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/06/slides/
+
+Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.
+
+Begriffe: [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/), [ai-register](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/)
+
+Bis zum nächsten Termin: Abgabe am 22.01.2027: ein ZIP mit Projekt-ZIP, Build-ZIP und PDF, höchstens 2,5 GB. Aufwand: etwa 10 Stunden mit gepflegtem Devlog, bis zu 20 ohne. Bis 10.01. (2 h): den Abgabe-Check einmal ganz durchgehen, Lücken notieren. Bis 15.01. (4 bis 8 h): die Kapitel der PDF; im Blackboard-Thread das Inhaltsverzeichnis, ein fertiges Kapitel, der Stand des Builds, ein Hindernis. Bis 21.01. (3 h): letzter Build, Test auf einem fremden Windows-Rechner, Tag abgabe, PDF, ZIP, hochladen. Nach dem Feature-Freeze nur Reparaturen, und was zu den zwei Pflicht-Interaktionen noch fehlt.
+
+### Vier Wochen später
+
+Wer hat heute einen Build dabei, der auf einem anderen Rechner lief?
+
+Beta: Der Inhalt ist komplett, der [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) lief auf einem fremden Rechner, die Dokumentation steht als Entwurf.
+
+Abgabe in 14 Tagen: 22.01.2027
+
+**Die Check-ins am 18.12. und 04.01.** waren freiwillig. Für alle, die sie nachholen oder beim nächsten Projekt so arbeiten wollen: Ein guter Post hat drei Teile.
+
+1. **Ein lauffähiger Stand.** Ein Clip von 30 bis 60 Sekunden, aufgenommen im Build, nicht im Play-Modus des Editors. Wer kann, hängt den Build an.
+2. **Drei offene Aufgaben**, jede so klein, dass sie an einem Nachmittag fertig wird, in der Reihenfolge, in der sie drankommen.
+3. **Höchstens eine Frage**, mit dem, was schon versucht wurde.
+
+Schwach: „Läuft so halb, muss noch einiges machen.“
+
+Stark: „Clip im Anhang: Der Raum ist komplett, die Tür geht mit dem Schlüssel auf. Offen: 1. Die Falle setzt noch nicht zurück. 2. Neustart per Taste R. 3. Ein Ton für die Tür. Frage: Der Build startet mit schwarzem Bild, die Szene steht in der Scene List. Was fehlt noch?“
+
+Am 04.01. kommt eine Zeile dazu: Welche der drei Aufgaben vom 18.12. sind erledigt?
+
+Wer heute weder einen getesteten Build noch einen Doku-Entwurf hat, macht trotzdem überall mit: Im zweiten Block wird notfalls im Play-Modus des Editors gespielt, und der Abgabe-Check zeigt, was in den nächsten 14 Tagen zuerst drankommt.
+
+### Wo 40 Punkte liegen
+
+**Tafelbild:** Balken je Kriterium: Idee und Konzept 30 Punkte, Audio-visuell 20, Funktionalität 20, Struktur und Build 10, Implementierung 10, Dokumentation 10.
+
+Idee und Konzept 30, Dokumentation 10: so viel wie Grafik, Ton und Funktion zusammen.
+
+### Was 30 Punkte für die Idee zeigen
+
+- Das Erlebnis ist benannt, das Spiel erzeugt es
+- Zwei Alternativen und warum diese Idee
+- Die Designfrage, im Test beantwortet
+- Specs, nach denen andere bauen könnten
+
+Die Idee steht im Spiel, das PDF belegt sie.
+
+Die Aufgabenstellung nennt nur die Überschrift „Idee und Konzept“. So lese ich sie: Zählt, wie klar die Idee ist und wie gut das Spiel sie einlöst. Das PDF belegt, dass das Erlebnis geplant war: Was sollten die Spielenden erleben, welche anderen Wege gab es, welche Frage wurde im Test beantwortet? Die Kapitel 1 bis 4 aus `DOKUMENTATION.md` (Idee, Alternativen, Designfrage, Spec) tragen diesen Teil.
+
+### Was 10 Punkte für die Dokumentation zeigen
+
+- Ein Making-of: was sich geändert hat und warum
+- Verworfene Entwürfe mit Bild und Datum
+- Ein System, in eigenen Worten erklärt
+- Das [KI-Verzeichnis](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/), vollständig
+
+Keine Seitenzahl. „500 Seiten sind zu viel, eine Seite ist zu wenig.“
+
+Das Zitat stammt aus der Aufgabenstellung. Bilder sind ausdrücklich erwünscht, Konzeptzeichnungen auch. Die Kapitel 5 bis 9 aus `DOKUMENTATION.md` (Tests, Überarbeitungen, ein System, Reflexion, Quellen und KI) tragen diesen Teil.
+
+### Woraus das Making-of entsteht
+
+1. Das [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/) unten in `DOKUMENTATION.md`
+2. Der [Verlauf](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/): Commits mit Datum
+3. Playtest-Karten von Tag 4 und heute
+4. Screenshots mit Datum in `bilder/`
+
+Das Making-of liegt schon da. Es muss nur noch sortiert werden.
+
+Wer kein Devlog geführt hat: Der Verlauf ist das Gerüst. Jeder Commit hat ein Datum, und aus den Nachrichten lässt sich rekonstruieren, wann sich was geändert hat. Die Playtest-Karten werden in Kapitel 5 ausgewertet (Tabelle: Datum, wer, Beobachtung, Änderung); Fotos der Karten kommen in den Anhang.
+
+### Was gestrichen wurde, gehört hinein
+
+HIGH WATER
+
+1. Vorher festgelegt, in welcher Reihenfolge gestrichen wird
+2. Zuerst weitere Gegnertypen, dann Räume
+3. Dann das große Finale, zuletzt Grafik-Feinschliff
+4. Nie gestrichen: Hitstop, Wackeln, Ton bei jedem Treffer
+
+Jeder Strich hat einen Grund. Der Grund gehört ins Making-of.
+
+HIGH WATER entstand in einer Game Jam. Vor dem Start stand fest, was zuerst wegfällt, wenn die Zeit knapp wird, und was nie wegfällt: das Gefühl jedes Treffers. Gestrichen oder verschoben wurden unter anderem die höhere Auflösung (sie hätte etwa 1,78-mal so viel Rechenarbeit pro Bild gekostet), Charaktermodelle aus Polygonen (ersetzt durch Voxel-Figuren), eine Ausrüstungsseite und eigene Zug- und Fabriklevel, die nur als einzelne Momente blieben.
+
+Ein zweites Stück Making-of steckt in den Zahlen. Das Designdokument plante für den dritten Schlag einen Stoß von 11 nach vorn und 5 nach oben. Im Code steht nach dem Tuning 8,5 und 4,5, dazu ein Anteil aus dem Tempo der Spielfigur. Das Dokument hält die erste Absicht fest, der Code den getunten Wert. Beides gehört ins Making-of: was geplant war und was der Test daraus gemacht hat.
+
+Spiel: [limeminister.itch.io/high-water](https://limeminister.itch.io/high-water).
+
+### Ein Eintrag im Making-of
+
+1. Datum und Bild
+2. Was war geplant?
+3. Was habt ihr beobachtet?
+4. Was habt ihr geändert, und in welchem Commit?
+
+Drei, vier solche Einträge tragen ein ganzes Kapitel.
+
+### Ein System, laut erklärt
+
+**Tafelbild:** Drei Kästen: Auslöser, Prüfung, Änderung. Beispiel: Die Spielerin betritt den Trigger. Hat sie den Schlüssel? Ja: Die Tür schwingt auf, dazu ein Ton. Nein: „Verschlossen.“ erscheint.
+
+Zu zweit, je zwei Minuten. Wer zuhört, fragt nach, sobald es unklar wird.
+
+### Dann aufschreiben
+
+Fünf Minuten: das Gesagte als Stichworte für Kapitel 7.
+
+Wo nachgefragt wurde, fehlt etwas im Text.
+
+Kapitel 7 in `DOKUMENTATION.md`: ein System so erklären, dass jemand ohne Unity-Erfahrung versteht, was es auslöst, was es prüft und was es verändert. Das System darf mit einem Agenten gebaut sein. Die Erklärung kommt von euch. Ein Screenshot des Graphen oder des Inspectors hilft.
+
+### Lasst den Entwurf prüfen
+
+„Lies DOKUMENTATION.md und die Checkliste. Liste als Fragen auf, was fehlt oder unklar ist. Schreib keinen Text für mich.“
+
+Ihr entscheidet, welche Fragen stimmen, und schreibt selbst.
+
+Der vollständige Auftrag zum Kopieren:
+
+> Lies `DOKUMENTATION.md` und `KI-VERZEICHNIS.md` in diesem Projekt und die Checkliste unter https://www.allknivesnobagel.com/teaching/gec1/druck/abgabe-check.html. Liste als Fragen auf, was in der Dokumentation fehlt oder für eine fremde Person unklar ist. Ordne nach Wichtigkeit. Schreib keinen Text für die Dokumentation und ändere keine Datei.
+
+Danach drei Fragen auswählen, die stimmen, und die Antworten selbst schreiben. Fragen, die nicht stimmen, streichen. Wer keinen Agenten zur Hand hat, tauscht den Entwurf mit der Person daneben und stellt dieselben Fragen von Hand.
+
+### Auch die Prüfung bekommt eine Zeile
+
+Die Antworten gehen in die Arbeit ein. Also gehört der Auftrag ins [KI-Verzeichnis](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/).
+
+**Tafelbild:** Eine Zeile im KI-Verzeichnis: Werkzeug Claude Code, Zweck Doku auf Lücken geprüft, Datei DOKUMENTATION.md, Notiz: Text selbst geschrieben.
+
+Dazu Datum, Modell und Anbieter, wie in jeder Zeile.
+
+Die Regel: Eine Zeile bekommt jeder Auftrag, dessen Antwort in die Arbeit eingeht. Das gilt auch, wenn der Agent nur eine Diagnose stellt und ihr die Änderung selbst ausführt, und hier, wenn er Lücken findet und ihr den Text selbst schreibt. Die Notiz sagt, was von euch ist.
+
+### Das KI-Verzeichnis im PDF
+
+1. Die ganze Tabelle in den Anhang
+2. Zeile für Zeile lesen: Stimmen Modell, Zweck und Datei?
+3. Generierte Bilder oder Texte im PDF: Quelle und Verweis auf den Prompt
+
+Etwa so: Abb. 3 (ChatGPT, Version …, 2027; Prompt P2)
+
+Die Richtlinie der Hochschule vom 28.04.2025 verlangt für generierte Elemente, die in die Arbeit übernommen werden, eine Quellenangabe an der Stelle mit Verweis auf den Prompt, auch nach eigener Überarbeitung. Dafür die verwendeten Prompts unter einer Nummer aufheben, am einfachsten in einem Abschnitt „Prompts“ unten in `KI-VERZEICHNIS.md`: P1, P2 … mit Datum, Werkzeug und Wortlaut. Die Zeile in der Tabelle nennt die Nummer, die Quellenangabe im Text auch.
+
+Auch Kürzen, Glätten und Rechtschreibprüfung durch eine KI bekommen eine Zeile, sobald das Ergebnis in der PDF steht. Generierte Inhalte im Spiel (Bilder, Ton, Texte) brauchen außerdem einen Credit im Spiel oder im Abspann.
+
+### Ein sauberer Stand
+
+1. Szenen speichern, committen, pushen
+2. Aus genau diesem Stand bauen, auf einem fremden Rechner testen
+3. History › Rechtsklick auf diesen Commit › Create Tag › `beta`
+4. Push origin: Der [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/) geht mit
+
+Danach noch committet? Der Tag bleibt am Build-Commit.
+
+Dieselbe Reihenfolge gilt zur Abgabe mit dem Tag `abgabe`: speichern, committen, bauen, den Build auf einem fremden Rechner testen, dann genau diesen Commit taggen und pushen. Wer heute keinen getesteten Build hat, setzt den Tag `beta` erst, wenn ein Build woanders gelaufen ist.
+
+Im Terminal geht es auch. Die Kennung des Build-Commits steht in GitHub Desktop unter History:
+
+```
+git tag beta 7c1e0a2
+git push origin beta
+```
+
+Auf GitHub liegt zu jedem Tag unter **Code › Tags** ein Download **Source code (zip)**. Er enthält genau den gepushten Stand des Tags, ohne `Library/` und ohne `Temp/`. Das ist das sauberste Projekt-ZIP für die Abgabe. Was nicht gespeichert, committet und gepusht ist, fehlt darin.
+
+### Der Verlauf als Beleg
+
+**Tafelbild:** Eine Zeitleiste mit Commits: 13.11. Blockout, 27.11. Tür geht auf, 04.12. Falle raus, 11.12. Freeze mit Tag alpha, 08.01. heute mit Tag beta, 22.01. Abgabe mit Tag abgabe. Ein Pfeil führt vom Commit am 04.12. ins Making-of: „Am 04.12. habe ich die Falle gestrichen, weil …“, mit der Commit-Kennung.
+
+Im Making-of einen Commit so zitieren: Datum, Nachricht, die ersten sieben Zeichen der Kennung, etwa „04.12., Falle entfernt (`7c1e0a2`)“. Ein Screenshot aus dem Reiter History in GitHub Desktop zeigt einen Abschnitt des Verlaufs auf einen Blick. Wer Jonas Zugriff auf das Repository gegeben hat (freiwillig, auf GitHub unter Settings › Collaborators), kann zusätzlich den Link angeben; nötig ist das nicht.
+
+### Der Abgabe-Check
+
+**Tafelbild:** Die Abgabe als Baum: Nachname\_Vorname\_GEC1.zip, höchstens 2,5 GB, darin das Projekt-ZIP mit Assets, Packages und ProjectSettings, das Build-ZIP mit dem ganzen Build-Ordner und die PDF mit Konzept, Dokumentation und KI-Verzeichnis. Library und Temp sind durchgestrichen.
+
+Liegt gedruckt aus. Die Liste reicht für die nächsten 14 Tage.
+
+Die Checkliste zum Ausdrucken: [Abgabe-Check](/teaching/gec1/druck/abgabe-check.html). Sie führt durch alles, was bis zum 22.01. zu prüfen ist: Dateinamen, Inhalt der beiden ZIPs, Build-Test auf einem fremden Rechner, Teile der PDF, Größe.
+
+### Zu zweit prüfen
+
+1. Build-ZIP auf den anderen Laptop, entpacken, starten
+2. Einmal ganz durchspielen
+3. Die Checkliste gemeinsam abhaken
+4. Was offen bleibt, ist eure Liste für 14 Tage
+
+Jedes Paar hat einen Windows-Laptop. Sonst: zwei Stationen für alle, mit Zeitliste.
+
+Paare werden so gebildet, dass in jedem ein Windows-Laptop ist; sie bleiben für den zweiten Block zusammen. Wer einen Mac hat, testet den eigenen Build auf dem Windows-Laptop der anderen Person. Der Build reist per USB-Stick oder Cloud-Link, am besten schon vor 14:15 fertig gezippt. Der entpackte Build bleibt für den zweiten Block auf dem Laptop liegen.
+
+Gibt es weniger Windows-Laptops als Paare, stehen zwei Gemeinschaftsstationen bereit. Paare ohne Windows-Gerät tragen sich dort in die Zeitliste ein: je 10 Minuten für Entpacken, Starten und einmal Durchspielen.
+
+### Aus Markdown wird PDF
+
+1. Pandoc macht aus Doku und KI-Verzeichnis eine Word-Datei
+2. Öffnen in Word, LibreOffice oder Pages
+3. Titelseite ergänzen, Bilder prüfen, als PDF exportieren
+
+Pandoc ist kostenlos und läuft ohne Installation. Download und Befehl stehen im Handout.
+
+Pandoc ist ein kostenloses Umwandlungsprogramm, das ohne Installation und ohne Administratorrechte läuft. Getestet mit Pandoc 3.12: Bilder aus `bilder/` und Tabellen kommen mit.
+
+1. Auf [github.com/jgm/pandoc/releases/latest](https://github.com/jgm/pandoc/releases/latest) das ZIP laden: Windows `pandoc-…-windows-x86_64.zip`, Mac mit Apple-Chip `pandoc-…-arm64-macOS.zip`, ältere Macs `pandoc-…-x86_64-macOS.zip`.
+2. Entpacken, etwa nach `Dokumente/pandoc`.
+3. Im Projektordner ein Terminal öffnen (GitHub Desktop: Repository › Open in Command Prompt bzw. Open in Terminal) und den Befehl in einer Zeile ausführen, mit dem Pfad zu Pandoc vorn, etwa `C:\Users\Name\Documents\pandoc\pandoc-3.12\pandoc.exe` oder `~/Documents/pandoc/pandoc-3.12-arm64/bin/pandoc`:
+   `pandoc DOKUMENTATION.md KI-VERZEICHNIS.md -o Dokumentation.docx`
+   Den Befehl kann auch der Agent ausführen.
+4. `Dokumentation.docx` öffnen, Titelseite ergänzen, Bilder und Tabellen ansehen, als PDF exportieren. Word: Datei › Speichern unter › PDF. LibreOffice: Datei › Als PDF exportieren. Pages: Ablage › Exportieren › PDF.
+
+Wer lieber in Word, InDesign oder Google Docs gestaltet, übernimmt den Text von Hand. Am Ende zählt eine PDF mit allen Teilen aus dem Abgabe-Check.
+
+### Show and Tell
+
+**Tafelbild:** Fünf Stationen A mit laufendem Build. Unter jeder steht eine Person B. Pfeile zeigen: B wandert alle 7 Minuten eine Station weiter, die letzte springt zur ersten. 6 Minuten spielen, 1 Minute Zettel. Nach drei Stationen tauschen A und B.
+
+Aus jedem Paar ist eine Person A, eine B.
+
+Wer einen Mac hat, zeigt den eigenen Build am Windows-Laptop der anderen Person aus dem Paar; dort liegt er seit dem ersten Block. Wer einen Windows-Laptop hat, zeigt am eigenen oder am Laptop der anderen Person. Ohne Windows-Gerät im Paar: An den zwei Gemeinschaftsstationen zeigt in jedem 7-Minuten-Abschnitt eine andere Person ihren Build, nach der Zeitliste.
+
+### An der Station
+
+A
+
+Der Build läuft, nicht der Editor. Ihr erklärt nichts, bevor gespielt wird. Helfen erst, wenn jemand eine Minute festhängt.
+
+B
+
+Spielen, dann den Zettel ausfüllen und dalassen.
+
+### Der Spielzettel
+
+1. Startet der Build? Bild, Ton, Steuerung?
+2. Was habe ich zuerst versucht?
+3. Wo wusste ich nicht weiter?
+4. Was hat sich gut angefühlt?
+
+Drei Zettel pro Station sind ein Playtest: Auswertung in Kapitel 5, Fotos in den Anhang.
+
+### Runde 1
+
+3 × 7:00
+
+A sitzt am Build, B spielt. Nach sechs Minuten der Zettel, dann eine Station weiter.
+
+### Runde 2
+
+3 × 7:00
+
+Jetzt sitzt B am Build, A spielt.
+
+### Fragen zur Abgabe
+
+- Was darf sich jetzt noch ändern?
+- Der Build startet woanders nicht
+- Das ZIP ist zu groß
+- Was gehört in die PDF?
+
+Die Antworten stehen auch im Handout.
+
+**Was darf sich jetzt noch ändern?** Der Feature-Freeze war am 11.12. Erlaubt sind Reparaturen an dem, was schon da ist, dazu Ton, Licht, Texte und die Dokumentation. Neue Interaktionen kommen nicht mehr dazu. Die einzige Ausnahme: Fehlt noch eine der zwei Pflicht-Interaktionen aus der Aufgabenstellung, wird sie fertig gebaut. Nach jeder Änderung den Build noch einmal auf einem fremden Rechner testen.
+
+**Der Build startet woanders nicht.** Der Reihe nach prüfen: Wurde das ZIP entpackt, oder läuft die `.exe` aus der ZIP-Vorschau heraus? Liegt der ganze Ordner bei, mit dem Ordner, der auf `_Data` endet? Stehen alle Szenen in der Scene List, die Startszene oben? Windows zeigt bei Spielen ohne Signatur „Der Computer wurde durch Windows geschützt“: **Weitere Informationen › Trotzdem ausführen**. Das ist normal und gehört als Hinweis in die PDF.
+
+**Das ZIP ist zu groß.** Meist liegt `Library/` im Projekt-ZIP; das Source-ZIP von GitHub hat das Problem nicht. Danach große Rohdateien in `Assets/` prüfen (`.wav`, `.psd`, `.blend`, Videos). Im Build helfen kleinere Max Size bei Texturen und komprimierte Audioformate.
+
+**Was gehört in die PDF?** Siehe Abgabe-Check, Teil F. Dazu eine kurze Spielanleitung: wie man das Spiel startet, die Steuerung, das Ziel.
+
+**Fremde Assets?** Kostenlose sind erlaubt, mit Quelle und Lizenz in der PDF. Kostenpflichtige Pakete sind ausgeschlossen. Selbst gemachte Assets bewertet die Aufgabenstellung besser.
+
+### Die nächsten 14 Tage
+
+1. Bis 10.01. (2 h): Abgabe-Check, Lücken notieren
+2. Bis 15.01. (4–8 h): Kapitel schreiben, Stand in den Thread
+3. 30 Minuten fest? Fragen.
+4. Bis 21.01. (3 h): Build, fremder Test, Tag `abgabe`, hochladen
+
+Etwa 10 h mit [Devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/), bis 20 ohne.
+
+Der Post am 15.01. im Blackboard-Thread enthält: das Inhaltsverzeichnis der PDF, ein fertiges Kapitel, den Stand des Builds und ein Hindernis.
+
+Die Stunden sind Richtwerte für Dokumentation und Abgabe; Reparaturen am Spiel kommen dazu. Wer neben dem Studium arbeitet, trägt die drei Blöcke fest in den Kalender ein, den letzten nicht auf den 22.01.
+
+Nicht in der letzten Stunde hochladen. Über ein Gigabyte kann im Hochschul-WLAN lange dauern, und ein Fehler beim Upload lässt sich dann nicht mehr beheben. Die Abgabe geht als ein ZIP in den Prüfungsraum auf Blackboard. Das Devlog bekommt am Abgabetag einen letzten Eintrag.
+
+### Abspann
+
+**Bild:** Kreidezeichnung eines handbetriebenen Projektors, aus dem eine Folge von Rampe, Würfel, Schlüssel und Tür nach oben über die Tafel läuft. (KI-generiert).
+
+Ein Satz pro Person.
+
+Was ändert ihr bis zum 22.01. noch an eurem Spiel?
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/06/
+
+## KI-Verzeichnis
+
+Die Tabelle aller Aufgaben, bei denen eine KI am Projekt etwas geändert oder erzeugt hat. Pflicht in jeder Projektarbeit der Hochschule, auch ohne KI-Nutzung. Sie kommt in den Anhang der PDF.
+
+Auch: KI-Verzeichnisses, KI-VERZEICHNIS.md, KI-Richtlinie
+
+Verwandt: [devlog](https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), [diff](https://www.allknivesnobagel.com/teaching/gec1/concepts/diff/)
+
+
+
+### Kurz
+
+Die Hochschule verbietet KI nicht. Sie verlangt, dass jede Nutzung vollständig angegeben wird und dass man selbst die Verantwortung dafür übernimmt (Richtlinie vom 28.04.2025). Im Kurs sammelt die Datei `KI-VERZEICHNIS.md` im Projekt die Zeilen. Zur Abgabe kommt die Tabelle in den Anhang der PDF.
+
+### Genauer
+
+**Was eine Zeile bekommt:** jede Aufgabe, bei der eine KI im Projekt etwas geändert oder erzeugt hat, und jeder Auftrag, dessen Antwort in die Arbeit eingeht. Das gilt auch, wenn ein Agent nur eine Diagnose stellt und man die Änderung selbst ausführt. Reine Fragen, deren Antwort nirgends verwendet wird, brauchen keine Zeile. Auch Kürzen, Glätten und Rechtschreibprüfung zählen, sobald das Ergebnis in der Arbeit steht.
+
+**Die Spalten:** Datum, Werkzeug, Modell/Version, Anbieter, Zweck, Dateien/System, Anmerkung. In einer Hausarbeit stünde unter „Stelle“ Kapitel und Seite; im Projekt steht dort die Datei oder das System, etwa `Assets/Scripts/Door.cs` oder „Inventar“.
+
+**Generiertes im Spiel oder im PDF** bekommt zusätzlich eine Quellenangabe an der Stelle selbst, die auf den Prompt verweist, auch nach eigener Überarbeitung. Dafür die verwendeten Prompts unter Nummern aufheben, etwa in einem Abschnitt „Prompts“ unten in `KI-VERZEICHNIS.md` (P1, P2 … mit Datum, Werkzeug und Wortlaut). Im PDF steht dann an der Abbildung oder am Text eine Kurzangabe wie „(ChatGPT, Version …, 2027; Prompt P2)“, im Spiel ein Credit im Abspann.
+
+**Was es noch ist:** Material für das Making-of. Die Tabelle zeigt, was gefragt, übernommen und verworfen wurde.
+
+### In der Abgabe
+
+1. `KI-VERZEICHNIS.md` öffnen und Zeile für Zeile lesen: stimmt Modell, Zweck, Datei?
+2. Fehlende Aufgaben nachtragen, etwa Texte, die eine KI geglättet hat, oder Diagnosen, die man selbst umgesetzt hat.
+3. Prüfen, ob jedes generierte Bild und jeder generierte Text in der PDF auf seinen Prompt verweist.
+4. Die Tabelle mit den Prompts in den Anhang der PDF übernehmen.
+
+### Weiterlesen
+
+- „Richtlinien für den Einsatz von generativen Künstlichen Intelligenz-Systemen bei Projekt- und Abschlussarbeiten“, Hochschule Macromedia, Stand 28.04.2025 (Blackboard bzw. SharePoint der Hochschule).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/
+
+## Animation
+
+Ein Animation Clip hält fest, wie sich Werte über die Zeit ändern, etwa Drehung, Position oder Farbe. Gesetzt werden nur einzelne Keyframes; die Frames dazwischen rechnet Unity aus.
+
+Auch: Animationen, Animation Clip, Animation Clips, Keyframe, Keyframes, Animation-Fenster, Loop Time, Mixamo
+
+Verwandt: [animator](https://www.allknivesnobagel.com/teaching/gec1/concepts/animator/), [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/animeditor-CreatingANewAnimationClip.html
+
+
+### Kurz
+
+Ein Animation Clip ist eine Datei (`.anim`), die für bestimmte Eigenschaften festhält, welchen Wert sie zu welcher Zeit haben. Ein Deckel ist bei 0 s um 0° gedreht und bei 1 s um 100°. Diese festen Punkte heißen **Keyframes**. In jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) dazwischen berechnet Unity einen passenden Zwischenwert.
+
+Animieren lässt sich fast alles, was im Inspector eine Zahl, eine Farbe oder ein Häkchen ist: Werte im [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), die Farbe eines Lichts, ob ein Objekt aktiv ist.
+
+### Genauer
+
+Ein Clip allein spielt nichts ab. Abgespielt wird er von einem [Animator](https://www.allknivesnobagel.com/teaching/gec1/concepts/animator/), der entscheidet, wann welcher Clip läuft.
+
+Zwei Einstellungen am Clip sorgen oft für Überraschungen:
+
+- **Loop Time:** Clips, die im Animation-Fenster entstehen, wiederholen sich zunächst endlos. Für eine Tür, die einmal aufgeht, das Häkchen entfernen (Clip im Project-Fenster anklicken, Inspector).
+- **Feste Werte:** Ein Clip schreibt genau die Werte, die aufgenommen wurden. Animiert er die Position des Objekts, das den Animator trägt, springt dieses Objekt beim Abspielen an die aufgenommene Stelle zurück, auch wenn es inzwischen woanders steht. Darum kommt der Animator auf ein leeres Elternobjekt, animiert wird ein Kind.
+
+Für eine einzelne Bewegung von A nach B reicht im Kit oft der Knoten **Bewegen**. Ein Clip lohnt sich, sobald mehrere Werte zusammenspielen, die Kurve eine eigene Form braucht (erst langsam, dann schnell, kurz überschwingen) oder die Bewegung sich wiederholt, wie eine flackernde Lampe.
+
+### In Unity sehen
+
+1. Objekt auswählen, **Window › Animation › Animation**.
+2. **Create**, Clip speichern. Unity legt dabei einen Animator Controller an, trägt den Clip dort als Standardzustand ein und setzt eine Animator-Komponente auf das Objekt.
+3. **Add Property**, die Eigenschaft wählen (etwa Transform › Rotation) und mit **+** hinzufügen. Unity setzt je einen Keyframe an Anfang und Ende des Clips, beide mit dem aktuellen Wert.
+4. Aufnahme mit dem roten Punkt einschalten, den Abspielkopf auf den letzten Keyframe setzen und den Wert im Inspector oder in der Szene ändern. In der Aufnahme wird jede Änderung an der Stelle des Abspielkopfs zum Keyframe.
+5. Aufnahme beenden, im Animation-Fenster mit dem Abspielknopf ansehen.
+
+Die Kurven zwischen den Keyframes zeigt der Reiter **Curves** unten im Animation-Fenster.
+
+### Fertige Animationen importieren
+
+Für Figuren mit Skelett gibt es fertige Bewegungen. Sie kommen als FBX-Datei ins Projekt und laufen nur auf einer Figur mit passendem Skelett; der Kursspieler ist eine Kapsel ohne Skelett.
+
+- **Mixamo** (Adobe, kostenlos mit Adobe-Konto): Figuren und Animationen. Export als **FBX for Unity**. In Unity im Inspector der Datei, Reiter **Rig**, **Animation Type: Humanoid**. Laufanimationen mit **In Place** exportieren, sonst läuft die Figur aus ihrem eigenen Collider heraus.
+- **Pakete mit CC0-Lizenz**, etwa von Kenney oder Quaternius: frei verwendbar, ohne Namensnennung.
+
+Lizenzen kurz und richtig: Mixamo erlaubt die Nutzung in eigenen Projekten, auch in Hochschul- und kommerziellen Projekten, ohne Gebühren. Verboten ist, die rohen Dateien weiterzugeben, auch kostenlos. Ein öffentliches Repository mit Mixamo-FBX-Dateien wäre genau das; das Kursprojekt bleibt deshalb privat. CC-BY verlangt eine Namensnennung, CC0 nicht. Pakete aus dem Unity Asset Store stehen unter der Asset-Store-EULA: im eigenen Spiel verwenden ja, als Dateien weitergeben nein. Jede fremde Datei kommt mit Quelle und Lizenz in die Asset-Liste der Dokumentation.
+
+### Weiterlesen
+
+- [Unity Manual: Creating a new Animation Clip](https://docs.unity3d.com/6000.3/Documentation/Manual/animeditor-CreatingANewAnimationClip.html) – was Unity beim Anlegen automatisch erzeugt (Unity 6.3, englisch).
+- [Unity Manual: Animating a GameObject](https://docs.unity3d.com/6000.3/Documentation/Manual/animeditor-AnimatingAGameObject.html) – Aufnahme, Vorschau, Keyframes mit K (englisch).
+- [Mixamo FAQ: Licensing, Royalties, Ownership](https://community.adobe.com/t5/mixamo-discussions/mixamo-faq-licensing-royalties-ownership-eula-and-tos/m-p/13234775) – Lizenzfragen im Wortlaut von Adobe (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/
+
+## Animator
+
+Die Komponente, die entscheidet, welcher Animation Clip gerade läuft. Ihr Animator Controller ist ein Zustandsautomat aus Zuständen, Übergängen und Parametern, die von außen gesetzt werden.
+
+Auch: Animator Controller, Animator-Fenster, Übergang, Übergänge, Transition, Transitions, Has Exit Time, Animator-Wert, Parameter
+
+Verwandt: [animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/class-Transition.html
+
+
+### Kurz
+
+Ein [Animation Clip](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/) beschreibt eine Bewegung. Der Animator entscheidet, welche gerade dran ist. Dazu hängt an ihm ein **Animator Controller**: eine Datei, die einen [Zustandsautomaten](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) enthält.
+
+- **Zustände** (Kästchen): Jeder spielt einen Clip, oder keinen.
+- **Übergänge** (Pfeile): von einem Zustand zum nächsten.
+- **Parameter**: Werte, die ein Übergang abfragt. Typen: Trigger, Bool, Int, Float.
+
+Ein Zustand ist der Standard (orange im Animator-Fenster); in ihm beginnt alles.
+
+### Genauer
+
+Ein **Trigger** ist ein Parameter für einen Moment: Er wird gesetzt, ein Übergang verbraucht ihn, danach ist er wieder aus. Er passt zu einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/) wie „Truhe benutzt“. Ein **Bool** bleibt stehen, bis er wieder umgestellt wird, und passt zu einem Zustand wie „Licht an“.
+
+**Has Exit Time** ist bei neuen Übergängen eingeschaltet. Dann wartet der Übergang, bis der Clip des aktuellen Zustands einen bestimmten Punkt erreicht hat, und prüft erst danach seine Bedingungen. Hat ein Übergang gar keine Bedingung, geht er nach dieser Zeit von selbst. Für alles, was sofort auf eine Handlung reagieren soll: Has Exit Time aus, eine Bedingung hinzufügen.
+
+Was ein Animator animiert, schreibt er in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) neu. Ein anderer Knoten oder ein Skript, das denselben Wert ändert, kommt dagegen nicht an. Bewegt der Kit-Knoten **Bewegen** also dieselbe Drehung, die auch ein Clip animiert, gewinnt der Animator.
+
+### Im Kit
+
+Der Knoten **Animator-Wert** setzt einen Parameter: Animator als Ziel, Name des Parameters, Art (Trigger, Ja/Nein, Zahl, Ganzzahl). Passt der Name oder die Art nicht zum Animator Controller, meldet der Knoten den Fehler im Graphen und in der Console, statt still nichts zu tun. „Gesetzt“ heißt nur, dass der Parameter gesetzt ist, nicht, dass die Animation schon gelaufen ist.
+
+### In Unity sehen
+
+- **Window › Animation › Animator** zeigt den Controller des ausgewählten Objekts. Im Play-Modus läuft im aktiven Zustand ein blauer Fortschrittsbalken mit.
+- Rechtsklick auf die freie Fläche: **Create State › Empty**. Rechtsklick auf einen Zustand: **Make Transition**, dann auf das Ziel klicken.
+- Links im Reiter **Parameters** mit **+** einen Parameter anlegen.
+- Einen Übergang anklicken: Im Inspector stehen **Has Exit Time** und unten **Conditions**.
+
+### Weiterlesen
+
+- [Unity Manual: Animation transitions](https://docs.unity3d.com/6000.3/Documentation/Manual/class-Transition.html) – Has Exit Time, Dauer, Bedingungen (Unity 6.3, englisch).
+- [Unity Manual: Animation parameters](https://docs.unity3d.com/6000.3/Documentation/Manual/AnimationParameters.html) – die vier Parametertypen (englisch).
+- [Game Programming Patterns: State](https://gameprogrammingpatterns.com/state.html) – warum Zustandsautomaten so viele `if`-Abfragen ersetzen (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/animator/
+
 ## Branch
 
 Eine eigene Linie im Verlauf, auf der sich etwas ausprobieren lässt, ohne den Hauptstand zu gefährden. Gelingt es, wird der Branch zurückgeführt (Merge); sonst bleibt er liegen oder wird gelöscht.
@@ -566,7 +2185,7 @@ Unity meldet nicht jede Berührung. Mindestens eines der beiden Objekte braucht 
 - **Aufprall-Meldungen** gibt es nur, wenn mindestens ein Objekt einen Rigidbody hat, bei dem **Is Kinematic** aus ist. Zwei Wände ohne Rigidbody melden sich nie, auch wenn sie sich überlappen.
 - **Trigger-Meldungen** gibt es, wenn mindestens eines der Objekte einen Rigidbody hat, auch einen kinematischen. Meist ist der Trigger fest und das Objekt, das hindurchgeht, hat den Rigidbody.
 
-Die Spielfigur des Kits hat keinen Rigidbody, sondern einen **CharacterController**. Der löst Trigger trotzdem aus.
+Die Spielfigur des Kits hat keinen Rigidbody, sondern einen **CharacterController**. Der löst Trigger aus, aber keine Aufprall-Meldung: Läuft die Figur gegen eine Wand, kommt kein `OnCollisionEnter`. Dafür hat der CharacterController eine eigene Meldung, `OnControllerColliderHit`, auf dem Objekt der Spielfigur.
 
 ```csharp
 void OnTriggerEnter(Collider other)   // auf dem Objekt mit dem Trigger
@@ -588,6 +2207,7 @@ void OnTriggerEnter(Collider other)   // auf dem Objekt mit dem Trigger
 - [Unity Manual: Interaction between collider types](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-types-interaction.html) – die vollständige Tabelle, welche Kombination welche Meldung auslöst (Unity 6.3, englisch).
 - [Unity Manual: OnTrigger events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-ontrigger.html) und [OnCollision events](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-oncollision.html) – Enter, Stay, Exit mit Beispielskript.
 - [Unity Manual: Create and configure a trigger collider](https://docs.unity3d.com/6000.3/Documentation/Manual/collider-interactions-create-trigger.html) – Schritt für Schritt.
+- [Unity Scripting API: CharacterController.OnControllerColliderHit](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/CharacterController.OnControllerColliderHit.html) – die Meldung der Spielfigur beim Anstoßen (englisch).
 - [Unity Manual: Character Controller](https://docs.unity3d.com/6000.3/Documentation/Manual/class-CharacterController.html) – warum Spielfiguren oft keinen Rigidbody haben.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/
@@ -732,6 +2352,59 @@ Bei Zonen und Zusammenstößen filtert oft ein Tag: `other.CompareTag("Player")`
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/
 
+## Console
+
+Das Fenster, in dem Unity und eure Skripte melden, was passiert und was schiefgeht. Rot sind Fehler, gelb Warnungen, weiß Hinweise. Ein Doppelklick führt zur Zeile im Code.
+
+Auch: Konsole, Fehlermeldung, Fehlermeldungen, Debug.Log, Exception, Compilerfehler
+
+Verwandt: [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/Console.html
+
+
+### Kurz
+
+Die Console ist das Logbuch des Editors: **Window › General › Console**, oder Strg + Umschalt + C (Mac: Cmd + Umschalt + C). Jede Zeile ist eine Meldung.
+
+| Symbol | heißt | Beispiel |
+|---|---|---|
+| rot | Fehler | `UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.` |
+| gelb | Warnung | `[Kit] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt` |
+| weiß | Hinweis | was ein Skript mit `Debug.Log("…")` schreibt |
+
+### Genauer
+
+Zwei Sorten roter Meldungen fühlen sich verschieden an:
+
+- **Kompilierfehler** (`error CS…`): Ein Skript ist kein gültiges C#, etwa weil ein Semikolon fehlt. Unity kann dann gar nichts mehr ausführen; Play bleibt gesperrt mit „All compiler errors have to be fixed before you can enter playmode!“.
+- **Laufzeitfehler** (Exception): Das Skript bricht an einer Stelle ab, das Spiel läuft weiter. Kommt der Fehler aus `Update()` oder `FixedUpdate()`, steht er in jedem Frame neu da.
+
+Lesen von oben: Der erste Fehler ist oft die Ursache der folgenden. Ein Doppelklick auf eine Meldung öffnet das Skript an der Zeile, aus der sie kam. Häufig ist die Zeile richtig und die Ursache liegt im Inspector, etwa ein leeres Feld (siehe [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)).
+
+Die Knöpfe oben:
+
+| Knopf | macht |
+|---|---|
+| Clear | leert die Liste, Kompilierfehler bleiben stehen; im Pfeil daneben: Clear on Play, Clear on Build, Clear on Recompile |
+| Collapse | fasst gleiche Meldungen zu einer Zeile mit Zähler zusammen |
+| Error Pause | hält das Spiel an, sobald ein Skript einen Fehler meldet |
+
+Nicht jeder Fehler meldet sich. Eine Kiste ohne Rigidbody schwebt, ohne dass die Console etwas sagt. Dann hilft nur Hinsehen: Szene, Inspector, im Kit der Graph.
+
+### In Unity sehen
+
+- Ein Skript mit `Debug.Log("Hallo");` in `Start()` schreibt eine weiße Zeile.
+- Das Kit meldet sich mit `[Kit]` am Anfang. Vor Play prüft es alle Interaktionen und schreibt, was fehlt.
+- Die Zahlen oben rechts zählen Hinweise, Warnungen und Fehler; ein Klick blendet die Sorte aus.
+
+### Weiterlesen
+
+- [Unity Manual: Console window](https://docs.unity3d.com/6000.3/Documentation/Manual/Console.html) – alle Knöpfe und Einstellungen (Unity 6.3, englisch).
+- [Unity Scripting API: Debug.Log](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Debug.Log.html) – eigene Meldungen schreiben.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/console/
+
 ## deltaTime
 
 Die Zeit seit dem letzten Frame, in Sekunden. Damit multipliziert, gilt Bewegung pro Sekunde statt pro Frame.
@@ -762,6 +2435,36 @@ transform.Translate(0, 3f * Time.deltaTime, 0);
 Unity misst die Zeit zwischen zwei Frames und begrenzt sie nach oben (`Time.maximumDeltaTime`), damit ein langer Ruckler keinen riesigen Sprung erzeugt. Für Physik gibt es einen eigenen, festen Takt: `Time.fixedDeltaTime` in `FixedUpdate()`.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/
+
+## Devlog
+
+Das Entwicklungstagebuch des Projekts, mindestens zwei Sätze pro Woche. Daraus entsteht am Ende das Making-of der Dokumentation.
+
+Auch: Devlogs, Entwicklungstagebuch, Making-of
+
+Verwandt: [ai-register](https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
+
+
+
+### Kurz
+
+Ein Devlog hält fest, was in einer Woche passiert ist und warum. Im Kurs steht es unten in `DOKUMENTATION.md`, neuester Eintrag oben. Zwei Sätze pro Woche reichen.
+
+### Genauer
+
+Ein guter Eintrag nennt eine Entscheidung und ihren Grund: „Die Falle ist raus. Im Test sind drei von vier Personen hineingelaufen, ohne sie zu sehen.“ „Weiter am Level gearbeitet“ hilft im Januar niemandem.
+
+Für das Making-of der Abgabe ist das Devlog die Hauptquelle. Dazu kommen der Verlauf der [Commits](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/), die Playtest-Notizen und Screenshots mit Datum. Wer im Devlog den Commit nennt, kann später belegen, wann etwas passiert ist.
+
+Verworfene Entwürfe gehören hinein, mit Bild. Die Aufgabenstellung wünscht sich ausdrücklich ein Making-of mit alten und verworfenen Designs.
+
+### In der Abgabe
+
+1. Das Devlog von unten nach oben lesen, also von Oktober an.
+2. Die drei, vier Wendepunkte markieren: Wo hat sich das Design geändert?
+3. Zu jedem Wendepunkt: Bild, Datum, was geplant war, was beobachtet wurde, was sich geändert hat.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/devlog/
 
 ## Diff
 
@@ -864,6 +2567,59 @@ Im Kit beginnt jede Kette mit einem Auslöser-Knoten: **Start**, **Taste**, **Zo
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/event/
 
+## Feedback
+
+Alles, woran Spielende merken, dass ihre Handlung angekommen ist, etwa ein Ton, eine Bewegung, ein Aufblitzen oder ein kurzes Anhalten des Bildes. Ohne Rückmeldung wirkt auch eine funktionierende Mechanik kaputt.
+
+Auch: Rückmeldung, Rückmeldungen, Juice, Game Feel, Spielgefühl, Hitstop, Screenshake
+
+Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/), [playtest](https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/Manual/class-AudioSource.html
+
+
+### Kurz
+
+In der Spec ist die Rückmeldung eine der vier Zeilen: Verb, Regel, Rückmeldung, Scheitern. Sie beantwortet die Frage: Woran merken die Spielenden, dass es geklappt hat?
+
+Ein Spiel kann den [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) richtig ändern und trotzdem kaputt wirken. Die Tür ist offen, aber niemand hat es gesehen, weil sie hinter der Kamera lag und kein Ton kam.
+
+### Genauer
+
+Gute Rückmeldung beginnt im selben [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/) wie die Handlung. Schon eine Zehntelsekunde ohne Reaktion fühlt sich träge an. Mehrere Rückmeldungen auf einmal verstärken sich: Ton, eine kurze Bewegung, ein Lichtwechsel, eine [Animation](https://www.allknivesnobagel.com/teaching/gec1/concepts/animation/).
+
+Für diese Schichten gibt es den Spitznamen **Juice**. Die bekanntesten Mittel:
+
+| Mittel | Wirkung | im Kit |
+|---|---|---|
+| Ton | bestätigt ohne Hinsehen | Ton abspielen |
+| Kurz größer und zurück | „das Ding hat reagiert“ | zwei Bewegen-Knoten, Was: Größe (einer hin, einer zurück) |
+| Aufblitzen | lenkt den Blick | Material tauschen, An/Aus |
+| Partikel | Wucht, Belohnung | Erzeugen (Prefab mit Partikelsystem) |
+| Bildschirmwackeln | Wucht | Kamera wackeln (nur mit Cinemachine) |
+| Anhalten | Treffer wirkt schwer | nicht im Kit |
+
+**Anhalten** heißt in Kampfspielen Hitstop: Das Bild steht für einige Hundertstelsekunden still. In HIGH WATER sind es 55, 65 und 130 ms für die drei Schläge des Dreier-Schlags.
+
+Für „kurz größer und zurück“ braucht es zwei Bewegen-Knoten auf dasselbe Objekt: Der erste fährt hin, sein „Angekommen“ startet „Zurück“ am zweiten, und der zweite hat keine ausgehende Verbindung. Ein einzelner Knoten, dessen „Angekommen“ an sein eigenes „Zurück“ führt, stößt nach jeder Rückfahrt die nächste an.
+
+Juice ersetzt keine Klarheit. Wackelt bei jeder Kleinigkeit der Bildschirm, wackelt er bei der wichtigen Sache nicht mehr auffällig. Die stärkste Rückmeldung gehört zum wichtigsten Moment.
+
+### Ton als Rückmeldung
+
+- Eine **AudioSource** an das Objekt, das klingen soll. **Play On Awake** ausschalten, sonst klingt es beim Start.
+- **Spatial Blend** auf 3D: Der Ton kommt von der Stelle im Raum und wird mit Abstand leiser. 2D: überall gleich laut, gut für Menütöne.
+- Derselbe Ton bei jedem Treffer nutzt sich ab. Zwei, drei Varianten mit dem Knoten **Zufällig** wechseln lassen.
+- Freie Töne: [Kenney Audio](https://kenney.nl/assets/category:Audio) (CC0), [freesound.org](https://freesound.org/) mit Lizenzfilter CC0 oder CC-BY (dann mit Namensnennung), selbst erzeugt mit [sfxr.me](https://sfxr.me/).
+
+### Weiterlesen
+
+- [Juice it or lose it](https://www.youtube.com/watch?v=Fy0aCDmgnxg) – Martin Jonasson und Petri Purho machen aus einem nüchternen Breakout in 15 Minuten ein saftiges (Vortrag, englisch).
+- [The art of screenshake](https://www.youtube.com/watch?v=AJdEqssNZ-U) – Jan Willem Nijman (Vlambeer) baut Rückmeldung Schritt für Schritt in einen Shooter ein (Vortrag, englisch).
+- [Unity Manual: Audio Source](https://docs.unity3d.com/6000.3/Documentation/Manual/class-AudioSource.html) – alle Einstellungen der AudioSource (Unity 6.3, englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/
+
 ## Frame
 
 Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
@@ -965,6 +2721,203 @@ Unity bringt kein Git mit. Gearbeitet wird in GitHub Desktop oder im Terminal, e
 - [Michael Schwern: Git for Ages 4 and Up](https://www.youtube.com/watch?v=1ffBJ4sVUb4) – Vortrag (linux.conf.au 2013, rund 100 Minuten), der Git mit Steckspielzeug auf dem Tisch nachbaut (englisch).
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/git/
+
+## Graph
+
+Eine Interaktion des Kurs-Pakets, gezeichnet aus Knoten und Drähten. Events laufen durch die Drähte von Knoten zu Knoten; im Play-Modus zeigt jeder Knoten, was er gerade tut.
+
+Auch: Graphen, Knoten, Draht, Drähte, Kit, Interaktion, Interaktionen, Node, Nodes
+
+Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)
+
+
+
+### Kurz
+
+Ein Graph ist eine Datei mit der Endung `.kit`. Darin stehen Knoten, etwa **Zone**, **Wenn**, **Bewegen**, und die Drähte dazwischen. Zusammen beschreiben sie eine Interaktion: Wenn das passiert und das gilt, geschieht dies.
+
+Drei Drahtarten:
+
+| Draht | trägt | Bild |
+|---|---|---|
+| ▶ Event | den Moment, in dem etwas passiert | orange, gestrichelt |
+| ● Daten | einen Wert, der gelesen wird | violett, durchgezogen |
+| ◆ Referenz | welches Objekt gemeint ist | blaugrün, doppelt |
+
+### Genauer
+
+Der Graph kennt keine Objekte der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), nur Plätze für sie. Die Component **Interaktion** an einem GameObject verbindet einen Graph mit der Szene: Sie hält die Tabelle, welches Objekt welchen Platz füllt. So kann derselbe Graph an zwei Türen hängen, und jede hat ihren eigenen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/).
+
+Jeder Knoten ist eine kleine C#-Klasse. **Code ansehen** (`</>` am Knoten) zeigt sie. Eigene Knoten folgen demselben Muster: Markierungen wie `[Input("…")]`, `[Output("…")]` und `[Ref("…")]` machen aus Methoden und Feldern Anschlüsse. Eigene Knoten liegen immer in `Assets/Eigene Knoten`; **Tools › Kit › Eigener Knoten (C#)** legt die beiden Dateien dafür an.
+
+Im Play-Modus meldet jeder Knoten seinen Zustand: ○ empfangen, ▬ läuft, ✓ fertig, ⛔ blockiert (mit Grund), ! Fehler. Ein Knoten mit Fehler feuert seinen Erfolgs-Ausgang nie.
+
+### In Unity sehen
+
+- **Tools › Kit › Beispiel „Schlüssel und Tür“ bauen** legt ein fertiges Beispiel an.
+- **GameObject › Kit › Interaktion** legt eine neue Interaktion an; im Inspector **Neuer Graph …**.
+- Doppelklick auf eine `.kit`-Datei öffnet den Graph. „+ Knoten“ unten links holt Knoten.
+
+### Weiterlesen
+
+- [Tag 3](https://www.allknivesnobagel.com/teaching/gec1/days/03/) – Schlüssel und Tür Schritt für Schritt, mit Bildern aus dem Editor.
+- [Unity Manual: Graph Toolkit](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.4/manual/index.html) – das Werkzeug, auf dem der Graph-Editor des Kits aufbaut (englisch, experimentell).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/
+
+## Licht
+
+Licht macht Form, Tiefe und Blickführung sichtbar. Realtime wird in jedem Frame berechnet; Baked steckt vorberechnet in Lightmaps; Mixed verbindet beides.
+
+Auch: Lichter, Lighting, Beleuchtung, Light, Lightmap, Lightmaps, Lichtbacken, Lightmapping
+
+Verwandt: [material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/)
+
+Unity-Doku: https://docs.unity.com/en-us/engine/6000.3/manual/lighting-overview/lighting-light-sources/components/configuring/light-modes/light-modes
+
+
+### Kurz
+
+Licht entscheidet, welche Formen lesbar sind, wohin der Blick fällt und welche Stimmung ein Raum hat. Ein Material reagiert erst durch Licht sichtbar als rau, glatt oder metallisch.
+
+Unity kennt drei Light Modes:
+
+| Mode | wann berechnet? | geeignet für |
+|---|---|---|
+| **Realtime** | während des Spiels, jeden Frame | bewegte, flackernde oder zerstörbare Lichter |
+| **Baked** | vorher im Editor | feste Architektur und Hintergrundlicht |
+| **Mixed** | teils vorher, teils im Spiel | feste Lichter, die bewegte Figuren beleuchten sollen |
+
+### Genauer
+
+Bei **Lightmapping** berechnet Unity die Helligkeit fester Oberflächen vorab und speichert sie in Texturen, den Lightmaps. Das kostet Zeit beim Backen und Speicher im Build, spart aber Rechenarbeit während des Spiels. Die gespeicherte Beleuchtung kann sich im Spiel nicht verändern.
+
+Realtime-Licht reagiert sofort auf Änderungen, kostet aber in jedem Frame Rechenzeit. Schatten, viele überlappende Lichter und große Reichweiten erhöhen diese Kosten. Mixed ist kein kostenloser Mittelweg: Es kombiniert gebackene Anteile mit Realtime-Berechnung.
+
+Für das Kursprojekt reicht meist ein klares Hauptlicht, wenige gezielte lokale Lichter und gebackenes Licht für unveränderliche Umgebung. Erst nach einem Test im Build mehr hinzufügen.
+
+### In Unity sehen
+
+1. Ein Light in der Hierarchy auswählen und im Inspector `Mode` auf Realtime, Baked oder Mixed stellen.
+2. Für Lightmaps feste Mesh Renderer unter `Mesh Renderer › Lighting › Contribute Global Illumination` markieren.
+3. `Window › Rendering › Lighting` öffnen und **Baked Global Illumination** aktivieren.
+4. Unten **Generate Lighting** wählen. In neuen Unity-6-Projekten läuft das Backen standardmäßig nicht automatisch beim Öffnen einer Szene.
+
+Die Kursvorlage verwendet URP. Das aktive URP Asset steht standardmäßig unter `Edit › Project Settings › Graphics › Default Render Pipeline`. Ein Qualitätslevel kann es unter `Edit › Project Settings › Quality › Rendering › Render Pipeline Asset` überschreiben.
+
+### Post-Processing in URP
+
+1. An der Kamera unter `Rendering` **Post Processing** aktivieren.
+2. `GameObject › Volume › Global Volume` anlegen und mit `New` ein Profil erstellen.
+3. `Add Override › Post-processing › Color Adjustments` wählen.
+4. Das Häkchen links neben `Post Exposure` aktivieren. Ohne dieses Parameter-Override ignoriert URP den eingetragenen Wert.
+5. Als eindeutigen Test `Post Exposure: +3` setzen. Wird das Bild nicht deutlich heller, prüfen, ob die `Volume Mask` der Kamera die Ebene des Volumes enthält.
+6. Danach einen begründeten, kleineren Wert einstellen und im Build prüfen.
+
+URP enthält dieses Post-Processing bereits. Kein zusätzliches Post-Processing-Paket installieren.
+
+### Weiterlesen
+
+- [Unity Manual: Set the Mode of a Light](https://docs.unity.com/en-us/engine/6000.3/manual/lighting-overview/lighting-light-sources/components/configuring/light-modes/light-modes) – Realtime, Baked und Mixed (Unity 6.3, englisch).
+- [Unity Manual: Introduction to lightmaps and baking](https://docs.unity.com/en-us/engine/6000.3/manual/lighting-overview/direct-and-indirect-lighting/lightmapping/baking-before-runtime/lightmappers) – was eine Lightmap speichert.
+- [Unity Manual: Lighting window reference](https://docs.unity.com/en-us/engine/6000.3/manual/lighting-overview/lighting-reference/lighting-window) – `Generate Lighting` und Unity-6-Standardwerte.
+- [Unity Manual: Universal Render Pipeline asset](https://docs.unity.com/en-us/engine/6000.3/manual/render-pipelines/universal-render-pipeline/urp-quality-settings/urp-asset-and-renderer) – URP Asset und Qualitätsstufen.
+- [Unity Manual: Add post-processing in URP](https://docs.unity3d.com/6000.0/Documentation/Manual/urp/add-post-processing.html) – Kamera, Global Volume, Profil und Override.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/light/
+
+## Material
+
+Ein Material legt fest, wie eine Oberfläche gezeichnet wird. Der Shader ist das Rechenverfahren; das Material liefert Werte wie Farbe, Textur, Metallanteil und Rauheit.
+
+Auch: Materialien, Materials, Oberfläche, Oberflächen
+
+Verwandt: [light](https://www.allknivesnobagel.com/teaching/gec1/concepts/light/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/)
+
+Unity-Doku: https://docs.unity.com/en-us/engine/6000.3/manual/materials-and-shaders/built-in/shaders-in-universalrp
+
+
+### Kurz
+
+Ein Material beschreibt die sichtbare Oberfläche eines Objekts. Es verändert nicht dessen Form und nicht das Licht der Szene. Ein Material verweist auf einen **Shader** und gibt ihm Werte: Farbe oder Textur, Metallanteil, Glätte, Normal Map und Emission.
+
+Ein Material kann auf vielen Objekten liegen. Wird das gemeinsame Asset geändert, sehen alle diese Objekte anders aus. Für eine einzelne Ausnahme wird eine eigene Materialkopie angelegt.
+
+### Genauer
+
+Der Shader ist das Rechenverfahren, das aus Oberfläche, Licht und Blickrichtung ein Pixel macht. Das Material ist der ausgefüllte Parametersatz für dieses Verfahren. Im Kurs reicht fast immer **Universal Render Pipeline/Lit**:
+
+- **Base Map**: Grundfarbe oder Farbtextur
+- **Metallic**: Metall oder Nichtmetall; Zwischenwerte sind selten plausibel
+- **Smoothness**: scharfe oder breite Reflexe, also glatt oder rau
+- **Normal Map**: kleine Unebenheiten ohne zusätzliche Geometrie
+- **Emission**: eine sichtbare Leuchtfarbe; sie ersetzt nicht automatisch eine Lichtquelle
+
+URP/Lit verwendet physikalisch basierte Darstellung. Dadurch bleiben Materialien unter verschiedenen Lichtern eher nachvollziehbar. Für einen stilisierten Look sind **Simple Lit** oder **Unlit** oft günstiger. Unlit ignoriert Licht vollständig.
+
+### In Unity sehen
+
+1. Im Project-Fenster `Create › Material` wählen.
+2. Im Inspector als Shader `Universal Render Pipeline/Lit` lassen.
+3. Base Map, Metallic und Smoothness mit einer Kugel oder einem Würfel unter demselben Licht vergleichen.
+4. Das Material auf einen Mesh Renderer ziehen.
+
+Eine eigene PNG-Zeichnung kann zwei verschiedene Rollen haben:
+
+- **Textur auf einem Material:** Datei nach `Assets/Art` ziehen, im Import Inspector `Texture Type: Default` lassen und die Textur in die Base Map ziehen.
+- **Bild im UI:** `Texture Type: Sprite (2D and UI)` wählen und das Sprite in `Image › Source Image` einsetzen.
+
+`Max Size` sollte nicht größer sein als für die tatsächliche Darstellung nötig. Bei PNGs mit transparentem Rand Alpha und Filterung in der Game View prüfen. Die Quelldatei außerhalb des Unity-Imports aufheben und im Devlog notieren, dass die Zeichnung selbst erstellt wurde.
+
+Ein magentafarbenes Objekt ist meist kein gewollter Look: Häufig fehlt ein passender Shader für die aktive Render Pipeline. Die Kursvorlage verwendet URP; dort URP-Shader statt des alten Standard Shaders verwenden.
+
+### Weiterlesen
+
+- [Unity Manual: Prebuilt shaders in URP](https://docs.unity.com/en-us/engine/6000.3/manual/materials-and-shaders/built-in/shaders-in-universalrp) – Lit, Simple Lit, Baked Lit und Unlit (Unity 6.3, englisch).
+- [Unity Manual: Choose a prebuilt shader in URP](https://docs.unity.com/en-us/engine/6000.3/manual/materials-and-shaders/built-in/shaders-in-universalrp/choose) – Nutzen und Kosten der Shader.
+- [Unity Manual: Import an image as Sprite (2D and UI)](https://docs.unity3d.com/6000.0/Documentation/Manual/sprite/import-images-sprites/set-texture-type-imported-image-sprite-2d-ui.html) – Importtyp für Bilder im Canvas.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/material/
+
+## Playtest
+
+Jemand anderes spielt, wer das Spiel gebaut hat, schaut zu und schweigt. Was die Person zuerst versucht, wo sie hängen bleibt und was ihr gefällt, zeigt, ob die Spec im Spiel ankommt.
+
+Auch: Playtests, Playtesting, Spieltest, Peer Play, lautes Denken, Think Aloud, Playtest-Karte
+
+Verwandt: [feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
+
+
+
+### Kurz
+
+Wer ein Spiel gebaut hat, kann es nicht mehr zum ersten Mal sehen. Ein Playtest leiht sich dafür fremde Augen. Eine Person spielt und sagt laut, was sie denkt. Wer gebaut hat, sitzt daneben, erklärt nichts und schreibt mit. Ein Satz zum Start reicht: „Bitte einfach spielen und dabei laut denken.“
+
+Drei Fragen tragen fast jeden frühen Test:
+
+1. Was hat die Person zuerst versucht?
+2. Wo wusste sie nicht weiter?
+3. Was hat sich gut angefühlt?
+
+### Genauer
+
+Jede Erklärung während des Tests verdeckt einen Befund. Muss nach einer Minute Feststecken doch geholfen werden, wird das notiert: Genau dort fehlt im Spiel etwas, oft eine [Rückmeldung](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/).
+
+Ein Test beantwortet am besten eine Frage, die vorher feststeht. Die Designfrage aus der ersten Hausaufgabe ist so eine Frage. Sie wird vor dem Test aufgeschrieben, aber nicht vorgelesen, damit die Person nicht danach spielt.
+
+Was zwei Personen unabhängig voneinander bemerken, ist ein Muster; was nur eine bemerkt, ist ein Hinweis. Nach dem Test steht fest, ob die Designfrage beantwortet oder noch offen ist, und mit welchem Beleg. Daraus folgt eine Entscheidung: eine Zeile der Spec ändern, oder sie begründet beibehalten und den nächsten Test planen. Der Devlog hält fest, was beobachtet und was entschieden wurde. Mit dem [Commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/) des getesteten Stands lässt sich später zeigen, welches Spiel getestet wurde.
+
+### Im Kurs
+
+- Ablauf und Karten: [Tag 4](https://www.allknivesnobagel.com/teaching/gec1/days/04/), Druckvorlage `druck/playtest-karte.html`.
+- Jede Runde: acht Minuten spielen, drei Minuten Karte, erst dann reden. Ist das Spiel schneller durchgespielt, spielt die Person es ein zweites Mal ohne Hinweis.
+- Ein Spiel, das nicht startet, ist auch ein Befund. Dann spielt die Person es selbst vor, und die andere füllt die Karte als Zuschauerin aus.
+
+### Weiterlesen
+
+- [Nielsen Norman Group: Thinking Aloud, the #1 Usability Tool](https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/) – warum lautes Denken so viel zeigt und wie man dabei nicht stört (englisch).
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest/
 
 ## Prefab
 
@@ -1377,6 +3330,54 @@ git push origin alpha
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/tag/
 
+## Drehmoment
+
+Eine Kraft, die einen Rigidbody um eine Achse dreht, statt ihn zu verschieben. In Unity heißt das AddTorque. Richtung und Länge des Vektors geben Achse und Stärke.
+
+Auch: Torque, AddTorque, Drehung, Drehmomente, Drehimpuls
+
+Verwandt: [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/)
+
+Unity-Doku: https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody.AddTorque.html
+
+
+### Kurz
+
+Eine Kraft schiebt einen [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/) in eine Richtung. Ein Drehmoment dreht ihn um eine Achse: ein Drehkreuz, ein Windrad, eine Kiste, die sich beim Wegfliegen überschlägt.
+
+```csharp
+// ein Ruck um die senkrechte Achse
+rb.AddTorque(Vector3.up * 4f, ForceMode.Impulse);
+```
+
+### Genauer
+
+Das Drehmoment ist ein [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/). Seine Richtung ist die Drehachse, seine Länge die Stärke. `Vector3.up` dreht um die senkrechte Achse wie ein Karussell, `Vector3.right` wie ein Rad, das auf euch zurollt, `Vector3.forward` wie die Zeiger einer Uhr, auf die ihr schaut.
+
+Wie bei `AddForce` gibt es zwei übliche Arten:
+
+| Art | wirkt | wohin im Code |
+|---|---|---|
+| `ForceMode.Impulse` | ein einzelner Ruck | beim Event, z. B. beim Tastendruck |
+| `ForceMode.Force` (Standard) | gleichmäßig in jedem Physik-Schritt | in `FixedUpdate()` |
+
+Was bremst: **Angular Damping** am Rigidbody, sonst dreht sich etwas ohne Reibung sehr lange weiter. Was sperrt: **Constraints › Freeze Rotation** verhindert die Drehung um einzelne Achsen. Ein kinematischer Rigidbody reagiert auf kein Drehmoment.
+
+Eine Kraft, die nicht am Schwerpunkt angreift, erzeugt ebenfalls ein Drehmoment: `AddForceAtPosition` stößt an einer Stelle, und der Körper schiebt sich und dreht sich zugleich.
+
+### In Unity sehen
+
+- Ein flacher Würfel als Arm, Rigidbody mit Use Gravity aus, Constraints: Position ganz gesperrt, Drehung nur um Y frei. Ein Drehmoment um `Vector3.up` macht ein Drehkreuz.
+- Das Kit hat einen Knoten **Kraft**, aber keinen für Drehmoment. Wie ein eigener Knoten dafür aussieht, steht in [Tag 3](https://www.allknivesnobagel.com/teaching/gec1/days/03/).
+
+### Weiterlesen
+
+- [Unity Scripting API: Rigidbody.AddTorque](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Rigidbody.AddTorque.html) – mit Beispiel (Unity 6.3, englisch).
+- [Unity Scripting API: ForceMode](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/ForceMode.html) – die vier Arten, eine Kraft wirken zu lassen.
+- [Unity Manual: Rigidbody component reference](https://docs.unity3d.com/6000.3/Documentation/Manual/class-Rigidbody.html) – Angular Damping und Constraints.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/
+
 ## Transform
 
 Die Component, die Position, Drehung und Größe eines GameObjects hält. Jedes GameObject hat genau eine. Bei Kindobjekten gelten die Werte relativ zum Elternobjekt.
@@ -1427,6 +3428,69 @@ transform.position        // in der Welt
 - [Catlike Coding: Game Objects and Scripts](https://catlikecoding.com/unity/tutorials/basics/game-objects-and-scripts/) – eine Uhr aus verschachtelten Objekten, deren Zeiger ein Skript über ihre Transform dreht. Ausführliches Tutorial in Bildern (englisch).
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/
+
+## UI
+
+Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Kit-Graphen.
+
+Auch: User Interface, Benutzeroberfläche, Oberfläche, HUD, Menü, Canvas, uGUI, Unity UI
+
+Verwandt: [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)
+
+Unity-Doku: https://docs.unity.com/en-us/engine/6000.3/manual/uitoolkits
+
+
+### Kurz
+
+UI ist die Schicht zwischen Spielzustand und Spielenden. Ein HUD zeigt wichtige Werte. Ein Start-, Ziel- oder Scheiterbildschirm bietet eine nächste Handlung an. Gute UI beantwortet drei Fragen: Was ist passiert? Was ist wichtig? Was kann als Nächstes getan werden?
+
+Im Kurs wird **uGUI (Unity UI)** mit den vorhandenen Kit-Graphen verwendet. uGUI ist GameObject-basiert: Ein Canvas enthält Panels, Texte, Bilder und Buttons. Für das Kursprojekt reicht **eine projektbezogene UI-Handlung**. Ein vollständiger Ablauf mit Start, Spiel und Ende ist eine Erweiterung.
+
+### Warum uGUI und nicht UI Toolkit?
+
+Unity 6.3 bietet mehrere UI-Systeme. **UI Toolkit** verwendet UI Documents, UXML und Stylesheets und eignet sich besonders für wiederverwendbare, datenreiche Oberflächen und Editor-Werkzeuge. uGUI arbeitet mit Canvas, GameObjects und Komponenten, die aus Hierarchy und Inspector schon bekannt sind.
+
+Beide können Runtime-UI bauen. Die Kursentscheidung gilt nicht allgemein: uGUI passt hier besser zum Kit und führt für eine kleine Spieloberfläche weniger neue Begriffe ein. Beide Systeme parallel zu lernen, würde das Arbeitsmodell verdoppeln.
+
+### Ein vollständiges Graph-Beispiel
+
+Ein Schlüssel-und-Tür-Spiel kann mit einem Canvas und zwei Panels auskommen:
+
+1. `Beginn → An/Aus` schaltet `Start` ein → `Pause` .
+2. Der Spielen-Button feuert `Knopf gedrückt` ; danach schaltet `An/Aus` das Start-Panel aus und `Weiter`  gibt Spieler und Cursor zurück.
+3. Wenn die Tür geöffnet ist, schaltet `An/Aus` das Panel `Geschafft` ein und `Pause`  hält das Spiel an.
+4. Der Neustart-Button feuert `Knopf gedrückt`  zu `Szene laden`. Der Szenenname muss stimmen und die Szene muss in der Scene List stehen.
+
+Die drei provisorischen Knotenbezeichnungen kommen mit Kit v0.3.2. Der vollständige Drei-Screen-Ablauf ist optional. Hat ein Projekt keinen Scheiterzustand, braucht es kein Game Over.
+
+### Vorhandene Kit-Bausteine
+
+- `HUD-Anzeige` liest eine Zahl laufend und formatiert sie in ein gebundenes TMP-Textfeld.
+- `An/Aus` schaltet ein gebundenes GameObject ein, aus oder um.
+- `Lebenspunkte` liefert `Tot` genau einmal, wenn der Wert auf null fällt.
+- `Checkpoint` merkt einen Respawn-Punkt oder setzt den Kit-Spieler dorthin zurück.
+- `Szene laden` lädt eine Szene nur, wenn sie in der Scene List aktiviert ist.
+
+Nicht alle Bausteine gehören in jedes Projekt. Der Graph folgt der Spec, nicht umgekehrt.
+
+### In Unity sehen
+
+1. `GameObject › UI › Canvas` anlegen. Unity ergänzt bei Bedarf ein EventSystem.
+2. Unter dem Canvas nur die benötigten Panels anlegen, zum Beispiel `Start` und `Geschafft`.
+3. Für Bildschirmgrößen den **Canvas Scaler** auf `Scale With Screen Size` stellen und eine Referenzauflösung wählen.
+4. Elemente über ihre **Anchors** an einer Ecke, Kante oder der Mitte festhalten.
+5. Das EventSystem braucht beim neuen Input System ein **Input System UI Input Module**.
+6. Im Kit-Graph die vorhandenen Knoten verbinden und alle Szene-Referenzen binden.
+7. Im Play-Modus dreimal prüfen: öffnen, Button anklicken, spielen, zurückkehren. Im UI ist der Cursor frei; im Spiel wird der Blick wieder gefangen.
+
+Reagiert ein Button nicht, zuerst EventSystem, sichtbares Panel, `Interactable`, Graph-Instanz und gebundene Szene-Referenzen prüfen. Keine Szene oder Prefab-Datei außerhalb von Unity als YAML bearbeiten.
+
+### Weiterlesen
+
+- [Unity Manual: UI systems](https://docs.unity.com/en-us/engine/6000.3/manual/uitoolkits) – UI Toolkit, uGUI und IMGUI im Überblick (Unity 6.3, englisch).
+- [Input System Manual: UI support](https://docs.unity.cn/Packages/com.unity.inputsystem@1.11/manual/UISupport.html) – Input System UI Input Module für uGUI.
+
+Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/ui/
 
 ## Update
 
