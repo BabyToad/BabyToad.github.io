@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-git/ · Stand 2026-10-04T10:20Z · cb3c273 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-git/ · Stand 2026-10-05T10:26Z · 915d46a -->
 
 Dauer: Windows ca. 5 Min; Mac 10–25 Min (läuft im Hintergrund)
 
@@ -11,7 +11,7 @@ Stand: nicht durchgespielt
 
 # Git installieren
 
-Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später Spieler-Controller und Kit)
+Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, Spieler-Controller und Kit)
 direkt aus einem Git-Repository. Dafür muss **Git** als eigenes Programm installiert sein.
 GitHub Desktop bringt zwar ein Git mit, aber nur für sich selbst – Unity findet es nicht. Ohne
 Git öffnet sich das Kursprojekt mit dem Fehler _„No 'git' executable was found“_. KI-Agenten im

@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-04T10:20Z · cb3c273. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-05T10:26Z · 915d46a. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -10,7 +10,7 @@ Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 
 Begriffe: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
 
-Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen.
+Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen. Dazu: mit der Spielfigur aus dem Kurs-Paket durch einen grob gebauten Raum laufen; Commit, Push und ein kurzer Clip im Blackboard-Thread.
 
 ### Alles steht auf der Kursseite
 
@@ -35,6 +35,8 @@ Der Rest geht auch zu Hause.
 Eine interaktive Spielwelt in Unity.
 
 Ein Raum reicht.
+
+**Bild:** Isometrische Kreidezeichnung eines kleinen begehbaren Raums mit Tür, Rampe, drei Hindernissen und einer gelb betonten Spielfigur. (KI-generiert).
 
 Abgabe: 22.01.2027
 
@@ -158,7 +160,45 @@ Papers, Please Es geht um Pflicht gegen Gewissen. Ihr prüft Pässe unter Zeitdr
 
 Zwei Minuten.
 
-Die Uhr ist hart. Zeigt Bilder: eine Folie, Referenzbilder, Spiele, die ähnlich sind.
+Hartes Zeitlimit: Nach zwei Minuten ist Schluss. Zeigt, statt zu erzählen: Referenzbilder, ähnliche Spiele, eine Skizze.
+
+**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
+
+### Ein Beispiel: HIGH WATER
+
+Zwei Minuten, live.
+
+HIGH WATER, ein Spiel von Jonas: [limeminister.itch.io/high-water](https://limeminister.itch.io/high-water). Setting: Dark City Shining Babel. Inhaltshinweis: Blut und Gewalt gegen menschliche Figuren; Gore lässt sich in den Optionen abschalten.
+
+KI-Hinweis von der itch-Seite, wörtlich: „No generative image, audio or voice models were used anywhere in HIGH WATER. The characters are voxel models written as code; every sound effect is synthesised in code, with no samples; the music is FM scores written as code and rendered by our own synthesiser; the UI is drawn in code. Jonas built the game together with Claude and Codex, the AI coding assistants that wrote that code with him. He made the calls and takes responsibility for the result.“
+
+### HIGH WATER
+
+Ein Prügelspiel mit Physik. Das Gebäude ist der zweite Gegner.
+
+**Screenshot:** HIGH WATER: Die Spielfigur prügelt sich durch eine Bar im Hochhaus, eine Gasflasche explodiert neben den Gegnern. (HIGH WATER · limeminister.itch.io/high-water).
+
+Wie Streets of Rage, mit der Physik von Smash Bros.
+
+### Alles im Raum ist Waffe
+
+Jede Wand ist Mauerwerk. Jeder Gegner ist ein Wurfgeschoss.
+
+**Screenshot:** HIGH WATER: Ein Boxring mitten im Stockwerk, die Spielfigur wirft einen Gegner über die Seile. (HIGH WATER · limeminister.itch.io/high-water).
+
+### Was schiefgehen kann
+
+Der Dreier-Schlag muss sich allein schon gut anfühlen.
+
+Sonst trägt die ganze Physik nichts. Also kommt er zuerst.
+
+### Die Pitch-Karte zu HIGH WATER
+
+- **Erlebnis:** Jeder Treffer sitzt, und der Raum geht dabei kaputt.
+- **Machbarkeit:** Ein Stockwerk, eine Gang, ein Boss. Keine Story.
+- **Riskanteste Annahme:** Der Dreier-Schlag trägt das Spiel. Also zuerst bauen und zuerst testen.
+
+Gestrichen, damit es passt: höhere Auflösung, eigene Charaktermodelle, weitere Level.
 
 ### Eine Seite zur Idee
 
@@ -180,13 +220,26 @@ Mechanik-Satz
 
 „Solange ich die Taste halte, lädt sich ein Sprung auf, höchstens zwei Sekunden. Beim Loslassen springe ich so hoch, wie geladen wurde.“
 
-### Zu Hause: der erste Würfel
+### Zu Hause: durch die eigene Welt laufen
 
-Selbststudium
+Bis zum 23.10.
+
+1. Neue [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), `Spieler` aus dem Kurs-Paket hineinziehen, Play
+2. Laufen, springen, mit V die Ansicht wechseln
+3. Aus Würfeln einen groben Raum bauen: Boden, Wände, eine Tür
+4. Commit und Push, dazu ein Clip von 20 Sekunden im Blackboard-Thread
+
+Eine Einheit ist ein Meter. Eine Tür ist etwa 2 m hoch.
+
+`Spieler` liegt im Project-Fenster unter Packages › GEC1 Kurs-Paket › Player. Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechselt zwischen Ich- und Third-Person-Ansicht. Ein Gamepad geht auch.
+
+### Für Neugierige: der erste Würfel
+
+Optional
 
 Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
 
-Würfel anlegen, Skript `Mover` anlegen, auf den Würfel ziehen, Play. Am 23.10. greifen wir das zu Beginn kurz auf.
+Würfel anlegen, Skript `Mover` anlegen, auf den Würfel ziehen, Play.
 
 ### Wie schnell steigt der Würfel?
 
@@ -234,7 +287,9 @@ Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-t
 
 2:00
 
-Die Uhr ist hart. Danach schreibt jede Person eine Pitch-Karte. Diskutiert wird nicht.
+Hartes Zeitlimit: Nach zwei Minuten ist Schluss. Danach füllen alle eine Pitch-Karte aus, ohne Diskussion.
+
+**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
 
 Die Reihenfolge ist ausgelost. Wer dran ist, steht schon bereit.
 
@@ -283,6 +338,17 @@ Schwach
 
 „Der Spieler kann Gegner besiegen.“
 
+### Eine echte Spec: der Dreier-Schlag
+
+HIGH WATER
+
+1. Verb: Dreimal Schlag drücken: Jab, Cross, Drive
+2. Regel: Der nächste Druck muss innerhalb von 0,3 s kommen. Ein Gegner hat 10 Lebenspunkte.
+3. Rückmeldung: Jeder Treffer hält das Bild kurz an, 55, 65 und 130 ms. Dazu Wackeln, Ton, Vibration.
+4. Scheitern: Zu spät gedrückt? Die Kette beginnt wieder beim Jab.
+
+Der Playtest hat eine Regel gekippt: Ein Schlag ins Leere bricht die Kette nicht mehr ab.
+
 ### Lasst die Spec prüfen
 
 „Was ist an dieser Spec mehrdeutig? Schreib sie nicht um.“
@@ -297,21 +363,27 @@ Erst stimmen Größen und Wege, dann kommt die Grafik.
 
 Würfel, Ebenen, ProBuilder: mehr braucht ein Blockout nicht.
 
+### Erst grau, dann Grafik
+
+Dieselbe Stelle in HIGH WATER, am ersten und am zweiten Tag. Wege, Höhen und Deckung standen, bevor es Grafik gab.
+
+**Screenshot:** HIGH WATER, Stockwerk 70 als Blockout: einfarbige Kästen, eine Ziegelwand, Debug-Anzeige. (Tag 1: Blockout).
+
+**Screenshot:** Dieselbe Stelle mit Grafik: texturierte Blöcke, Uhren an der Wand, beschriftete Kisten. (Tag 2: Grafik).
+
 ### Eine Einheit ist ein Meter
 
 Stellt zuerst die Spielfigur hinein. Dann seht ihr, ob der Rest passt.
 
 **Tafelbild:** Maßstab auf Kästchen von 1 m: Spielfigur 1,8 m, Tür 2 m, Stufe 0,2 m, Würfel 1 m.
 
-### Die Spielfigur ist schon da
+### Weiter mit eurem Raum
 
-Aus dem Kurspaket: `Spieler` in die [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/) ziehen, Play, laufen.
+Der Raum von zu Hause ist der Anfang des Blockouts. Wer noch keinen hat: `Spieler` in die [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/) ziehen, Play, laufen.
 
-- WASD laufen, Maus schauen
-- Leertaste springen, Shift rennen
-- V wechselt zwischen Ego- und Third-Person-Ansicht
+Fällt die Figur aus der Welt, erscheint sie wieder am Start.
 
-Fällt die Figur aus der Welt, erscheint sie wieder am Start. Ein Gamepad geht auch.
+Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechselt zwischen Ich- und Third-Person-Ansicht. Ein Gamepad geht auch.
 
 ### Transform: lokal und Welt
 
@@ -332,6 +404,8 @@ Ein Prefab ist eine Vorlage für ein GameObject mit allen Komponenten. Änderung
 ### Heute schon ein Build
 
 Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum 13.11. muss eurer auf einem fremden Windows-Rechner laufen.
+
+**Bild:** Kreidezeichnung: Aus einem offenen Arbeitsplatz mit Würfel, Kamera und Lampe wird ein eigenständig laufendes Spielgerät. (KI-generiert).
 
 File › Build Profiles › Windows › Build
 
@@ -1578,7 +1652,7 @@ anderen Seiten herunterladen, auch wenn sie in der Suchmaschine weiter oben steh
 
 Unity braucht ein kostenloses **Unity-Konto**, GitHub ein kostenloses **GitHub-Konto**.
 
-Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später
+Warum Git Pflicht ist: Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**,
 Spieler-Controller und Kit) direkt aus einem Git-Repository. GitHub Desktop bringt zwar ein Git
 mit, aber nur für sich selbst.
 
@@ -1685,7 +1759,7 @@ Stand: nicht durchgespielt
 
 ## Git installieren
 
-Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, später Spieler-Controller und Kit)
+Unity lädt das Kurs-Paket (Menü **Kurs > Setup prüfen**, Spieler-Controller und Kit)
 direkt aus einem Git-Repository. Dafür muss **Git** als eigenes Programm installiert sein.
 GitHub Desktop bringt zwar ein Git mit, aber nur für sich selbst – Unity findet es nicht. Ohne
 Git öffnet sich das Kursprojekt mit dem Fehler _„No 'git' executable was found“_. KI-Agenten im
@@ -2358,7 +2432,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -2411,7 +2485,7 @@ Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/); unter Windows danach den Hub ganz beenden und neu starten.
 
 **Package Manager: Die Adresse wird nicht gefunden.**
-Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
+Die Adresse genau so einfügen, inklusive `#v0.3.1` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
 Ist oben die Editor-Version 6000.3.15f1 gewählt? Die Vorlagen hängen an der Version.
@@ -2986,60 +3060,60 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/guides/first-commit/
 
 Dauer: ca. 5 Min
 
-Voraussetzungen: Projekt aus der Kursvorlage (Projekt anlegen); Git ist installiert (Git installieren); Jonas hat eine neue Version angekündigt (zum 23.10.: v0.2.0)
+Voraussetzungen: Projekt aus der Kursvorlage (Projekt anlegen); Git ist installiert (Git installieren); Jonas hat eine neue Version angekündigt
 
 Checkpunkte:
 - [ ] Im Package Manager steht beim GEC1 Kurs-Paket die neue Versionsnummer
 - [ ] Menü „Kurs > Setup prüfen“ zeigt beim Kurs-Paket die neue Version
 - [ ] Die Änderung an Packages/manifest.json ist committet
-- [ ] Ab v0.2.0: Im Project-Fenster liegt unter Packages > GEC1 Kurs-Paket > Player das Prefab „Spieler“
 
 Stand: nicht durchgespielt
 
 ## Kurs-Paket aktualisieren
 
-Das **Kurs-Paket** (`de.macromedia.gec1`) bringt das Menü **Kurs > Setup prüfen** und im Lauf
-des Semesters weitere Werkzeuge: den Spieler-Controller und das Kit. Es liegt nicht im eigenen
+Das **Kurs-Paket** (`de.macromedia.gec1`) bringt das Menü **Kurs > Setup prüfen**, den
+Spieler-Controller (Prefab **Spieler**) und das Kit mit dem Graph-Editor. Es liegt nicht im eigenen
 Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich nur, **welche
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.1.0",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1",
 ```
 
-Das `#v0.1.0` am Ende ist die Version. Aktualisieren heißt: diese Zeile auf die neue Version
-setzen. Unity lädt den Rest selbst (dafür braucht es Git).
+Das `#v0.3.1` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
+Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
 Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgängig machen.
 
 | Version | Ab | Neu |
 |---|---|---|
-| v0.1.0 | 09.10. (in der Kursvorlage) | Menü **Kurs > Setup prüfen** |
-| v0.2.0 | 23.10. | Spieler-Controller: Prefab **Spieler** (laufen, springen, umsehen; Ich- und Dritte-Person-Ansicht) |
-| v0.3.0 | 13.11. | Kit mit Graph-Editor: Interaktionen als Graph bauen und beim Spielen beobachten; Beispiel „Schlüssel und Tür“ |
+| v0.3.1 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiel „Schlüssel und Tür“ |
+
+Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
 ### Schritt 1: Neue Version eintragen
 
 1. In GitHub Desktop prüfen: **No local changes**. Wenn nicht, erst committen.
 2. In Unity: **Window > Package Manager**.
 3. Oben links auf **+** > **Install package from git URL…** klicken.
-4. Die Adresse mit der neuen Version einfügen, z. B. für Version 0.2.0:
+4. Die Adresse mit der neuen Version einfügen, z. B. für eine Version 0.4.0:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.2.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.4.0
    ```
 
    Die genaue Versionsnummer nennt Jonas.
 5. **Install** klicken. Unity lädt die neue Version und kompiliert kurz.
 
-(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.2.0.)
+(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.4.0.)
 
 ✅ **Checkpoint:** Im Package Manager steht unter **In Project** das **GEC1 Kurs-Paket** mit
 der neuen Versionsnummer. **Kurs > Setup prüfen** zeigt bei **Kurs-Paket** dieselbe Version.
-Ab v0.2.0 liegt im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket > Player** das Prefab
-**Spieler**; es lässt sich von dort in die Szene ziehen.
+Das Prefab **Spieler** liegt weiterhin im **Project**-Fenster unter **Packages > GEC1 Kurs-Paket >
+Player**.
 
-**Ab v0.3.0: Beispiel importieren.** Im Package Manager beim **GEC1 Kurs-Paket** den Reiter
+**Beispiel importieren.** Im Package Manager beim **GEC1 Kurs-Paket** den Reiter
 **Samples** öffnen und bei **Schlüssel und Tür** auf **Import** klicken. Das Beispiel landet unter
 `Assets/Samples/GEC1 Kurs-Paket/…`. Ein Doppelklick auf `Schlüssel und Tür.kit` öffnet den
 Graph-Editor; die Szene `Keller` zeigt das Beispiel im Spiel.
@@ -3052,7 +3126,7 @@ Graph-Editor; die Szene `Keller` zeigt das Beispiel im Spiel.
    `Packages/packages-lock.json`.
 2. Auf `manifest.json` klicken. Rechts zeigt der **Diff** genau eine geänderte Zeile: rot die
    alte Version, grün die neue.
-3. Unten bei **Summary** z. B. `Kurs-Paket auf 0.2.0` eintragen > **Commit to main** >
+3. Unten bei **Summary** z. B. `Kurs-Paket auf 0.4.0` eintragen > **Commit to main** >
    **Push origin**.
 
 ✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**, der Commit steht oben in
@@ -3067,7 +3141,7 @@ Rechtsklick auf den Commit > **Revert changes in commit** sie wieder rückgängi
 Mit Claude Code oder Codex im Projektordner geht es auch so:
 
 ```
-Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.2.0. Ändere sonst
+Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.4.0. Ändere sonst
 nichts. Zeig mir danach den Diff. Nicht committen.
 ```
 
@@ -3079,7 +3153,7 @@ Danach Unity in den Vordergrund holen (Unity lädt das Paket dann neu) und weite
 Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/).
 
-**„Could not find … v0.2.0“ / die Version wird nicht gefunden.**
+**„Could not find … v0.4.0“ / die Version wird nicht gefunden.**
 Tippfehler in der Adresse oder die Version gibt es (noch) nicht. Die Adresse genau so einfügen,
 mit `#v` vor der Nummer und ohne Leerzeichen.
 
@@ -3088,7 +3162,7 @@ In GitHub Desktop beide geänderten Dateien mit **Discard changes** zurücksetze
 Commit) bzw. den Commit mit **Revert changes in commit** rückgängig machen. Dann Jonas Bescheid
 sagen und den Text aus der Console mitschicken.
 
-**Ab v0.3.0 zeigt Unity oben einen Hinweis auf „experimentelle Pakete“.**
+**Unity zeigt oben einen Hinweis auf „experimentelle Pakete“.**
 Das ist erwartet: Der Graph-Editor des Kits baut auf dem **Graph Toolkit** von Unity auf, das
 noch als experimentell gekennzeichnet ist. Der Kurs nutzt genau die getestete Version. Den
 Hinweis einfach stehen lassen.

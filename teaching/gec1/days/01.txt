@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/01/ · Stand 2026-10-04T10:20Z · cb3c273 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/01/ · Stand 2026-10-05T10:26Z · 915d46a -->
 
 # Tag 1: Was macht eine Engine?
 
@@ -8,7 +8,7 @@ Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 
 Begriffe: [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/), [update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/), [delta-time](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/), [game-object](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/), [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/)
 
-Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen.
+Bis zum nächsten Termin: Pitch für den 23.10.: zwei Minuten, mit visueller Unterstützung (Folie, Referenzbilder, Spielreferenzen). Eine Seite zur Idee: zwei Alternativen, das angestrebte Spielerlebnis, warum diese Idee, eine Designfrage, die sich im Test beantworten lässt, und ein Satz zur Kernmechanik, so genau, dass jemand anderes sie bauen könnte. Was heute beim Setup nicht fertig wurde, zu Hause abschließen. Dazu: mit der Spielfigur aus dem Kurs-Paket durch einen grob gebauten Raum laufen; Commit, Push und ein kurzer Clip im Blackboard-Thread.
 
 ## Alles steht auf der Kursseite
 
@@ -33,6 +33,8 @@ Der Rest geht auch zu Hause.
 Eine interaktive Spielwelt in Unity.
 
 Ein Raum reicht.
+
+**Bild:** Isometrische Kreidezeichnung eines kleinen begehbaren Raums mit Tür, Rampe, drei Hindernissen und einer gelb betonten Spielfigur. (KI-generiert).
 
 Abgabe: 22.01.2027
 
@@ -156,7 +158,45 @@ Papers, Please Es geht um Pflicht gegen Gewissen. Ihr prüft Pässe unter Zeitdr
 
 Zwei Minuten.
 
-Die Uhr ist hart. Zeigt Bilder: eine Folie, Referenzbilder, Spiele, die ähnlich sind.
+Hartes Zeitlimit: Nach zwei Minuten ist Schluss. Zeigt, statt zu erzählen: Referenzbilder, ähnliche Spiele, eine Skizze.
+
+**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
+
+## Ein Beispiel: HIGH WATER
+
+Zwei Minuten, live.
+
+HIGH WATER, ein Spiel von Jonas: [limeminister.itch.io/high-water](https://limeminister.itch.io/high-water). Setting: Dark City Shining Babel. Inhaltshinweis: Blut und Gewalt gegen menschliche Figuren; Gore lässt sich in den Optionen abschalten.
+
+KI-Hinweis von der itch-Seite, wörtlich: „No generative image, audio or voice models were used anywhere in HIGH WATER. The characters are voxel models written as code; every sound effect is synthesised in code, with no samples; the music is FM scores written as code and rendered by our own synthesiser; the UI is drawn in code. Jonas built the game together with Claude and Codex, the AI coding assistants that wrote that code with him. He made the calls and takes responsibility for the result.“
+
+## HIGH WATER
+
+Ein Prügelspiel mit Physik. Das Gebäude ist der zweite Gegner.
+
+**Screenshot:** HIGH WATER: Die Spielfigur prügelt sich durch eine Bar im Hochhaus, eine Gasflasche explodiert neben den Gegnern. (HIGH WATER · limeminister.itch.io/high-water).
+
+Wie Streets of Rage, mit der Physik von Smash Bros.
+
+## Alles im Raum ist Waffe
+
+Jede Wand ist Mauerwerk. Jeder Gegner ist ein Wurfgeschoss.
+
+**Screenshot:** HIGH WATER: Ein Boxring mitten im Stockwerk, die Spielfigur wirft einen Gegner über die Seile. (HIGH WATER · limeminister.itch.io/high-water).
+
+## Was schiefgehen kann
+
+Der Dreier-Schlag muss sich allein schon gut anfühlen.
+
+Sonst trägt die ganze Physik nichts. Also kommt er zuerst.
+
+## Die Pitch-Karte zu HIGH WATER
+
+- **Erlebnis:** Jeder Treffer sitzt, und der Raum geht dabei kaputt.
+- **Machbarkeit:** Ein Stockwerk, eine Gang, ein Boss. Keine Story.
+- **Riskanteste Annahme:** Der Dreier-Schlag trägt das Spiel. Also zuerst bauen und zuerst testen.
+
+Gestrichen, damit es passt: höhere Auflösung, eigene Charaktermodelle, weitere Level.
 
 ## Eine Seite zur Idee
 
@@ -178,13 +218,26 @@ Mechanik-Satz
 
 „Solange ich die Taste halte, lädt sich ein Sprung auf, höchstens zwei Sekunden. Beim Loslassen springe ich so hoch, wie geladen wurde.“
 
-## Zu Hause: der erste Würfel
+## Zu Hause: durch die eigene Welt laufen
 
-Selbststudium
+Bis zum 23.10.
+
+1. Neue [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), `Spieler` aus dem Kurs-Paket hineinziehen, Play
+2. Laufen, springen, mit V die Ansicht wechseln
+3. Aus Würfeln einen groben Raum bauen: Boden, Wände, eine Tür
+4. Commit und Push, dazu ein Clip von 20 Sekunden im Blackboard-Thread
+
+Eine Einheit ist ein Meter. Eine Tür ist etwa 2 m hoch.
+
+`Spieler` liegt im Project-Fenster unter Packages › GEC1 Kurs-Paket › Player. Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechselt zwischen Ich- und Third-Person-Ansicht. Ein Gamepad geht auch.
+
+## Für Neugierige: der erste Würfel
+
+Optional
 
 Ein Würfel, ein Skript, eine Zeile in [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update/).
 
-Würfel anlegen, Skript `Mover` anlegen, auf den Würfel ziehen, Play. Am 23.10. greifen wir das zu Beginn kurz auf.
+Würfel anlegen, Skript `Mover` anlegen, auf den Würfel ziehen, Play.
 
 ## Wie schnell steigt der Würfel?
 

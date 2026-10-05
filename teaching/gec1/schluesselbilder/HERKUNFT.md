@@ -1,85 +1,76 @@
 # Herkunft der Schlüsselbilder
 
-Stand: 04.10.2026. Alle Bilder wurden mit dem integrierten OpenAI-ImageGen-Werkzeug erzeugt. Die konkrete Modellbezeichnung wird vom Werkzeug nicht ausgewiesen. Die Dateien wurden anschließend mittig auf 4:3 beschnitten, auf 1200 × 900 Pixel skaliert und als WebP komprimiert.
+Stand: 04.10.2026. Alle zwölf Bilder wurden mit dem integrierten OpenAI-ImageGen-Werkzeug neu als transparente Kreidezeichnungen erzeugt. Die konkrete Modellbezeichnung weist das Werkzeug nicht aus. Die ausgewählten PNGs wurden mit FFmpeg auf 4:3 eingepasst und als WebP mit Alphakanal komprimiert. `prefab.webp` und `scene.webp` messen 1000 × 750 Pixel, alle anderen 1200 × 900 Pixel; jede Datei bleibt unter 250 kB.
 
-Gemeinsame Vorgaben für alle ersten Generationsläufe: Stilreferenzen dienten nur für die ruhige Dokumentationsanmutung deutscher Lehrmittel von 1972–78; keine Übernahme ihrer Komposition. Matte Oberflächen, ruhiges Tageslicht und glaubwürdige Gebrauchsspuren. Kein Text, keine Buchstaben, Zahlen, Logos oder Wasserzeichen. Verboten: Hologramme, Leuchtlinien, Neon, isometrische Illustration, futuristische Anmutung, Lila-Blau-Verläufe, lächelnde Personen, Gesichter im Fokus, Filmkorn, Lichtlecks, VHS- oder Retrofilter, Sonnenuntergangsstreifen, glänzende 3D-Render-Optik, Stockfoto-Politur, dekorative Symmetrie, runde UI-Karten, Fake-Terminal und Tasten in Form eines Startsymbols.
+## Gemeinsame Vorgaben
 
-## Tag 1 · Titelbild
+Finale Prompts enthielten jeweils diese Vorgaben: Zeichnung einer geübten Lehrperson auf einer echten Tafel, angelehnt an die sachliche Klarheit deutscher Telekolleg-Tafelbilder; sichere Kreidestriche mit Pigmentkorn, gebrochenen Rändern, Druckwechseln, kleinen Konstruktionsspuren und höchstens sparsamer Schraffur. Echter transparenter Hintergrund, damit die Zeichnung direkt auf `#1d2a25` steht. Kreideweiß `#eeece4`, Gelb `#f7f09c` nur zur Betonung; Orange `#f6a54e` nur für Ereignisse, Violett `#cfa9f7` nur für Daten, Blaugrün `#72d5c0` nur für Referenzen. Keine Schrift im Bild.
 
-- Datei: `tag-01.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
+Ausgeschlossen waren insbesondere: Café- oder Menüschrift, ornamentale Rahmen und Banner, Herzen, Sterne und Füll-Doodles, Pinterest-Kreideästhetik, Neon, Leuchteffekte, 3D-Fasen, Vignetten aus Wischspuren, Icons statt erklärender Zeichnungen, Logos und Wasserzeichen.
+
+## Tag 1 · `tag-01.webp`
+
 - Versuche: 1
-- Finaler Prompt: „Two hands are setting a worn unpainted wooden cube beside a small beige 1970s CRT monitor on a scratched school worktable. The curved screen shows the same cube as a spare white wireframe, visibly matching the physical cube. A keyboard edge is barely visible. This should suggest that a game engine repeatedly turns a described object and input into a visible image. Muted documentary photograph for an educational-equipment manual, Germany 1972–78. Landscape 4:3; subject on the right two thirds; generous calm empty table area on the left; readable at thumbnail size; only hands, no face. Quiet window daylight; matte; factual, not nostalgic.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Finaler Prompt-Kern: Offene mechanische Spielmaschine in Dreiviertelansicht. Ein Controller schickt genau einen orangefarbenen Ereignispfeil in ein sichtbares Kreide-Räderwerk; rechts entstehen drei aufeinanderfolgende Würfelbilder, das neueste gelb betont. Eingabe, Verarbeitung und wiederholtes Bild werden ohne Beschriftung lesbar.
 
-## Frame
+## Tag 2 · `tag-02.webp`
 
-- Datei: `frame.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
 - Versuche: 2
-- Finaler Prompt: „Preserve the exact three-stage loop composition and all object geometry. Change only the surface treatment and accent use: replace the artificially aged, speckled, torn-edge paper with clean cool off-white matte manual paper, almost smooth, no distressed border, no grain overlay, no stains, no retro filter. Keep the warm-orange continuous loop line. Make the moving cube in the center black ink like the other cubes, so orange is used only for the one continuous loop line. Keep no text, letters, numbers, logos, or watermark.“
+- Finaler Prompt-Kern: Isometrischer Ein-Raum-Blockout mit drei Wandflächen, Tür, Rampe, drei Hindernissen und kleiner Spielfigur. Figur und kurzes Wegende gelb, alles andere weiß; offene Linien statt Flächen.
+- Verworfen: Der erste Lauf legte eine große weiße Schmierfläche über den Boden und wirkte dadurch illustriert statt an der Tafel entwickelt.
 
-## Component
+## Frame · `frame.webp`
 
-- Datei: `component.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
+- Versuche: 3
+- Finaler Prompt-Kern: Genau drei gleich große Szenenfelder mit demselben Würfel: links ruhend, in der Mitte gelb in der Luft, rechts gelandet. Zwei Vorwärtspfeile und ein großer Rückpfeil schließen die Frame-Schleife.
+- Verworfen: Lauf 1 wurde zur Gamepad-Vignette; Lauf 2 zeigte geräteartige Würfel statt drei eindeutig gleicher Zustände.
+
+## Component · `component.webp`
+
 - Versuche: 1
-- Finaler Prompt: „Hands plug one small capability module into a plain grey base object on a worktable. Two different modules are already attached: one carries a small lamp, one a spring wheel; a fourth switch module waits beside the base. The same neutral base visibly gains different capabilities from the attached modules. Modules must fit the base mechanically and remain distinct. Muted documentary photograph for a German educational-equipment manual, 1972–78; real used plastic and metal with modest wear. Landscape 4:3; slight top-down angle; only hands; main assembly large and readable; empty margin on left. Quiet window daylight, matte and factual.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Finaler Prompt-Kern: Explosionszeichnung eines schlichten Grundkörpers, an den Rad-, Lampen- und Federbaustein an sichtbare Anschlüsse gesetzt werden. Nur das Licht der bereits montierten Lampe ist gelb.
 
-## deltaTime
+## deltaTime · `delta-time.webp`
 
-- Datei: `delta-time.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
 - Versuche: 1
-- Finaler Prompt: „A horizontal time strip divided by vertical frame boundaries at clearly unequal intervals: alternating narrow and wide gaps, irregular but orderly. At every boundary, a black dot sits on one single straight rising warm-orange motion line. Wider time gaps produce proportionally larger rises, narrow gaps smaller rises, so all dots lie exactly on the same straight line. This must explain variable time per frame yet constant motion per second; it must not look like an architectural staircase or handrail. Fine black ink technical drawing on cool off-white matte drafting paper, German science workbook plate 1972–78, slightly imperfect offset ink; exactly one flat accent color warm orange #f6a54e for the motion line. Landscape 4:3; one large clear graph-like construction on the right two thirds; generous left margin; no axes labels.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Finaler Prompt-Kern: Acht bewusst ungleich verteilte Frame-Striche auf einer Zeitlinie. An jedem Strich sitzt ein Punkt auf derselben geraden Bewegungsbahn; Falllinien verbinden Punkt und Strich. Nur ein kleines Steigungsdreieck ist gelb.
 
-## Transform
+## Transform · `transform.webp`
 
-- Datei: `transform.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
 - Versuche: 2
-- Finaler Prompt: „Preserve the overall top-down technical drawing, floor grid, rectangular tabletop, key, palette, and long black world vector. Correct only the local origin and local vector. Make the tabletop a strict flat top-view rectangle with no visible legs. Put a clearly visible small origin cross exactly on the tabletop's lower-left corner, not halfway up an edge and not obscured. Start the blue-green local vector exactly at that cross and end it exactly at the center hole of the key. Both the blue-green vector and the black world vector must end precisely at the same center hole of the key. Keep clean cool off-white matte paper with no distressed border, no grain overlay, no stains, no text, letters, numbers, logos, ruler, or watermark.“
+- Finaler Prompt-Kern: Zwei versetzte Tische mit derselben Tasse an derselben lokalen Stelle. Zwei identische blaugrüne lokale Referenzpfeile beginnen an den Tischursprüngen; zwei verschieden lange weiße Weltpfeile beginnen am festen Weltursprung und enden an den Tassen. Gelber Bewegungspfeil zwischen beiden Zuständen.
+- Verworfen: Lauf 1 färbte den ganzen verschobenen Tisch gelb und ließ die Pfeilbeziehungen mehrdeutig werden.
 
-## Vektor
+## Vektor · `vector.webp`
 
-- Datei: `vector.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
+- Versuche: 1
+- Finaler Prompt-Kern: Zwei identische gelbe Verschiebungspfeile beginnen an verschiedenen puckartigen Punkten und enden an Zielkreisen. Gestrichelte Projektionen zeigen bei einem Pfeil die Komponenten.
+
+## Prefab · `prefab.webp`
+
 - Versuche: 2
-- Finaler Prompt: „Preserve exactly the two identical orange arrows, their positions, directions, lengths, endpoint dots, and the two dotted horizontal correspondence lines. Change only the paper surface and border: use clean cool off-white matte manual paper, nearly smooth, with no torn or darkened edges, no stains, no speckle, no distressed texture, no grain overlay, and no retro filter. Keep the background otherwise empty. No text, letters, numbers, logos, or watermark.“
+- Finaler Prompt-Kern: Eine große Lampenform erzeugt fünf gleiche Kreidelampen in räumlicher Folge. Nur die letzte Instanz erhält als Override einen gelben Lampenschirm.
+- Verworfen: Lauf 1 führte braune Holzfarbe ein; Lauf 2 übersetzte die Quelle vollständig in weißes Kreide-Linienwerk.
 
-## Prefab
+## Szene · `scene.webp`
 
-- Datei: `prefab.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
 - Versuche: 1
-- Finaler Prompt: „On a worn school worktable, a clearly visible wooden rubber stamp with a simple house-shaped face sits beside an ink pad and a sheet containing exactly five crisp identical house impressions in a row. A hand is coloring only one impression warm orange with a pencil, while the other four remain identical black outlines. The stamp is the source template, the prints are instances, the colored one is an override. Muted documentary photograph for a German educational-equipment manual, 1972–78; honest used materials, no staging glamour. Landscape 4:3; slight top-down angle; stamp, all five prints, and coloring hand fully visible; calm empty margin on left. Quiet window daylight, matte.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Finaler Prompt-Kern: Räumlicher Bühnenkasten mit genau Würfel, Kamera und Lampe. Rechts stehen dieselben drei Objekte einzeln; drei blaugrüne Referenzlinien verbinden die Paare. Nur der Lichtkegel darf gelb sein.
 
-## Szene
+## Build · `build.webp`
 
-- Datei: `scene.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
 - Versuche: 2
-- Finaler Prompt: „Preserve the two-view educational technical plate, scene boundary, cube, camera, correspondence lines, and right-hand vertical inventory. Change only the lamp pictogram in both views. Replace the ambiguous two-disc object with an unmistakable classic articulated desk lamp: one round base, two slim hinged arms, and one conical lampshade pointing downward. The lamp inside the scene and the lamp pictogram in the inventory must be exactly the same object. Keep exactly three objects total in each view: cube, camera, lamp. Use a clean cool off-white matte paper with no distressed border, no grain overlay, no stains. No text, letters, numbers, logos, or watermark.“
+- Finaler Prompt-Kern: Links offener Arbeitsplatz mit Rechner, Würfel, Kamera und Lampe; rechts läuft dieselbe Welt in einem geschlossenen eigenständigen Gerät. Dazwischen trägt ein weißer Montagepfeil die Teile zum fertigen Gerät; nur dessen Bildfläche ist gelb.
+- Verworfen: Lauf 1 ergänzte Joystick, runde Arcade-Tasten und Pseudo-Oberfläche. Im finalen Edit wurden sie durch eine schlichte Ablage und einen rechteckigen Netzschalter ersetzt; der Monitor zeigt nur die drei Szenenobjekte.
 
-## Build
+## Commit · `commit.webp`
 
-- Datei: `build.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
-- Versuche: 1
-- Finaler Prompt: „A restrained documentary before-and-after on one worktable. Left: an open educational electronics workbench with loose wooden cube, tiny camera, lamp, wires, tools, and an open beige computer used to assemble them. Right: the same cube-camera-lamp world runs as a finished self-contained small tabletop game unit, closed and portable, with its own screen and power cable; it is physically disconnected from the large workbench computer. A single plain orange transfer arrow lies on the tabletop between them. There is no large round button and no play triangle. Muted documentary photograph for a German educational-equipment manual, 1972–78; real scuffed materials, matte, practical. Landscape 4:3; clear left-to-right transformation; large shapes readable at thumbnail size; no hands needed; empty margin around objects. Quiet daylight, factual.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Versuche: 2
+- Finaler Prompt-Kern: Vier Ansichten desselben Raums zeigen nacheinander leer, Tisch, Lampe und Würfel. Sie liegen auf einer weißen Verlaufsbahn mit genau vier violetten Datenpunkten; der neue Stand ist gelb unterstrichen.
+- Verworfen: Lauf 1 behandelte die einsetzende Hand wie einen grauen Fotoausschnitt. Der finale Edit macht daraus eine offene weiße Kreidekontur.
 
-## Commit
+## Zwei Minuten · `zwei-minuten.webp`
 
-- Datei: `commit.webp`
-- Modell: OpenAI ImageGen, integriert; Modellbezeichnung nicht ausgewiesen
-- Datum: 04.10.2026
-- Versuche: 1
-- Finaler Prompt: „Hands turn a page of a worn photo album holding exactly four square instant photographs of the same small room at successive working states: first empty, second with a table, third with table and lamp, fourth with table, lamp, and wooden cube. Every photograph captures the whole room from the same fixed viewpoint. Beneath each is one short blank ruled caption line, with no writing. This should read as four saved project states in a history, not as decoration. Muted documentary photograph for a German educational-equipment manual, 1972–78; matte paper, honest wear. Landscape 4:3; top-down slight angle; all four photographs large and readable; only hands; generous margin. Quiet window daylight, factual.“ Dazu kamen die gemeinsamen Vorgaben oben.
+- Versuche: 2
+- Finaler Prompt-Kern: Leicht gekippte Sanduhr mit blasser Drehkontur. Oben verbleibt gelber Sand, ein einzelner Strom fällt sichtbar in den wachsenden unteren Haufen; Rahmen und Glas bleiben weißes offenes Linienwerk.
+- Verworfen: Lauf 1 war zu dicht mit dunkler Kohleschattierung gefüllt und stand dadurch nicht in derselben Hand wie die Tafelbilder.

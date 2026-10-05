@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/ · Stand 2026-10-04T10:20Z · cb3c273 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/ · Stand 2026-10-05T10:26Z · 915d46a -->
 
 # Szene
 

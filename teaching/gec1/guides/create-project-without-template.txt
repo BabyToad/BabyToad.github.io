@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-04T10:20Z · cb3c273 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-10-05T10:26Z · 915d46a -->
 
 Dauer: ca. 30 Min
 
@@ -72,7 +72,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.1
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -125,7 +125,7 @@ Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/); unter Windows danach den Hub ganz beenden und neu starten.
 
 **Package Manager: Die Adresse wird nicht gefunden.**
-Die Adresse genau so einfügen, inklusive `#v0.1.0` am Ende, ohne Leerzeichen.
+Die Adresse genau so einfügen, inklusive `#v0.3.1` am Ende, ohne Leerzeichen.
 
 **Die Vorlage "Universal 3D" fehlt im Hub.**
 Ist oben die Editor-Version 6000.3.15f1 gewählt? Die Vorlagen hängen an der Version.
