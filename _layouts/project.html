@@ -54,11 +54,11 @@ use_container: false
         </div>
 
         <div class="project-body">
-            {{ content }}
+            {% if page.sidenotes %}{{ content | replace: '[[', '<span class="sidenote-anchor">' | replace: ']]', '</span>' }}{% else %}{{ content }}{% endif %}
         </div>
     </article>
 
     <div class="sidenotes">
-        <!-- Sidenotes placeholder (if needed in future) -->
+        <!-- Sidenotes are populated by JavaScript when the page sets sidenotes: true -->
     </div>
 </div> 

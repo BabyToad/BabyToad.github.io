@@ -81,3 +81,6 @@ llms-full.txt
 /blog/
 /thoughts/
 /for-want-of-fuel/
+
+# Obsidian vault settings (local editing only)
+.obsidian/

@@ -1,24 +1,14 @@
 ---
-layout: project
-title: HIGH WATER
-description: "A physics brawler where the building is the other enemy. Built in Godot in one jam week with a studio of about twenty named AI agents; a talk and an archive of the decision boards document how."
-status: complete
-tags: [godot, game-dev, brawler, ai, game-jam, process]
-thumbnail: /assets/images/projects/high-water-thumb.png
-show_thumbnail: true
-demo_url: https://limeminister.itch.io/high-water
-show_repo: false
-sidenotes: true
-last_modified_at: 2026-10-08
+layout: post
+title: "Making HIGH WATER with a studio of agents"
+date: 2026-10-08
+description: "A jam brawler built in one week by me and about twenty named AI agents: what we made, how the studio was organised, and why we got disqualified."
+tags: [godot, game-dev, ai, game-jam, process]
+toc: true
+visibility: public
 ---
 
-# HIGH WATER
-
-<div class="project-intro">
-    <p>A Streets of Rage brawler with Smash physics, where the building is the other enemy. Made for the Vierfacher Questpresso jam (theme: <em>Destroy the System!</em>), October 2026.</p>
-</div>
-
-**[Play it on itch.io](https://limeminister.itch.io/high-water)** · **[The talk](/high-water/talk/)** · **[The decision boards](/high-water/boards/)**
+*This is a copy of the [HIGH WATER project page](/projects/high-water.html). [Play it on itch.io](https://limeminister.itch.io/high-water) · [The talk](/high-water/talk/) · [The decision boards](/high-water/boards/)*
 
 I made a game. Well, me plus a bunch of AI agents. You can do really good, high quality work now. Especially if you know what you are doing.
 

@@ -58,7 +58,7 @@ class Sidenotes {
             // Get original text
             let originalText = anchor.getAttribute('data-original-text');
             if (!originalText) {
-                originalText = anchor.textContent.trim();
+                originalText = anchor.innerHTML.trim(); // keep links and emphasis
                 anchor.setAttribute('data-original-text', originalText);
             }
 
@@ -76,6 +76,19 @@ class Sidenotes {
 
             // Position sidenote
             this.positionSidenote(anchor, sidenote);
+        });
+
+        // After positioning (one frame later), push overlapping notes down
+        requestAnimationFrame(() => requestAnimationFrame(() => this.stackSidenotes()));
+    }
+
+    stackSidenotes() {
+        let floor = 0;
+        this.sidenotes.forEach(sidenote => {
+            sidenote.style.transform = 'none';
+            const top = Math.max(parseFloat(sidenote.style.top) || 0, floor);
+            sidenote.style.top = `${top}px`;
+            floor = top + sidenote.offsetHeight + 12;
         });
     }
 
@@ -101,7 +114,7 @@ class Sidenotes {
         requestAnimationFrame(() => {
             const anchorRect = anchor.getBoundingClientRect();
             const containerRect = this.sidenotesContainer.getBoundingClientRect();
-            const topPosition = anchorRect.top - containerRect.top + window.scrollY;
+            const topPosition = anchorRect.top - containerRect.top; // both rects are viewport-relative
 
             sidenote.style.top = `${Math.max(0, topPosition)}px`;
 
