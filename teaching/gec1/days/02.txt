@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-22T09:07Z · ec6a88d -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-22T09:17Z · 686f534 -->
 
 # Tag 2: Pitch und Blockout
 
@@ -30,16 +30,6 @@ Wer hat den Würfel zu Hause bewegt?
 
 Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1/concepts/delta-time/) steigt er pro Frame, auf schnellen Rechnern also schneller. Mit deltaTime steigt er pro Sekunde, überall gleich.
 
-## Zwei Minuten pro Pitch
-
-2:00
-
-Hartes Zeitlimit: Nach zwei Minuten ist Schluss, dann ist die nächste Person dran.
-
-**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
-
-Die Reihenfolge ist ausgelost. Wer dran ist, steht schon bereit.
-
 ## Ihr baut ein Erlebnis
 
 Ihr baut Straße und Auto. Fahren tun die Spielenden.
@@ -63,6 +53,16 @@ Stark heißt: ein Erlebnis, eine Mechanik, fanatischer Fokus.
 - Jedes Feature muss gebaut, getestet und erklärt werden
 
 Pflicht laut Aufgabenstellung: mindestens zwei der genannten Interaktionen. Die Größe ist egal, „es kann ein einziger kleiner Raum sein“. Unsere Empfehlung für den Anfang: ein Raum, eine Kernschleife, ein Neustart.
+
+## Zwei Minuten pro Pitch
+
+2:00
+
+Hartes Zeitlimit: Nach zwei Minuten ist Schluss, dann ist die nächste Person dran.
+
+**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
+
+Die Reihenfolge ist ausgelost. Wer dran ist, steht schon bereit.
 
 ## Von der Idee zur Spec
 
