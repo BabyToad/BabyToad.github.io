@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-22T08:24Z · 21cef83. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-22T08:26Z · ec3a4cb. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
