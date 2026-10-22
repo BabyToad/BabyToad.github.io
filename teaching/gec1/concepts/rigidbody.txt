@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/ · Stand 2026-10-22T08:26Z · ec3a4cb -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/ · Stand 2026-10-22T09:07Z · ec6a88d -->
 
 # Rigidbody
 
