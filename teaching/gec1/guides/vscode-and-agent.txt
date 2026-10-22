@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-05T13:39Z · 21cef83 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/vscode-and-agent/ · Stand 2026-10-22T08:24Z · 21cef83 -->
 
 Dauer: ca. 30 Min
 

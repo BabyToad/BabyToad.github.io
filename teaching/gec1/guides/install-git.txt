@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-git/ · Stand 2026-10-05T13:39Z · 21cef83 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/install-git/ · Stand 2026-10-22T08:24Z · 21cef83 -->
 
 Dauer: Windows ca. 5 Min; Mac 10–25 Min (läuft im Hintergrund)
 
