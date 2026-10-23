@@ -59,6 +59,11 @@ defaults:
       path: "teaching/gec1/**/*.md"
     values:
       sitemap: false
+  # Unlinked GEC1 test preview (deploy-to-personal-site.mjs --vorschau): never in the sitemap.
+  - scope:
+      path: "teaching/gec1-vorschau"
+    values:
+      sitemap: false
 
 plugins:
   - jekyll-feed

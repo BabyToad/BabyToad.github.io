@@ -8,5 +8,7 @@
 
 User-agent: *
 Allow: /
+# Unlinked test preview of the GEC1 course; not part of the site.
+Disallow: /teaching/gec1-vorschau/
 
 Sitemap: https://www.allknivesnobagel.com/sitemap.xml
