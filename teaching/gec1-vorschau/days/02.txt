@@ -1,0 +1,206 @@
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1-vorschau/days/02/ · Stand 2026-10-23T12:40Z · c608b51 -->
+
+# Tag 2: Pitch und Blockout
+
+23.10.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1-vorschau/days/02/slides/
+
+Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
+
+Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/vector/), [prefab](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/commit/)
+
+Bis zum nächsten Termin: Meilenstein Blockout bis 20.11.: eure Welt grau und begehbar (ein Raum reicht); die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+
+## Was ist eine Game Engine?
+
+Wiederverwendbare Software, die die Spielschleife übernimmt: Sie liest in jedem [Frame](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/frame/) die Eingabe, rechnet die Welt einen Schritt weiter und gibt Bild und Ton aus. Dazwischen ruft sie euren Code auf, zum Beispiel [Update](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/update/).
+
+Dazu kommt ein Editor, in dem ihr das Spiel großteils als Daten baut: Szenen, Objekte, Komponenten.
+
+Framework
+
+PyGame, openFrameworks: Schleife ja, Editor nein.
+
+Engine
+
+Unity, Godot, Unreal: Schleife, Editor, Pipeline bis zum Build.
+
+## Kurz zurück: deltaTime
+
+Wer hat den Würfel zu Hause bewegt?
+
+Ohne [deltaTime](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/delta-time/) steigt er pro Frame, auf schnellen Rechnern also schneller. Mit deltaTime steigt er pro Sekunde, überall gleich.
+
+## Ihr baut ein Erlebnis
+
+Ihr baut Straße und Auto. Fahren tun die Spielenden.
+
+Darum gilt: Was das Spiel erzählt, sollen die Spielenden auch tun.
+
+## Ideen, schwach und stark
+
+Schwach: „Ein Open-World-Spiel mit Crafting, Dialogen und Bosskämpfen.“
+
+Stark: _Death Stranding_. Ein Spiel übers Gehen, und das Gehen ist die Mechanik: Last, Gleichgewicht, Gelände.
+
+Stark: _Getting Over It_. Ein Hammer, mit der Maus geführt. Mehr gibt es nicht, und das ist gnadenlos gut gemacht.
+
+Stark heißt: ein Erlebnis, eine Mechanik, fanatischer Fokus.
+
+## Lieber eine Sache richtig
+
+- Klein und fertig schlägt groß und kaputt
+- Die letzten 20 % der Arbeit kosten 80 % der Zeit
+- Jedes Feature muss gebaut, getestet und erklärt werden
+
+Pflicht laut Aufgabenstellung: mindestens zwei der genannten Interaktionen. Die Größe ist egal, „es kann ein einziger kleiner Raum sein“. Unsere Empfehlung für den Anfang: ein Raum, eine Kernschleife, ein Neustart.
+
+## Zwei Minuten pro Pitch
+
+2:00
+
+Hartes Zeitlimit: Nach zwei Minuten ist Schluss, dann ist die nächste Person dran.
+
+**Bild:** Kreidezeichnung einer leicht gekippten Sanduhr; gelber Sand fällt sichtbar durch den Hals. (KI-generiert).
+
+Die Reihenfolge ist ausgelost. Wer dran ist, steht schon bereit.
+
+## Von der Idee zur Spec
+
+1. Verb: Was tun die Spielenden?
+2. Regel: Nach welchen Regeln?
+3. Rückmeldung: Woran merken sie, dass es geklappt hat?
+4. Scheitern: Was passiert, wenn es schiefgeht?
+
+Eine Spec (Spezifikation) ist gut, wenn jemand anderes sie bauen kann, ohne nachzufragen.
+
+## Eine Spec zerlegen
+
+**Tafelbild:** Die starke Spec in vier Zeilen, Schild für Schild: Verb: Mit dem Stock zuschlagen. Regel: Drei Treffer werfen einen Gegner um. Rückmeldung: Getroffen blinkt er weiß. Scheitern: Zu langsam? Nach fünf Sekunden steht er wieder auf.
+
+Schwach
+
+„Der Spieler kann Gegner besiegen.“
+
+## Eine echte Spec: der Dreier-Schlag
+
+HIGH WATER
+
+1. Verb: Dreimal Schlag drücken: Jab, Cross, Drive
+2. Regel: Der nächste Druck muss innerhalb von 0,3 s kommen. Ein Gegner hat 10 Lebenspunkte.
+3. Rückmeldung: Jeder Treffer hält das Bild kurz an, 55, 65 und 130 ms. Dazu Wackeln, Ton, Vibration.
+4. Scheitern: Zu spät gedrückt? Die Kette beginnt wieder beim Jab.
+
+Der Playtest hat eine Regel gekippt: Ein Schlag ins Leere bricht die Kette nicht mehr ab.
+
+## Lasst die Spec prüfen
+
+„Was ist an dieser Spec mehrdeutig? Schreib sie nicht um.“
+
+Die KI oder jemand aus dem Kurs fragt nach. Ihr reagiert und aktualisiert die Spec.
+
+## Blockout: grau, aber begehbar
+
+Erst stimmen Größen und Wege, dann kommt die Grafik.
+
+**Tafelbild:** Grundriss eines grauen Raums: Wände, eine Tür, drei Kisten, eine Rampe und ein Startpunkt. Ein Weg führt vom Start zur Tür.
+
+Würfel und Ebenen reichen. Wer mehr will: ProBuilder, kostenlos im Package Manager.
+
+## Erst grau, dann Grafik
+
+Dieselbe Stelle in HIGH WATER, am ersten und am zweiten Tag. Wege, Höhen und Deckung standen, bevor es Grafik gab.
+
+**Screenshot:** HIGH WATER, Stockwerk 70 als Blockout: einfarbige Kästen, eine Ziegelwand, Debug-Anzeige. (Tag 1: Blockout).
+
+**Screenshot:** Dieselbe Stelle mit Grafik: texturierte Blöcke, Uhren an der Wand, beschriftete Kisten. (Tag 2: Grafik).
+
+## Vom Blockmesh zur fertigen Grafik
+
+**Video:** [Uncharted 4: Madagaskar, vom Blockmesh zur fertigen Grafik](https://www.youtube.com/watch?v=cwRcgbQbCkc) (Anthony Vaccaro, Naughty Dog, 2016).
+
+Dieselben Kamerapositionen, Bild für Bild: erst graue Kästen aus dem Level-Design, dann Fels, Häuser, Licht. Die Wege ändern sich kaum.
+
+Mehr davon: [Uncharted: The Lost Legacy, Westghats](https://www.youtube.com/watch?v=tWnbOR-kGb4) (Anthony Vaccaro, 1:24) · [GDC 2018: Blockmesh and Lighting Tips](https://www.youtube.com/watch?t=81\&v=09r1B9cVEQY), David Shaver (Naughty Dog) und Robert Yang, ab 1:21 · [#Blocktober bei CD Projekt Red](https://www.cdprojektred.com/en/blog/50/discovering-the-art-of-level-design-through-blocktober): Blockout und fertiges Spiel aus derselben Perspektive. Alles englisch.
+
+## Eine Einheit ist ein Meter
+
+Stellt zuerst die Spielfigur hinein. Dann seht ihr, ob der Rest passt.
+
+**Tafelbild:** Maßstab auf Kästchen von 1 m: Spielfigur 1,8 m, Tür 2 m, Stufe 0,2 m, Würfel 1 m.
+
+## Euer Raum, ab jetzt
+
+1. Neue [Szene](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/scene/), `Spieler` aus dem Kurs-Paket hineinziehen, Play, laufen
+2. Boden, Wände, eine Tür aus Würfeln
+3. Dann eure Welt: Wege, Höhen, Hindernisse
+
+`Spieler` liegt im Project-Fenster unter Packages › GEC1 Kurs-Paket › Player.
+
+Fällt die Figur aus der Welt, erscheint sie wieder am Start.
+
+Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechselt zwischen Ich- und Third-Person-Ansicht. Ein Gamepad geht auch. Das Kurs-Paket mit Spieler und Kit: [Kurs-Paket aktualisieren](/teaching/gec1/guides/update-package/) · [Quellcode auf GitHub](https://github.com/BabyToad/macromedia-gec1-kit).
+
+## Heute schon ein Build
+
+Ein [Build](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/build/) läuft ohne Unity. Bis zum 20.11. muss eurer auf einem fremden Windows-Rechner laufen.
+
+**Bild:** Kreidezeichnung: Aus einem offenen Arbeitsplatz mit Würfel, Kamera und Lampe wird ein eigenständig laufendes Spielgerät. (KI-generiert).
+
+File › Build Profiles › Windows › Build
+
+Mac: im Hub das Windows-Modul dazuholen, Backend Mono.
+
+Der Build kommt bewusst früh, damit Probleme nicht erst im Januar auffallen. Auf dem Mac geht für Windows nur das Mono-Backend, IL2CPP nicht. Wer kein Windows-Gerät hat, tauscht mit einer Person aus dem Kurs.
+
+## Prefab und Instanzen
+
+Ein [Prefab](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/prefab/): einmal bauen, oft verwenden, an einer Stelle ändern.
+
+**Tafelbild:** Ein Prefab „Laterne“ und fünf Instanzen in der Szene. Eine Änderung am Prefab erscheint in allen Instanzen; eine Instanz hat einen Override und bleibt an dieser Stelle anders.
+
+Ein Prefab ist eine Vorlage für ein GameObject mit allen Komponenten. Änderungen am Prefab wirken auf alle Instanzen in der Szene, außer dort, wo eine Instanz einen Override hat.
+
+## Transform: lokal und Welt
+
+Ein [Transform](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/transform/) hält Position, Drehung und Größe, je als [Vektor](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/vector/) mit x, y und z.
+
+**Tafelbild:** Eine Tasse steht auf einem Tisch, lokal bei (0, 1, 0). Der Tisch fährt von x = 2 nach x = 6. Die Tasse fährt mit: Lokal bleibt (0, 1, 0), in der Welt wird aus (2, 1, 0) die Position (6, 1, 0).
+
+Hängt ein Objekt an einem anderen, sind seine Werte lokal: Es bewegt sich mit dem Elternobjekt mit. Die Weltkoordinaten zählen von der Mitte der Szene.
+
+## Was nie ins Repository gehört
+
+Das [Repository](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/repository/) hält nur, was ihr selbst gemacht habt.
+
+- Library, Temp, Logs: baut Unity neu
+- Builds: gehören in die Abgabe
+- Dateien über 50 MB
+
+```
+/Library/
+/Temp/
+/Logs/
+/Build/
+```
+
+History: jeder [Commit](https://www.allknivesnobagel.com/teaching/gec1-vorschau/concepts/commit/) mit Nachricht.
+
+Die `.gitignore` der Vorlage hält diese Ordner schon heraus. GitHub warnt bei Dateien über 50 MB und lehnt sie ab 100 MB ab. In GitHub Desktop zeigt der Reiter History jeden Commit von heute: Gute Nachrichten sagen, was und warum, nicht „update“.
+
+## Checkpoint
+
+1. Die Spielfigur läuft durch einen grauen Raum
+2. Die Spec der ersten Interaktion steht
+3. Committet und gepusht
+4. Ein Build existiert
+
+Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
+
+## Bis zum 20.11.
+
+1. Nach 48 Stunden: die Übung von heute nachbauen
+2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+3. Wer 30 Minuten feststeckt, fragt
+4. Bis zum 20.11.: testen, Spec überarbeiten
+
+Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.
