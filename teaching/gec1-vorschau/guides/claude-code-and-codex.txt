@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1-vorschau/guides/claude-code-and-codex/ · Stand 2026-10-23T13:18Z · f266f45 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1-vorschau/guides/claude-code-and-codex/ · Stand 2026-10-23T18:42Z · 1f1b480 -->
 
 Dauer: ca. 20 Min pro Agent
 
