@@ -1,0 +1,104 @@
+{
+  "version": 3,
+  "compatibleWith": 2,
+  "coordinateSystem": { "width": 512, "height": 512, "origin": "top-left", "units": "source pixels" },
+  "boardColor": "#1d2a25",
+  "boil": { "frames": 3, "fps": 8, "frameDurationMs": 125, "method": "locked silhouette with deterministic 1-2 px contour displacement and changing dry-grain seed" },
+  "layerOrder": ["back", "chalk", "front"],
+  "writingLayerOrder": ["back", "fingers", "chalk", "thumb", "cuff"],
+  "rig": {
+    "cuffLagMs": 50,
+    "cuffOvershootDeg": 3,
+    "cuffSettleMs": 120,
+    "fingerLagMs": 30,
+    "chalkLagMs": 20,
+    "note": "All layer PNGs retain the 512x512 pose coordinate system. Rotate cuff around wristPivot without repositioning."
+  },
+  "chalk": {
+    "canvas": { "width": 256, "height": 128 },
+    "frames": ["chalk-0.png", "chalk-1.png", "chalk-2.png"],
+    "anchors": { "pivot": [128, 64], "whiteTip": [46, 64], "yellowTip": [210, 64] },
+    "colors": { "whiteEnd": "#f1efde", "yellowEnd": "#f7f09c" },
+    "suggestedScale": 0.34
+  },
+  "poses": {
+    "schreiben": {
+      "role": "clear empty writing pinch; insert chalk between fingers and thumb",
+      "frames": ["schreiben-0.png", "schreiben-1.png", "schreiben-2.png"],
+      "layers": {
+        "back": ["schreiben-back-0.png", "schreiben-back-1.png", "schreiben-back-2.png"],
+        "fingers": ["schreiben-fingers-0.png", "schreiben-fingers-1.png", "schreiben-fingers-2.png"],
+        "thumb": ["schreiben-thumb-0.png", "schreiben-thumb-1.png", "schreiben-thumb-2.png"],
+        "front": ["schreiben-front-0.png", "schreiben-front-1.png", "schreiben-front-2.png"],
+        "cuff": ["schreiben-cuff-0.png", "schreiben-cuff-1.png", "schreiben-cuff-2.png"]
+      },
+      "layerPivots": { "back": [340, 351], "fingers": [340, 351], "thumb": [340, 351], "front": [340, 351], "cuff": [340, 351] },
+      "articulationPivots": { "fingers": [278, 257], "thumb": [225, 300] },
+      "chalkTransform": { "pivotAt": [215, 245], "rotationDeg": -45, "scale": 0.55 },
+      "anchors": { "tip": [183, 277], "pinch": [207, 242], "palm": [305, 298], "wrist": [355, 390] },
+      "wristPivot": [340, 351],
+      "bounds": [124, 128, 320, 310],
+      "suggestedScale": 0.531
+    },
+    "zeigen": {
+      "role": "point",
+      "frames": ["zeigen-0.png", "zeigen-1.png", "zeigen-2.png"],
+      "layers": { "body": ["zeigen-body-0.png", "zeigen-body-1.png", "zeigen-body-2.png"], "cuff": ["zeigen-cuff-0.png", "zeigen-cuff-1.png", "zeigen-cuff-2.png"] },
+      "layerPivots": { "body": [370, 310], "cuff": [370, 310] },
+      "anchors": { "fingertip": [72, 235], "palm": [286, 291], "wrist": [424, 325] },
+      "wristPivot": [370, 310], "bounds": [71, 180, 378, 223], "suggestedScale": 0.45
+    },
+    "flach": {
+      "role": "slap sign, carry photo, wave",
+      "frames": ["flach-0.png", "flach-1.png", "flach-2.png"],
+      "layers": {
+        "body": ["flach-body-0.png", "flach-body-1.png", "flach-body-2.png"],
+        "palm": ["flach-palm-0.png", "flach-palm-1.png", "flach-palm-2.png"],
+        "fingers": ["flach-fingers-0.png", "flach-fingers-1.png", "flach-fingers-2.png"],
+        "cuff": ["flach-cuff-0.png", "flach-cuff-1.png", "flach-cuff-2.png"]
+      },
+      "layerPivots": { "body": [276, 365], "palm": [276, 365], "fingers": [276, 365], "cuff": [276, 365] },
+      "articulationPivots": { "fingers": [264, 278] },
+      "anchors": { "palm": [275, 304], "wrist": [276, 418] },
+      "wristPivot": [276, 365], "bounds": [92, 81, 349, 368], "suggestedScale": 0.462
+    },
+    "daumen": {
+      "role": "thumbs up", "frames": ["daumen-0.png", "daumen-1.png", "daumen-2.png"],
+      "layers": { "body": ["daumen-body-0.png", "daumen-body-1.png", "daumen-body-2.png"], "cuff": ["daumen-cuff-0.png", "daumen-cuff-1.png", "daumen-cuff-2.png"] },
+      "layerPivots": { "body": [345, 340], "cuff": [345, 340] },
+      "anchors": { "palm": [274, 291], "wrist": [393, 365] }, "wristPivot": [345, 340], "bounds": [135, 97, 300, 343], "suggestedScale": 0.496
+    },
+    "schnipsen": {
+      "role": "snap or flick", "frames": ["schnipsen-0.png", "schnipsen-1.png", "schnipsen-2.png"],
+      "layers": { "body": ["schnipsen-body-0.png", "schnipsen-body-1.png", "schnipsen-body-2.png"], "cuff": ["schnipsen-cuff-0.png", "schnipsen-cuff-1.png", "schnipsen-cuff-2.png"] },
+      "layerPivots": { "body": [200, 355], "cuff": [200, 355] },
+      "anchors": { "pinch": [351, 171], "palm": [244, 303], "wrist": [154, 380] }, "wristPivot": [200, 355], "bounds": [103, 110, 275, 321], "suggestedScale": 0.53
+    },
+    "trick-catch": {
+      "role": "open hand for stick-flip catch", "frames": ["trick-catch-0.png", "trick-catch-1.png", "trick-catch-2.png"],
+      "layers": { "body": ["trick-catch-body-0.png", "trick-catch-body-1.png", "trick-catch-body-2.png"], "cuff": ["trick-catch-cuff-0.png", "trick-catch-cuff-1.png", "trick-catch-cuff-2.png"] },
+      "layerPivots": { "body": [276, 365], "cuff": [276, 365] },
+      "anchors": { "palm": [269, 335], "wrist": [276, 409] }, "wristPivot": [276, 365], "bounds": [87, 183, 342, 246], "suggestedScale": 0.497
+    },
+    "staub-ab": {
+      "role": "tap chalk dust off", "frames": ["staub-ab-0.png", "staub-ab-1.png", "staub-ab-2.png"],
+      "layers": { "body": ["staub-ab-body-0.png", "staub-ab-body-1.png", "staub-ab-body-2.png"], "cuff": ["staub-ab-cuff-0.png", "staub-ab-cuff-1.png", "staub-ab-cuff-2.png"] },
+      "layerPivots": { "body": [330, 315], "cuff": [330, 315] },
+      "anchors": { "pinch": [211, 354], "palm": [284, 249], "wrist": [354, 337] }, "wristPivot": [330, 315], "bounds": [120, 121, 257, 272], "suggestedScale": 0.625
+    },
+    "release": {
+      "role": "two fingers opening after carry or slap",
+      "frames": ["release-0.png", "release-1.png", "release-2.png"],
+      "layers": {
+        "body": ["release-body-0.png", "release-body-1.png", "release-body-2.png"],
+        "palm": ["release-palm-0.png", "release-palm-1.png", "release-palm-2.png"],
+        "fingers": ["release-fingers-0.png", "release-fingers-1.png", "release-fingers-2.png"],
+        "cuff": ["release-cuff-0.png", "release-cuff-1.png", "release-cuff-2.png"]
+      },
+      "layerPivots": { "body": [335, 360], "palm": [335, 360], "fingers": [335, 360], "cuff": [335, 360] },
+      "articulationPivots": { "fingers": [275, 258] },
+      "anchors": { "fingertip": [203, 72], "palm": [282, 298], "wrist": [350, 401] },
+      "wristPivot": [335, 360], "bounds": [78, 67, 352, 387], "suggestedScale": 0.439
+    }
+  }
+}

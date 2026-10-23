@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-23T12:43Z · f08aad2
+Stand: 2026-10-23T16:10Z · 22dcf2f
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md). Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), für Werkzeuge, die text/markdown ablehnen. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
