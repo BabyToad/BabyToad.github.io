@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-22T09:17Z · 686f534 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/02/ · Stand 2026-10-23T12:43Z · f08aad2 -->
 
 # Tag 2: Pitch und Blockout
 
@@ -8,7 +8,7 @@ Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
 
 Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
 
-Bis zum nächsten Termin: Meilenstein Blockout bis zum nächsten Termin (13.11. oder 20.11., Ansage folgt): eure Welt grau und begehbar (ein Raum reicht); die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+Bis zum nächsten Termin: Meilenstein Blockout bis 20.11.: eure Welt grau und begehbar (ein Raum reicht); die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
 
 ## Was ist eine Game Engine?
 
@@ -142,7 +142,7 @@ Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechse
 
 ## Heute schon ein Build
 
-Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum nächsten Termin muss eurer auf einem fremden Windows-Rechner laufen.
+Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum 20.11. muss eurer auf einem fremden Windows-Rechner laufen.
 
 **Bild:** Kreidezeichnung: Aus einem offenen Arbeitsplatz mit Würfel, Kamera und Lampe wird ein eigenständig laufendes Spielgerät. (KI-generiert).
 
@@ -196,11 +196,11 @@ Die `.gitignore` der Vorlage hält diese Ordner schon heraus. GitHub warnt bei D
 
 Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
 
-## Bis zum nächsten Termin
+## Bis zum 20.11.
 
 1. Nach 48 Stunden: die Übung von heute nachbauen
 2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
 3. Wer 30 Minuten feststeckt, fragt
-4. Bis zum nächsten Termin: testen, Spec überarbeiten
+4. Bis zum 20.11.: testen, Spec überarbeiten
 
 Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.

@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-22T09:17Z · 686f534
+Stand: 2026-10-23T12:43Z · f08aad2
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md). Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), für Werkzeuge, die text/markdown ablehnen. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
@@ -10,7 +10,7 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 
 - [Tag 1: Was macht eine Engine?](https://www.allknivesnobagel.com/teaching/gec1/days/01.md): 09.10.2026. Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 - [Tag 2: Pitch und Blockout](https://www.allknivesnobagel.com/teaching/gec1/days/02.md): 23.10.2026. Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
-- [Tag 3: Interaktion von Hand](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 13.11.2026. Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
+- [Tag 3: Interaktion von Hand](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 20.11.2026. Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
 - [Tag 4: Vertical Slice: spielen lassen](https://www.allknivesnobagel.com/teaching/gec1/days/04.md): 27.11.2026. Andere spielen euer Spiel, ihr schaut zu. Danach bekommt eure Welt ihre erste eigene Animation.
 - [Tag 5: Look, Ton, Oberfläche](https://www.allknivesnobagel.com/teaching/gec1/days/05.md): 11.12.2026. Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
 - [Tag 6: Ship](https://www.allknivesnobagel.com/teaching/gec1/days/06.md): 08.01.2027. Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.

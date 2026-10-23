@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/04/ · Stand 2026-10-22T09:17Z · 686f534 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/04/ · Stand 2026-10-23T12:43Z · f08aad2 -->
 
 # Tag 4: Vertical Slice: spielen lassen
 
@@ -246,7 +246,7 @@ Die Zeile in `KI-VERZEICHNIS.md` nennt Werkzeug, Version, Zweck und Stelle in de
 
 **Parameter.** Links im Reiter **Parameters** auf **+** › **Trigger**, Name „Öffnen“. Den Pfeil von „Zu“ nach „Auf“ anklicken; im Inspector **Has Exit Time** abhaken, unter **Conditions** mit **+** „Öffnen“ wählen. **Stufe 2:** Im Play-Modus bleibt der Deckel jetzt zu.
 
-**Graph.** In der Interaktion wie am 13.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
+**Graph.** In der Interaktion wie am 20.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
 
 **Häufige Fehler:** Animator auf dem Deckel statt auf der Truhe. Parametername im Knoten anders geschrieben als im Animator (der Knoten meldet das). Has Exit Time noch an: Der Deckel öffnet verspätet. Deckel klappt in die falsche Richtung: Vorzeichen der Rotation x umdrehen.
 

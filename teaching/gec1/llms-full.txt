@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-22T09:17Z · 686f534. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-10-23T12:43Z · f08aad2. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -275,7 +275,7 @@ Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
 
 Begriffe: [transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/), [vector](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/), [prefab](https://www.allknivesnobagel.com/teaching/gec1/concepts/prefab/), [scene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), [build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/), [repository](https://www.allknivesnobagel.com/teaching/gec1/concepts/repository/), [commit](https://www.allknivesnobagel.com/teaching/gec1/concepts/commit/)
 
-Bis zum nächsten Termin: Meilenstein Blockout bis zum nächsten Termin (13.11. oder 20.11., Ansage folgt): eure Welt grau und begehbar (ein Raum reicht); die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
+Bis zum nächsten Termin: Meilenstein Blockout bis 20.11.: eure Welt grau und begehbar (ein Raum reicht); die Spec der ersten Interaktion; der Build läuft auf dem Windows-Rechner einer anderen Person. Nach 48 Stunden die Übung von heute nachgebaut, eine Woche später im Blackboard-Thread: 30-Sekunden-Clip, ein Hindernis, der nächste Schritt.
 
 ### Was ist eine Game Engine?
 
@@ -409,7 +409,7 @@ Steuerung: WASD laufen, Maus schauen, Leertaste springen, Shift rennen, V wechse
 
 ### Heute schon ein Build
 
-Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum nächsten Termin muss eurer auf einem fremden Windows-Rechner laufen.
+Ein [Build](https://www.allknivesnobagel.com/teaching/gec1/concepts/build/) läuft ohne Unity. Bis zum 20.11. muss eurer auf einem fremden Windows-Rechner laufen.
 
 **Bild:** Kreidezeichnung: Aus einem offenen Arbeitsplatz mit Würfel, Kamera und Lampe wird ein eigenständig laufendes Spielgerät. (KI-generiert).
 
@@ -463,12 +463,12 @@ Die `.gitignore` der Vorlage hält diese Ordner schon heraus. GitHub warnt bei D
 
 Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
 
-### Bis zum nächsten Termin
+### Bis zum 20.11.
 
 1. Nach 48 Stunden: die Übung von heute nachbauen
 2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
 3. Wer 30 Minuten feststeckt, fragt
-4. Bis zum nächsten Termin: testen, Spec überarbeiten
+4. Bis zum 20.11.: testen, Spec überarbeiten
 
 Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.
 
@@ -476,7 +476,7 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
 
 ## Tag 3: Interaktion von Hand
 
-13.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
+20.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
 
 Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
 
@@ -844,7 +844,7 @@ So sollte der Diff aussehen
 ```csharp
 // Drehmoment: ein eigener Kit-Knoten, der einen Rigidbody um eine Achse dreht.
 // Herkunft: geschrieben von einem Agenten (Werkzeug und Modell siehe KI-Verzeichnis),
-// geprüft und getestet von <Name>, 13.11.2026.
+// geprüft und getestet von <Name>, 20.11.2026.
 using System;
 using UnityEngine;
 using Kit;
@@ -901,7 +901,7 @@ Ab heute beginnt jedes eigene Skript mit einem Kopfkommentar.
 
 ```csharp
 // Drehmoment: dreht einen Rigidbody.
-// Herkunft: Agent, geprüft von <Name>, 13.11.2026.
+// Herkunft: Agent, geprüft von <Name>, 20.11.2026.
 ```
 
 Der Agent darf ihn schreiben. Ihr prüft, ob er stimmt.
@@ -1221,7 +1221,7 @@ Die Zeile in `KI-VERZEICHNIS.md` nennt Werkzeug, Version, Zweck und Stelle in de
 
 **Parameter.** Links im Reiter **Parameters** auf **+** › **Trigger**, Name „Öffnen“. Den Pfeil von „Zu“ nach „Auf“ anklicken; im Inspector **Has Exit Time** abhaken, unter **Conditions** mit **+** „Öffnen“ wählen. **Stufe 2:** Im Play-Modus bleibt der Deckel jetzt zu.
 
-**Graph.** In der Interaktion wie am 13.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
+**Graph.** In der Interaktion wie am 20.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
 
 **Häufige Fehler:** Animator auf dem Deckel statt auf der Truhe. Parametername im Knoten anders geschrieben als im Animator (der Knoten meldet das). Has Exit Time noch an: Der Deckel öffnet verspätet. Deckel klappt in die falsche Richtung: Vorzeichen der Rotation x umdrehen.
 

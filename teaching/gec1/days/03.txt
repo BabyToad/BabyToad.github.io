@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/03/ · Stand 2026-10-22T09:17Z · 686f534 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/03/ · Stand 2026-10-23T12:43Z · f08aad2 -->
 
 # Tag 3: Interaktion von Hand
 
-13.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
+20.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
 
 Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
 
@@ -370,7 +370,7 @@ So sollte der Diff aussehen
 ```csharp
 // Drehmoment: ein eigener Kit-Knoten, der einen Rigidbody um eine Achse dreht.
 // Herkunft: geschrieben von einem Agenten (Werkzeug und Modell siehe KI-Verzeichnis),
-// geprüft und getestet von <Name>, 13.11.2026.
+// geprüft und getestet von <Name>, 20.11.2026.
 using System;
 using UnityEngine;
 using Kit;
@@ -427,7 +427,7 @@ Ab heute beginnt jedes eigene Skript mit einem Kopfkommentar.
 
 ```csharp
 // Drehmoment: dreht einen Rigidbody.
-// Herkunft: Agent, geprüft von <Name>, 13.11.2026.
+// Herkunft: Agent, geprüft von <Name>, 20.11.2026.
 ```
 
 Der Agent darf ihn schreiben. Ihr prüft, ob er stimmt.
