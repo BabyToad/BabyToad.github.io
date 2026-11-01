@@ -29,5 +29,5 @@ sources.each do |path|
   bundle << "\n;\n"
 end
 output = File.join(root, 'assets/js/gallery-bundle.js')
-File.write(output, bundle, encoding: 'utf-8')
+File.binwrite(output, bundle)
 puts "gallery-bundle.js: #{bundle.bytesize} bytes, #{slugs.length} pieces"
