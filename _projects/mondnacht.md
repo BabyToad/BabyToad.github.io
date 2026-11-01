@@ -2,12 +2,13 @@
 layout: project
 title: Mondnacht
 description: An interactive narrative game exploring a poetic journey to the stars, created in 10 hours for the Naranauten Game Jam.
-status: completed
+status: released
 tags: [game-dev, twine, narrative, game-jam, poetry]
 show_thumbnail: false
 demo_url: "/assets/games/mondnacht/Mondnacht.html"  # Local path to the game
 show_repo: false
 last_modified_at: 2024-12-20
+date: 2024-12-20
 ---
 
 <div class="project-intro">

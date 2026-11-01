@@ -6,6 +6,7 @@ description: "Comparing AI models' ability to process and organize RPG session t
 date: 2025-01-11
 tags: [AI, RPG, Benchmarking, D&D, AudioToLogs, LLM]
 permalink: /projects/rpg-notetaker-bench/
+status: archived
 ---
 
 A comprehensive comparison of how different AI models process and organize tabletop RPG session transcripts. This benchmark analyzes a 2.5-hour D&D session transcript processed by six different AI models, comparing their approaches to note-taking, organization, and information extraction.

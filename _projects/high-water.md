@@ -2,7 +2,7 @@
 layout: project
 title: HIGH WATER
 description: "A physics brawler where the building is the other enemy. Built in Godot in one jam week with a studio of about twenty named AI agents; a talk and an archive of the decision boards document how."
-status: complete
+status: released
 tags: [godot, game-dev, brawler, ai, game-jam, process]
 thumbnail: /assets/images/projects/high-water-thumb.png
 image: /assets/images/projects/high-water-thumb.png
@@ -11,6 +11,9 @@ demo_url: https://limeminister.itch.io/high-water
 show_repo: false
 sidenotes: true
 last_modified_at: 2026-10-08
+date: 2026-10-05
+featured: true
+featured_order: 1
 ---
 
 <div class="project-intro">

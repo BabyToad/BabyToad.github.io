@@ -2,7 +2,7 @@
 layout: project
 title: Workshop-Zuteilungs-Tool
 description: A desktop application for optimal student-to-workshop assignment using mathematical optimization algorithms.
-status: completed
+status: released
 version: 1.0.0
 confidence: High-ish
 tags:
@@ -16,6 +16,7 @@ tags:
 last_modified_at: 2025-10-06
 github_url: https://github.com/babytoad/clown_orga
 show_repo: true
+date: 2025-10-06
 ---
 
 A desktop application for optimal student-to-workshop assignment using mathematical optimization algorithms. Built with Python and featuring a clean MVC architecture. Done for a overworked teacher.

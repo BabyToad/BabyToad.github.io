@@ -2,12 +2,13 @@
 layout: project
 title: Schneekugel
 description: A fractal snow globe puzzle game. Navigate nested worlds by finding the correct snowflake gate and reach depth 100 to win.
-status: in-progress
+status: in development
 tags: [game-dev, godot, puzzle, game-jam]
 show_thumbnail: false
 demo_url: "/assets/games/schneekugel/schneekugel-godot.html"
 show_repo: false
 last_modified_at: 2025-12-13
+date: 2025-12-13
 ---
 
 <div class="project-intro">

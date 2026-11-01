@@ -2,7 +2,7 @@
 layout: project
 title: Isometric Game Engine
 description: A TypeScript-based isometric game engine with centralized configuration management and comprehensive development tools.
-status: in-progress
+status: in development
 version: 0.5.1
 confidence: medium
 tags:
@@ -17,6 +17,7 @@ image: /assets/images/projects/iso_engine_thumb.png
 demo_url: /assets/iso-engine/
 github_url: https://github.com/babytoad/isometric-game-engine
 show_repo: true
+date: 2025-09-22
 ---
 
 A professional TypeScript-based isometric game engine designed for WordPress integration, featuring centralized configuration management and comprehensive development tools.

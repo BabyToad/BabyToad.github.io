@@ -1,6 +1,8 @@
 ---
 image: /assets/images/thoughts/very-model-of-language-large-and-general.webp
 layout: thought
+featured: true
+featured_order: 4
 date: 2026-08-12
 title: "A Language Large & General"
 context: AI music video

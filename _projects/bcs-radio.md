@@ -9,6 +9,7 @@ image: /assets/images/projects/bcs-radio-thumb.png
 show_thumbnail: true
 demo_url: https://bcs-radio.vercel.app
 last_modified_at: 2026-03-27
+date: 2026-03-29
 ---
 
 <div class="project-intro">

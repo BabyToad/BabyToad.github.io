@@ -10,7 +10,29 @@ use_container: false
     <p class="page-intro">A collection of my game development and design projects.</p>
 
     <div class="project-grid">
-        {% for project in site.projects %}
+        {% comment %}Pinned work has an explicit editorial order. The remaining
+        keys sort by date (last_modified_at is the fallback), then slug for ties.
+        Keep these as ISO dates so the string sort is chronological.{% endcomment %}
+        {% assign featured_projects = site.projects | where: 'featured', true | sort: 'featured_order' %}
+        {% comment %}Jekyll supplies site.time for undated collection items;
+        treat that generated value as missing before applying the fallback.{% endcomment %}
+        {%- capture project_keys -%}
+            {%- for project in site.projects -%}
+                {%- unless project.featured -%}
+                    {%- assign project_date = project.date | default: project.last_modified_at -%}
+                    {%- if project_date == site.time -%}{%- assign project_date = project.last_modified_at -%}{%- endif -%}
+                    {{- project_date | date: '%Y-%m-%d' -}}|{{- project.slug -}},
+                {%- endunless -%}
+            {%- endfor -%}
+        {%- endcapture -%}
+        {% assign project_keys = project_keys | split: ',' | sort | reverse %}
+        {% assign ordered_projects = featured_projects %}
+        {% for key in project_keys %}
+            {% assign slug = key | split: '|' | last %}
+            {% assign match = site.projects | where: 'slug', slug %}
+            {% assign ordered_projects = ordered_projects | concat: match %}
+        {% endfor %}
+        {% for project in ordered_projects %}
         <article class="project-card">
             <a class="project-thumb" href="{{ project.url }}">
                 {% if project.thumbnail %}
@@ -20,14 +42,12 @@ use_container: false
                 {% endif %}
             </a>
             <div class="project-body">
-                {% if project.status %}
-                {% assign s = project.status | downcase %}
-                {% if s contains 'release' or s contains 'complet' %}
-                <div class="project-status released">{% if s contains 'release' %}Released{% else %}Complete{% endif %}</div>
-                {% else %}
-                <div class="project-status wip">In Development</div>
-                {% endif %}
-                {% endif %}
+                {% assign project_date = project.date | default: project.last_modified_at %}
+                {% if project_date == site.time %}{% assign project_date = project.last_modified_at %}{% endif %}
+                <div class="project-card-metadata">
+                    <span class="project-status {{ project.status | slugify }}">{{ project.status }}</span>
+                    <time datetime="{{ project_date | date: '%Y-%m-%d' }}">{{ project_date | date: '%Y' }}</time>
+                </div>
                 <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
                 <p>{{ project.description }}</p>
                 {% if project.tags and project.tags != empty %}
