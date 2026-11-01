@@ -1,0 +1,61 @@
+---
+---
+// Liquid inlines the existing CSS sources before Sass compresses them.
+// Explicit .css @imports would remain browser requests with our Sass version.
+{% include_relative base/fonts.css %}
+{% include_relative base/reset.css %}
+{% include_relative base/variables.css %}
+{% include_relative base/themes.css %}
+{% include_relative base/typography.css %}
+{% include_relative base/utilities.css %}
+{% include_relative base/accessibility.css %}
+
+/* Layout imports */
+{% include_relative layouts/grid.css %}
+{% include_relative layouts/content.css %}
+{% include_relative layouts/post.css %}
+
+/* Component imports */
+{% include_relative components/shared.css %}
+{% include_relative components/navigation.css %}
+{% include_relative components/essay.css %}
+{% include_relative components/forms.css %}
+{% include_relative components/intro.css %}
+{% include_relative components/blog-index.css %}
+{% include_relative components/toc.css %}
+{% include_relative components/sidenotes.css %}
+{% include_relative components/game-container.css %}
+{% include_relative components/preview-popup.css %}
+{% include_relative components/contact.css %}
+{% include_relative components/links.css %}
+{% include_relative components/projects.css %}
+{% include_relative components/thoughts.css %}
+{% include_relative components/dither.css %}
+{% include_relative components/footer.css %}
+
+/* Base styles */
+body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: var(--bg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--ink);
+}
+
+/* Global styles */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+p {
+    margin-bottom: 1.5rem;
+}

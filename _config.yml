@@ -23,6 +23,15 @@ collections:
 # Most _for_want_of_fuel files carry no layout in front matter — without this
 # default they build as bare HTML fragments with no site chrome.
 defaults:
+  # Feature styles are opt-in; keep content front matter and URLs independent.
+  - scope:
+      path: "_thoughts/2026-07-21-bagel-male-affirmations.md"
+    values:
+      player: true
+  - scope:
+      path: "_projects/rpg-notetaker-bench.md"
+    values:
+      rpg_notetaker_bench: true
   - scope:
       type: for_want_of_fuel
     values:

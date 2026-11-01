@@ -51,7 +51,8 @@ touch "_projects/project-name.md"
 - **base/**: Core styles (reset, typography, themes, variables, utilities, accessibility)
 - **layouts/**: Grid system, content areas, post layouts (grid.css, content.css, post.css)
 - **components/**: Reusable UI elements (navigation, forms, toc, preview-popup, essay, projects, etc.)
-- **styles.css**: Main stylesheet that imports all others in proper cascade order
+- **styles.scss**: Jekyll entry point with YAML front matter; Liquid includes the existing CSS sources in cascade order, then Sass emits one compressed `/assets/css/styles.css` with no browser imports. Keep source CSS paths intact.
+- **Feature styles**: `fuel`, `srs`, `player`, and `rpg_notetaker_bench` page/layout flags opt into their stylesheets in `base.html`. Defaults for individual documents live in `_config.yml`; `radio.html` already loads only its standalone radio stylesheet. KaTeX and image-alternates remain conditional.
 
 #### CSS Architecture Conventions
 - **Unified Container Classes**: All layouts use `.content-container` with layout-specific modifiers (`.post-layout`, `.essay-layout`, `.fuel-layout`, etc.)
