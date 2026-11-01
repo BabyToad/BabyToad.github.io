@@ -72,6 +72,7 @@ touch "_projects/project-name.md"
 Data stored in `_data/`:
 - **tags.json**: Weapon and fitting tag definitions for RPG mechanics
 - **flashcards.json**: Spaced repetition flashcards (see `docs/flashcard-format.md`)
+- **experiments.yml**: Ordered Experiments links below the Projects grid and in `llms.txt`. Each entry has `title`, a site-relative `url`, and a one-line `description`. Learn lives here rather than in the primary nav; Schneekugel and Mondnacht link directly to their playable builds.
 
 ### Key Features
 - **Conditional Resource Loading**: JavaScript and CSS loaded only when needed based on layout flags

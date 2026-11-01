@@ -61,4 +61,16 @@ use_container: false
         </article>
         {% endfor %}
     </div>
+
+    <section class="experiments-section" aria-labelledby="experiments-title">
+        <h2 id="experiments-title">Experiments</h2>
+        <ul class="experiments-grid">
+            {% for experiment in site.data.experiments %}
+            <li class="experiment-card">
+                <h3><a href="{{ experiment.url | relative_url }}">{{ experiment.title | escape }}</a></h3>
+                <p>{{ experiment.description | escape }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
 </div>

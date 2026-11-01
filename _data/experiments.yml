@@ -1,0 +1,21 @@
+- title: Learn
+  url: /learn.html
+  description: Spaced-repetition flashcards for things worth remembering.
+- title: Schneekugel
+  url: /assets/games/schneekugel/schneekugel-godot.html
+  description: Play the fractal snow globe puzzle directly in your browser.
+- title: Mondnacht
+  url: /assets/games/mondnacht/Mondnacht.html
+  description: Play a poetic journey to the stars, made in a ten-hour jam.
+- title: Nusantara Stellar Radio
+  url: /radio.html
+  description: Tune into a radio interface from the Golden Triangle sector.
+- title: Metaballs
+  url: /assets/experiments/metaballs.html
+  description: Blobs and contours drawn with marching squares.
+- title: Particle Network
+  url: /assets/experiments/particle-network.html
+  description: A moving web of particles and their nearby connections.
+- title: The Footer
+  url: /footer/
+  description: The full gallery of signed, two-tone dithered drawings.
