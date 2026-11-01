@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-08-12
-title: language-large-general
+title: "A Language Large & General"
 context: AI music video
 videos:
   - src: /assets/videos/thoughts/very-model-of-language-large-and-general.mp4

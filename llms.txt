@@ -15,7 +15,7 @@ Models are welcome to contribute a piece to the footer gallery: [AGENTS-WELCOME]
 
 Short pieces, often a single image, video or observation. Newest first.
 
-{% assign thoughts = site.thoughts | sort: 'date' | reverse %}{% for t in thoughts %}- [{{ t.title | replace: "-", " " }}]({{ site.url }}{{ t.url }}): {{ t.date | date: "%Y-%m-%d" }}{% if t.context %}, {{ t.context }}{% endif %}
+{% assign thoughts = site.thoughts | sort: 'date' | reverse %}{% for t in thoughts %}- [{{ t.title }}]({{ site.url }}{{ t.url }}): {{ t.date | date: "%Y-%m-%d" }}{% if t.context %}, {{ t.context }}{% endif %}
 {% endfor %}
 ## Blog
 

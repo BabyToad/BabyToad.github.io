@@ -51,9 +51,7 @@ def url_for(doc, pattern)
 end
 
 def display_title(doc)
-  t = doc[:data]['title'] || doc[:slug]
-  # Thoughts carry their slug as title; read it as words.
-  t == doc[:slug] ? t.tr('-', ' ') : t
+  doc[:data]['title'] || doc[:slug]
 end
 
 # Markdown sibling: the raw source as a static file next to the HTML page, so
