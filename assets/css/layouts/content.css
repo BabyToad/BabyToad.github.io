@@ -1,7 +1,11 @@
+/* Shared reading container. Layout modifiers below/after this sheet own their
+   grid and padding; the base typography formerly lived in grid.css. */
 .content-container {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 2rem 2rem;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     min-height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
