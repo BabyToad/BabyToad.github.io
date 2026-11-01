@@ -9,8 +9,6 @@ player: true
 visibility: public
 ---
 
-Testing and playing around with more automated video production pipelines.
-
 Patrick McKenzie's thread about a founder who wants to open a bank for the underbanked, as a 1990s PC-98 visual novel. Two people, one kissaten, every line of the thread spoken.
 
 <figure class="thought-video">
