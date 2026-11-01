@@ -1,6 +1,7 @@
 ---
 image: /assets/images/bagel-male-poster.jpg
 layout: thought
+player: true
 date: 2026-07-21
 title: "Bagel Male Affirmations"
 permalink: /bagel/

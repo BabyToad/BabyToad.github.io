@@ -1,200 +1,120 @@
-/* Thoughts / Microblog Styles */
-
-/* Timeline Page */
-.thoughts-timeline {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
+/* Thoughts — a reading-width ledger, with machinery in the date gutter. */
+.thoughts-timeline,
+.thought-single {
+    width: 100%;
+    max-width: var(--content-width);
 }
 
 .thoughts-header {
-    margin-bottom: var(--space-xl);
-    text-align: center;
-}
-
-.thoughts-header h1 {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
 }
 
 .thoughts-intro {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
+    color: var(--ink-soft);
 }
 
-/* Thought Cards */
-.thoughts-feed {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+.thought-row {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: var(--space-lg) 0;
+    border-bottom: var(--rule);
+    align-items: baseline;
 }
 
-.thought-card {
-    background: var(--bg-secondary);
-    border-radius: var(--border-radius);
-    padding: var(--space-lg);
-    border: 1px solid var(--border-color);
-    transition: border-color 0.2s ease;
+.thought-row:first-child {
+    border-top: var(--rule);
 }
 
-.thought-card:hover {
-    border-color: var(--accent-color);
+.thought-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
 }
 
-.thought-card-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.thought-card-header time {
-    font-weight: 500;
+.thought-date time {
+    white-space: nowrap;
 }
 
 .thought-context {
-    color: var(--text-tertiary, var(--text-secondary));
-    opacity: 0.7;
-}
-
-.thought-context::before {
-    content: "·";
-    margin-right: var(--space-sm);
-}
-
-.thought-card-content {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-primary);
-}
-
-.thought-card-content p {
-    margin: 0;
-}
-
-.thought-card-content p + p {
-    margin-top: var(--space-sm);
-}
-
-/* Images in thoughts */
-.thought-card-image {
-    margin: var(--space-md) 0 0 0;
-    border-radius: var(--border-radius-sm);
-    overflow: hidden;
-}
-
-.thought-card-image img,
-.thought-card-image video {
-    width: 100%;
-    height: auto;
     display: block;
+    margin-top: var(--space-xs);
 }
 
-/* Sources */
-.thought-sources {
-    margin-top: var(--space-md);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+.thought-entry {
+    min-width: 0;
 }
 
-.thought-sources .sources-label {
-    margin-right: var(--space-xs);
-}
-
-.thought-sources a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-.thought-sources a:hover {
-    text-decoration: underline;
-}
-
-.thought-card-footer {
-    margin-top: var(--space-md);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    justify-content: flex-end;
-}
-
-.thought-permalink {
-    color: var(--text-secondary);
-    opacity: 0.5;
-    font-size: 0.85rem;
-    transition: opacity 0.2s;
-}
-
-.thought-permalink:hover {
-    opacity: 1;
-    color: var(--accent-color);
-}
-
-/* Single Thought Page */
-.thought-single {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: var(--space-xl) var(--space-md);
-}
-
-.thought-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
+/* Shared prose and media on the timeline, single pages and homepage. */
 .thought-content {
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--ink);
 }
 
 .thought-content p {
     margin: 0;
 }
 
-.thought-image {
-    margin: var(--space-lg) 0;
-    border-radius: var(--border-radius);
-    overflow: hidden;
+.thought-content p + p {
+    margin-top: var(--space-md);
+}
+
+.thought-image,
+.latest-thought-image {
+    margin: var(--space-md) 0 0;
+    border-radius: var(--radius);
 }
 
 .thought-image img,
-.thought-image video {
+.thought-image video,
+.latest-thought-image img,
+.latest-thought-image video {
     width: 100%;
     height: auto;
     display: block;
 }
 
 .thought-image figcaption {
-    padding: var(--space-sm);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    text-align: center;
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+}
+
+.thought-sources {
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    overflow-wrap: anywhere;
+}
+
+.thought-sources .sources-label {
+    margin-right: var(--space-xs);
+}
+
+.thought-sources a:hover {
+    text-decoration: underline;
+}
+
+.thought-actions {
+    margin-top: var(--space-md);
+}
+
+.thought-permalink,
+.thought-footer .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
 }
 
 .thought-footer {
-    margin-top: var(--space-xl);
+    margin-top: var(--space-lg);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-color);
+    border-top: var(--rule);
 }
 
-.back-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.back-link:hover {
-    color: var(--accent-color);
-}
-
-/* Homepage Latest Thought — an accent rule, the thought itself in display
-   italic so a joke thought reads as intentional marginalia. */
+/* Homepage Latest Thought — a quoted entry with an accent rule. */
 .latest-thought-section {
     max-width: var(--content-width);
     margin: 0;
@@ -203,79 +123,50 @@
 .latest-thought {
     border-left: 2px solid var(--accent);
     padding: 0.4rem 0 0.4rem 1.4rem;
-    background: none;
-    border-radius: 0;
 }
 
-.latest-thought .thought-body {
+.latest-thought .thought-content {
     font-family: var(--font-display);
     font-size: 1.3rem;
     font-style: italic;
     font-weight: 420;
     line-height: 1.4;
-    color: var(--ink);
-}
-
-.latest-thought .thought-body p {
-    margin: 0;
-}
-
-.latest-thought-image {
-    margin: var(--space-md) 0 0;
-    border-radius: var(--radius);
-    overflow: hidden;
-}
-
-.latest-thought-image img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    display: block;
-}
-
-.latest-thought .thought-sources {
-    margin-top: var(--space-md);
 }
 
 .thought-meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 1rem;
-    margin-top: 0.9rem;
-}
-
-.thought-meta time {
+    gap: var(--space-sm) var(--space-md);
+    margin-top: var(--space-md);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 .thought-meta .more {
     margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    text-decoration: none;
 }
 
-.thought-meta .more:hover {
-    color: var(--accent-hover);
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-    .thoughts-timeline,
-    .thought-single {
-        padding: var(--space-md);
+/* Mobile: stack the date above the entry, as on Blog and Talks. */
+@media (max-width: 600px) {
+    .thought-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-sm);
     }
 
-    .thought-card-content,
-    .thought-content {
-        font-size: 1rem;
+    .thought-date {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs) var(--space-md);
+    }
+
+    .thought-context {
+        margin-top: 0;
     }
 }
 
-/* Video thoughts — machinery frame around moving pictures */
+/* Bagel's inline player keeps its machinery caption. */
 .thought-video {
     margin: var(--space-lg) 0 var(--space-md);
 }
@@ -289,7 +180,7 @@
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.02em;
-    color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 .thought-video .video-links {
@@ -299,13 +190,4 @@
 .thought-video .video-credit {
     flex-basis: 100%;
     font-size: 0.6875rem;
-}
-
-.thought-video figcaption a {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.thought-video figcaption a:hover {
-    color: var(--accent-hover);
 }

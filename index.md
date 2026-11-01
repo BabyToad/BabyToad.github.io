@@ -26,7 +26,7 @@ image_alternates: true
             {% comment %}Every document inherits the sharing card. Only use an
             actual thought image, not that metadata default, as a thumbnail.{% endcomment %}
             {% assign featured_image = item.image %}
-            {% if featured_image == site.defaults.first.values.image %}{% assign featured_image = nil %}{% endif %}
+            {% if featured_image == '/assets/images/site-card.png' %}{% assign featured_image = nil %}{% endif %}
             {% assign featured_description = item.video_caption %}
             {% unless featured_description %}
                 {% assign featured_text = item.content | markdownify | strip_html | normalize_whitespace %}
@@ -62,7 +62,7 @@ image_alternates: true
 <section class="latest-thought-section">
     <div class="section-label">Latest Thought</div>
     <article class="latest-thought">
-        <div class="thought-body">
+        <div class="thought-content">
             {{ latest_thought.content }}
         </div>
         {% include thought-images.html item=latest_thought figure_class="latest-thought-image" dither=true %}
