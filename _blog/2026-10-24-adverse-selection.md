@@ -1,14 +1,15 @@
 ---
-layout: thought
+layout: post
+title: "Adverse Selection"
 date: 2026-10-24
-title: adverse-selection
-permalink: /adverse-selection/
-context: video
-noindex: true
-sitemap: false
+description: "Testing and playing around with more automated video production pipelines."
+tags: [ai, video, pc-98]
+toc: false
+player: true
+visibility: public
 ---
 
-<!-- Unlisted: noindex, not in a collection, so it stays out of the thoughts list, feed, sitemap and llms.txt. DRAFT copy for Jonas to rewrite in his own words. -->
+Testing and playing around with more automated video production pipelines.
 
 Patrick McKenzie's thread about a founder who wants to open a bank for the underbanked, as a 1990s PC-98 visual novel. Two people, one kissaten, every line of the thread spoken.
 
