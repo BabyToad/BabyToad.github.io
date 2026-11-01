@@ -6,6 +6,8 @@ date: 2026-10-28
 status: in development
 featured: true
 featured_order: 2
+thumbnail: /assets/images/projects/tausendkorn-thumb.png
+image: /assets/images/projects/tausendkorn-thumb.png
 tags: [computer-vision, agriculture, ai, hackathon]
 demo_url: https://goldpfanne-tausendkorn.pages.dev/
 ---

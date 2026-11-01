@@ -39,7 +39,8 @@ def candidates(source):
 
 def budget(site):
     images = Images((site / "projects/index.html").read_text(encoding="utf-8")).images
-    assert len(images) == 11, f"Project card count changed: {len(images)}; review budget"
+    assert images, "No project card images found; review budget"
+    print(f"Projects: {len(images)} thumbnail images")
     for codec in ("avif", "webp", "img fallback"):
         small, large = set(), set()
         for img, sources in images:

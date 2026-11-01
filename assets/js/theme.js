@@ -25,6 +25,8 @@
     const btn = document.querySelector('.theme-toggle');
     if (!btn) return;
     btn.setAttribute('data-mode', theme);
+    btn.setAttribute('aria-pressed', String(theme === 'dark'));
+    btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
   }
 
   function applyTheme(theme) {

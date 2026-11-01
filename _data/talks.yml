@@ -38,9 +38,8 @@
 
 - title: AI for Game Developers
   date: 2025-06-13
-  date_label: archive date
-  venue: Nerdicon 2025
-  city: null
+  venue: NERDICon 2025, Macromedia
+  city: Leipzig
   format: talk
   language: English
   summary: Mundane, useful applications of AI for game developers, with a December 2025 update.
@@ -51,7 +50,9 @@
     venue: Macromedia
     city: Leipzig
     post_url: /blog/ai-gamedev-talk-2025-update/
-  # Original: _blog/ai-for-game-dev-talk-archive.md (publication date, Nerdicon).
-  # The supplied deck is the December update; its notes identify the original
-  # as June, without a day/city. Update date: deck title slide; date/venue:
+  # Original date confirmed by Jonas (2026-11-01): 13 June, at NERDICon 2025.
+  # Event ran 12–13 June 2025 at Hochschule Macromedia, Leipzig. Sources:
+  # Eventbrite.de, "NERDICon Leipzig 2025, 12.-13. Juni 2025";
+  # https://nerdic.org/nerdicon-le-2025
+  # Update date: deck title slide; date/venue:
   # _blog/2025-12-19-ai-gamedev-talk-2025-update.md.

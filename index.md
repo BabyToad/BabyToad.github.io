@@ -45,7 +45,7 @@ image_alternates: true
                 {% endif %}
             </a>
             <div class="featured-body">
-                <div class="featured-meta">{{ featured_kind }} &middot; <time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%Y' }}</time></div>
+                <div class="featured-meta">{{ featured_kind }} &middot; {% if item.collection == 'projects' %}{% include project-years.html project=item %}{% else %}<time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%Y' }}</time>{% endif %}</div>
                 <h3><a href="{{ item.url | relative_url }}">{{ item.title | escape }}</a></h3>
                 <p>{{ featured_description | escape }}</p>
             </div>
