@@ -112,3 +112,11 @@ After building, validate metadata and compare with an isolated main build:
 ```powershell
 uv --no-cache run --no-project --python C:/Users/heink/AppData/Local/Programs/Python/Python311/python.exe python scripts/check_sharing_output.py --site _site/current-build --baseline _site/baseline-build
 ```
+
+The comparison requires identical HTML bodies after normalizing picture fallback
+URLs and the existing image-alternates build-time query string. It checks every
+SEO head, with RSS autodiscovery required on the site's base layout (the
+repository notes use the theme's own layout). Sitemap structure and URLs must be
+identical; `lastmod` timestamps are compared separately in review because the
+plugin derives them from Git commits and static-file checkout mtimes. Metadata
+commits legitimately update document dates; timestamps are not pinned to hide it.

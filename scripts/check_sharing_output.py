@@ -32,7 +32,7 @@ class Head(HTMLParser):
 
 
 def metadata(site):
-    count = 0
+    count, base_count = 0, 0
     for path in sorted(site.rglob("*.html")):
         html = path.read_text(encoding="utf-8")
         if "<!-- Begin Jekyll SEO tag" not in html:
@@ -40,6 +40,7 @@ def metadata(site):
         head = Head(html)
         for key in ("og:title", "og:description", "og:image", "og:type"):
             assert head.meta.get(key), (path, key)
+        assert "Personal website showcasing projects and skills" not in head.meta["og:description"], path
         assert head.meta["twitter:card"] == "summary_large_image", path
         assert head.meta["og:type"] in {"article", "website"}, path
         image = head.meta["og:image"]
@@ -48,13 +49,16 @@ def metadata(site):
         assert parts.path.lower().endswith((".png", ".jpg", ".jpeg", ".webp")), image
         if image.startswith(ORIGIN + "/"):
             assert (site / unquote(parts.path).lstrip("/")).is_file(), image
-        feeds = [link for link in head.links
-                 if link.get("rel") == "alternate"
-                 and link.get("type") == "application/atom+xml"]
-        assert len(feeds) == 1 and feeds[0]["href"] == ORIGIN + "/feed.xml", path
+        if any(link.get("href") == "/assets/css/styles.css" for link in head.links):
+            feeds = [link for link in head.links
+                     if link.get("rel") == "alternate"
+                     and link.get("type") == "application/atom+xml"]
+            assert len(feeds) == 1 and feeds[0]["href"] == ORIGIN + "/feed.xml", path
+            base_count += 1
         count += 1
     assert count > 0
-    print(f"Validated {count} SEO heads: OG title/description/image/type, Twitter card, feed link")
+    print(f"Validated {count} SEO heads: OG title/description/image/type, Twitter card; "
+          f"feed autodiscovery in all {base_count} base-layout heads")
 
 
 def feed_entries(site):
@@ -101,17 +105,24 @@ def compare(site, baseline):
             assert before is not None and after is not None
             assert before.attrib == after.attrib, (key, field)
             assert before.text == after.text, (key, field)
-    thought_urls = {ORIGIN + "/thoughts/" + p.stem[11:] + "/"
-                    for p in (ROOT / "_thoughts").glob("*.md")}
+    thought_urls = set()
+    for source in (ROOT / "_thoughts").glob("*.md"):
+        front = source.read_text(encoding="utf-8").split("---", 2)[1]
+        permalink = re.search(r"^permalink:\s*(\S+)", front, re.M)
+        url = permalink[1].strip("\"'") if permalink else "/thoughts/" + source.stem[11:] + "/"
+        thought_urls.add(ORIGIN + url)
     links = {e.find("a:link", ATOM).get("href") for e in new_feed.values()}
     assert thought_urls <= links, "A thought is absent from the combined feed"
     print(f"Feed: {len(new_feed)} entries, all {len(old_feed)} baseline entries retained, "
           f"all {len(thought_urls)} thoughts included")
 
-    before = (baseline / "sitemap.xml").read_bytes()
-    after = (site / "sitemap.xml").read_bytes()
-    assert before == after, "Sitemap differs from baseline"
-    print("Sitemap is byte-for-byte unchanged")
+    before = (baseline / "sitemap.xml").read_text(encoding="utf-8")
+    after = (site / "sitemap.xml").read_text(encoding="utf-8")
+    # The plugin derives dates from Git for documents and checkout mtimes for
+    # copied static HTML. Independent checkouts cannot have identical lastmods.
+    normalize = lambda xml: re.sub(r"<lastmod>[^<]*</lastmod>", "<lastmod/>", xml)
+    assert normalize(before) == normalize(after), "Sitemap changed beyond lastmod dates"
+    print("Sitemap is identical except for Git/checkout lastmod timestamps")
 
 
 if __name__ == "__main__":
