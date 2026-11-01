@@ -4,7 +4,6 @@
 .rpg-bench-page .project-detail,
 .rpg-bench-page .content,
 .rpg-bench-page .main-content .content {
-  max-width: 1400px !important;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -210,3 +209,11 @@
     font-size: 0.9rem;
   }
 } 
+/* Preserve the legacy width override after the responsive declarations.
+   The feature sheet loads after shared CSS; source order replaces !important. */
+.rpg-bench-page .main-content,
+.rpg-bench-page .project-detail,
+.rpg-bench-page .content,
+.rpg-bench-page .main-content .content {
+  max-width: 1400px;
+}
