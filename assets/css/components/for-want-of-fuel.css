@@ -1263,6 +1263,7 @@
 
 .tag-list {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
@@ -1309,12 +1310,6 @@
 @media (min-width: 768px) {
     .tag-list {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-}
-
-@media (max-width: 767px) {
-    .tag-list {
-        grid-template-columns: 1fr;
     }
 }
 

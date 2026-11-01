@@ -88,7 +88,7 @@
 }
 
 /* Keep the desktop bar comfortable just above the mobile breakpoint. */
-@media (min-width: 769px) and (max-width: 900px) {
+@media (max-width: 900px) {
     .navbar-container {
         gap: 1.25rem;
     }
@@ -139,6 +139,11 @@
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+    /* Restore the base gap while the links are positioned outside the bar. */
+    .navbar-container {
+        gap: 2rem;
+    }
+
     .mobile-menu-toggle {
         display: flex;
     }
