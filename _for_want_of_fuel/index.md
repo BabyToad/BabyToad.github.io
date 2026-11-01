@@ -9,8 +9,6 @@ order: 0
 permalink: /for-want-of-fuel/
 ---
 
-# Playtest
-
 This document provides a streamlined set of rules for running Stars Without Number compatible mech combat scenes.
 
 ## For Want Of Fuel

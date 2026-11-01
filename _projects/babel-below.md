@@ -12,8 +12,6 @@ demo_url: https://babelbelow.vercel.app
 last_modified_at: 2026-03-27
 ---
 
-# Babel Below
-
 <div class="project-intro">
     <p>A tactical roguelike that translates <a href="/projects/mondnacht/">Forged in the Dark</a> tabletop mechanics into grid-based combat. Into the Breach meets Cyberpunk 2077, built in Godot 4.6.</p>
 </div>

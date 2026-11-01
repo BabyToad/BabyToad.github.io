@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2024-11-27
-title: infinite-content
+title: "Infinite Content"
 context: Discord
 image: /assets/images/thoughts/infinite-content.png
 image_alt: Discord message screenshot

@@ -1,0 +1,111 @@
+/* ============================================================
+   NOTES — [[note]] in markdown, rendered by _includes/sidenotes.html.
+   Below 1340px the number opens the note under its line (a checkbox,
+   so no JS). From 1340px there is room right of the 700px reading
+   column, and the note floats into the margin instead.
+   ============================================================ */
+.sidenote-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidenote-ref {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    color: var(--accent);
+}
+
+.sidenote-ref sup,
+.sidenote > sup {
+    font-size: 0.68rem;
+    line-height: 0;
+}
+
+.sidenote {
+    display: none;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+
+.sidenote > sup {
+    font-family: var(--font-mono);
+    color: var(--accent);
+}
+
+@media (max-width: 1339.98px) {
+    /* Generous hit area that does not disturb the line height */
+    .sidenote-ref {
+        padding: 0.5em 0.3em;
+        margin: -0.5em -0.1em;
+        cursor: pointer;
+    }
+
+    .sidenote-toggle:focus-visible + .sidenote-ref {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+    }
+
+    .sidenote-toggle:checked + .sidenote-ref sup {
+        padding: 0.1em 0.3em;
+        color: var(--accent-ink);
+        background: var(--accent);
+        border-radius: var(--radius);
+    }
+
+    /* A full-width float drops under the current line, so the sentence
+       is not broken mid-line and the text resumes below the note. */
+    .sidenote-toggle:checked + .sidenote-ref + .sidenote {
+        display: block;
+        float: left;
+        clear: both;
+        width: 100%;
+        margin: 0.5rem 0 0.75rem;
+        padding-left: 0.8rem;
+        border-left: 2px solid var(--border-strong);
+    }
+}
+
+@media (min-width: 1340px) {
+    .sidenote-toggle {
+        display: none;
+    }
+
+    /* Keeps adjacent numbers apart: "3 4", not "34" */
+    .sidenote-ref {
+        padding: 0 0.12em;
+    }
+
+    /* Floats in one formatting context stack without overlapping.
+       Width: what is left of the viewport right of the reading column. */
+    .sidenote {
+        --sidenote-w: clamp(200px, 50vw - 468px, 18rem);
+        display: block;
+        float: right;
+        clear: right;
+        width: var(--sidenote-w);
+        margin: 0.2rem calc(-1 * var(--sidenote-w) - 2rem) 1rem 0;
+    }
+}
+
+@media print {
+    .sidenote-toggle {
+        display: none;
+    }
+
+    .sidenote {
+        display: block;
+        float: none;
+        width: auto;
+        margin: 0.5rem 0;
+    }
+}

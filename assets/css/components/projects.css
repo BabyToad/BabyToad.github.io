@@ -146,6 +146,12 @@
     color: var(--ink);
 }
 
+/* .project-body is also the index card's flex column; on the detail page it must
+   be plain flow, or each paragraph is its own context and margin notes overlap. */
+.project-content .project-body {
+    display: block;
+}
+
 .project-header {
     margin-bottom: var(--space-xl);
 }

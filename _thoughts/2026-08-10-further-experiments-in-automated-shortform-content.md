@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-08-10
-title: further-experiments-in-automated-shortform-content
+title: "Further Experiments in Automated Shortform Content"
 context: shortform video
 videos:
   - src: /assets/videos/thoughts/compute-is-the-new-oil.mp4

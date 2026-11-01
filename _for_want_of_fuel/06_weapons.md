@@ -3,8 +3,6 @@ title: Frame Weapons
 order: 6
 ---
 
-# Frame Weapons
-
 *Complete list of available weapons for frame customization.*
 
 ## Weapon Categories

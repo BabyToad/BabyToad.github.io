@@ -11,8 +11,6 @@ show_repo: true
 last_modified_at: 2025-12-29
 ---
 
-# SWN Golden Triangle Character Sheet
-
 <div class="project-intro">
     <p>A heavily customized Roll20 character sheet for <em>Stars Without Number</em>, designed for our Golden Triangle campaign. Features a diegetic "corporate document" aesthetic inspired by ALIENS and Blade Runner, plus a custom Faction management tab.</p>
 </div>

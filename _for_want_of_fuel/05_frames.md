@@ -3,8 +3,6 @@ title: Frame Catalog
 order: 5
 ---
 
-# Frame Catalog
-
 *A comprehensive catalog of available mech frames and their specifications.*
 
 ## Frame Classes

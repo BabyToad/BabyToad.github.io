@@ -62,6 +62,7 @@ use_container: false
             {% for part in sorted_parts %}
                 {% unless part.title == page.title %}
                 <div class="rules-part" id="part-{{ part.title | slugify }}">
+                    <header class="rules-part-header"><h2>{{ part.title }}</h2></header>
                     {{ part.content }}
                 </div>
                 {% endunless %}

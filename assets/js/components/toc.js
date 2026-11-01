@@ -70,7 +70,7 @@ class TableOfContents {
 
         this.headings.forEach((heading, index) => {
             // Generate unique ID for heading
-            const id = this.generateHeadingId(heading.textContent, index);
+            const id = this.generateHeadingId(this.headingText(heading), index);
             heading.id = id;
 
             // Create TOC item
@@ -78,6 +78,13 @@ class TableOfContents {
             this.tocList.appendChild(tocItem);
             this.tocItems.push(tocItem);
         });
+    }
+
+    // A heading may carry a [[note]]: keep its number and text out of the TOC
+    headingText(heading) {
+        const clone = heading.cloneNode(true);
+        clone.querySelectorAll('.sidenote-ref, .sidenote').forEach(el => el.remove());
+        return clone.textContent.trim();
     }
 
     generateHeadingId(text, index) {
@@ -100,7 +107,7 @@ class TableOfContents {
 
         const link = document.createElement('a');
         link.href = `#${id}`;
-        link.textContent = heading.textContent;
+        link.textContent = this.headingText(heading);
         link.className = 'toc-link';
 
         // Desktop: add progress bar

@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-09-28
-title: experiments-with-opus-5-5-and-video
+title: "Experiments with Opus 5.5 and Video"
 context: video gen
 videos:
   - src: https://github.com/BabyToad/BabyToad.github.io/releases/download/taw-trailer-v1/throne-and-wheel-trailer.mp4

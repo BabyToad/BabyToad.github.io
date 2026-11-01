@@ -69,7 +69,7 @@ Data stored in `_data/`:
 - **Math Rendering**: KaTeX integration for mathematical content (loaded conditionally)
 - **Theme System**: Dark theme with CSS custom properties and theme toggle
 - **Table of Contents**: Auto-generating TOC with progress tracking
-- **Sidenotes System**: Marginal notes that adapt to screen size
+- **Sidenotes System**: `[[note]]` in markdown, rendered at build time by `_includes/sidenotes.html`: margin notes when wide, tap-to-expand below 1340px, no JS (project pages opt in with `sidenotes: true`)
 - **Preview Popups**: JavaScript-powered content previews for links
 - **RPG Content**: Specialized layouts and data structures for tabletop RPG content
 - **Tag System**: Interactive tag highlighting with popup definitions
@@ -77,8 +77,8 @@ Data stored in `_data/`:
 - **Spaced Repetition**: Flashcard system at `/learn` using FSRS algorithm
 
 ### JavaScript Architecture
-- **Modular Components**: Class-based JavaScript components (TableOfContents, Sidenotes)
-- **Conditional Loading**: Scripts loaded based on layout flags (`toc: true`, `sidenotes: true`, etc.)
+- **Modular Components**: Class-based JavaScript components (TableOfContents)
+- **Conditional Loading**: Scripts loaded based on layout flags (`toc: true`, `srs: true`, etc.)
 - **Component Files**: `/assets/js/components/` for reusable components
 - **Legacy Support**: Individual feature scripts in `/assets/js/` root
 
@@ -99,7 +99,6 @@ date: YYYY-MM-DD
 description: "Post description for SEO"
 tags: [tag1, tag2, tag3]
 toc: true              # Optional: enable table of contents
-sidenotes: true        # Optional: enable sidenotes
 visibility: public     # Options: public, private, draft
 ```
 
@@ -133,6 +132,7 @@ description: "Part description"
 ### Important Notes
 - Site uses GitHub Pages deployment (automatically builds on push to main)
 - All content written in Markdown with YAML front matter following established schemas
+- The layout prints the page's h1 from `title`; a source body never opens with its own title, and thoughts carry a human `title` while the URL comes from the filename
 - Custom Liquid templates for specialized content types
 - Responsive design with mobile-first approach
 - FontAwesome icons loaded via CDN

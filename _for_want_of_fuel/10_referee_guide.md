@@ -3,8 +3,6 @@ title: Referee Quick Cues
 order: 10
 ---
 
-# Referee Quick Cues
-
 ## Combat Tips
 
 ### Using Cover

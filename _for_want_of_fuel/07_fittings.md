@@ -3,8 +3,6 @@ title: Frame Fittings
 order: 7
 ---
 
-# Frame Fittings
-
 *Complete list of available fittings for frame customization and enhancement.*
 
 ## Fitting Categories

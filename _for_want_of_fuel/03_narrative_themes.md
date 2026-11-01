@@ -4,8 +4,6 @@ title: Narrative Themes
 order: 3
 ---
 
-## Narrative Themes
-
 ### **The Reward of Blood**
 Violence brings safety, heat, respect and even divinity. <br>
 The further you go from civilisation the more violence becomes a currency.

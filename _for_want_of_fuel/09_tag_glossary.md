@@ -3,8 +3,6 @@ title: Tag Glossary
 order: 13
 ---
 
-# Tag Glossary
-
 *Tags modify how weapons and systems function, creating unique tactical options.*
 
 ## Weapon Tags

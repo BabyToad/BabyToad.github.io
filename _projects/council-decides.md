@@ -13,8 +13,6 @@ show_repo: true
 last_modified_at: 2025-10-05
 ---
 
-# Evil (The) Gathering
-
 A deck builder with roguelike and pack opening elements. As an intern in the DespicableWe Inc., you are tasked with plotting evil schemes for the Council members. For this, you'll have a wide range of card types at your disposal. Each card has an Evil Value (called "EP" for "Evil Points") as well as a unique card effect. In order to assemble the ultimate plan, you'll have to combine your cards in clever ways to activate combos that can give EXORBITANT amounts of points. But beware: every 5 turns a quota has to be met in order to progress. If you fail, you're out. But if you surpass your given quota, a nice bonus waits for you, which you can spend for card packs, containing more – maybe even Legendary – new cards for your deck.
 
 Can you master the art of evilness and become the ultimate criminal?

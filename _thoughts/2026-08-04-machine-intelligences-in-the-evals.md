@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-08-04
-title: machine-intelligences-in-the-evals
+title: "Machine Intelligences in the Evals"
 context: AI evals
 images:
   - src: /assets/images/thoughts/machine-intelligences-evals-claude.webp

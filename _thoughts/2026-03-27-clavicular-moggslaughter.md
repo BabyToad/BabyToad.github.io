@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-03-27
-title: clavicular-moggslaughter
+title: "Clavicular Moggslaughter"
 ---
 
 Clavicular moggslaughter.

@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-07-21
-title: bagel-male-affirmations
+title: "Bagel Male Affirmations"
 permalink: /bagel/
 context: video
 ---

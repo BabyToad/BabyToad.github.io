@@ -1,7 +1,7 @@
 ---
 layout: thought
 date: 2026-08-22
-title: hard-times-create-strong-jaws
+title: "Hard Times Create Strong Jaws"
 context: shortform video
 videos:
   - src: /assets/videos/thoughts/habsburg-gigachad.mp4

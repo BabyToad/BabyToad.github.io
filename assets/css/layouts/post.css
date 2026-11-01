@@ -83,40 +83,6 @@
     margin-top: var(--space-md);
 }
 
-/* Sidenotes */
-.sidenotes {
-    grid-column: 3;
-    position: relative;
-    min-height: 100%;
-}
-
-.sidenote {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    font-size: 0.9em;
-    color: var(--text-secondary);
-    padding: var(--space-sm);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-sm);
-    transform: translateY(-50%);
-}
-
-.sidenote sup {
-    color: var(--accent-color);
-    margin-right: 0.5em;
-}
-
-.sidenote-anchor {
-    color: var(--accent-color);
-    cursor: help;
-    text-decoration: none;
-}
-
-.sidenote-anchor sup {
-    font-size: 0.8em;
-}
-
 /* Post Footer + pagination — mono direction labels, display-serif titles. */
 .post-footer {
     margin-top: var(--space-lg);
@@ -314,14 +280,6 @@
     .content-container.post-layout {
         grid-template-columns: minmax(200px, 250px) minmax(0, 700px);
         gap: var(--space-lg);
-    }
-    
-    .sidenotes {
-        display: none;
-    }
-    
-    .sidenote-anchor {
-        border-bottom: 1px dotted var(--accent-color);
     }
 }
 
