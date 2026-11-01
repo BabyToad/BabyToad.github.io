@@ -14,7 +14,17 @@ use_container: false
         keys sort by date (last_modified_at is the fallback), then slug for ties.
         Keep these as ISO dates so the string sort is chronological.{% endcomment %}
         {% assign featured_projects = site.projects | where: 'featured', true | sort: 'featured_order' %}
-        {% capture project_keys %}{% for project in site.projects %}{% unless project.featured %}{% assign project_date = project.date | default: project.last_modified_at %}{{ project_date | date: '%Y-%m-%d' }}|{{ project.slug }},{% endunless %}{% endfor %}{% endcapture %}
+        {% comment %}Jekyll supplies site.time for undated collection items;
+        treat that generated value as missing before applying the fallback.{% endcomment %}
+        {%- capture project_keys -%}
+            {%- for project in site.projects -%}
+                {%- unless project.featured -%}
+                    {%- assign project_date = project.date | default: project.last_modified_at -%}
+                    {%- if project_date == site.time -%}{%- assign project_date = project.last_modified_at -%}{%- endif -%}
+                    {{- project_date | date: '%Y-%m-%d' -}}|{{- project.slug -}},
+                {%- endunless -%}
+            {%- endfor -%}
+        {%- endcapture -%}
         {% assign project_keys = project_keys | split: ',' | sort | reverse %}
         {% assign ordered_projects = featured_projects %}
         {% for key in project_keys %}
@@ -33,6 +43,7 @@ use_container: false
             </a>
             <div class="project-body">
                 {% assign project_date = project.date | default: project.last_modified_at %}
+                {% if project_date == site.time %}{% assign project_date = project.last_modified_at %}{% endif %}
                 <div class="project-card-metadata">
                     <span class="project-status {{ project.status | slugify }}">{{ project.status }}</span>
                     <time datetime="{{ project_date | date: '%Y-%m-%d' }}">{{ project_date | date: '%Y' }}</time>
