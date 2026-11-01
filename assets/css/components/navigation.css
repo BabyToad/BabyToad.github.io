@@ -47,6 +47,7 @@
 
 .nav-links {
     display: flex;
+    flex-shrink: 0;
     align-items: baseline;
     gap: 1.6rem;
 }
@@ -84,6 +85,17 @@
 
 .theme-toggle:hover {
     color: var(--accent);
+}
+
+/* Keep the desktop bar comfortable just above the mobile breakpoint. */
+@media (min-width: 769px) and (max-width: 900px) {
+    .navbar-container {
+        gap: 1.25rem;
+    }
+
+    .nav-links {
+        gap: 1.1rem;
+    }
 }
 
 /* Mobile menu toggle button */

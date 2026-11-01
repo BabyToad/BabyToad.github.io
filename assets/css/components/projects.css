@@ -308,6 +308,56 @@
     color: var(--accent-ink);
 }
 
+/* Small text-only companions to the project cards. */
+.experiments-section {
+    margin-top: var(--space-xl);
+}
+
+.experiments-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    margin-bottom: var(--space-md);
+}
+
+.experiments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experiment-card {
+    padding: var(--space-md);
+    border: var(--rule);
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+}
+
+.experiment-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin: 0 0 var(--space-xs);
+}
+
+.experiment-card h3 a {
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.experiment-card h3 a:hover {
+    color: var(--accent);
+}
+
+.experiment-card p {
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
     .content-container.project-layout {
