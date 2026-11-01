@@ -10,12 +10,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 bundle install
 
 # Serve site locally (available at http://localhost:4000)
+ruby scripts/gallery_bundle.rb
 bundle exec jekyll serve
 
 # Build site for production
+ruby scripts/gallery_bundle.rb
 bundle exec jekyll build
 
 # Serve with drafts included
+ruby scripts/gallery_bundle.rb
 bundle exec jekyll serve --drafts
 ```
 

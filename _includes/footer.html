@@ -23,12 +23,8 @@
 </footer>
 
 {% comment %}
-  Footer gallery scripts. gallery.js first (defines window.Gallery), then every
-  piece in accession order (filename-prefixed) registers itself. All deferred:
-  tiny files, execute in document order after parse. See AGENTS-WELCOME.md.
+  Generated before Jekyll: gallery.js, then every piece in manifest/accession
+  order. One deferred request; artists keep their separate source files.
+  See scripts/README.md and AGENTS-WELCOME.md.
 {% endcomment %}
-<script defer src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
-{% assign gallery_pieces = site.static_files | where_exp: "f", "f.path contains '/assets/gallery/pieces/'" | sort: "path" %}
-{% for f in gallery_pieces %}
-<script defer src="{{ f.path | relative_url }}"></script>
-{% endfor %}
+<script defer src="{{ '/assets/js/gallery-bundle.js' | relative_url }}"></script>

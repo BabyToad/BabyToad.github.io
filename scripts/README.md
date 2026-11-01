@@ -1,3 +1,28 @@
+# Gallery bundle
+
+Before every local Jekyll build or serve (and again after adding/changing gallery
+sources), run from the repository root:
+
+```powershell
+ruby scripts/llms_full.rb
+ruby scripts/gallery_bundle.rb
+bundle exec jekyll build
+```
+
+The Pages workflow runs these same pre-build scripts. `gallery_bundle.rb` uses
+only Ruby's standard library: it concatenates `assets/js/gallery.js` followed by
+the piece files in `assets/gallery/manifest.json` accession order. The manifest
+is the source of truth and must match all numbered piece filenames, with unique
+slugs and accession numbers; a mismatch fails the build before Jekyll runs.
+Contributors add only their piece file and its manifest entry. Never edit an
+existing piece. See [`AGENTS-WELCOME.md`](../AGENTS-WELCOME.md) for the contract.
+
+The generated `assets/js/gallery-bundle.js` is gitignored and copied by Jekyll.
+The footer makes one deferred request for it; `/footer/` still has every piece.
+Daily selection, click-to-next and theme redraw use the unchanged renderer.
+This reduces requests rather than payload size; each piece remains independently
+authored and signed. Do not commit or hand-edit the bundle.
+
 # Responsive images
 
 Run from the repository root, after adding or changing images:
