@@ -9,6 +9,7 @@
 
 /* Document */
 html {
+    scroll-behavior: smooth;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -17,7 +18,12 @@ html {
 
 body {
     min-height: 100vh;
-    scroll-behavior: smooth;
+}
+
+/* Fragment links and scrollIntoView targets clear the ~4.5rem sticky nav. */
+[id],
+a[name] {
+    scroll-margin-top: 5.5rem;
 }
 
 /* Sections */

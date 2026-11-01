@@ -32,7 +32,6 @@ class TableOfContents {
         if (this.shouldShowTOC()) {
             this.generateTOC();
             this.setupScrollTracking();
-            this.setupSmoothScrolling();
         } else {
             this.hideTOC();
         }
@@ -69,8 +68,8 @@ class TableOfContents {
         this.tocItems = [];
 
         this.headings.forEach((heading, index) => {
-            // Generate unique ID for heading
-            const id = this.generateHeadingId(this.headingText(heading), index);
+            // Keep server-rendered IDs: copied hashes must work before JS runs.
+            const id = heading.id || this.generateHeadingId(this.headingText(heading), index);
             heading.id = id;
 
             // Create TOC item
@@ -95,8 +94,11 @@ class TableOfContents {
             .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
 
         // Ensure uniqueness
-        const id = baseId || `heading-${index}`;
-        return document.getElementById(id) ? `${id}-${index}` : id;
+        const base = baseId || `heading-${index}`;
+        let id = base;
+        let suffix = 1;
+        while (document.getElementById(id)) id = `${base}-${suffix++}`;
+        return id;
     }
 
     createTOCItem(heading, id) {
@@ -150,11 +152,11 @@ class TableOfContents {
 
     highlightCurrentSection() {
         let current = null;
-        const scrollPos = window.scrollY + 100; // Offset for better UX
-
         // Find the current section
         for (let i = 0; i < this.headings.length; i++) {
-            if (this.headings[i].offsetTop <= scrollPos) {
+            const heading = this.headings[i];
+            const offset = parseFloat(getComputedStyle(heading).scrollMarginTop) || 0;
+            if (heading.getBoundingClientRect().top <= offset + 1) {
                 current = i;
             }
         }
@@ -162,6 +164,12 @@ class TableOfContents {
         // Update highlighting
         this.tocItems.forEach((item, index) => {
             item.classList.toggle('active', index === current);
+            const link = item.querySelector('.toc-link');
+            if (index === current) {
+                link.setAttribute('aria-current', 'location');
+            } else {
+                link.removeAttribute('aria-current');
+            }
         });
 
         this.currentSection = current;
@@ -198,25 +206,6 @@ class TableOfContents {
             const progressBar = this.tocItems[index]?.querySelector('.progress');
             if (progressBar) {
                 progressBar.style.width = `${progress}%`;
-            }
-        });
-    }
-
-    setupSmoothScrolling() {
-        this.tocItems.forEach(item => {
-            const link = item.querySelector('.toc-link');
-            if (link) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
             }
         });
     }
