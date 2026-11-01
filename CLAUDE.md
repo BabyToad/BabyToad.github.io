@@ -73,6 +73,7 @@ Data stored in `_data/`:
 - **tags.json**: Weapon and fitting tag definitions for RPG mechanics
 - **flashcards.json**: Spaced repetition flashcards (see `docs/flashcard-format.md`)
 - **experiments.yml**: Ordered Experiments links below the Projects grid and in `llms.txt`. Each entry has `title`, a site-relative `url`, and a one-line `description`. Learn lives here rather than in the primary nav; Schneekugel and Mondnacht link directly to their playable builds.
+- **talks.yml**: Shared source for `/talks/` and the Talks section of `llms.txt`, sorted newest first by `date`. Each entry has `title`, `date`, `venue`, `city`, `format` (`talk`, `guest lecture`, `retrospective`), `language`, `summary`, `deck_url`, and optional `post_url`. Unknown venues/cities are null; `date_label` identifies publication dates when no presentation date is recorded. Optional `update` holds a later version's `date`, `venue`, `city`, and `post_url`; `boards_url` preserves related decision boards. Comments record date/venue provenance. Use deck title-slide dates ahead of post publication dates; do not infer missing event details.
 
 ### Key Features
 - **Conditional Resource Loading**: JavaScript and CSS loaded only when needed based on layout flags

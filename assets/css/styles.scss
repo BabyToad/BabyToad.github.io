@@ -151,12 +151,65 @@ p {
 
 .featured-body p {
     margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 0.98rem;
     line-height: 1.5;
     color: var(--ink-soft);
+}
+
+/* Talks reuse the dated ledger, with their own metadata and actions. */
+.talk-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+}
+
+.talk-date time {
+    white-space: nowrap;
+}
+
+.talk-date span {
+    display: block;
+    font-size: 0.65rem;
+}
+
+.talk-row h2 {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 560;
+    font-variation-settings: "opsz" 72;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.talk-row .talk-meta,
+.talk-links {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+}
+
+.talk-row .talk-meta {
+    margin-bottom: var(--space-xs);
+}
+
+.talk-row .talk-note {
+    margin-top: var(--space-xs);
+    font-size: 0.9rem;
+}
+
+.talk-links {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.talks-teaching {
+    margin-top: var(--space-lg);
 }
 
 @media (max-width: 900px) {
