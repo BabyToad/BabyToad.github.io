@@ -1,0 +1,838 @@
+{
+  "settings": {
+    "widths": [
+      480,
+      960
+    ],
+    "webp_quality": 82,
+    "avif_quality": 55,
+    "webp_method": 6,
+    "avif_speed": 6
+  },
+  "pillow": "12.1.0",
+  "images": {
+    "/assets/images/bagel-male-poster.jpg": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "63649c6b6e6aef06b12d2978a3e02a4ffe4da40e67ebbcb24bf62a3298573eb9",
+      "webp": [
+        {
+          "src": "/assets/images/bagel-male-poster-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 10816,
+          "sha256": "b818652c734e0701e134fbcb60590354d3f14a549f2e6572ef8718876580766c"
+        },
+        {
+          "src": "/assets/images/bagel-male-poster-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 29658,
+          "sha256": "b2f23cbfd237522f2fc06d730599eda85616653969ed22a93a5c37840fce9a72"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/bagel-male-poster-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 7010,
+          "sha256": "417e4997900e2df54671552fa2a0ce017d42135eec43c3cfe5c66fe7f1f75e1d"
+        },
+        {
+          "src": "/assets/images/bagel-male-poster-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 17278,
+          "sha256": "206b3fedf53f2236710ad2d1fcc83b507f40023ba58f7fc5b6f95c2584aa576c"
+        }
+      ]
+    },
+    "/assets/images/projects/babel-below-thumb.png": {
+      "width": 1536,
+      "height": 1024,
+      "sha256": "1a988387aac56904ae0f0115740867388851415d7c4feb21df59a162a053648c",
+      "webp": [
+        {
+          "src": "/assets/images/projects/babel-below-thumb-480w.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 4052,
+          "sha256": "9004582612170a2ffd192aafc5117db06b97e7140abc6633a30e2f50f9a97f62"
+        },
+        {
+          "src": "/assets/images/projects/babel-below-thumb-960w.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 11444,
+          "sha256": "c15d7cf62a8fae8d9885ed84487c66ef262a1f6d08a19ca24b6787d0193d13fa"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/babel-below-thumb-480w.avif",
+          "width": 480,
+          "height": 320,
+          "bytes": 2305,
+          "sha256": "5c84c9d32857049d5df0abe2b51ef7ffd4396cf2d21578f029acc43101c380fd"
+        },
+        {
+          "src": "/assets/images/projects/babel-below-thumb-960w.avif",
+          "width": 960,
+          "height": 640,
+          "bytes": 5896,
+          "sha256": "1160248abe1eab15bcce66d0de53b7b2022756a6b4c3684257820ffa6c570714"
+        }
+      ]
+    },
+    "/assets/images/projects/bcs-radio-thumb.png": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "da6a7b17f28ed781dafb708b4173a1af1bf763e6da3ae61fa268dc34726a5607",
+      "webp": [
+        {
+          "src": "/assets/images/projects/bcs-radio-thumb-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 3820,
+          "sha256": "6d56d0d9cfba1116ae855fe22e47c163100b0d8773fad0ee66a9525f0f7003b0"
+        },
+        {
+          "src": "/assets/images/projects/bcs-radio-thumb-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 11106,
+          "sha256": "6ac7b0fbbb746762d8595e3ceb2cd0b38fdce4557ef0f05f397c8e723ea98d2b"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/bcs-radio-thumb-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 2472,
+          "sha256": "8ca7d00a515536b811648c00cdbbeaf0e1a00ff5f9373fea588ff6ece5dcc145"
+        },
+        {
+          "src": "/assets/images/projects/bcs-radio-thumb-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 6787,
+          "sha256": "2c38f0bed3e8fa201ea979f4c9a2fed5b160c54eb661198be6da7a8c2b5cde0f"
+        }
+      ]
+    },
+    "/assets/images/projects/council_decides.png": {
+      "width": 681,
+      "height": 582,
+      "sha256": "6c9691562f111d5e714556177abe3947015f3ade89382e19526264b0fe3e2e60",
+      "webp": [
+        {
+          "src": "/assets/images/projects/council_decides-480w.webp",
+          "width": 480,
+          "height": 410,
+          "bytes": 24322,
+          "sha256": "500bb107b41fbdba227e16887d5e8c9f3458bd05ba5da920a9913876de87cad1"
+        },
+        {
+          "src": "/assets/images/projects/council_decides-681w.webp",
+          "width": 681,
+          "height": 582,
+          "bytes": 39730,
+          "sha256": "b7944bfd63d6afe8130320f14a8b5fe414561a92a83613cc70f476748355ab38"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/council_decides-480w.avif",
+          "width": 480,
+          "height": 410,
+          "bytes": 12375,
+          "sha256": "48cd34654378333b3336bac60e4ef9fcf71225ecd6232f544f8355ce72cb648a"
+        },
+        {
+          "src": "/assets/images/projects/council_decides-681w.avif",
+          "width": 681,
+          "height": 582,
+          "bytes": 19478,
+          "sha256": "dd69438eb43083f376b4e49e611cab37449bb56ae091180e9b663632a223518e"
+        }
+      ]
+    },
+    "/assets/images/projects/endstation_thumbnail.png": {
+      "width": 315,
+      "height": 250,
+      "sha256": "394062e23c70c7119173f92cc488e76bd6a7dd5b617328708e59690bb08083c8",
+      "webp": [
+        {
+          "src": "/assets/images/projects/endstation_thumbnail-315w.webp",
+          "width": 315,
+          "height": 250,
+          "bytes": 7316,
+          "sha256": "a1c955a96294cd65ae9f9e04e59d43410976859ee7777c075ebfe23d8dc7f260"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/endstation_thumbnail-315w.avif",
+          "width": 315,
+          "height": 250,
+          "bytes": 4927,
+          "sha256": "e642093f12333b5dbe167624f7f819f35b239b12f6c6be4e67ee334957888cf5"
+        }
+      ]
+    },
+    "/assets/images/projects/forWantOfFuel_thumb.png": {
+      "width": 1024,
+      "height": 1024,
+      "sha256": "0d64fff755cfc927fa396bc001086445ac9afbe7bf6ca9c6c2924255d8bd571e",
+      "webp": [
+        {
+          "src": "/assets/images/projects/forWantOfFuel_thumb-480w.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 21056,
+          "sha256": "21c829c243893bbf20665baf58ff6cf85d612daf114460a3b21a48b838e3cdc2"
+        },
+        {
+          "src": "/assets/images/projects/forWantOfFuel_thumb-960w.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 74352,
+          "sha256": "5452e9f9a0118374ffd80c1cf5bd76e280012c48a42a968e3f93f3a5d64b5f28"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/forWantOfFuel_thumb-480w.avif",
+          "width": 480,
+          "height": 480,
+          "bytes": 13698,
+          "sha256": "2068010eafff47dd839e5e45ab1cdf227da13280b8fa7a6407ecb2c1d6efeba4"
+        },
+        {
+          "src": "/assets/images/projects/forWantOfFuel_thumb-960w.avif",
+          "width": 960,
+          "height": 960,
+          "bytes": 36921,
+          "sha256": "a8071bee4ef5789c0d973e372b3831986a793732a9447e14abc6f31f644f36f1"
+        }
+      ]
+    },
+    "/assets/images/projects/GoldenTriangle_Thumb.png": {
+      "width": 1024,
+      "height": 1024,
+      "sha256": "30682137cb35fb1ef3a4facecb3edd4da2bab618d9dc3c7d5747e0b0ceddf164",
+      "webp": [
+        {
+          "src": "/assets/images/projects/GoldenTriangle_Thumb-480w.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 27200,
+          "sha256": "acc21e48e398d909a3e2f5e6a257acf8fa0dc23a98ca1d3efd8efffdab48e19a"
+        },
+        {
+          "src": "/assets/images/projects/GoldenTriangle_Thumb-960w.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 90500,
+          "sha256": "5328ff08d69cd2103e7a29eca04a8ead1e012b659d7c9fbb8f6f036e9b385c31"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/GoldenTriangle_Thumb-480w.avif",
+          "width": 480,
+          "height": 480,
+          "bytes": 17576,
+          "sha256": "370185f9971c8687c813c920897bffffde565c3d832e8f5efcb801f39aacd0fc"
+        },
+        {
+          "src": "/assets/images/projects/GoldenTriangle_Thumb-960w.avif",
+          "width": 960,
+          "height": 960,
+          "bytes": 49634,
+          "sha256": "06a0081892f03d57bae7b1565ec16f23bac1681feab3300c8219d59c9e4b70b8"
+        }
+      ]
+    },
+    "/assets/images/projects/high-water-thumb.png": {
+      "width": 630,
+      "height": 500,
+      "sha256": "e037daa0a863b93c1f1fb9593f664edf52f291baf0947cb7ab84f95367fe2122",
+      "webp": [
+        {
+          "src": "/assets/images/projects/high-water-thumb-480w.webp",
+          "width": 480,
+          "height": 381,
+          "bytes": 40250,
+          "sha256": "4b79190c4f07818a9fae868ba71be7f0d3e5a5b65dda45ae75cf78628c3fbd0c"
+        },
+        {
+          "src": "/assets/images/projects/high-water-thumb-630w.webp",
+          "width": 630,
+          "height": 500,
+          "bytes": 59366,
+          "sha256": "9b79ab9a21f38e5a885df787587fb246335ca3d9f5f9b4f6004ab08bfaf01537"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/high-water-thumb-480w.avif",
+          "width": 480,
+          "height": 381,
+          "bytes": 28025,
+          "sha256": "f13819e103ae0808f6cc2e686a6661dd044b443c2a4b2ea5191c48c29366a7c9"
+        },
+        {
+          "src": "/assets/images/projects/high-water-thumb-630w.avif",
+          "width": 630,
+          "height": 500,
+          "bytes": 20168,
+          "sha256": "772cd6eb08f55f4145e36c0387db1f46cf4f62fcf4dd44aa8522bff8787c1b9b"
+        }
+      ]
+    },
+    "/assets/images/projects/iso_engine_thumb.png": {
+      "width": 1024,
+      "height": 1024,
+      "sha256": "aa441880d9a0177806081609aa60ec78f2e720c74ce8704ba29a502f1f72a0aa",
+      "webp": [
+        {
+          "src": "/assets/images/projects/iso_engine_thumb-480w.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 16596,
+          "sha256": "9f78c15435f4c1940901f979492cc4183d295b5a3c25d10095655e6f866e7441"
+        },
+        {
+          "src": "/assets/images/projects/iso_engine_thumb-960w.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 43186,
+          "sha256": "9f46760a3b8373dc708cf0b3bd66a61f6c8af85c9fc36bae8c77399e6ba3cdfa"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/iso_engine_thumb-480w.avif",
+          "width": 480,
+          "height": 480,
+          "bytes": 10177,
+          "sha256": "5529a1ccc920eae66425c42adefa218f9df2b5323506a9f46f2fb71502125c30"
+        },
+        {
+          "src": "/assets/images/projects/iso_engine_thumb-960w.avif",
+          "width": 960,
+          "height": 960,
+          "bytes": 23908,
+          "sha256": "62ff10560fa57dd990512132b6c57c2cce5fcaa3c1c1ea58cdf566796c5e3150"
+        }
+      ]
+    },
+    "/assets/images/projects/obsidian-archive-logo.png": {
+      "width": 512,
+      "height": 512,
+      "sha256": "2635eba49ae3290cef593cd88ce3d59c1371770b8d62d4c6e4947bd11e71352e",
+      "webp": [
+        {
+          "src": "/assets/images/projects/obsidian-archive-logo-480w.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 9690,
+          "sha256": "289b623e469ae38bfdab7e2a935394d82f5d1facd3891e76fb932d202763a493"
+        },
+        {
+          "src": "/assets/images/projects/obsidian-archive-logo-512w.webp",
+          "width": 512,
+          "height": 512,
+          "bytes": 6208,
+          "sha256": "93338e70732681e7498b5283fd86558ac78949de0ec4332e54dcf421d035909a"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/obsidian-archive-logo-480w.avif",
+          "width": 480,
+          "height": 480,
+          "bytes": 5923,
+          "sha256": "5b263140a3ee21592ffc114376345baa0221a79f0db4ba9147c5c9a905789275"
+        },
+        {
+          "src": "/assets/images/projects/obsidian-archive-logo-512w.avif",
+          "width": 512,
+          "height": 512,
+          "bytes": 4924,
+          "sha256": "17eb311d3f02613bcf2be7af2313d7cecc270299d7e56bb7ab637501a71f6564"
+        }
+      ]
+    },
+    "/assets/images/projects/srd-framework-thumb.png": {
+      "width": 1920,
+      "height": 911,
+      "sha256": "25c588cb93b4ec3a1a90a900028677740f5dd83aa14d14687870d507c284ed35",
+      "webp": [
+        {
+          "src": "/assets/images/projects/srd-framework-thumb-480w.webp",
+          "width": 480,
+          "height": 228,
+          "bytes": 5268,
+          "sha256": "7e7d4ee7dc29055033aed3e8883a72665f7e4a26e910616c432560b5010e9257"
+        },
+        {
+          "src": "/assets/images/projects/srd-framework-thumb-960w.webp",
+          "width": 960,
+          "height": 456,
+          "bytes": 20348,
+          "sha256": "b62f44a35bc2228c292e953bcf52b30b1faa2a365c7c5e12d9cdf53d64c9d07b"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/srd-framework-thumb-480w.avif",
+          "width": 480,
+          "height": 228,
+          "bytes": 4094,
+          "sha256": "12abc8214d272d87100953328ba4e4231327fdfc56a07f575252341a37443e73"
+        },
+        {
+          "src": "/assets/images/projects/srd-framework-thumb-960w.avif",
+          "width": 960,
+          "height": 456,
+          "bytes": 15489,
+          "sha256": "325f36f6a7a10dcc9fd41335914a6f1907cf316c205081befca7addb1d3b623d"
+        }
+      ]
+    },
+    "/assets/images/projects/swn-sheet-character.png": {
+      "width": 873,
+      "height": 926,
+      "sha256": "ac74725f5b09e8015578bece0b218819af73e11cb40aa411636fa0b4be10fca4",
+      "webp": [
+        {
+          "src": "/assets/images/projects/swn-sheet-character-480w.webp",
+          "width": 480,
+          "height": 509,
+          "bytes": 22232,
+          "sha256": "76e7cfa612d88b67d6127fb4578733a293875acd59ed29c64747e7a3a320c37f"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-character-873w.webp",
+          "width": 873,
+          "height": 926,
+          "bytes": 57758,
+          "sha256": "4929db5ca6ffab79a7ff914fff89e315f05587e6f4887540c762c975107b98ca"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/swn-sheet-character-480w.avif",
+          "width": 480,
+          "height": 509,
+          "bytes": 14912,
+          "sha256": "e1ce13358f6ea2a66950a22d5ee18db94505da3617c498c1f0764b372935d1ae"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-character-873w.avif",
+          "width": 873,
+          "height": 926,
+          "bytes": 29611,
+          "sha256": "c276d10e6c53b31e08c194c8fae39ef548e467f8462bc4262571c150401d36bf"
+        }
+      ]
+    },
+    "/assets/images/projects/swn-sheet-faction.png": {
+      "width": 901,
+      "height": 867,
+      "sha256": "6c7ea1b0e376f2592d673d5facfbd8acfb284b400d96ffda06cbe499902b6733",
+      "webp": [
+        {
+          "src": "/assets/images/projects/swn-sheet-faction-480w.webp",
+          "width": 480,
+          "height": 462,
+          "bytes": 11710,
+          "sha256": "c7b88dad7ecbd11d389745971f2a46715e422086c01b98a7a9c6c7c5011025bd"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-faction-901w.webp",
+          "width": 901,
+          "height": 867,
+          "bytes": 28424,
+          "sha256": "954ab3b0092b91f00143158389e07c0851d7f2b2d9ae7011f170cc03a9ed1dc8"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/swn-sheet-faction-480w.avif",
+          "width": 480,
+          "height": 462,
+          "bytes": 7808,
+          "sha256": "96c7ca783c776fa1213b84a6d23fbb17e94b0c2cf109e2e48c1fea302e19b577"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-faction-901w.avif",
+          "width": 901,
+          "height": 867,
+          "bytes": 12949,
+          "sha256": "b9be4ad7e251ba9a3cccaea046c5dde38b804fa65b6b4088896f609f8e48c6c6"
+        }
+      ]
+    },
+    "/assets/images/projects/swn-sheet-thumb.png": {
+      "width": 873,
+      "height": 926,
+      "sha256": "ac74725f5b09e8015578bece0b218819af73e11cb40aa411636fa0b4be10fca4",
+      "webp": [
+        {
+          "src": "/assets/images/projects/swn-sheet-thumb-480w.webp",
+          "width": 480,
+          "height": 509,
+          "bytes": 22232,
+          "sha256": "76e7cfa612d88b67d6127fb4578733a293875acd59ed29c64747e7a3a320c37f"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-thumb-873w.webp",
+          "width": 873,
+          "height": 926,
+          "bytes": 57758,
+          "sha256": "4929db5ca6ffab79a7ff914fff89e315f05587e6f4887540c762c975107b98ca"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/swn-sheet-thumb-480w.avif",
+          "width": 480,
+          "height": 509,
+          "bytes": 14912,
+          "sha256": "e1ce13358f6ea2a66950a22d5ee18db94505da3617c498c1f0764b372935d1ae"
+        },
+        {
+          "src": "/assets/images/projects/swn-sheet-thumb-873w.avif",
+          "width": 873,
+          "height": 926,
+          "bytes": 29611,
+          "sha256": "c276d10e6c53b31e08c194c8fae39ef548e467f8462bc4262571c150401d36bf"
+        }
+      ]
+    },
+    "/assets/images/thoughts/compute-is-the-new-oil.webp": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "14faf0579b1768b6d36e793736eb3e63689b9664b38da230f6880d8f7cd885d5",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/compute-is-the-new-oil-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 9770,
+          "sha256": "0bc41301169a16dc455437f6ec97e78071132114f0e26960d625f2d4b32993f9"
+        },
+        {
+          "src": "/assets/images/thoughts/compute-is-the-new-oil-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 22246,
+          "sha256": "e27ff876505665ded909bef5d90973dcb30940f3276b69350aa03657a3ae01af"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/compute-is-the-new-oil-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 7119,
+          "sha256": "b68e07a2df0819973c311bcb26e2c9c23efd88e8d84b1e7df0e26a7a2cd59fda"
+        },
+        {
+          "src": "/assets/images/thoughts/compute-is-the-new-oil-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 14242,
+          "sha256": "b7242e07773d77134ad1d11ac9cff3c522539bec5d052e4370642555c1fbac94"
+        }
+      ]
+    },
+    "/assets/images/thoughts/habsburg-gigachad.webp": {
+      "width": 540,
+      "height": 960,
+      "sha256": "bfadc811b580a3d7ee53219833431134f2557c9ff0e42ec492737c34c8a48bf6",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/habsburg-gigachad-480w.webp",
+          "width": 480,
+          "height": 853,
+          "bytes": 25832,
+          "sha256": "cfceb7fd70eab8d8289e7e9120c46af604030809608fc3415a4a938519fc6a59"
+        },
+        {
+          "src": "/assets/images/thoughts/habsburg-gigachad-540w.webp",
+          "width": 540,
+          "height": 960,
+          "bytes": 32270,
+          "sha256": "dadecf14d5cf5c8971aab00642cacbb832a7206087f7d1c34044ca20bcfa985f"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/habsburg-gigachad-480w.avif",
+          "width": 480,
+          "height": 853,
+          "bytes": 19439,
+          "sha256": "ca5c24ccd736021767a26b11cca40cba0e28a0a9a37d9154d2020627dcb86ca4"
+        },
+        {
+          "src": "/assets/images/thoughts/habsburg-gigachad-540w.avif",
+          "width": 540,
+          "height": 960,
+          "bytes": 23237,
+          "sha256": "4a97d7c0bc9cb0aff4ac2024cac3c78c83f888ca323c3210022e2b8cd4380da6"
+        }
+      ]
+    },
+    "/assets/images/thoughts/infinite-content.png": {
+      "width": 423,
+      "height": 67,
+      "sha256": "463fdf8da636b6bf6606ccbcafa104c83ac4c250adbb10652d1c24e547a8ecf1",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/infinite-content-423w.webp",
+          "width": 423,
+          "height": 67,
+          "bytes": 3872,
+          "sha256": "747a17897f808d51af7e5cd1c51788ddc7008dbff03d2b8d761b922c45301989"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/infinite-content-423w.avif",
+          "width": 423,
+          "height": 67,
+          "bytes": 3092,
+          "sha256": "2e359f35f684386375acd0511ea6df9a91fbff3d6bd49eeb4f8f64ecce8518e1"
+        }
+      ]
+    },
+    "/assets/images/thoughts/machine-intelligences-evals-claude.webp": {
+      "width": 1200,
+      "height": 800,
+      "sha256": "b1fa023be4756ca1a25090ead05ed70d0438fe66baa56eaba9e0dc21fe052b3e",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-claude-480w.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 17330,
+          "sha256": "9fb039d4f59a06cc0039d79ef9eb4281a1c35b7c9cc7d490fa874d31c6efee0b"
+        },
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-claude-960w.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 37282,
+          "sha256": "6d9287cb5b8397d767604b12a37923c1d01ae0cba7b299e368f1cb12cef4278d"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-claude-480w.avif",
+          "width": 480,
+          "height": 320,
+          "bytes": 10294,
+          "sha256": "b37fbf09ff1ee97e5825e96264c7cbdf634efaeff3591c7082d9a8e9d655a05a"
+        },
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-claude-960w.avif",
+          "width": 960,
+          "height": 640,
+          "bytes": 18829,
+          "sha256": "3ce0190c0bbb656d1a8bad65720a47788230058792d875bbb45300f121c50061"
+        }
+      ]
+    },
+    "/assets/images/thoughts/machine-intelligences-evals-codex.webp": {
+      "width": 1200,
+      "height": 800,
+      "sha256": "8963cf8897e2bbd24adf750b0c2464ebd901b1f9bb48fbfa2a62c5159b13cb22",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-codex-480w.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 16810,
+          "sha256": "d481a31fd86eb23e2fa13e11d142160101cc5054b0e3c5d905121c502fe9254d"
+        },
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-codex-960w.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 38268,
+          "sha256": "6bd7a3ebb5a48a0819bea20c28ad25c655758bb2f07df3803bdc05eaa9aa091c"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-codex-480w.avif",
+          "width": 480,
+          "height": 320,
+          "bytes": 10625,
+          "sha256": "e59ead2a4299c7d351f85efee2b09519867279b5cd48fbcca176ac90fb9559c7"
+        },
+        {
+          "src": "/assets/images/thoughts/machine-intelligences-evals-codex-960w.avif",
+          "width": 960,
+          "height": 640,
+          "bytes": 21424,
+          "sha256": "be5b2112526ad58c96dc35ef197d9e67482b22d9a4d032a9bfeab908aadeb96d"
+        }
+      ]
+    },
+    "/assets/images/thoughts/throne-and-wheel-trailer.webp": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "5f022bb16d15523aa46acf0d100ca83a29551adf1e79c0b7a582bb193f776943",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/throne-and-wheel-trailer-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 37626,
+          "sha256": "01f9768609fdd9032a1d4238eab565bc5a196471d3d6081bc078f4176258ff7b"
+        },
+        {
+          "src": "/assets/images/thoughts/throne-and-wheel-trailer-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 98286,
+          "sha256": "e25a10151661b7cddba950c99d9c6fc366a67e07f154a0c0e4a7cf8a9d948c1b"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/throne-and-wheel-trailer-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 27629,
+          "sha256": "1936d0f04d34f2e53f56a77e5d533da50530b4a98daf543c850f24f6b1ff8238"
+        },
+        {
+          "src": "/assets/images/thoughts/throne-and-wheel-trailer-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 67853,
+          "sha256": "cdf3adff8a9ccac7502938b7976a14d4ed824a8c28ff2b57965209b38193c51d"
+        }
+      ]
+    },
+    "/assets/images/thoughts/very-model-of-language-large-and-general.webp": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "b6b6861ae33968a2bebfd3c700a3a162f4d774ae3b6bb39bd7b53eb47666912c",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/very-model-of-language-large-and-general-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 10806,
+          "sha256": "b43d622cf10d642f1bc3c8e987676b7a7e1d39a4a6cb1a487c42565ecfba7953"
+        },
+        {
+          "src": "/assets/images/thoughts/very-model-of-language-large-and-general-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 23280,
+          "sha256": "edcf43d930d3e0f72f0dc392c6cf0d8f788240d85a0e828047bbe0a559166b4a"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/very-model-of-language-large-and-general-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 7241,
+          "sha256": "9a2a12c7440fddc9018771bed0259850bff0a3c185b216bc1c16521c7bb316ae"
+        },
+        {
+          "src": "/assets/images/thoughts/very-model-of-language-large-and-general-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 14150,
+          "sha256": "efd4a0409b3cd0173c39dd64c34e0bfe57e90a8267856320249633b07175b12f"
+        }
+      ]
+    },
+    "/assets/images/thoughts/wildeford-tweet.png": {
+      "width": 1169,
+      "height": 385,
+      "sha256": "c14a600b58320700516c6e1e7b6b6444f0ed556bea4809caf1bce62b8ebaf4e9",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/wildeford-tweet-480w.webp",
+          "width": 480,
+          "height": 158,
+          "bytes": 15550,
+          "sha256": "20db707377c20cf0f03c84dcd2440d140d127393745ce26e257c25bd816457db"
+        },
+        {
+          "src": "/assets/images/thoughts/wildeford-tweet-960w.webp",
+          "width": 960,
+          "height": 316,
+          "bytes": 39940,
+          "sha256": "509aed013fdba3686037d20316407072cc9885313a855c7c954480b080d5ac53"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/wildeford-tweet-480w.avif",
+          "width": 480,
+          "height": 158,
+          "bytes": 12627,
+          "sha256": "f745344d4924c417a69170731550a95d2a74171173fb9e0d200389555fc9af59"
+        },
+        {
+          "src": "/assets/images/thoughts/wildeford-tweet-960w.avif",
+          "width": 960,
+          "height": 316,
+          "bytes": 30746,
+          "sha256": "bceee4bed23c399b474b4876fb85bad7b8fe86b4244e3dc2aa6280477bc917af"
+        }
+      ]
+    },
+    "/assets/images/thoughts/you-are-not-sufficiently-ai-pilled.webp": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "63175c08dafd427c5d9646114fa3fc4b0b17015aa4a85153056b08e2af4b5e3a",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/you-are-not-sufficiently-ai-pilled-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 11156,
+          "sha256": "865e26f95b43fab22420d9cd7fa7df29673a51a7d89fa2a87a56dbeb45a6fcc4"
+        },
+        {
+          "src": "/assets/images/thoughts/you-are-not-sufficiently-ai-pilled-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 25918,
+          "sha256": "2e33ec7cc346e1a0840b4c8fb338563031cf5468ceb75e2ae179bc15f85cba59"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/you-are-not-sufficiently-ai-pilled-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 8444,
+          "sha256": "fbd4114b518046963f37284c065c24ee79001e1d0936faf5482b46fe4a1b52b6"
+        },
+        {
+          "src": "/assets/images/thoughts/you-are-not-sufficiently-ai-pilled-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 17144,
+          "sha256": "36b85c2ff1473f41fa795de6bba30ab4582bc0b723b8526908c4c02db28915ea"
+        }
+      ]
+    }
+  }
+}

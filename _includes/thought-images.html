@@ -38,12 +38,7 @@
 <figure class="{{ include.figure_class }} thought-images" data-image-alternates>
     <div class="thought-images-frame">
         {% for image in thought_item.images %}
-        <img src="{{ image.src }}"
-             alt="{{ image.alt | default: 'Thought image' }}"
-             loading="lazy"
-             class="thought-images-panel{% if forloop.first %} is-active{% endif %}"
-             data-image-panel
-             aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+        {% include responsive-image.html src=image.src alt=image.alt panel=true active=forloop.first %}
         {% endfor %}
     </div>
     {% if thought_item.images.size > 1 %}
@@ -65,7 +60,7 @@
 </figure>
 {% elsif thought_item.image %}
 <figure class="{{ include.figure_class }}">
-    <img src="{{ thought_item.image }}" alt="{{ thought_item.image_alt | default: 'Thought image' }}" loading="lazy"{% if include.dither %} data-dither{% endif %}>
+    {% include responsive-image.html src=thought_item.image alt=thought_item.image_alt dither=include.dither %}
     {% if include.show_caption and thought_item.image_caption %}
     <figcaption>{{ thought_item.image_caption }}</figcaption>
     {% endif %}

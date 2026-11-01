@@ -24,7 +24,9 @@ def read_doc(path)
 end
 
 def clean(text)
-  text.gsub(/\{%.*?%\}/m, '').gsub(/\{\{.*?\}\}/m, '').gsub(/\n{3,}/, "\n\n").strip
+  # Retain literal prose image descriptions/URLs in the raw Markdown exports.
+  text.gsub(/\{%\s*include responsive-image\.html src="([^"]+)" alt="([^"]+)"[^%]*%\}/, '![\2](\1)')
+      .gsub(/\{%.*?%\}/m, '').gsub(/\{\{.*?\}\}/m, '').gsub(/\n{3,}/, "\n\n").strip
 end
 
 def slug_of(path)

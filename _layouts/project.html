@@ -37,7 +37,7 @@ use_container: false
         </header>
 
         {% if page.thumbnail and page.show_thumbnail != false %}
-        <img class="project-thumbnail" src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}" data-dither>
+        {% include responsive-image.html src=page.thumbnail alt=page.title class="project-thumbnail" dither=true loading="eager" sizes="(max-width: 900px) 100vw, 900px" %}
         {% endif %}
 
         <div class="project-links">
@@ -57,4 +57,4 @@ use_container: false
             {% if page.sidenotes %}{% include sidenotes.html html=content %}{% else %}{{ content }}{% endif %}
         </div>
     </article>
-</div> 
+</div>

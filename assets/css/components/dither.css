@@ -21,10 +21,17 @@
 
 /* Image develop: the canvas overlays the reserved image box (no layout shift),
    then is removed to reveal the true image. */
+.responsive-image {
+  display: block;
+}
+.responsive-image > img {
+  height: auto;
+}
 .dither-wrap {
   position: relative;
   display: inline-block;
   line-height: 0;
+  max-width: 100%;
 }
 .dither-wrap > canvas.dither-canvas {
   position: absolute;

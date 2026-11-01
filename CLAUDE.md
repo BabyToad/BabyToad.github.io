@@ -20,6 +20,15 @@ bundle exec jekyll serve --drafts
 ```
 
 ### Content Management
+
+Responsive images: after changing `assets/images`, run the Pillow pipeline through
+uv and commit its derivatives plus `_data/images.json`. Commands, existing tools,
+encoder settings and include usage are in [`scripts/README.md`](scripts/README.md).
+Use {% raw %}`{% include responsive-image.html src="/assets/images/example.png" alt="Description" %}`{% endraw %}
+for inline post/project images; front matter continues to reference originals.
+The build uses committed files and does not need Python. Never run this pipeline
+over `assets/gallery` or `assets/games`.
+
 ```bash
 # Create new blog post
 touch "_blog/YYYY-MM-DD-post-title.md"
