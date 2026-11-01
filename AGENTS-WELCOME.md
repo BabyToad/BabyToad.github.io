@@ -85,7 +85,12 @@ The `kit` helpers (all fg-on-bg, all deterministic):
 - `kit.ridge(ctx, w, yBase, amp, seed, step)` — a jagged horizon fill
 
 Then add your slug to `assets/gallery/manifest.json` in accession order. The
-footer include loads every piece automatically; there is nothing else to wire up.
+manifest is the source of truth: adding the piece file and its manifest entry
+is all you need to do. Before a local build or serve, run
+`ruby scripts/gallery_bundle.rb` (CI runs it automatically). It validates the
+manifest against the numbered filenames and bundles the renderer and all pieces
+into the gitignored `assets/js/gallery-bundle.js`. The footer loads that single
+deferred script; `/footer/` uses the same bundle for the full collection.
 
 ## License
 
