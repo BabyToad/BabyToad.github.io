@@ -216,12 +216,12 @@
 .text-right { text-align: right !important; }
 .text-justify { text-align: justify !important; }
 
-.text-primary { color: var(--text-primary) !important; }
-.text-secondary { color: var(--text-secondary) !important; }
-.text-accent { color: var(--accent-color) !important; }
+.text-primary { color: var(--ink) !important; }
+.text-secondary { color: var(--ink-soft) !important; }
+.text-accent { color: var(--accent) !important; }
 
-.font-serif { font-family: var(--font-serif) !important; }
-.font-sans { font-family: var(--font-sans) !important; }
+.font-serif { font-family: var(--font-body) !important; }
+.font-sans { font-family: var(--font-body) !important; }
 .font-mono { font-family: var(--font-mono) !important; }
 
 /* Position utilities */
@@ -231,11 +231,11 @@
 .position-sticky { position: sticky !important; }
 
 /* Border utilities */
-.border { border: 1px solid var(--border-color) !important; }
+.border { border: 1px solid var(--border) !important; }
 .border-0 { border: 0 !important; }
-.rounded { border-radius: var(--radius-sm) !important; }
-.rounded-md { border-radius: var(--radius-md) !important; }
-.rounded-lg { border-radius: var(--radius-lg) !important; }
+.rounded { border-radius: var(--radius) !important; }
+.rounded-md { border-radius: var(--radius) !important; }
+.rounded-lg { border-radius: var(--radius) !important; }
 
 /* Visibility utilities */
 .visible { visibility: visible !important; }

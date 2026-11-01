@@ -1,7 +1,7 @@
 .contact {
     margin-top: 4rem;
     padding: 2rem 0;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 }
 
 .social-links {
@@ -11,7 +11,7 @@
 }
 
 .social-links a {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     text-decoration: none;
     transition: color 0.2s ease;
     display: flex;
@@ -20,7 +20,7 @@
 }
 
 .social-links a:hover {
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 /* Contact Page Styles */

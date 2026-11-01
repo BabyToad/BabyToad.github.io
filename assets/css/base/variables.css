@@ -28,14 +28,4 @@
     --radius: 2px;
     --rule: 1px solid var(--border);
 
-    /* --- Legacy radius aliases (map to the single squared radius) --- */
-    --border-radius: var(--radius);
-    --border-radius-sm: var(--radius);
-    --radius-sm: var(--radius);
-    --radius-md: var(--radius);
-    --radius-lg: var(--radius);
-
-    /* --- Legacy font aliases --- */
-    --font-serif: var(--font-body);
-    --font-sans: var(--font-body);
 }

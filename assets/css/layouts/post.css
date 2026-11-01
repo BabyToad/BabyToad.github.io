@@ -231,32 +231,32 @@
     width: 100%;
     font-size: 0.95rem;
     line-height: 1.5;
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
 }
 
 .post-body th {
     font-weight: 600;
     text-align: left;
     padding: var(--space-sm) var(--space-md);
-    border-bottom: 2px solid var(--border-color);
-    background: var(--bg-primary);
+    border-bottom: 2px solid var(--border);
+    background: var(--bg);
 }
 
 .post-body td {
     padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     vertical-align: top;
 }
 
 .post-body tr:nth-child(even) {
-    background: var(--bg-primary);
+    background: var(--bg);
 }
 
 .post-body table code {
-    background: var(--bg-primary);
+    background: var(--bg);
     padding: 0.2em 0.4em;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     font-size: 0.9em;
 }
 

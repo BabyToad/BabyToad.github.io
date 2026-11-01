@@ -137,7 +137,7 @@ small,
 }
 
 .text-meta {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-size: 0.9em;
 }
 
@@ -198,5 +198,5 @@ small,
 /* Meta information styling */
 .meta-info {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 } 

@@ -10,7 +10,7 @@
     padding: var(--space-lg);
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 /* Document header - base styling in shared.css */
@@ -36,9 +36,9 @@
 
 /* Stat blocks */
 .stat-block {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: var(--space-md);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     margin: var(--space-md) 0;
 }
 
@@ -80,29 +80,29 @@
     margin: 2rem 0;
     font-size: 0.9em;
     line-height: 1.5;
-    border: 1px solid var(--border-color);
-    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    background: var(--bg);
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .weapon-table th,
 .fitting-table th {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: 1rem 0.75rem;
     text-align: left;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 0.85em;
-    border-bottom: 2px solid var(--accent-color);
-    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    color: var(--ink);
 }
 
 .weapon-table td,
 .fitting-table td {
     padding: 0.875rem 0.75rem;
     vertical-align: middle;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .weapon-table tr:last-child td,
@@ -112,18 +112,18 @@
 
 .weapon-table tr:nth-child(even),
 .fitting-table tr:nth-child(even) {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
 }
 
 .weapon-table tr:hover,
 .fitting-table tr:hover {
-    background: var(--bg-hover);
+    background: var(--bg-raised);
 }
 
 /* Weapon table specific styles */
 .weapon-table td:nth-child(1) { /* Name */
     font-weight: 500;
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .weapon-table td:nth-child(2), /* Range */
@@ -139,17 +139,17 @@
 }
 
 .weapon-table td:nth-child(5) { /* Tags */
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 /* Fitting table specific styles */
 .fitting-table td:nth-child(1) { /* Name */
     font-weight: 500;
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .fitting-table td:nth-child(2) { /* Effect */
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 .fitting-table td:nth-child(3), /* Power */
@@ -184,8 +184,8 @@
 .rules-part h2 {
     font-size: 1.5rem;
     margin-bottom: var(--space-md);
-    color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
     padding-bottom: var(--space-sm);
 }
 
@@ -228,9 +228,9 @@
         height: auto;
         margin-bottom: var(--space-lg);
         padding: var(--space-md);
-        background: var(--bg-secondary);
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
+        background: var(--bg-raised);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
     }
 }
 
@@ -242,22 +242,22 @@
     margin: 2rem 0;
     font-size: 0.85em;
     line-height: 1.5;
-    background: var(--bg-primary);
+    background: var(--bg);
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     border-radius: 4px;
     overflow: hidden;
 }
 
 .frame-table th {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: 1rem 0.5rem;
     text-align: center;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 0.8em;
-    border-bottom: 2px solid var(--accent-color);
-    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    color: var(--ink);
     white-space: nowrap;
 }
 
@@ -265,7 +265,7 @@
     padding: 0.875rem 0.5rem;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .frame-table tr:last-child td {
@@ -273,18 +273,18 @@
 }
 
 .frame-table tr:nth-child(even) {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
 }
 
 .frame-table tr:hover {
-    background: var(--bg-hover);
+    background: var(--bg-raised);
 }
 
 /* Frame table specific column styles */
 .frame-table td:first-child { /* Hull name */
     text-align: left;
     font-weight: 500;
-    color: var(--accent-color);
+    color: var(--accent);
     padding-left: 1rem;
 }
 
@@ -308,7 +308,7 @@
 
 /* Special indicators (* and #) */
 .frame-table td sup {
-    color: var(--accent-color);
+    color: var(--accent);
     font-weight: bold;
     font-size: 0.85em;
 }
@@ -857,27 +857,27 @@
     margin: 2rem 0;
     font-size: 1rem;
     line-height: 1.6;
-    background: var(--bg-primary);
+    background: var(--bg);
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
 }
 
 .mechanics-table th {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: 1rem 0.75rem;
     text-align: left;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-size: 0.85em;
-    border-bottom: 2px solid var(--accent-color);
-    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    color: var(--ink);
 }
 
 .mechanics-table td {
     padding: 1rem 1.25rem;
     vertical-align: top;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .mechanics-table tr:last-child td {
@@ -885,11 +885,11 @@
 }
 
 .mechanics-table tr:nth-child(even) {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
 }
 
 .mechanics-table tr:hover {
-    background: var(--bg-hover);
+    background: var(--bg-raised);
 }
 
 /* Specific column styles for mechanics tables */
@@ -903,11 +903,11 @@
 
 .mechanics-table td:nth-child(2) { /* Title column */
     font-weight: 500;
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .mechanics-table td:nth-child(3) { /* Description column */
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 /* Mobile adjustments for mechanics tables */
@@ -933,7 +933,7 @@
     margin: 0 0 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--text-primary);
+    color: var(--ink);
     border-bottom: none;
     padding-bottom: 0;
 }
@@ -944,8 +944,8 @@
     line-height: 1.3;
     margin: 1.5rem 0 1rem;
     font-weight: 600;
-    color: var(--text-primary);
-    border-bottom: 2px solid var(--border-color);
+    color: var(--ink);
+    border-bottom: 2px solid var(--border);
     padding-bottom: 0.5rem;
     background: none;
     font-style: normal;
@@ -979,10 +979,10 @@
 .content-container.fuel-layout blockquote {
     margin: 2rem 0;
     padding: 1.5rem;
-    border-left: 4px solid var(--accent-color);
-    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    background: var(--bg-raised);
     font-style: italic;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 .content-container.fuel-layout blockquote p {
@@ -1001,9 +1001,9 @@
     font-family: var(--font-mono);
     font-size: 0.9em;
     padding: 0.2em 0.4em;
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     border-radius: 3px;
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 /* Mobile Typography Adjustments */
@@ -1060,7 +1060,7 @@
 .content-container.fuel-layout h2 + ul > li > strong {
     margin-bottom: 2rem;
     padding-left: 1.5rem;
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid var(--border);
     display: block;
 }
 
@@ -1070,7 +1070,7 @@
     padding-left: 0;
     border-left: none;
     font-size: 0.95em;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     list-style-type: '- ';
 }
 

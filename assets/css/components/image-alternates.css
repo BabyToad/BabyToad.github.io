@@ -8,8 +8,8 @@
     flex-direction: column;
     gap: var(--space-sm);
     overflow: hidden;
-    border-radius: var(--border-radius-sm);
-    background: var(--bg-primary);
+    border-radius: var(--radius);
+    background: var(--bg);
 }
 
 .thought-images-panel {
