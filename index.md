@@ -6,10 +6,54 @@ image_alternates: true
 
 <header class="intro-section">
     <h1>I am Jonas and<br>this is my website.</h1>
-    <p>I write about roleplaying games, game design, AI, and sometimes rationality.</p>
-    <p>This page hosts my projects, essays, and occasional thoughts on other topics that catch my interest.</p>
-    <p class="quiet">I work at <a href="https://playinsightstudios.com/">PlayInsight Studios</a> and help run <a href="https://www.proludens.com/">Pro Ludens</a>.</p>
+    <p>I write about roleplaying games, game design and AI, and sometimes rationality. I work at <a href="https://playinsightstudios.com/">PlayInsight Studios</a> and help run <a href="https://www.proludens.com/">Pro Ludens</a>.</p>
 </header>
+
+{% assign featured_items = site.projects | concat: site.thoughts | where: 'featured', true | sort: 'featured_order' %}
+{% if featured_items.size > 0 %}
+<div class="asterism">&#8258;</div>
+
+<section class="featured-section" aria-labelledby="featured-heading">
+    <h2 class="section-label" id="featured-heading">Featured</h2>
+    <div class="featured-grid">
+        {% for item in featured_items limit:4 %}
+        {% if item.collection == 'projects' %}
+            {% assign featured_kind = 'Project' %}
+            {% assign featured_image = item.thumbnail %}
+            {% assign featured_description = item.description %}
+        {% else %}
+            {% assign featured_kind = 'Thought' %}
+            {% comment %}Every document inherits the sharing card. Only use an
+            actual thought image, not that metadata default, as a thumbnail.{% endcomment %}
+            {% assign featured_image = item.image %}
+            {% if featured_image == site.defaults.first.values.image %}{% assign featured_image = nil %}{% endif %}
+            {% assign featured_description = item.video_caption %}
+            {% unless featured_description %}
+                {% assign featured_text = item.content | markdownify | strip_html | normalize_whitespace %}
+                {% assign featured_description = featured_text | split: '. ' | first %}
+                {% if featured_description != featured_text %}{% assign featured_description = featured_description | append: '.' %}{% endif %}
+            {% endunless %}
+        {% endif %}
+        <article class="featured-card">
+            <a class="featured-thumb" href="{{ item.url | relative_url }}">
+                {% if featured_image %}
+                {% assign featured_loading = 'lazy' %}
+                {% if forloop.first %}{% assign featured_loading = 'eager' %}{% endif %}
+                {% include responsive-image.html src=featured_image alt=item.title dither=true loading=featured_loading sizes="(max-width: 480px) calc(100vw - 2rem), (max-width: 900px) 50vw, (max-width: 1216px) 25vw, 276px" %}
+                {% else %}
+                <span class="featured-placeholder">{{ item.title | escape }}</span>
+                {% endif %}
+            </a>
+            <div class="featured-body">
+                <div class="featured-meta">{{ featured_kind }} &middot; <time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%Y' }}</time></div>
+                <h3><a href="{{ item.url | relative_url }}">{{ item.title | escape }}</a></h3>
+                <p>{{ featured_description | escape }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
 {% assign latest_thought = site.thoughts | sort: 'date' | reverse | first %}
 {% if latest_thought %}
