@@ -106,6 +106,7 @@ sass:
   style: compressed
 
 exclude:
+  - scripts/
   - docs/
   - task-dashboard/
   - vendor/
