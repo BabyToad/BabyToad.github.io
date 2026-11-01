@@ -108,7 +108,6 @@ a:hover {
 .for-want-of-fuel-content a,
 .project-body a,
 .intro-section a,
-.thought-card-content a,
 .thought-content a,
 .abstract a {
     text-decoration: underline;
@@ -123,7 +122,6 @@ a:hover {
 .for-want-of-fuel-content a:hover,
 .project-body a:hover,
 .intro-section a:hover,
-.thought-card-content a:hover,
 .thought-content a:hover,
 .abstract a:hover {
     color: var(--accent-hover);

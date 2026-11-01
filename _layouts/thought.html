@@ -4,13 +4,14 @@ image_alternates: true
 ---
 
 <article class="thought-single">
-    <header class="thought-header">
-        <time datetime="{{ page.date | date_to_xmlschema }}">
-            {{ page.date | date: "%B %d, %Y" }}
-        </time>
-        {% if page.context %}
-        <span class="thought-context">{{ page.context }}</span>
-        {% endif %}
+    <header class="post-header">
+        <div class="kicker">Thought{% if page.context %} &middot; {{ page.context | escape }}{% endif %}</div>
+        <h1>{{ page.title | escape }}</h1>
+        <div class="post-metadata">
+            <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%B %d, %Y" }}
+            </time>
+        </div>
     </header>
 
     <div class="thought-content">
@@ -28,7 +29,7 @@ image_alternates: true
     </div>
     {% endif %}
 
-    <footer class="thought-footer">
+    <div class="thought-footer">
         <a href="/thoughts/" class="back-link">&larr; All thoughts</a>
-    </footer>
+    </div>
 </article>

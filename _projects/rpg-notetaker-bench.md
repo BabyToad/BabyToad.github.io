@@ -1,5 +1,6 @@
 ---
 layout: project
+rpg_notetaker_bench: true
 classes: wide-content rpg-bench-page
 title: "RPG Notetaker Bench"
 description: "Comparing AI models' ability to process and organize RPG session transcripts"

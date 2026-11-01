@@ -19,8 +19,10 @@ or its layout sets the corresponding flag:
 | `player` | `components/player.css` | Bagel post and Thoughts timeline |
 | `rpg_notetaker_bench` | `components/rpg-notetaker-bench.css` | RPG Notetaker Bench project |
 
-Flags for individual documents live in `_config.yml` defaults. The Thoughts
-timeline needs player styles because it renders the Bagel post's full content.
+Flags for individual documents live in their own front matter: `player: true`
+on the Bagel thought and `thoughts.md`, and `rpg_notetaker_bench: true` on the
+bench project. The Thoughts timeline needs player styles because it renders
+the Bagel post's full content.
 KaTeX and image-alternates keep their existing conditional loading. Radio keeps
 its standalone layout, which already loads only its own radio stylesheet.
 

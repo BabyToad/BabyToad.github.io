@@ -139,7 +139,7 @@ title: "Human Title"     # The URL comes from the filename
 date: YYYY-MM-DD
 featured: true         # Optional: available to homepage curation
 featured_order: 4      # Required when featured: ascending editorial order
-context: video         # Optional: shown next to the date
+context: video         # Optional: in the timeline date gutter and single-page kicker
 image: /assets/images/thoughts/x.png   # Sharing image; every page inherits the site card by default
 show_image: true       # Required to render `image` as a figure; without it `image` is metadata only
 images: [...]          # Alternates with a switcher; videos: [...] for video thoughts (see thought-images.html)
@@ -148,6 +148,15 @@ images: [...]          # Alternates with a switcher; videos: [...] for video tho
 Sharing metadata: `_config.yml` sets `image: /assets/images/site-card.png` as a front matter default for
 every page, so `page.image` is never empty for jekyll-seo-tag. That is why thought figures need `show_image`.
 Regenerate the card with `scripts/site_card.py` (see `scripts/README.md`).
+
+Homepage featured thoughts use `image` as their thumbnail, except for the literal
+`/assets/images/site-card.png`, which renders a text placeholder. Compare against
+that path, never the order of `_config.yml` defaults. An explicit thought poster
+therefore works without `show_image` (video thoughts already render their media).
+The Thoughts timeline uses a 42rem reading column with a mono date gutter, stacked
+above the entry on mobile. Single thoughts reuse the post header: Thought/context
+kicker, one visible h1 from `title`, and date. Document-specific feature stylesheet
+flags belong in that document's front matter (see `docs/stylesheet-loading.md`).
 
 Project curation: `featured: true` is a boolean shared by Projects and Thoughts.
 Pinned projects currently rank HIGH WATER (1), Tausendkorn (2), SRD Framework (3);
