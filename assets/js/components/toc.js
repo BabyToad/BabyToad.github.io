@@ -68,8 +68,11 @@ class TableOfContents {
         this.tocItems = [];
 
         this.headings.forEach((heading, index) => {
-            // Keep server-rendered IDs: copied hashes must work before JS runs.
-            const id = heading.id || this.generateHeadingId(this.headingText(heading), index);
+            // Keep server-rendered IDs unless an earlier element already owns one.
+            // Compiled chapters can contain duplicate IDs; each TOC link must reach its heading.
+            const id = heading.id && document.getElementById(heading.id) === heading
+                ? heading.id
+                : this.generateHeadingId(this.headingText(heading), index, heading.id);
             heading.id = id;
 
             // Create TOC item
@@ -86,7 +89,7 @@ class TableOfContents {
         return clone.textContent.trim();
     }
 
-    generateHeadingId(text, index) {
+    generateHeadingId(text, index, preferredId) {
         const baseId = text.toLowerCase()
             .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
             .replace(/\s+/g, '-') // Replace spaces with hyphens
@@ -94,7 +97,7 @@ class TableOfContents {
             .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
 
         // Ensure uniqueness
-        const base = baseId || `heading-${index}`;
+        const base = preferredId || baseId || `heading-${index}`;
         let id = base;
         let suffix = 1;
         while (document.getElementById(id)) id = `${base}-${suffix++}`;
