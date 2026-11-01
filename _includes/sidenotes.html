@@ -1,0 +1,20 @@
+{%- comment -%}
+  Turns [[note]] markers into numbered notes at build time, so they work with JS off.
+  Below the margin breakpoint the number is a checkbox label that opens the note under
+  the line; at wide widths the note floats into the margin. See components/sidenotes.css.
+  Usage: {% include sidenotes.html html=content %}
+{%- endcomment -%}
+{%- assign sidenote_count = 0 -%}
+{%- assign sidenote_chunks = include.html | split: '[[' -%}
+{%- for chunk in sidenote_chunks -%}
+  {%- if forloop.first -%}
+    {{- chunk -}}
+  {%- elsif chunk contains ']]' -%}
+    {%- assign sidenote_count = sidenote_count | plus: 1 -%}
+    {%- assign sidenote_text = chunk | split: ']]' | first -%}
+    <input type="checkbox" id="sn-{{ sidenote_count }}" class="sidenote-toggle"><label for="sn-{{ sidenote_count }}" class="sidenote-ref"><span class="sr-only">Note </span><sup>{{ sidenote_count }}</sup></label><span class="sidenote"><sup aria-hidden="true">{{ sidenote_count }}</sup> {{ sidenote_text }}</span>
+    {{- chunk | remove_first: sidenote_text | remove_first: ']]' -}}
+  {%- else -%}
+    [[{{- chunk -}}
+  {%- endif -%}
+{%- endfor -%}
