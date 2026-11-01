@@ -109,6 +109,7 @@ description: "Post description for SEO"
 tags: [tag1, tag2, tag3]
 toc: true              # Optional: enable table of contents
 visibility: public     # Options: public, private, draft
+image: /assets/images/projects/thumb.png  # Optional: sharing image (og:image); defaults to the site card
 ```
 
 #### Projects (`_projects/`)
@@ -125,6 +126,21 @@ github_url: https://github.com/  # Optional
 show_repo: true
 last_modified_at: YYYY-MM-DD
 ```
+
+#### Thoughts (`_thoughts/`)
+```yaml
+layout: thought
+title: "Human Title"     # The URL comes from the filename
+date: YYYY-MM-DD
+context: video         # Optional: shown next to the date
+image: /assets/images/thoughts/x.png   # Sharing image; every page inherits the site card by default
+show_image: true       # Required to render `image` as a figure; without it `image` is metadata only
+images: [...]          # Alternates with a switcher; videos: [...] for video thoughts (see thought-images.html)
+```
+
+Sharing metadata: `_config.yml` sets `image: /assets/images/site-card.png` as a front matter default for
+every page, so `page.image` is never empty for jekyll-seo-tag. That is why thought figures need `show_image`.
+Regenerate the card with `scripts/site_card.py` (see `scripts/README.md`).
 
 #### Game Documentation (`_for_want_of_fuel/`)
 ```yaml
