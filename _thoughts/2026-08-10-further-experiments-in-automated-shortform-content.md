@@ -1,4 +1,5 @@
 ---
+image: /assets/images/thoughts/compute-is-the-new-oil.webp
 layout: thought
 date: 2026-08-10
 title: "Further Experiments in Automated Shortform Content"

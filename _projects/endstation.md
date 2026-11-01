@@ -5,6 +5,7 @@ description: A sci-fantasy story game about managing a guild of explorers at the
 status: in-progress
 tags: [game-dev, unity, sci-fantasy, narrative]
 thumbnail: /assets/images/projects/endstation_thumbnail.png
+image: /assets/images/projects/endstation_thumbnail.png
 show_thumbnail: false  # Set to false to hide thumbnail
 demo_url: https://limeminister.itch.io/endstation
 github_url: https://github.com/limeminister/endstation

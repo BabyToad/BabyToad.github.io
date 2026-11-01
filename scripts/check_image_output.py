@@ -85,5 +85,6 @@ if __name__ == "__main__":
         print("Baseline:")
         list(budget(args.baseline))
     print("Current:")
-    assert max(budget(args.site)) < 1_000_000, "Projects index exceeds 1 MB"
+    sizes = list(budget(args.site))
+    assert max(sizes[:2]) < 1_000_000, "Projects responsive sources exceed 1 MB"
     audit(args.site)

@@ -5,6 +5,7 @@ description: "A pirate radio station from the Golden Triangle sector — AI-gene
 status: released
 tags: [next-js, ai-music, creative-coding, golden-triangle]
 thumbnail: /assets/images/projects/bcs-radio-thumb.png
+image: /assets/images/projects/bcs-radio-thumb.png
 show_thumbnail: true
 demo_url: https://bcs-radio.vercel.app
 last_modified_at: 2026-03-27

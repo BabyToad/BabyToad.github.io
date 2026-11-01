@@ -1,4 +1,5 @@
 ---
+image: /assets/images/bagel-male-poster.jpg
 layout: thought
 date: 2026-07-21
 title: "Bagel Male Affirmations"

@@ -1,6 +1,7 @@
 ---
 layout: base
 title: Projects
+description: Games, tools, and experiments in digital and tabletop game design by Jonas Heinke.
 use_container: false
 ---
 

@@ -515,6 +515,43 @@
         }
       ]
     },
+    "/assets/images/site-card.png": {
+      "width": 1200,
+      "height": 630,
+      "sha256": "faaa4eaade7278d3288dee1365302ff68faa9a6b2b0c84f56503e4946a168dde",
+      "webp": [
+        {
+          "src": "/assets/images/site-card-480w.webp",
+          "width": 480,
+          "height": 252,
+          "bytes": 17834,
+          "sha256": "4587b9eafc78a739cff008b08ab70f2b31266934946fb07b9581dc8d3e4b4dd8"
+        },
+        {
+          "src": "/assets/images/site-card-960w.webp",
+          "width": 960,
+          "height": 504,
+          "bytes": 70168,
+          "sha256": "7ef8201fc8abdcdf47b16e33bda1ebff38253585978d0dcb177a1dbeda2e2346"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/site-card-480w.avif",
+          "width": 480,
+          "height": 252,
+          "bytes": 10572,
+          "sha256": "8bfc5800bb5ab8c0be203a3fb9799cd69c3a84bd289da6155583d25c6be38883"
+        },
+        {
+          "src": "/assets/images/site-card-960w.avif",
+          "width": 960,
+          "height": 504,
+          "bytes": 39083,
+          "sha256": "8d3c66965ddf6f3f22a8f5cc9937240dd28acef73ceb26e26ab764301a19d8d5"
+        }
+      ]
+    },
     "/assets/images/thoughts/compute-is-the-new-oil.webp": {
       "width": 1280,
       "height": 720,

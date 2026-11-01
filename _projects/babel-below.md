@@ -5,6 +5,7 @@ description: "A tactical roguelike translating tabletop RPG mechanics into grid-
 status: wip
 tags: [godot, game-dev, roguelike, tactics, cyberpunk]
 thumbnail: /assets/images/projects/babel-below-thumb.png
+image: /assets/images/projects/babel-below-thumb.png
 show_thumbnail: true
 github_url: https://github.com/BabyToad/babel-below
 show_repo: true

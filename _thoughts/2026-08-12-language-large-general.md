@@ -1,4 +1,5 @@
 ---
+image: /assets/images/thoughts/very-model-of-language-large-and-general.webp
 layout: thought
 date: 2026-08-12
 title: "A Language Large & General"

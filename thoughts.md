@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Thoughts
-description: Short musings, observations, and things I wanted to say somewhere
+description: Short observations and experiments by Jonas Heinke on games, AI, and things worth sharing.
 permalink: /thoughts/
 image_alternates: true
 ---

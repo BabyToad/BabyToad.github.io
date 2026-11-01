@@ -1,4 +1,5 @@
 ---
+image: /assets/images/thoughts/throne-and-wheel-trailer.webp
 layout: post
 title: "Experiments with Opus 5.5 and Video"
 date: 2026-09-28

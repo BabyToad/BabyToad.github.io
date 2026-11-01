@@ -6,6 +6,7 @@ status: in-progress
 confidence: medium
 tags: [rpg, stars-without-number, worldbuilding, game-design, campaign-setting, swn]
 thumbnail: /assets/images/projects/GoldenTriangle_Thumb.png
+image: /assets/images/projects/GoldenTriangle_Thumb.png
 abstract: A comprehensive documentation of a Stars Without Number campaign setting.
 last_modified_at: 2024-12-06
 ---

@@ -1,4 +1,5 @@
 ---
+image: https://media.allknivesnobagel.com/adverse-selection/v1.2/poster.png
 layout: post
 title: "Adverse Selection"
 date: 2026-10-24

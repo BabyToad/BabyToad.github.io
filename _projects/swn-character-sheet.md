@@ -6,6 +6,7 @@ status: complete
 tags: [rpg, stars-without-number, roll20, web-dev, swn]
 show_thumbnail: true
 thumbnail: /assets/images/projects/swn-sheet-thumb.png
+image: /assets/images/projects/swn-sheet-thumb.png
 repo_url: https://github.com/BabyToad/swn-golden-triangle-sheet
 show_repo: true
 last_modified_at: 2025-12-29

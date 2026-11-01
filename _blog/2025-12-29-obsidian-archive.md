@@ -1,4 +1,5 @@
 ---
+image: /assets/images/projects/obsidian-archive-logo.png
 layout: post
 title: "Side Project: Obsidian Archive"
 date: 2025-12-29
