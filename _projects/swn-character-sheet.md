@@ -24,7 +24,7 @@ The sheet reimagines character management as corporate personnel files from the 
 - **Typography**: Monospace fonts for data fields, condensed sans-serif for headers
 - **Aesthetic**: Worn corporate dystopia meets Nusantaran-Arabic geometric patterns
 
-![Character sheet overview](/assets/images/projects/swn-sheet-character.png)
+{% include responsive-image.html src="/assets/images/projects/swn-sheet-character.png" alt="Character sheet overview" %}
 
 ## Custom Features
 
@@ -39,7 +39,7 @@ A complete faction tracking system for player-run organizations:
 - **Assets**: Repeating section for equipment/vehicles/property
 - **People**: NPC tracking with BitD-style magnitude scale and OSE morale loyalty
 
-![Faction management tab](/assets/images/projects/swn-sheet-faction.png)
+{% include responsive-image.html src="/assets/images/projects/swn-sheet-faction.png" alt="Faction management tab" %}
 
 ### Stress & Panic System
 

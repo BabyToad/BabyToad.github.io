@@ -20,13 +20,16 @@
     const h = Math.round(img.clientHeight || img.getBoundingClientRect().height);
     if (!w || !h) return; // not laid out; leave the plain image
 
-    // Wrap the image so the canvas can overlay it without shifting layout.
-    let wrapper = img.parentElement;
+    // Keep <img> inside <picture>: moving it out discards the selected sources.
+    // drawImage(img) below uses the browser-decoded currentSrc, not img.src.
+    const media = img.parentElement.tagName === 'PICTURE' ? img.parentElement : img;
+    // Wrap the complete media so the canvas overlays its reserved image box.
+    let wrapper = media.parentElement;
     if (!wrapper || !wrapper.classList.contains('dither-wrap')) {
       wrapper = document.createElement('span');
       wrapper.className = 'dither-wrap';
-      img.parentNode.insertBefore(wrapper, img);
-      wrapper.appendChild(img);
+      media.parentNode.insertBefore(wrapper, media);
+      wrapper.appendChild(media);
     }
 
     const cv = document.createElement('canvas');

@@ -13,7 +13,7 @@ use_container: false
         <article class="project-card">
             <a class="project-thumb" href="{{ project.url }}">
                 {% if project.thumbnail %}
-                <img src="{{ project.thumbnail | relative_url }}" alt="{{ project.title }}" data-dither loading="lazy">
+                {% include responsive-image.html src=project.thumbnail alt=project.title dither=true sizes="(max-width: 680px) 100vw, (max-width: 1008px) 50vw, 360px" %}
                 {% else %}
                 <span class="placeholder">{{ project.title }}</span>
                 {% endif %}
