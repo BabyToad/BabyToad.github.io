@@ -9,6 +9,9 @@ image: /assets/images/projects/srd-framework-thumb.png
 show_thumbnail: true
 demo_url: https://srd-framework.vercel.app
 last_modified_at: 2026-09-12
+date: 2026-03-29
+featured: true
+featured_order: 3
 ---
 
 <div class="project-intro">

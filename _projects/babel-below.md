@@ -2,7 +2,7 @@
 layout: project
 title: Babel Below
 description: "A tactical roguelike translating tabletop RPG mechanics into grid-based combat. Into the Breach meets Cyberpunk 2077."
-status: wip
+status: in development
 tags: [godot, game-dev, roguelike, tactics, cyberpunk]
 thumbnail: /assets/images/projects/babel-below-thumb.png
 image: /assets/images/projects/babel-below-thumb.png
@@ -11,6 +11,7 @@ github_url: https://github.com/BabyToad/babel-below
 show_repo: true
 demo_url: https://babelbelow.vercel.app
 last_modified_at: 2026-03-27
+date: 2026-03-29
 ---
 
 <div class="project-intro">

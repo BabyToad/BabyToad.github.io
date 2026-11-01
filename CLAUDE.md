@@ -117,7 +117,10 @@ image: /assets/images/projects/thumb.png  # Optional: sharing image (og:image); 
 layout: project
 title: Project Name
 description: "Project description"
-status: in-progress    # Options: completed, in-progress, planning
+date: YYYY-MM-DD       # Project date, not the latest edit; record its source in the PR
+status: in development # Only: released, in development, archived
+featured: true         # Optional: pin on Projects; also available to homepage curation
+featured_order: 1      # Required when featured: ascending editorial order
 tags: [tag1, tag2]
 thumbnail: /assets/images/projects/thumb.png
 show_thumbnail: true
@@ -132,6 +135,8 @@ last_modified_at: YYYY-MM-DD
 layout: thought
 title: "Human Title"     # The URL comes from the filename
 date: YYYY-MM-DD
+featured: true         # Optional: available to homepage curation
+featured_order: 4      # Required when featured: ascending editorial order
 context: video         # Optional: shown next to the date
 image: /assets/images/thoughts/x.png   # Sharing image; every page inherits the site card by default
 show_image: true       # Required to render `image` as a figure; without it `image` is metadata only
@@ -141,6 +146,17 @@ images: [...]          # Alternates with a switcher; videos: [...] for video tho
 Sharing metadata: `_config.yml` sets `image: /assets/images/site-card.png` as a front matter default for
 every page, so `page.image` is never empty for jekyll-seo-tag. That is why thought figures need `show_image`.
 Regenerate the card with `scripts/site_card.py` (see `scripts/README.md`).
+
+Project curation: `featured: true` is a boolean shared by Projects and Thoughts.
+Pinned projects currently rank HIGH WATER (1), Tausendkorn (2), SRD Framework (3);
+the featured thought A Language Large & General ranks 4. Thoughts do not appear
+on the Projects index. All other projects sort newest first by `date`, falling
+back to `last_modified_at`; equal dates sort by slug descending. Give every new
+project an explicit date, using its stated project date or first file commit,
+so build times cannot affect the order. Keep `last_modified_at` for later edits.
+Statuses mean: `released` is available to play or use, `in development` is work
+in progress, and `archived` is a preserved snapshot rather than ongoing work.
+Cards display the normalized status directly, with the project year beside it.
 
 #### Game Documentation (`_for_want_of_fuel/`)
 ```yaml

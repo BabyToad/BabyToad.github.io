@@ -11,6 +11,7 @@ last_modified_at: 2025-12-29
 show_repo: true
 
 
+date: 2025-12-29
 ---
 
 <div class="project-intro">
