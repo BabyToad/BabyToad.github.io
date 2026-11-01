@@ -11,10 +11,10 @@
         {% assign u = page.url %}
         <div class="nav-links" id="nav-links">
             <a href="/blog/"{% if u contains '/blog' %} class="active"{% endif %}>Blog</a>
-            <a href="/thoughts"{% if u contains '/thoughts' %} class="active"{% endif %}>Thoughts</a>
+            <a href="/thoughts/"{% if u contains '/thoughts' %} class="active"{% endif %}>Thoughts</a>
             <a href="/projects/"{% if u contains '/projects' %} class="active"{% endif %}>Projects</a>
             <a href="/talks/"{% if u contains '/talks' %} class="active"{% endif %}>Talks</a>
-            <a href="/teaching"{% if u contains '/teaching' %} class="active"{% endif %}>Teaching</a>
+            <a href="/teaching/"{% if u contains '/teaching' %} class="active"{% endif %}>Teaching</a>
             <a href="/about"{% if u contains '/about' %} class="active"{% endif %}>About</a>
             <button class="theme-toggle" aria-label="Toggle dark mode">
                 <span class="icon icon-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>

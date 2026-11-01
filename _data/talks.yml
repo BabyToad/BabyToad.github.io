@@ -1,0 +1,57 @@
+# Dates are presentation dates unless date_label says otherwise.
+# An empty venue/city means the post and deck do not record one.
+- title: "HIGH WATER: a studio of agents"
+  date: 2026-10-08
+  date_label: write-up date
+  venue: null
+  city: null
+  format: retrospective
+  language: English
+  summary: Building a Godot brawler in one jam week with a studio of about twenty AI agents.
+  deck_url: /high-water/talk/
+  post_url: /blog/high-water/
+  boards_url: /high-water/boards/
+  # _blog/high-water.md front matter; its Further Reading calls this a deck
+  # "for when I want to speak on this". No presentation date or venue is stated.
+
+- title: Press A to Learn
+  date: 2026-05-10
+  venue: Macromedia
+  city: Leipzig
+  format: talk
+  language: German
+  summary: Sixty minutes on founding a games start-up in Mitteldeutschland.
+  deck_url: /press-a-to-learn-talk.html
+  post_url: /blog/press-a-to-learn/
+  # Date/venue: deck title slide and _blog/2026-05-10-press-a-to-learn.md.
+
+- title: Applied Game Design
+  date: 2026-03-03
+  venue: Otto von Guericke University
+  city: Magdeburg
+  format: guest lecture
+  language: English
+  summary: Practical game design heuristics, followed by questions from the Applied Game Design course.
+  deck_url: /applied-game-design-talk.html
+  post_url: /blog/game-design-talk-magdeburg/
+  # Date/venue: deck title slide (03.03.2026). The post was published March 6.
+
+- title: AI for Game Developers
+  date: 2025-06-13
+  date_label: archive date
+  venue: Nerdicon 2025
+  city: null
+  format: talk
+  language: English
+  summary: Mundane, useful applications of AI for game developers, with a December 2025 update.
+  deck_url: /assets/talks/ai-gamedev-2025/
+  post_url: /blog/ai-for-game-dev-talk-archive/
+  update:
+    date: 2025-12-19
+    venue: Macromedia
+    city: Leipzig
+    post_url: /blog/ai-gamedev-talk-2025-update/
+  # Original: _blog/ai-for-game-dev-talk-archive.md (publication date, Nerdicon).
+  # The supplied deck is the December update; its notes identify the original
+  # as June, without a day/city. Update date: deck title slide; date/venue:
+  # _blog/2025-12-19-ai-gamedev-talk-2025-update.md.
