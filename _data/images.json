@@ -515,6 +515,43 @@
         }
       ]
     },
+    "/assets/images/projects/tausendkorn-thumb.png": {
+      "width": 1280,
+      "height": 720,
+      "sha256": "8a8fe9ec6a02e9b223519c9dc541c408ace27797f7eac6f64750966e0e83ffa1",
+      "webp": [
+        {
+          "src": "/assets/images/projects/tausendkorn-thumb-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 10488,
+          "sha256": "4becca9c14a1d1866bb1c584f2789b99ade72527f787dabc5a23358cdc390570"
+        },
+        {
+          "src": "/assets/images/projects/tausendkorn-thumb-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 28464,
+          "sha256": "9912aa5de06fe96a32c0a1ef7157e2a2f27911da9faa43beb634d3d967c422d4"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/tausendkorn-thumb-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 7419,
+          "sha256": "3cccebdbb16a359f172c1476c44e38d9ea0f046be47964bea5a53fbb2e28004e"
+        },
+        {
+          "src": "/assets/images/projects/tausendkorn-thumb-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 18920,
+          "sha256": "9b0eff8fd0a7a6d9cc501f2351d7f76cdb9116e1a1117b8f844d09948ef936af"
+        }
+      ]
+    },
     "/assets/images/site-card.png": {
       "width": 1200,
       "height": 630,

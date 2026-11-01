@@ -42,11 +42,9 @@ use_container: false
                 {% endif %}
             </a>
             <div class="project-body">
-                {% assign project_date = project.date | default: project.last_modified_at %}
-                {% if project_date == site.time %}{% assign project_date = project.last_modified_at %}{% endif %}
                 <div class="project-card-metadata">
                     <span class="project-status {{ project.status | slugify }}">{{ project.status }}</span>
-                    <time datetime="{{ project_date | date: '%Y-%m-%d' }}">{{ project_date | date: '%Y' }}</time>
+                    {% include project-years.html project=project %}
                 </div>
                 <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
                 <p>{{ project.description }}</p>

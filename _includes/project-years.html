@@ -1,0 +1,7 @@
+{%- assign start_date = include.project.date | default: include.project.last_modified_at -%}
+{%- if start_date == site.time -%}{%- assign start_date = include.project.last_modified_at -%}{%- endif -%}
+{%- assign start_year = start_date | date: '%Y' -%}
+{%- assign end_year = include.project.last_modified_at | default: start_date | date: '%Y' -%}
+{%- comment -%}Some legacy modification dates predate the recorded start date.
+Show the covered years chronologically; keep datetime as the project start.{%- endcomment -%}
+<time datetime="{{ start_date | date: '%Y-%m-%d' }}">{%- if end_year < start_year -%}{{ end_year }}–{{ start_year }}{%- else -%}{{ start_year }}{%- if end_year != start_year -%}–{{ end_year }}{%- endif -%}{%- endif -%}</time>
