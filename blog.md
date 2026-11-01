@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Blog
-description: Thoughts on game design, development, and other topics
+description: Essays and project notes by Jonas Heinke on roleplaying games, game design, and AI.
 use_container: false
 preview_popup: true
 ---

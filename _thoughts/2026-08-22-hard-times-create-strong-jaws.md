@@ -1,4 +1,5 @@
 ---
+image: /assets/images/thoughts/habsburg-gigachad.webp
 layout: thought
 date: 2026-08-22
 title: "Hard Times Create Strong Jaws"

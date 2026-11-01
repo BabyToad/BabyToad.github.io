@@ -1,4 +1,5 @@
 ---
+image: /assets/images/projects/high-water-thumb.png
 layout: post
 title: "Making HIGH WATER with a studio of agents"
 date: 2026-10-08

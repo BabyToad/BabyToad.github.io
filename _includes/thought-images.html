@@ -58,7 +58,7 @@
     <figcaption>{{ thought_item.image_caption }}</figcaption>
     {% endif %}
 </figure>
-{% elsif thought_item.image %}
+{% elsif thought_item.show_image and thought_item.image %}
 <figure class="{{ include.figure_class }}">
     {% include responsive-image.html src=thought_item.image alt=thought_item.image_alt dither=include.dither %}
     {% if include.show_caption and thought_item.image_caption %}

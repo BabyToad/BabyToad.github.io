@@ -11,6 +11,7 @@ tags:
   - Stars Without Number
   - Mech Combat
 thumbnail: /assets/images/projects/forWantOfFuel_thumb.png
+image: /assets/images/projects/forWantOfFuel_thumb.png
 last_modified_at: 2024-03-20
 show_thumbnail: false
 ---

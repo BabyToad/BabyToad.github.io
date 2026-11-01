@@ -1,6 +1,6 @@
 title: Steak Knives and Bagels
 author: Jonas Heinke
-description: Personal website showcasing projects and skills
+description: Jonas Heinke writes about roleplaying games, game design, and AI from Leipzig.
 baseurl: ""
 url: "https://www.allknivesnobagel.com"
 
@@ -23,6 +23,11 @@ collections:
 # Most _for_want_of_fuel files carry no layout in front matter — without this
 # default they build as bare HTML fragments with no site chrome.
 defaults:
+  # jekyll-seo-tag reads page.image, so the site card is a front matter default.
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/site-card.png
   # Canonical index URLs; redirects/ preserves the old .html addresses.
   - scope:
       path: "blog.md"
@@ -93,13 +98,10 @@ plugins:
   - jekyll-sitemap
   - jekyll-last-modified-at
 
-# Posts live in the `blog` collection, not `_posts` — point the main feed at it,
-# and park the (empty) default posts feed out of the way.
+# feed.xml combines Blog + Thoughts; jekyll-feed supplies feed_meta and skips
+# generation when a source feed already exists at its configured path.
 feed:
-  path: "/feed/posts.xml"
-  collections:
-    blog:
-      path: "/feed.xml"
+  path: "/feed.xml"
 
 sass:
   sass_dir: assets/css

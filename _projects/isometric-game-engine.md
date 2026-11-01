@@ -13,6 +13,7 @@ tags:
   - Development Tools
 last_modified_at: 2024-12-22
 thumbnail: /assets/images/projects/iso_engine_thumb.png
+image: /assets/images/projects/iso_engine_thumb.png
 demo_url: /assets/iso-engine/
 github_url: https://github.com/babytoad/isometric-game-engine
 show_repo: true

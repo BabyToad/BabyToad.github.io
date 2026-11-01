@@ -1,4 +1,5 @@
 ---
+image: /assets/images/thoughts/machine-intelligences-evals-claude.webp
 layout: thought
 date: 2026-08-04
 title: "Machine Intelligences in the Evals"

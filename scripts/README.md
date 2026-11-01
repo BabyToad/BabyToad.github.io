@@ -53,7 +53,62 @@ with JavaScript disabled all alternatives remain visible.
 After a Jekyll build, `check_image_output.py` checks emitted local image markup and
 files, and enforces a conservative projects-index budget: every card's largest
 candidate, for each format separately, must total less than 1,000,000 bytes. It
-also reports the smallest candidates and img-only fallback. Add `--baseline PATH`
+also reports the smallest candidates and img-only fallback. The budget applies
+to the AVIF and WebP picture sources; the img fallback deliberately references
+the original for crawlers and clients without picture support. Add `--baseline PATH`
 to compare with a separate main build. These are asset bytes for all cards, not a
 browser network trace; native lazy loading can defer off-screen cards. The audit
 skips copied teaching pages and assets, which this pipeline does not manage.
+
+
+# Sharing card and metadata
+
+Regenerate the committed 1200x630 card (no network access needed):
+
+```powershell
+uv --no-cache run --no-project --python C:/Users/heink/AppData/Local/Programs/Python/Python311/python.exe python scripts/site_card.py
+uv --no-cache run --no-project --python C:/Users/heink/AppData/Local/Programs/Python/Python311/python.exe python scripts/images.py
+```
+
+Use Pillow 12.1.0, as for the image pipeline above. `site_card.py` draws Newsreader
+at weight 400, display optical size 72 and subtitle optical size 18, with the
+footer's 8x8 Bayer thresholds. It writes a palette-indexed, strictly two-colour
+PNG (`#ffb000` / `#141210`), without random values or timestamps, under 300 KB.
+The second command updates its responsive derivatives and the manifest; Jekyll
+and social previews use the original PNG. No Python or font download runs in CI.
+
+`scripts/fonts/Newsreader.ttf` is the unmodified 451,664-byte variable TTF from
+[google/fonts at 8b0a1d0](https://github.com/google/fonts/tree/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/newsreader),
+originally named `Newsreader[opsz,wght].ttf`. Its SIL Open Font License is included
+as `scripts/fonts/OFL.txt`. The font is build tooling only and excluded from the
+published site along with `scripts/`.
+
+The global front matter `image` default in `_config.yml` supplies the site card
+to jekyll-seo-tag. Override it in documents with an original PNG/JPEG/WebP or a
+960w WebP, never AVIF. Projects use their thumbnail; thoughts use the first image
+or video poster. `show_image: true` opts a thought's single `image` into its body;
+otherwise `image` is metadata only. This prevents inherited defaults or inline
+video posters from becoming extra visible figures. The existing `images` and
+`videos` arrays keep their display behavior.
+
+# Combined Atom feed
+
+`feed.xml` combines all published Blog and Thoughts documents, newest first,
+without a ten-entry cap: frequent thoughts must not evict the existing blog
+entries. Existing entry IDs, dates, links and content follow jekyll-feed 0.17.0.
+Draft/private/noindexed documents are excluded. Thoughts include their media
+from the same include used on the page. Subscribers stay on `/feed.xml`; no
+second subscription or additional visible links are necessary. `{% feed_meta %}`
+in the base head advertises this same URL.
+
+jekyll-feed 0.17.0 can generate separate collection feeds but cannot merge them.
+The local template adapts its Atom template (MIT license preserved in
+`docs/jekyll-feed-LICENSE.txt`). The plugin intentionally skips a feed path that
+already exists in the source. Keep the plugin for its autodiscovery tag; compare
+the local template with upstream when upgrading it.
+
+After building, validate metadata and compare with an isolated main build:
+
+```powershell
+uv --no-cache run --no-project --python C:/Users/heink/AppData/Local/Programs/Python/Python311/python.exe python scripts/check_sharing_output.py --site _site/current-build --baseline _site/baseline-build
+```

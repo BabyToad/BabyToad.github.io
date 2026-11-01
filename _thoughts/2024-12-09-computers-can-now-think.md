@@ -2,6 +2,7 @@
 layout: thought
 date: 2024-12-09
 title: "Computers Can Now Think"
+show_image: true
 image: /assets/images/thoughts/wildeford-tweet.png
 image_alt: Tweet by Peter Wildeford about being a member of the 'computers can now think' community
 sources:

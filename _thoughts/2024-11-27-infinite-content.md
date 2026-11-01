@@ -3,6 +3,7 @@ layout: thought
 date: 2024-11-27
 title: "Infinite Content"
 context: Discord
+show_image: true
 image: /assets/images/thoughts/infinite-content.png
 image_alt: Discord message screenshot
 sources:

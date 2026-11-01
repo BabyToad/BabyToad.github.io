@@ -5,6 +5,7 @@ description: "A physics brawler where the building is the other enemy. Built in 
 status: complete
 tags: [godot, game-dev, brawler, ai, game-jam, process]
 thumbnail: /assets/images/projects/high-water-thumb.png
+image: /assets/images/projects/high-water-thumb.png
 show_thumbnail: true
 demo_url: https://limeminister.itch.io/high-water
 show_repo: false

@@ -5,6 +5,7 @@ description: "A multi-system tabletop RPG reference built for humans in a browse
 status: released
 tags: [astro, ttrpg, ad&d, swn, wwn, agents, web-dev]
 thumbnail: /assets/images/projects/srd-framework-thumb.png
+image: /assets/images/projects/srd-framework-thumb.png
 show_thumbnail: true
 demo_url: https://srd-framework.vercel.app
 last_modified_at: 2026-09-12
