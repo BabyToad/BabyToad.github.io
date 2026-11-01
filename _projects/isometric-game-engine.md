@@ -18,8 +18,6 @@ github_url: https://github.com/babytoad/isometric-game-engine
 show_repo: true
 ---
 
-# Isometric Game Engine
-
 A professional TypeScript-based isometric game engine designed for WordPress integration, featuring centralized configuration management and comprehensive development tools.
 
 See it in Action here: [lust-auf-zahnarzt.de/ecke-tour/](https://lust-auf-zahnarzt.de/ecke-tour/) or check out the [Demo](/assets/iso-engine/).

@@ -3,8 +3,6 @@ title: Mech Builder
 order: 9
 ---
 
-# Mech Builder
-
 <div class="mech-builder">
     <div class="builder-left">
         <!-- Frame Selection -->

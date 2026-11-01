@@ -3,8 +3,6 @@ title: Damage Types and Armor
 order: 2
 ---
 
-# Damage & Armor Model
-
 *The PEX (Physical, Energy, Exotic) damage model creates distinct tactical choices in combat.*
 
 ### Damage Types

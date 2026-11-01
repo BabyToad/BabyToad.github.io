@@ -3,8 +3,6 @@ title: Travel
 order: 12
 ---
 
-# Travel
-
 > *The land stretches beyond reason. Ice and stone and silence that swallows mechs whole. You are small here. Your machine is small. Only the cold is infinite.*
 
 ## The Hard Truth of Distance

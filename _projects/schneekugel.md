@@ -10,8 +10,6 @@ show_repo: false
 last_modified_at: 2025-12-13
 ---
 
-# Schneekugel (Snow Globe World)
-
 <div class="project-intro">
     <p><em>Schneekugel</em> is a fractal snow globe puzzle game where you navigate through nested worlds by finding the correct snowflake gate. Each snowflake contains another world inside. Reach depth 100 to win.</p>
 </div>

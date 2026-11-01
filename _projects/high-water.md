@@ -12,8 +12,6 @@ sidenotes: true
 last_modified_at: 2026-10-08
 ---
 
-# HIGH WATER
-
 <div class="project-intro">
     <p>A Streets of Rage brawler with Smash physics, where the building is the other enemy. Made for the Vierfacher Questpresso jam (theme: <em>Destroy the System!</em>), October 2026.</p>
 </div>

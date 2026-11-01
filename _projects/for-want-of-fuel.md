@@ -15,8 +15,6 @@ last_modified_at: 2024-03-20
 show_thumbnail: false
 ---
 
-# For Want Of Fuel
-
 A streamlined set of playtest rules for running Stars Without Number compatible mech combat scenes.
 
 <div class="project-cta">

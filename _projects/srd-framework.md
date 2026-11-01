@@ -10,8 +10,6 @@ demo_url: https://srd-framework.vercel.app
 last_modified_at: 2026-09-12
 ---
 
-# SRD Framework
-
 <div class="project-intro">
     <p>One reference site for the systems my tables play: Stars Without Number (The Golden Triangle), Worlds Without Number, AD&D 2nd Edition and my own Throne and Wheel rules. Searchable, static, and deliberately readable by AI agents as well as people.</p>
 </div>

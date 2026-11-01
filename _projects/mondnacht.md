@@ -10,8 +10,6 @@ show_repo: false
 last_modified_at: 2024-12-20
 ---
 
-# Mondnacht
-
 <div class="project-intro">
     <p><em>Mondnacht</em> is an interactive narrative experience that weaves together classic poetry and science fiction. Created in just 10 hours for the first Naranauten Game Jam, this experimental piece earned first place by transforming Joseph von Eichendorff's romantic poem into a journey through the cosmos.</p>
 </div>

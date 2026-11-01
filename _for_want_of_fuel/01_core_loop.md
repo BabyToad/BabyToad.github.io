@@ -3,8 +3,6 @@ title: Core Loop & Dice Basics
 order: 1
 ---
 
-# Core Loop & Dice Basics
-
 ## Basic Resolution
 
 - **Attack Roll**: d20 + hit bonus vs. target's AC

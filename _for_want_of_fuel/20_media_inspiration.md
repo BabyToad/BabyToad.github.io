@@ -4,8 +4,6 @@ title: Media Inspiration
 order: 20
 ---
 
-# Media Inspiration
-
 ## Soundtrack
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=8_mV1wA067dWTstc&amp;list=PL4ZO1ZhcfOX-pKp49I-0cFtH35XQSO-TQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 

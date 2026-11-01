@@ -3,8 +3,6 @@ title: Settlements
 order: 11
 ---
 
-# Settlement Profile
-
 ## Core Questions
 - What do they need that violence can provide? (bandits, beasts, territorial disputes)
 - What do they need that violence cannot? (medicine, food, trade routes, leadership) 

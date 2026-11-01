@@ -4,8 +4,6 @@ title: Mechanics
 order: 4
 ---
 
-# Mechanics
-
 ## Sortie
 ### After a Sortie
 

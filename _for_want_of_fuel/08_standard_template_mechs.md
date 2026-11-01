@@ -3,8 +3,6 @@ title: Standard Template Mechs
 order: 8
 ---
 
-# Standard Template Mechs
-
 ## Mechs
 
 <div class="mech-template">

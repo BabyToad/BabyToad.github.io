@@ -10,8 +10,6 @@ demo_url: https://bcs-radio.vercel.app
 last_modified_at: 2026-03-27
 ---
 
-# BCS Radio
-
 <div class="project-intro">
     <p><em>Bonebox No Kips</em> is a pirate radio station broadcasting from somewhere the Fifth Bureau can't reach. Twelve AI-generated tracks, two AI-voiced DJs, and a cyberpunk visualizer — all built as a companion piece to our <a href="/projects/golden-triangle/">Stars Without Number campaign</a>.</p>
 </div>

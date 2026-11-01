@@ -12,8 +12,6 @@ show_repo: true
 
 ---
 
-# Obsidian Archive
-
 <div class="project-intro">
     <p><em>Obsidian Archive</em> is a Chrome extension that archives web pages to your Obsidian vault with rich metadata for search and citation. One click saves any article, tweet, or page as a well-formatted markdown file.</p>
 </div>

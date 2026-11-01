@@ -8,8 +8,6 @@ tags: [AI, RPG, Benchmarking, D&D, AudioToLogs, LLM]
 permalink: /projects/rpg-notetaker-bench/
 ---
 
-# RPG Notetaker Bench
-
 A comprehensive comparison of how different AI models process and organize tabletop RPG session transcripts. This benchmark analyzes a 2.5-hour D&D session transcript processed by six different AI models, comparing their approaches to note-taking, organization, and information extraction.
 
 **Source Project:** This benchmark is the result of experiments conducted as part of the [AudioToLogs project](https://github.com/BabyToad/AudioToLogs) - a web-based audio transcription application that converts RPG session recordings into well-formatted markdown logs using OpenAI's Whisper API and various LLM models for post-processing.
