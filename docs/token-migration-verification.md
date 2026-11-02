@@ -1,7 +1,10 @@
 # Token migration verification
 
 Compared origin/main `6609798` with the item 12 branch, using installed headless
-Chrome and Pillow. Screenshot artifacts and local harnesses remain under ignored
+Chrome and Pillow. A final fetch found main `4c732f9`, whose only change is a
+standalone Applied Game Design deck date. It was merged without rewriting history;
+CSS and all 19 captured page inputs are unchanged, so the comparison still applies.
+Screenshot artifacts and local harnesses remain under ignored
 `_site/token-audit/`; no images, binaries, or build workarounds are committed.
 
 ## Counts and size
