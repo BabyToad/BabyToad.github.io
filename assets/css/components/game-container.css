@@ -1,9 +1,9 @@
 .game-container {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: 20px;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     margin: 2em 0;
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
     position: relative;
     overflow: hidden;
 }
@@ -14,7 +14,7 @@
     width: 100%;
     height: 600px;
     border: none;
-    background: var(--bg-primary);
+    background: var(--bg);
 }
 
 .project-intro {
@@ -22,8 +22,8 @@
     line-height: 1.6;
     margin: 1.5em 0;
     padding: 1em;
-    border-left: 4px solid var(--accent-color);
-    background: var(--bg-alt);
+    border-left: 4px solid var(--accent);
+    background: var(--bg-raised);
 }
 
 .game-project .project-content {

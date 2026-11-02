@@ -26,7 +26,7 @@
 .srs-header h1 {
     margin: 0;
     font-size: 1.5rem;
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
 }
 
 .srs-progress {
@@ -36,22 +36,22 @@
 }
 
 .srs-due-count {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-size: 0.9rem;
 }
 
 .srs-streak {
     font-size: 0.9rem;
     padding: var(--space-xs) var(--space-sm);
-    background: var(--bg-hover);
-    border-radius: var(--radius-sm);
+    background: var(--bg-raised);
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
     gap: 0.4em;
 }
 
 .srs-streak i {
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 /* --- Filters --- */
@@ -64,22 +64,22 @@
 
 .srs-filters label {
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 .srs-filters select {
     padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: var(--background);
-    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
     font-size: 0.9rem;
     cursor: pointer;
 }
 
 .srs-filters select:focus {
     outline: none;
-    border-color: var(--accent-color);
+    border-color: var(--accent);
 }
 
 /* --- Card Area --- */
@@ -94,9 +94,9 @@
 
 .srs-card {
     width: 100%;
-    background: var(--background-alt);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    background: var(--bg-dip);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: var(--space-lg);
     text-align: center;
     transition: transform 0.3s ease;
@@ -116,8 +116,8 @@
     font-size: 1rem;
     line-height: 1.6;
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    color: var(--ink-soft);
 }
 
 /* --- Card Type Styling --- */
@@ -135,18 +135,18 @@
     min-width: 80px;
     padding: 2px 8px;
     margin: 0 2px;
-    background: var(--bg-hover);
-    border-radius: var(--radius-sm);
-    color: var(--accent-color);
+    background: var(--bg-raised);
+    border-radius: var(--radius);
+    color: var(--accent);
     font-weight: 500;
 }
 
 .srs-cloze-answer {
-    color: var(--accent-color);
+    color: var(--accent);
     font-weight: 600;
     background: rgba(74, 158, 255, 0.1);
     padding: 2px 6px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
 }
 
 /* --- Show Answer Button --- */
@@ -154,16 +154,16 @@
     margin-top: var(--space-lg);
     padding: var(--space-sm) var(--space-xl);
     font-size: 1rem;
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     cursor: pointer;
     transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .srs-show-answer:hover {
-    background: color-mix(in srgb, var(--accent-color) 85%, black);
+    background: color-mix(in srgb, var(--accent) 85%, black);
 }
 
 .srs-show-answer:active {
@@ -187,7 +187,7 @@
     gap: 4px;
     padding: var(--space-sm) var(--space-xs);
     border: 2px solid transparent;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9rem;
@@ -203,47 +203,47 @@
 }
 
 .srs-btn-again {
-    background: var(--background);
-    color: var(--text-secondary);
-    border-color: var(--border-color);
+    background: var(--bg);
+    color: var(--ink-soft);
+    border-color: var(--border);
 }
 
 .srs-btn-again:hover {
-    background: var(--bg-hover);
-    border-color: var(--text-tertiary);
+    background: var(--bg-raised);
+    border-color: var(--ink-faint);
 }
 
 .srs-btn-hard {
-    background: var(--background);
-    color: var(--text-secondary);
-    border-color: var(--border-color);
+    background: var(--bg);
+    color: var(--ink-soft);
+    border-color: var(--border);
 }
 
 .srs-btn-hard:hover {
-    background: var(--bg-hover);
-    border-color: var(--text-tertiary);
+    background: var(--bg-raised);
+    border-color: var(--ink-faint);
 }
 
 .srs-btn-good {
-    background: var(--background);
-    color: var(--text-primary);
-    border-color: var(--border-color);
+    background: var(--bg);
+    color: var(--ink);
+    border-color: var(--border);
 }
 
 .srs-btn-good:hover {
-    background: var(--bg-hover);
-    border-color: var(--accent-color);
+    background: var(--bg-raised);
+    border-color: var(--accent);
 }
 
 .srs-btn-easy {
-    background: var(--background);
-    color: var(--accent-color);
-    border-color: var(--border-color);
+    background: var(--bg);
+    color: var(--accent);
+    border-color: var(--border);
 }
 
 .srs-btn-easy:hover {
-    background: var(--bg-hover);
-    border-color: var(--accent-color);
+    background: var(--bg-raised);
+    border-color: var(--accent);
 }
 
 /* --- Empty State --- */
@@ -255,7 +255,7 @@
 
 .srs-empty-icon {
     font-size: 2.5rem;
-    color: var(--accent-color);
+    color: var(--accent);
     margin-bottom: var(--space-md);
     opacity: 0.8;
 }
@@ -267,7 +267,7 @@
 }
 
 .srs-next-due {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-size: 0.9rem;
 }
 
@@ -275,16 +275,16 @@
 .srs-stats {
     margin-top: auto;
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 }
 
 .srs-stats-toggle {
     width: 100%;
     padding: var(--space-sm);
     background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--ink-soft);
     cursor: pointer;
     font-size: 0.9rem;
     display: flex;
@@ -295,8 +295,8 @@
 }
 
 .srs-stats-toggle:hover {
-    background: var(--bg-hover);
-    color: var(--text-primary);
+    background: var(--bg-raised);
+    color: var(--ink);
 }
 
 .srs-stats-panel {
@@ -318,20 +318,20 @@
 .srs-stat {
     text-align: center;
     padding: var(--space-sm);
-    background: var(--bg-hover);
-    border-radius: var(--radius-sm);
+    background: var(--bg-raised);
+    border-radius: var(--radius);
 }
 
 .srs-stat-value {
     display: block;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .srs-stat-label {
     font-size: 0.75rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -344,18 +344,18 @@
 .srs-reset-progress {
     padding: var(--space-xs) var(--space-sm);
     background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: var(--text-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--ink-faint);
     cursor: pointer;
     font-size: 0.8rem;
     transition: all 0.2s ease;
 }
 
 .srs-reset-progress:hover {
-    background: var(--bg-hover);
-    border-color: var(--text-tertiary);
-    color: var(--text-secondary);
+    background: var(--bg-raised);
+    border-color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 /* --- Keyboard Hints --- */
@@ -365,18 +365,18 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.75rem;
-    color: var(--text-tertiary);
-    background: var(--background);
+    color: var(--ink-faint);
+    background: var(--bg);
     padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
 }
 
 .srs-keyboard-hint kbd {
     display: inline-block;
     padding: 2px 6px;
-    background: var(--bg-hover);
-    border: 1px solid var(--border-color);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
     border-radius: 3px;
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -384,7 +384,7 @@
 
 /* --- Loading and Error States --- */
 .srs-loading {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,8 +395,8 @@
     content: '';
     width: 18px;
     height: 18px;
-    border: 2px solid var(--border-color);
-    border-top-color: var(--accent-color);
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
     border-radius: 50%;
     animation: srs-spin 0.8s linear infinite;
 }
@@ -406,23 +406,23 @@
 }
 
 .srs-error {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 .srs-retry-btn {
     display: inline-block;
     margin-top: var(--space-md);
     padding: var(--space-xs) var(--space-md);
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
     cursor: pointer;
     font-size: 0.9rem;
 }
 
 .srs-retry-btn:hover {
-    background: color-mix(in srgb, var(--accent-color) 85%, black);
+    background: color-mix(in srgb, var(--accent) 85%, black);
 }
 
 /* --- Responsive --- */

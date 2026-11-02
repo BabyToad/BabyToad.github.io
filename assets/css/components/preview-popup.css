@@ -2,8 +2,8 @@
 .preview-popup {
     position: fixed;
     display: none;
-    background: var(--bg-primary);
-    border: 1px solid var(--text-secondary);
+    background: var(--bg);
+    border: 1px solid var(--ink-soft);
     padding: var(--space-md);
     max-width: 400px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -20,23 +20,23 @@
 .preview-title {
     font-size: 1rem;
     margin: 0 0 var(--space-xs);
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 .preview-date {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 /* Content sections */
 .preview-description {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     margin-bottom: var(--space-sm);
 }
 
 .preview-tags {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 /* Animation */

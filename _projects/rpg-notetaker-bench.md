@@ -153,7 +153,7 @@ function showModel(modelId) {
 <style>
 .rpg-bench-navigator {
   margin: 2rem 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -161,8 +161,8 @@ function showModel(modelId) {
 .model-tabs {
   display: flex;
   flex-wrap: wrap;
-  background: var(--surface-color);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
 }
 
 .tab-button {
@@ -174,7 +174,7 @@ function showModel(modelId) {
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
-  border-right: 1px solid var(--border-color);
+  border-right: 1px solid var(--border);
 }
 
 .tab-button:last-child {
@@ -182,11 +182,11 @@ function showModel(modelId) {
 }
 
 .tab-button:hover {
-  background: var(--hover-color);
+  background: var(--bg-raised);
 }
 
 .tab-button.active {
-  background: var(--primary-color);
+  background: var(--accent);
   color: white;
 }
 
@@ -215,7 +215,7 @@ function showModel(modelId) {
 
 .model-details h3 {
   margin: 0 0 0.5rem 0;
-  color: var(--primary-color);
+  color: var(--accent);
 }
 
 .model-details p {
@@ -224,7 +224,7 @@ function showModel(modelId) {
 
 .rpg-content-viewer {
   margin: 2rem 0;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -243,7 +243,7 @@ function showModel(modelId) {
   .tab-button {
     flex: none;
     border-right: none;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
   }
   
   .tab-button:last-child {

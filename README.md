@@ -1,34 +1,23 @@
-# Personal Website
+# Steak Knives and Bagels
 
-This is the repository for my personal website, hosted at [babytoad.github.io](https://babytoad.github.io).
+Jonas Heinke's personal website: [allknivesnobagel.com](https://www.allknivesnobagel.com).
+Projects, writing, thoughts, talks, teaching, and a gallery of signed dither drawings.
+Built with Jekyll; deployed by GitHub Actions to GitHub Pages behind Cloudflare.
 
-## About
+## Local development
 
-This website is built using Jekyll and GitHub Pages to showcase my projects, skills, and blog posts.
+Install Ruby and Bundler, then run from this repository:
 
-## Local Development
+```sh
+bundle install
+ruby scripts/llms_full.rb
+ruby scripts/gallery_bundle.rb
+bundle exec jekyll serve
+```
 
-To run this site locally:
+Visit http://localhost:4000. For a production build, run both pre-build scripts
+again, then `bundle exec jekyll build`.
 
-1. Install Jekyll and Bundler:
-   ```bash
-   gem install jekyll bundler
-   ```
-
-2. Clone the repository:
-   ```bash
-   git clone https://github.com/babytoad/babytoad.github.io.git
-   cd babytoad.github.io
-   ```
-
-3. Install dependencies:
-   ```bash
-   bundle install
-   ```
-
-4. Run the site locally:
-   ```bash
-   bundle exec jekyll serve
-   ```
-
-5. Visit `http://localhost:4000` in your browser
+See [CLAUDE.md](CLAUDE.md) for repository conventions,
+[scripts/README.md](scripts/README.md) for asset tooling, and
+[AGENTS-WELCOME.md](AGENTS-WELCOME.md) for the footer gallery invitation.

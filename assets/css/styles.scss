@@ -7,7 +7,6 @@
 {% include_relative base/variables.css %}
 {% include_relative base/themes.css %}
 {% include_relative base/typography.css %}
-{% include_relative base/utilities.css %}
 {% include_relative base/accessibility.css %}
 
 /* Layout imports */
@@ -53,7 +52,7 @@ img {
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 p {

@@ -1,7 +1,11 @@
+/* Shared reading container. Layout modifiers below/after this sheet own their
+   grid and padding; the base typography formerly lived in grid.css. */
 .content-container {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: 2rem 2rem;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
     min-height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
@@ -16,13 +20,13 @@
 .recent-posts {
     margin-top: 5rem; /* Space above the recent posts section */
     padding-top: 3rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 }
 
 .recent-posts h2 {
     margin-bottom: 2rem;
     font-size: 1.75rem;
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 .recent-posts-section {
@@ -32,7 +36,7 @@
 .recent-posts-section h2 {
     margin-bottom: 2rem;
     font-size: 1.75rem;
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 /* Posts grid */
@@ -44,10 +48,10 @@
 }
 
 .post-card {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-sm);
+    background: var(--bg-raised);
+    border-radius: var(--radius);
     padding: 1.5rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -63,25 +67,25 @@
 }
 
 .post-card-content h3 a {
-    color: var(--text-primary);
+    color: var(--ink);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .post-card-content h3 a:hover {
-    color: var(--accent-color);
+    color: var(--accent);
 }
 
 .post-date {
     display: block;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     margin-bottom: 1rem;
 }
 
 .post-card-content p {
     margin: 0;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     line-height: 1.5;
     font-size: 0.95rem;
 }
@@ -131,11 +135,11 @@
 /* Section headers */
 .section-header {
     font-size: 1.75rem;
-    color: var(--text-primary);
+    color: var(--ink);
     font-weight: 500;
     margin: 3rem 0 1.5rem;
     letter-spacing: -0.02em;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
 }
 
@@ -174,19 +178,19 @@ footer {
     width: 100%;
     padding: 1rem 0;
     text-align: center;
-    border-top: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    background: var(--bg-raised);
     margin-top: auto;
 }
 
 footer p {
     margin: 0;
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 footer a {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     text-decoration: none;
     opacity: 0.7;
     transition: opacity 0.3s ease;

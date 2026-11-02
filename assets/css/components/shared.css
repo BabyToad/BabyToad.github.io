@@ -55,15 +55,15 @@
 
 /* Metadata Component */
 .metadata {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: var(--space-md);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--radius);
     margin-bottom: var(--space-lg);
     display: flex;
     gap: var(--space-md);
     flex-wrap: wrap;
     align-items: center;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-size: 0.9rem;
 }
 
@@ -82,14 +82,14 @@
 
 /* Abstract Component */
 .abstract {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     padding: var(--space-lg);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     margin: var(--space-md) 0 var(--space-xl) 0;
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
-    color: var(--text-secondary);
-    border-left: 4px solid var(--accent-color);
+    color: var(--ink-soft);
+    border-left: 4px solid var(--accent);
 }
 
 /* Document Header Component */
@@ -97,14 +97,14 @@
     grid-column: 1 / -1;
     margin-bottom: var(--space-xl);
     padding-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border);
 }
 
 .document-header h1 {
     font-size: 2.5rem;
     line-height: 1.2;
     margin-bottom: var(--space-md);
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 /* Special Links — the PDF download reads as a primary button. */
@@ -132,8 +132,8 @@
 .last-modified {
     margin-top: var(--space-xl);
     padding-top: var(--space-md);
-    border-top: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    color: var(--ink-soft);
     font-size: 0.9em;
 }
 
@@ -144,10 +144,10 @@
 
 .thought-box {
     position: relative;
-    background: var(--bg-secondary);
-    border-left: 3px solid var(--accent-color);
+    background: var(--bg-raised);
+    border-left: 3px solid var(--accent);
     padding: var(--space-lg);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
 }
 
 .thought-box blockquote {
@@ -159,14 +159,14 @@
 
 .thought-box blockquote p {
     margin: 0;
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 .thought-box cite {
     display: block;
     margin-top: var(--space-sm);
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-style: normal;
 }
 
@@ -176,7 +176,7 @@
     right: var(--space-sm);
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     cursor: pointer;
     padding: var(--space-xs);
     opacity: 0.5;

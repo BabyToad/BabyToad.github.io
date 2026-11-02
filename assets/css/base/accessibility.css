@@ -36,9 +36,9 @@
     top: var(--space-sm);
     left: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    background: var(--bg-primary);
-    border: 2px solid var(--accent-color);
-    border-radius: var(--radius-sm);
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius);
 }
 
 /* Reduced motion preferences */

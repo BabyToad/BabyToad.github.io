@@ -62,17 +62,17 @@
 }
 
 .toc ul::-webkit-scrollbar-track {
-    background: var(--bg-secondary);
+    background: var(--bg-raised);
     border-radius: 3px;
 }
 
 .toc ul::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: var(--border);
     border-radius: 3px;
 }
 
 .toc ul::-webkit-scrollbar-thumb:hover {
-    background: var(--text-secondary);
+    background: var(--ink-soft);
 }
 
 /* TOC Items — mono decimal-leading-zero counter in accent. */
@@ -105,21 +105,21 @@
 .toc-item[data-level="h2"] .toc-link {
     font-size: 1em;
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--ink);
 }
 
 .toc-item[data-level="h3"] a,
 .toc-item[data-level="h3"] .toc-link {
     font-size: 0.9em;
     font-weight: 400;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
 }
 
 .toc-item[data-level="h4"] a,
 .toc-item[data-level="h4"] .toc-link {
     font-size: 0.85em;
     font-weight: 300;
-    color: var(--text-tertiary);
+    color: var(--ink-faint);
 }
 
 .toc-item a:hover, .toc-link:hover {
@@ -145,11 +145,11 @@
 
     .toc-item a, .toc-link {
         padding: var(--space-xs);
-        border-radius: var(--border-radius-sm);
+        border-radius: var(--radius);
     }
 
     .toc-item a:hover, .toc-link:hover {
-        background: var(--bg-primary);
+        background: var(--bg);
     }
 }
 
@@ -160,7 +160,7 @@
     bottom: -2px;
     width: 100%;
     height: 2px;
-    background: var(--border-color);
+    background: var(--border);
     opacity: 1;
     transition: opacity 0.3s ease;
 }
@@ -168,7 +168,7 @@
 .progress {
     width: 0;
     height: 100%;
-    background: var(--accent-color);
+    background: var(--accent);
     transition: width 0.2s ease;
 }
 

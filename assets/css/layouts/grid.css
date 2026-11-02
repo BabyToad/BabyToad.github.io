@@ -7,13 +7,6 @@
     padding-left: var(--container-padding);
 }
 
-.content-container {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-base);
-}
 
 .wide-container {
     max-width: var(--container-max);
