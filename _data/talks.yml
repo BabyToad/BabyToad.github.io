@@ -34,7 +34,13 @@
   summary: Practical game design heuristics, followed by questions from the Applied Game Design course.
   deck_url: /applied-game-design-talk.html
   post_url: /blog/game-design-talk-magdeburg/
-  # Date/venue: deck title slide (03.03.2026). The post was published March 6.
+  repeat:
+    date: 2026-11-02
+    venue: Otto von Guericke University
+    city: Magdeburg
+  # Date/venue: deck title slide (02.11.2026, first given 03.03.2026),
+  # which names Otto von Guericke University Magdeburg for the repeat.
+  # The original post was published March 6; no repeat write-up is recorded.
 
 - title: AI for Game Developers
   date: 2025-06-13
