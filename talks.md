@@ -24,6 +24,9 @@ description: Talks on AI, game design, and making games by Jonas Heinke.
             {% if talk.update %}
             <p class="talk-note"><a href="{{ talk.update.post_url | relative_url }}">December update</a>: {{ talk.update.date | date: "%Y-%m-%d" }}, {{ talk.update.venue | escape }} {{ talk.update.city | escape }}. The deck below is this updated version.</p>
             {% endif %}
+            {% if talk.repeat %}
+            <p class="talk-note">Repeat: {{ talk.repeat.date | date: "%Y-%m-%d" }}, {{ talk.repeat.venue | escape }} {{ talk.repeat.city | escape }}. The deck below is this version.</p>
+            {% endif %}
             <div class="talk-links">
                 <a href="{{ talk.deck_url | relative_url }}">Deck</a>
                 {% if talk.post_url %}<a href="{{ talk.post_url | relative_url }}">Write-up</a>{% endif %}
