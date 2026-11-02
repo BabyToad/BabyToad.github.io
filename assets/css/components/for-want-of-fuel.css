@@ -624,7 +624,7 @@
 }
 
 .fitting-list {
-    font-family: var(--font-system);
+    font-family: inherit;
     font-size: 0.9em;
     color: #ccc;
 }

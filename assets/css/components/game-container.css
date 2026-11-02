@@ -3,7 +3,7 @@
     padding: 20px;
     border-radius: var(--radius);
     margin: 2em 0;
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
     position: relative;
     overflow: hidden;
 }
