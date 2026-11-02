@@ -210,7 +210,7 @@
   }
 } 
 /* Preserve the legacy width override after the responsive declarations.
-   The feature sheet loads after shared CSS; source order replaces !important. */
+   The feature sheet loads after shared CSS; source order replaces priority. */
 .rpg-bench-page .main-content,
 .rpg-bench-page .project-detail,
 .rpg-bench-page .content,
