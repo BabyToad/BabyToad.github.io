@@ -102,15 +102,15 @@
 }
 
 .project-status.released {
-    color: #3f7d47;
-}
-
-[data-theme="dark"] .project-status.released {
-    color: #8fbf94;
+    color: var(--ink-soft);
 }
 
 .project-status.in-development {
     color: var(--accent);
+}
+
+.project-status.archived {
+    color: var(--ink-faint);
 }
 
 .project-body h3 {

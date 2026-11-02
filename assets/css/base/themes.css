@@ -12,7 +12,8 @@
     --bg-dip: #ece3d1;
     --ink: #221c14;
     --ink-soft: #675d4c;
-    --ink-faint: #94886f;
+    /* Small text: >= 4.5:1 on all three paper surfaces. */
+    --ink-faint: #6f6451;
     --border: #ddd2bb;
     --border-strong: #b8a988;
     --accent: #a13d21;
@@ -29,7 +30,8 @@
     --bg-dip: #0e0c0a;
     --ink: #e8e2d4;
     --ink-soft: #a89f8c;
-    --ink-faint: #6f675a;
+    /* Small text: >= 4.5:1 even on the raised CRT surface. */
+    --ink-faint: #8b8272;
     --border: #35302a;
     --border-strong: #524a3e;
     --accent: #ffb000;
