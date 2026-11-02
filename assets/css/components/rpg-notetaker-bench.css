@@ -208,7 +208,7 @@
   .rpg-bench-page .model-details p {
     font-size: 0.9rem;
   }
-} 
+}
 /* Preserve the legacy width override after the responsive declarations.
    The feature sheet loads after shared CSS; source order replaces priority. */
 .rpg-bench-page .main-content,
