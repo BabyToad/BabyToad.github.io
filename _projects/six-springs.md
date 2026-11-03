@@ -17,7 +17,7 @@ date: 2026-11-03
     <p>A saint in a painted wayside shrine. Move your pointer and she watches it. Ring the bell, offer the bowl, feed the frog, poke her. Her words appear on the wall.</p>
 </div>
 
-**[Enter the shrine](/six-springs/)**. It has sound; there is a mute button, and it runs on a phone, though best on a desktop.
+**[Enter the shrine](/six-springs/)** · **[How it was made](/pose-to-shrine/)**. It has sound; there is a mute button, and it runs on a phone, though best on a desktop.
 
 *Work in progress. The mix, the voice takes and the hands are still being worked on.*
 
