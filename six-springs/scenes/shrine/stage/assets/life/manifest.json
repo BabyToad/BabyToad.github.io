@@ -1,0 +1,70 @@
+{
+  "water": {
+    "stream": {
+      "frames": [
+        "stream/00.png",
+        "stream/01.png",
+        "stream/02.png",
+        "stream/03.png",
+        "stream/04.png",
+        "stream/05.png"
+      ],
+      "placement": [
+        1199,
+        615
+      ],
+      "size": [
+        81,
+        126
+      ],
+      "fps": 8
+    },
+    "surface": {
+      "frames": [
+        "surface/00.png",
+        "surface/01.png",
+        "surface/02.png",
+        "surface/03.png",
+        "surface/04.png",
+        "surface/05.png"
+      ],
+      "placement": [
+        1067,
+        723
+      ],
+      "size": [
+        250,
+        30
+      ],
+      "fps": 4
+    }
+  },
+  "provenance": {
+    "source": "scenes/shrine/art/water",
+    "masterSHA256": "cd376b241f8db27e8e5cf5a4bf9570d67b8a69a3bd2b38304a4f778235ecadce",
+    "manifestSHA256": "655af7b01bc4acd20775433b2678c7809d97325fe47f0947adece8d5b974c494",
+    "files": {
+      "stream/00.png": "60adcf3cb8871a08bb63ad67018035078a60e26955279e76cc5fe0f6385b7748",
+      "stream/01.png": "bfd8176aeac272c2a7d4fe291bd85648f0b16dee5cf06c711e74a230364a40f7",
+      "stream/02.png": "63e21dbc8ddec4cde674aa4fc3768a0f0dd9a466a88bd3f9d86f7610439552fc",
+      "stream/03.png": "c25dae229783ab0401c14d2510f084266c57623945bf9879efc88ca6dce06b62",
+      "stream/04.png": "46c9847d7b26632dd56c1319a8fb3bd578cc720e8937f93bc15a9bdd0777f768",
+      "stream/05.png": "f8d7833972b5d478bc76d7c4ca03940f1f97b6af1f3f6d87ece8cd3ee7d15694",
+      "surface/00.png": "236aaf7af5aff46aaf5e9c14f6b12e23003e6133b8afa876c4ded79c5d8dca75",
+      "surface/01.png": "1e1d221930ced9b0cd9cd1991dbef237b8ce8c8156af71373f41a198f833c990",
+      "surface/02.png": "0901d4bbbecec0be284ce2988a20923ac667d646adea7f625a138bbc65e360f2",
+      "surface/03.png": "0290a1ba76dcc2f47b56645813934378b7d633f27812ad5480dbcd8034f3d743",
+      "surface/04.png": "6463dbac160066f66461b9fe48a28d1738fce27272304536acdcb72593fd7270",
+      "surface/05.png": "9b320722540f83be5ee6de5ca5a4f03d9a126b661fc14f659341eccefd3d2453"
+    }
+  },
+  "ribbonPlate": {
+    "bounds": [
+      1124,
+      59,
+      115,
+      252
+    ],
+    "path": "ribbon-plate.png"
+  }
+}

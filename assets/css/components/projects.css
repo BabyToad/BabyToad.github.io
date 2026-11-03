@@ -105,7 +105,8 @@
     color: var(--ink-soft);
 }
 
-.project-status.in-development {
+.project-status.in-development,
+.project-status.wip {
     color: var(--accent);
 }
 

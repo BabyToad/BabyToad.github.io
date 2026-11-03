@@ -367,6 +367,43 @@
         }
       ]
     },
+    "/assets/images/projects/six-springs-thumb.jpg": {
+      "width": 1000,
+      "height": 750,
+      "sha256": "a599981617995c6d101db2a6632b12dc882c2a75858f885ebbec4eb477b78529",
+      "webp": [
+        {
+          "src": "/assets/images/projects/six-springs-thumb-480w.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 49384,
+          "sha256": "f857f1430bd9812276a603a2dd20c1ed0ff3712a038786963930c3787b482506"
+        },
+        {
+          "src": "/assets/images/projects/six-springs-thumb-960w.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 141622,
+          "sha256": "be87f689136bebcf9249829120cbea9ad9de5c9f9585433f20b4c622f5329801"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/projects/six-springs-thumb-480w.avif",
+          "width": 480,
+          "height": 360,
+          "bytes": 33930,
+          "sha256": "d266174851567c60eaae5ba20f112cb97d460a9756bb9c86d8fc9a98a3db7aa5"
+        },
+        {
+          "src": "/assets/images/projects/six-springs-thumb-960w.avif",
+          "width": 960,
+          "height": 720,
+          "bytes": 94961,
+          "sha256": "e76b5f4624f8bba5f34ce2544ff202edadd9c4bdebd4e413124cebe55eac1246"
+        }
+      ]
+    },
     "/assets/images/projects/srd-framework-thumb.png": {
       "width": 1920,
       "height": 911,

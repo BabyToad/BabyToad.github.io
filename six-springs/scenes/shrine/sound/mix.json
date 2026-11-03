@@ -1,0 +1,33 @@
+{
+  "note": "Levels in dB. Beds are normalized to -20 dB RMS, one-shots to -3 dB peak.",
+  "room": {"return": -6, "voiceSend": -24},
+  "stems": {
+    "fallsDeep": {"db": -13, "bus": "bed", "group": "place"},
+    "fallsAir":  {"db": -22, "bus": "bed", "group": "place"},
+    "spout":     {"db": -29, "bus": "bed", "group": "place"},
+    "insects":   {"db": -27, "bus": "bed", "group": "place"},
+    "leaves":    {"db": -23, "bus": "bed", "group": "place"},
+    "wet":       {"db": -27, "bus": "bed", "group": "place", "send": -12, "voices": 3},
+    "far":       {"db": -35, "bus": "bed", "group": "place", "send": -8, "voices": 3},
+    "temple":    {"db": -29, "bus": "bed", "group": "place", "send": -4, "voices": 1},
+
+    "music":     {"db": -14, "bus": "bed", "group": "music", "send": -12, "voices": 10},
+    "drone":     {"db": -20, "bus": "bed", "group": "music", "send": -14},
+
+    "body":      {"db": -13, "bus": "sfx", "group": "her", "send": -18, "voices": 6},
+    "air":       {"db": -34, "bus": "sfx", "group": "her"},
+    "jewels":    {"db": -24, "bus": "sfx", "group": "her", "send": -14, "voices": 5},
+    "bell":      {"db": -7, "bus": "sfx", "group": "things", "send": -8, "voices": 8},
+    "rope":      {"db": -27, "bus": "sfx", "group": "things", "send": -18, "voices": 3},
+    "bowl":      {"db": -8, "bus": "sfx", "group": "things", "send": -10, "voices": 6},
+    "rice":      {"db": -24, "bus": "sfx", "group": "things", "send": -14, "voices": 12},
+    "frog":      {"db": -20, "bus": "sfx", "group": "things", "send": -16, "voices": 3},
+    "ribbon":    {"db": -12, "bus": "sfx", "group": "things", "send": -18, "voices": 3},
+    "water":     {"db": -20, "bus": "sfx", "group": "things", "send": -14, "voices": 2},
+    "words":     {"db": -24, "bus": "sfx", "group": "words", "send": -18, "voices": 6},
+    "brush":     {"db": -22, "bus": "sfx", "group": "words"},
+    "ui":        {"db": -24, "bus": "sfx", "group": "words", "send": -14, "voices": 2}
+  },
+  "speech": {"musicDip": -5},
+  "opening": {"place": 3.5, "stagger": 0.9}
+}

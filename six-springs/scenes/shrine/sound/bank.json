@@ -1,0 +1,691 @@
+{
+ "format": 1,
+ "sounds": {
+  "fallsDeep": {
+   "files": [
+    "amb/fallsDeep_01"
+   ],
+   "durations": [
+    22.0
+   ]
+  },
+  "fallsAir": {
+   "files": [
+    "amb/fallsAir_01"
+   ],
+   "durations": [
+    22.0
+   ]
+  },
+  "spout": {
+   "files": [
+    "amb/spout_01",
+    "amb/spout_02"
+   ],
+   "durations": [
+    16.0,
+    16.0
+   ]
+  },
+  "crickets": {
+   "files": [
+    "amb/crickets_01",
+    "amb/crickets_02"
+   ],
+   "durations": [
+    16.0,
+    16.0
+   ]
+  },
+  "cicada": {
+   "files": [
+    "amb/cicada_01"
+   ],
+   "durations": [
+    12.0
+   ]
+  },
+  "leaves": {
+   "files": [
+    "amb/leaves_01",
+    "amb/leaves_02"
+   ],
+   "durations": [
+    16.0,
+    16.0
+   ]
+  },
+  "brush": {
+   "files": [
+    "amb/brush_01",
+    "amb/brush_02"
+   ],
+   "durations": [
+    7.0,
+    7.0
+   ]
+  },
+  "drip": {
+   "files": [
+    "sfx/drip_01",
+    "sfx/drip_02",
+    "sfx/drip_03",
+    "sfx/drip_04",
+    "sfx/drip_05",
+    "sfx/drip_06",
+    "sfx/drip_07",
+    "sfx/drip_08"
+   ],
+   "durations": [
+    0.098,
+    0.032,
+    0.046,
+    0.036,
+    0.042,
+    0.078,
+    0.148,
+    0.09
+   ]
+  },
+  "bird": {
+   "files": [
+    "sfx/bird_01",
+    "sfx/bird_02",
+    "sfx/bird_03",
+    "sfx/bird_04"
+   ],
+   "durations": [
+    0.243,
+    0.221,
+    0.337,
+    0.337
+   ]
+  },
+  "flush": {
+   "files": [
+    "sfx/flush_01"
+   ],
+   "durations": [
+    2.48
+   ]
+  },
+  "ribbon": {
+   "files": [
+    "sfx/ribbon_01",
+    "sfx/ribbon_02",
+    "sfx/ribbon_03",
+    "sfx/ribbon_04",
+    "sfx/ribbon_05"
+   ],
+   "durations": [
+    0.048,
+    0.044,
+    0.11,
+    0.088,
+    0.108
+   ]
+  },
+  "foot": {
+   "files": [
+    "sfx/foot_01",
+    "sfx/foot_02",
+    "sfx/foot_03",
+    "sfx/foot_04",
+    "sfx/foot_05",
+    "sfx/foot_06",
+    "sfx/foot_07",
+    "sfx/foot_08",
+    "sfx/foot_09",
+    "sfx/foot_10",
+    "sfx/foot_11",
+    "sfx/foot_12"
+   ],
+   "durations": [
+    0.058,
+    0.064,
+    0.056,
+    0.048,
+    0.048,
+    0.056,
+    0.07,
+    0.06,
+    0.07,
+    0.112,
+    0.076,
+    0.158
+   ]
+  },
+  "stamp": {
+   "files": [
+    "sfx/stamp_01",
+    "sfx/stamp_02"
+   ],
+   "durations": [
+    1.2,
+    1.2
+   ]
+  },
+  "cloth": {
+   "files": [
+    "sfx/cloth_01",
+    "sfx/cloth_02",
+    "sfx/cloth_03",
+    "sfx/cloth_04",
+    "sfx/cloth_05",
+    "sfx/cloth_06",
+    "sfx/cloth_07",
+    "sfx/cloth_08",
+    "sfx/cloth_09",
+    "sfx/cloth_10"
+   ],
+   "durations": [
+    0.247,
+    0.329,
+    0.417,
+    0.449,
+    0.423,
+    0.419,
+    0.375,
+    0.417,
+    0.429,
+    0.499
+   ]
+  },
+  "bangle": {
+   "files": [
+    "sfx/bangle_01",
+    "sfx/bangle_02",
+    "sfx/bangle_03",
+    "sfx/bangle_04",
+    "sfx/bangle_05",
+    "sfx/bangle_06",
+    "sfx/bangle_07",
+    "sfx/bangle_08",
+    "sfx/bangle_09",
+    "sfx/bangle_10"
+   ],
+   "durations": [
+    0.158,
+    0.158,
+    0.104,
+    0.108,
+    0.166,
+    0.194,
+    0.1,
+    0.168,
+    0.092,
+    0.096
+   ]
+  },
+  "earring": {
+   "files": [
+    "sfx/earring_01",
+    "sfx/earring_02",
+    "sfx/earring_03",
+    "sfx/earring_04",
+    "sfx/earring_05",
+    "sfx/earring_06",
+    "sfx/earring_07",
+    "sfx/earring_08"
+   ],
+   "durations": [
+    0.048,
+    0.11,
+    0.09,
+    0.124,
+    0.086,
+    0.084,
+    0.102,
+    0.086
+   ]
+  },
+  "rope": {
+   "files": [
+    "sfx/rope_01",
+    "sfx/rope_02",
+    "sfx/rope_03",
+    "sfx/rope_04",
+    "sfx/rope_05"
+   ],
+   "durations": [
+    0.124,
+    0.076,
+    0.044,
+    0.19,
+    0.054
+   ]
+  },
+  "creak": {
+   "files": [
+    "sfx/creak_01",
+    "sfx/creak_02",
+    "sfx/creak_03",
+    "sfx/creak_04"
+   ],
+   "durations": [
+    0.042,
+    0.042,
+    0.128,
+    0.325
+   ]
+  },
+  "bowlHard": {
+   "files": [
+    "sfx/bowlHard_01",
+    "sfx/bowlHard_02",
+    "sfx/bowlHard_03"
+   ],
+   "durations": [
+    1.7,
+    1.7,
+    1.7
+   ]
+  },
+  "bowlTap": {
+   "files": [
+    "sfx/bowlTap_01",
+    "sfx/bowlTap_02",
+    "sfx/bowlTap_03",
+    "sfx/bowlTap_04",
+    "sfx/bowlTap_05",
+    "sfx/bowlTap_06",
+    "sfx/bowlTap_07",
+    "sfx/bowlTap_08",
+    "sfx/bowlTap_09",
+    "sfx/bowlTap_10"
+   ],
+   "durations": [
+    0.152,
+    0.144,
+    0.144,
+    0.152,
+    0.152,
+    0.14,
+    0.134,
+    0.116,
+    0.21,
+    0.206
+   ]
+  },
+  "bowlBounce": {
+   "files": [
+    "sfx/bowlBounce_01"
+   ],
+   "durations": [
+    2.6
+   ]
+  },
+  "bowlSettle": {
+   "files": [
+    "sfx/bowlSettle_01",
+    "sfx/bowlSettle_02"
+   ],
+   "durations": [
+    2.0,
+    2.0
+   ]
+  },
+  "bowlWood": {
+   "files": [
+    "sfx/bowlWood_01",
+    "sfx/bowlWood_02",
+    "sfx/bowlWood_03",
+    "sfx/bowlWood_04",
+    "sfx/bowlWood_05",
+    "sfx/bowlWood_06"
+   ],
+   "durations": [
+    0.102,
+    0.11,
+    0.088,
+    0.08,
+    0.074,
+    0.088
+   ]
+  },
+  "palm": {
+   "files": [
+    "sfx/palm_01"
+   ],
+   "durations": [
+    0.7
+   ]
+  },
+  "rice": {
+   "files": [
+    "sfx/rice_01",
+    "sfx/rice_02"
+   ],
+   "durations": [
+    2.48,
+    2.48
+   ]
+  },
+  "grain": {
+   "files": [
+    "sfx/grain_01",
+    "sfx/grain_02",
+    "sfx/grain_03",
+    "sfx/grain_04",
+    "sfx/grain_05",
+    "sfx/grain_06",
+    "sfx/grain_07",
+    "sfx/grain_08",
+    "sfx/grain_09",
+    "sfx/grain_10",
+    "sfx/grain_11",
+    "sfx/grain_12"
+   ],
+   "durations": [
+    0.052,
+    0.042,
+    0.058,
+    0.068,
+    0.054,
+    0.068,
+    0.052,
+    0.052,
+    0.022,
+    0.024,
+    0.048,
+    0.054
+   ]
+  },
+  "swoosh": {
+   "files": [
+    "sfx/swoosh_01"
+   ],
+   "durations": [
+    1.48
+   ]
+  },
+  "croak": {
+   "files": [
+    "sfx/croak_01",
+    "sfx/croak_02",
+    "sfx/croak_03",
+    "sfx/croak_04",
+    "sfx/croak_05",
+    "sfx/croak_06",
+    "sfx/croak_07",
+    "sfx/croak_08"
+   ],
+   "durations": [
+    0.154,
+    0.114,
+    0.134,
+    0.148,
+    0.182,
+    0.206,
+    0.048,
+    0.054
+   ]
+  },
+  "plop": {
+   "files": [
+    "sfx/plop_01",
+    "sfx/plop_02",
+    "sfx/plop_03",
+    "sfx/plop_04"
+   ],
+   "durations": [
+    0.07,
+    0.068,
+    0.092,
+    0.06
+   ]
+  },
+  "gulp": {
+   "files": [
+    "sfx/gulp_01"
+   ],
+   "durations": [
+    0.9
+   ]
+  },
+  "pat": {
+   "files": [
+    "sfx/pat_01",
+    "sfx/pat_02",
+    "sfx/pat_03",
+    "sfx/pat_04",
+    "sfx/pat_05",
+    "sfx/pat_06",
+    "sfx/pat_07",
+    "sfx/pat_08",
+    "sfx/pat_09",
+    "sfx/pat_10"
+   ],
+   "durations": [
+    0.132,
+    0.134,
+    0.072,
+    0.136,
+    0.122,
+    0.118,
+    0.094,
+    0.088,
+    0.094,
+    0.092
+   ]
+  },
+  "thud": {
+   "files": [
+    "sfx/thud_01"
+   ],
+   "durations": [
+    0.6
+   ]
+  },
+  "flake": {
+   "files": [
+    "sfx/flake_01",
+    "sfx/flake_02"
+   ],
+   "durations": [
+    3.0,
+    3.0
+   ]
+  },
+  "wordFloor": {
+   "files": [
+    "sfx/wordFloor_01",
+    "sfx/wordFloor_02",
+    "sfx/wordFloor_03"
+   ],
+   "durations": [
+    0.146,
+    0.094,
+    0.074
+   ]
+  },
+  "wordHop": {
+   "files": [
+    "sfx/wordHop_01",
+    "sfx/wordHop_02",
+    "sfx/wordHop_03",
+    "sfx/wordHop_04",
+    "sfx/wordHop_05",
+    "sfx/wordHop_06",
+    "sfx/wordHop_07",
+    "sfx/wordHop_08"
+   ],
+   "durations": [
+    0.126,
+    0.11,
+    0.116,
+    0.17,
+    0.088,
+    0.118,
+    0.184,
+    0.104
+   ]
+  },
+  "splash": {
+   "files": [
+    "sfx/splash_01"
+   ],
+   "durations": [
+    3.0
+   ]
+  },
+  "knock": {
+   "files": [
+    "sfx/knock_01",
+    "sfx/knock_02",
+    "sfx/knock_03",
+    "sfx/knock_04",
+    "sfx/knock_05"
+   ],
+   "durations": [
+    0.054,
+    0.06,
+    0.06,
+    0.056,
+    0.062
+   ]
+  },
+  "zither": {
+   "notes": {
+    "B2": {
+     "f": "zither/b2_f",
+     "fCents": -3,
+     "mf": "zither/b2_mf",
+     "mfCents": 1
+    },
+    "B3": {
+     "f": "zither/b3_f",
+     "fCents": 8,
+     "mf": "zither/b3_mf",
+     "mfCents": -6
+    },
+    "B4": {
+     "f": "zither/b4_f",
+     "fCents": -4,
+     "mf": "zither/b4_mf",
+     "mfCents": 1
+    },
+    "B5": {
+     "f": "zither/b5_f",
+     "fCents": -12,
+     "mf": "zither/b5_mf",
+     "mfCents": -4
+    },
+    "C#3": {
+     "f": "zither/cs3_f",
+     "fCents": 16,
+     "mf": "zither/cs3_mf",
+     "mfCents": 15
+    },
+    "C#4": {
+     "f": "zither/cs4_f",
+     "fCents": 48,
+     "mf": "zither/cs4_mf",
+     "mfCents": 38
+    },
+    "C#5": {
+     "f": "zither/cs5_f",
+     "fCents": -1,
+     "mf": "zither/cs5_mf",
+     "mfCents": -7
+    },
+    "D#3": {
+     "f": "zither/ds3_f",
+     "fCents": 22,
+     "mf": "zither/ds3_mf",
+     "mfCents": -1
+    },
+    "D#4": {
+     "f": "zither/ds4_f",
+     "fCents": 6,
+     "mf": "zither/ds4_mf",
+     "mfCents": 2
+    },
+    "D#5": {
+     "f": "zither/ds5_f",
+     "fCents": 1,
+     "mf": "zither/ds5_mf",
+     "mfCents": 5
+    },
+    "F#3": {
+     "f": "zither/fs3_f",
+     "fCents": 7,
+     "mf": "zither/fs3_mf",
+     "mfCents": -9
+    },
+    "F#4": {
+     "f": "zither/fs4_f",
+     "fCents": -10,
+     "mf": "zither/fs4_mf",
+     "mfCents": -11
+    },
+    "F#5": {
+     "f": "zither/fs5_f",
+     "fCents": -7,
+     "mf": "zither/fs5_mf",
+     "mfCents": 2
+    },
+    "G#3": {
+     "f": "zither/gs3_f",
+     "fCents": 13,
+     "mf": "zither/gs3_mf",
+     "mfCents": 4
+    },
+    "G#4": {
+     "f": "zither/gs4_f",
+     "fCents": -5,
+     "mf": "zither/gs4_mf",
+     "mfCents": 0
+    },
+    "G#5": {
+     "f": "zither/gs5_f",
+     "fCents": -5,
+     "mf": "zither/gs5_mf",
+     "mfCents": 3
+    }
+   }
+  },
+  "gliss": {
+   "files": [
+    "zither/gliss_01",
+    "zither/gliss_02"
+   ],
+   "durations": [
+    5.0,
+    5.0
+   ]
+  },
+  "bell": {
+   "files": [
+    "inst/bell_01"
+   ],
+   "durations": [
+    2.972
+   ]
+  },
+  "gong": {
+   "files": [
+    "inst/gong_01"
+   ],
+   "durations": [
+    12.0
+   ]
+  },
+  "gongLight": {
+   "files": [
+    "inst/gongLight_01"
+   ],
+   "durations": [
+    5.0
+   ]
+  },
+  "drone": {
+   "files": [
+    "inst/drone_01"
+   ],
+   "durations": [
+    7.138
+   ]
+  }
+ }
+}

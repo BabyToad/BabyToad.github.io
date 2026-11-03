@@ -1,0 +1,24 @@
+{
+  "title": "Six Springs, for one zither, somewhere out of sight",
+  "note": "Original to this project. C# shang: C# D# F# G# B, no third, so it never says major or minor. Her bell's fundamental is C#6 and its second partial F#7, measured, so the bell always belongs. Notes are [pitch, beats, velocity 0..1, technique]. Beats 0 sound with the next note. Techniques: g slide up into the note, b released from a press, n pressed toward the note above and back, v left-hand vibrato.",
+  "beat": 0.82,
+  "phrases": {
+    "shrug":      {"rest": 5,  "notes": [["G#4",2,0.62,"g"],["F#4",1,0.5],["C#4",4,0.56,"v"]]},
+    "ground":     {"rest": 6,  "notes": [["C#3",0,0.5],["G#3",2,0.46],["B3",1,0.42],["C#4",4,0.5,"v"]]},
+    "shrug2":     {"rest": 7,  "notes": [["G#4",1,0.56],["B4",1,0.66,"g"],["G#4",1,0.5],["F#4",1,0.46],["D#4",1,0.46],["C#4",4,0.54,"v"]]},
+    "refusal":    {"rest": 14, "notes": [["F#4",2,0.54],["D#4",1,0.44],["B3",1,0.44],["G#3",5,0.5,"v"]]},
+    "halls":      {"rest": 6,  "notes": [["C#5",2,0.58,"v"],["B4",1,0.46],["G#4",1,0.44],["B4",3,0.56,"n"],["G#4",1.5,0.44],["F#4",3,0.46]]},
+    "tall":       {"rest": 9,  "notes": [["D#5",2,0.6,"g"],["C#5",1,0.5],["B4",1,0.44],["G#4",1,0.44],["F#4",1,0.44],["D#4",4,0.5,"n"]]},
+    "drops":      {"rest": 12, "notes": [["C#4",1.4,0.52],["C#4",1,0.5],["C#4",0.7,0.46],["C#4",0.5,0.42],["C#4",0.36,0.38],["C#4",0.26,0.34],["C#4",0.2,0.3],["C#4",0.16,0.26],["F#3",4,0.5,"v"]]},
+    "low":        {"rest": 5,  "notes": [["C#3",3,0.56],["D#3",1,0.44],["F#3",1,0.44],["G#3",3,0.52,"v"],["F#3",1,0.42],["D#3",1,0.42],["C#3",5,0.52]]},
+    "listening":  {"rest": 16, "notes": [["G#3",0,0.36],["C#4",6,0.44,"v"]]},
+    "stair":      {"rest": 6,  "notes": [["F#3",1,0.44],["G#3",1,0.44],["B3",1,0.46],["C#4",1,0.5],["D#4",1,0.5],["F#4",3,0.56,"n"],["D#4",2,0.46],["C#4",4,0.46,"v"]]},
+    "shrug3":     {"rest": 8,  "notes": [["G#3",2,0.5],["F#3",1,0.42],["C#3",5,0.5]]},
+    "nothing":    {"rest": 45, "notes": [["C#5",5,0.34,"v"]]}
+  },
+  "order": ["shrug","ground","shrug2","refusal","halls","tall","drops","low","listening","stair","shrug3","nothing"],
+  "answers": {
+    "bell":    {"notes": [["C#5",1,0.42],["G#4",1,0.42],["C#4",4,0.46,"v"]], "wait": 3.4, "rest": 7},
+    "home":    {"notes": [["F#3",0.7,0.42],["G#3",0.7,0.44],["C#4",4,0.5,"v"]], "wait": 0.5, "rest": 7}
+  }
+}

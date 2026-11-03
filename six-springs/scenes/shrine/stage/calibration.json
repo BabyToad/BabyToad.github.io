@@ -1,0 +1,27 @@
+{
+  "format": 1,
+  "image": {"width": 1536, "height": 1024},
+  "camera": {"cx": 470, "cy": 640, "focal": 1400, "height": 1.6},
+  "wall": {"line": [[430, 772], [1445, 873.5]], "left": 430, "right": 1445},
+  "light": {"direction": [0.802, -0.488, -0.72], "opacity": 0.28, "mapSize": 1024},
+  "bell": {"depth": 11.5, "top": [875, 210], "joint": [875, 286]},
+  "offering": {"anchor":[369,732],"depth":11.25,"standDepth":11.3,"standFeetX":462,"dip":90,"floorReach":120,"floorDip":0, "drop":{"depth":8.9,"x":[210,930],"maxSpeed":1.8}},
+  "cord": {"bottom":[875,690]},
+  "saint": {"feet": [620, 832], "heightPixels": 500},
+  "structure": [
+    {"id":"bell-beam","thickness":0.18,"vertices":[[810,145,11.5],[910,115,11.5],[1065,180,"wall"],[1065,252,"wall"],[912,184,11.5],[811,207,11.5]],"triangles":[0,1,4,0,4,5,1,2,3,1,3,4]},
+    {"id":"bell-brace","thickness":0.12,"vertices":[[953,258,11.5],[1014,274,11.5],[1058,405,"wall"],[998,411,"wall"]],"triangles":[0,1,2,0,2,3]}
+  ],
+  "occluders": [
+    {"id": "stool", "foot": [375, 874]},
+    {"id": "sack", "foot": [385, 884]},
+    {"id": "frog", "foot": [475, 876]},
+    {"id": "bowl", "depth": 11.25},
+    {"id": "rice", "depth": 11.2},
+    {"id": "basin", "foot": [1190, 921]},
+    {"id": "spout", "depth": 8.7},
+    {"id": "stream", "depth": 8.0},
+    {"id": "board", "depth": 10.3},
+    {"id": "ribbon", "depth": 10.5}
+  ]
+}
