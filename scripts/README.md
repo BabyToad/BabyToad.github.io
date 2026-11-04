@@ -1,3 +1,17 @@
+# Media handoff
+
+`ruby scripts/media_manifest.rb --check` verifies the R2 inventory against local
+bytes; omit `--check` to regenerate it. This uses only Ruby's standard library.
+Jonas performs the upload and account changes using [upload-media.md](upload-media.md).
+All inventory files remain tracked while `_config.yml` has `media_base: ""`.
+The `media_url` Liquid filter prefixes site-relative thought video/download URLs
+at rendering time; their YAML `videos[].src` paths stay literal, since front
+matter does not evaluate Liquid. Existing external videos keep their own URLs.
+The Godot loader's two payload lookups use `Engine.fileUrls`; its worklet base and
+virtual PCK path stay local. The iso-engine bundle's two audio-path resolvers use
+`config.audioPath`, supplied by its page, while image/scene paths stay local.
+Preserve these small integration patches if re-exporting either upstream demo.
+
 # Gallery bundle
 
 Before every local Jekyll build or serve (and again after adding/changing gallery
