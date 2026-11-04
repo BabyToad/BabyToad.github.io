@@ -3,7 +3,7 @@ layout: post
 title: "Ask the Archives: AI Rules Lookup for AD&D 2E"
 date: 2026-03-27
 description: "Building an AI agent that answers AD&D 2E rules questions by searching the actual books — not by guessing from training data. Architecture notes on embedding search, Claude Sonnet tool use, and making AI trustworthy for reference work."
-tags: [ai, claude-code, web-dev, ad&d, ttrpg, side-project]
+tags: [ai, claude-code, web-dev, adnd, ttrpg, side-project]
 visibility: public
 ---
 

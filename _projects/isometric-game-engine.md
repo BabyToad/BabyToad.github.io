@@ -5,12 +5,7 @@ description: A TypeScript-based isometric game engine with centralized configura
 status: in development
 version: 0.5.1
 confidence: medium
-tags:
-  - TypeScript
-  - Game Engine
-  - WordPress
-  - Interactive
-  - Development Tools
+tags: [typescript, game-engine, wordpress, interactive, development-tools]
 last_modified_at: 2024-12-22
 thumbnail: /assets/images/projects/iso_engine_thumb.png
 image: /assets/images/projects/iso_engine_thumb.png

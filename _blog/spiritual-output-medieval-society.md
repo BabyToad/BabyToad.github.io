@@ -3,7 +3,7 @@ layout: post
 title: "Thinking about Spiritual Output in a Medieval Society"
 date: 2025-09-22
 description: "Exploring how to model spiritual production and religious devotion in medieval RPGs, and designing game mechanics that align player incentives with character motivations around faith and worship."
-tags: [game-design, rpg, medieval, religion, mechanics, economics]
+tags: [game-design, ttrpg, medieval, religion, mechanics, economics]
 toc: true
 visibility: public
 ---

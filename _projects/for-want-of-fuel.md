@@ -5,11 +5,7 @@ description: A streamlined set of playtest rules for running Stars Without Numbe
 status: in development
 version: 0.4
 confidence: Medium
-tags:
-  - RPG
-  - Game Design
-  - Stars Without Number
-  - Mech Combat
+tags: [ttrpg, game-design, stars-without-number, mech-combat]
 thumbnail: /assets/images/projects/forWantOfFuel_thumb.png
 image: /assets/images/projects/forWantOfFuel_thumb.png
 last_modified_at: 2024-03-20
