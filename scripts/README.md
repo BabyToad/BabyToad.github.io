@@ -1,3 +1,17 @@
+# Media handoff
+
+`ruby scripts/media_manifest.rb --check` verifies the R2 inventory against local
+bytes; omit `--check` to regenerate it. This uses only Ruby's standard library.
+Jonas performs the upload and account changes using [upload-media.md](upload-media.md).
+All inventory files remain tracked while `_config.yml` has `media_base: ""`.
+The `media_url` Liquid filter prefixes site-relative thought video/download URLs
+at rendering time; their YAML `videos[].src` paths stay literal, since front
+matter does not evaluate Liquid. Existing external videos keep their own URLs.
+The Godot loader's two payload lookups use `Engine.fileUrls`; its worklet base and
+virtual PCK path stay local. The iso-engine bundle's two audio-path resolvers use
+`config.audioPath`, supplied by its page, while image/scene paths stay local.
+Preserve these small integration patches if re-exporting either upstream demo.
+
 # Gallery bundle
 
 Before every local Jekyll build or serve (and again after adding/changing gallery
@@ -140,8 +154,8 @@ uv --no-cache run --no-project --python C:/Users/heink/AppData/Local/Programs/Py
 
 The comparison requires identical HTML bodies after normalizing picture fallback
 URLs and the existing image-alternates build-time query string. It checks every
-SEO head, with RSS autodiscovery required on the site's base layout (the
-repository notes use the theme's own layout). Sitemap structure and URLs must be
+SEO head, with RSS autodiscovery required on the site's base layout (including
+the repository reference pages). Sitemap structure and URLs must be
 identical; `lastmod` timestamps are compared separately in review because the
 plugin derives them from Git commits and static-file checkout mtimes. Metadata
 commits legitimately update document dates; timestamps are not pinned to hide it.

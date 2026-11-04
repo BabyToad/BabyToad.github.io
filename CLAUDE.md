@@ -1,3 +1,9 @@
+---
+layout: base
+title: Repository guide
+sitemap: false
+---
+
 # Repository guide
 
 Steak Knives and Bagels is Jonas Heinke's personal website at
@@ -6,7 +12,7 @@ and [the gallery contract](AGENTS-WELCOME.md) before changing design or gallery 
 
 ## Build and deployment
 
-Jekyll 3.10, Bundler, GitHub Actions, GitHub Pages behind Cloudflare. From the root:
+Jekyll 4.4, Bundler, GitHub Actions, GitHub Pages behind Cloudflare. From the root:
 
 ```sh
 bundle install

@@ -2,11 +2,20 @@
 
 `assets/css/styles.scss` is the Jekyll entry point. Its YAML front matter enables
 Liquid and Sass processing; the build emits compressed `/assets/css/styles.css`.
-The URL stays stable, and the output contains no browser `@import` requests.
+The output contains no browser `@import` requests.
+
+The base layout's shared and conditional stylesheets and the footer gallery bundle
+carry `?v=<first 16 hex characters of SHA-256>`. `_plugins/asset_versions.rb`
+resolves the Liquid filter's placeholders after every page has rendered, hashing
+the actual Sass output or static file bytes. Identical builds keep identical URLs;
+changed CSS, its included sources, or gallery content changes the relevant URL.
+No asset from a previous `_site` build is read. Cloudflare must keep the query
+string in its cache key; see [hosting.md](hosting.md).
 
 Liquid `include_relative` directives inline the existing CSS sources in their
 original cascade order before Sass runs. This preserves their paths and avoids
-renaming sources: the current Ruby Sass version does not inline `.css` imports.
+renaming sources: explicit `.css` imports remain browser requests in Sass.
+Jekyll 4 uses jekyll-sass-converter 3 and Dart Sass.
 Keep shared styles in this entry point, including `components/sidenotes.css`.
 
 Feature styles are loaded directly by `_layouts/base.html` when either the page

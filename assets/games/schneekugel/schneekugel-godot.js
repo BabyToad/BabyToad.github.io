@@ -684,7 +684,8 @@ const Engine = (function () {
 	Engine.load = function (basePath, size) {
 		if (loadPromise == null) {
 			loadPath = basePath;
-			loadPromise = preloader.loadPromise(`${loadPath}.wasm`, size, true);
+			// Site integration: map payload URLs without moving the local worklets.
+			loadPromise = preloader.loadPromise(SafeEngine.fileUrls?.[`${loadPath}.wasm`] || `${loadPath}.wasm`, size, true);
 			requestAnimationFrame(preloader.animateProgress);
 		}
 		return loadPromise;
@@ -769,7 +770,8 @@ const Engine = (function () {
 			 * @returns {Promise} A Promise that resolves once the file is loaded.
 			 */
 			preloadFile: function (file, path) {
-				return preloader.preload(file, path, this.config.fileSizes[file]);
+				// Preserve the local virtual-filesystem path and progress byte count.
+				return preloader.preload(SafeEngine.fileUrls?.[file] || file, path, this.config.fileSizes[file]);
 			},
 
 			/**

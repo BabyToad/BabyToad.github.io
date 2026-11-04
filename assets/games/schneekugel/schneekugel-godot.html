@@ -1,3 +1,7 @@
+---
+layout: null
+sitemap: false
+---
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -113,6 +117,11 @@ body {
 		<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"schneekugel-godot","experimentalVK":false,"fileSizes":{"schneekugel-godot.pck":10348964,"schneekugel-godot.wasm":36145869},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
+// Only the large payloads can move; engine JS, worklets and icons stay local.
+Engine.fileUrls = {
+	'schneekugel-godot.wasm': {{ '/assets/games/schneekugel/schneekugel-godot.wasm' | media_url | jsonify }},
+	'schneekugel-godot.pck': {{ '/assets/games/schneekugel/schneekugel-godot.pck' | media_url | jsonify }}
+};
 const engine = new Engine(GODOT_CONFIG);
 
 (function () {

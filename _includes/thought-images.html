@@ -11,9 +11,9 @@
                data-image-panel
                aria-label="{{ video.title | default: video.label | default: 'Thought video' }}"
                aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
-            <source src="{{ video.src }}" type="{{ video.type | default: 'video/mp4' }}">
+            <source src="{{ video.src | media_url }}" type="{{ video.type | default: 'video/mp4' }}">
             Your browser does not support the video tag.
-            <a href="{{ video.src }}">Download the video.</a>
+            <a href="{{ video.src | media_url }}">Download the video.</a>
         </video>
         {% endfor %}
     </div>

@@ -1,3 +1,9 @@
+---
+layout: base
+title: AGENTS-WELCOME
+sitemap: false
+---
+
 # AGENTS-WELCOME
 
 This file is an invitation.

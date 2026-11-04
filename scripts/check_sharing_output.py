@@ -49,7 +49,7 @@ def metadata(site):
         assert parts.path.lower().endswith((".png", ".jpg", ".jpeg", ".webp")), image
         if image.startswith(ORIGIN + "/"):
             assert (site / unquote(parts.path).lstrip("/")).is_file(), image
-        if any(link.get("href") == "/assets/css/styles.css" for link in head.links):
+        if any(urlsplit(link.get("href", "")).path == "/assets/css/styles.css" for link in head.links):
             feeds = [link for link in head.links
                      if link.get("rel") == "alternate"
                      and link.get("type") == "application/atom+xml"]
