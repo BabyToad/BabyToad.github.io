@@ -4,6 +4,14 @@
 Liquid and Sass processing; the build emits compressed `/assets/css/styles.css`.
 The output contains no browser `@import` requests.
 
+The base layout's shared and conditional stylesheets and the footer gallery bundle
+carry `?v=<first 16 hex characters of SHA-256>`. `_plugins/asset_versions.rb`
+resolves the Liquid filter's placeholders after every page has rendered, hashing
+the actual Sass output or static file bytes. Identical builds keep identical URLs;
+changed CSS, its included sources, or gallery content changes the relevant URL.
+No asset from a previous `_site` build is read. Cloudflare must keep the query
+string in its cache key; see [hosting.md](hosting.md).
+
 Liquid `include_relative` directives inline the existing CSS sources in their
 original cascade order before Sass runs. This preserves their paths and avoids
 renaming sources: explicit `.css` imports remain browser requests in Sass.
