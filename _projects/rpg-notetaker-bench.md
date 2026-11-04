@@ -5,7 +5,7 @@ classes: wide-content rpg-bench-page
 title: "RPG Notetaker Bench"
 description: "Comparing AI models' ability to process and organize RPG session transcripts"
 date: 2025-01-11
-tags: [AI, RPG, Benchmarking, D&D, AudioToLogs, LLM]
+tags: [ai, ttrpg, benchmarking, dnd, audiotologs, llm]
 permalink: /projects/rpg-notetaker-bench/
 status: archived
 ---

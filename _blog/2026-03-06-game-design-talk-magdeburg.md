@@ -3,7 +3,7 @@ layout: post
 title: "Guest Talk: Game Design at Otto von Guericke University"
 date: 2026-03-06
 description: "Gave a guest lecture on practical game design and development at the Applied Game Design course in Magdeburg."
-tags: [game-design, talk, university]
+tags: [game-design, talks, university]
 visibility: public
 ---
 

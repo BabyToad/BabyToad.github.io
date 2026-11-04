@@ -5,14 +5,7 @@ description: A desktop application for optimal student-to-workshop assignment us
 status: released
 version: 1.0.0
 confidence: High-ish
-tags:
-  - Python
-  - Desktop Application
-  - Educational Tools
-  - Linear Programming
-  - Optimization
-  - tkinter
-  - Excel Integration
+tags: [python, desktop-application, educational-tools, linear-programming, optimization, tkinter, excel-integration]
 last_modified_at: 2025-10-06
 github_url: https://github.com/babytoad/clown_orga
 show_repo: true

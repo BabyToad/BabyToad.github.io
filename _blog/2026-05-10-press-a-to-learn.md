@@ -3,7 +3,7 @@ layout: post
 title: "Guest Talk: Press A to Learn — Macromedia Leipzig"
 date: 2026-05-10
 description: "Gave a 60-minute talk on founding a games start-up in Mitteldeutschland at the Press A to Learn event hosted by Macromedia students in Leipzig."
-tags: [game-design, talk, university, mitteldeutschland]
+tags: [game-design, talks, university, mitteldeutschland]
 visibility: public
 ---
 

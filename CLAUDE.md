@@ -45,6 +45,10 @@ sharing-card regeneration, and output audits. No Node tooling in the build.
 - Use original image paths in front matter and `responsive-image.html` in prose;
   regenerate derivatives and `_data/images.json` together (see scripts guide).
 - `feed.xml` combines public Blog and Thoughts; preserve existing entry IDs.
+- Tags in Blog, Projects and Thoughts use lower-case, hyphenated front matter
+  (`game-dev`, `game-design`, `ttrpg`, `dnd`, `adnd`, `stars-without-number`).
+  `_plugins/tag_pages.rb` builds `/tags/` and `/tags/<tag>/` from public documents,
+  including single-item tags. Use `tag.html` for linked chips; no hover previews.
 
 Projects use `date` for project chronology and `last_modified_at` for edits.
 Status is `released`, `in development`, or `archived`. Featured projects and

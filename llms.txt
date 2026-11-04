@@ -27,6 +27,10 @@ Longer essays, talk write-ups and project posts. Newest first.
 
 {% for pr in site.projects %}- [{{ pr.title }}]({{ site.url }}{{ pr.url }}): {{ pr.description | strip_newlines }}{% if pr.demo_url %} Live: {% if pr.demo_url contains "://" %}{{ pr.demo_url }}{% else %}{{ site.url }}{{ pr.demo_url }}{% endif %}{% endif %}
 {% endfor %}
+## Tags
+
+- [Tags]({{ site.url }}/tags/): browse blog posts, projects and thoughts by topic.
+
 ## For Want of Fuel
 
 Playtest rules for Stars Without Number compatible mech combat. [Overview]({{ site.url }}/for-want-of-fuel/), then chapters in reading order.

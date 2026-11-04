@@ -1,0 +1,19 @@
+---
+layout: base
+---
+<h1 class="page-title">{{ page.title | escape }}</h1>
+<p><a href="{{ '/tags/' | relative_url }}">All tags &rarr;</a></p>
+<div class="post-list">
+    {% for entry in page.entries %}
+    <article class="post-row">
+        <time datetime="{{ entry.date | date_to_xmlschema }}">{{ entry.date | date: '%Y-%m-%d' }}</time>
+        <div>
+            <div class="section-label">{{ entry.kind }}</div>
+            <h3><a href="{{ entry.url | relative_url }}">{{ entry.title | escape }}</a></h3>
+            {% if entry.description %}
+            <p>{{ entry.description | markdownify | strip_html | normalize_whitespace | escape }}</p>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+</div>

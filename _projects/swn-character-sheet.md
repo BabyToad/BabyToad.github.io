@@ -3,7 +3,7 @@ layout: project
 title: SWN Golden Triangle Character Sheet
 description: A custom Roll20 character sheet for Stars Without Number with corporate dystopia aesthetics and faction management.
 status: released
-tags: [rpg, stars-without-number, roll20, web-dev, swn]
+tags: [ttrpg, stars-without-number, roll20, web-dev]
 show_thumbnail: true
 thumbnail: /assets/images/projects/swn-sheet-thumb.png
 image: /assets/images/projects/swn-sheet-thumb.png

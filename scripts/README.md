@@ -1,3 +1,12 @@
+# Tag archives
+
+`bundle exec ruby scripts/check_tag_pages.rb` checks the tag generator with a
+small fixture spanning Blog, Projects and Thoughts, including visibility guards,
+single-item tags and first-line summaries. `_plugins/tag_pages.rb` runs during
+normal builds; no extra pre-build step is needed. Tags must be lower-case ASCII
+words/digits joined by hyphens; the build rejects other spellings. Keep aliases
+merged in front matter rather than adding a second URL for the same concept.
+
 # Media handoff
 
 `ruby scripts/media_manifest.rb --check` verifies the R2 inventory against local

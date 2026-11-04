@@ -27,7 +27,7 @@ use_container: false
                 {% if page.tags %}
                 <div class="tags post-tags">
                     {% for tag in page.tags %}
-                    <span class="tag">{{ tag }}</span>
+                    {% include tag.html tag=tag %}
                     {% endfor %}
                 </div>
                 {% endif %}

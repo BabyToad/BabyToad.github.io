@@ -78,7 +78,8 @@
     margin-top: 0.6rem;
 }
 
-.tag {
+.tag,
+a.tag {
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.04em;
