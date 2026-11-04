@@ -1,3 +1,7 @@
+---
+layout: null
+sitemap: false
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +42,7 @@
         // Configuration for the demo
         window.ISO_Game_Config = {
             assetsPath: '.',  // Current directory - should create relative paths
+            audioPath: {{ '/assets/iso-engine' | media_url | jsonify }},
             width: 800,
             height: 600,
             tileSize: 32,

@@ -87,3 +87,11 @@ llms-full.txt
 
 # Obsidian vault settings (local editing only)
 .obsidian/
+
+# R2 migration inventory: still tracked until Jonas verifies the upload.
+# These rules allow offline copies after the follow-up removal PR.
+/assets/games/schneekugel/schneekugel-godot.wasm
+/assets/games/schneekugel/schneekugel-godot.pck
+/assets/games/mondnacht.zip
+/assets/videos/thoughts/*.mp4
+/assets/iso-engine/audio/
