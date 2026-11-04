@@ -2,11 +2,12 @@
 
 `assets/css/styles.scss` is the Jekyll entry point. Its YAML front matter enables
 Liquid and Sass processing; the build emits compressed `/assets/css/styles.css`.
-The URL stays stable, and the output contains no browser `@import` requests.
+The output contains no browser `@import` requests.
 
 Liquid `include_relative` directives inline the existing CSS sources in their
 original cascade order before Sass runs. This preserves their paths and avoids
-renaming sources: the current Ruby Sass version does not inline `.css` imports.
+renaming sources: explicit `.css` imports remain browser requests in Sass.
+Jekyll 4 uses jekyll-sass-converter 3 and Dart Sass.
 Keep shared styles in this entry point, including `components/sidenotes.css`.
 
 Feature styles are loaded directly by `_layouts/base.html` when either the page

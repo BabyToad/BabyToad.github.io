@@ -3,10 +3,10 @@
 # thought, blog post, project page and For Want of Fuel chapter, one entry per
 # heading with its source URL. Companion to llms.txt (a Liquid page).
 #
-# Runs before `jekyll build` (see .github/workflows/pages.yml). It is a plain
-# script rather than a Jekyll plugin because the github-pages gem disables
-# custom _plugins. Output is gitignored; Jekyll copies it through as a static
-# file. Local check: `ruby scripts/llms_full.rb && head llms-full.txt`.
+# Runs before `jekyll build` (see .github/workflows/pages.yml), so the Markdown
+# siblings exist before Jekyll reads its source tree. Output is gitignored;
+# Jekyll copies it through as static files. Local check:
+# `ruby scripts/llms_full.rb && head llms-full.txt`.
 require 'yaml'
 require 'date'
 require 'fileutils'

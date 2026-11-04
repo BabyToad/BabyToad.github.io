@@ -41,7 +41,7 @@ defaults:
       type: for_want_of_fuel
     values:
       layout: for_want_of_fuel
-  # Static assets, agent files and the repo notes are not pages: keep them out of the sitemap.
+  # Assets and repository reference pages stay out of the sitemap.
   - scope:
       path: "assets"
     values:
@@ -54,25 +54,8 @@ defaults:
       path: "AGENTS-WELCOME.md"
     values:
       sitemap: false
-  # Generated markdown siblings (scripts/llms_full.rb) are for agents, not the sitemap.
-  - scope:
-      path: "blog"
-    values:
-      sitemap: false
-  - scope:
-      path: "thoughts"
-    values:
-      sitemap: false
-  - scope:
-      path: "for-want-of-fuel"
-    values:
-      sitemap: false
-  # GEC1 course site (built elsewhere, copied verbatim): its .md siblings get turned into
-  # extra .html pages by GitHub Pages' optional-front-matter; keep those out of the sitemap.
-  - scope:
-      path: "teaching/gec1/**/*.md"
-    values:
-      sitemap: false
+  # Jekyll 4 copies front-matter-free .md siblings verbatim, including GEC1;
+  # jekyll-sitemap excludes these static .md files without broad path defaults.
   # Unlinked GEC1 test preview (deploy-to-personal-site.mjs --vorschau): never in the sitemap.
   - scope:
       path: "teaching/gec1-vorschau"
@@ -95,6 +78,12 @@ sass:
   style: compressed
 
 exclude:
+  - _site/
+  - .jekyll-cache/
+  - .sass-cache/
+  - .bundle/
+  - .env
+  - .env.*
   - scripts/
   - docs/
   - task-dashboard/
