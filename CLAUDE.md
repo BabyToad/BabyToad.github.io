@@ -48,7 +48,13 @@ sharing-card regeneration, and output audits. No Node tooling in the build.
 - Tags in Blog, Projects and Thoughts use lower-case, hyphenated front matter
   (`game-dev`, `game-design`, `ttrpg`, `dnd`, `adnd`, `stars-without-number`).
   `_plugins/tag_pages.rb` builds `/tags/` and `/tags/<tag>/` from public documents,
-  including single-item tags. Use `tag.html` for linked chips; no hover previews.
+  including single-item tags. It downcases and trims tags, turns whitespace and
+  underscores into hyphens and `&` into `and`, drops other punctuation, and
+  collapses/trims hyphens. Changed spellings warn with the source file and original
+  tag; only an empty result fails the build. Aliases share one archive and count
+  each document once; linked chips use the normalized spelling. Single-item
+  archives are noindexed and excluded from the sitemap, but stay on `/tags/`.
+  Use `tag.html` for linked chips; no hover previews.
 
 Projects use `date` for project chronology and `last_modified_at` for edits.
 Status is `released`, `in development`, or `archived`. Featured projects and

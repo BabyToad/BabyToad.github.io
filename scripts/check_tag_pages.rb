@@ -28,37 +28,60 @@ Dir.mktmpdir('tag-pages-') do |source|
     site.collections.fetch(collection).docs << doc
     doc
   end
-  add.call('blog', 'essay', 1, %w[shared shared singleton], 'description' => 'Essay description.')
+  essay = add.call('blog', 'essay', 1, [' Shared ', 'SHARED', 'shared', 'singleton'], 'description' => 'Essay description.')
   add.call('projects', 'tool', 3, ['shared'])
-  add.call('thoughts', 'note', 2, ['shared'])
+  note = add.call('thoughts', 'note', 2, ['shared', ' -- GAME__Design & AI!!! -- ', 'game-design-and-ai'])
   [{ 'visibility' => 'private' }, { 'visibility' => 'draft' }, { 'visibility' => 'unlisted' },
    { 'noindex' => true }, { 'draft' => true }, { 'published' => false }].each_with_index do |extra, i|
     add.call('thoughts', "hidden-#{i}", 4, ['hidden'], extra)
   end
   add.call('projects', 'untagged', 5, nil)
 
-  TagPages::Generator.new.generate(site)
+  warnings = []
+  original_warn = Jekyll.logger.method(:warn)
+  Jekyll.logger.define_singleton_method(:warn) { |*args| warnings << args.join(' ') }
+  begin
+    TagPages::Generator.new.generate(site)
+  ensure
+    Jekyll.logger.define_singleton_method(:warn, original_warn)
+  end
+  check(warnings.length == 3, 'Only changed spellings should warn')
+  [['essay', ' Shared '], ['essay', 'SHARED'], ['note', ' -- GAME__Design & AI!!! -- ']].each do |file, spelling|
+    check(warnings.any? { |warning| warning.include?("/#{file}.md") && warning.include?(spelling.inspect) },
+          'Warnings must identify the source file and original spelling')
+  end
+  check(essay.data['tags'] == %w[shared singleton], 'Normalize and deduplicate linked chips')
+  check(note.data['tags'] == %w[shared game-design-and-ai], 'Normalize punctuation, whitespace, underscores and ampersands')
   index = site.pages.find { |page| page.url == '/tags/' }
-  check(index.data['tags'].map { |tag| [tag['name'], tag['count']] } == [['shared', 3], ['singleton', 1]],
+  check(index.data['tags'].map { |tag| [tag['name'], tag['count']] } == [['game-design-and-ai', 1], ['shared', 3], ['singleton', 1]],
         'Index must sort alphabetically, count documents once, and omit hidden content')
   shared = site.pages.find { |page| page.url == '/tags/shared/' }
   check(shared.data['entries'].map { |entry| entry['kind'] } == %w[Project Thought Blog],
         'All three kinds must appear newest first')
   check(shared.data['entries'][1]['description'].strip == 'First **line**.', 'Thought fallback must use first line')
   check(shared.data['entries'].last['description'] == 'Essay description.', 'Prefer explicit description')
-  check(site.pages.any? { |page| page.url == '/tags/singleton/' }, 'Single-item tags need pages')
-  check(site.pages.all? { |page| page.data['sitemap'] && page.data['description'] && page.data['layout'] },
-        'Every generated page needs layout, sitemap inclusion and sharing description')
+  singletons = site.pages.select { |page| %w[/tags/singleton/ /tags/game-design-and-ai/].include?(page.url) }
+  check(singletons.length == 2, 'Single-item tags need pages, even after alias deduplication')
+  check(singletons.all? { |page| page.data['noindex'] == true && page.data['sitemap'] == false },
+        'Single-item archives must be noindexed and excluded from the sitemap')
+  check([shared, index].all? { |page| !page.data['noindex'] && page.data['sitemap'] == true },
+        'Shared archives and the tag index must remain indexable')
+  check(site.pages.all? { |page| page.data['description'] && page.data['layout'] },
+        'Every generated page needs a layout and sharing description')
   check(shared.data['title'] == 'Tagged shared', 'Tag page needs its sharing title')
   check(site.pages.all? { |page| page.data['last_modified_at'].nil? },
         'Generated pages must not run a git/mtime lookup for a nonexistent source file')
 
-  add.call('blog', 'unsafe', 6, ['../escape'])
+  escaped = add.call('blog', 'unsafe', 6, ['../escape'])
+  TagPages::Generator.new.generate(site)
+  check(escaped.data['tags'] == ['escape'], 'Drop URL punctuation rather than failing')
+  add.call('blog', 'empty', 7, [' !!! ___ '])
   begin
     TagPages::Generator.new.generate(site)
-    raise 'Noncanonical tags must fail the build'
+    raise 'Empty normalized tags must fail the build'
   rescue Jekyll::Errors::FatalException => error
-    check(error.message.include?('Noncanonical tag'), 'Unexpected validation error')
+    check(error.message.include?('Empty normalized tag') && error.message.include?('/empty.md') && error.message.include?(' !!! ___ '.inspect),
+          'Empty-tag errors must identify the file and original spelling')
   end
 end
-puts 'Tag pages: mixed collections, ordering, counts, singleton, visibility, summaries and URL validation passed.'
+puts 'Tag pages: mixed collections, ordering, alias counts, singleton indexing, visibility, summaries, normalization and warnings passed.'

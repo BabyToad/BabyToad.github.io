@@ -1,5 +1,5 @@
-# Collection tags share one namespace. Keep spellings canonical in front matter;
-# fail on unsafe URL segments rather than silently giving distinct tags one URL.
+# Collection tags share one namespace. Normalize URL segments and warn so authors
+# can keep front matter canonical; spelling aliases count each document only once.
 module TagPages
   class Generator < Jekyll::Generator
     safe true
@@ -12,11 +12,21 @@ module TagPages
           next if doc.data['published'] == false || doc.data['draft'] || doc.data['noindex']
           next if %w[private draft unlisted].include?(doc.data['visibility'])
 
-          Array(doc.data['tags']).uniq.each do |tag|
-            unless tag.is_a?(String) && tag.match?(/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/)
-              raise Jekyll::Errors::FatalException, "Noncanonical tag #{tag.inspect} in #{doc.relative_path}"
+          tags = Array(doc.data['tags']).map do |original|
+            tag = original.to_s.downcase.strip.gsub(/[\s_]+/, '-').gsub('&', 'and')
+                          .gsub(/[^a-z0-9-]/, '').gsub(/-+/, '-').gsub(/\A-|-\z/, '')
+            if tag.empty?
+              raise Jekyll::Errors::FatalException, "Empty normalized tag #{original.inspect} in #{doc.relative_path}"
             end
+            if tag != original
+              Jekyll.logger.warn 'Tag normalization:', "#{doc.relative_path}: #{original.inspect} -> #{tag.inspect}"
+            end
+            tag
+          end.uniq
+          # Linked chips must use the same normalized spelling as their archives.
+          doc.data['tags'] = tags if doc.data.key?('tags')
 
+          tags.each do |tag|
             grouped[tag] << {
               'title' => doc.data['title'], 'url' => doc.url, 'date' => doc.date,
               'kind' => kind,
@@ -33,7 +43,7 @@ module TagPages
         page.data.merge!(
           'layout' => 'tag', 'title' => "Tagged #{tag}", 'tag' => tag,
           'description' => "Blog posts, projects and thoughts tagged #{tag} on Steak Knives and Bagels.",
-          'entries' => entries, 'sitemap' => true,
+          'entries' => entries, 'noindex' => entries.length == 1, 'sitemap' => entries.length > 1,
           # jekyll-last-modified-at's post_init hook assumes a real source file.
           'last_modified_at' => nil
         )

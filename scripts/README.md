@@ -3,9 +3,11 @@
 `bundle exec ruby scripts/check_tag_pages.rb` checks the tag generator with a
 small fixture spanning Blog, Projects and Thoughts, including visibility guards,
 single-item tags and first-line summaries. `_plugins/tag_pages.rb` runs during
-normal builds; no extra pre-build step is needed. Tags must be lower-case ASCII
-words/digits joined by hyphens; the build rejects other spellings. Keep aliases
-merged in front matter rather than adding a second URL for the same concept.
+normal builds; no extra pre-build step is needed. Tags normalize to lower-case
+ASCII words/digits joined by hyphens, with a source-file warning for changed
+spellings and a build failure only for empty results (see CLAUDE.md). Aliases
+count each document once. Single-item archives stay on `/tags/`, but are noindexed
+and excluded from the sitemap. Keep front matter spellings canonical.
 
 # Media handoff
 
