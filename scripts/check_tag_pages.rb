@@ -50,6 +50,8 @@ Dir.mktmpdir('tag-pages-') do |source|
   check(site.pages.all? { |page| page.data['sitemap'] && page.data['description'] && page.data['layout'] },
         'Every generated page needs layout, sitemap inclusion and sharing description')
   check(shared.data['title'] == 'Tagged shared', 'Tag page needs its sharing title')
+  check(site.pages.all? { |page| page.data['last_modified_at'].nil? },
+        'Generated pages must not run a git/mtime lookup for a nonexistent source file')
 
   add.call('blog', 'unsafe', 6, ['../escape'])
   begin

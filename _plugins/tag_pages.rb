@@ -33,7 +33,9 @@ module TagPages
         page.data.merge!(
           'layout' => 'tag', 'title' => "Tagged #{tag}", 'tag' => tag,
           'description' => "Blog posts, projects and thoughts tagged #{tag} on Steak Knives and Bagels.",
-          'entries' => entries, 'sitemap' => true
+          'entries' => entries, 'sitemap' => true,
+          # jekyll-last-modified-at's post_init hook assumes a real source file.
+          'last_modified_at' => nil
         )
         site.pages << page
         { 'name' => tag, 'url' => page.url, 'count' => entries.length }
@@ -43,6 +45,7 @@ module TagPages
       index.content = ''
       index.data.merge!(
         'layout' => 'tag-index', 'title' => 'Tags', 'tags' => tags, 'sitemap' => true,
+        'last_modified_at' => nil,
         'description' => 'Browse blog posts, projects and thoughts by topic on Steak Knives and Bagels.'
       )
       site.pages << index

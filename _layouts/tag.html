@@ -8,7 +8,7 @@ layout: base
     <article class="post-row">
         <time datetime="{{ entry.date | date_to_xmlschema }}">{{ entry.date | date: '%Y-%m-%d' }}</time>
         <div>
-            <div class="kicker">{{ entry.kind }}</div>
+            <div class="section-label">{{ entry.kind }}</div>
             <h3><a href="{{ entry.url | relative_url }}">{{ entry.title | escape }}</a></h3>
             {% if entry.description %}
             <p>{{ entry.description | markdownify | strip_html | normalize_whitespace | escape }}</p>
