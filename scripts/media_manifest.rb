@@ -23,7 +23,8 @@ manifest = CSV.generate(col_sep: "\t", row_sep: "\n") do |csv|
 end
 target = File.join(__dir__, 'media-manifest.txt')
 if ARGV == ['--check']
-  abort 'Media manifest differs; regenerate with ruby scripts/media_manifest.rb' unless File.binread(target) == manifest
+  actual = File.binread(target).gsub("\r\n", "\n")
+  abort 'Media manifest differs; regenerate with ruby scripts/media_manifest.rb' unless actual == manifest
 else
   abort 'Usage: ruby scripts/media_manifest.rb [--check]' unless ARGV.empty?
   File.binwrite(target, manifest)
