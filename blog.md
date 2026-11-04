@@ -3,7 +3,6 @@ layout: base
 title: Blog
 description: Essays and project notes by Jonas Heinke on roleplaying games, game design, and AI.
 use_container: false
-preview_popup: true
 ---
 
 <div class="content-container">
@@ -15,12 +14,7 @@ preview_popup: true
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
             <div>
                 <h3>
-                    <a href="{{ post.url }}"
-                       data-preview="true"
-                       data-title="{{ post.title }}"
-                       data-date="{{ post.date | date: '%Y-%m-%d' }}"
-                       data-description="{{ post.description }}"
-                       data-tags="{{ post.tags | join: ', ' }}">
+                    <a href="{{ post.url }}">
                         {{ post.title }}
                     </a>
                     {% if post.type == "review" %}
@@ -33,7 +27,7 @@ preview_popup: true
                 {% if post.tags %}
                 <div class="tags">
                     {% for tag in post.tags limit:4 %}
-                    <span class="tag">{{ tag }}</span>
+                    {% include tag.html tag=tag %}
                     {% endfor %}
                 </div>
                 {% endif %}
@@ -41,13 +35,4 @@ preview_popup: true
         </article>
         {% endfor %}
     </div>
-</div>
-
-<div class="preview-popup" id="preview-popup">
-    <div class="preview-header">
-        <h3 class="preview-title"></h3>
-        <time class="preview-date"></time>
-    </div>
-    <div class="preview-description"></div>
-    <div class="preview-tags"></div>
 </div>

@@ -51,7 +51,7 @@ use_container: false
                 {% if project.tags and project.tags != empty %}
                 <div class="tags">
                     {% for tag in project.tags limit:3 %}
-                    <span class="tag">{{ tag }}</span>
+                    {% include tag.html tag=tag %}
                     {% endfor %}
                 </div>
                 {% endif %}

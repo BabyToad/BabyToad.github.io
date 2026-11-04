@@ -102,7 +102,7 @@ image_alternates: true
                 {% if post.tags %}
                 <div class="tags">
                     {% for tag in post.tags limit:3 %}
-                    <span class="tag">{{ tag }}</span>
+                    {% include tag.html tag=tag %}
                     {% endfor %}
                 </div>
                 {% endif %}

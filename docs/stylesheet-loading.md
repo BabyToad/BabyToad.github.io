@@ -17,6 +17,9 @@ original cascade order before Sass runs. This preserves their paths and avoids
 renaming sources: explicit `.css` imports remain browser requests in Sass.
 Jekyll 4 uses jekyll-sass-converter 3 and Dart Sass.
 Keep shared styles in this entry point, including `components/sidenotes.css`.
+Tag archives reuse `components/blog-index.css` for ledger rows and linked chips.
+The former blog hover preview, its script/flag and shared popup CSS are removed;
+tag navigation works without JavaScript.
 
 Feature styles are loaded directly by `_layouts/base.html` when either the page
 or its layout sets the corresponding flag:
