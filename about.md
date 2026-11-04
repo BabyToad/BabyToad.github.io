@@ -21,4 +21,6 @@ I am currently building my company PlayInsight Studios and helping run [Pro Lude
 
 Feel free to reach out to me at [heinke.jonas@googlemail.com](mailto:heinke.jonas@googlemail.com).
 
-{% include contact.html %} 
+{% include contact.html %}
+
+For the type, themes, footer gallery and how this site is built, see the [colophon](/colophon/).
