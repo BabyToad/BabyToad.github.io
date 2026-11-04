@@ -12,21 +12,21 @@
     {% endif %}
     <link rel="preload" href="{{ '/assets/fonts/newsreader-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/jetbrains-mono-var-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}?v={{ '/assets/css/styles.css' | asset_version }}">
     {% if page.fuel or layout.fuel %}
-    <link rel="stylesheet" href="{{ '/assets/css/components/for-want-of-fuel.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components/for-want-of-fuel.css' | relative_url }}?v={{ '/assets/css/components/for-want-of-fuel.css' | asset_version }}">
     {% endif %}
     {% if page.rpg_notetaker_bench or layout.rpg_notetaker_bench %}
-    <link rel="stylesheet" href="{{ '/assets/css/components/rpg-notetaker-bench.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components/rpg-notetaker-bench.css' | relative_url }}?v={{ '/assets/css/components/rpg-notetaker-bench.css' | asset_version }}">
     {% endif %}
     {% if page.player or layout.player %}
-    <link rel="stylesheet" href="{{ '/assets/css/components/player.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components/player.css' | relative_url }}?v={{ '/assets/css/components/player.css' | asset_version }}">
     {% endif %}
     {% if page.srs or layout.srs %}
-    <link rel="stylesheet" href="{{ '/assets/css/components/srs.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components/srs.css' | relative_url }}?v={{ '/assets/css/components/srs.css' | asset_version }}">
     {% endif %}
     {% if page.image_alternates or layout.image_alternates %}
-    <link rel="stylesheet" href="{{ '/assets/css/components/image-alternates.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components/image-alternates.css' | relative_url }}?v={{ '/assets/css/components/image-alternates.css' | asset_version }}">
     {% endif %}
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
     <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
