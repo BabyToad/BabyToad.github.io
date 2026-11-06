@@ -14,6 +14,8 @@ import { createOutput } from "../src/speech/output.js";
 import { LINES, parseLines } from "../scenes/shrine/speech/direction.js";
 import { Director } from "../scenes/shrine/speech/director.js";
 import { Speaker, defaultTake } from "../scenes/shrine/speech/speaker.js";
+import { captionText } from "./captions.js";
+import { framePainting } from './framing.js';
 
 const $ = id => document.getElementById(id);
 const root = new URL("../", import.meta.url), at = path => new URL(path, root);
@@ -28,6 +30,8 @@ const SMALLEST = 0.52, KEEP_WIDTH = 720, KEEP_MIDDLE = [640, 560], ROOF = 190, B
 
 let director, performance, speaker, stage, letters, voice, clock;
 let audio = null, sound = null, entered = false, muted = remembered("dalang.muted") === "1", pointer = null, previous = null, paused = false, limit = null, shown = null, saidUntil = null, lost = false;
+let captionScore = null, captionAge = 0, fullCaption = remembered("dalang.fullText") === "1";
+let baseFraming=null,framingKey=null;
 
 /**
  * Fit the painting: all of it when there is room, otherwise a crop from the bowl to the bell. On an upright
@@ -44,12 +48,34 @@ function layout() {
   room.style.height = `${roomHeight}px`;
   room.style.top = narrow ? "0" : `${Math.max(0, (h - roomHeight) / 2)}px`;
   Object.assign(canvas.style, { width: `${cw}px`, height: `${ch}px`, left: `${x}px`, top: `${y}px` });
+  baseFraming={width:w,height:roomHeight,scale,x,y};framingKey=null;
   document.body.classList.toggle("narrow", narrow);
   $("said").style.top = `${roomHeight}px`;
   if (!performance) return;
   // Writing composes inside what can be seen. A recorded input, since it changes where words go.
   const next = narrow ? [Math.round(-x / scale) + 14, Math.round((w - x) / scale) - 14] : null;
   if (JSON.stringify(next) !== JSON.stringify(limit)) { limit = next; performance.send({ kind: "speech-settings", settings: { limit } }); }
+  presentFraming();
+}
+
+function presentFraming(){
+  if(!baseFraming)return;
+  const frame=performance?.things.framing(),view=framePainting(baseFraming,frame,CALM.matches);
+  const key=[view.scale,view.x,view.y,view.active].join(',');
+  if(key===framingKey)return;
+  framingKey=key;
+  Object.assign($('stage').style,{width:`${WIDTH*view.scale}px`,height:`${HEIGHT*view.scale}px`,left:`${view.x}px`,top:`${view.y}px`});
+  $('return-view').hidden=!view.active;
+  // Lettering keeps the recorded normal crop. Temporary panning is a pure
+  // render sample; captions below the picture remain available throughout.
+}
+
+function dismissView(){
+  const frame=performance.things.framing();
+  if(!frame||$('return-view').hidden)return false;
+  performance.send(frame.dismiss);
+  if(document.activeElement===$('return-view'))document.querySelector(`#things [data-do="${CSS.escape(frame.returnControl)}"]`)?.focus();
+  return true;
 }
 
 /** The first gesture. A browser allows sound only from here on, so this is where the room starts to be heard. */
@@ -99,22 +125,18 @@ function setMuted(value) {
 
 /** A thing in the room, by name: the same whether it came from a click on the painting or from a keyboard. */
 function act(thing, x, y) {
-  if (thing === "bell" || thing === "cord") performance.send({ kind: "ring" });
-  // Her empty stool asks for the bowl too, so a dropped one can always be called back.
-  else if (thing === "bowl" || thing === "rice" || (thing === "stool" && performance.bowl.moved)) performance.send({ kind: "offer" });
-  else if (thing === "frog") performance.send({ kind: "feed-frog" });
-  else if (thing === "ribbon") performance.send({ kind: "wind" });
-  else if (thing === "stream" || thing === "basin" || thing === "spout") { performance.send({ kind: "water" }); performance.send({ kind: "poke", target: "water", x, y }); }
-  // What she was doing when you poked her, as of now: anything else in this tick's batch is not what you poked.
-  else if (thing === "saint") performance.send({ kind: "poke", target: thing, x, y, action: performance.action?.id ?? null });
-  else performance.send({ kind: "poke", target: thing ?? "wall", x, y });
+  const options = {experience:true, ...(x === undefined ? {} : {point:[x,y]})};
+  if (!performance.interact(thing ?? "wall", options)) performance.send({kind:"poke",target:thing ?? "wall",x:x??0,y:y??0});
 }
 
 const ray = new THREE.Raycaster();
+function wordAt(x,y){
+  ray.setFromCamera(new THREE.Vector2(x / WIDTH * 2 - 1, 1 - y / HEIGHT * 2), stage.camera);
+  return letters.pick(ray);
+}
 function clickAt(x, y) {
   gesture();
-  ray.setFromCamera(new THREE.Vector2(x / WIDTH * 2 - 1, 1 - y / HEIGHT * 2), stage.camera);
-  const word = letters.pick(ray);
+  const word = wordAt(x,y);
   if (word) { performance.send({ kind: "knock-word", word }); return; }
   act(thingAt(x, y), x, y);
 }
@@ -122,11 +144,8 @@ function clickAt(x, y) {
 /** A forgiving finger. Small things win near misses, because the frog is worth more than the sack it hides behind. */
 function thingAt(x, y) {
   const direct = stage.pick(x, y);
-  if (direct === "bowl") return direct;
-  const [fx, fy] = performance.frame("frog").screen;
-  if (Math.hypot(x - fx, y - fy) < 42) return "frog";
-  const { bowl } = performance;
-  if (bowl.moved && !bowl.held) { const [bx, by] = performance.frame("bowl").screen; if (Math.hypot(x - bx, y - by) < 64) return "bowl"; }
+  const resident = performance.things.pick(x,y,direct);
+  if (resident) return resident;
   if (direct || !document.body.classList.contains("narrow")) return direct;
   for (const [dx, dy] of [[0, -26], [26, 0], [0, 26], [-26, 0], [18, -18], [18, 18], [-18, 18], [-18, -18]]) {
     const near = stage.pick(x + dx, y + dy);
@@ -142,16 +161,47 @@ function painting(event) {
 
 function wire() {
   const canvas = $("stage");
-  canvas.onpointermove = event => { const [x, y] = painting(event); pointer = { kind: "pointer", x, y, touch: event.pointerType === "touch" }; };
-  canvas.onpointerdown = event => { const [x, y] = painting(event); pointer = { kind: "pointer", x, y, touch: event.pointerType === "touch" }; };
+  let capture=null,suppressClick=false;
+  canvas.onpointermove = event => {
+    const [x,y]=painting(event);pointer={kind:'pointer',x,y,touch:event.pointerType==='touch'};
+    if(capture?.id===event.pointerId)performance.things.gesture(capture.target,'move',[x,y]);
+  };
+  canvas.onpointerdown = event => {
+    const [x,y]=painting(event);pointer={kind:'pointer',x,y,touch:event.pointerType==='touch'};
+    if(capture||event.button!==0)return;
+    suppressClick=false;
+    if(wordAt(x,y))return;
+    const target=thingAt(x,y);
+    if(performance.things.gesture(target,'start',[x,y])){
+      gesture();capture={target,id:event.pointerId};suppressClick=true;canvas.setPointerCapture(event.pointerId);
+    }
+  };
+  function finishPointer(event,phase){
+    if(capture?.id!==event.pointerId)return;
+    performance.things.gesture(capture.target,phase,painting(event));capture=null;
+    if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
+  }
+  canvas.onpointerup=event=>finishPointer(event,'end');
+  canvas.onpointercancel=event=>finishPointer(event,'cancel');
+  canvas.onlostpointercapture=event=>finishPointer(event,'cancel');
   canvas.onpointerleave = event => { if (event.pointerType !== "touch") pointer = { kind: "pointer", active: false }; };
-  canvas.onclick = event => clickAt(...painting(event));
-  const spots = { offer: "bowl", ring: "bell", frog: "frog", water: "stream", board: "board", sack: "sack", saint: "saint" };
-  const spotOf = { board: [1090, 400], sack: [230, 800], saint: [620, 500], stream: [1210, 740] };
-  for (const button of document.querySelectorAll("#things button")) button.onclick = () => { gesture(); const thing = spots[button.dataset.do]; act(thing, ...(spotOf[thing] ?? [0, 0])); };
+  canvas.onclick = event => {if(suppressClick){suppressClick=false;return;}clickAt(...painting(event));};
+  for (const button of document.querySelectorAll("#things button")) {
+    button.onclick = () => { gesture(); act(performance.things.control(button.dataset.do)); };
+    button.onkeydown = event => {
+      if(performance.things.key(performance.things.control(button.dataset.do),event.key)){gesture();event.preventDefault();}
+    };
+  }
   $("mute").onclick = () => { gesture(); setMuted(!muted); sound?.ui?.("tap"); };
+  $("caption-mode").onclick = () => {
+    fullCaption = !fullCaption;
+    remember("dalang.fullText", fullCaption ? "1" : "0");
+    renderCaption();
+  };
+  $('return-view').onclick=dismissView;
   addEventListener("keydown", event => {
     if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if(event.key==='Escape'&&dismissView()){event.preventDefault();return;}
     if (event.key === "m" || event.key === "M") { gesture(); setMuted(!muted); }
     if (event.key === "`") { $("inspect").hidden = !$("inspect").hidden; }
   });
@@ -180,13 +230,31 @@ function wire() {
   CALM.addEventListener?.("change", () => performance.send({ kind: "speech-settings", settings: { calm: CALM.matches } }));
 }
 
-/** Her words again in plain text, for screen readers, and under the picture on a phone. */
+function renderCaption() {
+  if (!captionScore) return;
+  const text = captionText(captionScore, captionAge, fullCaption);
+  if ($("caption-visual").textContent !== text) $("caption-visual").textContent = text;
+  $("caption-mode").hidden = captionScore.register !== "sutra";
+  $("caption-mode").textContent = fullCaption ? "Follow recital" : "Read full line";
+  $("caption-mode").setAttribute("aria-pressed", String(fullCaption));
+}
+
+/** Full accessible text remains available; the visible recital reveals one phrase at a time. */
 function caption(tick) {
-  const current = speaker.current, key = current?.startTick ?? null;
-  if (current && key !== shown) { $("said").textContent = current.score.text; $("said").style.opacity = 1; $("said").scrollTop = 0; saidUntil = key + current.score.ticks + 72; }
+  const current = speaker.current, key = current?.id ?? null;
+  if (current && key !== shown) {
+    captionScore = current.score;
+    $("said-accessible").textContent = current.score.text;
+    $("said").style.opacity = 1; $("said").scrollTop = 0;
+    saidUntil = current.startTick + current.score.ticks + 72;
+  }
+  if (current) { captionAge = tick - current.startTick; renderCaption(); }
+  else if (shown !== null && captionScore?.register === "sutra") saidUntil = tick + 72;
   shown = key;
   // Frames can skip ticks, so this is a deadline and not a moment. The words stay for a screen reader; only the sight of them goes.
-  if (!current && saidUntil !== null && tick >= saidUntil) { $("said").style.opacity = 0; saidUntil = null; }
+  if (!current && saidUntil !== null && tick >= saidUntil) {
+    $("said").style.opacity = 0; $("caption-mode").hidden = true; saidUntil = null;
+  }
 }
 
 function status() {
@@ -199,7 +267,7 @@ function status() {
 }
 
 function step() { if (pointer) { performance.send(pointer); pointer = null; } performance.step(); }
-function draw() { letters.sync(speaker.lettering); letters.poseTongue(speaker.lettering, performance.frame("frog.mouth").position); stage.render(); }
+function draw() { letters.sync(speaker.lettering); letters.poseTongue(speaker.lettering, performance.frame("frog.mouth").position); stage.render(); presentFraming(); }
 
 function loop(now) {
   requestAnimationFrame(loop);

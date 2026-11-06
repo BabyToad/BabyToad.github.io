@@ -9,6 +9,7 @@ import { MOUTH, BROWS } from "../../../src/speech/text.js";
 import { Follow } from "../../../src/motion/follow.js";
 import { clamp } from "../../../src/math.js";
 import { FOCUS, LINES, TARGETS } from "./direction.js";
+import { directSutra, sutraSource, recitalRoom, noticeRecital, followRecital } from "./sutra.js";
 
 // She looks round at words making way: it is not her doing, and she does not approve.
 const GLANCE = {
@@ -71,7 +72,7 @@ export class Speaker {
   liveTargets() {
     if (!this.stage) return {};
     const at = (name, eyes) => this.lookTo(this.stage.frame(name).screen, eyes);
-    return { bowl: at("bowl", "down"), frog: at("frog.mouth", "down"), bell: at("bell", "up") };
+    return { bowl: at("bowl", "down"), frog: at("frog.mouth", "down"), bell: at("bell", "up"), water: this.lookTo([1210,740]) };
   }
 
   /** Whoever she is talking to: the pointer when there is one, otherwise the person in front of her. Never whatever she is holding. */
@@ -90,17 +91,19 @@ export class Speaker {
     const text = recorded?.text ?? this.assets.written[direction.number]?.text;
     if (!text) throw new Error(`No text for line ${line}`);
     const common = { text, register: direction.register, direction, targets: { ...TARGETS, ...this.liveTargets(), written: this.writtenTarget(direction.register) } };
-    if (!recorded) return { score: compileScore({ ...common, alignment: writtenAlignment(text, direction.register) }), audio: null, segments: [] };
+    const compile = timing => directSutra(compileScore({ ...common, ...timing }), direction, common.targets);
+    if (!recorded) return { score: compile({ alignment: writtenAlignment(text, direction.register) }), audio: null, segments: [] };
     const edit = spliceTake(recorded, direction.pauses);
-    return { score: compileScore({ ...common, alignment: edit.alignment, loudness: edit.loudness }), audio: recorded.audio, original: recorded.original, segments: edit.segments };
+    return { score: compile({ alignment: edit.alignment, loudness: edit.loudness }), audio: recorded.audio, original: recorded.original, segments: edit.segments };
   }
 
   /** Scene-side command. `written` chooses whether words go on the wall at all. */
   say(tick, { line, take = null, written = true, id }) {
     const { score, audio, original, segments } = this.compile(line, take);
-    this.actor.drive("speech", speechSource(score, this.stage ? () => this.addressee : null), { id: id ?? `say:${++this.count}`, fade: 4, release: 10 });
+    const request = id ?? `say:${++this.count}`, room = recitalRoom(score);
+    this.actor.drive("speech", sutraSource(score, speechSource(score, this.stage ? () => this.addressee : null), room), { id: request, fade: 4, release: 10 });
     if (written) this.lettering.say(score, tick, LINES[line], this.stance(score.register));
-    this.current = { line, take, score, audio, original, segments, startTick: tick };
+    this.current = { id: request, line, take, score, audio, original, segments, startTick: tick, room, letteringId: written ? this.lettering.current : null };
     return this.current;
   }
 
@@ -115,12 +118,13 @@ export class Speaker {
   uninscribe(tick, uid) { for (const word of this.lettering.words) if (word.utterance === uid) this.lettering.release(word, tick); }
 
   /** Stop talking. A mouth that was open presses shut for a beat rather than fading through other drawings. */
-  hush(tick) {
-    if (!this.current) return;
-    this.actor.cancel("speech", { fade: 3 });
+  hush(tick, { id } = {}) {
+    if (!this.current || (id !== undefined && id !== this.current.id)) return false;
+    this.actor.cancel("speech", { id: this.current.id, fade: this.current.score.recital ? 10 : 3 });
     this.lettering.hush(tick);
     this.current = null;
     this.closing = tick + 2;
+    return true;
   }
 
   /** Hold named drawings for a while, when she is not talking: a laugh, a look of disapproval. */
@@ -160,6 +164,26 @@ export class Speaker {
   beforePose(tick) {
     if (this.current && tick - this.current.startTick >= this.current.score.ticks) this.current = null;
     this.followAddressee();
+    const said = this.current;
+    if (said?.room) followRecital(said.score, said.room, tick - said.startTick, this.recitalTarget(said));
+  }
+
+  /** A deliberate peripheral look, then back to the recital; pointer motion alone cannot drag it away. */
+  notice(tick, point) {
+    const said = this.current;
+    return !!said && noticeRecital(said.score, said.room, tick - said.startTick, this.lookTo(point));
+  }
+
+  /** Resolve where the object or final wet word is now, including after a move or phone composition. */
+  recitalTarget(said) {
+    const { look, word, target } = said.score.recital;
+    if (look === "bowl" && this.stage) return this.lookTo(this.stage.frame("bowl").screen);
+    if (look === "hand" && this.stage) return this.lookTo(this.stage.frame("hand.L").screen);
+    if (look === "written") {
+      const ink = this.lettering.words.findLast(w => w.utterance === said.letteringId && w.word === word);
+      if (ink) return this.lookTo(this.lettering.wall.toPixel(ink.s + ink.width / 2, ink.t));
+    }
+    return target;
   }
 
   /** After physics, with what actually happened: the wall and its writing advance once. */

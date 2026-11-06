@@ -10,6 +10,9 @@ import { figureSpace,cupPreset,CUP_ANGLE,fallStep } from './spatial.js';
 import { Perception } from './perception.js';
 import { stageLife } from './life.js';
 import { curve,hops,hopAt } from './keys.js';
+import { createThings } from './things/registry.js';
+import { shrineThings } from './things/index.js';
+import { ANSWERS } from '../speech/answers.js';
 
 const lerp=(a,b,u)=>a.map((v,i)=>mix(v,b[i],u));
 const distance=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
@@ -17,7 +20,7 @@ const armKeys=['uarmL','farmL','handL','uarmR','farmR','handR','spine','bob','pe
 
 /** Authored planar performance with measured projected grips. The painted prop
  * and hand may have different depths: this is not a volumetric contact solver. */
-export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,onTick}={}) {
+export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,onTick,things:factories=shrineThings}={}) {
   const scene=new Scene(),rig=new Rig(baked),view=rig.views.front,motion=new Secondary(24),rng=random(seed);
   const space=figureSpace(rig,config),p=space.p,perception=new Perception();
   const life=stageLife(config,p);
@@ -29,7 +32,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
   let cordBottom=[...cordHome];
   const bowl={position:[...bowlHome],velocity:[0,0,0],held:false,settled:true,moved:false,basis:[1,0,0,1],owner:'stand',layer:'world'};
   let root=[...space.home],action=null,goal=null,release=null,handCup=false,cupUntil=0,kick=0,bellPose;
-  let frogStart=null,frogFrom=[0,0,0],frogTo=[0,0,0],reactionStart=-1000,position=0,probe=null,previousPalm=null,previousTransport=null;
+  let reactionStart=-1000,position=0,probe=null,previousPalm=null,previousTransport=null,things;
   let walkPose={fLx:0,fRx:0,fLy:0,fRy:0},falling=0;
   const stretch=new Follow(6,.6,0,1),tilt=new Follow(5,.5);let squash={sx:1,sy:1,lean:0},characterFrame=space.frame(root,squash);
   const grains=[],dropPolicy=config.offering.drop||{depth:8.9,x:[210,930],maxSpeed:1.8};
@@ -38,29 +41,16 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
   function consequence(kind,detail={}) {
     const event={tick:scene.tick,kind,...structuredClone(detail)};
     scene.record(kind,detail);consequences.push(event);
-  }
-  const frogFoot=p.onPlane(config.occluders.find(x=>x.id==='frog').foot,p.floor);
-  function frogOffset(){
-    if(frogStart===null||scene.tick<frogStart)return [...frogFrom];
-    const u=clamp((scene.tick-frogStart)/24,0,1),point=lerp(frogFrom,frogTo,smooth(u));
-    point[1]+=.24*Math.sin(Math.PI*u);return point;
-  }
-  function hopFrog(start=scene.tick){
-    if(frogStart!==null&&scene.tick<frogStart+24)return false;
-    frogFrom=frogOffset();frogTo=[...frogFrom];frogTo[1]=0;
-    const away=frogFoot[0]+frogFrom[0]>=bowl.position[0]?1:-1;
-    let next=frogFrom[0]+away*.24;
-    if(next<-.3||next>.55)next=frogFrom[0]-away*.24;
-    frogTo[0]=next;frogStart=start;scene.record('frog-start',{from:frogFrom,to:frogTo});return true;
+    things?.event(immutable(structuredClone(event)));
   }
   // Fresh snapshots; querying a target never advances simulation.
   function frame(name){
-    const frog=p.atDepth([474,846],-frogFoot[2]).map((v,i)=>v+frogOffset()[i]);
     const points={root, giver:p.atDepth([620,400],-root[2]), bowl:bowl.position,
       bell:p.atDepth(bell.views.default.point(bellPose,'bell',[875,350]),config.bell.depth),
-      cord:cordBottom, ribbon:life.origin, frog, 'frog.mouth':frog, 'frog.foot':frogFoot.map((v,i)=>v+frogOffset()[i]), 'hand.L':palm('L'), 'hand.R':palm('R')};
-    if(!points[name])throw Error(`Unknown stage frame ${name}`);
-    return immutable({name,tick:scene.tick,position:[...points[name]],screen:p.project(points[name])});
+      cord:cordBottom, ribbon:life.origin, 'hand.L':palm('L'), 'hand.R':palm('R')};
+    const point=things?.hasFrame(name)?things.frame(name):Object.hasOwn(points,name)?points[name]:undefined;
+    if(!point)throw Error(`Unknown stage frame ${name}`);
+    return immutable({name,tick:scene.tick,position:[...point],screen:p.project(point)});
   }
   const bell=new Rig({format:2,name:'Painted bell',stage:config.image,
     controls:{drive:[-30,30],swing:[-30,30],flex:[-30,30]},parts:{},views:{default:{
@@ -94,14 +84,48 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     if(release){const u=1-smooth((scene.tick-release.tick)/12);
       for(const [key,value] of Object.entries(release.delta))pose[key]+=value*u;
       if(u===0)release=null;}
+    if(!action)pose=things?.constrain(pose)??pose;
     for(const key of ['handL','handR'])pose[key]=clamp(pose[key],...rig.controls[key]);
     return pose;
   }});
+  things=createThings(factories,{
+    config,p,frame,actor,bowl,emit,consequence,space,
+    get characterFrame(){return characterFrame;},
+    perform, cancelPerformance,
+    get tick(){return scene.tick;},get action(){return action;},
+    get request(){return things?.request??null;},
+    send:(intent,tick)=>scene.enqueue(intent,tick),record:(kind,detail)=>scene.record(kind,detail),
+    random(label){let value=seed;for(const char of label)value=Math.imul(value^char.charCodeAt(0),16777619);return random(value);},
+  },{
+    intents:['pointer','ring','offer','speech-hop','test-impulse','interrupt','notice','water','wind','placement'],
+    frames:['root','giver','bowl','bell','cord','ribbon','hand.L','hand.R'],
+    answers:Object.keys(ANSWERS),
+  });
   function releaseConstraint(){
     // Preserve the drawn correction while primary channels and springs fade.
     if(!goal&&release)return;
     const delta={};if(goal)for(const key of goal.chain.channels)delta[key]=actor.constraintDelta?.[key]||0;
     release={tick:scene.tick,delta};goal=null;
+  }
+  // Resident-authored travel uses the same grounded hops, hand solver and
+  // interruptible action ownership as the original bell/bowl performances.
+  function cancelPerformance(id){
+    if(!action?.resident||id&&action.id!==id)return false;
+    const previous=action;
+    releaseConstraint();actor.cancel('action',{id:previous.id,fade:8});action=null;
+    consequence('resident-action-cancel',{owner:previous.resident,request:previous.id});return true;
+  }
+  function perform({id,owner,plan,target,duration,sample,reach}){
+    if(action||things.request||probe||!owner||!id)return false;
+    action={id,kind:owner,resident:owner,start:scene.tick,plan,target:p.atDepth(target,-root[2]),offering:false};
+    releaseConstraint();
+    actor.drive('action',{duration,keys:armKeys.concat(['gaze','yaw']),sample(age,context){
+      const aim=reach?.(age);
+      if(aim)goal={chain:HANDS.R,position:p.atDepth(aim.point,-root[2]),angle:aim.angle??-70,weight:aim.weight};
+      else goal=null;
+      return sample(age,context);
+    }},{id,fade:3,release:8});
+    consequence('resident-action-start',{owner,request:id});return true;
   }
   function drop(){
     const wasHeld=bowl.held;
@@ -126,6 +150,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     if(wasHeld)for(let i=0;i<18;i++)grains.push({position:[bowl.position[0],bowl.position[1]+.35,bowl.position[2]],velocity:[bowl.velocity[0]+(rng()-.5)*1.3,1+rng(),bowl.velocity[2]+(rng()-.5)*.9],settled:false,born:scene.tick});
   }
   function begin(kind,id){
+    if(action?.kind==='speech-hop'){actor.cancel('action',{id:action.id,fade:0});action=null;}
     if(action || probe){scene.record('rejected',{id,reason:'busy'});return false;}
     if(kind==='offer' && bowl.moved){if(!bowl.settled){scene.record('rejected',{id,reason:'offering still falling'});return false;}kind='recover';}
     const offering=kind!=='ring';
@@ -216,16 +241,24 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     scene.record('interaction-start',{id,interaction:kind});return true;
   }
   function handle(intent,tick){
+    const handled=things.handle(intent,tick);if(handled!==undefined)return handled;
     if(intent.kind==='pointer'){
       if(intent.active!==false&&![intent.x,intent.y].every(Number.isFinite)){scene.record('rejected',{id:intent.id,reason:'invalid pointer'});return false;}
       perception.observe(intent,tick);
-    }else if(intent.kind==='ring'||intent.kind==='offer')return begin(intent.kind,intent.id);
+    }else if(intent.kind==='ring'||intent.kind==='offer'){cancelPerformance();return begin(intent.kind,intent.id);}
+    else if(intent.kind==='speech-hop'){
+      // The score requests a real grounded hop. A later visitor action always wins.
+      const speech=actor.layers.get('speech');
+      if(action||things.request||root[1]>1e-6||!speech?.source||speech.id!==intent.request)return false;
+      const plan={...hops(0,root,root,0),n:1,end:9,dir:0};
+      action={id:intent.id,kind:'speech-hop',start:tick,plan:[plan],responsive:true};
+      actor.drive('action',{keys:[],duration:15,sample:()=>({})},{id:intent.id,fade:0,release:0});
+    }
     else if(intent.kind==='test-impulse'){kick=3;scene.record('test-impulse',{id:intent.id});}
     else if(intent.kind==='interrupt'){
-      if(intent.request&&intent.request!==action?.id){scene.record('rejected',{id:intent.id,reason:'stale cancellation'});return false;}
+      if(intent.request&&intent.request!==action?.id){if(things.interrupt(intent))return true;scene.record('rejected',{id:intent.id,reason:'stale cancellation'});return false;}
       if(action){drop();releaseConstraint();actor.cancel('action',{id:action.id,fade:12});action=null;emit('visitor',frame('giver').position);}
     }else if(intent.kind==='notice'){emit('visitor',p.atDepth([620,400],-root[2]));}
-    else if(intent.kind==='feed-frog'){if(!hopFrog()){scene.record('rejected',{id:intent.id,reason:'frog airborne'});return false;}}
     else if(intent.kind==='water'){emit('water',p.atDepth([1210,740],8));}
     else if(intent.kind==='wind'){emit('wind',life.origin);}
     else if(intent.kind==='placement'){if(action){scene.record('rejected',{id:intent.id,reason:'busy'});return false;}probe={from:[...root],to:intent.behind?p.onPlane([400,838],p.floor):space.home,start:tick};position=intent.behind?1:0;}
@@ -245,6 +278,10 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
       const age=tick-action.start;
       for(const plan of action.plan){const at=hopAt(plan,age);if(age>=plan.start&&(at.active||age>=plan.end||!hop)){root=at.position;hop=at.active?{...at,dir:plan.dir}:null;}}
     }
+    const residentMotion=!action&&things.motion(tick);
+    if(residentMotion){root=[...residentMotion.position];hop=residentMotion.active?residentMotion:null;}
+    if(previousRoot[1]>1e-6&&root[1]<=1e-6)consequence('saint-land',{
+      interaction:action?.kind??'interrupted',speed:previousRoot[1]*24,point:[...root]});
     const air=hop?.air||0,side=hop&&hop.index%2?-1:1,dir=hop?.dir||0;
     walkPose={fLx:dir*side*9*air,fRx:-dir*side*9*air,fLy:(side>0?26:14)*air,fRy:(side>0?14:26)*air};
     const sy=stretch.step(hop?.active?hop.stretch:1),rootSpeed=(root[0]-previousRoot[0])/space.unit;
@@ -253,6 +290,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     actor.world={vx:rootSpeed,vy:-(root[1]-previousRoot[1])/space.unit};
     bellPose=motion.step(bell.views.default,bell.neutral({drive:kick>0?-22:0}));if(kick>0)kick--;
     const context=immutable({commands:structuredClone(commands)});
+    things.beforePose(tick,{...context,frame});
     // Legacy hook remains until speech migrates; never invoke both input hooks.
     if(beforePose)beforePose(tick,{...context,frame});else onTick?.(tick,intents);
     const events=actor.step(tick);
@@ -261,7 +299,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
       if(bowl.owner!=='flight'){
         bowl.owner='flight';bowl.settled=false;
         bowl.flight={from:[...bowl.position],target:[...goal.position],basis:[...bowl.basis],start:tick,end:action.start+action.C};
-        stretch.kick(-3);consequence('stamp',{point:[...bowl.position]});hopFrog(tick+2);
+        stretch.kick(-3);consequence('stamp',{point:[...bowl.position]});
       }
       const flight=bowl.flight,u=(tick-flight.start)/(flight.end-flight.start),old=[...bowl.position];
       bowl.position=lerp(flight.from,flight.target,u);bowl.position[1]+=.35*Math.sin(Math.PI*u);
@@ -293,31 +331,26 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
       if(landed){
       if(bowl.settled)bowl.owner='floor';
       emit('land',bowl.position);if(tick-reactionStart>40)reactionStart=tick;
-      if(frogStart===null||tick-frogStart>72)hopFrog(tick+4);
       }
     }
     if(bowl.owner==='free')bowl.basis=lerp(bowl.releaseBasis||[1,0,0,1],[bowl.restScale||1,0,0,bowl.restScale||1],smooth((tick-bowl.releasedTick)/12));
     previousPalm=palm('L');previousTransport=transport;
     for(const grain of grains)fallStep(grain);
     for(let i=grains.length-1;i>=0;i--)if(tick-grains[i].born>=240)grains.splice(i,1);
-    if(tick===frogStart)emit('frog',frame('frog').position);
     const top=p.atDepth(bell.views.default.point(bellPose,'bell',[875,390]),config.bell.depth);
     if(action?.kind==='ring'&&action.contact&&action.age<=action.hold){cordBottom=palm('R');cordFollow.forEach((f,i)=>f.set(cordBottom[i]));}
     else cordBottom=cordFollow.map((f,i)=>f.step(top[i]-(i===1?cordLength:0)));
+    things.afterPhysics(tick);
     life.step(tick,consequences);
     afterPhysics?.(tick,{events:immutable(structuredClone(consequences)),frame});
   });}
-  return {scene,rig,actor,bell,space,bowl,grains,perception,life,step,frame,offering:{...config.offering,home:bowlHome},
+  return {scene,rig,actor,bell,space,bowl,grains,perception,life,things,step,frame,offering:{...config.offering,home:bowlHome},
     send:(intent,tick)=>scene.enqueue(intent,tick),
-    interact(target){
-      const kind=target==='saint'?(action?'interrupt':'notice'):{bell:'ring',cord:'ring',bowl:'offer',rice:'offer',frog:'feed-frog',stream:'water',basin:'water',ribbon:'wind'}[target];
-      if(typeof kind!=='string')return false;
-      return scene.enqueue({kind,...(kind==='interrupt'?{request:action.id}:{})});
-    },
+    interact:(target,options)=>things.interact(target,options),
     recording:()=>({format:3,seed,ticks:scene.tick,inputs:structuredClone(scene.inputs)}),
     get characterFrame(){return characterFrame;},get root(){return root;},get squash(){return squash;},get bellPose(){return bellPose;},get placement(){return position;},
     get cup(){return handCup&&scene.tick<cupUntil;},get action(){return action;},get goal(){return goal;},
     get cord(){return {top:p.atDepth(bell.views.default.point(bellPose,'bell',[875,390]),config.bell.depth),bottom:[...cordBottom]};},
-    get frogOffset(){return frogOffset();},
+    get frogOffset(){return things.get('frog')?.offset??[0,0,0];},
   };
 }

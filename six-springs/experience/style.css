@@ -9,7 +9,7 @@ html,body{height:100%;margin:0;background:var(--ground);color:var(--paper);font:
 
 /* The picture is placed by script: it fills what it can and, on a phone, crops rather than shrinks. */
 #room{position:fixed;left:0;top:0;width:100%;height:100%;overflow:hidden;background:var(--ground)}
-canvas{position:absolute;display:block;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;outline:none}
+canvas{position:absolute;display:block;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;outline:none}
 
 #veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:10px;padding-bottom:clamp(28px,9vh,80px);background:var(--ground) url(poster.jpg) center/cover no-repeat;transition:opacity .9s ease;pointer-events:none}
 #veil::before{content:"";position:absolute;inset:0;background:var(--ground);opacity:.72}
@@ -21,20 +21,26 @@ canvas{position:absolute;display:block;cursor:pointer;touch-action:manipulation;
 
 #prompt{position:absolute;left:50%;bottom:clamp(14px,5%,42px);transform:translateX(-50%);margin:0;padding:6px 14px 7px;white-space:nowrap;font-size:14px;color:#f4ecd8;background:#14110ec4;border-radius:2px;pointer-events:none;transition:opacity .5s ease}
 #prompt.gone{opacity:0}
+#return-view{position:absolute;left:12px;bottom:12px;min-height:44px;padding:8px 12px;background:#14110ee6}
+#return-view[hidden]{display:none}
 #note{position:absolute;left:16px;bottom:14px;margin:0;max-width:60%;padding:5px 10px;font-size:13px;background:#14110ec4}
 
 /* Under the picture on an upright phone. It has the room the layout reserved; anything longer scrolls. */
 #said{position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom));margin:0;padding:8px 16px;text-align:center;font-size:clamp(14px,4.4vw,17px);line-height:1.4;color:var(--paper);transition:opacity .6s ease;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y}
 body:not(.stacked) #said{clip-path:inset(50%);width:1px;height:1px;padding:0;overflow:hidden;white-space:nowrap;top:auto!important;bottom:0}
+#caption-visual{margin:0}
+#caption-mode{margin:6px 0 0;min-height:44px;color:var(--soft)}
+body:not(.stacked) #caption-mode{display:none}
+.sr-only{position:absolute;clip-path:inset(50%);width:1px;height:1px;padding:0;overflow:hidden;white-space:nowrap}
 
 /* For the keyboard: nothing to see until you tab to it. */
 #things{position:fixed;left:0;right:0;top:0;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:10px;background:#14110ee6;transform:translateY(-110%)}
 #things:focus-within{transform:none}
 #things .short{display:none}
 /* An upright phone cannot show the whole shrine, so what it cannot reach by finger sits here in plain sight. */
-body.stacked #things{top:auto;left:8px;right:64px;bottom:max(12px,env(safe-area-inset-bottom));transform:none;padding:0;background:none;flex-wrap:nowrap;gap:4px}
-body.stacked #things button{flex:1 1 0;min-width:0;min-height:44px;padding:4px 2px}
-body.stacked #things [data-do=board],body.stacked #things [data-do=sack],body.stacked #things [data-do=saint]{display:none}
+body.stacked #things{top:auto;left:8px;right:64px;bottom:max(12px,env(safe-area-inset-bottom));transform:none;padding:0 0 3px;background:none;flex-wrap:nowrap;justify-content:flex-start;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin}
+body.stacked #things button{flex:0 0 auto;min-width:44px;min-height:44px;padding:4px 7px}
+body.stacked #things [data-do=saint]{display:none}
 body.stacked #things .full{display:none}
 body.stacked #things .short{display:inline}
 body:not(.ready) #things{visibility:hidden}

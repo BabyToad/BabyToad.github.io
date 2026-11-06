@@ -3,6 +3,7 @@
 // Water does not cast at all, because it is on the wall, not in front of it. Read-only over the sim.
 
 import * as THREE from "three";
+import { eatingAt } from './eating.js';
 
 const PIXELS_PER_EM = 96; // Card texture resolution. A 33 px word is drawn at about 3x.
 const LEAN = 0.9; // Radians from upright for a word at rest on the floor.
@@ -208,23 +209,36 @@ export function createLetteringStage(scene, p, measureContext, map) {
     if (card.mesh.userData.glint) { card.mesh.userData.glint.matrix.copy(card.mesh.matrix); card.mesh.userData.glint.matrixWorldNeedsUpdate = true; }
   }
 
-  // A tongue is a thin flat quad on the floor, drawn only for the few ticks it exists.
-  const tongue = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ color: 0xc8506a, side: THREE.DoubleSide, toneMapped: false }));
-  tongue.matrixAutoUpdate = false; tongue.frustumCulled = false; tongue.visible = false; tongue.renderOrder = 3; group.add(tongue);
-  const a = new THREE.Vector3(), b = new THREE.Vector3(), tip = new THREE.Vector3(), side = new THREE.Vector3();
+  // A tapered, slightly slack strip, rooted in the animated mouth. Dry edge marks
+  // belong to this small painted appendage; it never controls the eating clock.
+  const tonguePaint=document.createElement('canvas');tonguePaint.width=128;tonguePaint.height=16;
+  const brush=tonguePaint.getContext('2d');
+  brush.fillStyle='#592d29';brush.fillRect(0,2,128,12);
+  brush.fillStyle='#af5949';brush.fillRect(0,4,128,7);
+  brush.fillStyle='#d99775';brush.fillRect(0,5,128,2);
+  for(let i=0;i<32;i++){brush.clearRect(i*4,2,1,1+i%3);brush.clearRect(i*4+2,12,2,2);}
+  const tongueMap=new THREE.CanvasTexture(tonguePaint);tongueMap.colorSpace=THREE.SRGBColorSpace;
+  const tongue = new THREE.Mesh(new THREE.PlaneGeometry(1,1,16,1),new THREE.MeshBasicMaterial({map:tongueMap,transparent:true,side:THREE.DoubleSide,toneMapped:false,depthWrite:false}));
+  tongue.frustumCulled=false;tongue.visible=false;tongue.renderOrder=3;group.add(tongue);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), tip = new THREE.Vector3();
   function poseTongue(lettering, mouthWorld) {
     const word = lettering.words.find(w => w.phase === "eaten");
     tongue.visible = !!word;
     if (!word) return;
-    a.set(...mouthWorld).setY(0.09);
-    const u = (lettering.tick - word.eatenAt) / 7, reach = u < 0.4 ? u / 0.4 : 1;
-    b.copy(frame.origin).addScaledVector(frame.along, word.s + word.width / 2).addScaledVector(frame.normal, word.lift).setY(0.06);
+    a.set(...mouthWorld);
+    const age=lettering.tick-word.eatenAt,{reach,home,contact}=eatingAt(age);
+    b.copy(frame.origin).addScaledVector(frame.along, word.s + word.width / 2).addScaledVector(frame.normal, word.lift).addScaledVector(frame.up, word.t);
     tip.copy(a).lerp(b, reach);
-    const along = tip.clone().sub(a), width = 0.045;
-    side.set(0, width, 0); // Upright, for the same reason words lean: a flat tongue would be invisible.
-    const middle = a.clone().add(tip).multiplyScalar(0.5);
-    tongue.matrix.set(along.x, side.x, 0, middle.x, along.y, side.y, 1, middle.y, along.z, side.z, 0, middle.z, 0, 0, 0, 1);
-    tongue.matrixWorldNeedsUpdate = true;
+    const length=a.distanceTo(tip),positions=tongue.geometry.attributes.position;
+    for(let row=0;row<2;row++)for(let i=0;i<=16;i++){
+      // A thick root and rounded sticky tip, with a travelling unfurl that goes
+      // taut at contact. A hanging straight line would read as a cable.
+      const t=i/16,width=.10*(1-.5*t)+.055*Math.exp(-(((t-.94)/.10)**2));
+      const bow=Math.sin(Math.PI*t)*Math.min(.18,length*.09)*(contact?.25:1-home*.8);
+      const wave=Math.sin(Math.PI*t)*Math.sin(t*9-age*.9)*.035*(1-home)*(contact?0:1);
+      positions.setXYZ(row*17+i,a.x+(tip.x-a.x)*t,a.y+(tip.y-a.y)*t+bow+wave+(row===0?1:-1)*width/2,a.z+(tip.z-a.z)*t+.002);
+    }
+    positions.needsUpdate=true;
   }
 
   /**
@@ -249,7 +263,7 @@ export function createLetteringStage(scene, p, measureContext, map) {
   return {
     warm, measure, scale, wallAt: frame.wallAt, frame, toPixel, map,
     /** A world point in lettering coordinates: along the wall, and out from it. */
-    floorAt(point) { const v = new THREE.Vector3(...point).sub(frame.origin); return { s: v.dot(frame.along), lift: v.dot(frame.normal) }; },
+    floorAt(point) { const v = new THREE.Vector3(...point).sub(frame.origin); return { s: v.dot(frame.along), t: v.dot(frame.up), lift: v.dot(frame.normal) }; },
     poseTongue,
     /** Mirror the simulation's words into cards. */
     sync(lettering) {

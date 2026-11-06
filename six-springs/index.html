@@ -23,17 +23,28 @@
   <div id="veil"><div id="progress" role="progressbar" aria-label="Loading the shrine" aria-valuemin="0" aria-valuemax="100"><span id="bar"></span></div><p id="loading">Loading the shrine</p></div>
   <p id="prompt" hidden></p>
   <p id="note" role="status" hidden></p>
+  <button id="return-view" hidden aria-label="Return to the shrine view">Back to shrine</button>
   <div id="lost" role="alert" hidden><p>The browser took the picture away. It usually gives it back.</p><button id="reload">Reload the shrine</button></div>
 </main>
 <!-- She says it aloud and on the wall; this is the same words for anyone reading another way. On an upright phone it also sits under the picture. -->
-<p id="said" aria-live="polite"></p>
+<section id="said" aria-label="Her words">
+  <p id="caption-visual" aria-hidden="true"></p>
+  <button id="caption-mode" aria-controls="caption-visual" aria-pressed="false" hidden>Read full line</button>
+</section>
+<p id="said-accessible" class="sr-only" aria-live="polite" aria-atomic="true"></p>
 <nav id="things" aria-label="Things in the shrine">
   <button data-do="offer" aria-label="Offer the bowl"><span class="full">Offer the bowl</span><span class="short">Bowl</span></button>
   <button data-do="ring" aria-label="Ring the bell"><span class="full">Ring the bell</span><span class="short">Bell</span></button>
   <button data-do="frog" aria-label="Feed the frog"><span class="full">Feed the frog</span><span class="short">Frog</span></button>
   <button data-do="water" aria-label="Touch the water"><span class="full">Touch the water</span><span class="short">Water</span></button>
-  <button data-do="board">Point at the board</button>
-  <button data-do="sack">Point at the rice sack</button>
+  <button data-do="spout" aria-label="Touch the spout"><span class="full">Touch the spout</span><span class="short">Spout</span></button>
+  <button data-do="waterfall" aria-label="Listen across the valley to the distant falls"><span class="full">Listen to the distant falls</span><span class="short">Falls</span></button>
+  <button data-do="wall-symbol" aria-label="Turn the tarnished wall mirror"><span class="full">Turn the wall mirror</span><span class="short">Mirror</span></button>
+  <button data-do="board" aria-label="Pull the brass peg, then move it to the next hole" aria-description="Left and right move the peg. Down explores underneath the board." aria-keyshortcuts="ArrowLeft ArrowRight ArrowDown"><span class="full">Brass peg</span><span class="short" aria-hidden="true">Peg</span></button>
+  <button data-do="clay-bowl" aria-label="Drink from the clay cup"><span class="full">Drink from the clay cup</span><span class="short">Cup</span></button>
+  <button data-do="bird" aria-label="Watch the roof bird"><span class="full">Watch the roof bird</span><span class="short">Bird</span></button>
+  <button data-do="insect" aria-label="Look for the beetle on the foreground leaves"><span class="full">Look for the beetle</span><span class="short">Beetle</span></button>
+  <button data-do="sack" aria-label="Poke the sack, or take rice when open" aria-description="Up opens or ties the sack. Right takes one grain. Down pokes." aria-keyshortcuts="ArrowUp ArrowRight ArrowDown"><span class="full">Rice sack</span><span class="short">Rice</span></button><button data-do="sack-tie" aria-label="Open or tie the rice sack"><span class="full">Open / tie sack</span><span class="short">Tie</span></button>
   <button data-do="saint">Poke her</button>
 </nav>
 <div id="corner">
@@ -49,11 +60,11 @@
     <li>Put it in the bowl.</li>
     <li>Feeding me is good merit.</li>
     <li>It's a small bowl. I know it's a small bowl.</li>
-    <li>The frog also gives nothing. But the frog stays.</li>
-    <li>You rang it. I was already here.</li>
-    <li>Most people stop at the temple. It has stairs for that.</li>
+    <li>The frog gives nothing. But I like the frog.</li>
+    <li>You rang it. Yet, I was already here.</li>
+    <li>You are not a monk. Why are you here?</li>
     <li>I've done this before.</li>
-    <li>Thus it was said at the third river. Give, and the giving goes downstream. Do not follow it. Sit.</li>
+    <li>Do not think lightly of small good. Drop by drop the water pot is filled.</li>
   </ul>
   <p><button id="retry" hidden>Try loading again</button></p>
 </section>

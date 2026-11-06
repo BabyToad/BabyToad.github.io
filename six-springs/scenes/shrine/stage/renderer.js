@@ -113,19 +113,25 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
     return geometry([[x,y],[x+w,y],[x+w,y+h],[x,y+h]].map(q=>p.atDepth(q,depth)),[0,1,1,1,1,0,0,0],quadIndices);
   }
   const cuts=await Promise.all(Object.entries(manifest.cuts).map(async([id,entry])=>[id,{...entry,map:await texture(`${id}.png`)}]));
-  const cutMap=new Map(cuts),occluders=[];
+  const cutMap=new Map(cuts),occluders=[],cards=new Map(),extraPicks=[];
+  const residentArt=new Map(performance.things.art.map(def=>[def.id,def]));
+  const cardDefs=new Map(config.occluders.map(def=>[def.id,def]));
+  for(const def of residentArt.values())cardDefs.set(def.id,{...cardDefs.get(def.id),...def});
   const registration=await (await fetch(new URL('../../art/round3/HAND_REGISTRATION.json',assetURL))).json();
   const hands=new Map(await Promise.all(['cup-back','cup-palm','cup-fingers','open-back','open-palm','open-fingers'].map(async name=>[name,(await texture(`../../art/round3/hands/${name}.png`)).image])));
-  for(const def of config.occluders) {
+  for(const def of cardDefs.values()) {
     if(def.id==='ribbon')continue; // one skinned copy, never a second static ribbon
-    const cut=cutMap.get(def.id),depth=def.id==='bowl'?performance.offering.depth:def.depth ?? p.depthAtFloor(def.foot);
+    const cut=def.path?{bounds:def.bounds,map:await texture(def.path)}:cutMap.get(def.cut??def.id);
+    if(!cut)throw Error(`Missing stage art for ${def.id}`);
+    const depth=def.id==='bowl'?performance.offering.depth:def.depth ?? p.depthAtFloor(def.foot);
     // Fixed-camera occlusion cards reproduce registered master pixels. Moving
     // skins keep linear filtering; static pixel-aligned cards use nearest.
     cut.map.magFilter=THREE.NearestFilter;cut.map.minFilter=THREE.NearestFilter;
     cut.map.generateMipmaps=false;cut.map.anisotropy=1;cut.map.needsUpdate=true;
     const mesh=new THREE.Mesh(cutGeometry(cut.bounds,depth),basic(cut.map,{alphaTest:.5}));
-    mesh.name=def.id;objects.add(mesh);occluders.push(mesh);
-    if(['bowl','frog','stool','sack','basin','board','spout'].includes(def.id)){mesh.castShadow=true;mesh.customDepthMaterial=new THREE.MeshDepthMaterial({map:cut.map,alphaTest:.5,depthPacking:THREE.RGBADepthPacking,side:THREE.DoubleSide});resources.push(mesh.customDepthMaterial);}
+    mesh.name=def.id;mesh.userData.stageTarget=def.target??def.id;objects.add(mesh);cards.set(def.id,mesh);
+    if(def.pickable!==false)occluders.push(mesh);
+    if(def.castShadow??['bowl','stool','sack','basin','board','spout'].includes(def.id)){mesh.castShadow=true;mesh.customDepthMaterial=new THREE.MeshDepthMaterial({map:cut.map,alphaTest:.5,depthPacking:THREE.RGBADepthPacking,side:THREE.DoubleSide});resources.push(mesh.customDepthMaterial);}
   }
   // Registered patches replace interior brush marks, not the painted silhouette.
   // Keep surface before stream and attach each patch to its original object's
@@ -180,6 +186,13 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
   const grainGeo=new THREE.SphereGeometry(.018,5,3);resources.push(grainGeo);
   const grainMaterial=basic(null,{color:0xffefca}),grainMeshes=[];
   const raycaster=new THREE.Raycaster();
+  const figureParts=[];
+  const residents=await performance.things.mount({THREE,p,cards,objects,texture,geometry,basic,cutGeometry,
+    figure(part){figureParts.push(part);},
+    // Custom geometry can join alpha-aware picking without a renderer edit.
+    pick(mesh,target){mesh.userData.stageTarget=target;extraPicks.push(mesh);},
+    own(resource){resources.push(resource);return resource;},
+  });
   let mode='live',shadows=true,lastTick=-1,figureFoot=feet,draws=0;
   function update() {
     const tick=performance.scene.tick;if(tick===lastTick)return;lastTick=tick;
@@ -190,7 +203,7 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
     const [X,Y]=grid.evaluate(performance.bellPose),pos=bellGeo.attributes.position;
     for(let i=0;i<X.length;i++)pos.setXYZ(i,...p.atDepth([X[i],Y[i]],config.bell.depth));
     pos.needsUpdate=true;bellGeo.computeVertexNormals();bellGeo.computeBoundingSphere();
-    ctx.clearRect(0,0,ink.width,ink.height);paintFigure(ctx,performance,hands,registration,cutMap.get('bowl'));inkTexture.needsUpdate=true;
+    ctx.clearRect(0,0,ink.width,ink.height);paintFigure(ctx,performance,hands,registration,cutMap.get('bowl'),figureParts);inkTexture.needsUpdate=true;
     figureFoot=performance.root;
     const positions=figureGeo.attributes.position;
     for(const [i,[x,y]] of [[0,0],[ink.width,0],[ink.width,ink.height],[0,ink.height]].entries())
@@ -210,7 +223,7 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
         performance.bowl.position[1]+basis[1]*dx+basis[3]*dy,performance.bowl.position[2]);
     }
     bowl.geometry.attributes.position.needsUpdate=true;bowl.geometry.computeVertexNormals();bowl.geometry.computeBoundingSphere();
-    occluders.find(x=>x.name==='frog').position.fromArray(performance.frogOffset);
+    residents.update(tick);
     // One straight cord at the same pixels, drawn behind every place she stands and in front of the wall.
     const behind=q=>new THREE.Vector3(...p.atDepth(p.project(q),11.95)),top=behind(performance.cord.top),bottom=behind(performance.cord.bottom);
     cord.position.copy(top).add(bottom).multiplyScalar(.5);cord.scale.y=top.distanceTo(bottom);
@@ -236,13 +249,22 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
     raycaster.setFromCamera(new THREE.Vector2(x/p.width*2-1,1-y/p.height*2),camera);
     // Raycaster doesn't know texture alpha. Read the texture at the hit UV, so
     // transparent corners never block a farther prop or count as a bell click.
-    for(const hit of raycaster.intersectObjects([...occluders.filter(x=>x.visible),bell,ribbon,figure,cord])) {
+    for(const hit of raycaster.intersectObjects([...occluders,...extraPicks,bell,ribbon,figure,cord].filter(x=>x.visible),false)) {
       if(hit.object===cord)return 'bell';
-      const map=hit.object.material.map,im=map.image;
+      const target=hit.object.userData.stageTarget??hit.object.name,map=hit.object.material.map;
+      if(!map)return target;
+      const im=map.image;
       let pixels=map.userData.pick;
-      if(!pixels || map===inkTexture) {const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(im,0,0);pixels=cx.getImageData(0,0,c.width,c.height);map.userData.pick=pixels;}
+      // needsUpdate increments Texture.version for every producer, including
+      // resident CanvasTextures. Static textures keep their cached silhouette.
+      if(!pixels || map.userData.pickVersion!==map.version || map.userData.pickImage!==im) {
+        const c=document.createElement('canvas');c.width=im.width;c.height=im.height;
+        const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(im,0,0);
+        pixels=cx.getImageData(0,0,c.width,c.height);map.userData.pick=pixels;
+        map.userData.pickVersion=map.version;map.userData.pickImage=im;
+      }
       const u=Math.min(pixels.width-1,Math.max(0,Math.floor(hit.uv.x*pixels.width))),v=Math.min(pixels.height-1,Math.max(0,Math.floor((1-hit.uv.y)*pixels.height)));
-      if(pixels.data[(v*pixels.width+u)*4+3]>127)return hit.object.name;
+      if(pixels.data[(v*pixels.width+u)*4+3]>127)return target;
     }
     return null;
   }
@@ -256,5 +278,5 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
       structure:(config.structure||[]).map(x=>x.id),water:water.map(x=>x.index),ribbon:performance.life.pose,
       contacts:contacts.map(x=>({position:x.position.toArray(),opacity:x.material.opacity})),
       triangles:renderer.info.render.triangles,textureSize:[ink.width,ink.height],plate:manifest.plate};},
-    dispose(){for(const item of resources)item.dispose();light.shadow.dispose();renderer.dispose();}};
+    dispose(){residents.dispose();for(const item of resources)item.dispose();light.shadow.dispose();renderer.dispose();}};
 }

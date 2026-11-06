@@ -16,22 +16,13 @@
 
 import { BROWS, MOUTH, EYE_SETS } from "../../../src/speech/text.js";
 import { Reactions } from "./reactions.js";
+import { ANSWERS } from "./answers.js";
+import { LINES } from "./direction.js";
+export { ANSWERS } from "./answers.js";
 
 const SECOND = 24;
-/** What each thing can get out of her, in order. */
-export const ANSWERS = {
-  taken: ["merit", "small", "burn", "deeds"], // The bowl, taken up each time. Fewer compliments as it goes.
-  bell: ["rang", "stairs"],
-  frog: ["frog"],
-  board: ["deeds"],
-  sack: ["burn"],
-  stool: ["small"],
-  ribbon: ["stairs"],
-  water: ["third", "sixth", "nothing"],
-  saint: ["arrow", "arm", "before", "halls", "corpse"], // After the first poke, which only gets a look.
-};
 /** Talking to herself: what, and how many seconds of quiet each one takes. The wait grows. */
-export const MUSINGS = [["bowl", 24], ["before", 30], ["arm", 45], ["halls", 60], ["corpse", 80], ["nothing", 110], ["sixth", 150]];
+export const MUSINGS = [["bowl", 24], ["before", 30], ["arm", 45], ["halls", 60], ["corpse", 80], ["devil", 110], ["weather", 140], ["beings", 170]];
 const OPENING_PAUSE = 58, GAP = 19, AFTER_CLICK = 5 * SECOND, FORGET = 6 * SECOND, REPEATS_AFTER = 240 * SECOND;
 const FETCHES_AFTER = 30 * SECOND;
 const RESTLESS = 2400, RESTLESS_DECAY = 0.985, NEVER_BEFORE = 12 * SECOND, HOVER_FACE = 30, HOVER_SAYS = 120;
@@ -53,6 +44,8 @@ export class Director extends Reactions {
     super(performance, speaker, places);
     this.saidAt = new Map(); this.entered = null; this.title = null; this.pokes = {}; this.lastClick = -1e9; this.lastLineEnd = 0;
     this.fetchAt = null; this.restless = 0; this.lastPointer = null; this.hovered = 0; this.touch = false; this.nextGlance = 12 * SECOND; this.demanded = 0;
+    this.waterIndex = 0; this.bells = 0; this.followup = null; this.observedSpeech = null;
+    this.hopsSeen = 0; this.lastHop = -Infinity; this.hopQueued = null;
   }
 
   /** A line she has not said lately. Lines she has said do come back, a long way off. */
@@ -61,11 +54,20 @@ export class Director extends Reactions {
   /** The arrow does not exist on a touch screen, so she cannot have been looking at it. */
   allowed(line) { return line !== "arrow" || !this.touch; }
 
-  next(pool, tick) { return ANSWERS[pool].find(line => this.allowed(line) && this.eligible(line, tick)) ?? null; }
+  next(pool, tick) {
+    const owned = this.performance.things?.answers(pool), lines = owned ?? ANSWERS[pool] ?? [];
+    // A deliberate water request can revisit the cycle; automatic talk still never loops.
+    if (!owned && pool === "water") return lines[this.waterIndex % lines.length] ?? null;
+    if (!owned && pool === "bell") return this.bells <= 2 ? lines[Math.max(0, this.bells - 1)] : this.eligible("wars", tick) ? "wars" : null;
+    return lines.find(line => this.allowed(line) && this.eligible(line, tick)) ?? null;
+  }
 
   say(tick, line, id) {
     this.saidAt.set(line, tick);
     super.say(tick, line, id);
+    if (ANSWERS.water.includes(line)) this.waterIndex = ANSWERS.water.indexOf(line) + 1;
+    this.followup = null;
+    this.observedSpeech = this.speaker.current;
   }
 
   /** An answer waits for her. Only the last thing asked is remembered, and not for long. */
@@ -78,7 +80,10 @@ export class Director extends Reactions {
   }
 
   /** Enough of the body to show she noticed, without taking anything from what she is doing. */
-  lookAt(point, tick) { this.performance.perception.observe({ kind: "visitor", point }, tick); }
+  lookAt(point, tick) {
+    this.performance.perception.observe({ kind: "visitor", point }, tick);
+    this.speaker.notice(tick, point);
+  }
 
   disapprove(tick, ticks = 30) { if (!this.speaker.current) this.speaker.requestFace(tick, { mouth: MOUTH.displeased, browSet: BROWS.skeptical }, ticks); }
 
@@ -117,28 +122,31 @@ export class Director extends Reactions {
     this.lastPointer = [intent.x, intent.y];
   }
 
-  poke({ target, x, y, action = null }, tick) {
+  poke({ target, x, y, action = null, speech = null }, tick) {
     this.lastClick = tick;
     this.pokes[target] = (this.pokes[target] ?? 0) + 1;
-    if (target === "saint") { this.pokedHer(tick, action); return; }
+    if (target === "saint") { this.pokedHer(tick, action, speech); return; }
     this.lookAt([x, y], tick);
-    if (ANSWERS[target]) this.ask(target, tick, this.speaker.current ? GAP : 10);
+    if (ANSWERS[target] || this.performance.things?.answers(target)) this.ask(target, tick, this.speaker.current ? GAP : 10);
   }
 
   /** @param {string|null} poked the action she was in when the visitor poked her, captured at that moment */
-  pokedHer(tick, poked) {
+  pokedHer(tick, poked, speech) {
     const { performance } = this;
     performance.actor.play("expression", POKED, { id: `poked:${tick}`, fade: 1, release: 4 });
     performance.send({ kind: "notice" });
     this.disapprove(tick, 24);
     // She is doing something and you have just poked her. With the bowl in her hands, this is the page's best joke.
     // Scoped to that action, so if it has since finished the stage rejects it, and anything started since goes on.
+    const recital = (this.speaker.current?.score.recital || this.speaker.current?.line === "movement") && this.speaker.current.id === speech;
+    if (recital) performance.send({ kind: "hush-speech", request: speech });
     if (poked) performance.send({ kind: "interrupt", request: poked });
-    else if (this.pokes.saint > 1) this.ask("saint", tick, this.speaker.current ? GAP : 14);
+    else if (!recital && this.pokes.saint > 1) this.ask("saint", tick, this.speaker.current ? GAP : 14);
   }
 
   knocked(word, tick) {
     this.lastClick = tick;
+    this.speaker.notice(tick, this.speaker.lettering.wall.toPixel(word.s + word.width / 2, word.t));
     if (this.speaker.current) return;
     this.performance.actor.play("expression", LOOK_ROUND, { id: `knocked:${tick}`, fade: 2, release: 5 });
     this.lookAt(this.speaker.lettering.wall.toPixel(word.s + word.width / 2, word.t), tick);
@@ -156,7 +164,7 @@ export class Director extends Reactions {
   }
 
   respond(kind, tick) {
-    if (kind === "bell") this.ask("bell", tick, 20);
+    if (kind === "bell") { this.bells++; this.ask("bell", tick, 20); }
     else if (kind === "drop") this.pending = null;
     // "Put it in the bowl" is her refrain, the one line a fall may get twice more.
     else if (kind === "land") { if (++this.demanded <= 2) this.plan("bowl", tick, 44); }
@@ -168,6 +176,7 @@ export class Director extends Reactions {
 
   /** Decide, once a tick, whether anything is worth saying unasked, and keep her eyes occupied. */
   think(tick) {
+    this.followSpeech(tick);
     if (this.entered === null) return;
     const { speaker, performance } = this;
     if (speaker.current) this.lastLineEnd = tick;
@@ -177,6 +186,16 @@ export class Director extends Reactions {
     this.glance(tick);
     this.fetchBowl(tick);
     const quiet = tick - this.lastLineEnd;
+    if (this.followup && tick > this.followup.until) this.followup = null;
+    if (this.followup && !this.pending && this.free() && tick >= this.followup.at) {
+      this.plan("monks", tick); this.followup = null; return;
+    }
+    // Only an actual observed journey earns this aside. It waits for both speech and feet,
+    // expires if the visitor keeps her busy, and occurs at most once per visit.
+    if (!this.followup && this.hopsSeen >= 6 && tick - this.lastHop < 8 * SECOND && quiet > GAP &&
+        !this.pending && !speaker.current && !performance.action && !this.saidAt.has("movement")) {
+      this.plan("movement", tick); return;
+    }
     if (this.pending || speaker.current || performance.action || tick - this.lastClick < AFTER_CLICK) return;
     if (tick - this.entered > NEVER_BEFORE && quiet > GAP * 4 && (this.restless > RESTLESS || this.hovered > HOVER_SAYS) && this.allowed("arrow") && this.eligible("arrow", tick)) {
       this.restless = 0;
@@ -185,6 +204,28 @@ export class Director extends Reactions {
     }
     const musing = MUSINGS.find(([line]) => !this.saidAt.has(line));
     if (musing && quiet > musing[1] * SECOND) this.plan(musing[0], tick);
+  }
+
+  followSpeech(tick) {
+    const current = this.speaker.current, previous = this.observedSpeech;
+    if (previous && current?.id !== previous.id) {
+      // Only the completed question earns the follow-up, never a cut-off accusation.
+      if (previous.line === "stairs" && tick >= previous.startTick + previous.score.ticks && this.eligible("monks", tick))
+        this.followup = { at: tick + 24, until: tick + 6 * SECOND };
+      this.observedSpeech = current;
+    }
+    if (current && LINES[current.line].hop && this.hopQueued !== current.id) {
+      const word = current.score.words.find(w => w.word === LINES[current.line].hop);
+      if (tick - current.startTick === word.start - 3) {
+        this.hopQueued = current.id;
+        this.performance.send({ kind: "speech-hop", request: current.id });
+      }
+    }
+  }
+
+  consequence(event, tick) {
+    if (event.kind === "saint-land" && event.interaction !== "speech-hop") { this.hopsSeen++; this.lastHop = tick; }
+    super.consequence(event, tick);
   }
 
   /** Nobody is going to hand it to her. Wherever it ended up, however hidden, it does not stay lost. */

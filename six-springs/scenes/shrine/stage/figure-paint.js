@@ -4,9 +4,24 @@ import { cupPreset } from './spatial.js';
 
 /** Serving art is an authored view preset. Keep all of its registration here,
  * outside the generic rig and the Three renderer. The original curves survive. */
-export function paintFigure(ctx,performance,hands,registration,bowlCut) {
+export function paintFigure(ctx,performance,hands,registration,bowlCut,parts=[]) {
   const view=performance.rig.views.front,pose=performance.actor.pose;
-  if(!performance.cup){drawCanvas(ctx,view,pose);return;}
+  if(!performance.cup){
+    const active=parts.filter(part=>part.active());
+    if(!active.length){drawCanvas(ctx,view,pose);return;}
+    const frame=view.evaluate(pose),S=view.skeleton(view.resolve(pose));
+    const packet=paths=>({paint(sink){for(const path of paths)sink({kind:'path',...path});}});
+    drawCanvas(ctx,packet(frame.paths.filter(path=>!active.some(part=>part.layer===path.layer))));
+    for(const part of active){
+      const wrist=view.pivots[part.wrist],elbow=view.pivots[part.elbow],length=Math.hypot(wrist[0]-elbow[0],wrist[1]-elbow[1]);
+      const d=[(wrist[0]-elbow[0])/length,(wrist[1]-elbow[1])/length],n=[-d[1],d[0]];
+      const corners=[[-1000,-1000],[1000,-1000],[1000,3],[-1000,3]].map(([x,y])=>apply(S[part.bone],[wrist[0]+n[0]*x+d[0]*y,wrist[1]+n[1]*x+d[1]*y]));
+      ctx.save();ctx.beginPath();corners.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.clip();
+      drawCanvas(ctx,packet(frame.paths.filter(path=>path.layer===part.layer)));ctx.restore();
+      ctx.save();part.paint(ctx,{performance,view,pose,S});ctx.restore();
+    }
+    return;
+  }
   const frame=view.evaluate(pose),S=view.skeleton(view.resolve(pose));
   const packet=paths=>({paint(sink){for(const path of paths)sink({kind:'path',...path});}});
   const arm=path=>path.layer==='b:front.uarmL'||path.layer==='b:front.farmL';

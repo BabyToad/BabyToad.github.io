@@ -45,7 +45,7 @@ export class Reactions {
   resolve(pending) { return pending.line; }
 
   /** Is she free to start a line? Holding a bowl does not stop her talking; walking somewhere does. */
-  free() { return !this.speaker.current && (!this.performance.action || this.performance.bowl.held); }
+  free() { return !this.speaker.current && !this.performance.things?.request && (!this.performance.action || this.performance.bowl.held); }
 
   applySettings(settings) {
     this.settings = { ...this.settings, ...settings };
@@ -58,6 +58,10 @@ export class Reactions {
       case "speech-settings": this.applySettings(intent.settings); break;
       case "say": this.pending = null; this.say(tick, intent.line, intent.id); break;
       case "hush": this.pending = null; this.speaker.hush(tick); break;
+      case "hush-speech":
+        // A poke names the utterance it touched. It cannot hush a later line or cancel an action.
+        if (typeof intent.request === "string") this.speaker.hush(tick, { id: intent.request });
+        break;
       case "interrupt":
         // A scoped cancellation belongs to the action it names, and the stage says if it was stale.
         // Only an unscoped interrupt stops her talking.
@@ -68,7 +72,6 @@ export class Reactions {
         if (word && ["arriving", "held"].includes(word.phase)) { this.speaker.lettering.dislodge(word); this.knocked(word, tick); }
         break;
       }
-      case "feed-frog": this.fedFrog(this.speaker.lettering.eat(tick, this.places.frogMouth()), tick); break;
       default:
     }
   }
@@ -100,6 +103,7 @@ export class Reactions {
   }
 
   consequence(event, tick) {
+    this.performance.things?.speechEvent(event,tick,this);
     const { speaker, places } = this;
     switch (event.kind) {
       case "bell":
@@ -133,7 +137,10 @@ export class Reactions {
   before(tick, { commands }) {
     for (const command of commands) {
       if (command.accepted === false) this.rejected(command, tick);
-      else this.command(command, tick);
+      else {
+        this.performance.things?.speechCommand(command,tick,this);
+        this.command(command, tick);
+      }
     }
     this.speaker.beforePose(tick);
     this.think(tick);

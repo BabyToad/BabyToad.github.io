@@ -3,6 +3,7 @@
 // off it, how much ink is left) that the stage turns into a lit card. Replay needs no extra state.
 
 import { smooth } from "../math.js";
+import { EATING, eatingAt } from './eating.js';
 import { composePage, rectFree } from "./compose.js";
 
 /** One word's material: ink is cut out and casts a shadow, water is a stain on the plaster. */
@@ -10,7 +11,7 @@ export const STYLE = {
   said: { material: "ink", font: "DalangInk", size: 33, leading: 1.26, fill: "#14100e", rest: 0.05, light: 0.14, heavy: 0.34, fall: 4, keep: 44, soak: 26, supersede: 10, ghost: 0.05, width: 300, lines: 4 },
   mutter: { material: "ink", font: "DalangInkMedium", size: 21, leading: 1.3, fill: "#231a15", rest: 0.02, light: 0.05, heavy: 0.1, fall: 2, keep: 20, soak: 18, supersede: 8, ghost: 0.03, width: 150, lines: 5 },
   ponder: { material: "ink", font: "DalangInkLight", size: 28, leading: 1.3, fill: "#231a12", rest: 0.03, light: 0.12, heavy: 0.2, fall: 7, keep: 24, soak: 44, supersede: 14, ghost: 0, width: 210, lines: 4 },
-  sutra: { material: "water", font: "DalangWater", size: 48, leading: 1.22, fill: "#000000", rest: 0.004, light: 0.004, heavy: 0.004, fall: 0, keep: 40, soak: 84, supersede: 34, sentencePages: true, ghost: 0, width: 340, lines: 4 },
+  sutra: { material: "water", font: "DalangWater", size: 48, leading: 1.22, fill: "#000000", rest: 0.004, light: 0.004, heavy: 0.004, fall: 0, keep: 40, soak: 84, supersede: 10, sentencePages: true, ghost: 0, width: 340, lines: 4 },
 };
 
 const GRAVITY = 0.0105, GHOSTS = 18;
@@ -22,12 +23,12 @@ function tumble(word, salt) {
   return (h >>> 8) / 16777216 * 2 - 1;
 }
 
-/** Group a score's words into pages: a jump in the direction or, for scripture, a new sentence. */
+/** Group words by authored starts (word text or zero-based index), or scripture sentences. */
 function pagesOf(words, register, phrasing) {
   const pages = [];
   let current = null, sentence = -1;
   for (const word of words) {
-    const jump = phrasing[word.text.toLowerCase()];
+    const jump = phrasing[word.index] ?? phrasing[word.text.toLowerCase()];
     if (!current || jump || (STYLE[register].sentencePages && word.sentence !== sentence)) {
       current = { words: [], near: jump ? jump.near : null };
       pages.push(current);
@@ -43,8 +44,9 @@ const boundsOf = ({ s, t, width, size }) => ({ s0: s, s1: s + width, t0: t - siz
  * Compose pages onto the wall, each in space no other writing holds. Sizes shrink before a page
  * gives up its own space. Failing that it may share, and the words beneath are told to clear fast.
  * A page with nowhere at all to go is split at its middle, then placed plainly as a last resort.
+ * Authored clearPages clauses may reuse the same plaster: their readable lifetimes never overlap.
  */
-function composePages(pages, wall, focus, register, occupancy, held = []) {
+function composePages(pages, wall, focus, register, occupancy, held = [], clearPages = false) {
   const base = STYLE[register], size = base.size * wall.scale;
   const metrics = { size, leading: base.leading, width: base.width, lines: base.lines };
   const queue = [...pages], out = [];
@@ -58,7 +60,7 @@ function composePages(pages, wall, focus, register, occupancy, held = []) {
     const attempt = (scale, reserved) => composePage(page.words, wall, target, { ...metrics, size: size * scale }, occupancy, reserved);
     const taken = [...held, ...previous];
     const result = attempt(1, taken) ?? attempt(0.8, taken) ?? attempt(1, []) ?? attempt(0.8, []) ?? (single ? attempt(0.62, []) : null);
-    if (result) { out.push(result); previous = result.placed.map(boundsOf); continue; }
+    if (result) { out.push(result); previous = clearPages ? [] : result.placed.map(boundsOf); continue; }
     if (!single) {
       const middle = Math.ceil(page.words.length / 2);
       queue.unshift({ words: page.words.slice(0, middle), near: page.near }, { words: page.words.slice(middle), near: page.near });
@@ -85,7 +87,7 @@ export class Lettering {
    * Put an utterance on the wall, composed around where she stands.
    * @param {object} score
    * @param {number} startTick
-   * @param {object} direction the line's marks: `words` styling and `phrasing` places
+   * @param {object} direction `words` styling, `phrasing` page starts/places, optional `clearPages` handoffs
    * @param {{focus:{x:number,y:number},occupancy:object[]}} stance from the speaker
    */
   say(score, startTick, direction, stance) {
@@ -97,7 +99,7 @@ export class Lettering {
     });
     // What is still readable holds its space. Ghosts and fallen words do not.
     const visible = this.words.filter(w => ["arriving", "held", "soaking"].includes(w.phase) && w.erode < 0.5 && (w.style.ghost === 0 || w.ink > 0.3));
-    const pages = composePages(pagesOf(prepared, score.register, direction.phrasing ?? {}), this.wall, stance.focus, score.register, stance.occupancy, visible.map(boundsOf));
+    const pages = composePages(pagesOf(prepared, score.register, direction.phrasing ?? {}), this.wall, stance.focus, score.register, stance.occupancy, visible.map(boundsOf), direction.clearPages);
     const placedBounds = pages.flatMap(page => page.placed.map(boundsOf));
     for (const word of visible) {
       const b = boundsOf(word);
@@ -114,9 +116,10 @@ export class Lettering {
         this.words.push({
           id: `${uid}.${w.index}`, utterance: uid, text: w.text, word: w.word, stress: w.stress, phrase: w.phrase, sentence: w.sentence, style, size, width, widthEm: w.widthEm,
           s, t, lift: 0, airborne: 0, rot: 0, sx: 1, sy: 1, ink: 1, erode: 0, reveal: 0, bleed: 0, drip: 0, flat: 0, velocity: [0, 0, 0], spin: 0, move: null, page: pageIndex,
-          phase: "waiting", arrive: land - style.fall, voiceStart: startTick + w.start, voiceEnd: startTick + w.end,
+          phase: "waiting", arrive: style.material === "water" ? startTick + w.start : Math.max(land - style.fall, direction.clearPages ? pageStart[pageIndex] : -Infinity), voiceStart: startTick + w.start, voiceEnd: startTick + w.end,
           height: this.calm ? style.rest : w.stress === 2 ? style.heavy : style.light, stretch: style.stretch ?? 1, release: null,
           lineEnd: startTick + score.lastSound, nextPage: pageStart[pageIndex + 1] ?? null,
+          clearAt: direction.clearPages ? pageStart[pageIndex + 1] ?? null : null,
         });
       }
     });
@@ -199,6 +202,13 @@ export class Lettering {
   }
 
   stepWord(word, tick, jolt) {
+    // An authored clause turn has one readable page. Its last word can stay through the
+    // voice, but cannot linger beneath/behind the next clause. Knocked words keep falling.
+    if (word.clearAt !== null && tick >= word.clearAt && ["waiting", "arriving", "held", "soaking"].includes(word.phase)) {
+      word.phase = word.style.ghost > 0 ? "ghost" : "gone";
+      word.ink = word.style.ghost; word.erode = word.style.ghost > 0 ? 0 : 1; word.lift = 0.002;
+      return;
+    }
     if (word.phase === "waiting") {
       if (tick < word.arrive) return;
       word.phase = "arriving"; word.lift = word.height; word.reveal = word.style.material === "water" ? 0 : 1;
@@ -220,7 +230,7 @@ export class Lettering {
     const style = word.style;
     if (style.material === "water") {
       // A brush goes across at the speed of the voice.
-      word.reveal = Math.min(1, Math.max(0, (tick - word.voiceStart + 2) / Math.max(4, word.voiceEnd - word.voiceStart)));
+      word.reveal = Math.min(1, Math.max(0, (tick - word.voiceStart) / Math.max(4, word.voiceEnd - word.voiceStart)));
       word.lift = style.rest;
       if (word.reveal >= 1) { word.phase = "held"; this.note("brush-end", word, tick); }
       return;
@@ -257,7 +267,9 @@ export class Lettering {
     }
     word.rot = word.shiver !== undefined && tick - word.shiver < 10 ? Math.sin((tick - word.shiver) * 2.4) * 0.016 * (1 - (tick - word.shiver) / 10) : 0;
     // A page gives way as the next arrives, but is never gone before it has been read.
-    if (word.nextPage !== null && tick >= Math.max(word.nextPage - (style.supersede ?? 0) - 1, word.voiceEnd + 18)) { this.release(word, tick); word.superseded = true; }
+    // Wet clauses can move above their predecessors on a phone. Clear the previous clause
+    // promptly so the eye cannot read both in reverse order; the spoken word still finishes.
+    if (word.nextPage !== null && tick >= Math.max(word.nextPage - (style.supersede ?? 0) - 1, word.voiceEnd + (word.clearAt !== null ? 0 : style.material === "water" ? 3 : 18))) { this.release(word, tick); word.superseded = true; }
     if (style.material === "water") {
       word.drip = Math.min(1, word.drip + 1 / 26);
       // Water does not wait for the line to end: earlier sentences are already drying.
@@ -269,7 +281,8 @@ export class Lettering {
   }
 
   soaking(word, tick) {
-    const style = word.style, u = Math.min(1, (tick - word.soakStart) / (word.superseded ? style.supersede ?? style.soak : style.soak));
+    const style = word.style, duration = word.superseded ? style.supersede ?? style.soak : style.soak;
+    const u = Math.min(1, (tick - word.soakStart) / Math.max(1, word.clearAt === null ? duration : Math.min(duration, word.clearAt - word.soakStart)));
     word.lift += (Math.max(0.002, style.rest * 0.1) - word.lift) * 0.14;
     if (style.ghost > 0) {
       // The plaster keeps a little of everything she has said.
@@ -309,20 +322,20 @@ export class Lettering {
   }
 
   /** Something eats a word off the floor: it is pulled to `mouth` over a few ticks, then gone. */
-  eat(tick, mouth) {
-    const word = this.words.filter(w => w.phase === "floor").sort((a, b) => Math.hypot(a.s - mouth.s, a.lift - mouth.lift) - Math.hypot(b.s - mouth.s, b.lift - mouth.lift))[0];
+  eat(tick, mouth, target) {
+    const word = this.words.filter(w => w.phase === "floor" && (target === undefined || w.id === target)).sort((a, b) => Math.hypot(a.s - mouth.s, a.lift - mouth.lift) - Math.hypot(b.s - mouth.s, b.lift - mouth.lift))[0];
     if (!word) return null;
-    word.phase = "eaten"; word.eatenAt = tick; word.mouth = mouth; word.from = { s: word.s, lift: word.lift };
-    this.note("word-eaten", word, tick);
+    word.phase = "eaten"; word.eatenAt = tick; word.mouth = mouth; word.from = { s: word.s, t: word.t, lift: word.lift };
     return word;
   }
 
   eaten(word, tick) {
-    const u = (tick - word.eatenAt) / 7;
-    if (u >= 1) { word.phase = "gone"; return; }
-    // Out and back on one flick: the tongue reaches for three ticks, and the word rides it home.
-    const home = u < 0.4 ? 0 : smooth((u - 0.4) / 0.6);
-    word.s = word.from.s + (word.mouth.s - word.from.s) * home;
+    const age=tick-word.eatenAt,{home,done}=eatingAt(age);
+    if(done){word.phase='gone';return;}
+    if(age===EATING.contact)this.note('word-eaten',word,tick);
+    // `s` is the left edge; the word's centre is what reaches the mouth.
+    word.s = word.from.s + (word.mouth.s - word.width / 2 - word.from.s) * home;
+    word.t = word.from.t + ((word.mouth.t ?? word.from.t) - word.from.t) * home;
     word.lift = word.from.lift + (word.mouth.lift - word.from.lift) * home;
     word.sx = word.sy = 1 - home * 0.6;
   }

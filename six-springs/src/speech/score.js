@@ -13,7 +13,7 @@ export const REGISTER = Object.freeze({
   said: { breath: 1, nod: 1, opens: 1.6, chin: -0.16, roll: 2.2, eyes: "normal", touch: "press", hold: 26, lead: 13, blinkOnBreak: 1 },
   mutter: { breath: 0.45, nod: 0.45, opens: 9, chin: 0.2, roll: 1, eyes: "down", touch: "chew", hold: 14, lead: 7, blinkOnBreak: 0.6 },
   ponder: { breath: 1.25, nod: 0.3, opens: 1.8, chin: -0.5, roll: 3.2, eyes: "normal", touch: "press", hold: 40, lead: 18, blinkOnBreak: 1 },
-  sutra: { breath: 1.5, nod: 0.18, opens: 1, chin: 0.12, roll: 0.5, eyes: "heavy", touch: "press", hold: 34, lead: 20, blinkOnBreak: 0 },
+  sutra: { breath: 0.8, nod: 0.08, opens: 2.1, chin: 0.12, roll: 0.15, eyes: "normal", touch: "press", hold: 80, lead: 26, blinkOnBreak: 1 },
 });
 
 // A nod is drawn, not simulated: a small lift, a quick drop, a slow return with a little rebound.
