@@ -1,63 +1,62 @@
-# R2 handoff for Jonas
+# Media on Cloudflare R2
 
-This PR is preparation only. All 32 media files remain tracked and served locally;
-`media_base: ""` in `_config.yml` keeps current URLs working. Nothing has been
-uploaded and no account configuration or credentials have been read.
+The 32 objects in `scripts/media-manifest.txt` are live in bucket `aknb-media`,
+served at `https://media.allknivesnobagel.com`. They were uploaded and verified on
+2026-11-06; the bucket now permits public browser reads through CORS.
+`_config.yml` sets `media_base` to that host without a trailing slash. GitHub
+Pages remains the site origin. The Bagel video on a GitHub release is unchanged.
 
-The existing `https://media.allknivesnobagel.com/` already serves the Adverse
-Selection videos. Reuse its R2 bucket and custom domain. The bucket name and the
-earlier upload method are unknown; find the bucket in Cloudflare R2 → Settings →
-Custom Domains. Do not create a second bucket or change the site's Pages origin.
+The migration inventory records exact object keys, byte counts, SHA-256,
+encoded URLs and Content-Type: 137,641,848 bytes (131.27 MiB), comprising two
+Godot payloads, Mondnacht ZIP, four thought videos and 25 MP3s. These files are
+untracked; ignored offline copies may remain, but Jekyll excludes them from
+builds. Image originals, loaders, scripts, worklets and icons stay in Git.
+History is retained: no purge or force push, and no historical clone-size saving.
 
-## 1. Check the inventory
+## Add a large file
 
-From this repository's root in PowerShell, with Ruby and Wrangler 4 installed:
+1. Keep the bytes out of Git. Use the existing `assets/...` object-key layout,
+   with a new filename whenever content changes: year-cached keys are immutable.
+   Add a matching `.gitignore` rule and Jekyll `exclude` entry if the existing
+   media patterns do not already cover the new path.
+2. Authenticate with Wrangler yourself if needed (`wrangler login`). Upload to
+   the existing bucket, using the correct MIME type and these cache headers:
 
-```powershell
-ruby scripts/media_manifest.rb --check
-if ($LASTEXITCODE -ne 0) { throw 'Manifest check failed' }
-$mediaBucket = 'REPLACE_WITH_EXISTING_BUCKET_NAME'
-if ($mediaBucket -eq 'REPLACE_WITH_EXISTING_BUCKET_NAME') { throw 'Set the existing bucket name first' }
-$mediaObjects = Import-Csv -LiteralPath scripts/media-manifest.txt -Delimiter "`t"
-foreach ($object in $mediaObjects) {
-    $file = Get-Item -LiteralPath $object.path
-    $sha = (Get-FileHash -LiteralPath $object.path -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($file.Length -ne [long]$object.bytes -or $sha -ne $object.sha256) {
-        throw "Local media differs from manifest: $($object.path)"
-    }
-}
-```
+   ```powershell
+   $mediaBucket = 'aknb-media'
+   $mediaKey = 'assets/videos/thoughts/NEW-FILENAME.mp4'
+   wrangler r2 object put "$mediaBucket/$mediaKey" --remote `
+       --file $mediaKey --content-type 'video/mp4' `
+       --cache-control 'public, max-age=31536000, immutable'
+   if ($LASTEXITCODE -ne 0) { throw 'Upload failed' }
+   ```
 
-`media-manifest.txt` is TSV: path (also the exact R2 object key), byte count,
-SHA-256, encoded target URL and Content-Type. It covers 137,641,848 bytes
-(131.27 MiB): two Godot payloads, Mondnacht ZIP, four thought videos, 25 MP3s.
-Image originals, loaders, scripts, worklets and icons stay in Git.
+   MIME types: WASM `application/wasm`, PCK `application/octet-stream`, ZIP
+   `application/zip`, MP4 `video/mp4`, MP3 `audio/mpeg`. Do not set Content-Encoding
+   on uncompressed source files. Cloudflare may compress responses in transit.
+3. Verify HTTPS 200, byte size, MIME, caching and CORS before publishing. Use
+   `Accept-Encoding: identity` when checking Content-Length against source bytes.
+   Download and compare SHA-256 for new objects; R2's ETag is not SHA-256.
+4. Reference the site-relative path through Liquid's `media_url` filter:
 
-## 2. Upload to the existing remote bucket
+   ```liquid
+   <a href="{{ '/assets/games/NEW-FILENAME.zip' | media_url }}">Download</a>
+   ```
 
-Authenticate yourself with `wrangler login` if needed, then run this exact loop
-in the same shell. It expands one `wrangler r2 object put` command per manifest
-row, including filenames containing spaces, apostrophes and `!`.
+   Thought front matter keeps literal site-relative `videos[].src` values;
+   `thought-images.html` applies the filter to sources and download links.
+   JavaScript values should use `| media_url | jsonify`. Existing external URLs
+   pass through unchanged. Preserve Godot's `Engine.fileUrls` and iso-engine's
+   `config.audioPath` integration when re-exporting; JS/worklets/icons and
+   scene/image paths stay local.
+5. Run both pre-build scripts, build, and check real browser loading, seeking
+   and decoding. Never force-add the media bytes. The original migration
+   manifest remains an audit record; `media_manifest.rb --check` requires all
+   32 original offline copies and is not required to build a fresh clone.
 
-```powershell
-foreach ($object in $mediaObjects) {
-    wrangler r2 object put "$mediaBucket/$($object.path)" --remote `
-        --file $object.path --content-type $object.content_type `
-        --cache-control 'public, max-age=31536000, immutable'
-    if ($LASTEXITCODE -ne 0) { throw "Upload failed: $($object.path)" }
-}
-```
+## Public read policy
 
-Headers: WASM `application/wasm`; PCK `application/octet-stream`; ZIP
-`application/zip`; MP4 `video/mp4`; MP3 `audio/mpeg`. Every object gets
-`Cache-Control: public, max-age=31536000, immutable`. Do not set Content-Encoding
-on these uncompressed files. Keep these keys immutable: later revisions should
-use a new filename and manifest URL rather than overwrite year-cached bytes.
-
-## 3. Permit browser reads
-
-In the same bucket's Settings → CORS Policy, merge a public read rule with any
-existing rules (do not discard an existing upload policy). Dashboard JSON:
+The bucket's CORS policy includes this rule. Preserve any other existing rules:
 
 ```json
 [
@@ -71,60 +70,45 @@ existing rules (do not discard an existing upload policy). Dashboard JSON:
 ]
 ```
 
-These are public, credential-free assets. Godot's WASM fetch and the iso-engine's
-Web Audio fetch require CORS. If adding CORS to already cached objects, purge
-their media-host URLs so cached responses receive the new headers. Keep the
-WASM MIME type above: streaming compilation depends on it.
+Godot's WASM fetch and iso-engine's Web Audio fetch require CORS. If changing
+CORS on cached objects, purge their media-host URLs so the new headers reach
+browsers. Keep `application/wasm` for streaming compilation. Do not proxy around
+a CORS failure; inspect the browser error and the public response headers.
 
-## 4. Verify all public bytes and headers before switching
+## Verify the original inventory
 
-Download every target and compare its SHA-256 and size (not R2's ETag, which is
-not SHA-256). This writes disposable files only under the ignored `_site`:
+From the repo root in PowerShell (use `curl.exe`, not PowerShell's curl alias):
 
 ```powershell
-$verifyDirectory = New-Item -ItemType Directory -Force -Path _site/media-verification
+$mediaObjects = Import-Csv -LiteralPath scripts/media-manifest.txt -Delimiter "`t"
 foreach ($object in $mediaObjects) {
-    $download = Join-Path $verifyDirectory.FullName $object.sha256
-    $response = Invoke-WebRequest -Uri $object.url -OutFile $download -PassThru `
-        -Headers @{ Origin = 'https://www.allknivesnobagel.com' }
-    if ((Get-Item -LiteralPath $download).Length -ne [long]$object.bytes -or `
-        (Get-FileHash -LiteralPath $download -Algorithm SHA256).Hash.ToLowerInvariant() -ne $object.sha256) {
-        throw "Remote media differs: $($object.url)"
-    }
-    $response.Headers | Format-List
+    curl.exe -sSI -H 'Accept-Encoding: identity' `
+        -H 'Origin: https://www.allknivesnobagel.com' $object.url
+    if ($LASTEXITCODE -ne 0) { throw "HEAD failed: $($object.path)" }
 }
 ```
 
-Check `Content-Type`, `Cache-Control` and `Access-Control-Allow-Origin` on those
-responses. Check seeking with a range request; expect `206` and `Content-Range`:
+Require 200, the manifest Content-Length and Content-Type,
+`Cache-Control: public, max-age=31536000, immutable`, and
+`Access-Control-Allow-Origin: *`. Check seeking with a range request; expect
+206 and `Content-Range: bytes 0-1023/TOTAL`:
 
 ```powershell
 curl.exe -sS -D - -o NUL -H 'Origin: https://www.allknivesnobagel.com' `
     -H 'Range: bytes=0-1023' $mediaObjects[0].url
 ```
 
-Then test a temporary local config override with `media_base` set to
-`https://media.allknivesnobagel.com` (no trailing slash), running both pre-build
-scripts before building. Check Schneekugel starts and plays with audio, the
-iso-engine's background/interaction sounds, thought videos and video seeking,
-and the ZIP URL. Loader JS, worklets and icons must still request the site origin.
+To verify hashes, download to a disposable directory outside published output,
+then use `Get-FileHash -Algorithm SHA256` and compare to each manifest row.
 
-## 5. Trigger the second PR
+## Compatibility and rollback
 
-Tell Sol/Fable that all manifest objects and browser checks passed. Only then
-prepare a second PR setting `media_base: "https://media.allknivesnobagel.com"`
-and `git rm --cached` for exactly the manifest paths. The ignore rules are already
-prepared; local copies can remain for offline work. Add the same paths to Jekyll
-`exclude` in that PR so those ignored local copies cannot enter an R2 build.
-Git history is deliberately retained: no purge and no force push. A fresh clone
-will still download historical media. Merging this preparation PR alone saves no
-Git or deployment bytes.
-
-Before removal, old direct `/assets/...` URLs may have been shared. Cloudflare
-redirect rules for those exact paths to the matching media-host URLs can keep
-them working after removal; evaluate this in the second PR, with query strings
-preserved. To undo activation, first restore local media from Git history, then
-reset `media_base` to empty. No rollback or removal is needed for this PR.
+Old direct site-origin `/assets/...` URLs leave Pages with this activation.
+Optional Cloudflare redirects for the exact manifest paths can preserve shared
+links, with query strings retained; no redirect rules are changed by this PR.
+To undo activation, restore the manifest files from the pre-activation Git commit,
+reset `media_base` to empty and remove the media exclusions from `_config.yml`.
+Run both pre-build scripts and verify the local-media build before deployment.
 
 References: [Wrangler R2 object commands](https://developers.cloudflare.com/workers/wrangler/commands/r2/),
 [R2 CORS](https://developers.cloudflare.com/r2/buckets/cors/).

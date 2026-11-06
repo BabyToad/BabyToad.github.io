@@ -9,12 +9,14 @@ spellings and a build failure only for empty results (see CLAUDE.md). Aliases
 count each document once. Single-item archives stay on `/tags/`, but are noindexed
 and excluded from the sitemap. Keep front matter spellings canonical.
 
-# Media handoff
+# Media on R2
 
-`ruby scripts/media_manifest.rb --check` verifies the R2 inventory against local
-bytes; omit `--check` to regenerate it. This uses only Ruby's standard library.
-Jonas performs the upload and account changes using [upload-media.md](upload-media.md).
-All inventory files remain tracked while `_config.yml` has `media_base: ""`.
+The 32 objects in `media-manifest.txt` are live in R2 bucket `aknb-media` and are
+no longer tracked. See [upload-media.md](upload-media.md) for adding large files;
+upload and verify them before publishing references, and never commit the bytes.
+`ruby scripts/media_manifest.rb --check` checks the original migration inventory
+only when all 32 offline files are present; it is not a fresh-clone build step.
+Do not regenerate that historical inventory from an incomplete local checkout.
 The `media_url` Liquid filter prefixes site-relative thought video/download URLs
 at rendering time; their YAML `videos[].src` paths stay literal, since front
 matter does not evaluate Liquid. Existing external videos keep their own URLs.

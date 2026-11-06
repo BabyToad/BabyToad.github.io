@@ -4,8 +4,12 @@ GitHub Pages remains the origin, built and deployed by `.github/workflows/pages.
 Cloudflare proxies the site; R2's existing `media.allknivesnobagel.com` host serves
 large media. Jekyll 4 runs directly in Actions, without the `github-pages` gem or
 a plugin whitelist. Full-history checkout stays enabled for git modification dates.
-Git history is deliberately kept: removal is a later ordinary commit, never a
-purge or force push. See [the media upload handoff](../scripts/upload-media.md).
+The 32 objects in `scripts/media-manifest.txt` are live in bucket `aknb-media`;
+`media_base` points to `https://media.allknivesnobagel.com`. Their 137,641,848 bytes
+(131.27 MiB) are no longer tracked in the checkout or copied into the deployment.
+Git history is deliberately kept, so historical media still contributes to Git
+object storage and clone size. No purge or force push is used. See
+[the media maintenance guide](../scripts/upload-media.md).
 
 In Cloudflare → the `allknivesnobagel.com` zone → Caching → Cache Rules:
 
@@ -41,10 +45,20 @@ previous build output is involved. GitHub Pages can keep its origin CSS TTL;
 new deployments request a new URL when bytes change. Keep old asset cache entries
 until expiry; they do not need purging.
 
-The media handoff is deliberately gated: this PR leaves `media_base: ""` and all
-32 files tracked. Jonas uploads, verifies hashes/headers/CORS and playback, then
-requests the activation/removal PR. No deployment-size or Git-size reduction is
-claimed before that step. Image originals remain pipeline sources in the repo.
+Large media belongs in R2, never in a new Git commit. Upload with the same
+`assets/...` object-key layout, the correct Content-Type and
+`Cache-Control: public, max-age=31536000, immutable`; use a new filename when bytes
+change. Reference site-relative paths through `media_url`. The bucket permits
+public GET/HEAD with CORS, Range requests and exposed range/length headers for
+Godot, Web Audio and video playback. Verify HTTPS bytes and browser loading
+before publishing a reference. Ignored offline copies may stay on disk; Jekyll's
+media exclusions keep them out of `_site`. Image originals remain pipeline
+sources in the repo. The Bagel video on a GitHub release keeps its existing URL.
+
+Old direct site-origin media URLs are no longer served by Pages. If preserving
+shared direct links is needed, add Cloudflare redirects for the exact manifest
+paths to their media-host URLs, preserving query strings. This activation does
+not change account-side redirect rules.
 
 Cloudflare references: [Cache Rules settings](https://developers.cloudflare.com/cache/how-to/cache-rules/settings/),
 [cache keys and query strings](https://developers.cloudflare.com/cache/how-to/cache-keys/),

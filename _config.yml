@@ -3,9 +3,8 @@ author: Jonas Heinke
 description: Jonas Heinke writes about roleplaying games, game design, and AI from Leipzig.
 baseurl: ""
 url: "https://www.allknivesnobagel.com"
-# Keep local media until Jonas verifies every R2 object; activate in a second PR.
-# Future value: https://media.allknivesnobagel.com (no trailing slash).
-media_base: ""
+# Public R2 media host; keep this URL without a trailing slash.
+media_base: "https://media.allknivesnobagel.com"
 
 # Collections
 collections:
@@ -81,6 +80,12 @@ sass:
   style: compressed
 
 exclude:
+  # Offline media copies are ignored by Git and must not enter Pages builds.
+  - assets/games/mondnacht.zip
+  - assets/games/schneekugel/schneekugel-godot.wasm
+  - assets/games/schneekugel/schneekugel-godot.pck
+  - assets/videos/thoughts/*.mp4
+  - assets/iso-engine/audio/
   - _site/
   - .jekyll-cache/
   - .sass-cache/
