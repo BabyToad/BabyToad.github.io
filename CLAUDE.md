@@ -27,6 +27,12 @@ Markdown siblings, llms-full.txt and gallery-bundle.js are gitignored; never edi
 or commit them. See [scripts/README.md](scripts/README.md) for image generation,
 sharing-card regeneration, and output audits. No Node tooling in the build.
 
+Large media lives in R2 bucket `aknb-media` at `https://media.allknivesnobagel.com`.
+Never commit new large media: upload with the same `assets/...` key layout,
+correct MIME type and immutable year-long caching, then reference the path through
+`media_url`. See [scripts/upload-media.md](scripts/upload-media.md). Ignored offline
+copies may stay locally; Jekyll excludes them from builds. Git history is retained.
+
 ## Content and layouts
 
 - `_blog/`: blog collection, `/blog/:title/`; `_thoughts/`: `/thoughts/:title/`.

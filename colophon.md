@@ -17,6 +17,6 @@ description: The cat, themes, type, footer gallery and machinery behind Jonas He
 
 **For machines.** Every essay, thought and project is also available as raw markdown: start from [/llms.txt](/llms.txt) and [/llms-full.txt](/llms-full.txt). The site is crawlable by anyone, people and models alike.
 
-**How it is built.** Jekyll, built by GitHub Actions, served from GitHub Pages behind Cloudflare, with the heavy media soon on Cloudflare R2. Source on [GitHub](https://github.com/BabyToad/BabyToad.github.io). Written mostly in Obsidian and edited with Claude Code; the current design was worked out with Claude in July 2026 under the heading "print by day, CRT by night".
+**How it is built.** Jekyll, built by GitHub Actions, served from GitHub Pages behind Cloudflare, with the heavy media on Cloudflare R2. Source on [GitHub](https://github.com/BabyToad/BabyToad.github.io). Written mostly in Obsidian and edited with Claude Code; the current design was worked out with Claude in July 2026 under the heading "print by day, CRT by night".
 
 **Now.** Teaching Game Engines & Coding 1 at Macromedia Leipzig, running the Throne and Wheel roleplaying game, and keeping up with the AI frontier.
