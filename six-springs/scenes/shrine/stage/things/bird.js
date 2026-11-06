@@ -1,8 +1,30 @@
 import { clamp, mix, smooth } from '../../../../src/math.js';
 import { curve } from '../keys.js';
 import { heard } from '../acoustics.js';
+import { Rig } from '../../../../src/rig.js';
+import { drawCanvas } from '../../../../src/render.js';
 
-const PERCHES=[[605,174],[690,149],[774,124]], DEPTH=11.6, SIZE=96;
+const PERCHES=[[605,174],[690,149],[774,124]], DEPTH=11.6;
+// The sparrow is a Dalang rig like the saint: pose numbers in, inked cutout out.
+// Its 400 px stage maps onto SIZE painting pixels; feet sit at FEET of its width/height.
+const SIZE=80, CANVAS=400, FEET=[180/400,330/400], FLAP=.95;
+const REST={pitch:0,head:0,headX:0,headY:0,eye:1,beak:0,spread:0,wingN:0,wingF:0,tail:0,tuck:0};
+// Deterministic texture for idle life: a pure function of the tick, so sampling
+// for a frame never draws from the resident's random stream.
+const hash=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x);};
+// Birds look in saccades: hold a head angle, then snap to the next within two ticks.
+function saccade(t,lo,hi,period=17){
+  const k=Math.floor(t/period),at=i=>lo+(hi-lo)*hash(i);
+  return mix(at(k-1),at(k),smooth((t-k*period)/2));
+}
+/** Continuous flapping on the spread drawings; glide holds them level, brake cups them up. */
+function flight(a,{glide=0,brake=0}={}){
+  const s=Math.sin(a*FLAP),f=Math.sin(a*FLAP-.5);
+  return {spread:1,tuck:1-brake,
+    wingN:mix(mix(mix(-100,20,(s+1)/2),-38,glide),32,brake),
+    wingF:mix(mix(mix(-92,14,(f+1)/2),-32,glide),26,brake),
+    pitch:mix(mix(22,14,glide),-14,brake),tail:mix(-4*s,-22,brake)};
+}
 const SLOT='bird.notice';
 // Decibels where she stands on the roof: above SKITTISH she leaves, above CURIOUS she
 // turns toward it. Calibrated so the bell, a dropped bowl and a stamp still clear the roof.
@@ -36,13 +58,43 @@ export function bird(host){
     }
     return [...base];
   }
+  function pose(){
+    const a=age(),t=host.tick,q={...REST};
+    if(run?.kind==='leave'){
+      if(run.airborne)Object.assign(q,flight(a+(run.phase??0)));
+      else if(a<5){const c=smooth(a/5);q.pitch=16*c;q.tail=-10*c;q.head=6*c;}
+      else Object.assign(q,flight(a-5));
+    }else if(run?.kind==='return'){
+      const u=a/42;
+      Object.assign(q,flight(a,{glide:clamp((u-.3)/.15,0,1)*clamp((.72-u)/.1,0,1),brake:clamp((u-.78)/.18,0,1)}));
+    }else if(run?.kind==='hop'){
+      if(a<5){const c=smooth(a/5);q.pitch=12*c;q.tail=-6*c;}
+      else if(a<15){const u=(a-5)/10;q.spread=1;q.wingN=mix(20,-75,u);q.wingF=q.wingN+8;q.pitch=mix(12,-6,u);q.tail=-10;}
+      else{const b=a-15;q.pitch=-8*Math.exp(-b/3)*Math.cos(b*.9);q.tail=-18*Math.exp(-b/4)*Math.cos(b*1.1);}
+    }else if(mode==='preen'){
+      q.head=36+4*Math.sin(t/7);q.eye=0;q.beak=Math.floor(t/5)%2;q.pitch=6;q.wingN=-7;
+    }else if(mode==='peek'){q.head=saccade(t,10,26);}
+    else{
+      q.head=saccade(t,-14,8);
+      if(hash(Math.floor(t/9)+.5)<.09&&t%9<3)q.eye=0; // blink
+      q.tail=-9*Math.max(0,Math.sin((t-lookAt)/5))*Math.exp(-Math.max(0,t-lookAt)/12);
+    }
+    // Head stabilisation: the world head angle is pitch + head, so a pitching
+    // body leaves the gaze where it was, as on a real bird.
+    if(mode!=='preen')q.head-=q.pitch;
+    if(run?.kind==='leave'&&run.airborne&&a<4){
+      // Numbers blend; drawing substitutions (spread, tuck, eye, beak) switch after the first tick.
+      const u=smooth(a/4),from=run.initial.pose;
+      if(a===0)return {...from};
+      for(const k of Object.keys(q))if(k!=='spread'&&k!=='tuck'&&k!=='eye'&&k!=='beak')q[k]=mix(from[k],q[k],u);
+    }
+    return q;
+  }
   function sample(){
     const a=age(),redirect=run?.kind==='leave'&&run.airborne,flight=run&&(run.kind==='return'||run.kind==='leave'&&(run.airborne||a>=5));
-    const cel=redirect&&a===0?run.initial.cel:flight?[3,5,4,5][Math.floor((a+(run.phase??0))/2)%4]:mode==='preen'?1:mode==='peek'?2:0;
     const squash=redirect?mix(run.initial.squash,1,smooth(a/4)):run?.kind==='hop'?curve(a,[[0,1],[4,.78],[6,1.08],[14,1],[16,.82],[21,1]]):run?.kind==='leave'?curve(a,[[0,1],[4,.74],[6,1.1],[12,1]]):1;
-    const pivot=redirect?mix(run.initial.pivot,.5,smooth(a/4)):flight?.5:facing===1?.4:.6;
     const breath=redirect?mix(run.initial.breath,1,smooth(a/4)):flight?1:1+Math.sin(host.tick/17)*.008;
-    return {point:position(),visible:mode!=='away',cel,facing,squash,pivot,breath,
+    return {point:position(),visible:mode!=='away',pose:pose(),facing,squash,pivot:facing===1?FEET[0]:1-FEET[0],breath,
       angle:!run&&mode==='watch'?Math.sin((host.tick-lookAt)/23)*.025:0,flight:!!flight};
   }
   const world=()=>host.p.atDepth(position(),DEPTH);
@@ -61,7 +113,7 @@ export function bird(host){
     const velocity=from.map((v,i)=>v-position(Math.max(0,a-1))[i]);
     const direction=airborne?-facing:departures%2===0?-1:1;
     run={kind:'leave',start:host.tick,from,direction,reason,airborne:!!airborne,
-      ...(airborne?{velocity,initial,phase:initial.flight?a%8:0}:{})};mode='flight';facing=-direction;departures++;
+      ...(airborne?{velocity,initial,phase:run.kind==='return'?a:0}:{})};mode='flight';facing=-direction;departures++;
     release();
   }
   function hop(){
@@ -130,24 +182,27 @@ export function bird(host){
     framing:()=>({bounds:[420,30,450,820],amount:panAmount(),open:pan.to===1,dismiss:{kind:'bird-dismiss'},returnControl:'bird'}),
     speech:{command({intent},tick,director){if(intent.kind==='bird-watch'&&'lastClick' in director)director.lastClick=tick;}},
     get state(){return {mode,perch,run:run&&structuredClone(run),visits,pressure,lastTouch,lastNoise,returnAt,departures,notice,pan:{...pan},...sample()};},
-    async mount({THREE,texture,geometry,basic,objects,pick,own}){
-      const map=await texture('bird/poses.png');map.generateMipmaps=false;map.minFilter=THREE.LinearFilter;
+    async mount({THREE,geometry,basic,objects,pick,own}){
+      const rig=new Rig(await (await fetch(new URL('../../../../characters/sparrow/baked.json',import.meta.url))).json());
+      const view=rig.views.default,canvas=document.createElement('canvas');canvas.width=canvas.height=CANVAS;
+      const ctx=canvas.getContext('2d'),map=own(new THREE.CanvasTexture(canvas));map.colorSpace=THREE.SRGBColorSpace;
       const g=geometry(Array(4).fill([0,0,0]),[0,1,1,1,1,0,0,0],[0,1,2,0,2,3]);
-      const mesh=new THREE.Mesh(g,basic(map,{alphaTest:.55,transparent:true}));mesh.name='bird';mesh.castShadow=true;
-      mesh.customDepthMaterial=own(new THREE.MeshDepthMaterial({map,alphaTest:.55,depthPacking:THREE.RGBADepthPacking,side:THREE.DoubleSide}));
+      const mesh=new THREE.Mesh(g,basic(map,{alphaTest:.3,transparent:true}));mesh.name='bird';mesh.castShadow=true;
+      mesh.customDepthMaterial=own(new THREE.MeshDepthMaterial({map,alphaTest:.3,depthPacking:THREE.RGBADepthPacking,side:THREE.DoubleSide}));
       objects.add(mesh);pick(mesh,'bird');
+      let drawn='';
       return {update(){
         const q=sample();mesh.visible=q.visible;if(!q.visible)return;
-        const [x,y]=q.point,w=SIZE,h=SIZE*q.squash*q.breath;
-        // Feet in each source cell lie at 82% of its height. Keep them registered to tile contact.
-        const pivot=q.pivot;
-        const pts=[[-w*pivot,-h*.82],[w*(1-pivot),-h*.82],[w*(1-pivot),h*.18],[-w*pivot,h*.18]]
+        // Redraw the vector cutout only when its pose numbers change.
+        const key=Object.values(q.pose).map(v=>v.toFixed(2)).join();
+        if(key!==drawn){ctx.clearRect(0,0,CANVAS,CANVAS);drawCanvas(ctx,view,rig.neutral(q.pose));map.needsUpdate=true;drawn=key;}
+        const [x,y]=q.point,w=SIZE,h=SIZE*q.squash*q.breath,pivot=q.pivot;
+        const pts=[[-w*pivot,-h*FEET[1]],[w*(1-pivot),-h*FEET[1]],[w*(1-pivot),h*(1-FEET[1])],[-w*pivot,h*(1-FEET[1])]]
           .map(([a,b])=>[x+a*Math.cos(q.angle)-b*Math.sin(q.angle),y+a*Math.sin(q.angle)+b*Math.cos(q.angle)]);
         pts.forEach((v,i)=>g.attributes.position.setXYZ(i,...host.p.atDepth(v,DEPTH)));
         g.attributes.position.needsUpdate=true;g.computeBoundingSphere();
-        const col=q.cel%3,row=Math.floor(q.cel/3),u0=col/3,u1=(col+1)/3,v0=1-(row+1)/2,v1=1-row/2;
-        const left=q.facing===1?u0:u1,right=q.facing===1?u1:u0;
-        [[left,v1],[right,v1],[right,v0],[left,v0]].forEach((v,i)=>g.attributes.uv.setXY(i,...v));g.attributes.uv.needsUpdate=true;
+        const [left,right]=q.facing===1?[0,1]:[1,0];
+        [[left,1],[right,1],[right,0],[left,0]].forEach((v,i)=>g.attributes.uv.setXY(i,...v));g.attributes.uv.needsUpdate=true;
       },dispose(){objects.remove(mesh);}};
     },
   };
