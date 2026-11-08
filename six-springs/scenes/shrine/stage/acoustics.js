@@ -39,6 +39,8 @@ export const SOURCES = Object.freeze({
   'rice-grain-land': e => 22 + 14 * Math.min(1, (e.speed ?? 0) / 3),
   'rice-knock': 40,
   'rice-heap-land': 24,
+  'rice-bowl-land': 26,
+  'rice-stomp': 66,        // her bare foot, hard, on stone
 });
 
 /** Source level in dB at 1 m, or null when the event makes no sound. */
