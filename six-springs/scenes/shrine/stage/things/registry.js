@@ -62,6 +62,10 @@ export function createThings(factories, host, core={}) {
       return active[0]?.value;
     },
     constrain(pose){for(const r of residents)pose=r.constrain?.(pose)??pose;return pose;},
+    // Material adoption: a resident that owns rice takes the offering's spill
+    // and exposes its grain bodies. Without one, the core keeps its legacy grains.
+    spill(detail){return residents.some(r=>r.spill?.(detail)===true);},
+    grains(){return residents.find(r=>r.grains)?.grains;},
     beforePose(tick,context){for(const thing of residents)thing.beforePose?.(tick,context);},
     afterPhysics(tick){for(const thing of residents)thing.afterPhysics?.(tick);},
     // FIFO delivery also permits a resident to emit a consequence in response.

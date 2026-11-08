@@ -228,9 +228,11 @@ export async function createStage(canvas,config,manifest,performance,assetURL) {
     const behind=q=>new THREE.Vector3(...p.atDepth(p.project(q),11.95)),top=behind(performance.cord.top),bottom=behind(performance.cord.bottom);
     cord.position.copy(top).add(bottom).multiplyScalar(.5);cord.scale.y=top.distanceTo(bottom);
     cord.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),top.clone().sub(bottom).normalize());
-    while(grainMeshes.length<performance.grains.length){const grain=new THREE.Mesh(grainGeo,grainMaterial);grain.castShadow=true;objects.add(grain);grainMeshes.push(grain);}
-    grainMeshes.forEach((mesh,i)=>{mesh.visible=i<performance.grains.length;});
-    performance.grains.forEach((grain,i)=>{grainMeshes[i].position.fromArray(grain.position);grainMeshes[i].scale.setScalar(Math.min(1,(240-(tick-grain.born))/24));});
+    // An adopting rice resident draws its own persistent grains.
+    const legacyGrains=performance.things.grains()?[]:performance.grains;
+    while(grainMeshes.length<legacyGrains.length){const grain=new THREE.Mesh(grainGeo,grainMaterial);grain.castShadow=true;objects.add(grain);grainMeshes.push(grain);}
+    grainMeshes.forEach((mesh,i)=>{mesh.visible=i<legacyGrains.length;});
+    legacyGrains.forEach((grain,i)=>{grainMeshes[i].position.fromArray(grain.position);grainMeshes[i].scale.setScalar(Math.min(1,(240-(tick-grain.born))/24));});
     renderer.shadowMap.needsUpdate=true;
   }
   function render() {

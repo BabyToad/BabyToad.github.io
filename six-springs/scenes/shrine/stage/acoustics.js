@@ -36,6 +36,9 @@ export const SOURCES = Object.freeze({
   'sack-tie': 42,
   'sack-grain-land': 30,
   'sack-rice-spilled': 36,
+  'rice-grain-land': e => 22 + 14 * Math.min(1, (e.speed ?? 0) / 3),
+  'rice-knock': 40,
+  'rice-heap-land': 24,
 });
 
 /** Source level in dB at 1 m, or null when the event makes no sound. */

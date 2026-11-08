@@ -29,8 +29,7 @@ export function sack(host){
       }},{id,fade:3,release:8});
   }
   function grain(amount,at,reason){
-    for(let i=0;i<amount;i++)particles.push({x:at[0],y:at[1],vx:(rng()-.5)*2.3,vy:-1.4-rng()*1.5,age:0});
-    particles=particles.slice(-24);
+    // The rice resident adopts spilled units as persistent grains; the sack keeps no witness of its own.
     host.consequence('sack-rice-spilled',{amount,remaining,reason,point:host.p.atDepth(at,depth),receipt:`sack:spill:${++sequence}`});
   }
   function poke(intent){

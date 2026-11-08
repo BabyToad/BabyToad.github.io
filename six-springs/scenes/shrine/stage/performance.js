@@ -147,7 +147,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     consequence('bowl-depth-handoff',{from:before,to:[...bowl.position],basis:[...bowl.basis]});
     consequence('bowl-release',{sourcePosition,sourceVelocity,transportVelocity:[...transport],position:[...bowl.position],velocity:[...bowl.velocity]});
     reactionStart=scene.tick;emit('drop',bowl.position);
-    if(wasHeld)for(let i=0;i<18;i++)grains.push({position:[bowl.position[0],bowl.position[1]+.35,bowl.position[2]],velocity:[bowl.velocity[0]+(rng()-.5)*1.3,1+rng(),bowl.velocity[2]+(rng()-.5)*.9],settled:false,born:scene.tick});
+    if(wasHeld&&!things.spill({position:[...bowl.position],velocity:[...bowl.velocity],amount:18}))for(let i=0;i<18;i++)grains.push({position:[bowl.position[0],bowl.position[1]+.35,bowl.position[2]],velocity:[bowl.velocity[0]+(rng()-.5)*1.3,1+rng(),bowl.velocity[2]+(rng()-.5)*.9],settled:false,born:scene.tick});
   }
   function begin(kind,id){
     if(action?.kind==='speech-hop'){actor.cancel('action',{id:action.id,fade:0});action=null;}
@@ -344,7 +344,7 @@ export function stagePerformance(baked,config,{seed=7,beforePose,afterPhysics,on
     life.step(tick,consequences);
     afterPhysics?.(tick,{events:immutable(structuredClone(consequences)),frame});
   });}
-  return {scene,rig,actor,bell,space,bowl,grains,perception,life,things,step,frame,offering:{...config.offering,home:bowlHome},
+  return {scene,rig,actor,bell,space,bowl,get grains(){return things.grains()??grains;},perception,life,things,step,frame,offering:{...config.offering,home:bowlHome},
     send:(intent,tick)=>scene.enqueue(intent,tick),
     interact:(target,options)=>things.interact(target,options),
     recording:()=>({format:3,seed,ticks:scene.tick,inputs:structuredClone(scene.inputs)}),
