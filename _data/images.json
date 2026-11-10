@@ -797,6 +797,43 @@
         }
       ]
     },
+    "/assets/images/thoughts/the-speaking-forecast.webp": {
+      "width": 1920,
+      "height": 1080,
+      "sha256": "56c68713a44862081ea22f1fedc0dede3428e46c4645c5e1b75e9548f93963c0",
+      "webp": [
+        {
+          "src": "/assets/images/thoughts/the-speaking-forecast-480w.webp",
+          "width": 480,
+          "height": 270,
+          "bytes": 17552,
+          "sha256": "f341678801aa2c9f6dd2ffc21cd4ca62647723a576268a2d604abb7cf3e4bbb8"
+        },
+        {
+          "src": "/assets/images/thoughts/the-speaking-forecast-960w.webp",
+          "width": 960,
+          "height": 540,
+          "bytes": 57068,
+          "sha256": "16f16f16fd1fa089a7b4fac6047b5a00b3394e64e7be41bbf19f0edbf79e19a9"
+        }
+      ],
+      "avif": [
+        {
+          "src": "/assets/images/thoughts/the-speaking-forecast-480w.avif",
+          "width": 480,
+          "height": 270,
+          "bytes": 12283,
+          "sha256": "9c36fe32c441d5dcc3a1fd80b0f62214668ee6d34db1501fc72435148492e75d"
+        },
+        {
+          "src": "/assets/images/thoughts/the-speaking-forecast-960w.avif",
+          "width": 960,
+          "height": 540,
+          "bytes": 37778,
+          "sha256": "5eac6516e5e0b35852a9ae998722941dbd048fe6da78c826c8aded73284d9d7e"
+        }
+      ]
+    },
     "/assets/images/thoughts/throne-and-wheel-trailer.webp": {
       "width": 1280,
       "height": 720,
