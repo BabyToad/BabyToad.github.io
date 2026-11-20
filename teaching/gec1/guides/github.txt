@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/github/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/github/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 Dauer: ca. 20 Min
 

@@ -20,12 +20,20 @@ responsibility for the result."
 
 Inhaltshinweis: Blut und Gewalt gegen menschliche Figuren; Gore lässt sich in den Optionen abschalten.
 
-## Kit (Kurs-Paket)
+## Kit (Kurs-Paket „Besteck“)
 
-Bildschirmfotos aus Unity 6000.3.15f1 mit dem Kurs-Paket 0.3.1, aufgenommen von Weiche (Studio Δt)
-am 05.10.2026 in einer Wegwerf-Kopie der Kursvorlage. Nur Unitys eigene Fenster, kein Desktop.
-Ausschnitte auf 1280 × 720 eingepasst.
+Bildschirmfotos aus Unity 6000.3.15f1. Nur Unitys eigene Fenster, kein Desktop. Ausschnitte auf 1280 × 720
+eingepasst, nicht gestreckt.
 
-- `graph`, `auswahl-schluessel`, `bindungen`, `play-tuer`, `code-wenn`: das Beispiel „Schlüssel und Tür“.
+Besteck 0.5 (main nach #13, Logik auf der Tür), aufgenommen von Dt3 (Studio Δt) am 23.10.2026 mit dem
+Studio-Werkzeug `KitShots` (`kit/Assets/Kit/Editor/Dev`) in einem frisch gebauten Beispiel:
+
+- `graph`, `play-tuer`, `code-wenn`: das Beispiel „Schlüssel und Tür“ im Graph-Fenster und in „Code ansehen“.
+- `bindungen`: der Inspector der Tür mit der Logik und ihren Rollen.
+- `auswahl-schluessel`, `rolle`: Hierarchy mit den ◆-Abzeichen, der Inspector des Schlüssels mit seiner Rolle.
+
+Kurs-Paket 0.3.1, aufgenommen von Weiche (Studio Δt) am 05.10.2026 in einer Wegwerf-Kopie der Kursvorlage:
+
 - `drehkreuz`: der eigene Knoten „Drehmoment“ aus dem Handout von Tag 3, im Play-Modus.
-- `werkstatt-zone`, `werkstatt-console`: ein Prototyp der kaputten Werkstatt (Tag 3), noch nicht im Paket.
+- `werkstatt-zone`, `werkstatt-console`: ein Prototyp der kaputten Werkstatt (Tag 3).
+

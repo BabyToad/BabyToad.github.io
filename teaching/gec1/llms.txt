@@ -2,7 +2,7 @@
 
 > Kursmaterial für „Game Engines & Coding 1“ (Macromedia Leipzig, WiSe 2026/27, Jonas Heinke): Termine mit Folien und Handout, Kernbegriffe der Spieleentwicklung mit Unity, Setup-Anleitungen. Sprache: Deutsch.
 
-Stand: 2026-10-23T16:10Z · 22dcf2f
+Stand: 2026-11-20T09:28Z · 1a29bcd
 
 Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /concepts/delta-time.md). Dieselbe Fassung liegt auch unter `.txt` (z. B. /days/01.txt), für Werkzeuge, die text/markdown ablehnen. Der Volltext aller Seiten steht in /llms-full.txt. Interaktive Erklärer sind dort als Textbeschreibung enthalten.
 
@@ -10,7 +10,7 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 
 - [Tag 1: Was macht eine Engine?](https://www.allknivesnobagel.com/teaching/gec1/days/01.md): 09.10.2026. Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 - [Tag 2: Pitch und Blockout](https://www.allknivesnobagel.com/teaching/gec1/days/02.md): 23.10.2026. Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
-- [Tag 3: Interaktion von Hand](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 20.11.2026. Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
+- [Tag 3: Schlüssel, Tür und Kiste](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 20.11.2026. Die erste Logik als Komponente auf dem Objekt, ein Graph aus Auslöser, Variable, Bedingung und Aktion, dazu Kräfte, die Dinge in Bewegung setzen.
 - [Tag 4: Vertical Slice: spielen lassen](https://www.allknivesnobagel.com/teaching/gec1/days/04.md): 27.11.2026. Andere spielen euer Spiel, ihr schaut zu. Danach bekommt eure Welt ihre erste eigene Animation.
 - [Tag 5: Look, Ton, Oberfläche](https://www.allknivesnobagel.com/teaching/gec1/days/05.md): 11.12.2026. Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
 - [Tag 6: Ship](https://www.allknivesnobagel.com/teaching/gec1/days/06.md): 08.01.2027. Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.
@@ -35,7 +35,7 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 - [Frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame.md): Ein Durchlauf der Spielschleife. Eingabe lesen, Zustand ändern, Bild zeichnen. Viele davon pro Sekunde.
 - [GameObject](https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object.md): Jedes Ding in einer Unity-Szene. Für sich allein leer; was es kann, bestimmen seine Komponenten.
 - [Git](https://www.allknivesnobagel.com/teaching/gec1/concepts/git.md): Ein Programm, das den Verlauf eines Projekts speichert. Jeder gespeicherte Stand lässt sich ansehen, vergleichen und zurückholen. GitHub ist ein Dienst, der Git-Projekte online aufbewahrt.
-- [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph.md): Eine Interaktion des Kurs-Pakets, gezeichnet aus Knoten und Drähten. Events laufen durch die Drähte von Knoten zu Knoten; im Play-Modus zeigt jeder Knoten, was er gerade tut.
+- [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph.md): Ein Logik-Graph von Besteck, gezeichnet aus Knoten und Drähten. Die Komponente Logik spielt ihn ab; Events laufen von Knoten zu Knoten, und im Play-Modus zeigt jeder Knoten, was er gerade tut.
 - [Licht](https://www.allknivesnobagel.com/teaching/gec1/concepts/light.md): Licht macht Form, Tiefe und Blickführung sichtbar. Realtime wird in jedem Frame berechnet; Baked steckt vorberechnet in Lightmaps; Mixed verbindet beides.
 - [Material](https://www.allknivesnobagel.com/teaching/gec1/concepts/material.md): Ein Material legt fest, wie eine Oberfläche gezeichnet wird. Der Shader ist das Rechenverfahren; das Material liefert Werte wie Farbe, Textur, Metallanteil und Rauheit.
 - [Playtest](https://www.allknivesnobagel.com/teaching/gec1/concepts/playtest.md): Jemand anderes spielt, wer das Spiel gebaut hat, schaut zu und schweigt. Was die Person zuerst versucht, wo sie hängen bleibt und was ihr gefällt, zeigt, ob die Spec im Spiel ankommt.
@@ -49,7 +49,7 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 - [Tag](https://www.allknivesnobagel.com/teaching/gec1/concepts/tag.md): Ein fester Name für einen bestimmten Commit, etwa „alpha“ oder „abgabe“. Anders als ein Branch rückt ein Tag nie weiter. Releases auf GitHub bauen auf Tags auf.
 - [Drehmoment](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque.md): Eine Kraft, die einen Rigidbody um eine Achse dreht, statt ihn zu verschieben. In Unity heißt das AddTorque. Richtung und Länge des Vektors geben Achse und Stärke.
 - [Transform](https://www.allknivesnobagel.com/teaching/gec1/concepts/transform.md): Die Component, die Position, Drehung und Größe eines GameObjects hält. Jedes GameObject hat genau eine. Bei Kindobjekten gelten die Werte relativ zum Elternobjekt.
-- [UI](https://www.allknivesnobagel.com/teaching/gec1/concepts/ui.md): Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Kit-Graphen.
+- [UI](https://www.allknivesnobagel.com/teaching/gec1/concepts/ui.md): Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Logik-Graphen.
 - [Update](https://www.allknivesnobagel.com/teaching/gec1/concepts/update.md): Die Methode, die Unity in jedem Frame auf jedem aktiven Skript aufruft. Hier passiert alles, was laufend geschehen soll.
 - [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector.md): Drei Zahlen x, y, z. Sie beschreiben einen Punkt im Raum oder eine Richtung mit Länge, etwa eine Bewegung oder eine Kraft. In Unity heißt der Typ Vector3.
 

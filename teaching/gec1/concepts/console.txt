@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/console/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/console/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Console
 
@@ -18,7 +18,7 @@ Die Console ist das Logbuch des Editors: **Window › General › Console**, ode
 | Symbol | heißt | Beispiel |
 |---|---|---|
 | rot | Fehler | `UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.` |
-| gelb | Warnung | `[Kit] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt` |
+| gelb | Warnung | `[Besteck] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt` |
 | weiß | Hinweis | was ein Skript mit `Debug.Log("…")` schreibt |
 
 ## Genauer
@@ -38,12 +38,12 @@ Die Knöpfe oben:
 | Collapse | fasst gleiche Meldungen zu einer Zeile mit Zähler zusammen |
 | Error Pause | hält das Spiel an, sobald ein Skript einen Fehler meldet |
 
-Nicht jeder Fehler meldet sich. Eine Kiste ohne Rigidbody schwebt, ohne dass die Console etwas sagt. Dann hilft nur Hinsehen: Szene, Inspector, im Kit der Graph.
+Nicht jeder Fehler meldet sich. Eine Kiste ohne Rigidbody schwebt, ohne dass die Console etwas sagt. Dann hilft nur Hinsehen: Szene, Inspector, in Besteck der Graph.
 
 ## In Unity sehen
 
 - Ein Skript mit `Debug.Log("Hallo");` in `Start()` schreibt eine weiße Zeile.
-- Das Kit meldet sich mit `[Kit]` am Anfang. Vor Play prüft es alle Interaktionen und schreibt, was fehlt.
+- Besteck meldet sich mit `[Besteck]` am Anfang. Vor Play prüft es alle Logiken und schreibt, was fehlt.
 - Die Zahlen oben rechts zählen Hinweise, Warnungen und Fehler; ein Klick blendet die Sorte aus.
 
 ## Weiterlesen

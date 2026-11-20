@@ -1,6 +1,6 @@
 # Game Engines & Coding 1: Volltext
 
-Stand: 2026-10-23T16:10Z · 22dcf2f. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
+Stand: 2026-11-20T09:28Z · 1a29bcd. Index: https://www.allknivesnobagel.com/teaching/gec1/llms.txt
 
 ## Tag 1: Was macht eine Engine?
 
@@ -474,15 +474,15 @@ Devlog: ganz unten in `DOKUMENTATION.md`, zwei Sätze pro Woche, neueste oben.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/02/
 
-## Tag 3: Interaktion von Hand
+## Tag 3: Schlüssel, Tür und Kiste
 
 20.11.2026 · Game Engines & Coding 1 · Macromedia Leipzig · Folien: https://www.allknivesnobagel.com/teaching/gec1/days/03/slides/
 
-Ereignisse, Bedingungen und Aktionen als Graph, dazu Kräfte, die Dinge in Bewegung setzen.
+Die erste Logik als Komponente auf dem Objekt, ein Graph aus Auslöser, Variable, Bedingung und Aktion, dazu Kräfte, die Dinge in Bewegung setzen.
 
-Begriffe: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/), [graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), [torque](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/), [console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)
+Begriffe: [component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/), [graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/), [feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/), [collision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/), [rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/), [torque](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/), [console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/), [revert](https://www.allknivesnobagel.com/teaching/gec1/concepts/revert/)
 
-Bis zum nächsten Termin: Meilenstein Vertical Slice bis 27.11.: zwei Interaktionen laufen im Blockout, ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner, das KI-Verzeichnis hat Einträge. Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt nachgebaut und die Werkstatt aus Kurs-Paket 0.3.2 repariert. Eine Woche später im Blackboard-Thread: 30-Sekunden-Clip von Interaktion 1, ein Hindernis, der nächste Schritt. Dazu die Spec der zweiten Interaktion. Aufwand: etwa 10 bis 13 Stunden.
+Bis zum nächsten Termin: Meilenstein Vertical Slice bis 27.11., also in einer Woche: zwei Interaktionen laufen im Blockout, ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner, das KI-Verzeichnis hat Einträge. Nach 48 Stunden (Sonntag, 22.11.): Schlüssel und Tür läuft im eigenen Projekt, die Werkstatt ist repariert, die Spec der zweiten Interaktion steht. Bis Dienstag, 24.11., im Blackboard-Thread: 30-Sekunden-Clip von Interaktion 1, ein Hindernis, der nächste Schritt. Aufwand: etwa 7 bis 9 Stunden.
 
 ### Was läuft schon?
 
@@ -495,12 +495,12 @@ Noch nicht so weit? Nehmt das Blatt „Rettungsweg“.
 
 Jetzt wird der Probe-Build getauscht: den Build-Ordner als ZIP per USB-Stick oder Cloud-Link an eine Person mit Windows-Rechner geben, dort entpacken und die `.exe` starten. Der Rettungsweg steht auch online: [Rettungsweg als Blatt](/teaching/gec1/druck/rettungsweg.html). Er zeigt, wie ihr heute im Kurs mitkommt und in der Woche danach aufholt.
 
-### Kurs-Paket prüfen
+### Läuft Besteck 0.5.0?
 
-1. Kurs › Setup prüfen: Steht beim Kurs-Paket 0.3.2 oder höher? Dann ist alles gut.
-2. Älter? GitHub Desktop: erst committen
-3. Window › Package Manager › + › Install package from git URL…, Adresse einfügen, Install
-4. Commit: „Kurs-Paket auf 0.3.2“
+1. Kurs › Setup prüfen: Kurs-Paket 0.5.0? Dann ist alles gut.
+2. Älter? Erst committen
+3. Package Manager › + › Install package from git URL…
+4. „Jetzt anpassen“, dann Commit: „Besteck 0.5.0“
 
 ```
 https://
@@ -508,20 +508,22 @@ github.com/
 BabyToad/
 macromedia-
 gec1-kit.git
-#v0.3.2
+#v0.5.0
 ```
 
-Die Kursvorlage bringt 0.3.2 seit dem 09.10. mit; aktualisieren müssen nur Projekte, die älter sind oder ohne Vorlage entstanden. Die Adresse am Stück: `https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2`. Version 0.3.2 bringt die kaputte Werkstatt für heute, das Menü **Tools › Kit › Eigener Knoten (C#)** und zwei Korrekturen im Kit: Warnungen „Vor Play“ bleiben in der Console stehen, und **Kraft › Dauerkraft** schiebt jetzt so lange, bis der Eingang **Stopp** kommt. Ausführlich steht das in der Anleitung „Kurs-Paket aktualisieren“. Kontrolle: **Kurs › Setup prüfen** zeigt beim Kurs-Paket 0.3.2.
+Das Kurs-Paket heißt seit Version 0.4 **Besteck**. Alle Menüs liegen jetzt unter **Tools › Besteck**, **GameObject › Besteck** und **Add Component › Besteck**; nur **Kurs › Setup prüfen** bleibt, wo es war. Die Adresse am Stück: `https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0`. Nach der Installation fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen angepasst werden sollen: **Jetzt anpassen**. Das geht auch später über **Tools › Besteck › Projekt auf den neuen Stand bringen**. Danach alles zusammen committen, damit Update und Anpassung ein Schritt bleiben.
 
-### Heute reagiert die Welt
+Was sich geändert hat, in einem Satz: Was bisher „Interaktion“ hieß, ist jetzt die Komponente **Logik**, die einen **Logik-Graph** abspielt; Merker und Zähler sind **Variablen**. Ausführlich: [Kurs-Paket aktualisieren](/teaching/gec1/guides/update-package/). Meldet die Console danach rot `CS0246` mit `'Interaction'` oder `'KitGraph'`, benutzt ein eigenes Skript noch die alten Namen; die Anleitung sagt, was zu ersetzen ist. Kontrolle: **Kurs › Setup prüfen** zeigt beim Kurs-Paket 0.5.0.
 
-Bisher läuft man durch den Raum. Ab heute antwortet er.
+### Der Raum bekommt Regeln
+
+Bisher läuft man nur durch den Raum. Ab heute passiert etwas, wenn man etwas tut.
 
 Wenn ich die Türzone betrete und den Schlüssel habe, fährt die Tür hoch. Sonst steht auf dem Schild: Verschlossen.
 
 ### Event, Bedingung, Aktion
 
-**Tafelbild:** Die Tür als Kette in drei Spalten. Event: Zone, Betreten. Bedingung: Wenn, Schlüssel da?, gespeist vom Merker „Schlüssel vorhanden“. Aktion: bei Ja Bewegen, die Tür fährt hoch; bei Nein Text setzen, „Verschlossen.“
+**Tafelbild:** Die Tür als Kette in drei Spalten. Event: Zone, Betreten. Bedingung: Wenn, Schlüssel da?, gespeist von der Variable Ja-Nein „Schlüssel vorhanden“. Aktion: bei Ja Bewegen, die Tür fährt hoch; bei Nein Text setzen, „Verschlossen.“
 
 [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/): ein Moment
 
@@ -529,43 +531,47 @@ Wenn ich die Türzone betrete und den Schlüssel habe, fährt die Tür hoch. Son
 
 [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/): ja oder nein
 
-Ein [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/) ist ein Zeitpunkt, an dem etwas passiert: Betreten, Drücken, Aufprall. Ein [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) bleibt von Frame zu Frame erhalten, etwa ob der Schlüssel schon aufgehoben ist. Eine [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/) fragt diesen Zustand in dem Moment ab, in dem das Event ankommt, und schickt es auf den einen oder den anderen Weg.
+Ein [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/) ist ein Zeitpunkt, an dem etwas passiert: Betreten, Drücken, Aufprall. In Besteck lösen solche Momente die **Auslöser** aus. Ein [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) bleibt von Frame zu Frame erhalten, etwa ob der Schlüssel schon aufgehoben ist; in Besteck steht er in einer **Variable** (eine Zahl, ein Ja-Nein oder ein Text mit Namen). Eine [Bedingung](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/) fragt diesen Zustand in dem Moment ab, in dem das Event ankommt, und schickt es auf den einen oder den anderen Weg.
+
+### Wo wohnt die Logik?
+
+**Tafelbild:** Links der Inspector der Tür: Transform, Mesh Renderer, Box Collider, darunter die Logik mit dem Logik-Graph „Tür öffnen“. Rechts der Graph: Zone, Betreten, führt zu Bewegen; dessen ◆ Objekt ist Dieses Objekt. Ein Kreidebogen von Bewegen zurück zum Transform der Tür: steuert.
+
+Tür auswählen, Add Component › Besteck › Logik.
+
+Logik ist selbst eine [Komponente](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/), die andere Komponenten steuert.
+
+Die **Logik** ist eine Komponente wie Rigidbody oder Box Collider: auswählen, im Inspector **Add Component**, „Logik“ tippen. Sie spielt einen **Logik-Graph** ab, eine Datei im Projekt, so wie ein Animator seinen Animator Controller abspielt. Die Knoten im Graph steuern andere Komponenten: **Bewegen** den Transform, **An/Aus** das ganze GameObject, **Kraft** den Rigidbody. Das Objekt, auf dem die Logik sitzt, heißt im Graph **Dieses Objekt**; in einem C#-Skript wäre das `gameObject`. Ein neuer Graph bringt den Knoten **Dieses Objekt** schon mit; ein Draht von seinem ◆ zu Bewegen sagt: Bewege mich.
+
+### Komponente oder Graph?
+
+**Tafelbild:** Links: Was einem Objekt gehört, ist eine Komponente. Die Wache trägt Verhalten, Variable „Geduld“ und Rigidbody. Rechts: Was mehrere verbindet, ist ein Graph. Schlüssel, Türzone und Tür sind über Referenzen mit dem Logik-Graph „Tür öffnen“ verbunden.
+
+Gehört es einem Objekt: Komponente.
+
+Verbindet es mehrere: Graph.
+
+Besteck bringt beides. Was nur ein Objekt betrifft, ist eine Komponente an diesem Objekt: **Add Component › Besteck › Variable** für einen Wert, der zu ihm gehört, **› Verhalten** für eine Figur, die patrouilliert oder folgt, **› Kamera** für einen festen Blick. Was mehrere Objekte zusammenbringt, steht in einem Logik-Graph; die anderen Objekte spielen darin **Rollen**. Die Logik ist die Brücke dazwischen: Sie selbst ist eine Komponente der Tür, und der Graph, den sie abspielt, verbindet die Tür mit Schlüssel und Zone. Das ist eine Faustregel, kein Gesetz. Unity selbst ist so gebaut, und dieselbe Frage stellt sich später bei jedem eigenen C#-Skript: Wem gehört dieses Verhalten?
 
 ### Drei Arten von Drähten
 
 **Tafelbild:** Drei Drahtarten. Event, gestrichelt: wann etwas passiert, etwa Betreten zu Prüfen. Daten, durchgezogen: ein Wert, der gelesen wird, etwa Wert zu Bedingung. Referenz, doppelt: welches Objekt gemeint ist, etwa Schlüssel zu An/Aus.
 
-Der [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/) des Kits kennt drei Drahtarten. ▶ Events laufen von links nach rechts durch die Kette. ● Daten werden gelesen, wenn ein Knoten sie braucht. ◆ Referenzen sagen einem Knoten, mit welchem Objekt in der Szene er arbeitet. Hängen an einem Event-Ausgang mehrere Drähte, tragen sie Nummern: Nr. 1 läuft zuerst. Falsche Verbindungen lassen sich gar nicht ziehen: Ein Event-Ausgang passt nur auf einen Event-Eingang.
+Der [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/) kennt drei Drahtarten. ▶ Events laufen von links nach rechts durch die Kette. ● Daten werden gelesen, wenn ein Knoten sie braucht. ◆ Referenzen sagen einem Knoten, mit welchem Objekt in der Szene er arbeitet: mit **Dieses Objekt** oder mit einer **Rolle**. Hängen an einem Event-Ausgang mehrere Drähte, tragen sie Nummern: Nr. 1 läuft zuerst. Falsche Verbindungen lassen sich gar nicht ziehen: Ein Event-Ausgang passt nur auf einen Event-Eingang.
 
 ### Das Beispiel holen
 
-Tools › Kit › Beispiel „Schlüssel und Tür“ bauen
+Tools › Besteck › Beispiel „Schlüssel und Tür“ bauen
 
-**Screenshot:** Das Graph-Fenster mit dem Beispiel Schlüssel und Tür: neun Knoten auf dunkler Tafel, darunter Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen und Ton abspielen, verbunden mit orangen, violetten und blaugrünen Drähten. (Unity 6.3 · Kurs-Paket 0.3.1).
+**Screenshot:** Das Graph-Fenster mit dem Beispiel Schlüssel und Tür: Rolle: Schlüssel, Benutzen, Ja-Nein, An/Aus, Zone, Wenn, Bewegen, Text setzen und Ton abspielen, unten der Knoten Dieses Objekt, dessen blaugrüner Draht zu Bewegen führt, daneben Text setzen mit „Verschlossen.“; dazu orange Event- und violette Datendrähte. Unten steht: Instanz: Tür, alles gebunden, bereit für Play. (Unity 6.3 · Besteck 0.5).
 
-Doppelklick auf die Datei „Schlüssel und Tür.kit“ öffnet den Graph.
+In der Hierarchy die Tür anklicken, im Inspector der Logik: Graph öffnen.
 
-Das Menü legt den Ordner `Assets/Kit Beispiel` an, mit dem Graph `Schlüssel und Tür.kit` und der Szene `Keller`. Gibt es das Beispiel schon, fragt Unity nach, bevor etwas überschrieben wird. Beispiele holt ihr immer über dieses Menü. Ist alles rosa, ist das Kurs-Paket zu alt: oben aktualisieren. Den Graph öffnet ein Doppelklick auf die `.kit`-Datei oder im Inspector der Interaktion der Knopf **Graph öffnen**.
-
-### Ein Graph, viele Türen
-
-**Tafelbild:** Ein Graph mit dem Knoten Bewegen und einem leeren Platz ◆ Objekt. Zwei Interaktionen in der Szene, Keller und Dachboden, füllen diesen Platz verschieden: die eine mit Tür A, die andere mit Tür B.
-
-Der [Graph](https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/) sagt, was passiert. Die Interaktion sagt, mit welchen Objekten: je Platz eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/).
-
-Der Graph ist eine Datei im Projekt. Er kennt keine Objekte der Szene, nur Plätze für sie (◆). Die Component **Interaktion** an einem GameObject verbindet beides: Sie zeigt auf einen Graph und hält eine Tabelle, welches Objekt welchen Platz füllt. Das ist eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/). Umbenennen oder Verschieben bricht sie nicht. Ein leerer Platz ist ein Fehler, und das Kit meldet ihn schon vor Play. Jede Interaktion hat ihren eigenen Merker: Zwei kopierte Türen öffnen sich nicht gegenseitig.
-
-### Die Plätze im Inspector
-
-**Screenshot:** Die Liste Objekte (◆) im Inspector der Interaktion: Schlüssel = Schlüssel, Benutzen: Kamera = leer, Zone: Zone = Türzone, Bewegen: Objekt = Tür, Text setzen: Textfeld = Schild, Ton abspielen: Quelle = Tür-Klack. Neben jedem Platz eine Lupe. (Unity 6.3 · Kurs-Paket 0.3.1).
-
-Objekte (◆): hineinziehen, was gemeint ist.
-
-Die Lupe neben jedem Platz springt in den Graph zum passenden Knoten. **Benutzen: Kamera** darf leer bleiben: Dann nimmt der Knoten die Hauptkamera, also die der Spielfigur.
+Das Menü legt den Ordner `Assets/Kit Beispiel` an, mit dem Graph `Schlüssel und Tür` und der Szene `Keller`. Gibt es das Beispiel schon, fragt Unity nach, bevor etwas überschrieben wird. Wer es schon mit einer älteren Version gebaut hat (Logik auf der Gruppe statt auf der Tür), bekommt das neue in einem eigenen Ordner, etwa `Assets/Kit Beispiel 1`; das alte bleibt unverändert, und die Console sagt das in einer Zeile. Beispiele holt ihr immer über dieses Menü. Ist alles rosa, ist Besteck zu alt: oben aktualisieren. Den Graph öffnet **Graph öffnen** im Inspector der Logik oder ein Doppelklick auf die Datei im Project-Fenster. Im Beispiel sitzt die Logik auf der Tür: Bewegen bekommt **Dieses Objekt**, alles andere (Schlüssel, Türzone, Schild, Tür-Klack) spielt Rollen. Das leere Objekt „Schlüssel und Tür“ hält die Teile in der Hierarchy nur zusammen. Beim Nachbauen geht ihr genauso vor.
 
 ### Zuschauen, während es läuft
 
-**Screenshot:** Der Graph im Play-Modus: Wenn trägt ein Häkchen mit „Ja, weil Schlüssel vorhanden: ja“, Bewegen ist gelb hinterlegt und meldet „läuft: 0,5 / 1,0 s“, Ton abspielen steht auf „noch nicht erreicht“. (Unity 6.3 · Kurs-Paket 0.3.1).
+**Screenshot:** Der Graph im Play-Modus, ohne Schlüssel an der Tür: Ja-Nein meldet „Schlüssel vorhanden: nein“, Zone „Betreten: Spieler“, Wenn „Nein, weil Schlüssel vorhanden: nein“; Benutzen, An/Aus, Bewegen und Ton abspielen stehen auf „noch nicht erreicht“. Unten: Play, 3 fertig, 5 nicht erreicht. (Unity 6.3 · Besteck 0.5).
 
 ○ empfangen
 
@@ -577,38 +583,47 @@ Die Lupe neben jedem Platz springt in den Graph zum passenden Knoten. **Benutzen
 
 ! Fehler
 
-Zum Ausprobieren: Play, ohne Schlüssel zur Tür laufen. Wenn zeigt „Nein, weil Schlüssel vorhanden: nein“, das Schild sagt „Verschlossen.“. Dann den Schlüssel anschauen und E drücken, zurück zur Tür: Bewegen läuft. Graph-Fenster und Game-Fenster nebeneinander legen hilft. Jeder Knoten zeigt im Play-Modus, was er gerade tut, und warum. Ein Knoten mit Fehler feuert nie seinen Erfolgs-Ausgang; der Grund steht am Knoten und in der Console. Die Leiste unten im Graph-Fenster zählt zusammen, wie viele Knoten laufen, fertig sind oder noch nicht erreicht wurden.
+Zum Ausprobieren: Play, ohne Schlüssel zur Tür laufen. Wenn zeigt „Nein“ und den Grund, das Schild sagt „Verschlossen.“. Dann den Schlüssel anschauen und E drücken, zurück zur Tür: Bewegen läuft. Graph-Fenster und Game-Fenster nebeneinander legen hilft. Jeder Knoten zeigt im Play-Modus, was er gerade tut, und warum. Ein Knoten mit Fehler feuert nie seinen Erfolgs-Ausgang; der Grund steht am Knoten und in der Console. Dasselbe steht auch im Inspector der Logik unter **Jetzt (Play)**, und **Tools › Besteck › Werte** zeigt alle Variablen mit ihrem aktuellen Wert.
 
 ### Vom Knoten zum Objekt
 
-**Screenshot:** Links die Hierarchy: Schlüssel ist ausgewählt; er und die anderen Objekte der Interaktion tragen das Abzeichen ◆1. Rechts der Graph: Der Knoten „Objekt: Schlüssel“ ist hervorgehoben, seine blaugrünen Drähte führen zu Benutzen und An/Aus. (Unity 6.3 · Kurs-Paket 0.3.1).
+**Screenshot:** Links die Hierarchy: Unter „Schlüssel und Tür“ tragen Schlüssel, Türzone, Tür, Schild und Tür-Klack das Abzeichen ◆1; Schlüssel ist ausgewählt. Rechts die Scene-Ansicht mit Tür, Schild und dem Schlüssel. (Unity 6.3 · Besteck 0.5).
 
 Doppelklick auf einen Knoten: Das Objekt leuchtet in der Hierarchy.
 
 Objekt auswählen: Seine Knoten leuchten im Graph.
 
-Ein Klick auf einen Knoten zeigt unten im Graph-Fenster, was er tut, und die Knöpfe **In der Hierarchy zeigen**, **Komponente öffnen** und **Code ansehen**. Ein Doppelklick wählt das gebundene Objekt aus. Umgekehrt leuchten alle Knoten auf, die ein in der Hierarchy ausgewähltes Objekt benutzen. Das Abzeichen ◆1 in der Hierarchy zählt, wie viele Plätze ein Objekt füllt; mit der Maus darauf steht da, welche.
+Ein Klick auf einen Knoten zeigt unten im Graph-Fenster, was er tut, und die Knöpfe **In der Hierarchy zeigen**, **Komponente öffnen** und **Code ansehen**. Ein Doppelklick wählt das gebundene Objekt aus. Umgekehrt leuchten alle Knoten auf, die ein in der Hierarchy ausgewähltes Objekt benutzen. Das Abzeichen ◆1 in der Hierarchy zählt, wie viele Rollen ein Objekt spielt; mit der Maus darauf steht da, welche.
+
+Jedes Objekt mit einer Rolle trägt außerdem die Komponente **Rolle**. Sie sagt im Inspector, welche Rolle es in welchem Graph spielt („Schlüssel in Schlüssel und Tür“), öffnet mit **Graph öffnen** genau den Knoten, der es benutzt, und zeigt im Play-Modus, was das Objekt gerade spürt, etwa eine betretene Zone. Einstellen muss man an ihr nichts: Besteck legt sie an und entfernt sie wieder.
+
+**Screenshot:** Der Inspector des Schlüssels mit der Komponente Rolle: ◆ Schlüssel in Schlüssel und Tür (Logik auf „Tür“), daneben der Knopf Graph öffnen, darunter: Spürt im Play Zusammenstöße. (Unity 6.3 · Besteck 0.5).
 
 ### Was steckt in einem Knoten?
 
-**Screenshot:** Das Fenster Code ansehen für den Knoten Wenn, Branch.cs mit 32 Zeilen. Zeile 28, chosen.Fire(signal), ist orange markiert: Dort feuert der Knoten Ja oder Nein. (Unity 6.3 · Kurs-Paket 0.3.1).
+**Screenshot:** Das Fenster Code ansehen für den Knoten Wenn, Branch.cs mit 36 Zeilen. Zeile 32, chosen.Fire(signal), ist orange markiert: Dort feuert der Knoten Ja oder Nein. (Unity 6.3 · Besteck 0.5).
 
 &#x20;am Knoten
 
 Orange: Hier feuert ein Ausgang.
 
-Jeder Knoten ist eine kleine C#-Datei. **Code ansehen** zeigt sie schreibgeschützt und markiert die Stellen, die zählen: orange, wo ein Ausgang feuert; gelb, wo der Knoten „läuft“ meldet; rot, wo er einen Fehler meldet; blaugrün, wo ein ◆-Platz steht. **Im Code-Editor öffnen** zeigt dieselbe Datei in VS Code. Lesen genügt; niemand muss das schreiben können.
+Jeder Knoten ist eine kleine C#-Datei. **Code ansehen** zeigt sie schreibgeschützt und markiert die Stellen, die zählen: orange, wo ein Ausgang feuert; gelb, wo der Knoten „läuft“ meldet; rot, wo er einen Fehler meldet; blaugrün, wo ein ◆-Anschluss steht. **Im Code-Editor öffnen** zeigt dieselbe Datei in VS Code. Lesen genügt; niemand muss das schreiben können.
 
-### Jetzt baut ihr sie nach
+### 1 · Die Objekte
 
-In eurem Blockout
+Jetzt baut ihr sie nach, in eurem Blockout
 
-1. Würfel „Schlüssel“ und Würfel „Tür“
-2. Schild: 3D Object › Text - TextMeshPro
-3. Türzone: leeres GameObject vor der Tür, Box Collider, Is Trigger
-4. GameObject › Kit › Interaktion, dann Neuer Graph …
+**Screenshot:** Hierarchy mit Licht, Boden, Spieler, Schlüssel, Tür, Schild und Türzone; in der Scene-Ansicht die braune Tür, davor der grüne Drahtrahmen der ausgewählten Türzone, rechts das Schild „Sample text“, vorne der gelbe Schlüssel. Rechts der Inspector der Türzone: Box Collider mit Is Trigger an, Size 3, 2, 2. (Unity 6.3 · Besteck 0.5).
 
-So entstehen die Objekte, alle als Kinder einer leeren „Tür-Gruppe“ oder lose in der Szene:
+Würfel „Schlüssel“
+
+Würfel „Tür“
+
+Schild: 3D Object › Text - TextMeshPro
+
+Türzone: Create Empty, Box Collider, Is Trigger
+
+So entstehen die Objekte, lose in der Szene oder als Kinder einer leeren „Tür-Gruppe“:
 
 | Objekt | Anlegen | Maße und Lage |
 |---|---|---|
@@ -617,65 +632,116 @@ So entstehen die Objekte, alle als Kinder einer leeren „Tür-Gruppe“ oder lo
 | Schild | 3D Object › Text - TextMeshPro | neben die Tür, auf Augenhöhe; beim ersten Mal fragt Unity nach **Import TMP Essentials**: bestätigen |
 | Türzone | Create Empty, dann Add Component › Box Collider, **Is Trigger** an | **Size** 3 × 2 × 2, Mitte etwa 1,5 m vor der Tür und 1 m über dem Boden, so dass man auf dem Weg zur Tür hineinläuft |
 
-Ein leeres GameObject entsteht dort, wo die Scene-Ansicht gerade hinschaut, und sein Box Collider ist 1 × 1 × 1 m. Darum die Türzone bewusst verschieben und vergrößern; der grüne Drahtrahmen zeigt, wo sie liegt. Dann **GameObject › Kit › Interaktion** und im Inspector **Neuer Graph …**: Unity fragt, wo die `.kit`-Datei liegen soll.
+Ein leeres GameObject entsteht dort, wo die Scene-Ansicht gerade hinschaut, und sein Box Collider ist 1 × 1 × 1 m. Darum die Türzone bewusst verschieben und vergrößern; der grüne Drahtrahmen zeigt, wo sie liegt.
 
-### Acht Knoten holen
+### 2 · Logik auf die Tür
 
-1. „+ Knoten“: Benutzen, Merker, An/Aus, Zone, Wenn, Bewegen, Text setzen
-2. Den Schlüssel aus der Hierarchy auf die Leinwand ziehen: Objekt „Schlüssel“
-3. Unten links: Instanz wählen
+**Screenshot:** Die Tür ist ausgewählt. Im Inspector ist die neue Komponente Logik aufgeklappt: Logik-Graph None, Knöpfe Neu und Graph öffnen, darunter der Hinweis, dass die Logik noch keinen Graph hat. (Unity 6.3 · Besteck 0.5).
 
-Ohne Instanz bleiben die ◆-Felder grau.
+Tür auswählen
 
-„+ Knoten“ unten links im Graph-Fenster öffnet die deutsche Liste mit den Gruppen Auslöser, Ablauf, Zustand, Aktion, Spielsysteme und Erweiterung. Die Leertaste im Graph öffnet die Liste des Graph Toolkits mit englischen Klassennamen; beide legen dieselben Knoten an. Den Schlüssel brauchen zwei Knoten, Benutzen und An/Aus. Darum bekommt er einen eigenen Knoten **Objekt**: Zieht ihn aus der Hierarchy direkt auf die Leinwand. **Instanz** heißt: welche Interaktion in der Szene dieses Fenster gerade bearbeitet. Der Knopf unten links im Graph-Fenster wählt sie; erst dann lassen sich Objekte auf die ◆-Felder ziehen. Der Ton aus dem Beispiel ist für den Nachbau nicht nötig.
+Add Component › Besteck › Logik
 
-### Die Drähte
+Im Inspector der Logik: Neu
 
-1. Objekt ◆ → Benutzen, An/Aus
-2. Benutzt ▶ → 1. Ja setzen, 2. Ausschalten
-3. Betreten ▶ → Prüfen
-4. Wert ● → Bedingung
-5. Ja ▶ → Hin. Nein ▶ → Setzen
+Die **Tür** auswählen, im Inspector **Add Component** und „Logik“ tippen (oder **GameObject › Besteck › Logik**). Die neue Logik hat noch keinen Graph; **Neu** legt `Assets/Logik/Tür` an und öffnet ihn, mit dem Knoten **Dieses Objekt** schon darin. Umbenennen geht im Project-Fenster, etwa in „Tür öffnen“.
 
-Die vollständige Liste für den Nachbau. Links der Ausgang, rechts der Eingang:
+### 3 · Drei Rollen
+
+**Screenshot:** Das Graph-Fenster „Tür öffnen“ mit vier Knoten: links Rolle: Schlüssel, Rolle: Türzone und Rolle: Schild, jede mit einem gelben Warndreieck, weiter rechts Dieses Objekt (Tür). Noch keine Drähte. (Unity 6.3 · Besteck 0.5).
+
+Schlüssel, Türzone und Schild aus der Hierarchy ins Graph-Fenster ziehen.
+
+Dieses Objekt ist schon da: die Tür.
+
+Graph-Fenster und Hierarchy nebeneinander legen. Dann Schlüssel, Türzone und Schild nacheinander aus der Hierarchy auf die freie Fläche des Graph-Fensters ziehen. Jedes wird ein Knoten „Rolle: Schlüssel“, „Rolle: Türzone“, „Rolle: Schild“ und ist in eurer Logik schon gebunden. **Dieses Objekt** und die Rollen sind Knoten, die nichts tun: Sie liefern nur ein Objekt, über ihren Ausgang ◆. Ein Draht von dort sagt einem anderen Knoten, mit welchem Objekt er arbeitet.
+
+Der Graph ist eine Datei im Projekt. Er kennt keine Objekte der Szene, nur Anschlüsse für sie (◆). Welches Objekt welche Rolle spielt, hält die Logik fest. Das ist eine [Referenz](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/). Umbenennen oder Verschieben bricht sie nicht. Darum können zwei Türen denselben Graph abspielen: Für jede ist **Dieses Objekt** sie selbst, und jede hat ihre eigenen Variablen.
+
+Im Inspector der Logik stehen alle Rollen untereinander, hier am fertigen Beispiel:
+
+**Screenshot:** Der Inspector der Tür: Transform, Mesh Filter, Box Collider, Mesh Renderer und aufgeklappt die Logik. Logik-Graph: Schlüssel und Tür, Knöpfe Neu und Graph öffnen. Darunter die Rollen: Dieses Objekt = Tür (grau, fest), Schlüssel, Benutzen: Kamera leer, Ja-Nein: Objekt leer, Zone: Türzone, Text setzen: Schild, Ton abspielen: Tür-Klack, jede mit einer Lupe. Unter Werte: Schlüssel vorhanden, Logik, Start nein. (Unity 6.3 · Besteck 0.5).
+
+Die Lupe neben jeder Rolle springt in den Graph zum passenden Knoten. Ist eine Rolle leer, steht gleich darunter, was zu tun ist: „ist leer: ein Objekt aus der Hierarchy hineinziehen“. Eine leere Rolle meldet Besteck schon vor Play. **◆ Dieses Objekt** steht oben und ist fest: Es ist immer die Tür selbst.
+
+### 4 · Sieben Knoten
+
+**Screenshot:** Dazu die Knoten Benutzen, An/Aus, Ja-Nein „Schlüssel vorhanden“, Zone, Wenn, Bewegen (Weg 0, 3, 0, Dauer 1) und Text setzen „Verschlossen.“, noch ohne Drähte. Benutzen, An/Aus, Zone, Bewegen und Text setzen sind rot: ◆ Objekt fehlt. Unten: 5 Problem(e) vor Play – rot markiert. (Unity 6.3 · Besteck 0.5).
+
+„+ Knoten“ unten links: Benutzen, Ja-Nein, An/Aus, Zone, Wenn, Bewegen, Text setzen
+
+Ja-Nein: Name „Schlüssel vorhanden“
+
+„+ Knoten“ unten links im Graph-Fenster öffnet die deutsche Liste mit den Gruppen Auslöser, Ablauf, Werte, Aktion und weiteren. Die Leertaste im Graph öffnet die Liste des Graph Toolkits mit englischen Klassennamen; beide legen dieselben Knoten an. **Ja-Nein** steht unter Werte: eine Variable, die sich Ja oder Nein merkt. Der Ton aus dem Beispiel ist für den Nachbau nicht nötig.
+
+Einstellungen an den Knoten: Ja-Nein **Name** „Schlüssel vorhanden“, **Startwert** aus, **Bereich** Logik (so ist es voreingestellt). Bewegen **Was** Position, **Weg** 0, 3, 0, **Dauer** 1. Text setzen **Text** „Verschlossen.“. Zone **Nur Tag** Player (so ist es voreingestellt).
+
+### 5 · Den Schlüssel aufheben
+
+**Screenshot:** Die blaugrünen ◆-Drähte sind gezogen: Schlüssel zu Benutzen und An/Aus, Türzone zu Zone, Schild zu Text setzen, Dieses Objekt zu Bewegen. Dazu zwei orange Drähte von Benutzt: Nr. 1 zu Ja-Nein · Ja setzen, Nr. 2 zu An/Aus · Ausschalten. Unten: alles gebunden, bereit für Play. (Unity 6.3 · Besteck 0.5).
+
+◆ Jede Rolle zu ihrem Knoten, Dieses Objekt zu Bewegen
+
+▶ Benutzt: 1. Ja setzen, 2. Ausschalten
+
+Links der Ausgang, rechts der Eingang:
 
 | Von | Nach | Draht |
 |---|---|---|
-| Objekt „Schlüssel“ · ◆ Objekt | Benutzen · ◆ Objekt | ◆ |
-| Objekt „Schlüssel“ · ◆ Objekt | An/Aus · ◆ Objekt | ◆ |
-| Benutzen · Benutzt | Merker · Ja setzen (Nr. 1) | ▶ |
+| Dieses Objekt · ◆ | Bewegen · ◆ Objekt | ◆ |
+| Rolle: Schlüssel · ◆ | Benutzen · ◆ Objekt | ◆ |
+| Rolle: Schlüssel · ◆ | An/Aus · ◆ Objekt | ◆ |
+| Rolle: Türzone · ◆ | Zone · ◆ Zone | ◆ |
+| Rolle: Schild · ◆ | Text setzen · ◆ Textfeld | ◆ |
+| Benutzen · Benutzt | Ja-Nein · Ja setzen (Nr. 1) | ▶ |
 | Benutzen · Benutzt | An/Aus · Ausschalten (Nr. 2) | ▶ |
+
+**Benutzen · ◆ Kamera** bleibt leer: Dann nimmt der Knoten die Hauptkamera, die der Spielfigur.
+
+### 6 · Die Tür prüft
+
+**Screenshot:** Der fertige Graph: Zone · Betreten führt zu Wenn · Prüfen, der violette Draht von Ja-Nein · Wert zu Wenn · Bedingung, Wenn · Ja zu Bewegen · Hin und Wenn · Nein zu Text setzen · Setzen. Unten: alles gebunden, bereit für Play. (Unity 6.3 · Besteck 0.5).
+
+▶ Betreten → Prüfen
+
+● Wert → Bedingung
+
+▶ Ja → Hin, Nein → Setzen
+
+Dann Play.
+
+| Von | Nach | Draht |
+|---|---|---|
 | Zone · Betreten | Wenn · Prüfen | ▶ |
-| Merker · Wert | Wenn · Bedingung | ● |
+| Ja-Nein · Wert | Wenn · Bedingung | ● |
 | Wenn · Ja | Bewegen · Hin | ▶ |
 | Wenn · Nein | Text setzen · Setzen | ▶ |
 
-Einstellungen an den Knoten: Merker **Name** „Schlüssel vorhanden“, **Startwert** aus. Bewegen **Was** Position, **Weg** 0, 3, 0, **Dauer** 1. Text setzen **Text** „Verschlossen.“. Zone **Nur Tag** Player (so ist es voreingestellt).
-
-Was auf die ◆-Felder der Knoten kommt, aus der Hierarchy hineingezogen:
-
-| Knoten · Platz | Objekt |
-|---|---|
-| Objekt „Schlüssel“ | Schlüssel |
-| Zone · ◆ Zone | Türzone |
-| Bewegen · ◆ Objekt | Tür |
-| Text setzen · ◆ Textfeld | Schild |
-| Benutzen · ◆ Kamera | leer lassen (Hauptkamera) |
-
-Dann Play. Gespeichert wird von selbst: Vor jedem Play speichert das Kit offene Graphen und prüft alle Interaktionen; was fehlt, steht als Warnung in der Console.
+Dann Play: Schlüssel ansehen, **E** drücken, zur Tür gehen. Gespeichert wird von selbst: Vor jedem Play speichert Besteck offene Graphen und prüft alle Logiken; was fehlt, steht als Warnung in der Console.
 
 **Wenn es hängt:**
 
-- Die ◆-Felder sind grau und nehmen nichts an: unten links im Graph-Fenster die Instanz wählen.
-- Wenn sagt immer Nein: Der Draht von Merker · Wert zu Wenn · Bedingung fehlt.
+- Ein Objekt lässt sich nicht hineinziehen oder bleibt ungebunden: Das Graph-Fenster weiß nicht, welche Logik gemeint ist (etwa nach einem Doppelklick auf die Datei). Den Graph über **Graph öffnen** an der Logik der Tür öffnen, oder unten links im Graph-Fenster die Logik wählen.
+- Bewegen meldet „◆ Objekt fehlt“: Der Draht von Dieses Objekt zu Bewegen fehlt.
+- Wenn sagt immer Nein: Der Draht von Ja-Nein · Wert zu Wenn · Bedingung fehlt.
 - Zone zeigt nie ✓: Is Trigger fehlt, die Zone liegt nicht im Weg, oder sie ist zu klein (grüner Rahmen in der Scene-Ansicht).
 - Der Schlüssel reagiert nicht auf E: näher als 3 m herangehen und ihn ansehen; er braucht seinen Box Collider.
 
+### Woran merkt man, dass der Schlüssel benutzbar ist?
+
+Benutzen meldet auch **Im Blick** und **Nicht mehr im Blick**.
+
+Was dann passiert, entscheidet ihr.
+
+Zum Beispiel ein Schild, ein Leuchten oder ein leiser Ton.
+
+„Im Blick“ feuert, sobald der Blick das Objekt in Reichweite trifft, „Nicht mehr im Blick“, sobald er es wieder verlässt. Was der Spieler dann sieht oder hört, baut ihr selbst, mit Knoten, die ihr schon kennt: Im Blick → **Text setzen** „E: aufheben“ und Nicht mehr im Blick → **Text setzen** mit leerem Text; oder ein kleines Licht über dem Schlüssel mit **An/Aus**; oder **Ton abspielen**. Das ist [Feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/): wie das Spiel dem Spieler sagt, was möglich ist. Ein leuchtender Umriss passt zu einem Abenteuer, ein Flüstern zu einem Horrorspiel, gar nichts zu einem Spiel über das Suchen.
+
 ### Die Interaktion als Satz
 
-Sagt den Satz zu eurer Tür laut, bevor ihr Play drückt.
+Wenn ich die Türzone betrete und den Schlüssel habe, fährt die Tür hoch. Sonst steht auf dem Schild: Verschlossen.
 
-Wenn \[Event] und \[Bedingung], dann \[Aktion]. Sonst \[andere Aktion].
+Wenn Event und Bedingung, dann Aktion. Sonst andere Aktion.
 
 Wer den Satz nicht sagen kann, hat noch keine klare Interaktion. Das gilt auch für die eigene Spec.
 
@@ -683,21 +749,9 @@ Wer den Satz nicht sagen kann, hat noch keine klare Interaktion. Das gilt auch f
 
 1. Steht ein ! an einem Knoten? Grund lesen.
 2. ⛔ blockiert? Dort endet die Kette, mit Begründung.
-3. Gar nichts passiert? Hat der Auslöser ✓? Sonst Zone oder Tag prüfen.
+3. Gar nichts passiert? Hat der Auslöser ✓? Sonst Zone, Tag oder Rolle prüfen.
 
-Der Graph sagt, wo es hängt. Gesucht wird von links nach rechts, vom Auslöser zur Aktion.
-
-### Eure Variation
-
-10 Minuten
-
-- Drei Schlüssel: [Zähler](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/) mit Ziel 3
-- Die Tür fällt nach 5 s wieder zu: Warten, dann Bewegen › Zurück
-- Das Schild spricht nur beim ersten Mal: Einmal
-
-Erst den Satz sagen, dann bauen.
-
-Eine Variante reicht; wer fertig ist, nimmt die nächste. Die Falle mit einer Kiste kommt nach der Pause, weil sie einen Rigidbody braucht.
+Der Graph sagt, wo es hängt. Gesucht wird von links nach rechts, vom Auslöser zur Aktion. Vor Play steht im Inspector der Logik unter **Vor Play prüfen**, was fehlt. Während Play zeigt die Komponente **Rolle** an einem Objekt, was es gerade spürt: Hat die Türzone den Spieler überhaupt bemerkt?
 
 ### Pause
 
@@ -713,38 +767,38 @@ Is Trigger ist ein Haken am Collider.
 
 Ein Collider ist die unsichtbare Form, mit der ein Objekt an der [Kollision](https://www.allknivesnobagel.com/teaching/gec1/concepts/collision/) teilnimmt. Ein normaler Collider ist fest. Mit **Is Trigger** wird er durchlässig und meldet nur noch, dass etwas hinein- oder hinauskommt. Die beiden Meldungen haben verschiedene Voraussetzungen:
 
-| Meldung | im Kit | wann sie kommt |
+| Meldung | Auslöser in Besteck | wann sie kommt |
 |---|---|---|
 | Trigger: `OnTriggerEnter` | **Zone** | eines der beiden Objekte hat einen [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/) (auch kinematisch) oder einen CharacterController, wie die Spielfigur |
 | Aufprall: `OnCollisionEnter` | **Zusammenstoß** | mindestens eines der beiden hat einen Rigidbody, bei dem Is Kinematic aus ist |
 
-Darum meldet die Spielfigur Zonen zuverlässig, aber keinen Aufprall: Läuft sie gegen eine Wand, gibt es kein `OnCollisionEnter` und der Knoten Zusammenstoß bleibt still. Der CharacterController hat dafür eine eigene Meldung, `OnControllerColliderHit`, die das Kit nicht als Knoten anbietet. Zusammenstoß gehört an Dinge mit Rigidbody: eine Kiste, die auf den Boden fällt, ein Ball, der gegen eine Wand rollt.
+Darum meldet die Spielfigur Zonen zuverlässig, aber keinen Aufprall: Läuft sie gegen eine Wand, gibt es kein `OnCollisionEnter` und der Auslöser Zusammenstoß bleibt still. Der CharacterController hat dafür eine eigene Meldung, `OnControllerColliderHit`, die Besteck nicht als Knoten anbietet. Zusammenstoß gehört an Dinge mit Rigidbody: eine Kiste, die auf den Boden fällt, ein Ball, der gegen eine Wand rollt. Diese Meldungen empfängt die Komponente **Rolle** am jeweiligen Objekt; im Play-Modus zeigt sie, was angekommen ist.
 
 ### Ein Rigidbody übergibt an die Physik
 
 Mit [Rigidbody](https://www.allknivesnobagel.com/teaching/gec1/concepts/rigidbody/) fällt der Würfel.
 
 1. Kiste in die Luft, Add Component › Rigidbody, Play
-2. Die Falle: Zone, dann Kraft auf die Kiste
+2. Die Falle: Logik auf die Kiste, Zone → Kraft
 3. Kraft: Richtung 0, 1, 0, Stärke 6, Stoß
 
 Felder: Mass, Use Gravity, Is Kinematic
 
 Mit Rigidbody bestimmt die Physik die Position. Wer die Transform trotzdem direkt verschiebt, arbeitet gegen sie; das Objekt ruckelt oder rutscht durch Wände. **Is Kinematic** heißt: Die Physik bewegt das Objekt nicht, ein Skript oder eine Animation tut es. Auf einen kinematischen Körper wirkt auch der Knoten Kraft nicht; er meldet das. **Constraints** sperren einzelne Achsen, etwa damit eine Figur nicht umkippt.
 
-Ein Aufprall lässt sich jetzt auch hören: Eine neue Interaktion mit **Zusammenstoß** (◆ Körper: der Collider der Kiste) · Getroffen → **Notiz in Konsole**. Fällt die Kiste auf den Boden, steht die Notiz in der Console. Das geht, weil die Kiste einen Rigidbody hat; an der Spielfigur bliebe Zusammenstoß still.
+Ein Aufprall lässt sich jetzt auch hören: Die Kiste bekommt eine eigene Logik (Add Component › Besteck › Logik, **Neu**), darin **Zusammenstoß** mit ◆ Körper = **Dieses Objekt** · Getroffen → **Notiz in Konsole**. Fällt die Kiste auf den Boden, steht die Notiz in der Console. Das geht, weil die Kiste einen Rigidbody hat; an der Spielfigur bliebe Zusammenstoß still.
 
-Die Falle als Graph: eine neue Interaktion, **Zone** (◆ Zone: eine Türzone-artige Trigger-Box vor der Kiste) · Betreten → **Kraft** · Anstoßen, ◆ Körper = Kiste. **Stoß** wirkt einmal, wenn das Event ankommt. **Dauerkraft** schiebt ab Kurs-Paket 0.3.2 so lange, bis der Eingang **Stopp** kommt, etwa von Zone · Verlassen.
+Die Falle, im Kurs vorgeführt und nach diesem Rezept nachzubauen, gehört in dieselbe Logik, denn es ist die Kiste, die springt: **Zone** (◆ Zone: eine Trigger-Box vor der Kiste, aus der Hierarchy hineingezogen) · Betreten → **Kraft** · Anstoßen, ◆ Körper = **Dieses Objekt**. **Stoß** wirkt einmal, wenn das Event ankommt. **Dauerkraft** schiebt so lange, bis der Eingang **Stopp** kommt, etwa von Zone · Verlassen.
 
-Wie so etwas in einem fertigen Spiel aussieht: In HIGH WATER (gebaut in Godot) ist jeder Gegner ein Rigidbody mit 3 kg. Im Stehen sind seine Drehachsen gesperrt, damit er aufrecht läuft; ein harter Treffer hebt die Sperre auf, und aus dem Läufer wird ein Geschoss, das beim Aufprall andere trifft. In Unity hieße das **Constraints › Freeze Rotation**, im Code wieder freigegeben mit `rb.constraints = RigidbodyConstraints.None`.
+Wie so etwas in einem fertigen Spiel aussieht: In HIGH WATER (gebaut in Godot) ist jede Figur ein Rigidbody mit 3 kg. Im Stehen sind ihre Drehachsen gesperrt, damit sie aufrecht läuft; ein kräftiger Stoß hebt die Sperre auf, und die Figur kippt, rollt und wirft beim Aufprall andere um. In Unity hieße das **Constraints › Freeze Rotation**, im Code wieder freigegeben mit `rb.constraints = RigidbodyConstraints.None`.
 
 ### Kraft und Drehmoment
 
 **Tafelbild:** Links: Eine Kraft am Schwerpunkt schiebt eine Kiste in eine Richtung, AddForce. Rechts: Ein Drehmoment dreht einen Balken um seine Achse, von oben gesehen, AddTorque.
 
-Kraft: Knoten im Kit
+Kraft: Knoten in Besteck
 
-[Drehmoment](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/): fehlt im Kit
+[Drehmoment](https://www.allknivesnobagel.com/teaching/gec1/concepts/torque/): fehlt in Besteck
 
 Eine Kraft ist ein [Vektor](https://www.allknivesnobagel.com/teaching/gec1/concepts/vector/): Richtung und Stärke. `AddForce` schiebt den ganzen Körper, `AddTorque` dreht ihn um eine Achse. Beide gibt es als Stoß (`ForceMode.Impulse`, ein einzelner Moment, etwa ein Tritt) oder als gleichmäßiges Schieben (`ForceMode.Force`, in jedem Physik-Schritt, also in `FixedUpdate()`). Masse zählt: Die gleiche Kraft bewegt eine schwere Kiste weniger.
 
@@ -759,36 +813,34 @@ Eine Kraft ist ein [Vektor](https://www.allknivesnobagel.com/teaching/gec1/conce
 
 Strg + Umschalt + C
 
-Die [Console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/) sammelt, was Unity und eure Skripte melden. Ein roter Kompilierfehler (`error CS…`) blockiert Play ganz, bis er behoben ist; Unity sagt dann „All compiler errors have to be fixed before you can enter playmode!“. Ein Laufzeitfehler (Exception) bricht nur das Skript an dieser Stelle ab, das Spiel läuft weiter. Steht dieselbe Meldung hundertmal da, kommt sie aus `Update()` oder `FixedUpdate()`: in jedem Frame einmal. **Clear** leert die Liste (Kompilierfehler bleiben stehen), **Error Pause** hält das Spiel an, sobald ein Skript einen Fehler meldet.
+Die [Console](https://www.allknivesnobagel.com/teaching/gec1/concepts/console/) sammelt, was Unity und eure Skripte melden. Ein roter Kompilierfehler (`error CS…`) blockiert Play ganz, bis er behoben ist; Unity sagt dann „All compiler errors have to be fixed before you can enter playmode!“. Ein Laufzeitfehler (Exception) bricht nur das Skript an dieser Stelle ab, das Spiel läuft weiter. Steht dieselbe Meldung hundertmal da, kommt sie aus `Update()` oder `FixedUpdate()`: in jedem Frame einmal. **Clear** leert die Liste (Kompilierfehler bleiben stehen), **Error Pause** hält das Spiel an, sobald ein Skript einen Fehler meldet. Meldungen von Besteck beginnen mit `[Besteck]`.
 
 ### Die kaputte Werkstatt
 
 10 Minuten
 
-Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen
+Tools › Besteck › Beispiel „Werkstatt (kaputt)“ bauen
 
 Fünf Fehler. Play drücken, Console lesen, einen beheben, wieder Play.
 
 **Bild:** Isometrische Kreidezeichnung einer kaputten Werkstatt: Eine Kiste schwebt, das Windrad sitzt nicht auf seiner Welle, eine Lampe ist nicht eingesteckt und eine Figur läuft gegen eine unsichtbare Wand. (KI-generiert).
 
-Ab Kurs-Paket 0.3.2
-
 Szene: Assets › Kit Beispiel › Werkstatt
 
-Die Werkstatt ist eine Beispiel-Szene im Kurs-Paket ab Version 0.3.2, absichtlich kaputt. Bauen: **Tools › Kit › Beispiel „Werkstatt (kaputt)“ bauen**. Das legt `Assets/Kit Beispiel/Werkstatt/` an, darin die Szene `Werkstatt.unity`; per Doppelklick öffnen. Fehlt der Menüpunkt, ist das Kurs-Paket noch auf 0.3.1: oben unter „Kurs-Paket prüfen“ aktualisieren.
+Die Werkstatt ist eine Beispiel-Szene in Besteck, absichtlich kaputt. Bauen: **Tools › Besteck › Beispiel „Werkstatt (kaputt)“ bauen**. Das legt `Assets/Kit Beispiel/Werkstatt/` an, darin die Szene `Werkstatt.unity`; per Doppelklick öffnen. Fehlt der Menüpunkt, ist Besteck zu alt: oben unter „Läuft Besteck 0.5.0?“ aktualisieren.
 
 So sieht die Console nach dem ersten Play aus, mit Collapse:
 
 ```
-[Kit] Lampe › An/Aus: ◆ Objekt fehlt (Slot „An/Aus: Objekt“ ist leer)            1
-UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.  356
+[Besteck] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt (Slot „An/Aus: Objekt“ ist leer)   1
+UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.   356
 ```
 
 Auflösung, erst nach dem eigenen Versuch
 
-1. **Knopfzone**: Is Trigger fehlt. Die Spielfigur läuft gegen eine unsichtbare Wand. Das Kit warnt vor Play: „„Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken)“, und der Graph „Knopf und Kiste“ markiert die Zone rot.
+1. **Knopfzone**: Is Trigger fehlt. Die Spielfigur läuft gegen eine unsichtbare Wand. Besteck warnt vor Play: „„Knopfzone“: Collider ist kein Trigger (Is Trigger anhaken)“, und der Graph „Knopf und Kiste“ markiert die Zone rot.
 2. **Kiste**: Is Kinematic ist an. Erst wenn Fehler 1 behoben ist, meldet der Knoten Kraft: „„Kiste“ ist kinematisch: Kräfte wirken nicht“. Ein Fehler kann den nächsten verdecken.
-3. **Lampe**: Der ◆-Platz von An/Aus ist leer. Lampenschirm hineinziehen, dann schaltet L das Licht.
+3. **Lampe**: In ihrer Logik ist die Rolle von An/Aus leer. Im Inspector der Logik unter **Rollen** den Lampenschirm hineinziehen, dann schaltet L das Licht.
 4. **Kiste (soll fallen)**: Ihr fehlt ein Rigidbody. Keine Meldung, sie schwebt einfach.
 5. **Windrad**: Im Skript ist das Feld Fluegel leer, in jedem Physik-Schritt kommt die Meldung neu. Doppelklick zeigt die Zeile mit `AddTorque`; die Lösung liegt im Inspector: Flügel hineinziehen.
 
@@ -804,16 +856,16 @@ Fehler 5 der Werkstatt ist der Normalfall in Unity: Die Zeile im Code ist richti
 
 1. Den Satz aus eurer Spec sagen
 2. Event, Bedingung und Aktion darin markieren
-3. Bauen, Play, beobachten
-4. Commit
+3. Welchem Objekt gehört die Logik?
+4. Bauen, Play, beobachten, Commit
 
-Bis 17:00. Ich komme rum.
+Bis 17:30. Ich komme rum.
 
-Wer noch keine Spec hat, schreibt sie jetzt in fünf Minuten: Verb, Regel, Rückmeldung, Scheitern. Vor dem ersten Knoten ein Commit.
+Wer noch keine Spec hat, schreibt sie jetzt in fünf Minuten: Verb, Regel, Rückmeldung, Scheitern. Vor dem ersten Knoten ein Commit. Die Logik kommt meist auf das Objekt, das sich am Ende ändert: die Tür, die aufgeht, die Kiste, die springt. Verbindet eine Interaktion viele Dinge gleichrangig, etwa ein Rätsel aus vier Schaltern, darf sie auch auf einem leeren GameObject sitzen, das alles zusammenhält.
 
 ### Ein Knoten, den es nicht gibt
 
-Kein Drehmoment im Kit? Tools › Kit › Eigener Knoten (C#), dann füllt ein Agent die Dateien.
+Kein Drehmoment in Besteck? Tools › Besteck › Eigener Knoten (C#), dann füllt ein Agent die Dateien.
 
 ```
 Knoten „Drehmoment“
@@ -827,22 +879,22 @@ Nur diese zwei
 Dateien ändern.
 ```
 
-Agenten-Übung Tag 3: Spec → Agent schreibt einen kleinen Knoten im Vertrag des Kits → Diff lesen → spielen → committen oder verwerfen. Im Kurs lesen wir einen vorbereiteten Diff. Zu Hause selbst ausprobieren ist freiwillig. Zuerst **Tools › Kit › Eigener Knoten (C#)** mit dem Namen „Drehmoment“ ausführen; das legt die beiden Dateien in `Assets/Eigene Knoten` an. Dann committen. Dann der Auftrag an den Agenten: „Fülle den Kit-Knoten in `Assets/Eigene Knoten/Drehmoment.cs` und `Assets/Eigene Knoten/Editor/DrehmomentNode.cs` nach dem Muster von Kraft (Push.cs im Kurs-Paket). ◆ Körper: Rigidbody. Einstellungen Achse und Stärke. Eingang Drehen, Ausgang Angewendet. Ist der Körper kinematisch, soll der Knoten mit Grund scheitern (Fail). Beide Dateien bekommen oben einen Kopfkommentar. Nur diese zwei Dateien ändern, nicht committen.“ Danach eine Zeile ins KI-Verzeichnis.
+Agenten-Übung Tag 3: Spec → Agent schreibt einen kleinen Knoten im Vertrag von Besteck → Diff lesen → spielen → committen oder verwerfen. Im Kurs lesen wir einen vorbereiteten Diff. Zu Hause selbst ausprobieren ist freiwillig. Zuerst **Tools › Besteck › Eigener Knoten (C#)** mit dem Namen „Drehmoment“ ausführen; das legt die beiden Dateien in `Assets/Eigene Knoten` an. Dann committen. Dann der Auftrag an den Agenten: „Fülle den Besteck-Knoten in `Assets/Eigene Knoten/Drehmoment.cs` und `Assets/Eigene Knoten/Editor/DrehmomentNode.cs` nach dem Muster von Kraft (Push.cs im Paket de.macromedia.gec1). ◆ Körper: Rigidbody. Einstellungen Achse und Stärke. Eingang Drehen, Ausgang Angewendet. Ist der Körper kinematisch, soll der Knoten mit Grund scheitern (Fail). Beide Dateien bekommen oben einen Kopfkommentar. Nur diese zwei Dateien ändern, nicht committen.“ Danach eine Zeile ins KI-Verzeichnis.
 
 ### Was ein Knoten braucht
 
-**Tafelbild:** Links fünf Markierungen aus dem C#-Code, rechts der Knoten, der daraus entsteht. NodeInfo gibt Titel und Gruppe, Input den Eingang Drehen, Ref den Platz ◆ Körper, Setting die Einstellung Stärke, Output den Ausgang Angewendet.
+**Tafelbild:** Links fünf Markierungen aus dem C#-Code, rechts der Knoten, der daraus entsteht. NodeInfo gibt Titel und Gruppe, Input den Eingang Drehen, Ref den Anschluss ◆ Körper, Setting die Einstellung Stärke, Output den Ausgang Angewendet.
 
 Zwei Dateien in Assets › Eigene Knoten. Das Menü legt sie an.
 
-Ein eigener Knoten besteht aus zwei Dateien, beide unter `Assets/Eigene Knoten`: `Drehmoment.cs` (der Knoten) und `Editor/DrehmomentNode.cs` (sein Gesicht im Graph-Editor). Das Menü **Tools › Kit › Eigener Knoten (C#)** legt beide an, dazu die Assembly-Dateien des Ordners; dasselbe gibt es unter **Assets › Create › Kit › Eigener Knoten (C#)**. Danach steht der Knoten unter „+ Knoten“ › Aktion › Drehmoment. Ohne `NodeInfo` landet er in der Gruppe „Eigene“ unter seinem Klassennamen.
+Ein eigener Knoten besteht aus zwei Dateien, beide unter `Assets/Eigene Knoten`: `Drehmoment.cs` (der Knoten) und `Editor/DrehmomentNode.cs` (sein Gesicht im Graph-Editor). Das Menü **Tools › Besteck › Eigener Knoten (C#)** legt beide an, dazu die Assembly-Dateien des Ordners; dasselbe gibt es unter **Assets › Create › Besteck › Eigener Knoten (C#)**. Danach steht der Knoten unter „+ Knoten“ › Aktion › Drehmoment. Ohne `NodeInfo` landet er in der Gruppe „Eigene“ unter seinem Klassennamen. Im C#-Code heißt Besteck weiterhin `Kit`: `using Kit;`, `KitNode`.
 
 So sollte der Diff aussehen
 
 `Assets/Eigene Knoten/Drehmoment.cs`:
 
 ```csharp
-// Drehmoment: ein eigener Kit-Knoten, der einen Rigidbody um eine Achse dreht.
+// Drehmoment: ein eigener Besteck-Knoten, der einen Rigidbody um eine Achse dreht.
 // Herkunft: geschrieben von einem Agenten (Werkzeug und Modell siehe KI-Verzeichnis),
 // geprüft und getestet von <Name>, 20.11.2026.
 using System;
@@ -872,7 +924,7 @@ public class Drehmoment : KitNode
 `Assets/Eigene Knoten/Editor/DrehmomentNode.cs`:
 
 ```csharp
-// DrehmomentNode: zeigt den Knoten Drehmoment im Graph-Editor des Kits.
+// DrehmomentNode: zeigt den Knoten Drehmoment im Graph-Editor von Besteck.
 // Herkunft: wie Drehmoment.cs.
 using System;
 using Kit.Editor;
@@ -888,12 +940,12 @@ public class DrehmomentNode : KitEditorNode
 
 1. Diff: Nur die zwei Dateien in Eigene Knoten?
 2. Steht oben ein Kopfkommentar? Feuert `Angewendet`?
-3. Drehkreuz bauen, Taste → Drehmoment, Play
+3. Drehkreuz bauen, Logik drauf, Taste → Drehmoment, Play
 4. Dreht es? Commit. Sonst verwerfen.
 
 In GitHub Desktop zeigt der Reiter **Changes** den Diff. Hat der Agent andere Dateien als die zwei in `Assets/Eigene Knoten` angefasst, ist das ein Grund zum Verwerfen, auch wenn es läuft.
 
-Das Drehkreuz zum Testen: ein Würfel „Arm“, Scale 2,4 × 0,12 × 0,25, auf etwa 1 m Höhe. Dazu Add Component › Rigidbody mit **Use Gravity** aus, **Angular Damping** 0,6 und unter **Constraints** Freeze Position X, Y und Z sowie Freeze Rotation X und Z. Ohne diese Sperren fällt der Arm herunter und rollt weg; das ist dann kein Fehler des Knotens. Graph: **Taste** (Taste R) · Gedrückt → **Drehmoment** · Drehen, Achse 0, 1, 0, Stärke 4, ◆ Körper = Arm.
+Das Drehkreuz zum Testen: ein Würfel „Arm“, Scale 2,4 × 0,12 × 0,25, auf etwa 1 m Höhe. Dazu Add Component › Rigidbody mit **Use Gravity** aus, **Angular Damping** 0,6 und unter **Constraints** Freeze Position X, Y und Z sowie Freeze Rotation X und Z. Ohne diese Sperren fällt der Arm herunter und rollt weg; das ist dann kein Fehler des Knotens. Dann auf den Arm eine Logik, **Neu**, im Graph: **Taste** (Taste R) · Gedrückt → **Drehmoment** · Drehen, Achse 0, 1, 0, Stärke 4, ◆ Körper = Dieses Objekt.
 
 ### Jedes Skript sagt, was es ist
 
@@ -949,29 +1001,29 @@ Was fehlt, ist eure Aufgabe für die nächsten 48 Stunden.
 
 Ins KI-Verzeichnis kommt eine Zeile, sobald die Antwort eines Agenten in die Arbeit eingeht: Code, eine Diagnose, die ihr anwendet, ein Text. Werkzeug, Modell, Zweck, Datei oder System, eine Notiz.
 
-### Die nächsten 14 Tage
+### Eine Woche bis zum Vertical Slice
 
-1. Nach 48 Stunden: Schlüssel und Tür im eigenen Projekt, Werkstatt repariert
-2. Eine Woche später: Clip, Hindernis, nächster Schritt in den Blackboard-Thread
+1. Bis Sonntag: Schlüssel und Tür, Werkstatt, Spec der zweiten Interaktion
+2. Bis Dienstag: Clip, Hindernis, nächster Schritt im Blackboard-Thread
 3. Wer 30 Minuten feststeckt, fragt
 4. Bis zum 27.11.: zwei Interaktionen und ein aktueller Build
 
 Am 27.11. spielen andere euren Stand.
 
-Meilenstein Vertical Slice am 27.11.: zwei Interaktionen aus der Liste der Aufgabenstellung laufen im Blockout, das KI-Verzeichnis hat Einträge, und ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner. Reihenfolge für den Build: speichern, committen, aus genau diesem Stand bauen, die `.exe` auf einem anderen Windows-Rechner testen (ZIP per USB-Stick oder Cloud-Link). Ab Tag 5 bekommt der getestete Commit zusätzlich einen Tag.
+Meilenstein Vertical Slice am 27.11., eine Woche nach heute: zwei Interaktionen aus der Liste der Aufgabenstellung laufen im Blockout, das KI-Verzeichnis hat Einträge, und ein aktueller Windows-Build dieses Stands läuft auf einem fremden Rechner. Reihenfolge für den Build: speichern, committen, aus genau diesem Stand bauen, die `.exe` auf einem anderen Windows-Rechner testen (ZIP per USB-Stick oder Cloud-Link). Ab Tag 5 bekommt der getestete Commit zusätzlich einen Tag.
 
-Aufwand bis zum 27.11., ehrlich gerechnet: etwa 10 bis 13 Stunden.
+Aufwand bis zum 27.11., ehrlich gerechnet: etwa 7 bis 9 Stunden.
 
-| Was | Mindestens | Zeit |
-|---|---|---|
-| Schlüssel und Tür im eigenen Projekt | läuft, committet | 2–3 h |
-| Werkstatt | alle fünf Fehler behoben | 1 h |
-| Spec der zweiten Interaktion | vier Zeilen und der Satz | 0,5 h |
-| Interaktion 2 | läuft im Blockout, mit Knoten, die ihr kennt | 4–6 h |
-| Build und Test auf fremdem Rechner | `.exe` startet, beide Interaktionen gehen | 1 h |
-| Clip, Post, Devlog | 30 s, ein Hindernis, zwei Sätze | 1 h |
+| Was | Bis | Mindestens | Zeit |
+|---|---|---|---|
+| Schlüssel und Tür im eigenen Projekt | So 22.11. | läuft, committet (im Kurs begonnen) | 0,5–1 h |
+| Werkstatt | So 22.11. | alle fünf Fehler behoben | 1 h |
+| Spec der zweiten Interaktion | So 22.11. | vier Zeilen und der Satz | 0,5 h |
+| Clip, Post, Devlog | Di 24.11. | 30 s, ein Hindernis, zwei Sätze | 0,5 h |
+| Interaktion 2 | Do 26.11. | läuft im Blockout, mit Knoten, die ihr kennt | 3–5 h |
+| Build und Test auf fremdem Rechner | Do 26.11. | `.exe` startet, beide Interaktionen gehen | 1 h |
 
-Wird Interaktion 2 größer als sechs Stunden, wird sie kleiner: weniger Schritte, bekannte Knoten. Wer den Rettungsweg geht, rechnet etwa vier Stunden dazu. Wer feststeckt: 30 Minuten selbst suchen (Graph, Console, Konzeptseiten), dann im Blackboard-Thread fragen, mit Bild der Console und des Graphs.
+Interaktion 2 ist diesmal klein: ein Auslöser, höchstens eine Variable, eine sichtbare Rückmeldung. Wird sie größer als fünf Stunden, wird sie kleiner: weniger Schritte, bekannte Knoten. Wer den Rettungsweg geht, rechnet etwa drei Stunden dazu. Wer feststeckt: 30 Minuten selbst suchen (Graph, Console, Konzeptseiten), dann im Blackboard-Thread fragen, mit Bild der Console und des Graphs.
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/days/03/
 
@@ -1138,7 +1190,7 @@ Der Animator ist eine Komponente. Sein Animator Controller enthält Zustände, �
 
 Der Graph sagt, wann. Der Animator weiß, wie.
 
-Den Knoten **Animator-Wert** gibt es im Kit in der Gruppe **Erweiterung**. Passen Parametername oder Art nicht zum Animator Controller, meldet er das im Graphen und in der Console.
+Den Knoten **Animator-Wert** gibt es in Besteck in der Gruppe **Erweiterung**. Passen Parametername oder Art nicht zum Animator Controller, meldet er das im Graphen und in der Console.
 
 ### Bewegen oder Clip?
 
@@ -1148,7 +1200,7 @@ Clip Mehrere Werte, eine eigene Kurve, eine Wiederholung.
 
 Eine Eigenschaft, die ein Clip animiert, kann Bewegen nicht mehr bewegen.
 
-Der Kit-Knoten **Bewegen** verschiebt, dreht oder skaliert ein Objekt über eine einstellbare Dauer: ein kleiner Tween ohne eigene Datei. Ein Clip lohnt sich, sobald mehrere Eigenschaften zusammenspielen, die Kurve eine eigene Form braucht (langsam anlaufen, überschwingen) oder sich etwas wiederholt, etwa eine flackernde Lampe. Animiert ein Clip eine Eigenschaft, etwa die Drehung des Scharniers, schreibt der Animator sie in jedem Frame neu; ein Bewegen-Knoten auf derselben Eigenschaft desselben Objekts hat dann keine Wirkung. Andere Eigenschaften und andere Objekte bleiben frei.
+Der Knoten **Bewegen** verschiebt, dreht oder skaliert ein Objekt über eine einstellbare Dauer: ein kleiner Tween ohne eigene Datei. Ein Clip lohnt sich, sobald mehrere Eigenschaften zusammenspielen, die Kurve eine eigene Form braucht (langsam anlaufen, überschwingen) oder sich etwas wiederholt, etwa eine flackernde Lampe. Animiert ein Clip eine Eigenschaft, etwa die Drehung des Scharniers, schreibt der Animator sie in jedem Frame neu; ein Bewegen-Knoten auf derselben Eigenschaft desselben Objekts hat dann keine Wirkung. Andere Eigenschaften und andere Objekte bleiben frei.
 
 ### Werkstatt: eine Animation, selbst gebaut
 
@@ -1160,7 +1212,7 @@ Ziel für alle: Der Graph löst eure Animation aus.
 
 Unterwegs gibt es drei Zwischenstände: Der Clip läuft von allein (Stufe 1), der Animator wartet (Stufe 2), der Graph löst aus (Stufe 3). Stufe 3 ist das Ziel für alle. Wer statt der Truhe eine Tür, eine Lampe oder eine Plattform animiert, folgt denselben Schritten. Wer schnell fertig ist, baut eine zweite Animation, die zur Entscheidung aus dem Playtest passt.
 
-**Rettungsweg:** Wer beim Bauen der Truhe hängen bleibt, nimmt den fertigen Rohling: **Tools › Kit › Rohling „Truhe“ bauen** (ab Kit v0.3.2). Er legt die Truhe mit Kiste, Scharnier und Deckel in die Szene, ohne Animation. Clip, Animator und Graph baut ihr dann selbst ab Schritt 2.
+**Rettungsweg:** Wer beim Bauen der Truhe hängen bleibt, nimmt den fertigen Rohling: **Tools › Besteck › Rohling „Truhe“ bauen**. Er legt die Truhe mit Kiste, Scharnier und Deckel in die Szene, ohne Animation. Clip, Animator und Graph baut ihr dann selbst ab Schritt 2.
 
 ### Schritt 1–4: Truhe und Clip
 
@@ -1221,7 +1273,7 @@ Die Zeile in `KI-VERZEICHNIS.md` nennt Werkzeug, Version, Zweck und Stelle in de
 
 **Parameter.** Links im Reiter **Parameters** auf **+** › **Trigger**, Name „Öffnen“. Den Pfeil von „Zu“ nach „Auf“ anklicken; im Inspector **Has Exit Time** abhaken, unter **Conditions** mit **+** „Öffnen“ wählen. **Stufe 2:** Im Play-Modus bleibt der Deckel jetzt zu.
 
-**Graph.** In der Interaktion wie am 20.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
+**Graph.** Auf die Truhe eine Logik wie am 20.11. (Add Component › Besteck › Logik, **Neu**), darin einen Knoten **Benutzen**, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
 
 **Häufige Fehler:** Animator auf dem Deckel statt auf der Truhe. Parametername im Knoten anders geschrieben als im Animator (der Knoten meldet das). Has Exit Time noch an: Der Deckel öffnet verspätet. Deckel klappt in die falsche Richtung: Vorzeichen der Rotation x umdrehen.
 
@@ -1233,14 +1285,14 @@ Commit auf `experiment-animation`: „Truhe klappt beim Benutzen auf“.
 
 [Feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/) beginnt im selben Frame wie die Handlung.
 
-Im Kit, jeweils an „Benutzt“ angeschlossen:
+In Besteck, jeweils an „Benutzt“ angeschlossen:
 
 - **Ton abspielen** (nächste Folie).
 - **Kurz größer und zurück** mit zwei Bewegen-Knoten auf dasselbe Objekt, beide mit Was: Größe. Der erste: Weg (0.1, 0.1, 0.1), Dauer 0.08 s, „Benutzt“ an „Hin“. Der zweite: Dauer 0.08 s, „Angekommen“ des ersten an „Zurück“ des zweiten. Der zweite Knoten bekommt keine ausgehende Verbindung; sonst stößt jede Rückfahrt die nächste an. Bewegt wird ein Objekt, das kein Clip animiert, hier die Kiste.
 - **Material tauschen** für ein kurzes Aufblitzen, mit **Warten** und „Zurück“.
 - **Erzeugen** für ein Prefab mit Partikelsystem.
 
-„Kamera wackeln“ (Spielsysteme) rüttelt die Kamera des Spielers kurz, „Anhalten“ (Aktion) hält das Spiel für ein paar Millisekunden an. Erinnert euch an den Dreier-Schlag vom 23.10.: 55, 65 und 130 ms Anhalten sind dort die stärkste Rückmeldung. Beide Knoten gibt es ab Kurs-Paket 0.3.2.
+„Kamera wackeln“ (Spielsysteme) rüttelt die Kamera des Spielers kurz, „Anhalten“ (Aktion) hält das Spiel für ein paar Millisekunden an. Erinnert euch an den Dreier-Schlag vom 23.10.: 55, 65 und 130 ms Anhalten sind dort die stärkste Rückmeldung. Beide Knoten bringt Besteck mit.
 
 ### Ton zuerst
 
@@ -1507,50 +1559,50 @@ Dieser frühe Build findet Fehler. Er bekommt noch keinen `alpha`-Tag.
 
 Pflicht ist eine projektbezogene UI-Handlung. Der vollständige Ablauf Start → Spiel → Geschafft → Neustart ist optional.
 
-Der Kurs verwendet uGUI: Canvas, GameObjects und Komponenten passen zum Kit, zu Hierarchy und Inspector. UI Toolkit ist ebenfalls für Runtime-UI geeignet, würde hier aber UXML, Stylesheets und UI Builder als zweites Modell einführen. Darum lernt der Kurs nicht beide parallel.
+Der Kurs verwendet uGUI: Canvas, GameObjects und Komponenten passen zu Besteck, zu Hierarchy und Inspector. UI Toolkit ist ebenfalls für Runtime-UI geeignet, würde hier aber UXML, Stylesheets und UI Builder als zweites Modell einführen. Darum lernt der Kurs nicht beide parallel.
 
-### Kit-Beispiel: Start und Spiel
+### Beispiel: Start und Spiel
 
 Für das Schlüssel-und-Tür-Spiel:
 
-- Start: `Beginn → An/Aus (Start an) → Pause`
+- Start: Auslöser `Start` `→ An/Aus (Start an) → Pause`
 - Spielen: `Knopf gedrückt` `→ An/Aus (Start aus) → Weiter`
 
 Button → Graph, ohne Skript.
 
-### Kit-Beispiel: Ziel und Neustart
+### Beispiel: Ziel und Neustart
 
 - Ziel: `Tür offen → An/Aus (Geschafft an) → Pause`
-- Neustart: `Knopf gedrückt` `→ Szene laden`
+- Neustart: `Knopf gedrückt` `→ Neustart`
 
-Szenenname exakt; Szene in der Scene List.
+Neustart braucht keinen Szenennamen.
 
 ### Der kleinste UI-Vertrag
 
 1. Spec-Handlung wählen: Start, Hinweis, Ziel oder Scheitern
-2. Mit vorhandenen Kit-Knoten verdrahten
+2. Mit vorhandenen Knoten verdrahten
 3. Öffnen → klicken → spielen → zurückkehren, dreimal
 4. Cursor im UI frei, Blick im Spiel gefangen
 
 Kein Scheiterzustand? Kein Game Over erzwingen.
 
-Für den vollständigen Ablauf hält `Pause` den Kit-Spieler an und gibt den Cursor frei; `Weiter` setzt beides zurück. `Knopf gedrückt` (Gruppe Auslöser) bekommt im ◆-Feld „Knopf“ den Button aus der Hierarchy; `Pause` und `Weiter` stehen unter Spielsysteme. Die drei Knoten gibt es ab Kurs-Paket 0.3.2. Nach jedem Menüwechsel den Cursor sichtbar anklicken und danach wieder laufen und umsehen.
+Für den vollständigen Ablauf bringt Besteck fertige Bildschirme (Start, Pause, Gewonnen, Verloren): Ist einer eingeschaltet, steht das Spiel und der Cursor ist frei. `Knopf gedrückt` (Gruppe Auslöser) bekommt im ◆-Feld „Knopf“ den Button aus der Hierarchy. Ohne Bildschirm halten `Pause` und `Weiter` (Spielsysteme) den Spieler an und geben ihn wieder frei. Nach jedem Menüwechsel den Cursor sichtbar anklicken und danach wieder laufen und umsehen.
 
-### Welcher Kit-Knoten passt?
+### Welcher Knoten passt?
 
-- Zahl im HUD → `HUD-Anzeige`
-- Panel zeigen → `An/Aus`
-- Tod bei null → `Lebenspunkte`
+- Zahl im HUD → `Wert anzeigen`
+- Bildschirm zeigen → `An/Aus`
+- Etwas bei null → Zahl, `Minimum erreicht`
 - Respawn-Punkt → `Checkpoint`
-- Neustart-Szene → `Szene laden`
+- Von vorn → `Neustart`
 
-`HUD-Anzeige` liest `Zahl` laufend. `An/Aus` schaltet ein gebundenes GameObject. `Lebenspunkte` feuert `Tot` einmal beim Fall auf null. `Checkpoint` merkt oder lädt einen Respawn-Punkt. `Szene laden` akzeptiert nur Szenen aus der Scene List.
+`Wert anzeigen` hält eine Anzeige (**GameObject › Besteck › Anzeige**: Zahl, Balken, Symbolreihe) auf dem Stand einer Variable. `An/Aus` schaltet ein gebundenes GameObject, auch einen Bildschirm aus **GameObject › Besteck › Bildschirm**. Eine Variable **Zahl** mit Grenzen feuert `Minimum erreicht`, wenn sie auf ihr Minimum fällt. `Checkpoint` merkt oder lädt einen Respawn-Punkt. `Neustart` beginnt die Szene von vorn; Szenen kommen als Datei in den Knoten, und Besteck trägt sie selbst in die Build Settings ein.
 
 ### Der Agent liest den Graph, ihr verdrahtet
 
-> „Lies meinen `.kit`-Graph. Plane \_\_\_ mit vorhandenen Kit-Knoten. Ändere keine Szene, Prefab oder Skript. Nenne Knoten, Ports, Bindungen und drei Tests.“
+> „Lies meinen `.kit`-Graph. Plane \_\_\_ mit vorhandenen Besteck-Knoten. Ändere keine Szene, Prefab oder Skript. Nenne Knoten, Ports, Bindungen und drei Tests.“
 
-Kit-Palette prüfen → selbst verdrahten → jeden Weg testen
+„+ Knoten“ prüfen → selbst verdrahten → jeden Weg testen
 
 ### Projektwerkstatt: 30 Minuten
 
@@ -2345,7 +2397,7 @@ else
 
 ### Genauer
 
-Die Frage richtet sich fast immer an einen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): Ist der Merker gesetzt? Ist der Zähler bei 3? Ist der Abstand kleiner als 2 Meter? Ausgelöst wird sie meist von einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/). Daraus ergibt sich ein Muster, das in fast jeder Interaktion steckt: **Event, Bedingung, Aktion.** Wenn etwas passiert und etwas gilt, folgt eine Reaktion.
+Die Frage richtet sich fast immer an einen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): Ist die Variable „Schlüssel vorhanden“ ja? Steht die Zahl schon bei 3? Ist der Abstand kleiner als 2 Meter? Ausgelöst wird sie meist von einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/). Daraus ergibt sich ein Muster, das in fast jeder Interaktion steckt: **Event, Bedingung, Aktion.** Wenn etwas passiert und etwas gilt, folgt eine Reaktion.
 
 Vergleiche liefern ja oder nein:
 
@@ -2362,7 +2414,7 @@ Ein Ja/Nein-Wert hat in C# den Typ `bool`, mit den Werten `true` und `false`.
 
 ### In Unity sehen
 
-Im Kit prüft der Knoten **Wenn** seine Bedingung in dem Moment, in dem ein Event ankommt, und schickt es zu **Ja** oder **Nein**. Die Bedingung kommt über eine Datenleitung, etwa von einem **Merker** oder einem **Vergleich**, der eine Zahl prüft.
+In Besteck prüft der Knoten **Wenn** seine Bedingung in dem Moment, in dem ein Event ankommt, und schickt es zu **Ja** oder **Nein**. Die Bedingung kommt über eine Datenleitung, etwa von einer Variable **Ja-Nein** oder einem **Vergleich**, der eine Zahl prüft.
 
 Bei Zonen und Zusammenstößen filtert oft ein Tag: `other.CompareTag("Player")` fragt, ob das, was hereinkam, die Spielfigur ist.
 
@@ -2392,7 +2444,7 @@ Die Console ist das Logbuch des Editors: **Window › General › Console**, ode
 | Symbol | heißt | Beispiel |
 |---|---|---|
 | rot | Fehler | `UnassignedReferenceException: The variable fluegel of Windrad has not been assigned.` |
-| gelb | Warnung | `[Kit] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt` |
+| gelb | Warnung | `[Besteck] Vor Play: Lampe › An/Aus: ◆ Objekt fehlt` |
 | weiß | Hinweis | was ein Skript mit `Debug.Log("…")` schreibt |
 
 ### Genauer
@@ -2412,12 +2464,12 @@ Die Knöpfe oben:
 | Collapse | fasst gleiche Meldungen zu einer Zeile mit Zähler zusammen |
 | Error Pause | hält das Spiel an, sobald ein Skript einen Fehler meldet |
 
-Nicht jeder Fehler meldet sich. Eine Kiste ohne Rigidbody schwebt, ohne dass die Console etwas sagt. Dann hilft nur Hinsehen: Szene, Inspector, im Kit der Graph.
+Nicht jeder Fehler meldet sich. Eine Kiste ohne Rigidbody schwebt, ohne dass die Console etwas sagt. Dann hilft nur Hinsehen: Szene, Inspector, in Besteck der Graph.
 
 ### In Unity sehen
 
 - Ein Skript mit `Debug.Log("Hallo");` in `Start()` schreibt eine weiße Zeile.
-- Das Kit meldet sich mit `[Kit]` am Anfang. Vor Play prüft es alle Interaktionen und schreibt, was fehlt.
+- Besteck meldet sich mit `[Besteck]` am Anfang. Vor Play prüft es alle Logiken und schreibt, was fehlt.
 - Die Zahlen oben rechts zählen Hinweise, Warnungen und Fehler; ein Klick blendet die Sorte aus.
 
 ### Weiterlesen
@@ -2746,9 +2798,9 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/git/
 
 ## Graph
 
-Eine Interaktion des Kurs-Pakets, gezeichnet aus Knoten und Drähten. Events laufen durch die Drähte von Knoten zu Knoten; im Play-Modus zeigt jeder Knoten, was er gerade tut.
+Ein Logik-Graph von Besteck, gezeichnet aus Knoten und Drähten. Die Komponente Logik spielt ihn ab; Events laufen von Knoten zu Knoten, und im Play-Modus zeigt jeder Knoten, was er gerade tut.
 
-Auch: Graphen, Knoten, Draht, Drähte, Kit, Interaktion, Interaktionen, Node, Nodes
+Auch: Graphen, Logik-Graph, Logik-Graphen, Logik, Knoten, Draht, Drähte, Besteck, Kit, Rolle, Rollen, Node, Nodes
 
 Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)
 
@@ -2756,7 +2808,7 @@ Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/
 
 ### Kurz
 
-Ein Graph ist eine Datei mit der Endung `.kit`. Darin stehen Knoten, etwa **Zone**, **Wenn**, **Bewegen**, und die Drähte dazwischen. Zusammen beschreiben sie eine Interaktion: Wenn das passiert und das gilt, geschieht dies.
+Ein Logik-Graph ist eine Datei im Projekt. Darin stehen Knoten, etwa **Zone**, **Wenn**, **Bewegen**, und die Drähte dazwischen. Zusammen beschreiben sie eine Interaktion: Wenn das passiert und das gilt, geschieht dies. Abgespielt wird der Graph von der [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) **Logik** an einem GameObject, so wie ein Animator seinen Animator Controller abspielt.
 
 Drei Drahtarten:
 
@@ -2768,22 +2820,24 @@ Drei Drahtarten:
 
 ### Genauer
 
-Der Graph kennt keine Objekte der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), nur Plätze für sie. Die Component **Interaktion** an einem GameObject verbindet einen Graph mit der Szene: Sie hält die Tabelle, welches Objekt welchen Platz füllt. So kann derselbe Graph an zwei Türen hängen, und jede hat ihren eigenen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/).
+Der Graph kennt keine Objekte der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), nur Anschlüsse für sie (◆). Einer ist immer schon da: **Dieses Objekt**, das Objekt mit der Logik (im Code: `gameObject`). Alle anderen Objekte spielen **Rollen**; die Logik hält fest, welches Objekt welche Rolle spielt, und jedes dieser Objekte trägt dann die Komponente **Rolle**. So kann derselbe Graph auf zwei Türen liegen: Jede meint sich selbst, und jede hat ihre eigenen Variablen, also ihren eigenen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/).
 
-Jeder Knoten ist eine kleine C#-Klasse. **Code ansehen** (`</>` am Knoten) zeigt sie. Eigene Knoten folgen demselben Muster: Markierungen wie `[Input("…")]`, `[Output("…")]` und `[Ref("…")]` machen aus Methoden und Feldern Anschlüsse. Eigene Knoten liegen immer in `Assets/Eigene Knoten`; **Tools › Kit › Eigener Knoten (C#)** legt die beiden Dateien dafür an.
+Faustregel: Was nur einem Objekt gehört, ist eine Komponente an diesem Objekt (Variable, Verhalten, Kamera). Was mehrere Objekte verbindet, steht in einem Graph.
+
+Jeder Knoten ist eine kleine C#-Klasse. **Code ansehen** (`</>` am Knoten) zeigt sie. Eigene Knoten folgen demselben Muster: Markierungen wie `[Input("…")]`, `[Output("…")]` und `[Ref("…")]` machen aus Methoden und Feldern Anschlüsse. Eigene Knoten liegen immer in `Assets/Eigene Knoten`; **Tools › Besteck › Eigener Knoten (C#)** legt die beiden Dateien dafür an.
 
 Im Play-Modus meldet jeder Knoten seinen Zustand: ○ empfangen, ▬ läuft, ✓ fertig, ⛔ blockiert (mit Grund), ! Fehler. Ein Knoten mit Fehler feuert seinen Erfolgs-Ausgang nie.
 
 ### In Unity sehen
 
-- **Tools › Kit › Beispiel „Schlüssel und Tür“ bauen** legt ein fertiges Beispiel an.
-- **GameObject › Kit › Interaktion** legt eine neue Interaktion an; im Inspector **Neuer Graph …**.
-- Doppelklick auf eine `.kit`-Datei öffnet den Graph. „+ Knoten“ unten links holt Knoten.
+- **Tools › Besteck › Beispiel „Schlüssel und Tür“ bauen** legt ein fertiges Beispiel an.
+- Ein Objekt auswählen, **Add Component › Besteck › Logik**, dann im Inspector **Neu**: Der neue Graph öffnet sich mit **Dieses Objekt** darin.
+- **Graph öffnen** an der Logik oder ein Doppelklick auf die Datei öffnet den Graph. „+ Knoten“ unten links holt Knoten.
 
 ### Weiterlesen
 
 - [Tag 3](https://www.allknivesnobagel.com/teaching/gec1/days/03/) – Schlüssel und Tür Schritt für Schritt, mit Bildern aus dem Editor.
-- [Unity Manual: Graph Toolkit](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.4/manual/index.html) – das Werkzeug, auf dem der Graph-Editor des Kits aufbaut (englisch, experimentell).
+- [Unity Manual: Graph Toolkit](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.4/manual/index.html) – das Werkzeug, auf dem der Graph-Editor von Besteck aufbaut (englisch, experimentell).
 
 Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/
 
@@ -3038,7 +3092,7 @@ Referenzen lassen sich auch per Code holen. `GetComponent<Rigidbody>()` sucht ei
 ### In Unity sehen
 
 - Ein GameObject in ein Feld ziehen, das eine Component erwartet (etwa `Rigidbody`): Unity nimmt die passende Component dieses Objekts. Hat es keine, lässt sich das Objekt nicht hineinziehen.
-- Im Kit sind Referenzen die ◆-Anschlüsse. Sie zeigen auf Objekte in der Szene; ein leerer ◆ wird als Problem gemeldet.
+- In Besteck sind Referenzen die ◆-Anschlüsse: **Dieses Objekt** (das Objekt mit der Logik) oder eine **Rolle**, die ein anderes Objekt der Szene spielt. Eine leere Rolle wird schon vor Play gemeldet.
 - Das Symbol ◆ und die blaugrüne Farbe stehen im ganzen Kurs für Referenzen.
 
 ### Weiterlesen
@@ -3262,7 +3316,7 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/
 
 Was sich das Spiel von einem Frame zum nächsten merkt. Ist die Tür offen? Wie viele Münzen sind gesammelt? Events ändern den Zustand, Bedingungen fragen ihn ab.
 
-Auch: Zustände, State, Variable, Variablen, Merker, Zähler, Zustandsautomat, State Machine
+Auch: Zustände, State, Variable, Variablen, Ja-Nein, Zustandsautomat, State Machine
 
 Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/)
 
@@ -3290,7 +3344,9 @@ Ein häufiger Fehler: Zustand, der nirgends gespeichert ist. Fragt ein Skript nu
 
 ### In Unity sehen
 
-- Im Kit halten die Knoten **Merker** (ja oder nein) und **Zähler** (eine Zahl) Zustand. Jeder Merker hat einen Namen, etwa „Schlüssel vorhanden“.
+- In Besteck hält eine **Variable** Zustand: eine **Zahl**, ein **Ja-Nein** oder ein **Text**, jeweils mit Namen, etwa „Schlüssel vorhanden“. Der **Bereich** sagt, wem sie gehört: **Logik** (nur dieser Logik), **Szene** (allen in der Szene) oder **Spiel** (sie bleibt beim Szenenwechsel). **Tools › Besteck › Werte** zeigt im Play-Modus alle Variablen mit ihrem Wert.
+- Gehört ein Wert zu einem Objekt, etwa die Münzen einer Truhe, sitzt er als Komponente daran: **Add Component › Besteck › Variable**.
+- Zustand und Anzeige sind getrennt: **Wert anzeigen** hält eine Zahl, einen Balken oder eine Symbolreihe auf dem Stand einer Variable. Wie der Wert aussieht, ist eine eigene Entscheidung.
 - Öffentliche Variablen eines Skripts erscheinen im Inspector. Im Play-Modus lässt sich dort zusehen, wie sie sich ändern.
 - Der **Animator** ist ein Zustandsautomat zum Ansehen: Zustände als Kästchen, Übergänge als Pfeile (Tag 4).
 
@@ -3453,7 +3509,7 @@ Quelle: https://www.allknivesnobagel.com/teaching/gec1/concepts/transform/
 
 ## UI
 
-Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Kit-Graphen.
+Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Logik-Graphen.
 
 Auch: User Interface, Benutzeroberfläche, Oberfläche, HUD, Menü, Canvas, uGUI, Unity UI
 
@@ -3466,32 +3522,32 @@ Unity-Doku: https://docs.unity.com/en-us/engine/6000.3/manual/uitoolkits
 
 UI ist die Schicht zwischen Spielzustand und Spielenden. Ein HUD zeigt wichtige Werte. Ein Start-, Ziel- oder Scheiterbildschirm bietet eine nächste Handlung an. Gute UI beantwortet drei Fragen: Was ist passiert? Was ist wichtig? Was kann als Nächstes getan werden?
 
-Im Kurs wird **uGUI (Unity UI)** mit den vorhandenen Kit-Graphen verwendet. uGUI ist GameObject-basiert: Ein Canvas enthält Panels, Texte, Bilder und Buttons. Für das Kursprojekt reicht **eine projektbezogene UI-Handlung**. Ein vollständiger Ablauf mit Start, Spiel und Ende ist eine Erweiterung.
+Im Kurs wird **uGUI (Unity UI)** mit den Logik-Graphen von Besteck verwendet. uGUI ist GameObject-basiert: Ein Canvas enthält Panels, Texte, Bilder und Buttons. Für das Kursprojekt reicht **eine projektbezogene UI-Handlung**. Ein vollständiger Ablauf mit Start, Spiel und Ende ist eine Erweiterung.
 
 ### Warum uGUI und nicht UI Toolkit?
 
 Unity 6.3 bietet mehrere UI-Systeme. **UI Toolkit** verwendet UI Documents, UXML und Stylesheets und eignet sich besonders für wiederverwendbare, datenreiche Oberflächen und Editor-Werkzeuge. uGUI arbeitet mit Canvas, GameObjects und Komponenten, die aus Hierarchy und Inspector schon bekannt sind.
 
-Beide können Runtime-UI bauen. Die Kursentscheidung gilt nicht allgemein: uGUI passt hier besser zum Kit und führt für eine kleine Spieloberfläche weniger neue Begriffe ein. Beide Systeme parallel zu lernen, würde das Arbeitsmodell verdoppeln.
+Beide können Runtime-UI bauen. Die Kursentscheidung gilt nicht allgemein: uGUI passt hier besser zu Besteck und führt für eine kleine Spieloberfläche weniger neue Begriffe ein. Beide Systeme parallel zu lernen, würde das Arbeitsmodell verdoppeln.
 
 ### Ein vollständiges Graph-Beispiel
 
-Ein Schlüssel-und-Tür-Spiel kann mit einem Canvas und zwei Panels auskommen:
+Ein Schlüssel-und-Tür-Spiel kommt mit zwei fertigen Bildschirmen aus Besteck aus (**GameObject › Besteck › Bildschirm**):
 
-1. `Beginn → An/Aus` schaltet `Start` ein → `Pause` .
-2. Der Spielen-Button feuert `Knopf gedrückt` ; danach schaltet `An/Aus` das Start-Panel aus und `Weiter`  gibt Spieler und Cursor zurück.
-3. Wenn die Tür geöffnet ist, schaltet `An/Aus` das Panel `Geschafft` ein und `Pause`  hält das Spiel an.
-4. Der Neustart-Button feuert `Knopf gedrückt`  zu `Szene laden`. Der Szenenname muss stimmen und die Szene muss in der Scene List stehen.
+1. **Bildschirm › Start** liegt in einer eigenen Szene „Start“, der ersten in **Tools › Besteck › Szenen**. Sein Knopf „Spielen“ feuert `Knopf gedrückt` zu `Nächste Szene`.
+2. Ein Bildschirm erscheint, wenn `An/Aus` ihn einschaltet. Solange er zu sehen ist, steht das Spiel und der Mauszeiger ist frei.
+3. Wenn die Tür geöffnet ist, schaltet `An/Aus` den Bildschirm **Gewonnen** ein.
+4. Sein Knopf „Nochmal“ feuert `Knopf gedrückt` zu `Neustart`. Szenen kommen als Datei in den Knoten, nicht als getippter Name; Besteck trägt sie selbst in die Build Settings ein.
 
-Die drei provisorischen Knotenbezeichnungen kommen mit Kit v0.3.2. Der vollständige Drei-Screen-Ablauf ist optional. Hat ein Projekt keinen Scheiterzustand, braucht es kein Game Over.
+Die Knöpfe der Bildschirme tun erst etwas, wenn eine Logik auf sie hört; ein unverbundener Knopf sagt beim Klicken, was fehlt. Der vollständige Drei-Screen-Ablauf ist optional. Hat ein Projekt keinen Scheiterzustand, braucht es kein Game Over.
 
-### Vorhandene Kit-Bausteine
+### Vorhandene Bausteine in Besteck
 
-- `HUD-Anzeige` liest eine Zahl laufend und formatiert sie in ein gebundenes TMP-Textfeld.
-- `An/Aus` schaltet ein gebundenes GameObject ein, aus oder um.
-- `Lebenspunkte` liefert `Tot` genau einmal, wenn der Wert auf null fällt.
-- `Checkpoint` merkt einen Respawn-Punkt oder setzt den Kit-Spieler dorthin zurück.
-- `Szene laden` lädt eine Szene nur, wenn sie in der Scene List aktiviert ist.
+- `Wert anzeigen` hält eine fertige Anzeige (**GameObject › Besteck › Anzeige**: Zahl, Balken, Symbolreihe) auf dem Stand einer Variable.
+- `An/Aus` schaltet ein gebundenes GameObject ein, aus oder um, auch einen Bildschirm.
+- Eine Variable **Zahl** mit Grenzen meldet `Minimum erreicht`, wenn sie auf ihr Minimum fällt, etwa null.
+- `Checkpoint` merkt einen Respawn-Punkt oder setzt den Spieler dorthin zurück.
+- `Neustart`, `Nächste Szene` und `Szene laden` wechseln die Szene über eine Blende.
 
 Nicht alle Bausteine gehören in jedes Projekt. Der Graph folgt der Spec, nicht umgekehrt.
 
@@ -3502,7 +3558,7 @@ Nicht alle Bausteine gehören in jedes Projekt. Der Graph folgt der Spec, nicht 
 3. Für Bildschirmgrößen den **Canvas Scaler** auf `Scale With Screen Size` stellen und eine Referenzauflösung wählen.
 4. Elemente über ihre **Anchors** an einer Ecke, Kante oder der Mitte festhalten.
 5. Das EventSystem braucht beim neuen Input System ein **Input System UI Input Module**.
-6. Im Kit-Graph die vorhandenen Knoten verbinden und alle Szene-Referenzen binden.
+6. Im Logik-Graph die vorhandenen Knoten verbinden und alle Rollen binden.
 7. Im Play-Modus dreimal prüfen: öffnen, Button anklicken, spielen, zurückkehren. Im UI ist der Cursor frei; im Spiel wird der Blick wieder gefangen.
 
 Reagiert ein Button nicht, zuerst EventSystem, sichtbares Panel, `Interactable`, Graph-Instanz und gebundene Szene-Referenzen prüfen. Keine Szene oder Prefab-Datei außerhalb von Unity als YAML bearbeiten.
@@ -4520,7 +4576,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
@@ -5165,10 +5221,11 @@ Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich 
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0",
 ```
 
-Das `#v0.3.2` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+Das `#v0.5.0` am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
+verwenden vielleicht noch `#v0.3.2`. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
@@ -5176,7 +5233,8 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 
 | Version | Ab | Neu |
 |---|---|---|
-| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**; seit 0.4 heißt das Menü **Tools › Besteck**), Vorlage für eigene Knoten |
+| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**; seit 0.5 heißt das Menü **Tools › Besteck**), Vorlage für eigene Knoten |
+| v0.5.0 | 23.10.2026 (in der Kursvorlage) | Das Paket heißt **Besteck**. **Logik** direkt am Objekt mit **Dieses Objekt** und **Rollen**, Variablen und Anzeigen, Szenenwechsel mit **Eingang** und Bildschirme (Start, Pause, Gewonnen, Verloren), Figuren mit **Verhalten** und Wahrnehmung, Atmosphäre (Blende, Licht, Nebel, Partikel, Musik, Tageszeit) und Kameras; Tooltips an allen Einstellungen. Einmal anpassen (siehe unten). Alles im CHANGELOG des Pakets |
 
 Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
@@ -5185,16 +5243,16 @@ Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 1. In GitHub Desktop prüfen: **No local changes**. Wenn nicht, erst committen.
 2. In Unity: **Window > Package Manager**.
 3. Oben links auf **+** > **Install package from git URL…** klicken.
-4. Die Adresse mit der neuen Version einfügen, z. B. für eine Version 0.4.0:
+4. Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.0:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.4.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0
    ```
 
    Die genaue Versionsnummer nennt Jonas.
 5. **Install** klicken. Unity lädt die neue Version und kompiliert kurz.
 
-(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.4.0.)
+(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.0.)
 
 ✅ **Checkpoint:** Im Package Manager steht unter **In Project** das Paket **Besteck – Kurs-Paket GEC1**
 mit der neuen Versionsnummer (bis 0.3.2 hieß es **GEC1 Kurs-Paket**). **Kurs > Setup prüfen** zeigt bei
@@ -5206,7 +5264,7 @@ Manager: z. B. **Tools › Besteck › Beispiel „Schlüssel und Tür“ bauen*
 „Werkstatt (kaputt)“ bauen**. Sie landen unter `Assets/Kit Beispiel/…`; eigene Änderungen daran
 bleiben beim Aktualisieren erhalten.
 
-**Ab 0.4: einmal anpassen.** Nach dem Update fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen
+**Ab 0.5: einmal anpassen.** Nach dem Update fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen
 angepasst werden sollen („Jetzt anpassen“); das geht auch später über **Tools › Besteck › Projekt auf den
 neuen Stand bringen**. Meldet die Console danach rot **CS0246** mit **'Interaction'** oder **'KitGraph'**,
 benutzt ein eigenes Skript noch die alten Namen: im Skript **Interaction** durch **Logic** und **KitGraph**
@@ -5216,13 +5274,13 @@ durch **LogicGraph** ersetzen (oder den Agenten darum bitten). Einen eigenen Spi
 ### Schritt 2: Die Änderung ansehen und committen
 
 1. In GitHub Desktop, Reiter **Changes**: Geändert sind `Packages/manifest.json` und
-   `Packages/packages-lock.json`. Wurde das Projekt angepasst („Jetzt anpassen“, ab 0.4), kommen
+   `Packages/packages-lock.json`. Wurde das Projekt angepasst („Jetzt anpassen“, ab 0.5), kommen
    Szenen, Prefabs und Logik-Graphen dazu, außerdem `ProjectSettings/KitMigration.asset` und, falls
    umgestellt, eigene Skripte.
 2. Auf `manifest.json` klicken. Rechts zeigt der **Diff** genau eine geänderte Zeile: rot die
    alte Version, grün die neue.
 3. Alles zusammen committen, damit Update und Anpassung ein Schritt bleiben: unten bei **Summary**
-   z. B. `Kurs-Paket auf 0.4.0` eintragen > **Commit to main** > **Push origin**.
+   z. B. `Kurs-Paket auf 0.5.0` eintragen > **Commit to main** > **Push origin**.
 
 ✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**, der Commit steht oben in
 **History**.
@@ -5236,7 +5294,7 @@ Rechtsklick auf den Commit > **Revert changes in commit** sie wieder rückgängi
 Mit Claude Code oder Codex im Projektordner geht es auch so:
 
 ```
-Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.4.0. Ändere sonst
+Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.5.0. Ändere sonst
 nichts. Zeig mir danach den Diff. Nicht committen.
 ```
 
@@ -5248,12 +5306,12 @@ Danach Unity in den Vordergrund holen (Unity lädt das Paket dann neu) und weite
 Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/).
 
-**„Could not find … v0.4.0“ / die Version wird nicht gefunden.**
+**„Could not find … v0.5.0“ / die Version wird nicht gefunden.**
 Tippfehler in der Adresse oder die Version gibt es (noch) nicht. Die Adresse genau so einfügen,
 mit `#v` vor der Nummer und ohne Leerzeichen.
 
 **Nach der Aktualisierung zeigt Unity rote Fehler in der Console.**
-Erst prüfen, ob es **CS0246** mit **'Interaction'** oder **'KitGraph'** ist (siehe „Ab 0.4: einmal
+Erst prüfen, ob es **CS0246** mit **'Interaction'** oder **'KitGraph'** ist (siehe „Ab 0.5: einmal
 anpassen“). Sonst zurück zum Stand vor dem Update: Unity schließen, in GitHub Desktop **alle**
 geänderten Dateien mit **Discard changes** zurücksetzen (vor dem Commit; auch die angepassten Szenen,
 Prefabs, Graphen und `ProjectSettings/KitMigration.asset`) bzw. den Commit mit **Revert changes in

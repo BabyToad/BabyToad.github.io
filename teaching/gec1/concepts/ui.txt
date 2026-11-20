@@ -1,8 +1,8 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/ui/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/ui/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # UI
 
-Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Kit-Graphen.
+Das User Interface zeigt Zustand und bietet Handlungen an. Im Kurs entsteht mindestens eine projektbezogene UI-Handlung mit uGUI und Logik-Graphen.
 
 Auch: User Interface, Benutzeroberfläche, Oberfläche, HUD, Menü, Canvas, uGUI, Unity UI
 
@@ -15,32 +15,32 @@ Unity-Doku: https://docs.unity.com/en-us/engine/6000.3/manual/uitoolkits
 
 UI ist die Schicht zwischen Spielzustand und Spielenden. Ein HUD zeigt wichtige Werte. Ein Start-, Ziel- oder Scheiterbildschirm bietet eine nächste Handlung an. Gute UI beantwortet drei Fragen: Was ist passiert? Was ist wichtig? Was kann als Nächstes getan werden?
 
-Im Kurs wird **uGUI (Unity UI)** mit den vorhandenen Kit-Graphen verwendet. uGUI ist GameObject-basiert: Ein Canvas enthält Panels, Texte, Bilder und Buttons. Für das Kursprojekt reicht **eine projektbezogene UI-Handlung**. Ein vollständiger Ablauf mit Start, Spiel und Ende ist eine Erweiterung.
+Im Kurs wird **uGUI (Unity UI)** mit den Logik-Graphen von Besteck verwendet. uGUI ist GameObject-basiert: Ein Canvas enthält Panels, Texte, Bilder und Buttons. Für das Kursprojekt reicht **eine projektbezogene UI-Handlung**. Ein vollständiger Ablauf mit Start, Spiel und Ende ist eine Erweiterung.
 
 ## Warum uGUI und nicht UI Toolkit?
 
 Unity 6.3 bietet mehrere UI-Systeme. **UI Toolkit** verwendet UI Documents, UXML und Stylesheets und eignet sich besonders für wiederverwendbare, datenreiche Oberflächen und Editor-Werkzeuge. uGUI arbeitet mit Canvas, GameObjects und Komponenten, die aus Hierarchy und Inspector schon bekannt sind.
 
-Beide können Runtime-UI bauen. Die Kursentscheidung gilt nicht allgemein: uGUI passt hier besser zum Kit und führt für eine kleine Spieloberfläche weniger neue Begriffe ein. Beide Systeme parallel zu lernen, würde das Arbeitsmodell verdoppeln.
+Beide können Runtime-UI bauen. Die Kursentscheidung gilt nicht allgemein: uGUI passt hier besser zu Besteck und führt für eine kleine Spieloberfläche weniger neue Begriffe ein. Beide Systeme parallel zu lernen, würde das Arbeitsmodell verdoppeln.
 
 ## Ein vollständiges Graph-Beispiel
 
-Ein Schlüssel-und-Tür-Spiel kann mit einem Canvas und zwei Panels auskommen:
+Ein Schlüssel-und-Tür-Spiel kommt mit zwei fertigen Bildschirmen aus Besteck aus (**GameObject › Besteck › Bildschirm**):
 
-1. `Beginn → An/Aus` schaltet `Start` ein → `Pause` .
-2. Der Spielen-Button feuert `Knopf gedrückt` ; danach schaltet `An/Aus` das Start-Panel aus und `Weiter`  gibt Spieler und Cursor zurück.
-3. Wenn die Tür geöffnet ist, schaltet `An/Aus` das Panel `Geschafft` ein und `Pause`  hält das Spiel an.
-4. Der Neustart-Button feuert `Knopf gedrückt`  zu `Szene laden`. Der Szenenname muss stimmen und die Szene muss in der Scene List stehen.
+1. **Bildschirm › Start** liegt in einer eigenen Szene „Start“, der ersten in **Tools › Besteck › Szenen**. Sein Knopf „Spielen“ feuert `Knopf gedrückt` zu `Nächste Szene`.
+2. Ein Bildschirm erscheint, wenn `An/Aus` ihn einschaltet. Solange er zu sehen ist, steht das Spiel und der Mauszeiger ist frei.
+3. Wenn die Tür geöffnet ist, schaltet `An/Aus` den Bildschirm **Gewonnen** ein.
+4. Sein Knopf „Nochmal“ feuert `Knopf gedrückt` zu `Neustart`. Szenen kommen als Datei in den Knoten, nicht als getippter Name; Besteck trägt sie selbst in die Build Settings ein.
 
-Die drei provisorischen Knotenbezeichnungen kommen mit Kit v0.3.2. Der vollständige Drei-Screen-Ablauf ist optional. Hat ein Projekt keinen Scheiterzustand, braucht es kein Game Over.
+Die Knöpfe der Bildschirme tun erst etwas, wenn eine Logik auf sie hört; ein unverbundener Knopf sagt beim Klicken, was fehlt. Der vollständige Drei-Screen-Ablauf ist optional. Hat ein Projekt keinen Scheiterzustand, braucht es kein Game Over.
 
-## Vorhandene Kit-Bausteine
+## Vorhandene Bausteine in Besteck
 
-- `HUD-Anzeige` liest eine Zahl laufend und formatiert sie in ein gebundenes TMP-Textfeld.
-- `An/Aus` schaltet ein gebundenes GameObject ein, aus oder um.
-- `Lebenspunkte` liefert `Tot` genau einmal, wenn der Wert auf null fällt.
-- `Checkpoint` merkt einen Respawn-Punkt oder setzt den Kit-Spieler dorthin zurück.
-- `Szene laden` lädt eine Szene nur, wenn sie in der Scene List aktiviert ist.
+- `Wert anzeigen` hält eine fertige Anzeige (**GameObject › Besteck › Anzeige**: Zahl, Balken, Symbolreihe) auf dem Stand einer Variable.
+- `An/Aus` schaltet ein gebundenes GameObject ein, aus oder um, auch einen Bildschirm.
+- Eine Variable **Zahl** mit Grenzen meldet `Minimum erreicht`, wenn sie auf ihr Minimum fällt, etwa null.
+- `Checkpoint` merkt einen Respawn-Punkt oder setzt den Spieler dorthin zurück.
+- `Neustart`, `Nächste Szene` und `Szene laden` wechseln die Szene über eine Blende.
 
 Nicht alle Bausteine gehören in jedes Projekt. Der Graph folgt der Spec, nicht umgekehrt.
 
@@ -51,7 +51,7 @@ Nicht alle Bausteine gehören in jedes Projekt. Der Graph folgt der Spec, nicht 
 3. Für Bildschirmgrößen den **Canvas Scaler** auf `Scale With Screen Size` stellen und eine Referenzauflösung wählen.
 4. Elemente über ihre **Anchors** an einer Ecke, Kante oder der Mitte festhalten.
 5. Das EventSystem braucht beim neuen Input System ein **Input System UI Input Module**.
-6. Im Kit-Graph die vorhandenen Knoten verbinden und alle Szene-Referenzen binden.
+6. Im Logik-Graph die vorhandenen Knoten verbinden und alle Rollen binden.
 7. Im Play-Modus dreimal prüfen: öffnen, Button anklicken, spielen, zurückkehren. Im UI ist der Cursor frei; im Spiel wird der Blick wieder gefangen.
 
 Reagiert ein Button nicht, zuerst EventSystem, sichtbares Panel, `Interactable`, Graph-Instanz und gebundene Szene-Referenzen prüfen. Keine Szene oder Prefab-Datei außerhalb von Unity als YAML bearbeiten.

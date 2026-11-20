@@ -1,10 +1,10 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/graph/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Graph
 
-Eine Interaktion des Kurs-Pakets, gezeichnet aus Knoten und Drähten. Events laufen durch die Drähte von Knoten zu Knoten; im Play-Modus zeigt jeder Knoten, was er gerade tut.
+Ein Logik-Graph von Besteck, gezeichnet aus Knoten und Drähten. Die Komponente Logik spielt ihn ab; Events laufen von Knoten zu Knoten, und im Play-Modus zeigt jeder Knoten, was er gerade tut.
 
-Auch: Graphen, Knoten, Draht, Drähte, Kit, Interaktion, Interaktionen, Node, Nodes
+Auch: Graphen, Logik-Graph, Logik-Graphen, Logik, Knoten, Draht, Drähte, Besteck, Kit, Rolle, Rollen, Node, Nodes
 
 Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [state](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/), [reference](https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/)
 
@@ -12,7 +12,7 @@ Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/
 
 ## Kurz
 
-Ein Graph ist eine Datei mit der Endung `.kit`. Darin stehen Knoten, etwa **Zone**, **Wenn**, **Bewegen**, und die Drähte dazwischen. Zusammen beschreiben sie eine Interaktion: Wenn das passiert und das gilt, geschieht dies.
+Ein Logik-Graph ist eine Datei im Projekt. Darin stehen Knoten, etwa **Zone**, **Wenn**, **Bewegen**, und die Drähte dazwischen. Zusammen beschreiben sie eine Interaktion: Wenn das passiert und das gilt, geschieht dies. Abgespielt wird der Graph von der [Component](https://www.allknivesnobagel.com/teaching/gec1/concepts/component/) **Logik** an einem GameObject, so wie ein Animator seinen Animator Controller abspielt.
 
 Drei Drahtarten:
 
@@ -24,19 +24,21 @@ Drei Drahtarten:
 
 ## Genauer
 
-Der Graph kennt keine Objekte der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), nur Plätze für sie. Die Component **Interaktion** an einem GameObject verbindet einen Graph mit der Szene: Sie hält die Tabelle, welches Objekt welchen Platz füllt. So kann derselbe Graph an zwei Türen hängen, und jede hat ihren eigenen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/).
+Der Graph kennt keine Objekte der [Szene](https://www.allknivesnobagel.com/teaching/gec1/concepts/scene/), nur Anschlüsse für sie (◆). Einer ist immer schon da: **Dieses Objekt**, das Objekt mit der Logik (im Code: `gameObject`). Alle anderen Objekte spielen **Rollen**; die Logik hält fest, welches Objekt welche Rolle spielt, und jedes dieser Objekte trägt dann die Komponente **Rolle**. So kann derselbe Graph auf zwei Türen liegen: Jede meint sich selbst, und jede hat ihre eigenen Variablen, also ihren eigenen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/).
 
-Jeder Knoten ist eine kleine C#-Klasse. **Code ansehen** (`</>` am Knoten) zeigt sie. Eigene Knoten folgen demselben Muster: Markierungen wie `[Input("…")]`, `[Output("…")]` und `[Ref("…")]` machen aus Methoden und Feldern Anschlüsse. Eigene Knoten liegen immer in `Assets/Eigene Knoten`; **Tools › Kit › Eigener Knoten (C#)** legt die beiden Dateien dafür an.
+Faustregel: Was nur einem Objekt gehört, ist eine Komponente an diesem Objekt (Variable, Verhalten, Kamera). Was mehrere Objekte verbindet, steht in einem Graph.
+
+Jeder Knoten ist eine kleine C#-Klasse. **Code ansehen** (`</>` am Knoten) zeigt sie. Eigene Knoten folgen demselben Muster: Markierungen wie `[Input("…")]`, `[Output("…")]` und `[Ref("…")]` machen aus Methoden und Feldern Anschlüsse. Eigene Knoten liegen immer in `Assets/Eigene Knoten`; **Tools › Besteck › Eigener Knoten (C#)** legt die beiden Dateien dafür an.
 
 Im Play-Modus meldet jeder Knoten seinen Zustand: ○ empfangen, ▬ läuft, ✓ fertig, ⛔ blockiert (mit Grund), ! Fehler. Ein Knoten mit Fehler feuert seinen Erfolgs-Ausgang nie.
 
 ## In Unity sehen
 
-- **Tools › Kit › Beispiel „Schlüssel und Tür“ bauen** legt ein fertiges Beispiel an.
-- **GameObject › Kit › Interaktion** legt eine neue Interaktion an; im Inspector **Neuer Graph …**.
-- Doppelklick auf eine `.kit`-Datei öffnet den Graph. „+ Knoten“ unten links holt Knoten.
+- **Tools › Besteck › Beispiel „Schlüssel und Tür“ bauen** legt ein fertiges Beispiel an.
+- Ein Objekt auswählen, **Add Component › Besteck › Logik**, dann im Inspector **Neu**: Der neue Graph öffnet sich mit **Dieses Objekt** darin.
+- **Graph öffnen** an der Logik oder ein Doppelklick auf die Datei öffnet den Graph. „+ Knoten“ unten links holt Knoten.
 
 ## Weiterlesen
 
 - [Tag 3](https://www.allknivesnobagel.com/teaching/gec1/days/03/) – Schlüssel und Tür Schritt für Schritt, mit Bildern aus dem Editor.
-- [Unity Manual: Graph Toolkit](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.4/manual/index.html) – das Werkzeug, auf dem der Graph-Editor des Kits aufbaut (englisch, experimentell).
+- [Unity Manual: Graph Toolkit](https://docs.unity3d.com/Packages/com.unity.graphtoolkit@0.4/manual/index.html) – das Werkzeug, auf dem der Graph-Editor von Besteck aufbaut (englisch, experimentell).

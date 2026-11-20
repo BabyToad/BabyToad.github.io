@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/reference/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Referenz
 
@@ -45,7 +45,7 @@ Referenzen lassen sich auch per Code holen. `GetComponent<Rigidbody>()` sucht ei
 ## In Unity sehen
 
 - Ein GameObject in ein Feld ziehen, das eine Component erwartet (etwa `Rigidbody`): Unity nimmt die passende Component dieses Objekts. Hat es keine, lässt sich das Objekt nicht hineinziehen.
-- Im Kit sind Referenzen die ◆-Anschlüsse. Sie zeigen auf Objekte in der Szene; ein leerer ◆ wird als Problem gemeldet.
+- In Besteck sind Referenzen die ◆-Anschlüsse: **Dieses Objekt** (das Objekt mit der Logik) oder eine **Rolle**, die ein anderes Objekt der Szene spielt. Eine leere Rolle wird schon vor Play gemeldet.
 - Das Symbol ◆ und die blaugrüne Farbe stehen im ganzen Kurs für Referenzen.
 
 ## Weiterlesen

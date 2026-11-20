@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/04/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/04/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Tag 4: Vertical Slice: spielen lassen
 
@@ -163,7 +163,7 @@ Der Animator ist eine Komponente. Sein Animator Controller enthält Zustände, �
 
 Der Graph sagt, wann. Der Animator weiß, wie.
 
-Den Knoten **Animator-Wert** gibt es im Kit in der Gruppe **Erweiterung**. Passen Parametername oder Art nicht zum Animator Controller, meldet er das im Graphen und in der Console.
+Den Knoten **Animator-Wert** gibt es in Besteck in der Gruppe **Erweiterung**. Passen Parametername oder Art nicht zum Animator Controller, meldet er das im Graphen und in der Console.
 
 ## Bewegen oder Clip?
 
@@ -173,7 +173,7 @@ Clip Mehrere Werte, eine eigene Kurve, eine Wiederholung.
 
 Eine Eigenschaft, die ein Clip animiert, kann Bewegen nicht mehr bewegen.
 
-Der Kit-Knoten **Bewegen** verschiebt, dreht oder skaliert ein Objekt über eine einstellbare Dauer: ein kleiner Tween ohne eigene Datei. Ein Clip lohnt sich, sobald mehrere Eigenschaften zusammenspielen, die Kurve eine eigene Form braucht (langsam anlaufen, überschwingen) oder sich etwas wiederholt, etwa eine flackernde Lampe. Animiert ein Clip eine Eigenschaft, etwa die Drehung des Scharniers, schreibt der Animator sie in jedem Frame neu; ein Bewegen-Knoten auf derselben Eigenschaft desselben Objekts hat dann keine Wirkung. Andere Eigenschaften und andere Objekte bleiben frei.
+Der Knoten **Bewegen** verschiebt, dreht oder skaliert ein Objekt über eine einstellbare Dauer: ein kleiner Tween ohne eigene Datei. Ein Clip lohnt sich, sobald mehrere Eigenschaften zusammenspielen, die Kurve eine eigene Form braucht (langsam anlaufen, überschwingen) oder sich etwas wiederholt, etwa eine flackernde Lampe. Animiert ein Clip eine Eigenschaft, etwa die Drehung des Scharniers, schreibt der Animator sie in jedem Frame neu; ein Bewegen-Knoten auf derselben Eigenschaft desselben Objekts hat dann keine Wirkung. Andere Eigenschaften und andere Objekte bleiben frei.
 
 ## Werkstatt: eine Animation, selbst gebaut
 
@@ -185,7 +185,7 @@ Ziel für alle: Der Graph löst eure Animation aus.
 
 Unterwegs gibt es drei Zwischenstände: Der Clip läuft von allein (Stufe 1), der Animator wartet (Stufe 2), der Graph löst aus (Stufe 3). Stufe 3 ist das Ziel für alle. Wer statt der Truhe eine Tür, eine Lampe oder eine Plattform animiert, folgt denselben Schritten. Wer schnell fertig ist, baut eine zweite Animation, die zur Entscheidung aus dem Playtest passt.
 
-**Rettungsweg:** Wer beim Bauen der Truhe hängen bleibt, nimmt den fertigen Rohling: **Tools › Kit › Rohling „Truhe“ bauen** (ab Kit v0.3.2). Er legt die Truhe mit Kiste, Scharnier und Deckel in die Szene, ohne Animation. Clip, Animator und Graph baut ihr dann selbst ab Schritt 2.
+**Rettungsweg:** Wer beim Bauen der Truhe hängen bleibt, nimmt den fertigen Rohling: **Tools › Besteck › Rohling „Truhe“ bauen**. Er legt die Truhe mit Kiste, Scharnier und Deckel in die Szene, ohne Animation. Clip, Animator und Graph baut ihr dann selbst ab Schritt 2.
 
 ## Schritt 1–4: Truhe und Clip
 
@@ -246,7 +246,7 @@ Die Zeile in `KI-VERZEICHNIS.md` nennt Werkzeug, Version, Zweck und Stelle in de
 
 **Parameter.** Links im Reiter **Parameters** auf **+** › **Trigger**, Name „Öffnen“. Den Pfeil von „Zu“ nach „Auf“ anklicken; im Inspector **Has Exit Time** abhaken, unter **Conditions** mit **+** „Öffnen“ wählen. **Stufe 2:** Im Play-Modus bleibt der Deckel jetzt zu.
 
-**Graph.** In der Interaktion wie am 20.11. einen Knoten **Benutzen** anlegen, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
+**Graph.** Auf die Truhe eine Logik wie am 20.11. (Add Component › Besteck › Logik, **Neu**), darin einen Knoten **Benutzen**, Objekt: „Truhe“. Der Blick trifft Kiste oder Deckel, beides Kinder der Truhe; das zählt. Dazu **Animator-Wert** aus der Gruppe **Erweiterung**: Animator „Truhe“, Parameter „Öffnen“, Art Trigger. Den Ausgang „Benutzt“ mit „Setzen“ verbinden. Play, die Truhe anschauen, E drücken. **Stufe 3:** Der Deckel klappt auf.
 
 **Häufige Fehler:** Animator auf dem Deckel statt auf der Truhe. Parametername im Knoten anders geschrieben als im Animator (der Knoten meldet das). Has Exit Time noch an: Der Deckel öffnet verspätet. Deckel klappt in die falsche Richtung: Vorzeichen der Rotation x umdrehen.
 
@@ -258,14 +258,14 @@ Commit auf `experiment-animation`: „Truhe klappt beim Benutzen auf“.
 
 [Feedback](https://www.allknivesnobagel.com/teaching/gec1/concepts/feedback/) beginnt im selben Frame wie die Handlung.
 
-Im Kit, jeweils an „Benutzt“ angeschlossen:
+In Besteck, jeweils an „Benutzt“ angeschlossen:
 
 - **Ton abspielen** (nächste Folie).
 - **Kurz größer und zurück** mit zwei Bewegen-Knoten auf dasselbe Objekt, beide mit Was: Größe. Der erste: Weg (0.1, 0.1, 0.1), Dauer 0.08 s, „Benutzt“ an „Hin“. Der zweite: Dauer 0.08 s, „Angekommen“ des ersten an „Zurück“ des zweiten. Der zweite Knoten bekommt keine ausgehende Verbindung; sonst stößt jede Rückfahrt die nächste an. Bewegt wird ein Objekt, das kein Clip animiert, hier die Kiste.
 - **Material tauschen** für ein kurzes Aufblitzen, mit **Warten** und „Zurück“.
 - **Erzeugen** für ein Prefab mit Partikelsystem.
 
-„Kamera wackeln“ (Spielsysteme) rüttelt die Kamera des Spielers kurz, „Anhalten“ (Aktion) hält das Spiel für ein paar Millisekunden an. Erinnert euch an den Dreier-Schlag vom 23.10.: 55, 65 und 130 ms Anhalten sind dort die stärkste Rückmeldung. Beide Knoten gibt es ab Kurs-Paket 0.3.2.
+„Kamera wackeln“ (Spielsysteme) rüttelt die Kamera des Spielers kurz, „Anhalten“ (Aktion) hält das Spiel für ein paar Millisekunden an. Erinnert euch an den Dreier-Schlag vom 23.10.: 55, 65 und 130 ms Anhalten sind dort die stärkste Rückmeldung. Beide Knoten bringt Besteck mit.
 
 ## Ton zuerst
 
