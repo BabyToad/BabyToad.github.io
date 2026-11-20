@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 Dauer: ca. 5 Min
 
@@ -19,10 +19,11 @@ Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich 
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.3.2",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0",
 ```
 
-Das `#v0.3.2` am Ende ist die Version. Mit ihr startet die Kursvorlage. Neue Versionen gibt es,
+Das `#v0.5.0` am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
+verwenden vielleicht noch `#v0.3.2`. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
@@ -30,7 +31,8 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 
 | Version | Ab | Neu |
 |---|---|---|
-| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**; seit 0.4 heißt das Menü **Tools › Besteck**), Vorlage für eigene Knoten |
+| v0.3.2 | 09.10. (in der Kursvorlage) | Setup-Check, Spieler-Controller (Prefab **Spieler**), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über **Tools › Kit**; seit 0.5 heißt das Menü **Tools › Besteck**), Vorlage für eigene Knoten |
+| v0.5.0 | 23.10.2026 (in der Kursvorlage) | Das Paket heißt **Besteck**. **Logik** direkt am Objekt mit **Dieses Objekt** und **Rollen**, Variablen und Anzeigen, Szenenwechsel mit **Eingang** und Bildschirme (Start, Pause, Gewonnen, Verloren), Figuren mit **Verhalten** und Wahrnehmung, Atmosphäre (Blende, Licht, Nebel, Partikel, Musik, Tageszeit) und Kameras; Tooltips an allen Einstellungen. Einmal anpassen (siehe unten). Alles im CHANGELOG des Pakets |
 
 Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
@@ -39,16 +41,16 @@ Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 1. In GitHub Desktop prüfen: **No local changes**. Wenn nicht, erst committen.
 2. In Unity: **Window > Package Manager**.
 3. Oben links auf **+** > **Install package from git URL…** klicken.
-4. Die Adresse mit der neuen Version einfügen, z. B. für eine Version 0.4.0:
+4. Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.0:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.4.0
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0
    ```
 
    Die genaue Versionsnummer nennt Jonas.
 5. **Install** klicken. Unity lädt die neue Version und kompiliert kurz.
 
-(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.4.0.)
+(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.0.)
 
 ✅ **Checkpoint:** Im Package Manager steht unter **In Project** das Paket **Besteck – Kurs-Paket GEC1**
 mit der neuen Versionsnummer (bis 0.3.2 hieß es **GEC1 Kurs-Paket**). **Kurs > Setup prüfen** zeigt bei
@@ -60,7 +62,7 @@ Manager: z. B. **Tools › Besteck › Beispiel „Schlüssel und Tür“ bauen*
 „Werkstatt (kaputt)“ bauen**. Sie landen unter `Assets/Kit Beispiel/…`; eigene Änderungen daran
 bleiben beim Aktualisieren erhalten.
 
-**Ab 0.4: einmal anpassen.** Nach dem Update fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen
+**Ab 0.5: einmal anpassen.** Nach dem Update fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen
 angepasst werden sollen („Jetzt anpassen“); das geht auch später über **Tools › Besteck › Projekt auf den
 neuen Stand bringen**. Meldet die Console danach rot **CS0246** mit **'Interaction'** oder **'KitGraph'**,
 benutzt ein eigenes Skript noch die alten Namen: im Skript **Interaction** durch **Logic** und **KitGraph**
@@ -70,13 +72,13 @@ durch **LogicGraph** ersetzen (oder den Agenten darum bitten). Einen eigenen Spi
 ## Schritt 2: Die Änderung ansehen und committen
 
 1. In GitHub Desktop, Reiter **Changes**: Geändert sind `Packages/manifest.json` und
-   `Packages/packages-lock.json`. Wurde das Projekt angepasst („Jetzt anpassen“, ab 0.4), kommen
+   `Packages/packages-lock.json`. Wurde das Projekt angepasst („Jetzt anpassen“, ab 0.5), kommen
    Szenen, Prefabs und Logik-Graphen dazu, außerdem `ProjectSettings/KitMigration.asset` und, falls
    umgestellt, eigene Skripte.
 2. Auf `manifest.json` klicken. Rechts zeigt der **Diff** genau eine geänderte Zeile: rot die
    alte Version, grün die neue.
 3. Alles zusammen committen, damit Update und Anpassung ein Schritt bleiben: unten bei **Summary**
-   z. B. `Kurs-Paket auf 0.4.0` eintragen > **Commit to main** > **Push origin**.
+   z. B. `Kurs-Paket auf 0.5.0` eintragen > **Commit to main** > **Push origin**.
 
 ✅ **Checkpoint:** GitHub Desktop zeigt **No local changes**, der Commit steht oben in
 **History**.
@@ -90,7 +92,7 @@ Rechtsklick auf den Commit > **Revert changes in commit** sie wieder rückgängi
 Mit Claude Code oder Codex im Projektordner geht es auch so:
 
 ```
-Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.4.0. Ändere sonst
+Ändere in Packages/manifest.json die Version von de.macromedia.gec1 auf v0.5.0. Ändere sonst
 nichts. Zeig mir danach den Diff. Nicht committen.
 ```
 
@@ -102,12 +104,12 @@ Danach Unity in den Vordergrund holen (Unity lädt das Paket dann neu) und weite
 Git fehlt oder der Unity Hub lief schon vor der Git-Installation. Siehe
 [Git installieren](../install-git/).
 
-**„Could not find … v0.4.0“ / die Version wird nicht gefunden.**
+**„Could not find … v0.5.0“ / die Version wird nicht gefunden.**
 Tippfehler in der Adresse oder die Version gibt es (noch) nicht. Die Adresse genau so einfügen,
 mit `#v` vor der Nummer und ohne Leerzeichen.
 
 **Nach der Aktualisierung zeigt Unity rote Fehler in der Console.**
-Erst prüfen, ob es **CS0246** mit **'Interaction'** oder **'KitGraph'** ist (siehe „Ab 0.4: einmal
+Erst prüfen, ob es **CS0246** mit **'Interaction'** oder **'KitGraph'** ist (siehe „Ab 0.5: einmal
 anpassen“). Sonst zurück zum Stand vor dem Update: Unity schließen, in GitHub Desktop **alle**
 geänderten Dateien mit **Discard changes** zurücksetzen (vor dem Commit; auch die angepassten Szenen,
 Prefabs, Graphen und `ProjectSettings/KitMigration.asset`) bzw. den Commit mit **Revert changes in

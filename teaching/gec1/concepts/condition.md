@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Bedingung
 
@@ -28,7 +28,7 @@ else
 
 ## Genauer
 
-Die Frage richtet sich fast immer an einen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): Ist der Merker gesetzt? Ist der Zähler bei 3? Ist der Abstand kleiner als 2 Meter? Ausgelöst wird sie meist von einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/). Daraus ergibt sich ein Muster, das in fast jeder Interaktion steckt: **Event, Bedingung, Aktion.** Wenn etwas passiert und etwas gilt, folgt eine Reaktion.
+Die Frage richtet sich fast immer an einen [Zustand](https://www.allknivesnobagel.com/teaching/gec1/concepts/state/): Ist die Variable „Schlüssel vorhanden“ ja? Steht die Zahl schon bei 3? Ist der Abstand kleiner als 2 Meter? Ausgelöst wird sie meist von einem [Event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/). Daraus ergibt sich ein Muster, das in fast jeder Interaktion steckt: **Event, Bedingung, Aktion.** Wenn etwas passiert und etwas gilt, folgt eine Reaktion.
 
 Vergleiche liefern ja oder nein:
 
@@ -45,7 +45,7 @@ Ein Ja/Nein-Wert hat in C# den Typ `bool`, mit den Werten `true` und `false`.
 
 ## In Unity sehen
 
-Im Kit prüft der Knoten **Wenn** seine Bedingung in dem Moment, in dem ein Event ankommt, und schickt es zu **Ja** oder **Nein**. Die Bedingung kommt über eine Datenleitung, etwa von einem **Merker** oder einem **Vergleich**, der eine Zahl prüft.
+In Besteck prüft der Knoten **Wenn** seine Bedingung in dem Moment, in dem ein Event ankommt, und schickt es zu **Ja** oder **Nein**. Die Bedingung kommt über eine Datenleitung, etwa von einer Variable **Ja-Nein** oder einem **Vergleich**, der eine Zahl prüft.
 
 Bei Zonen und Zusammenstößen filtert oft ein Tag: `other.CompareTag("Player")` fragt, ob das, was hereinkam, die Spielfigur ist.
 

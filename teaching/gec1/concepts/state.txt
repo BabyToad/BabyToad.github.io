@@ -1,10 +1,10 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/state/ · Stand 2026-10-23T16:10Z · 22dcf2f -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/state/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
 
 # Zustand
 
 Was sich das Spiel von einem Frame zum nächsten merkt. Ist die Tür offen? Wie viele Münzen sind gesammelt? Events ändern den Zustand, Bedingungen fragen ihn ab.
 
-Auch: Zustände, State, Variable, Variablen, Merker, Zähler, Zustandsautomat, State Machine
+Auch: Zustände, State, Variable, Variablen, Ja-Nein, Zustandsautomat, State Machine
 
 Verwandt: [event](https://www.allknivesnobagel.com/teaching/gec1/concepts/event/), [condition](https://www.allknivesnobagel.com/teaching/gec1/concepts/condition/), [frame](https://www.allknivesnobagel.com/teaching/gec1/concepts/frame/)
 
@@ -32,7 +32,9 @@ Ein häufiger Fehler: Zustand, der nirgends gespeichert ist. Fragt ein Skript nu
 
 ## In Unity sehen
 
-- Im Kit halten die Knoten **Merker** (ja oder nein) und **Zähler** (eine Zahl) Zustand. Jeder Merker hat einen Namen, etwa „Schlüssel vorhanden“.
+- In Besteck hält eine **Variable** Zustand: eine **Zahl**, ein **Ja-Nein** oder ein **Text**, jeweils mit Namen, etwa „Schlüssel vorhanden“. Der **Bereich** sagt, wem sie gehört: **Logik** (nur dieser Logik), **Szene** (allen in der Szene) oder **Spiel** (sie bleibt beim Szenenwechsel). **Tools › Besteck › Werte** zeigt im Play-Modus alle Variablen mit ihrem Wert.
+- Gehört ein Wert zu einem Objekt, etwa die Münzen einer Truhe, sitzt er als Komponente daran: **Add Component › Besteck › Variable**.
+- Zustand und Anzeige sind getrennt: **Wert anzeigen** hält eine Zahl, einen Balken oder eine Symbolreihe auf dem Stand einer Variable. Wie der Wert aussieht, ist eine eigene Entscheidung.
 - Öffentliche Variablen eines Skripts erscheinen im Inspector. Im Play-Modus lässt sich dort zusehen, wie sie sich ändern.
 - Der **Animator** ist ein Zustandsautomat zum Ansehen: Zustände als Kästchen, Übergänge als Pfeile (Tag 4).
 
