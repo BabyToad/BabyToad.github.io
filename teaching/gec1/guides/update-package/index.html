@@ -6,10 +6,10 @@
 Spieler-Controller (Prefab <strong>Spieler</strong>) und die Logik mit dem Graph-Editor (Menüs unter <strong>Tools › Besteck</strong>). Es liegt nicht im eigenen
 Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich nur, <strong>welche
 Version</strong> es verwendet – eine einzige Zeile in <code>Packages/manifest.json</code>:</p>
-<pre><code>"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0",
+<pre><code>"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.1",
 </code></pre>
-<p>Das <code>#v0.5.0</code> am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
-verwenden vielleicht noch <code>#v0.3.2</code>. Neue Versionen gibt es,
+<p>Das <code>#v0.5.1</code> am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
+verwenden vielleicht noch <code>#v0.5.0</code> oder <code>#v0.3.2</code>. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).</p>
 <p>Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgängig machen.</p>
@@ -33,7 +33,12 @@ Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht e
 
 
 
-<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.3.2</td><td>09.10. (in der Kursvorlage)</td><td>Setup-Check, Spieler-Controller (Prefab <strong>Spieler</strong>), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über <strong>Tools › Kit</strong>; seit 0.5 heißt das Menü <strong>Tools › Besteck</strong>), Vorlage für eigene Knoten</td></tr><tr><td>v0.5.0</td><td>23.10.2026 (in der Kursvorlage)</td><td>Das Paket heißt <strong>Besteck</strong>. <strong>Logik</strong> direkt am Objekt mit <strong>Dieses Objekt</strong> und <strong>Rollen</strong>, Variablen und Anzeigen, Szenenwechsel mit <strong>Eingang</strong> und Bildschirme (Start, Pause, Gewonnen, Verloren), Figuren mit <strong>Verhalten</strong> und Wahrnehmung, Atmosphäre (Blende, Licht, Nebel, Partikel, Musik, Tageszeit) und Kameras; Tooltips an allen Einstellungen. Einmal anpassen (siehe unten). Alles im CHANGELOG des Pakets</td></tr></tbody></table>
+
+
+
+
+
+<table><thead><tr><th>Version</th><th>Ab</th><th>Neu</th></tr></thead><tbody><tr><td>v0.3.2</td><td>09.10. (in der Kursvorlage)</td><td>Setup-Check, Spieler-Controller (Prefab <strong>Spieler</strong>), Kit mit Graph-Editor, Beispiele „Schlüssel und Tür“ und „Werkstatt (kaputt)“ und Rohling „Truhe“ (alle über <strong>Tools › Kit</strong>; seit 0.5 heißt das Menü <strong>Tools › Besteck</strong>), Vorlage für eigene Knoten</td></tr><tr><td>v0.5.0</td><td>23.10.2026 (in der Kursvorlage)</td><td>Das Paket heißt <strong>Besteck</strong>. <strong>Logik</strong> direkt am Objekt mit <strong>Dieses Objekt</strong> und <strong>Rollen</strong>, Variablen und Anzeigen, Szenenwechsel mit <strong>Eingang</strong> und Bildschirme (Start, Pause, Gewonnen, Verloren), Figuren mit <strong>Verhalten</strong> und Wahrnehmung, Atmosphäre (Blende, Licht, Nebel, Partikel, Musik, Tageszeit) und Kameras; Tooltips an allen Einstellungen. Einmal anpassen (siehe unten). Alles im CHANGELOG des Pakets</td></tr><tr><td>v0.5.1</td><td>20.11.2026 (in der Kursvorlage)</td><td>Korrekturen: Eine <strong>Bildstimmungs-Zone</strong> aus dem GameObject-Menü bekommt gleich ein Profil; <strong>Folgen</strong> holt den Spieler mit den Standardwerten ein, so dass <strong>Berührt</strong> feuert. Von 0.5.0 aus nichts anzupassen</td></tr></tbody></table>
 <p>Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.</p>
 <h2 id="schritt-1-neue-version-eintragen">Schritt 1: Neue Version eintragen</h2>
 <ol>
@@ -47,8 +52,8 @@ Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht e
 <p>Oben links auf <strong>+</strong> > <strong>Install package from git URL…</strong> klicken.</p>
 </li>
 <li>
-<p>Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.0:</p>
-<pre><code>https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0
+<p>Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.1:</p>
+<pre><code>https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.1
 </code></pre>
 <p>Die genaue Versionsnummer nennt Jonas.</p>
 </li>
@@ -56,7 +61,7 @@ Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht e
 <p><strong>Install</strong> klicken. Unity lädt die neue Version und kompiliert kurz.</p>
 </li>
 </ol>
-<figure class="screenshot platz" data-datei="package-manager-update.png"><div class="screenshot-bild">Screenshot folgt: package-manager-update.png</div><figcaption>Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.0.</figcaption></figure>
+<figure class="screenshot platz" data-datei="package-manager-update.png"><div class="screenshot-bild">Screenshot folgt: package-manager-update.png</div><figcaption>Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.1.</figcaption></figure>
 <p>✅ <strong>Checkpoint:</strong> Im Package Manager steht unter <strong>In Project</strong> das Paket <strong>Besteck – Kurs-Paket GEC1</strong>
 mit der neuen Versionsnummer (bis 0.3.2 hieß es <strong>GEC1 Kurs-Paket</strong>). <strong>Kurs > Setup prüfen</strong> zeigt bei
 <strong>Kurs-Paket</strong> dieselbe Version. Das Prefab <strong>Spieler</strong> liegt weiterhin im <strong>Project</strong>-Fenster unter
@@ -112,4 +117,4 @@ Das ist erwartet: Der Graph-Editor des Kits baut auf dem <strong>Graph Toolkit</
 noch als experimentell gekennzeichnet ist. Der Kurs nutzt genau die getestete Version. Den
 Hinweis einfach stehen lassen.</p>
 <p><strong>Im Package Manager steht noch die alte Version.</strong>
-Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim Kurs-Paket „Besteck“ die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-11-20T09:28Z · 1a29bcd</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>
+Unity neu starten. Steht in <code>Packages/manifest.json</code> die neue Version, lädt Unity sie beim Öffnen.</p></article><aside class="rand"><div><b>Voraussetzungen</b><ul><li>Projekt aus der Kursvorlage (Projekt anlegen)</li><li>Git ist installiert (Git installieren)</li><li>Jonas hat eine neue Version angekündigt</li></ul></div><div><b>Checkpunkte</b><ul><li>Im Package Manager steht beim Kurs-Paket „Besteck“ die neue Versionsnummer</li><li>Menü „Kurs &gt; Setup prüfen“ zeigt beim Kurs-Paket die neue Version</li><li>Die Änderung an Packages/manifest.json ist committet</li></ul></div><div><b>Stand</b><p>nicht durchgespielt</p></div></aside></div></main><footer class="fuss"><span>Game Engines &amp; Coding 1 · Macromedia Leipzig · WiSe 2026/27</span><span><a href="/teaching/gec1/llms.txt">llms.txt</a> · Stand 2026-11-20T10:19Z · 689def9</span></footer><script type="module">var e=document.createElement(`dialog`);e.className=`lichtkasten`,e.setAttribute(`aria-label`,`Bild vergrößert`),e.innerHTML=`<button type="button" class="lk-zu">Schließen</button><div class="lk-bild"></div><p class="lk-text"></p>`,document.body.append(e);var t=e.querySelector(`.lk-bild`),n=e.querySelector(`.lk-text`),r=null;function i(i){let a=i.closest(`figure`),o=i.querySelector(`img, svg`);if(!a||!o)return;r=i,t.replaceChildren(o.cloneNode(!0));let s=a.querySelector(`figcaption`)?.textContent?.trim();n.textContent=[o.getAttribute(`alt`)||o.getAttribute(`aria-label`)||``,s].filter(Boolean).join(` · `),e.showModal(),e.querySelector(`.lk-zu`).focus()}document.addEventListener(`click`,e=>{let t=e.target.closest(`button.zoom`);t&&!t.closest(`.deck-buehne`)&&(e.preventDefault(),i(t))}),e.addEventListener(`click`,()=>e.close()),e.addEventListener(`close`,()=>{t.replaceChildren(),r?.focus(),r=null});</script><script type="module">document.querySelector(`.thema`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.dataset.theme??(matchMedia(`(prefers-color-scheme: dark)`).matches?`dark`:`light`);e.dataset.theme=t===`dark`?`light`:`dark`;try{localStorage.setItem(`gec1-theme`,e.dataset.theme)}catch{}});</script></body></html>

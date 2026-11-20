@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/03/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/days/03/ · Stand 2026-11-20T10:19Z · 689def9 -->
 
 # Tag 3: Schlüssel, Tür und Kiste
 
@@ -21,12 +21,12 @@ Noch nicht so weit? Nehmt das Blatt „Rettungsweg“.
 
 Jetzt wird der Probe-Build getauscht: den Build-Ordner als ZIP per USB-Stick oder Cloud-Link an eine Person mit Windows-Rechner geben, dort entpacken und die `.exe` starten. Der Rettungsweg steht auch online: [Rettungsweg als Blatt](/teaching/gec1/druck/rettungsweg.html). Er zeigt, wie ihr heute im Kurs mitkommt und in der Woche danach aufholt.
 
-## Läuft Besteck 0.5.0?
+## Läuft Besteck 0.5?
 
-1. Kurs › Setup prüfen: Kurs-Paket 0.5.0? Dann ist alles gut.
+1. Kurs › Setup prüfen: Kurs-Paket 0.5.0 oder 0.5.1? Dann ist alles gut.
 2. Älter? Erst committen
 3. Package Manager › + › Install package from git URL…
-4. „Jetzt anpassen“, dann Commit: „Besteck 0.5.0“
+4. „Jetzt anpassen“, dann Commit: „Besteck 0.5.1“
 
 ```
 https://
@@ -34,12 +34,12 @@ github.com/
 BabyToad/
 macromedia-
 gec1-kit.git
-#v0.5.0
+#v0.5.1
 ```
 
-Das Kurs-Paket heißt seit Version 0.4 **Besteck**. Alle Menüs liegen jetzt unter **Tools › Besteck**, **GameObject › Besteck** und **Add Component › Besteck**; nur **Kurs › Setup prüfen** bleibt, wo es war. Die Adresse am Stück: `https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.0`. Nach der Installation fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen angepasst werden sollen: **Jetzt anpassen**. Das geht auch später über **Tools › Besteck › Projekt auf den neuen Stand bringen**. Danach alles zusammen committen, damit Update und Anpassung ein Schritt bleiben.
+Das Kurs-Paket heißt seit Version 0.4 **Besteck**. Alle Menüs liegen jetzt unter **Tools › Besteck**, **GameObject › Besteck** und **Add Component › Besteck**; nur **Kurs › Setup prüfen** bleibt, wo es war. Die Adresse am Stück: `https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.1`. Wer schon 0.5.0 hat, muss heute nichts tun; 0.5.1 korrigiert nur Bildstimmungs-Zone und Folgen. Nach der Installation fragt Unity einmal, ob Szenen, Prefabs und Logik-Graphen angepasst werden sollen: **Jetzt anpassen**. Das geht auch später über **Tools › Besteck › Projekt auf den neuen Stand bringen**. Danach alles zusammen committen, damit Update und Anpassung ein Schritt bleiben.
 
-Was sich geändert hat, in einem Satz: Was bisher „Interaktion“ hieß, ist jetzt die Komponente **Logik**, die einen **Logik-Graph** abspielt; Merker und Zähler sind **Variablen**. Ausführlich: [Kurs-Paket aktualisieren](/teaching/gec1/guides/update-package/). Meldet die Console danach rot `CS0246` mit `'Interaction'` oder `'KitGraph'`, benutzt ein eigenes Skript noch die alten Namen; die Anleitung sagt, was zu ersetzen ist. Kontrolle: **Kurs › Setup prüfen** zeigt beim Kurs-Paket 0.5.0.
+Was sich geändert hat, in einem Satz: Was bisher „Interaktion“ hieß, ist jetzt die Komponente **Logik**, die einen **Logik-Graph** abspielt; Merker und Zähler sind **Variablen**. Ausführlich: [Kurs-Paket aktualisieren](/teaching/gec1/guides/update-package/). Meldet die Console danach rot `CS0246` mit `'Interaction'` oder `'KitGraph'`, benutzt ein eigenes Skript noch die alten Namen; die Anleitung sagt, was zu ersetzen ist. Kontrolle: **Kurs › Setup prüfen** zeigt beim Kurs-Paket 0.5.1.
 
 ## Der Raum bekommt Regeln
 
@@ -312,6 +312,8 @@ Felder: Mass, Use Gravity, Is Kinematic
 
 Mit Rigidbody bestimmt die Physik die Position. Wer die Transform trotzdem direkt verschiebt, arbeitet gegen sie; das Objekt ruckelt oder rutscht durch Wände. **Is Kinematic** heißt: Die Physik bewegt das Objekt nicht, ein Skript oder eine Animation tut es. Auf einen kinematischen Körper wirkt auch der Knoten Kraft nicht; er meldet das. **Constraints** sperren einzelne Achsen, etwa damit eine Figur nicht umkippt.
 
+Modelle aus einem Asset-Pack bringen meist keinen Collider mit: ohne ihn fallen sie durch den Boden, und Zone, Benutzen und Zusammenstoß bemerken sie nicht. Also **Add Component › Box Collider**. Die Größe stimmt auch nicht immer: Eine Kiste aus einem Pack ist oft nur 0,5 m hoch. So eine kleine Kiste kippt leicht, und Stufen bis 0,35 m nimmt die Spielfigur von selbst. Zum Schieben die Kiste lieber auf etwa 1 m skalieren.
+
 Ein Aufprall lässt sich jetzt auch hören: Die Kiste bekommt eine eigene Logik (Add Component › Besteck › Logik, **Neu**), darin **Zusammenstoß** mit ◆ Körper = **Dieses Objekt** · Getroffen → **Notiz in Konsole**. Fällt die Kiste auf den Boden, steht die Notiz in der Console. Das geht, weil die Kiste einen Rigidbody hat; an der Spielfigur bliebe Zusammenstoß still.
 
 Die Falle, im Kurs vorgeführt und nach diesem Rezept nachzubauen, gehört in dieselbe Logik, denn es ist die Kiste, die springt: **Zone** (◆ Zone: eine Trigger-Box vor der Kiste, aus der Hierarchy hineingezogen) · Betreten → **Kraft** · Anstoßen, ◆ Körper = **Dieses Objekt**. **Stoß** wirkt einmal, wenn das Event ankommt. **Dauerkraft** schiebt so lange, bis der Eingang **Stopp** kommt, etwa von Zone · Verlassen.
@@ -353,7 +355,7 @@ Fünf Fehler. Play drücken, Console lesen, einen beheben, wieder Play.
 
 Szene: Assets › Kit Beispiel › Werkstatt
 
-Die Werkstatt ist eine Beispiel-Szene in Besteck, absichtlich kaputt. Bauen: **Tools › Besteck › Beispiel „Werkstatt (kaputt)“ bauen**. Das legt `Assets/Kit Beispiel/Werkstatt/` an, darin die Szene `Werkstatt.unity`; per Doppelklick öffnen. Fehlt der Menüpunkt, ist Besteck zu alt: oben unter „Läuft Besteck 0.5.0?“ aktualisieren.
+Die Werkstatt ist eine Beispiel-Szene in Besteck, absichtlich kaputt. Bauen: **Tools › Besteck › Beispiel „Werkstatt (kaputt)“ bauen**. Das legt `Assets/Kit Beispiel/Werkstatt/` an, darin die Szene `Werkstatt.unity`; per Doppelklick öffnen. Fehlt der Menüpunkt, ist Besteck zu alt: oben unter „Läuft Besteck 0.5?“ aktualisieren.
 
 So sieht die Console nach dem ersten Play aus, mit Collapse:
 

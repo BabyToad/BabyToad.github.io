@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/ · Stand 2026-11-20T09:28Z · 1a29bcd -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/game-object/ · Stand 2026-11-20T10:19Z · 689def9 -->
 
 # GameObject
 
