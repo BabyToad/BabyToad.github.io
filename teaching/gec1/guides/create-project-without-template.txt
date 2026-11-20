@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-11-20T10:19Z · 689def9 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/create-project-without-template/ · Stand 2026-11-20T10:53Z · 0a7ba80 -->
 
 Dauer: ca. 30 Min
 
@@ -72,7 +72,7 @@ im Projektordner liegen.
 5. Diese Adresse einfügen und **Install** klicken:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.1
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.2
    ```
 
 (Screenshot folgt: Zeigt den Package Manager mit dem aufgeklappten "+"-Menü und dem Feld "Install package from git URL" mit der Kurs-Adresse.)
