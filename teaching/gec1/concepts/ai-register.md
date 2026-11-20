@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/ · Stand 2026-11-20T10:19Z · 689def9 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/concepts/ai-register/ · Stand 2026-11-20T10:53Z · 0a7ba80 -->
 
 # KI-Verzeichnis
 
