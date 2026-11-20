@@ -1,4 +1,4 @@
-<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-11-20T10:53Z · 0a7ba80 -->
+<!-- Markdown-Fassung von https://www.allknivesnobagel.com/teaching/gec1/guides/update-package/ · Stand 2026-11-20T15:03Z · d3f31b3 -->
 
 Dauer: ca. 5 Min
 
@@ -19,11 +19,11 @@ Projekt, sondern in einem eigenen Repository auf GitHub. Das Projekt merkt sich 
 Version** es verwendet – eine einzige Zeile in `Packages/manifest.json`:
 
 ```
-"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.2",
+"de.macromedia.gec1": "https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.3",
 ```
 
-Das `#v0.5.2` am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
-verwenden vielleicht noch `#v0.5.0`, `#v0.5.1` oder `#v0.3.2`. Neue Versionen gibt es,
+Das `#v0.5.3` am Ende ist die Version. Mit ihr startet die Kursvorlage; ältere Projekte
+verwenden vielleicht noch `#v0.5.0` bis `#v0.5.2` oder `#v0.3.2`. Neue Versionen gibt es,
 wenn Korrekturen oder Ergänzungen fertig sind; Jonas kündigt sie an. Aktualisieren heißt: diese
 Zeile auf die neue Version setzen. Unity lädt den Rest selbst (dafür braucht es Git).
 
@@ -35,6 +35,7 @@ Vorher committen: Dann lässt sich die Aktualisierung mit einem Klick rückgäng
 | v0.5.0 | 23.10.2026 (in der Kursvorlage) | Das Paket heißt **Besteck**. **Logik** direkt am Objekt mit **Dieses Objekt** und **Rollen**, Variablen und Anzeigen, Szenenwechsel mit **Eingang** und Bildschirme (Start, Pause, Gewonnen, Verloren), Figuren mit **Verhalten** und Wahrnehmung, Atmosphäre (Blende, Licht, Nebel, Partikel, Musik, Tageszeit) und Kameras; Tooltips an allen Einstellungen. Einmal anpassen (siehe unten). Alles im CHANGELOG des Pakets |
 | v0.5.1 | 20.11.2026 (in der Kursvorlage) | Korrekturen: Eine **Bildstimmungs-Zone** aus dem GameObject-Menü bekommt gleich ein Profil; **Folgen** holt den Spieler mit den Standardwerten ein, so dass **Berührt** feuert. Von 0.5.0 aus nichts anzupassen |
 | v0.5.2 | 20.11.2026 (in der Kursvorlage) | Korrektur: Ein Logik-Graph mit dem Knoten **Farbe** lädt wieder ohne rote Meldungen. Nichts anzupassen |
+| v0.5.3 | 20.11.2026 (in der Kursvorlage) | Für Unity-Versionen neuer als 6000.3.15f1: Besteck bietet an, das Graph-Werkzeug im Projekt zu reparieren (**Tools › Besteck › Graph-Werkzeug reparieren**), danach committen. Auf 6000.3.15f1 ändert sich nichts |
 
 Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 
@@ -43,16 +44,16 @@ Neue Versionen kommen in diese Tabelle, sobald sie erscheinen.
 1. In GitHub Desktop prüfen: **No local changes**. Wenn nicht, erst committen.
 2. In Unity: **Window > Package Manager**.
 3. Oben links auf **+** > **Install package from git URL…** klicken.
-4. Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.2:
+4. Die Adresse mit der neuen Version einfügen, z. B. für die Version 0.5.3:
 
    ```
-   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.2
+   https://github.com/BabyToad/macromedia-gec1-kit.git#v0.5.3
    ```
 
    Die genaue Versionsnummer nennt Jonas.
 5. **Install** klicken. Unity lädt die neue Version und kompiliert kurz.
 
-(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.2.)
+(Screenshot folgt: Zeigt den Package Manager mit dem Feld "Install package from git URL" und der Adresse mit #v0.5.3.)
 
 ✅ **Checkpoint:** Im Package Manager steht unter **In Project** das Paket **Besteck – Kurs-Paket GEC1**
 mit der neuen Versionsnummer (bis 0.3.2 hieß es **GEC1 Kurs-Paket**). **Kurs > Setup prüfen** zeigt bei
