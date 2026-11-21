@@ -36,7 +36,7 @@
     white-space: nowrap;
 }
 
-.post-row h3 {
+.post-row :is(h2, h3) {
     font-family: var(--font-display);
     font-weight: 560;
     font-size: 1.3rem;
@@ -45,12 +45,12 @@
     margin: 0 0 0.3rem;
 }
 
-.post-row h3 a {
+.post-row :is(h2, h3) a {
     color: var(--ink);
     text-decoration: none;
 }
 
-.post-row h3 a:hover {
+.post-row :is(h2, h3) a:hover {
     color: var(--accent);
 }
 

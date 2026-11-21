@@ -3,6 +3,7 @@
 <head>
     <script>document.documentElement.classList.add('js');try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}</script>
     <meta charset="UTF-8">
+    {% if page.redirect %}<meta http-equiv="refresh" content="0; url={{ page.redirect | relative_url }}">{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
     {% if page.url == "/" %}

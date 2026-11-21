@@ -172,3 +172,17 @@ the repository reference pages). Sitemap structure and URLs must be
 identical; `lastmod` timestamps are compared separately in review because the
 plugin derives them from Git commits and static-file checkout mtimes. Metadata
 commits legitimately update document dates; timestamps are not pinned to hide it.
+
+# Blog archive routes
+
+`bundle exec ruby scripts/check_blog_output.rb` audits the built `_site` (or the
+first argument) against Jekyll's public Blog collection. It checks both `/blog/`
+and the legacy `/blog.html` document, including chronology, titles, dates, actual
+reading destinations, main landmarks, canonical metadata, manual navigation and
+the sitemap. Pages also serves the legacy document at `/blog`.
+
+Both documents render `_includes/blog-archive.html`; add or edit posts in `_blog/`,
+never a second list. The legacy page retains its immediate meta refresh for
+browsers and the full archive for clients that do not follow HTML redirects.
+CI builds and checks pull requests without deploying them, and checks main before
+uploading the Pages artifact. Only the canonical archive belongs in the sitemap.
