@@ -6,8 +6,115 @@
     "year": "1978",
     "cover": "/assets/images/records/excitable-boy.jpg",
     "url": "https://music.youtube.com/browse/MPREb_TNptpDKdduK",
-    "playlist": "OLAK5uy_k7Xox2EnOUA9i45oHs1r0juhQRkYBvWK0",
-    "note": ""
+    "note": "",
+    "spotifyId": "03WJAI8NnJHvCNqnlLw8kg",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "Johnny Strikes up the Band",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:5ElmrSoL1vXjlrF8gPfrYb",
+        "durationMs": 171106,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Roland the Headless Thompson Gunner",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:0VTQQh0dXlKRGsglMG28Us",
+        "durationMs": 229626,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "Excitable Boy",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:50fGkq9l9Zsn1x7C8GKIYr",
+        "durationMs": 161626,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Werewolves of London",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:6kotXaSQaGYxE62hVpdHWu",
+        "durationMs": 209466,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "Accidentally Like a Martyr",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:7dZLObuMEKfMrwkzKIw7fy",
+        "durationMs": 222240,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "Nighttime in the Switching Yard",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:4B9MPmBNMqJkJCpj93NtOe",
+        "durationMs": 259320,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "Veracruz",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:43WeackkE3OwrvK8BjH10d",
+        "durationMs": 211533,
+        "previewAvailable": true
+      },
+      {
+        "number": 8,
+        "title": "Tenderness on the Block",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:2MmZiiKxwOKrJLaEY8fT3h",
+        "durationMs": 238240,
+        "previewAvailable": true
+      },
+      {
+        "number": 9,
+        "title": "Lawyers, Guns and Money",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:64dHj8ZxaI2Wj0brEehVMN",
+        "durationMs": 210480,
+        "previewAvailable": true
+      },
+      {
+        "number": 10,
+        "title": "I Need a Truck - Outtake",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:0wsDnzbKu3pyv3qKmUpB83",
+        "durationMs": 48400,
+        "previewAvailable": true
+      },
+      {
+        "number": 11,
+        "title": "Werewolves of London - Alternate Version",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:5pZULogSzsKhfkfWS3XJjg",
+        "durationMs": 218280,
+        "previewAvailable": true
+      },
+      {
+        "number": 12,
+        "title": "Tule's Blues - Solo Piano Version",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:4GzReOw3lgqMRQebYpCkHk",
+        "durationMs": 189866,
+        "previewAvailable": true
+      },
+      {
+        "number": 13,
+        "title": "Frozen Notes - Strings Version",
+        "artist": "Warren Zevon",
+        "uri": "spotify:track:59FrkoM2djgbqoulsegXCL",
+        "durationMs": 119733,
+        "previewAvailable": true
+      }
+    ],
+    "context": "Werewolves of London, the title track and Lawyers, Guns and Money share this collection. This streaming edition also includes outtakes, an alternate version and solo piano recordings."
   },
   {
     "id": "the-overload",
@@ -16,8 +123,99 @@
     "year": "2022",
     "cover": "/assets/images/records/the-overload.jpg",
     "url": "https://music.youtube.com/browse/MPREb_wmYbXhR7eBE",
-    "playlist": "OLAK5uy_mM83ZC4cnISxwKBgorzAYxuPFD3EyYOsE",
-    "note": ""
+    "note": "",
+    "spotifyId": "7KWBJQVkPOkkyC4A3EaNA6",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "The Overload",
+        "artist": "Yard Act",
+        "uri": "spotify:track:6UXcVpdTl0MxMZbUnu6iqD",
+        "durationMs": 196533,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Dead Horse",
+        "artist": "Yard Act",
+        "uri": "spotify:track:2ZFtrnMinXJwTEN8ELyjQU",
+        "durationMs": 218786,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "Payday",
+        "artist": "Yard Act",
+        "uri": "spotify:track:0AKxaW1Oc5VWFkseLWnfD2",
+        "durationMs": 174386,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Rich",
+        "artist": "Yard Act",
+        "uri": "spotify:track:4Hq8Ls5LCwwueCMwJeeRY1",
+        "durationMs": 222333,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "The Incident",
+        "artist": "Yard Act",
+        "uri": "spotify:track:5sUncQwomGpivsnTM0eZFd",
+        "durationMs": 190853,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "Witness (Can I Get A?)",
+        "artist": "Yard Act",
+        "uri": "spotify:track:6bwUmIhxqcwjMvbMdsSLz8",
+        "durationMs": 80386,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "Land of the Blind",
+        "artist": "Yard Act",
+        "uri": "spotify:track:5xOCgc4DxbH20d4d81ecOc",
+        "durationMs": 180200,
+        "previewAvailable": true
+      },
+      {
+        "number": 8,
+        "title": "Quarantine the Sticks",
+        "artist": "Yard Act",
+        "uri": "spotify:track:32CEQoneAnmb4CzJ3KWOnz",
+        "durationMs": 160720,
+        "previewAvailable": true
+      },
+      {
+        "number": 9,
+        "title": "Tall Poppies",
+        "artist": "Yard Act",
+        "uri": "spotify:track:04N3JVWCZFG4z7wWDMTEQ2",
+        "durationMs": 381226,
+        "previewAvailable": true
+      },
+      {
+        "number": 10,
+        "title": "Pour Another",
+        "artist": "Yard Act",
+        "uri": "spotify:track:6HYxaJFfIYaxvWW2nTeWPx",
+        "durationMs": 200226,
+        "previewAvailable": true
+      },
+      {
+        "number": 11,
+        "title": "100% Endurance",
+        "artist": "Yard Act",
+        "uri": "spotify:track:0rtQRM8rjTrzYgmpKsGpHj",
+        "durationMs": 225160,
+        "previewAvailable": true
+      }
+    ],
+    "context": "The title track opens the album and 100% Endurance closes it. Eleven tracks, presented here in their streaming order."
   },
   {
     "id": "american-head",
@@ -26,8 +224,115 @@
     "year": "2020",
     "cover": "/assets/images/records/american-head.jpg",
     "url": "https://music.youtube.com/browse/MPREb_aFh9iLCBCs9",
-    "playlist": "OLAK5uy_mZqdjzFFYtbbAMjGzjfyRBtuloEtToOLk",
-    "note": ""
+    "note": "",
+    "spotifyId": "2s79HMasjZVNXwoqXTe1X2",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "Will You Return/When You Come Down",
+        "artist": "The Flaming Lips, Particle Kid",
+        "uri": "spotify:track:56MmO2TG4PPPAhhvnWaQbL",
+        "durationMs": 321000,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Watching The Lightbugs Glow",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:6gmYQTnsIlqxrpHdfj8uD2",
+        "durationMs": 173365,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "Flowers Of Neptune 6",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:6r442vJ1B73lFN8ars1lNw",
+        "durationMs": 270968,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Dinosaurs On The Mountain",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:3GuDDDzNxcgrVLSo101nhc",
+        "durationMs": 218422,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "At The Movies On Quaaludes",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:3ED2nJxb19RVlpka4mb17E",
+        "durationMs": 221110,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "Mother I've Taken LSD",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:6W4jxJ4hMsJxHoYhYiL8hF",
+        "durationMs": 228000,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "Brother Eye",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:4XBHqrEC8UwOXJOlpWTJlr",
+        "durationMs": 263466,
+        "previewAvailable": true
+      },
+      {
+        "number": 8,
+        "title": "You N Me Sellin' Weed",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:1nup01NjimpTFkeuOLB7Iq",
+        "durationMs": 296700,
+        "previewAvailable": true
+      },
+      {
+        "number": 9,
+        "title": "Mother Please Don't Be Sad",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:45BvGINoybvJvqzjsMJAQq",
+        "durationMs": 215881,
+        "previewAvailable": true
+      },
+      {
+        "number": 10,
+        "title": "When We Die When We're High",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:3htx9XOcnbnrfhhIRkfcdQ",
+        "durationMs": 219419,
+        "previewAvailable": true
+      },
+      {
+        "number": 11,
+        "title": "Assassins Of Youth",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:0a1HKuvHcENJpqsoP11slC",
+        "durationMs": 252166,
+        "previewAvailable": true
+      },
+      {
+        "number": 12,
+        "title": "God And The Policeman",
+        "artist": "The Flaming Lips, Kacey Musgraves",
+        "uri": "spotify:track:1hNyG4Hlkb66u4wwposrny",
+        "durationMs": 148400,
+        "previewAvailable": true
+      },
+      {
+        "number": 13,
+        "title": "My Religion Is You",
+        "artist": "The Flaming Lips",
+        "uri": "spotify:track:6s9V7KxYIuwI8g9AAcEotD",
+        "durationMs": 213266,
+        "previewAvailable": true
+      }
+    ],
+    "context": "Thirteen tracks, from Will You Return / When You Come Down to My Religion Is You. This edition includes Flowers of Neptune 6 and God and the Policeman."
   },
   {
     "id": "natural-light",
@@ -36,10 +341,117 @@
     "year": "2025",
     "cover": "/assets/images/records/natural-light.jpg",
     "url": "https://music.youtube.com/browse/MPREb_79GGmG52a5o",
-    "playlist": "OLAK5uy_kGLZj_87DM7tJCEjdzCU2DT7JeS8M38yk",
     "note": "",
     "bandcampId": 2684530334,
-    "bandcampUrl": "https://danmangan.bandcamp.com/album/natural-light"
+    "bandcampUrl": "https://danmangan.bandcamp.com/album/natural-light",
+    "spotifyId": "5mbEX4VVc8PY11n3RPqrGT",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "It Might Be Raining",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:145lUae1lkz99tKcwwEK9x",
+        "durationMs": 342081,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Diminishing Returns",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:6QmNuanzOQNCgV2uhpQFL7",
+        "durationMs": 181494,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "I Hated Love Songs",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:18UdQC8miUiBlBqV2nMiVD",
+        "durationMs": 205414,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Contained Free (Interlude)",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:43vml1hIKglyxg6IqvdUC8",
+        "durationMs": 46841,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "No Such Things As Wasted Love",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:73BzYeHkKENaJygXEBLhzF",
+        "durationMs": 180747,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "Melody",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:6p1H3W0bfsj2L0Re93wu6g",
+        "durationMs": 200214,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "My Dreams Are Getting Weirder",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:1kOa9tZRUUoruYNh7rBX7X",
+        "durationMs": 211080,
+        "previewAvailable": true
+      },
+      {
+        "number": 8,
+        "title": "Soapbox",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:0DInYGuZt4SNBl6ytXwpcO",
+        "durationMs": 274320,
+        "previewAvailable": true
+      },
+      {
+        "number": 9,
+        "title": "Cut The Brakes",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:3CNwtvP5rtzJGTfLvLNKJA",
+        "durationMs": 217254,
+        "previewAvailable": true
+      },
+      {
+        "number": 10,
+        "title": "For Him",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:23eDPaTPtpobAgwZ5uTQqN",
+        "durationMs": 190227,
+        "previewAvailable": true
+      },
+      {
+        "number": 11,
+        "title": "Sound The Alarm",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:6xUdrkEJRU28kGqtmxlcXu",
+        "durationMs": 201107,
+        "previewAvailable": true
+      },
+      {
+        "number": 12,
+        "title": "Proximity",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:5ymjFNVn5WcRsfPc5HIWKo",
+        "durationMs": 196361,
+        "previewAvailable": true
+      },
+      {
+        "number": 13,
+        "title": "Hit The Wall",
+        "artist": "Dan Mangan",
+        "uri": "spotify:track:2Q2SuEBJabjcKHAmIhlWMh",
+        "durationMs": 265921,
+        "previewAvailable": true
+      }
+    ],
+    "context": "Thirteen tracks recorded with Dan Mangan’s band. The artist also offers the full album through Bandcamp; previews follow the Spotify edition."
   },
   {
     "id": "aja",
@@ -48,8 +460,67 @@
     "year": "1977",
     "cover": "/assets/images/records/aja.jpg",
     "url": "https://music.youtube.com/browse/MPREb_jSbekZ09Zov",
-    "playlist": "OLAK5uy_ns_zqCLjZ6CXF0cji36OJNwTjH1YRYO_4",
-    "note": ""
+    "note": "",
+    "spotifyId": "1hOK2ey9W76x9GnftSRgrw",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "Black Cow",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:1he20mKw1eq2OVp1BKBlpt",
+        "durationMs": 310107,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Aja",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:2cgNpsfZcBzdgeNPEeCnue",
+        "durationMs": 477925,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "Deacon Blues",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:0xeBC6N81ZBYDtxuBFGSuO",
+        "durationMs": 455497,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Peg",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:5emxp4RqsF6QoAWXW2Afrk",
+        "durationMs": 237066,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "Home At Last",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:4rJMVlcWta53qxlr4b5zrF",
+        "durationMs": 335037,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "I Got The News",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:2i7C9LQOm08rwJYDsyhsuT",
+        "durationMs": 307582,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "Josie",
+        "artist": "Steely Dan",
+        "uri": "spotify:track:1QgLpUJsmrLG61KDVGT0Ux",
+        "durationMs": 273506,
+        "previewAvailable": true
+      }
+    ],
+    "context": "Seven tracks, including Black Cow, the title track, Deacon Blues and Peg. Josie closes the album."
   },
   {
     "id": "lifeforce",
@@ -58,7 +529,82 @@
     "year": "2019",
     "cover": "/assets/images/records/lifeforce.jpg",
     "url": "https://music.youtube.com/browse/MPREb_fV3VWgik6b7",
-    "playlist": "OLAK5uy_lnMW3h8SsIRc24tu0T9nInF1V-SFrdbMQ",
-    "note": ""
+    "note": "",
+    "spotifyId": "2mvz0NPBCPTbSEgRViuDLK",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "Because The End Is Really The Beginning",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:4yTF3ezhsvgyEpAYTKqFUt",
+        "durationMs": 288973,
+        "previewAvailable": true
+      },
+      {
+        "number": 2,
+        "title": "Birth Of Creation",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:3CuOokDRR0Z2r1WaPRXKaF",
+        "durationMs": 304266,
+        "previewAvailable": true
+      },
+      {
+        "number": 3,
+        "title": "Summon The Fire",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:5c44MldQ2CvroamP73V1lp",
+        "durationMs": 235200,
+        "previewAvailable": true
+      },
+      {
+        "number": 4,
+        "title": "Blood Of The Past",
+        "artist": "The Comet Is Coming, Kae Tempest",
+        "uri": "spotify:track:1st2ldrAppYwbJmbXucFhD",
+        "durationMs": 495400,
+        "previewAvailable": true
+      },
+      {
+        "number": 5,
+        "title": "Super Zodiac",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:26qvxre8pKtLTatKPYAR8Q",
+        "durationMs": 241680,
+        "previewAvailable": true
+      },
+      {
+        "number": 6,
+        "title": "Astral Flying",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:0MWuAl8muWokgXh7f69aeA",
+        "durationMs": 283986,
+        "previewAvailable": true
+      },
+      {
+        "number": 7,
+        "title": "Timewave Zero",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:2fOutkvdVCHmgAs1ITpAKJ",
+        "durationMs": 320760,
+        "previewAvailable": true
+      },
+      {
+        "number": 8,
+        "title": "Unity",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:73hC84WCZPpaGOvN9SSebV",
+        "durationMs": 253613,
+        "previewAvailable": true
+      },
+      {
+        "number": 9,
+        "title": "The Universe Wakes Up",
+        "artist": "The Comet Is Coming",
+        "uri": "spotify:track:2zaHxMIRqvNZlpXNDuCA7i",
+        "durationMs": 325053,
+        "previewAvailable": true
+      }
+    ],
+    "context": "Nine tracks, opening with Because The End Is Really The Beginning and closing with The Universe Wakes Up. Includes Summon The Fire and Blood Of The Past."
   }
 ]

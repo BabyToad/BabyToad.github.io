@@ -2,68 +2,22 @@
 layout: base
 title: Records
 permalink: /records/
-description: A small record collection. Pick a sleeve, put a record on, and listen.
+description: Browse the record crate, place a vinyl on the turntable, and explore the music.
 vinyl: true
 use_container: false
 ---
 <main class="records" data-records>
-  <div class="records-heading">
-    <p class="records-eyebrow">The listening corner <span>Vol. 01 / Six records</span></p>
-    <h1>Put a record on.</h1>
-    <p class="records-intro">A few favorites from Jonas’s collection. Choose a sleeve, set it on the turntable, and lower the needle.</p>
+  <div class="records-heading"><p class="records-eyebrow">The listening room <span>Volume 01 · Six records</span></p><h1>Something worth a spin.</h1><p>A few favorites from Jonas’s collection. Browse the sleeves, put one on, and find a track to stay with.</p></div>
+  <section class="listening-desk glass" aria-label="Record catalogue and turntable" data-enhanced hidden>
+    <div class="crate-navigation"><button id="previous-record" type="button" aria-label="Previous album">←</button><label for="album-picker">In the crate</label><select id="album-picker">{% for record in site.data.records %}<option value="{{ record.id }}">{{ record.artist | escape }} — {{ record.title | escape }}</option>{% endfor %}</select><button id="next-record" type="button" aria-label="Next album">→</button><span id="record-number"></span></div>
+    <div class="turntable-stage" id="turntable-stage" role="group" aria-label="3D album crate and turntable. Use the selector above or buttons below as alternatives."><div class="deck-fallback"><span class="fallback-disc"></span><p id="scene-message">Setting up the turntable…</p></div></div>
+    <div class="deck-bottom"><p class="deck-hint">Choose a sleeve. Drag the record to the platter, then cue the arm.<br>On a phone, tap or use the buttons. Swipe vertically to scroll.</p><div class="deck-controls"><button type="button" id="place-record">Place record</button><button type="button" id="cue-record" disabled>Lower needle</button><button type="button" id="return-record" disabled>Return to sleeve</button></div></div>
+  </section>
+  <div class="record-details" data-enhanced hidden>
+    <section class="liner-card glass" aria-labelledby="selected-title"><div class="album-heading"><img id="selected-cover" width="140" height="140" alt=""><div><p class="records-eyebrow">On the desk</p><h2 id="selected-title"></h2><p id="selected-artist"></p><p id="edition-note"></p></div></div><p id="album-context"></p><div class="listen-links"><a id="spotify-link" target="_blank" rel="noopener">Full album on Spotify ↗</a><a id="album-link" target="_blank" rel="noopener">YouTube Music ↗</a></div><div class="tracklist-heading"><h3>Track list</h3><span>Full track lengths · previews ≈30s</span></div><ol id="track-list"></ol></section>
+    <aside class="playback-card glass" aria-label="Listening controls"><p class="records-eyebrow">The music</p><h2>Drop the needle.</h2><p id="record-status" role="status" aria-live="polite"></p><div class="stream-permission"><label><input type="checkbox" id="stream-consent"> Enable Spotify previews</label><p>Loads Spotify only when you choose to play. Preview length and availability are set by Spotify; the service may use cookies.</p></div><div class="transport"><p id="track-current"></p><progress id="preview-progress" max="1" value="0" aria-label="Preview progress"></progress><div class="transport-bottom"><button type="button" id="previous-track" aria-label="Previous track">← Track</button><span id="preview-time">0:00 / 0:30 preview</span><button type="button" id="next-track" aria-label="Next track">Track →</button></div></div><div class="texture-control"><label><input type="checkbox" id="vinyl-texture"> Vinyl surface noise</label><p>Optional, gentle crackle over Spotify previews. The music itself stays unchanged.</p><p id="texture-status" role="status">Surface noise off.</p></div><div id="bandcamp-option" hidden><button type="button" id="load-bandcamp">Full album with Bandcamp</button><p>Loads the artist’s external player. Use its own Play button and track controls.</p></div><section id="record-stream" class="record-stream" aria-label="External music player" hidden><div class="stream-heading"><span>Official player</span><button type="button" id="disconnect-stream">Disconnect</button></div><p id="stream-caption"></p><div class="stream-frame"></div></section></aside>
   </div>
-  <section class="record-crate" aria-labelledby="crate-title">
-    <div class="records-section-label"><h2 id="crate-title">From the crate</h2><span>Pick something to sit with.</span></div>
-    <ol class="record-shelves">
-      {% for record in site.data.records %}
-      <li class="record-slot">
-        <button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-pressed="false" disabled>
-          <img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} album cover" width="320" height="320">
-          <span class="record-index">{{ forloop.index | prepend: '0' }}</span>
-          <span class="record-spine">{{ record.artist | escape }}</span>
-        </button>
-        <div class="record-caption"><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a><span>{{ record.artist | escape }} · {{ record.year }}</span></div>
-      </li>
-      {% endfor %}
-    </ol>
-    <noscript><p>The turntable needs JavaScript. Every album above links directly to YouTube Music.</p></noscript>
-  </section>
-  <section class="listening-desk" aria-label="Record player" hidden>
-    <div class="deck-panel">
-      <div class="deck-topline"><span>AKNB / Stereo</span><span>33⅓ RPM</span></div>
-      <div class="turntable-stage" id="turntable-stage" role="group" aria-label="Interactive turntable. Equivalent controls are below.">
-        <div class="deck-fallback"><span class="fallback-disc"></span><p id="scene-message">Setting up the turntable…</p></div>
-      </div>
-      <p class="deck-hint">Drag or tap the record to place it, then the arm to listen. The buttons do the same.</p>
-      <div class="deck-controls">
-        <button type="button" id="place-record">Place record</button>
-        <button type="button" id="cue-record" disabled>Lower needle</button>
-        <button type="button" id="return-record" disabled>Return to sleeve</button>
-      </div>
-    </div>
-    <aside class="liner-card" aria-labelledby="selected-title">
-      <p class="records-eyebrow">On the desk <span id="record-number">01 / 06</span></p>
-      <h2 id="selected-title"></h2>
-      <p id="selected-artist"></p>
-      <div class="liner-rule"></div>
-      <p id="record-status" role="status" aria-live="polite">Choose a record.</p>
-      <p class="liner-note" id="liner-note"></p>
-      <a id="album-link" class="record-outbound" target="_blank" rel="noopener">Open album in YouTube Music ↗</a>
-      <div class="stream-permission">
-        <label><input type="checkbox" id="youtube-consent"> Connect to YouTube for playback</label>
-        <p>Loads an external player. YouTube may use cookies and show ads. Nothing connects until you choose to listen.</p>
-      </div>
-      <div class="bandcamp-option" id="bandcamp-option" hidden>
-        <button type="button" id="load-bandcamp">Listen with Bandcamp</button>
-        <p>Loads the artist’s external player. Use its Play button and track controls.</p>
-      </div>
-    </aside>
-  </section>
-  <section class="record-stream" id="record-stream" aria-labelledby="stream-title" hidden>
-    <div class="records-section-label"><h2 id="stream-title">The music</h2><button type="button" id="disconnect-stream">Disconnect player</button></div>
-    <p id="stream-caption">Use the YouTube controls to choose tracks or adjust volume.</p>
-    <div class="stream-frame"><div id="youtube-player"></div></div>
-  </section>
-  <div class="records-endnote"><span>⁂</span><p>Six records to start with. No shuffle required.</p><a href="{{ '/about' | relative_url }}">Back to About ↗</a></div>
+  <details class="record-crate" id="album-catalogue" open><summary>Browse the album list <span>6 records</span></summary><ol class="record-shelves">{% for record in site.data.records %}<li class="record-slot"><button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-pressed="false" disabled><img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} album cover" width="320" height="320"></button><div class="record-caption"><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a><span>{{ record.artist | escape }} · {{ record.year }}</span><p>{{ record.context | escape }}</p><span>{{ record.tracks.size }} tracks</span></div></li>{% endfor %}</ol><noscript><p>The interactive turntable needs JavaScript. Every album above links directly to YouTube Music.</p></noscript></details>
+  <div class="records-endnote"><span>⁂</span><a href="{{ '/about' | relative_url }}">Back to About ↗</a></div>
 </main>
 <script type="application/json" id="records-data">{{ site.data.records | jsonify | replace: '</', '<\/' }}</script>
