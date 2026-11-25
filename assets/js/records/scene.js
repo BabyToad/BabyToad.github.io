@@ -21,7 +21,7 @@ export function createTurntable(host, action, onLost) {
   light.shadow.camera.top = 6; light.shadow.camera.bottom = -6; light.shadow.bias = -.001;
   world.add(light);
   const materials = {};
-  for (const key of ['body','edge','ink','soft','accent','disc']) materials[key] = new THREE.MeshStandardMaterial({ roughness: .85, metalness: key === 'edge' ? .4 : .05 });
+  for (const key of ['body','edge','ink','soft','accent','disc','mat']) materials[key] = new THREE.MeshStandardMaterial({ roughness: .85, metalness: key === 'edge' ? .4 : .05 });
   const meshes = [];
   function mesh(geometry, material, parent = world, x = 0, y = 0, z = 0) {
     const item = new THREE.Mesh(geometry, material); item.position.set(x,y,z);
@@ -38,7 +38,7 @@ export function createTurntable(host, action, onLost) {
   for(const x of [-2,2]) for(const z of [-1.4,1.4]) cylinder(.22,.22,materials.ink,deck,x,-.27,z);
   const platterX = -.65;
   cylinder(1.48,.15,materials.edge,deck,platterX,.37,0);
-  cylinder(1.4,.055,materials.ink,deck,platterX,.47,0);
+  cylinder(1.4,.055,materials.mat,deck,platterX,.47,0);
   // Machined strobe marks, still unless an actual record is playing.
   for(let i=0;i<64;i++) {
     const angle = i/64*Math.PI*2;
@@ -79,7 +79,7 @@ export function createTurntable(host, action, onLost) {
   const led=cylinder(.055,.02,materials.accent,deck,1.9,.32,1.4);
   box(.38,.06,.18,materials.ink,deck,1.45,.32,1.4);
   const loader=new THREE.TextureLoader(), textures=new Map();
-  let state={}, frame=0, disposed=false, visible=true, last=0, progress=0, cueProgress=0, drag;
+  let state={}, frame=0, disposed=false, visible=true, last=0, progress=0, cueProgress=0, drag, settle;
   const from=new THREE.Vector3(-2.9,.27,-.05), to=new THREE.Vector3(platterX+deck.position.x,.53,0);
   const ray=new THREE.Raycaster(); const pointer=new THREE.Vector2();
   function pick(event) {
@@ -92,25 +92,36 @@ export function createTurntable(host, action, onLost) {
     if(event.button!==0) return;
     const hit=pick(event); if(!hit)return;
     if (hit === 'record' && state.placed) return;
-    drag={hit,x:event.clientX,y:event.clientY};
+    drag={hit,x:event.clientX,y:event.clientY,startArm:cueProgress};
     renderer.domElement.setPointerCapture(event.pointerId); host.classList.add('is-dragging');
   }
   function move(event) {
-    if (!drag || Math.hypot(event.clientX-drag.x,event.clientY-drag.y)<6) return;
+    if (!drag || (Math.hypot(event.clientX-drag.x,event.clientY-drag.y)<6&&!drag.position&&drag.arm===undefined)) return;
     const rect=renderer.domElement.getBoundingClientRect();
     pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
     ray.setFromCamera(pointer,camera);
     if (drag.hit==='record') {
       const point=ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),-.9),new THREE.Vector3());
       if(point) drag.position=point.clamp(new THREE.Vector3(-4,.9,-2),new THREE.Vector3(3,.9,2));
-    } else drag.arm=THREE.MathUtils.clamp((drag.x-event.clientX)/rect.width*3,0,1);
+    } else drag.arm=THREE.MathUtils.clamp(drag.startArm+(drag.x-event.clientX)/rect.width*3,0,1);
     schedule();
   }
   function up(event) {
     if(!drag)return;
-    const hit=drag.hit; drag=null; host.classList.remove('is-dragging'); action(hit);
+    const held=drag;
+    const rect=renderer.domElement.getBoundingClientRect();
+    const inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;
+    const tapped=!held.position&&held.arm===undefined;
+    const recordDrop=held.position&&Math.hypot(held.position.x-to.x,held.position.z-to.z)<1.7;
+    const armDrop=held.arm!==undefined&&(held.arm>=.5)!==Boolean(state.cued);
+    cancel();
+    if(inside&&(tapped||(held.hit==='record'?recordDrop:armDrop)))action(held.hit);
   }
-  function cancel() { drag=null; host.classList.remove('is-dragging'); schedule(); }
+  function cancel() {
+    if(drag?.position)settle={from:record.position.clone(),progress:0};
+    if(drag?.arm!==undefined)cueProgress=drag.arm;
+    drag=null; host.classList.remove('is-dragging'); schedule();
+  }
   renderer.domElement.addEventListener('pointerdown',down);
   renderer.domElement.addEventListener('pointerup',up);
   renderer.domElement.addEventListener('pointermove',move);
@@ -132,6 +143,7 @@ export function createTurntable(host, action, onLost) {
     materials.body.color.set(color('--bg-raised')); materials.edge.color.set(color('--border-strong'));
     materials.ink.color.set(color('--ink')); materials.soft.color.set(color('--ink-soft'));
     materials.accent.color.set(color('--accent')); materials.disc.color.set('#181614');
+    materials.mat.color.set(color('--bg-dip')); grooveMat.color.set(color('--ink-soft'));
     drawLabel(); schedule();
   }
   function schedule() { if(!frame&&!disposed&&visible&&!document.hidden)frame=requestAnimationFrame(render); }
@@ -143,6 +155,13 @@ export function createTurntable(host, action, onLost) {
     if(Math.abs(progress-target)<.001)progress=target;
     if(Math.abs(cueProgress-armTarget)<.001)cueProgress=armTarget;
     record.position.lerpVectors(from,to,progress); record.position.y+=Math.sin(progress*Math.PI)*.85;
+    if(settle) {
+      settle.progress=reduced.matches?1:Math.min(1,settle.progress+dt*3);
+      const eased=THREE.MathUtils.smoothstep(settle.progress,0,1);
+      record.position.lerpVectors(settle.from,state.placed?to:from,eased);
+      record.position.y+=Math.sin(eased*Math.PI)*.15;
+      if(settle.progress===1){settle=null;progress=target;}
+    }
     record.rotation.z=Math.sin(progress*Math.PI)*.15;
     if(drag?.position) record.position.copy(drag.position);
     if(state.playing&&!reduced.matches) record.rotation.y-=dt*Math.PI*2*(33.333/60);
@@ -150,7 +169,7 @@ export function createTurntable(host, action, onLost) {
     if(drag?.arm!==undefined) arm.rotation.y=-drag.arm*.65;
     led.scale.setScalar(state.playing?1.2:1);
     renderer.render(world,camera);
-    if(progress!==target||cueProgress!==armTarget||(state.playing&&!reduced.matches))schedule();
+    if(settle||progress!==target||cueProgress!==armTarget||(state.playing&&!reduced.matches))schedule();
   }
   function resize() {
     const w=host.clientWidth,h=host.clientHeight,aspect=w/h;
@@ -168,6 +187,7 @@ export function createTurntable(host, action, onLost) {
     setState(next) {
       const changed=state.album?.id!==next.album.id; state=next;
       if(changed) {
+        drag=null; settle=null; host.classList.remove('is-dragging');
         record.rotation.y=0; drawLabel();
         const id=next.album.id;
         if(textures.has(id)) sleeveMat.map=textures.get(id);

@@ -39,3 +39,11 @@ Draft feature only: do not deploy or merge without Jonas.
 - Remaining acceptance: real mobile Safari/Android device playback, chosen-album availability in a normal browser session, and Jonas's judgment of handling/selection. Personal liner notes, full-catalog ranking and precise track grooves are later work.
 
 The still scene retains its drawing buffer so compositor captures preserve it while requestAnimationFrame sleeps. Pixel ratio is capped at 1.5; rendering stops when idle, offscreen or hidden. No new dependency or build step is required.
+
+## Opus review follow-up
+
+Claude Opus 5.5 high reviewed `a146dd0` and captures, requesting four corrections. The follow-up accepts real PLAYING events after a track error, allows a late-ready player to recover after a timeout, explicitly closes Bandcamp when enabling YouTube, aligns needle state and buttons during connecting/buffering/autoplay-blocked states, and makes record drops settle from their release position within a generous platter zone (rejected drops return). Arm drags must cross the halfway cue threshold; tapping remains available.
+
+Targeted Chromium checks passed for off-platter rejection, continuity on release, error-to-playing recovery, delayed-ready recovery after timeout, buffering pause, connecting disablement, ready-state needle lift, selected-sleeve no-op, Bandcamp-to-YouTube replacement and matching caption. Existing keyboard/stale-event/provider-denial/WebGL fallback checks also pass. New captures include a **synthetic-provider** placed/playing state; these do not establish real YouTube album availability. Local muted verification scripts remain in the vault scratch folder, not a new site build dependency.
+
+Also addressed: mobile vertical scrolling over the canvas, named semantic group for the stage, token-derived Bandcamp colors when loaded, darker platter mat, and the stylesheet flag registry. The correction commit was checked by Codex but has not had a second independent review. Playback release limitations above remain unchanged; the PR stays draft.

@@ -13,10 +13,9 @@ function status(message) { byId('record-status').textContent = message; }
 function update() {
   place.disabled = placed;
   back.disabled = !placed;
-  cue.disabled = !placed || !consent.checked || playbackState === 'external';
-  cue.textContent = playbackState === 'playing' ? 'Lift needle' : playbackState === 'error' ? 'Retry playback' : 'Lower needle';
-  if(playbackState==='external') cue.textContent='Use Bandcamp controls';
-  scene?.setState({ album: selected, placed, cued: ['playing','buffering','connecting','ready'].includes(playbackState), playing: playbackState === 'playing' });
+  cue.disabled = !placed || !consent.checked || ['external','connecting'].includes(playbackState);
+  cue.textContent = { playing:'Lift needle', buffering:'Lift needle', connecting:'Connecting…', ready:'Start playback', error:'Retry playback', external:'Use Bandcamp controls' }[playbackState] || 'Lower needle';
+  scene?.setState({ album: selected, placed, cued: ['playing','buffering'].includes(playbackState), playing: playbackState === 'playing' });
 }
 const playback = createPlayback(root.querySelector('.stream-frame'), (state, message) => {
   playbackState = state;
@@ -45,14 +44,16 @@ function placeRecord() {
   update();
 }
 function cueRecord() {
+  if (['external','connecting'].includes(playbackState)) return;
   if (!placed) { placeRecord(); return; }
   if (!consent.checked) { status('Enable YouTube playback to listen.'); consent.focus(); return; }
-  if (playbackState === 'playing') {
+  if (['playing','buffering'].includes(playbackState)) {
     playback.pause(); playbackState = 'paused'; status('Needle lifted.'); update();
   } else if (['paused','ready'].includes(playbackState)) {
     status('Starting playback…'); playback.resume();
   } else if (!['connecting','buffering'].includes(playbackState)) {
     stream.hidden = false;
+    byId('stream-caption').textContent = `${selected.title} — official album playlist on YouTube. Use its controls to choose tracks or adjust volume.`;
     playback.play(selected);
   }
 }
@@ -69,7 +70,9 @@ function loadBandcamp() {
   playback.stop(); consent.checked=false; placed=true; playbackState='external'; stream.hidden=false;
   const frame=document.createElement('iframe');
   frame.title=`${selected.title} by ${selected.artist} on Bandcamp`;
-  frame.src=`https://bandcamp.com/EmbeddedPlayer/album=${selected.bandcampId}/size=large/bgcol=ffffff/linkcol=333333/artwork=small/transparent=true/`;
+  const css=getComputedStyle(document.documentElement);
+  const color=token=>css.getPropertyValue(token).trim().replace('#','');
+  frame.src=`https://bandcamp.com/EmbeddedPlayer/album=${selected.bandcampId}/size=large/bgcol=${color('--bg')}/linkcol=${color('--accent')}/artwork=small/transparent=true/`;
   frame.setAttribute('allow','autoplay');
   root.querySelector('.stream-frame').append(frame);
   byId('stream-caption').textContent=`${selected.title} — the artist’s Bandcamp player. Playback is controlled here; the turntable cannot follow its play/pause state.`;
@@ -78,13 +81,19 @@ function loadBandcamp() {
 }
 buttons.forEach(button => {
   button.disabled = false;
-  button.addEventListener('click', () => select(records.find(record => record.id === button.dataset.record)));
+  button.addEventListener('click', () => {
+    if(button.dataset.record!==selected.id) select(records.find(record => record.id === button.dataset.record));
+  });
 });
 place.addEventListener('click', placeRecord);
 cue.addEventListener('click', cueRecord);
 back.addEventListener('click', returnRecord);
 consent.addEventListener('change', () => {
   if (!consent.checked) disconnect();
+  else if (playbackState === 'external') {
+    playback.stop(); stream.hidden=true; playbackState='idle';
+    status('Bandcamp closed. Lower the needle for YouTube.'); update();
+  }
   else { status(placed ? 'Ready. Lower the needle to connect and listen.' : 'Playback enabled. Place a record first.'); update(); }
 });
 byId('disconnect-stream').addEventListener('click', () => { disconnect(); consent.focus(); });

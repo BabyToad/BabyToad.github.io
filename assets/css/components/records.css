@@ -26,7 +26,7 @@
 .deck-panel { border: 1px solid var(--border-strong); background: var(--bg-dip); min-width: 0; }
 .deck-topline { padding: 1rem 1.2rem; display: flex; justify-content: space-between; color: var(--ink-soft); border-bottom: 1px solid var(--border); letter-spacing: .08em; }
 .turntable-stage { position: relative; height: clamp(260px,32vw,410px); overflow: hidden; background-image: radial-gradient(var(--border) .6px,transparent .6px); background-size: 5px 5px; }
-.turntable-stage canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+.turntable-stage canvas { width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; }
 .turntable-stage.is-dragging canvas { cursor: grabbing; }
 .deck-fallback { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--ink-soft); font: .7rem var(--font-mono); }
 .fallback-disc { display: block; width: 160px; height: 160px; border-radius: 50%; background: repeating-radial-gradient(circle,var(--bg-dip) 0 2px,var(--border) 3px 4px); border: 20px solid var(--ink); box-shadow: 0 15px 0 var(--border); transform: rotateX(45deg); }

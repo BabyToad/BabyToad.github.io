@@ -35,7 +35,6 @@ export function createPlayback(host, report) {
       host.append(mount);
       timer=setTimeout(()=>{
         if(generation!==ownGeneration)return;
-        failed=true;
         report('error','YouTube did not respond. Retry, or open the album directly.');
       },20000);
       player = new YT.Player(mount, {
@@ -50,14 +49,15 @@ export function createPlayback(host, report) {
             if (testingMuted) event.target.mute();
             event.target.playVideo();
             timer = setTimeout(() => {
-              if (generation === ownGeneration && event.target.getPlayerState() !== 1)
+              if (generation === ownGeneration && !failed && [-1,5].includes(event.target.getPlayerState()))
                 report('ready', 'Ready. Press Play in the YouTube player below if playback has not started.');
             }, 9000);
           },
           onStateChange(event) {
-            if (generation !== ownGeneration || failed) return;
+            if (generation !== ownGeneration) return;
             const state = event.data;
-            if (state === 1) { clearTimeout(timer); report('playing', 'Playing on YouTube.'); }
+            if (state === 1) { failed = false; clearTimeout(timer); report('playing', 'Playing on YouTube.'); }
+            if (failed) return;
             if (state === 2) report('paused', 'Paused. Lower the needle to continue.');
             if (state === 3) report('buffering', 'Buffering…');
             if (state === 0) report('ended', 'This track has finished. Use the player to choose another.');
