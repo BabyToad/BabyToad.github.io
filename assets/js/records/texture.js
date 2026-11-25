@@ -1,31 +1,35 @@
-// Optional surface noise, generated locally. It never processes the provider's audio.
-export function createVinylTexture() {
-  let context,source,gain,enabled=false,playing=false,level=.35;
-  const silent=new URLSearchParams(location.search).get('mute')==='1';
-  function sync() {
-    if(!context)return;
-    const audible=enabled&&playing&&!document.hidden&&!silent;
-    gain.gain.setTargetAtTime(audible ? level*.07 : 0,context.currentTime,.08);
-  }
-  async function enable(value) {
-    enabled=value;
-    if(value&&!context) {
-      const Audio=window.AudioContext||window.webkitAudioContext;
-      if(!Audio)throw new Error('This browser does not support the surface-noise effect.');
-      context=new Audio();gain=context.createGain();gain.gain.value=0;
-      const buffer=context.createBuffer(1,context.sampleRate*6,context.sampleRate),samples=buffer.getChannelData(0);
-      let smooth=0;
-      for(let i=0;i<samples.length;i++){
-        smooth=.97*smooth+.03*(Math.random()*2-1);
-        samples[i]=smooth+(Math.random()<.00012?(Math.random()*2-1)*.6:0);
-      }
-      const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=3200;
-      source=context.createBufferSource();source.buffer=buffer;source.loop=true;
-      source.connect(filter);filter.connect(gain);gain.connect(context.destination);source.start();
+// Local crackle layer only: provider audio is never intercepted or processed.
+export function createVinylTexture(onAudition=()=>{}) {
+  let disposed=false;
+  let context,source,gain,enabled=false,playing=false,level=.35,auditioning=false,testTimer,suspendTimer;
+  function ensure(){
+    if(disposed)throw new Error('Crackle player is closed.');
+    if(context)return;
+    const Audio=window.AudioContext||window.webkitAudioContext;
+    if(!Audio)throw new Error('This browser does not support vinyl crackle.');
+    context=new Audio();gain=context.createGain();gain.gain.value=0;
+    const buffer=context.createBuffer(1,context.sampleRate*11,context.sampleRate),samples=buffer.getChannelData(0);
+    let smooth=0,click=0,sum=0;
+    for(let i=0;i<samples.length;i++){
+      smooth=.93*smooth+.07*(Math.random()*2-1);
+      if(Math.random()<.00016)click=(Math.random()*2-1)*.9;
+      click*=.78;samples[i]=smooth+click;sum+=samples[i]*samples[i];
     }
-    if(value&&context?.state==='suspended')await context.resume();sync();
-    if(!value&&context?.state==='running')await context.suspend();
+    const scale=.22/Math.sqrt(sum/samples.length);
+    for(let i=0;i<samples.length;i++)samples[i]=Math.max(-1,Math.min(1,samples[i]*scale));
+    const filter=context.createBiquadFilter();filter.type='lowpass';filter.frequency.value=4200;
+    source=context.createBufferSource();source.buffer=buffer;source.loop=true;
+    source.connect(filter);filter.connect(gain);gain.connect(context.destination);source.start();
   }
+  function sync(){
+    if(disposed||!context)return;clearTimeout(suspendTimer);
+    const audible=(auditioning||enabled&&playing)&&!document.hidden;
+    gain.gain.setTargetAtTime(audible?level*.16:0,context.currentTime,.045);
+    if(audible&&context.state==='suspended')context.resume().catch(()=>{});
+    if(!audible&&context.state==='running')suspendTimer=setTimeout(()=>context?.suspend(),180);
+  }
+  async function enable(value){enabled=value;if(value){ensure();await context.resume();}sync();}
+  async function audition(){if(level===0)throw new Error('Raise the crackle level to hear the test.');ensure();clearTimeout(testTimer);auditioning=true;await context.resume();if(disposed)return;sync();onAudition('Testing crackle · 3 seconds');testTimer=setTimeout(()=>{auditioning=false;sync();onAudition('Crackle test finished.');},3000);}
   document.addEventListener('visibilitychange',sync);
-  return {enable,setLevel(value){level=Math.max(0,Math.min(1,value));sync();},setPlaying(value){playing=value;sync();},dispose(){document.removeEventListener('visibilitychange',sync);source?.stop();context?.close();}};
+  return {enable,audition,setLevel(value){level=Math.max(0,Math.min(1,value));sync();},setPlaying(value){playing=value;sync();},dispose(){disposed=true;clearTimeout(testTimer);clearTimeout(suspendTimer);document.removeEventListener('visibilitychange',sync);source?.stop();context?.close();}};
 }

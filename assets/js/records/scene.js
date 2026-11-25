@@ -545,7 +545,7 @@ export function createTurntable(host, action, onLost, albums = []) {
 
   // Four machined isolation feet (bottom y=0, top y=0.22)
   for (const fx of [-1.68, 1.68]) {
-    for (const fz of [-1.24, 1.24]) {
+    for (const fz of [-1.24, 1.64]) {
       const foot = new THREE.Group();
       foot.position.set(fx, 0, fz);
       deck.add(foot);
@@ -557,10 +557,10 @@ export function createTurntable(host, action, onLost, albums = []) {
   }
 
   // Recessed acoustic sub-chassis base
-  const subGeo = new THREE.ExtrudeGeometry(roundedRectShape(3.88, 3.02, 0.10), {
+  const subGeo = new THREE.ExtrudeGeometry(roundedRectShape(3.88, 3.42, 0.10), {
     depth: 0.13, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.015, bevelSegments: 2
   });
-  subGeo.rotateX(Math.PI / 2);
+  subGeo.rotateX(Math.PI / 2);subGeo.translate(0,0,.20);
   addMesh(subGeo, mats.subChassis, deck, 0, 0.35, 0);
 
   // Internal motor housing & brass drive pulley glimpsed beneath the clear acrylic plinth
@@ -573,25 +573,25 @@ export function createTurntable(host, action, onLost, albums = []) {
   beltRing.rotation.x = Math.PI / 2;
 
   // Thick beveled transparent acrylic plinth body
-  const plinthGeo = new THREE.ExtrudeGeometry(roundedRectShape(4.16, 3.30, 0.12), {
+  const plinthGeo = new THREE.ExtrudeGeometry(roundedRectShape(4.16, 3.70, 0.12), {
     depth: 0.30, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.025, bevelSegments: 3
   });
-  plinthGeo.rotateX(Math.PI / 2);
+  plinthGeo.rotateX(Math.PI / 2);plinthGeo.translate(0,0,.20);
   const plinthMesh = addMesh(plinthGeo, mats.plinthGlass, deck, 0, 0.66, 0, false);
   plinthMesh.receiveShadow = true;
   plinthMesh.renderOrder = 2;
   addEdges(plinthMesh, mats.plinthEdge, 28);
 
   // Brushed metal recessed top deck plate (top surface y = 0.713)
-  const topPlateGeo = new THREE.ExtrudeGeometry(roundedRectShape(3.84, 2.98, 0.08), {
+  const topPlateGeo = new THREE.ExtrudeGeometry(roundedRectShape(3.84, 3.42, 0.08), {
     depth: 0.04, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.008, bevelSegments: 2
   });
-  topPlateGeo.rotateX(Math.PI / 2);
+  topPlateGeo.rotateX(Math.PI / 2);topPlateGeo.translate(0,0,.22);
   addMesh(topPlateGeo, mats.brushedDeck, deck, 0, 0.705, 0);
 
   // Corner machined hex screws on top plate
   for (const sx of [-1.76, 1.76]) {
-    for (const sz of [-1.34, 1.34]) {
+    for (const sz of [-1.34, 1.82]) {
       addMesh(new THREE.CylinderGeometry(0.036, 0.036, 0.016, 12), mats.brushedSilver, deck, sx, 0.716, sz, false);
     }
   }
@@ -641,21 +641,21 @@ export function createTurntable(host, action, onLost, albums = []) {
   // 1B. FUNCTIONAL PHYSICAL DECK CONTROLS (Start/Cue, 33/45 RPM, Knobs)
   // =========================================================================
   // Start/Stop tactile switch (front-left) -> triggers 'arm' cue/play toggle
-  addMesh(new THREE.BoxGeometry(0.42, 0.028, 0.28), mats.darkMetal, deck, -1.60, 0.72, 1.18);
-  const startBtn = addMesh(new THREE.BoxGeometry(0.35, 0.044, 0.21), mats.brushedSilver, deck, -1.60, 0.74, 1.18);
-  const startStrip = addMesh(new THREE.BoxGeometry(0.28, 0.012, 0.024), mats.accentGlow, deck, -1.60, 0.764, 1.25, false);
+  addMesh(new THREE.BoxGeometry(0.42, 0.028, 0.28), mats.darkMetal, deck, -1.60, 0.72, 1.48);
+  const startBtn = addMesh(new THREE.BoxGeometry(0.35, 0.044, 0.21), mats.brushedSilver, deck, -1.60, 0.74, 1.48);
+  const startStrip = addMesh(new THREE.BoxGeometry(0.28, 0.012, 0.024), mats.accentGlow, deck, -1.60, 0.764, 1.55, false);
   tagHit(startBtn, { kind: 'arm' });
 
   // 33⅓ RPM & 45 RPM speed selector buttons (visual RPM only; parent truth-labels)
-  addMesh(new THREE.BoxGeometry(0.20, 0.02, 0.14), mats.darkMetal, deck, -1.16, 0.718, 1.23);
-  const btn33 = addMesh(new THREE.BoxGeometry(0.16, 0.038, 0.11), mats.brushedSilver, deck, -1.16, 0.735, 1.23);
+  addMesh(new THREE.BoxGeometry(0.20, 0.02, 0.14), mats.darkMetal, deck, -1.16, 0.718, 1.52);
+  const btn33 = addMesh(new THREE.BoxGeometry(0.16, 0.038, 0.11), mats.brushedSilver, deck, -1.16, 0.735, 1.52);
   tagHit(btn33, { kind: 'speed', rpm: 33.333 });
-  addMesh(new THREE.CylinderGeometry(0.022, 0.022, 0.016, 16), mats.led33, deck, -1.16, 0.724, 1.11, false);
+  addMesh(new THREE.CylinderGeometry(0.022, 0.022, 0.016, 16), mats.led33, deck, -1.16, 0.724, 1.38, false);
 
-  addMesh(new THREE.BoxGeometry(0.20, 0.02, 0.14), mats.darkMetal, deck, -0.92, 0.718, 1.23);
-  const btn45 = addMesh(new THREE.BoxGeometry(0.16, 0.038, 0.11), mats.brushedSilver, deck, -0.92, 0.735, 1.23);
+  addMesh(new THREE.BoxGeometry(0.20, 0.02, 0.14), mats.darkMetal, deck, -0.92, 0.718, 1.52);
+  const btn45 = addMesh(new THREE.BoxGeometry(0.16, 0.038, 0.11), mats.brushedSilver, deck, -0.92, 0.735, 1.52);
   tagHit(btn45, { kind: 'speed', rpm: 45 });
-  addMesh(new THREE.CylinderGeometry(0.022, 0.022, 0.016, 16), mats.led45, deck, -0.92, 0.724, 1.11, false);
+  addMesh(new THREE.CylinderGeometry(0.022, 0.022, 0.016, 16), mats.led45, deck, -0.92, 0.724, 1.38, false);
 
   // Strobe illuminator prism tower
   const strobeTower = new THREE.Group();
@@ -854,7 +854,7 @@ export function createTurntable(host, action, onLost, albums = []) {
   deck.add(dustcover);
 
   const dcW = 4.10;
-  const dcD = 3.22;
+  const dcD = 3.66;
   const dcH = 0.60; // Clears gimbal top (1.278) and spindle (1.188) cleanly even when closed!
   const dcT = 0.036;
 
@@ -958,7 +958,7 @@ export function createTurntable(host, action, onLost, albums = []) {
   addEdges(rightCheek, mats.glassEdge, 24);
 
   // Clear acrylic front showcase lip + inlaid accent bar under active sleeve
-  addGlassPanel(2.84, 0.25, 0.052, 0.18, 0.245, 1.07, crate, mats.crateGlass, mats.glassEdge, 4);
+  addGlassPanel(2.84, 0.11, 0.052, 0.18, 0.175, 1.07, crate, mats.crateGlass, mats.glassEdge, 4);
   addMesh(new THREE.BoxGeometry(2.38, 0.036, 0.034), mats.accent, crate, 0.32, 0.142, 1.03, false);
 
   // Brushed aluminum corner standoff pins joining the acrylic base, cheeks & backrest
@@ -1075,6 +1075,7 @@ export function createTurntable(host, action, onLost, albums = []) {
   let placeProgress = 0;        // 0 = peeking in sleeve, 1 = seated on spindle
   let armSwing = 0;             // 0 = over armrest, 1 = over target vinyl groove
   let armDrop = 1;              // 0 = lifted clear, 1 = resting (on armrest if swing=0, on vinyl if swing=1)
+  let seekingGroove = false;
   let grooveProgress = 0;       // 0..1 outer-to-inner groove tracking
   let platterAngle = 0;         // current platter & placed vinyl rotation (rad)
   let platterVel = 0;           // current angular speed (rad/s), smoothly ramps with inertia
@@ -1369,7 +1370,9 @@ export function createTurntable(host, action, onLost, albums = []) {
     ray.setFromCamera(pointer, camera);
     const hits = ray.intersectObjects([...interactiveTargets, ...sleeveHitTargets], false);
     if (!hits.length) return null;
-    const data = hits[0].object.userData;
+    // The generous invisible arm target must not mask a visible knob or button.
+    const hit = hits[0].object === armHit ? (hits.find(h => h.object !== armHit) || hits[0]) : hits[0];
+    const data = hit.object.userData;
     if (!data) return null;
     if (data.kind === 'sleeve') {
       const selId = state.album?.id;
@@ -1539,8 +1542,7 @@ export function createTurntable(host, action, onLost, albums = []) {
         drag.stepAccum += whole;
         drag.stepped = true;
         const dir = whole > 0 ? 1 : -1;
-        trackKnobAngle -= dir * (Math.PI / 6);
-        action('track', dir);
+        trackKnobAngle -= whole * (Math.PI / 6);
         schedule();
       }
       return;
@@ -1593,10 +1595,7 @@ export function createTurntable(host, action, onLost, albums = []) {
       host.classList.remove('is-dragging');
       updateCursor(null);
       if (inside && !held.moved) {
-        const toggled = surfaceVal < 0.08 ? 0.45 : 0;
-        surfaceVal = toggled;
-        state.surface = toggled;
-        action('surface', toggled);
+        action('surface-control');
       }
       schedule();
       return;
@@ -1606,10 +1605,9 @@ export function createTurntable(host, action, onLost, albums = []) {
       drag = null;
       host.classList.remove('is-dragging');
       updateCursor(null);
+      if(held.stepped && held.stepAccum!==0)action('track',held.stepAccum);
       if (inside && !held.stepped) {
-        const dir = event.clientX >= held.knobScreenX ? 1 : -1;
-        trackKnobAngle -= dir * (Math.PI / 6);
-        action('track', dir);
+        action('track-control');
       }
       schedule();
       return;
@@ -1620,11 +1618,11 @@ export function createTurntable(host, action, onLost, albums = []) {
       held.position &&
       Math.hypot(held.position.x - platterWorldPos.x, held.position.z - platterWorldPos.z) < SNAP_RADIUS
     );
-    const armDrop = held.arm !== undefined && (held.arm >= 0.5) !== Boolean(state.cued);
+    const armDrop = held.arm !== undefined && (held.arm >= 0.5) !== Boolean(state.cued || state.held);
 
     cancelDrag();
     if (inside && (tapped || (held.hit === 'record' ? recordDrop : armDrop))) {
-      action(held.hit);
+      action(held.hit === 'arm' && held.arm !== undefined && held.arm < .5 ? 'park' : held.hit);
     }
   }
 
@@ -1781,14 +1779,21 @@ export function createTurntable(host, action, onLost, albums = []) {
     //    And safe interlock: on record return, lift & clear arm BEFORE vinyl lifts off spindle!
     const wantPlace = Boolean(state.placed);
     const wantCue = Boolean(state.cued && wantPlace);
+    const holdArm = Boolean(state.held && wantPlace);
+    const desiredGroove = THREE.MathUtils.clamp(state.progress || 0,0,1);
 
     if (drag?.hit === 'arm' && drag.arm !== undefined) {
       armSwing = drag.arm;
       armDrop = instant ? 0 : THREE.MathUtils.damp(armDrop, 0, 14, dt);
       animating = true;
     } else if (instant) {
-      armSwing = wantCue ? 1 : 0;
-      armDrop = 1;
+      armSwing = wantCue || holdArm ? 1 : 0;
+      armDrop = holdArm ? 0 : 1;seekingGroove=false;
+    } else if ((holdArm || (seekingGroove && wantCue)) && placeProgress >= .995 && !drag && !settle) {
+      armDrop=THREE.MathUtils.damp(armDrop,0,16,dt);
+      if(armDrop<.01)armDrop=0;
+      if(seekingGroove && armDrop<.08 && Math.abs(grooveProgress-desiredGroove)<.002)seekingGroove=false;
+      if(wantCue||armDrop>0||seekingGroove)animating=true;
     } else if (wantCue && placeProgress >= 0.995 && !drag && !settle) {
       // Cue ON: 1) lift clear, 2) swing over groove, 3) controlled silicone-damped descent
       if (armSwing < 0.992) {
@@ -1836,9 +1841,9 @@ export function createTurntable(host, action, onLost, albums = []) {
     }
 
     // 6. Groove tracking progress while cued
-    const targetGroove = (wantCue && typeof state.progress === 'number')
+    const targetGroove = ((wantCue || holdArm) && typeof state.progress === 'number')
       ? THREE.MathUtils.clamp(state.progress, 0, 1) : 0;
-    grooveProgress = instant ? targetGroove : THREE.MathUtils.damp(grooveProgress, targetGroove, 4.5, dt);
+    if(!seekingGroove || armDrop<.08)grooveProgress = instant ? targetGroove : THREE.MathUtils.damp(grooveProgress, targetGroove, seekingGroove?12:4.5, dt);
     if (Math.abs(grooveProgress - targetGroove) < 0.0015) grooveProgress = targetGroove;
     else animating = true;
 
@@ -2005,7 +2010,7 @@ export function createTurntable(host, action, onLost, albums = []) {
     platterWorldPos.set(deck.position.x + PLATTER_X, PLATTER_SURFACE_Y + .014, deck.position.z + PLATTER_Z);
     dragClampMin.z = portrait ? -5 : -2.1;
     dragClampMax.z = portrait ? 4 : 2.2;
-    camDir.set(portrait ? 0 : .22, portrait ? 8.8 : 4.85, 8.85).normalize();
+    camDir.set(portrait ? 0 : .22, portrait ? 9.8 : 5.8, 8.85).normalize();
 
     computeSleeveTargets();
 
@@ -2043,8 +2048,8 @@ export function createTurntable(host, action, onLost, albums = []) {
     if (visible && !document.hidden || disposed) return;
     drag = null;settle = null;
     placeProgress = state.placed ? 1 : 0;
-    armSwing = state.cued && state.placed ? 1 : 0;armDrop = 1;
-    if (armSwing && !needleSettledLatched) {
+    armSwing = (state.cued || state.held) && state.placed ? 1 : 0;armDrop = state.held?0:1;seekingGroove=false;
+    if (armSwing && state.cued && !needleSettledLatched) {
       needleSettledLatched = true;
       queueMicrotask(() => {if (!disposed && state.cued && state.placed && needleSettledLatched) action('settled', 'needle');});
     }
@@ -2093,6 +2098,7 @@ export function createTurntable(host, action, onLost, albums = []) {
   reduced.addEventListener('change', schedule);
   renderer.domElement.addEventListener('webglcontextlost', onContextLost);
 
+  for(const [name,obj] of Object.entries({btn33,btn45,startBtn,vinylDisc,armTube,headshell,cartBody,stylusHousing,cantilever,wellRing}))obj.name=name;
   computeSleeveTargets();
   applyTheme();
   resize();
@@ -2120,7 +2126,9 @@ export function createTurntable(host, action, onLost, albums = []) {
       const nextRpm = typeof next.rpm === 'number' && next.rpm > 0 ? next.rpm : state.rpm;
       const nextSurface = typeof next.surface === 'number' ? THREE.MathUtils.clamp(next.surface, 0, 1) : state.surface;
 
+      if((next.trackIndex!==state.trackIndex || next.cueId!==state.cueId) && nextPlaced && nextCued && armSwing>.8){seekingGroove=true;needleSettledLatched=false;}
       if (!nextCued || !nextPlaced || changed) {
+        seekingGroove=false;
         needleSettledLatched = false;
       }
       if (nextCued) armSettledLatched = false;
@@ -2134,6 +2142,8 @@ export function createTurntable(host, action, onLost, albums = []) {
         placed: nextPlaced,
         cued: nextCued,
         playing: nextPlaying,
+        held: Boolean(next.held),
+        cueId:next.cueId,
         browserOpen: nextBrowserOpen,
         motor: nextMotor,
         rpm: nextRpm,
