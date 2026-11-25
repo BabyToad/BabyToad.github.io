@@ -18,6 +18,8 @@ const REST_PT = TUBE[20];
 const STROBE = [-0.158, -0.160], LAMP = [STROBE[0] + 0.7026 * 0.024, STROBE[1] + 0.7115 * 0.024, -0.013];
 const BLACK = [0.012, 0.012, 0.013], CHROME = [0.62, 0.63, 0.66], AMBER = [1.0, 0.55, 0.12];
 
+export const diamondGeometry = () => G.cyl(0.000018, 0.00010, -0.030018, -0.02978, 12);
+
 export class Renderer {
   constructor(canvas) {
     const gl = this.gl = canvas.getContext('webgl2', { antialias: true, alpha: false });
@@ -64,7 +66,9 @@ export class Renderer {
       // headshell frame (+x = direction of groove travel, stylus tip at z = -PIVOT_H)
       collar: m(G.merge(at(G.alongX(L([[0.0042, -0.047], [0.0060, -0.047], [0.0060, -0.036], [0.0042, -0.036]], 24)), 0, 0, -0.0125),
         at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, 0.0045), at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, -0.0045),
-        G.tube([[-0.0045, 0, -0.0270], [0, 0, -0.0297]], 0.00035, 8), G.cyl(0.00004, 0.0004, -0.0300, -0.0296, 8))),
+        G.tube([[-0.0045, 0, -0.0270], [0, 0, -0.02982]], 0.00013, 16))),
+      // Fine cantilever and a separate diamond: its seating centre is the solver point.
+      diamond: m(diamondGeometry()),
       shell: m(G.merge(G.rbox(-0.037, -0.0095, 0.012, 0.0095, -0.0142, -0.0122, 0.003, 0.0005),
         G.tube([[-0.002, 0.0090, -0.0132], [0.000, 0.022, -0.0130], [0.002, 0.032, -0.0108], [0.003, 0.036, -0.006]], 0.0013, 10),
         G.box(-0.0225, -0.0068, -0.0246, 0.0035, 0.0068, -0.0142))),
@@ -180,7 +184,7 @@ export class Renderer {
       [m.skateMark,G.chain(G.T(PIVOT_X+.047,PIVOT_Y+.012,-.0109),G.Rz((st.skate||0)*1.4)),CHROME,.25,1,0,off],
       [m.tower, I, [0.020, 0.020, 0.022], 0.38, 0.6, 0, off], [m.towerCap, I, CHROME, 0.16, 1, 0, off],
       [m.tube, arm, [0.30, 0.30, 0.32], 0.16, 1, 0, off], [m.weight, G.chain(arm,G.T((1.8-(st.force??1.8))*.003,0,0)), [0.022, 0.022, 0.024], 0.42, 0.7, 0, off], [m.dial, arm, CHROME, 0.28, 1, 0, off],
-      [m.collar, head, CHROME, 0.2, 1, 0, off], [m.shell, head, [0.014, 0.014, 0.015], 0.4, 0.2, 0, off], [m.holder, head, [0.80, 0.36, 0.05], 0.42, 0, 0, off],
+      [m.collar, head, CHROME, 0.2, 1, 0, off], [m.diamond, head, [0.65,0.70,0.74], 0.14, 0.15, 0, off], [m.shell, head, [0.014, 0.014, 0.015], 0.4, 0.2, 0, off], [m.holder, head, [0.80, 0.36, 0.05], 0.42, 0, 0, off],
     ];
     items.push([m.volume,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),BLACK,.32,.65,0,off]);
     items.push([m.volumeMark,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),CHROME,.3,.4,0,off]);
@@ -217,6 +221,7 @@ export class Renderer {
     gl.useProgram(this.rec.p); common(u); gl.uniformMatrix4fv(u.uM, false, discM);
     gl.uniform3fv(u.uWarp, info.warp); gl.uniform4fv(u.uScr, info.scr); gl.uniform1i(u.uNScr, info.nScr);
     gl.uniform1f(u.uRLo, info.rLo); gl.uniform1f(u.uRHi, info.rHi); gl.uniform1f(u.uRows, info.rows);
+    gl.uniform3f(u.uStylus, sx, sy, st.zt);
     gl.uniform1f(u.uRevEnd, info.revEnd); gl.uniform1f(u.uW, GROOVE_W); gl.uniform1f(u.uDust, info.dust);
     [['uLut', this.tex.lut], ['uVis', this.tex.vis], ['uLabel', this.tex.label]].forEach(([name, tex], i) => {
       gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(u[name], i);

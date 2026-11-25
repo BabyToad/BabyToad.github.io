@@ -1,6 +1,6 @@
 // Optional Node regression checks. No packages; not part of the Jekyll build.
 import assert from 'node:assert/strict';
-import {Renderer} from '../assets/js/records/physics/render.js';
+import {Renderer,diamondGeometry} from '../assets/js/records/physics/render.js';
 import {ALPHA_MIN,ALPHA_REST,stylusXY,alphaForRadius,grooveRadius} from '../assets/js/records/physics/geometry.js';
 import {Engine} from '../assets/js/records/physics/engine.js';
 import {cut} from '../assets/js/records/physics/cut.js';
@@ -10,14 +10,18 @@ import {readFileSync} from 'node:fs';
 // Capture matrices submitted by the actual rendering method, including the visible diamond.
 globalThis.window={devicePixelRatio:1};
 let model,mesh;const submissions=[];
-const gl=new Proxy({uniformMatrix4fv:(key,transpose,value)=>{if(key==='model')model=Array.from(value);},bindVertexArray:value=>{mesh=value;},drawArrays:()=>{if(mesh==='collar')submissions.push(model);}}, {get:(object,key)=>object[key]??(()=>{})});
+const gl=new Proxy({uniformMatrix4fv:(key,transpose,value)=>{if(key==='model')model=Array.from(value);},bindVertexArray:value=>{mesh=value;},drawArrays:()=>{if(mesh==='diamond')submissions.push(model);}}, {get:(object,key)=>object[key]??(()=>{})});
 const r=Object.create(Renderer.prototype);
 Object.assign(r,{gl,canvas:{width:1200,height:800,clientWidth:1200,clientHeight:800},m:new Proxy({}, {get:(_,key)=>({vao:key,count:6})}),tex:{},info:null,markings:{draw(){}},dep:{p:0,u:{uM:'model'}},std:{p:1,u:{uM:'model'}},lvp:new Float32Array(16)});
+const vertices=diamondGeometry(),tipVertices=[];
+for(let i=0;i<vertices.length;i+=6)if(Math.abs(vertices[i+2]+.030018)<1e-8)tipVertices.push([vertices[i],vertices[i+1],vertices[i+2]]);
+assert(tipVertices.length>0,'The actual diamond mesh must contain its fine seating tip');
 let maxError=0;
 for(let i=0;i<20;i++)for(const height of [0,.005]){
  const angle=ALPHA_MIN+(ALPHA_REST-ALPHA_MIN)*i/19;
  r.draw({al:angle,zt:height,thp:0,zoom:0,az:0,el:.7,rpm:100/3,motor:false});
  const m=submissions.at(-1),actual=[m[12]-.03*m[8],m[13]-.03*m[9],m[14]-.03*m[10]],expected=[...stylusXY(angle),height];
+ for(const v of tipVertices){const world=[0,1,2].map(k=>m[k]*v[0]+m[4+k]*v[1]+m[8+k]*v[2]+m[12+k]);assert(Math.hypot(...world.map((n,k)=>n-expected[k]))<.000027,'Actual mesh tip must meet the engine seat within 27 micrometres');}
  const error=Math.hypot(...actual.map((v,k)=>v-expected[k]));maxError=Math.max(maxError,error);assert(error<.0005,`Visible stylus differs by ${error} m at angle ${angle}`);
 }
 console.log(`PASS rendered stylus vs engine: 40 poses, max ${(maxError*1000).toFixed(6)} mm`);

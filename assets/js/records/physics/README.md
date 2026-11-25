@@ -11,3 +11,5 @@ Local changes: label.js supplies this site's label. render.js uses the site's ma
 Preserve the upstream license and this provenance when updating. Compare physical tests and scene/contact geometry before accepting an upstream revision.
 
 The v6 integration additionally exports plinth/surface/force telemetry, streams a bounded raw-wall window for the magnified contact mesh, exposes GL mesh buffers for dynamic updates, and renders an output-volume knob and solver-driven plinth displacement. No changes to the audio integration equations. See ../../../../docs/records.md for limits and verification.
+
+Normal Needle-view refinement: the cantilever is thinner, the diamond is a separate tapered mesh with an 18 µm seating endpoint, and sub-millimetre contact occlusion supplements the whole-deck shadow map. Engine audio/contact equations are unchanged.

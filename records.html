@@ -6,7 +6,7 @@ description: Ten records from my collection, and a turntable simulated from the 
 vinyl: true
 use_container: false
 ---
-<main class="records" data-records>
+<main class="records" data-records data-media-base="{{ '/' | media_url }}">
   <header class="records-heading"><div><p class="eyebrow">Steak Knives &amp; Bagels / Listening room</p><h1>Give it a spin.</h1></div><a class="catalogue-jump" href="#album-catalogue">Ten records ↓</a></header>
   <section class="listening-desk" aria-label="Physical record player">
     <canvas id="record-stage" tabindex="0" aria-label="3D record player. Drag empty space to orbit, pinch to zoom and pan. Equivalent controls follow." hidden></canvas>
@@ -19,8 +19,7 @@ use_container: false
       <button class="close-panel" id="close-sleeve" aria-label="Close sleeve details">×</button>
       <div class="sleeve-content"><img id="selected-cover" width="240" height="240" alt="">
       <div><p class="eyebrow" id="selected-meta"></p><h2 id="selected-title"></h2><p id="selected-artist"></p><p id="album-context"></p></div>
-      <div class="sleeve-actions"><a id="youtube-link" target="_blank" rel="noopener">YouTube Music ↗</a><a id="spotify-link" target="_blank" rel="noopener">Spotify ↗</a><a id="bandcamp-link" target="_blank" rel="noopener" hidden>Bandcamp ↗</a></div>
-      <p class="small">This sleeve has no audio file attached. Listen through a service, or cut your own files below. Browsing never changes the record playing.</p>
+      <div id="album-listening"></div>
       <button id="sleeve-files">Cut files from my device</button>
       <details><summary>Album track list</summary><ol id="album-tracks"></ol></details>
       </div><div class="sleeve-nav"><button id="previous-album" aria-label="Previous album">←</button><span id="album-number"></span><button id="next-album" aria-label="Next album">→</button></div>
@@ -45,7 +44,7 @@ use_container: false
       <div class="record-source"><button id="house-record">House pressing</button><button id="choose-files">Cut your files</button><select id="cut-track" aria-label="Track on the current pressing" disabled><option>Preparing tracks…</option></select><input type="file" id="audio-files" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden></div>
     </div>
   </section>
-  <p class="room-note">The house record is a synthesised demo. Your files are cut and played in this browser, never uploaded. Local sides are limited to 3 minutes on small screens and 10 minutes on larger screens to limit memory use. The sleeves below link to the artists’ music.</p>
+  <p class="room-note">The house record is a synthesised demo. Your files are cut and played in this browser, never uploaded. Local sides are limited to 3 minutes on small screens and 10 minutes on larger screens to limit memory use. Open a sleeve to choose a service player. Polygondwanaland also has full artist-authorized recordings; eligible tracks can be cut onto the physical deck.</p>
   <details class="record-catalogue" id="album-catalogue" open><summary>The collection <span>{{ site.data.records.size }} records</span></summary><ol class="record-shelves">{% for record in site.data.records %}<li><button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-label="Inspect {{ record.artist | escape }}: {{ record.title | escape }}" disabled><img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} cover" width="320" height="320"></button><div><h2><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a></h2><p>{{ record.artist | escape }} · {{ record.year }}</p><p>{{ record.context | escape }}</p><details><summary>Track list</summary><ol>{% for track in record.tracks %}<li>{{ track.title | escape }}</li>{% endfor %}</ol></details></div></li>{% endfor %}</ol></details>
   <p class="simulation-credit">Groove simulation adapted from <a href="https://github.com/rauchg/vinyl">vinyl by Guillermo Rauch</a> · <a href="{{ '/assets/js/records/physics/LICENSE.txt' | relative_url }}">MIT licence</a>. Interface and collection adapted for this site. A physical model, not a reconstruction of an original vinyl master.</p>
 </main>

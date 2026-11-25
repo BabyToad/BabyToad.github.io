@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Crumbling Castle",
+    "number": 1,
+    "path": "assets/audio/records/polygondwanaland/01-41a42634fb84.mp3",
+    "bytes": 26266672,
+    "sha256": "41a42634fb8482944f84e135ef86fa66ba9d9c6bdcc3f03029cddf8a889037b9",
+    "durationSec": 643.7565,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Polygondwanaland",
+    "number": 2,
+    "path": "assets/audio/records/polygondwanaland/02-f4a7cd5052e4.mp3",
+    "bytes": 9030232,
+    "sha256": "f4a7cd5052e4fe990ad9005b870b22e75e6300f75719ad846828070d310d7e04",
+    "durationSec": 212.8455,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "The Castle In The Air",
+    "number": 3,
+    "path": "assets/audio/records/polygondwanaland/03-525f4d387db1.mp3",
+    "bytes": 7219941,
+    "sha256": "525f4d387db189c17296ee8718e85a3f34aad8e45a3703c6c24e2fbaa50b3542",
+    "durationSec": 167.5881,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Deserted Dunes Welcome Weary Feet",
+    "number": 4,
+    "path": "assets/audio/records/polygondwanaland/04-4844d8042193.mp3",
+    "bytes": 9068877,
+    "sha256": "4844d804219355f873f12165c8090f5d6e740a696ef1c839b06567d55e36e3dd",
+    "durationSec": 213.8112,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Inner Cell",
+    "number": 5,
+    "path": "assets/audio/records/polygondwanaland/05-9934172ca285.mp3",
+    "bytes": 9939550,
+    "sha256": "9934172ca2853be5cd93507d57fd91f43a5340754b16659176517d7d77de1148",
+    "durationSec": 235.5786,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Loyalty",
+    "number": 6,
+    "path": "assets/audio/records/polygondwanaland/06-4b9e5018f429.mp3",
+    "bytes": 9266167,
+    "sha256": "4b9e5018f42974e6bf098165816712c1747ad124cebcf944079119521753dac9",
+    "durationSec": 218.7441,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Horology",
+    "number": 7,
+    "path": "assets/audio/records/polygondwanaland/07-73952d13afd9.mp3",
+    "bytes": 7401584,
+    "sha256": "73952d13afd95efbf9bb679a8c0974e93d6cbfc19b889b2289a7a280c78ad9aa",
+    "durationSec": 172.1295,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Tetrachromacy",
+    "number": 8,
+    "path": "assets/audio/records/polygondwanaland/08-871fa00a5465.mp3",
+    "bytes": 8941489,
+    "sha256": "871fa00a54655df8faaa085e3291f37b9a086071c55c9b7e8bc5a1f6b0c8a499",
+    "durationSec": 210.627,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "Searching...",
+    "number": 9,
+    "path": "assets/audio/records/polygondwanaland/09-d0bf928fbdf3.mp3",
+    "bytes": 7854684,
+    "sha256": "d0bf928fbdf3ee2801620bf364d548100d1f71ae80f609b99fc91e82fd71f4f5",
+    "durationSec": 183.4569,
+    "contentType": "audio/mpeg"
+  },
+  {
+    "title": "The Fourth Colour",
+    "number": 10,
+    "path": "assets/audio/records/polygondwanaland/10-359055bd6369.mp3",
+    "bytes": 15403853,
+    "sha256": "359055bd6369056ad7f5d3cd09f5a0518b004cd05f92147700eea7897a394d29",
+    "durationSec": 372.186,
+    "contentType": "audio/mpeg"
+  }
+]

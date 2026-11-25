@@ -28,3 +28,12 @@
 .volume-control label{display:flex;align-items:center;gap:.7rem;font:.72rem var(--font-mono);margin:.45rem .2rem 0}.volume-control input{flex:1;min-width:70px;min-height:24px}.volume-control output{min-width:4ch;color:var(--accent)}
 .micro-view .source-badge,.micro-view .hover-info{display:none}.micro-view .needle-scope{width:auto;right:1rem;max-width:none;pointer-events:none}.micro-view #scope-title{margin-bottom:.3rem}.micro-view #groove-stats{max-width:35rem}
 @media(max-width:600px){.view-strip button{font-size:.59rem;padding:.4rem .23rem}.micro-view .needle-scope{top:68px;right:.5rem}.volume-control label{font-size:.65rem}.sleeve-detail{bottom:350px}}
+
+/* A sleeve remains a listening destination when a service cannot embed. */
+#album-listening{grid-column:1/-1;min-width:0}.album-listening{display:grid;gap:.7rem}.listening-choices,.listening-links{display:flex;flex-wrap:wrap;gap:.5rem}.listening-choices button{flex:1}.listening-player{min-width:0}.listening-player iframe{width:100%;max-width:100%;min-width:200px}.listening-audio{display:block;width:100%}.listening-track{display:grid;gap:.4rem;font:.75rem var(--font-mono)}.listening-track select{width:100%;min-width:0}.listening-recording{display:grid;gap:.5rem}.listening-recording>a{font:.7rem var(--font-mono)}.listening-status{border-left:2px solid var(--accent);padding-left:.7rem}.records .sleeve-detail p.small{font:.72rem/1.55 var(--font-mono)}.service-listening .volume-control{opacity:.55;pointer-events:none}.service-listening #volume{visibility:hidden}
+@media(min-width:601px){.sleeve-detail{width:470px;bottom:35px}.sleeve-content{grid-template-columns:90px 1fr}.service-listening .deck-strip{left:1rem;transform:none;width:min(600px,calc(100% - 520px))}.service-listening .deck-buttons{flex-wrap:wrap}.service-listening .deck-buttons button{flex:1 0 25%}}
+@media(max-width:600px){.sleeve-detail{top:68px;bottom:38px}.service-listening .deck-strip{visibility:hidden}.listening-player iframe{height:352px}.needle-scope{width:235px;top:125px}.needle-scope .eyebrow{font-size:.6rem}}
+
+.service-listening #album-context{display:none}.listening-links{font:.72rem/1.6 var(--font-mono)}
+
+.service-listening .volume-control{display:none}.listening-cut-details summary{padding:.5rem 0}.listening-cut-details[open]{display:grid;gap:.5rem}.listening-cut-details .listening-cut{width:100%}

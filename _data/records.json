@@ -608,7 +608,9 @@
     "context": "9 tracks, from Call Me Star to Blood and Sand / Milk and Endless Waters.",
     "metadataSource": "https://music.apple.com/us/album/dying-surfer-meets-his-maker/1436819852?uo=4",
     "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/0e/ce/26/0ece26fe-2340-e671-42cb-24fcb60bc43f/607396644438.png/512x512bb.jpg",
-    "bandcampUrl": "https://allthemwitches.bandcamp.com/album/dying-surfer-meets-his-maker"
+    "bandcampUrl": "https://allthemwitches.bandcamp.com/album/dying-surfer-meets-his-maker",
+    "spotifyId": "3ALN0x74nkWeB6RgySpaPD",
+    "playbackProvenance": "https://open.spotify.com/album/3ALN0x74nkWeB6RgySpaPD"
   },
   {
     "id": "masana-temples",
@@ -682,7 +684,11 @@
     ],
     "context": "10 tracks, from Entrance to Blanket Song.",
     "metadataSource": "https://music.apple.com/us/album/masana-temples/1422830212?uo=4",
-    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/45/fd/4c/45fd4c9d-5626-c1e0-17b8-516fe473a5fd/606825444144_cover.jpg/512x512bb.jpg"
+    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/45/fd/4c/45fd4c9d-5626-c1e0-17b8-516fe473a5fd/606825444144_cover.jpg/512x512bb.jpg",
+    "spotifyId": "0tOFzVQMbTIUzzWGscve93",
+    "youtubeVideoId": "PNzsRauOeqE",
+    "playbackProvenance": "https://kikagakumoyo.com/works/masana-temples/",
+    "youtubeProvenance": "https://www.youtube.com/watch?v=PNzsRauOeqE"
   },
   {
     "id": "kind-of-blue",
@@ -726,7 +732,9 @@
     ],
     "context": "5 tracks, from So What to Flamenco Sketches.",
     "metadataSource": "https://music.apple.com/us/album/kind-of-blue/268443092?uo=4",
-    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/512x512bb.jpg"
+    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/512x512bb.jpg",
+    "spotifyId": "1weenld61qoidwYuZ1GESA",
+    "playbackProvenance": "https://open.spotify.com/album/1weenld61qoidwYuZ1GESA"
   },
   {
     "id": "polygondwanaland",
@@ -800,6 +808,70 @@
     ],
     "context": "10 tracks, from Crumbling Castle to The Fourth Colour.",
     "metadataSource": "https://music.apple.com/us/album/polygondwanaland/1876027939?uo=4",
-    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c0/3a/d0/c03ad0de-7e4b-8398-adc8-7aa396a15ca5/116.jpg/512x512bb.jpg"
+    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c0/3a/d0/c03ad0de-7e4b-8398-adc8-7aa396a15ca5/116.jpg/512x512bb.jpg",
+    "audioProvenanceUrl": "https://kinggizzardandthelizardwizard.com/polygondwanaland",
+    "audioCredit": "King Gizzard & The Lizard Wizard · official 320 kbps digital masters · shared with the band’s permission",
+    "audioTracks": [
+      {
+        "title": "Crumbling Castle",
+        "url": "/assets/audio/records/polygondwanaland/01-41a42634fb84.mp3",
+        "durationSec": 643.7565,
+        "sizeBytes": 26266672
+      },
+      {
+        "title": "Polygondwanaland",
+        "url": "/assets/audio/records/polygondwanaland/02-f4a7cd5052e4.mp3",
+        "durationSec": 212.8455,
+        "sizeBytes": 9030232
+      },
+      {
+        "title": "The Castle In The Air",
+        "url": "/assets/audio/records/polygondwanaland/03-525f4d387db1.mp3",
+        "durationSec": 167.5881,
+        "sizeBytes": 7219941
+      },
+      {
+        "title": "Deserted Dunes Welcome Weary Feet",
+        "url": "/assets/audio/records/polygondwanaland/04-4844d8042193.mp3",
+        "durationSec": 213.8112,
+        "sizeBytes": 9068877
+      },
+      {
+        "title": "Inner Cell",
+        "url": "/assets/audio/records/polygondwanaland/05-9934172ca285.mp3",
+        "durationSec": 235.5786,
+        "sizeBytes": 9939550
+      },
+      {
+        "title": "Loyalty",
+        "url": "/assets/audio/records/polygondwanaland/06-4b9e5018f429.mp3",
+        "durationSec": 218.7441,
+        "sizeBytes": 9266167
+      },
+      {
+        "title": "Horology",
+        "url": "/assets/audio/records/polygondwanaland/07-73952d13afd9.mp3",
+        "durationSec": 172.1295,
+        "sizeBytes": 7401584
+      },
+      {
+        "title": "Tetrachromacy",
+        "url": "/assets/audio/records/polygondwanaland/08-871fa00a5465.mp3",
+        "durationSec": 210.627,
+        "sizeBytes": 8941489
+      },
+      {
+        "title": "Searching...",
+        "url": "/assets/audio/records/polygondwanaland/09-d0bf928fbdf3.mp3",
+        "durationSec": 183.4569,
+        "sizeBytes": 7854684
+      },
+      {
+        "title": "The Fourth Colour",
+        "url": "/assets/audio/records/polygondwanaland/10-359055bd6369.mp3",
+        "durationSec": 372.186,
+        "sizeBytes": 15403853
+      }
+    ]
   }
 ]

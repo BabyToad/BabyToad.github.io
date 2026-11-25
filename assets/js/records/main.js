@@ -1,3 +1,4 @@
+import {createListeningPanel} from './listening.js';
 import {GrooveSurface} from './micro-surface.js';
 import {Renderer} from './physics/render.js';
 import {AlbumFan} from './fan.js';
@@ -8,12 +9,15 @@ import {ALPHA_REST,R_LEADIN,W33,alphaForRadius,grooveRadius,stylusXY} from './ph
 
 const $=id=>document.getElementById(id),root=document.querySelector('[data-records]');
 const albums=JSON.parse($('records-data').textContent),canvas=$('record-stage');
+const mediaBase=new URL(root.dataset.mediaBase||'/',location.href);
+for(const album of albums)for(const track of album.audioTracks||[])track.url=new URL(track.url,mediaBase).href;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'),phone=matchMedia('(max-width:600px)');
 const state={selected:0,tel:null,received:0,record:null,sequence:0,cutting:false,ready:false,motor:false,cue:true,rpm:100/3,pitch:0,lookOnly:false,source:'House pressing',sourceDetail:'Synthesised Demo EP · Guillermo Rauch'};
 const camera={az:-.38,el:.72,distance:1.50,focus:[-.22,.03,-.07],follow:false,target:null};
 let renderer,fan,worker,job=0,renderFrame=0,lastFrame=0,alive=true,shown=true,gestureCleanup;
 let microscope,microSample=null;
 let unavailable=false,pendingPressing=null,pendingPressingTimer;
+let downloadAbort=null,downloadJob=0;
 const coarse=matchMedia('(pointer:coarse)');
 const gestureHint=()=>coarse.matches?'Drag empty space to look · pinch to zoom · use two fingers to pan':'Drag empty space to look · click the scene for wheel zoom';
 $('gesture-hint').textContent=gestureHint();
@@ -22,37 +26,65 @@ const conditions={clean:{noise:.2,dust:0,scratches:0,warp:0,offCenter:0,echo:.1}
 function status(message){$('record-status').textContent=message;}
 function failure(message){status(message);audioPending=false;update();}
 const audio=createPhysicalAudio(t=>{if(t.recSeq!==state.sequence)return;const firstSurface=!!t.surface&&!microSample;if(t.surface)microSample=t;const previous=state.tel,changed=!previous||(Math.abs(t.wp)>.02&&Math.abs(t.wp-previous.wp)>.002)||Math.abs(t.al-previous.al)>1e-5||Math.abs(t.zb-previous.zb)>1e-5||Math.abs(t.plinth-previous.plinth)>1e-7||firstSurface||(camera.micro&&(Math.abs(t.xi-previous.xi)>1e-7||Math.abs(t.ze-previous.ze)>1e-7))||t.motor!==previous.motor||t.cueUp!==previous.cueUp||!!t.auto;state.tel=t;state.received=performance.now();state.motor=t.motor;state.cue=t.cueUp;state.ready=true;if(pendingPressing&&Math.abs(t.wp)<.01&&t.hc>=.001){const install=pendingPressing;pendingPressing=null;install();return;}if(changed||Math.abs(t.wp)>.02)invalidate();},()=>{if(pendingPressing&&audio.context?.state!=='running'){const install=pendingPressing;pendingPressing=null;install(true);}invalidate();},failure);
-function invalidate(){if(!renderFrame&&alive&&shown&&!document.hidden)renderFrame=requestAnimationFrame(frame);}
+
+const listening=createListeningPanel($('album-listening'),{
+  maxCutSeconds:()=>phone.matches?180:600,
+  beforePlay:async({provider})=>{
+    cancelDownload();if(state.cutting)cancelCut();gestureCleanup?.();await audio.silence();
+    state.tel=null;state.ready=false;state.motor=false;state.cue=true;status('Deck paused. Use the '+provider+' player in the sleeve.');update();invalidate();
+  },
+  onStop:()=>{status('Album player closed. Put it on resumes the physical pressing.');update();invalidate();},
+  onCut:cutOfficialTrack
+});
+function cancelDownload(){downloadJob++;if(downloadAbort){downloadAbort.abort();downloadAbort=null;state.cutting=false;}}
+async function cutOfficialTrack({album,track}){
+  if(unavailable)throw new Error('The vinyl simulation is unavailable. You can still play the full recording here.');
+  cancelCut();const id=downloadJob,controller=downloadAbort=new AbortController();
+  await audio.silence();if(id!==downloadJob)return false;
+  state.tel=null;state.ready=false;state.motor=false;state.cue=true;state.cutting=true;update();
+  status('Downloading '+track.title+' ('+(track.sizeBytes/1048576).toFixed(1)+' MB)…');
+  try{
+    const response=await fetch(track.url,{signal:controller.signal});if(!response.ok)throw new Error('The recording could not download. Try full playback or a service link.');
+    const blob=await response.blob();if(id!==downloadJob||!alive)return false;
+    if(blob.size!==track.sizeBytes)throw new Error('The download was incomplete. Try again or play the full recording.');
+    const file=new File([blob],track.title+'.mp3',{type:'audio/mpeg'});file.recordCredit={title:album.title,artist:album.artist};
+    downloadAbort=null;state.cutting=false;$('sleeve-detail').hidden=true;setView('deck');beginCut('official',[file]);return true;
+  }catch(error){if(id!==downloadJob||error.name==='AbortError')return false;downloadAbort=null;state.cutting=false;const message=error.message==='The download was incomplete. Try again or play the full recording.'?error.message:'The recording could not download. Try full playback or a service link.';status(message);update();throw new Error(message);}
+}
+
+function invalidate(){if(renderer&&!renderFrame&&alive&&shown&&!document.hidden)renderFrame=requestAnimationFrame(frame);}
 function setView(name){
   const portrait=phone.matches;
-  const views={room:{focus:[-.25,.06,.02],distance:portrait?2.6:1.95,az:-.38,el:.72},deck:{focus:[.04,-.02,portrait?-.20:-.065],distance:portrait?2.35:1.20,az:portrait?-.12:-.35,el:portrait?.92:.80},crate:{focus:[-.62,.10,-.04],distance:portrait?1.35:1.10,az:0,el:.40},stylus:{focus:[...stylusXY(state.tel?.al??ALPHA_REST),.002],distance:.17,az:-.45,el:.72}};
+  const views={room:{focus:[-.25,.06,.02],distance:portrait?2.6:1.95,az:-.38,el:.72},deck:{focus:[.04,-.02,portrait?-.20:-.065],distance:portrait?2.35:1.20,az:portrait?-.12:-.35,el:portrait?.92:.80},crate:{focus:[-.62,.10,-.04],distance:portrait?1.35:1.10,az:0,el:.40},stylus:{focus:[...stylusXY(state.tel?.al??ALPHA_REST),.002],distance:.12,az:-.45,el:.20}};
   const wasMicro=camera.micro;camera.micro=name==='grooves';
   if(camera.micro){microSample=null;views.grooves={focus:[0,0,0],distance:portrait?.0004:.0005,az:.25,el:.40};camera.target=null;Object.assign(camera,views.grooves);}
   const target=views[name]||views.room;if(reduced.matches||camera.micro||wasMicro)Object.assign(camera,target,{target:null});else camera.target=target;camera.follow=name==='stylus';
-  $('needle-scope').hidden=!['stylus','grooves'].includes(name);$('scope-title').textContent=camera.micro?'Raw groove cut · unfiltered':'Under the stylus · magnified';$('groove-scope').hidden=camera.micro;audio.send({t:'view',on:['stylus','grooves'].includes(name),micro:camera.micro});
+  $('needle-scope').hidden=!['stylus','grooves'].includes(name);$('scope-title').textContent=camera.micro?'Raw groove cut · unfiltered':'Stylus contact';$('groove-scope').hidden=true;audio.send({t:'view',on:camera.micro,micro:camera.micro});
   root.classList.toggle('micro-view',camera.micro);$('gesture-hint').textContent=camera.micro?'Cutaway · 18 µm seating radius for every stylus · white bar = 100 µm':gestureHint();
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===name)));
   invalidate();
 }
 function selectAlbum(index,inspect=true){
-  state.selected=Math.max(0,Math.min(albums.length-1,index));const a=albums[state.selected];
+  cancelDownload();state.selected=Math.max(0,Math.min(albums.length-1,index));const a=albums[state.selected];
   $('selected-title').textContent=a.title;$('selected-artist').textContent=a.artist;$('selected-meta').textContent=`${a.year} · ${a.tracks.length} tracks`;
   $('selected-cover').src=a.cover;$('selected-cover').alt=a.title+' cover';$('album-context').textContent=a.context;
-  $('youtube-link').href=a.url;$('spotify-link').href=a.spotifyId?`https://open.spotify.com/album/${a.spotifyId}`:'https://open.spotify.com/search/'+encodeURIComponent(a.artist+' '+a.title);
-  $('bandcamp-link').hidden=!a.bandcampUrl;if(a.bandcampUrl)$('bandcamp-link').href=a.bandcampUrl;
+  listening.selectAlbum(a);
   $('previous-album').disabled=state.selected===0;$('next-album').disabled=state.selected===albums.length-1;
   $('album-number').textContent=`${state.selected+1} / ${albums.length}`;
   $('album-tracks').replaceChildren(...a.tracks.map(t=>Object.assign(document.createElement('li'),{textContent:t.title})));
   document.querySelectorAll('[data-record]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.record===a.id)));
   if(inspect){$('sleeve-detail').hidden=false;$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');$('needle-scope').hidden=true;setView('crate');}
-  invalidate();
+  update();invalidate();
 }
 function update(){
   const enabled=!!state.record&&!state.cutting&&!unavailable;
   document.querySelector('[data-view=grooves]').disabled=!state.ready||state.cutting||unavailable;
   for(const id of ['put-on','motor','cue','cut-track','press-again'])$(id).disabled=!enabled||audioPending;
   $('cut-track').disabled=!enabled||!audio.ready||audioPending;
-  $('put-on').textContent=audioPending?'Starting…':'Put it on';
+  $('put-on').textContent=listening.active?'Restart physical record':audioPending?'Starting…':'Put it on';
+  for(const id of ['speed33','speed45','adjust-toggle'])$(id).disabled=unavailable;
+  for(const id of ['motor','cue','cut-track','press-again','speed33','speed45','adjust-toggle'])if(listening.active)$(id).disabled=true;
+  root.classList.toggle('service-listening',!!listening.active);
   $('motor').textContent=state.motor?'Stop motor':'Start motor';$('cue').textContent=state.cue?'Lower needle':'Lift needle';
   $('speed33').setAttribute('aria-pressed',String(state.rpm<40));$('speed45').setAttribute('aria-pressed',String(state.rpm>40));
   $('cancel-cut').hidden=!state.cutting;
@@ -60,11 +92,12 @@ function update(){
 }
 async function readyAction(fn){
   if(!state.record||state.cutting||unavailable||audioPending)return;
-  const actionJob=job;audioPending=true;status('Warming the cartridge…');update();
-  try{await audio.unlock();if(!alive)return;audioPending=false;if(state.cutting||actionJob!==job){update();return;}state.ready=true;applyParams();audio.send({t:'view',on:!$('needle-scope').hidden,micro:camera.micro});fn();status('The deck is yours.');}
+  listening.stop();const actionJob=job;audioPending=true;status('Warming the cartridge…');update();
+  try{await audio.unlock();if(!alive)return;audioPending=false;if(state.cutting||actionJob!==job){update();return;}state.ready=true;applyParams();audio.send({t:'view',on:camera.micro,micro:camera.micro});fn();status('The deck is yours.');}
   catch(error){failure(error.message);}update();invalidate();
 }
 function command(action,data={}){
+  if(listening.active)return status('Use the album player, or choose Return to physical deck.');
   if(action==='motor')return readyAction(()=>{state.motor=!state.motor;audio.send({t:'motor',on:state.motor});});
   if(unavailable)return;
   if(action==='speed33'||action==='speed45'){state.rpm=action==='speed33'?100/3:45;audio.send({t:'speed',rpm:state.rpm*(1+state.pitch/100)});update();return invalidate();}
@@ -81,7 +114,7 @@ function applyParams(){
 }
 function beginCut(kind,files=null){
   if(unavailable)return;
-  pendingPressing=null;clearTimeout(pendingPressingTimer);const id=++job;gestureCleanup?.();worker?.terminate();worker=null;state.cutting=true;audio.send({t:'cue',up:true});audio.send({t:'motor',on:false});state.motor=false;state.cue=true;update();
+  listening.stop();cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);const id=++job;gestureCleanup?.();worker?.terminate();worker=null;state.cutting=true;audio.send({t:'cue',up:true});audio.send({t:'motor',on:false});state.motor=false;state.cue=true;update();
   const w=worker=new Worker(new URL('./physics/master-worker.js',import.meta.url),{type:'module'});
   w.onerror=e=>{if(id===job){state.cutting=false;failure('Could not cut this side. Try a shorter file.');}w.terminate();};
   w.onmessage=({data:m})=>{
@@ -93,7 +126,7 @@ function beginCut(kind,files=null){
       microSample=null;if(camera.micro)setView('stylus');$('groove-stats').textContent='Needle raised · new pressing ready.';state.cutting=false;$('track-current').textContent='Needle raised';state.record=m.rec;state.record.sequence=++state.sequence;if(park)state.tel=null;state.ready=false;
       renderer?.setRecord(m.rec,m.vis);audio.install(state.record,park);if(park)applyParams();
       sourceKind=kind;sourceFiles=files;state.source=kind==='demo'?'House pressing':files.length===1?files[0].name.replace(/\.[^.]+$/,''):'Your local side';
-      state.sourceDetail=kind==='demo'?'Synthesised Demo EP · Guillermo Rauch':`${files.length} local ${files.length===1?'file':'files'} · cut here, never uploaded`;
+      state.sourceDetail=kind==='demo'?'Synthesised Demo EP · Guillermo Rauch':kind==='official'?files[0].recordCredit.artist+' · artist-authorized master, cut here':`${files.length} local ${files.length===1?'file':'files'} · cut here, never uploaded`;
       $('cut-track').replaceChildren(...m.rec.tracks.map((track,i)=>Object.assign(document.createElement('option'),{value:i,textContent:`${i+1}. ${track.title}`})));
       status(m.rec.truncated?'This side was cut short to fit. Choose fewer tracks to hear the full files.':'Ready. Put it on, or start the motor and cue by hand.');
       update();invalidate();w.terminate();worker=null;};
@@ -133,7 +166,7 @@ function cutFiles(fileList){
   if(files.reduce((sum,f)=>sum+f.size,0)>maxMB*1024*1024)return status(`Choose files totaling under ${maxMB} MB on this device.`);
   $('sleeve-detail').hidden=true;setView('deck');beginCut('files',files);
 }
-function cancelCut(){pendingPressing=null;clearTimeout(pendingPressingTimer);job++;worker?.terminate();worker=null;state.cutting=false;status(state.record?'Cut cancelled. The previous pressing is still on the deck.':'Cut cancelled. Choose House pressing or a local file.');update();}
+function cancelCut(){cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);job++;worker?.terminate();worker=null;state.cutting=false;status(state.record?'Cut cancelled. The previous pressing is still on the deck.':'Cut cancelled. Choose House pressing or a local file.');update();}
 function drawScope(t){
   const scope=$('groove-scope'),ctx=scope.getContext('2d'),v=t.view;if(!v)return;
   const styles=getComputedStyle(root),w=scope.width,h=scope.height;ctx.fillStyle=styles.getPropertyValue('--bg-dip');ctx.fillRect(0,0,w,h);ctx.strokeStyle=styles.getPropertyValue('--ink-soft');ctx.lineWidth=1.5;
@@ -159,7 +192,7 @@ function frame(now){
       const track=state.record?.tracks.find(k=>t.theta>=k.theta0&&t.theta<k.theta1);
       $('track-current').textContent=t.hc>.0001?'Needle raised':track?`${track.title} · ${format((t.theta-track.theta0)/W33)}`:t.theta>=state.record?.thetaLock?'Run-out groove':'Lead-in / between tracks';
       if(track&&document.activeElement!==$('cut-track'))$('cut-track').value=state.record.tracks.indexOf(track);
-      update();if(!$('needle-scope').hidden){if(!camera.micro)drawScope(t);$('groove-stats').textContent=contactText(t)+(camera.micro?' · drag to orbit / pinch to zoom':'');}
+      update();if(!$('needle-scope').hidden){$('groove-stats').textContent=contactText(t)+(camera.micro?' · drag to orbit / pinch to zoom':'');}
       $('contact-forces').textContent=contactText(t);
     }
   }catch(error){failure('The 3D view could not draw. The catalogue links still work.');console.error(error);return;}
@@ -170,19 +203,21 @@ function frame(now){
 try{
   renderer=new Renderer(canvas);microscope=new GrooveSurface(renderer.gl);fan=new AlbumFan(renderer,albums,invalidate);canvas.hidden=false;$('scene-fallback').hidden=true;
   gestureCleanup=connectGestures({canvas,renderer,fan,camera,getState:()=>({...state,skate:+$('skate').value,volume:+$('volume').value,al:state.tel?.al??ALPHA_REST}),command,select:selectAlbum,hover:index=>{if(fan.hover===index)return;fan.hover=index;$('hover-info').hidden=index===null;if(index!==null){const a=albums[index];$('hover-info').textContent=a.title+' · '+a.artist+' · '+a.year+' · '+a.tracks.length+' tracks';}invalidate();},invalidate});
-  document.querySelectorAll('[data-record]').forEach(button=>{button.disabled=false;button.addEventListener('click',()=>{selectAlbum(albums.findIndex(a=>a.id===button.dataset.record));canvas.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});});});
+
   new ResizeObserver(invalidate).observe(canvas);new MutationObserver(invalidate).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   new IntersectionObserver(entries=>{shown=entries[0].isIntersecting;if(shown)invalidate();}).observe(canvas);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();unavailable=true;gestureCleanup?.();audio.silence();update();shown=false;canvas.hidden=true;$('scene-fallback').hidden=false;$('scene-fallback').textContent='The 3D view lost its graphics context. Reload to restart the player; the catalogue links still work.';status('Player stopped. Reload to restore the 3D view.');});
   setView(phone.matches?'deck':'room');selectAlbum(0,false);beginCut('demo');
 }catch(error){unavailable=true;console.error(error);$('scene-fallback').textContent='The 3D player is unavailable in this browser. The complete collection and listening links are below.';status('The 3D player is unavailable.');for(const b of root.querySelectorAll('.deck-strip button,.view-strip button'))b.disabled=true;}
-document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{setView(button.dataset.view);if(button.dataset.view!=='crate')$('sleeve-detail').hidden=true;}));
+  document.querySelectorAll('[data-record]').forEach(button=>{button.disabled=false;button.addEventListener('click',()=>{selectAlbum(albums.findIndex(a=>a.id===button.dataset.record));document.querySelector('.listening-desk').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});});});
+if(unavailable)selectAlbum(0,false);
+document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{setView(button.dataset.view);if(button.dataset.view!=='crate'&&!listening.active)$('sleeve-detail').hidden=true;}));
 $('reset-view').onclick=()=>setView(phone.matches?'deck':'room');
 $('look-only').onclick=()=>{state.lookOnly=!state.lookOnly;$('look-only').setAttribute('aria-pressed',String(state.lookOnly));$('gesture-hint').textContent=state.lookOnly?'Drag anywhere to look · pinch or scroll to zoom':gestureHint();};
 $('put-on').onclick=()=>readyAction(()=>{state.motor=true;audio.send({t:'motor',on:true});audio.send({t:'cueTo',al:alphaForRadius(R_LEADIN-.0012)});});
 $('motor').onclick=()=>command('motor');$('cue').onclick=()=>command('cue');$('speed33').onclick=()=>command('speed33');$('speed45').onclick=()=>command('speed45');
-$('adjust-toggle').onclick=()=>{const open=$('adjustments').hidden;$('adjustments').hidden=!open;$('sleeve-detail').hidden=true;$('adjust-toggle').setAttribute('aria-expanded',String(open));};
-$('close-adjustments').onclick=()=>{$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');};$('close-sleeve').onclick=()=>{$('sleeve-detail').hidden=true;};
+$('adjust-toggle').onclick=()=>{listening.stop();const open=$('adjustments').hidden;$('adjustments').hidden=!open;$('sleeve-detail').hidden=true;$('adjust-toggle').setAttribute('aria-expanded',String(open));};
+$('close-adjustments').onclick=()=>{$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');};$('close-sleeve').onclick=()=>{listening.stop();$('sleeve-detail').hidden=true;};
 $('previous-album').onclick=()=>selectAlbum(state.selected-1);$('next-album').onclick=()=>selectAlbum(state.selected+1);
 for(const id of ['choose-files','sleeve-files'])$(id).onclick=()=>{$('audio-files').value='';$('audio-files').click();};
 $('audio-files').onchange=e=>cutFiles(e.target.files);$('house-record').onclick=()=>beginCut('demo');$('cancel-cut').onclick=cancelCut;
@@ -193,7 +228,7 @@ for(const [id,label,suffix]of [['force','force-value',' g'],['skate','skate-valu
 $('stylus-type').onchange=applyParams;
 $('cut-track').onchange=()=>{const k=state.record?.tracks[+$('cut-track').value];if(k)command('cueTo',{al:alphaForRadius(grooveRadius(state.record.rTab,k.theta0+.2))});};
 canvas.addEventListener('dragover',e=>e.preventDefault());canvas.addEventListener('drop',e=>{e.preventDefault();cutFiles(e.dataTransfer.files);});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('sleeve-detail').hidden=true;$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){listening.stop();$('sleeve-detail').hidden=true;$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){gestureCleanup?.();}else invalidate();});
 window.addEventListener('pageshow',e=>{if(e.persisted)location.reload();});
-window.addEventListener('pagehide',()=>{clearTimeout(pendingPressingTimer);alive=false;job++;worker?.terminate();audio.dispose();fan?.dispose();cancelAnimationFrame(renderFrame);});
+window.addEventListener('pagehide',()=>{cancelDownload();listening.dispose();clearTimeout(pendingPressingTimer);alive=false;job++;worker?.terminate();audio.dispose();fan?.dispose();cancelAnimationFrame(renderFrame);});

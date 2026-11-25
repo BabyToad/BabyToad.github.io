@@ -117,6 +117,7 @@ void main() {
 export const REC_FS = COMMON + `
 in vec3 vP, vN; in vec2 vQ; out vec4 o;
 uniform mat4 uM; uniform sampler2D uLut, uVis, uLabel;
+uniform vec3 uStylus;
 uniform float uRLo, uRHi, uRows, uRevEnd, uW, uDust; uniform vec4 uScr[12]; uniform int uNScr;
 float lut(float r) {
   float x = clamp((r - uRLo) / (uRHi - uRLo), 0.0, 1.0) * 2047.0; int i = int(floor(x));
@@ -161,5 +162,10 @@ void main() {
     vec2 cell = floor(vQ / 4e-4);                              // dust specks
     if (hash(cell) < uDust * 0.0016) c += 0.05 * (0.3 + key) * (1.0 - smoothstep(0.0, 6e-5 + px, length(vQ / 4e-4 - cell - 0.5) * 4e-4));
   }
+  // Sub-millimetre contact occlusion resolves what the whole-deck shadow map cannot.
+  // It fades away as the real solver raises the stylus, without moving the tip.
+  float clearance = max(0.0, uStylus.z - vP.z);
+  float seat = exp(-dot(vP.xy-uStylus.xy,vP.xy-uStylus.xy)/2.0e-8) * exp(-clearance/.00010);
+  c *= 1.0 - .75 * seat;
   o = vec4(tone(c), 1.0);
 }`;
