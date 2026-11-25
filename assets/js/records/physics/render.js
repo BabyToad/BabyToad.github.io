@@ -44,6 +44,8 @@ export class Renderer {
         G.rbox(-0.088, -0.186, -0.066, -0.174, DECK_Z, DECK_Z + 0.003, 0.002, 0.0006), G.rbox(-0.060, -0.186, -0.038, -0.174, DECK_Z, DECK_Z + 0.003, 0.002, 0.0006),
         
         G.rbox(-0.125, 0.172, -0.085, 0.1885, DECK_Z, DECK_Z + 0.011, 0.002, 0.001), G.rbox(0.130, 0.172, 0.170, 0.1885, DECK_Z, DECK_Z + 0.011, 0.002, 0.001))),
+      volume: m(G.cyl(.014,.013,DECK_Z,DECK_Z+.018,48)),
+      volumeMark: m(G.box(-.0006,.004,DECK_Z+.018,.0006,.012,DECK_Z+.0185)),
       pitchCap: m(G.rbox(0.2335, -0.118, 0.2545, -0.102, DECK_Z, DECK_Z + 0.009, 0.002, 0.001)),
       slot: m(G.rbox(0.2385, -0.170, 0.2495, -0.050, DECK_Z, DECK_Z + 0.0005, 0.002, 0.0002)),
       ledStart: m(G.merge(at(led, -0.132, -0.1635, DECK_Z + 0.004))), led33: m(G.merge(at(led, -0.084, -0.180, DECK_Z + 0.003))),
@@ -154,7 +156,8 @@ export class Renderer {
     const dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(c.clientWidth * dpr), h = Math.round(c.clientHeight * dpr);
     if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
     const cam = this.camera(st);
-    const spin = G.Rz(-st.thp), discM = G.chain(spin, G.T(ecc[0], ecc[1], 0));
+    const vibration=G.T(-.5*(st.plinth||0),0,st.plinth||0);
+    const spin = G.Rz(-st.thp), discM = G.chain(vibration,spin,G.T(ecc[0],ecc[1],0));
     const arm = G.chain(G.T(PIVOT_X, PIVOT_Y, PIVOT_H), G.Rz(st.al), G.Ry(-Math.asin(Math.max(-0.2, Math.min(0.2, st.zt / ARM_LE)))));
     const head = G.chain(arm, G.T(ARM_LE, 0, 0), G.Rz(-ARM_BETA));
     // Keep the modelled diamond at the engine's exact contact point while the arm tilts.
@@ -179,6 +182,10 @@ export class Renderer {
       [m.tube, arm, [0.30, 0.30, 0.32], 0.16, 1, 0, off], [m.weight, G.chain(arm,G.T((1.8-(st.force??1.8))*.003,0,0)), [0.022, 0.022, 0.024], 0.42, 0.7, 0, off], [m.dial, arm, CHROME, 0.28, 1, 0, off],
       [m.collar, head, CHROME, 0.2, 1, 0, off], [m.shell, head, [0.014, 0.014, 0.015], 0.4, 0.2, 0, off], [m.holder, head, [0.80, 0.36, 0.05], 0.42, 0, 0, off],
     ];
+    items.push([m.volume,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),BLACK,.32,.65,0,off]);
+    items.push([m.volumeMark,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),CHROME,.3,.4,0,off]);
+    // Plinth vibration is measured by the solver, never a cosmetic shake.
+    for(const item of items)if([m.body,m.plate,m.platter,m.mat,m.spindle].includes(item[0]))item[1]=G.mul(vibration,item[1]);
     if (info) items.push([m.edge, discM, [0.008, 0.008, 0.008], 0.22, 0, 0, off]);
 
     // 1. shadow map from the key light

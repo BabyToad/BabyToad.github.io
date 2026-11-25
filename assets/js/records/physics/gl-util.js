@@ -75,7 +75,7 @@ export function mesh(gl, data) {
   gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 24, 0);
   gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 24, 12);
   gl.bindVertexArray(null);
-  return { vao, count: data.length / 6 };
+  return { vao, buffer: buf, count: data.length / 6 };
 }
 export function program(gl, vs, fs) {
   const p = gl.createProgram();

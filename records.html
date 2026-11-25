@@ -12,7 +12,7 @@ use_container: false
     <canvas id="record-stage" tabindex="0" aria-label="3D record player. Drag empty space to orbit, pinch to zoom and pan. Equivalent controls follow." hidden></canvas>
     <p id="scene-fallback">The album catalogue and listening links are below. The simulated player needs JavaScript, WebGL2 and Web Audio.</p>
     <div class="view-strip glass" role="group" aria-label="Camera views">
-      <button data-view="room">Room</button><button data-view="crate">Records</button><button data-view="deck">Deck</button><button data-view="stylus">Needle</button><button id="reset-view" aria-label="Reset camera">↺</button><button id="look-only" aria-pressed="false">Look only</button>
+      <button data-view="room">Room</button><button data-view="crate">Records</button><button data-view="deck">Deck</button><button data-view="stylus">Needle</button><button data-view="grooves" title="Put a record on first; inspect its raw cut and contact model" disabled>Grooves</button><button id="reset-view" aria-label="Reset camera">↺</button><button id="look-only" aria-pressed="false">Look only</button>
     </div>
     <p id="hover-info" class="hover-info glass" hidden></p><div class="source-badge glass"><span class="eyebrow">On the platter</span><strong id="source-title">House pressing</strong><span id="source-detail">Synthesised Demo EP · Guillermo Rauch</span><span id="track-current">Preparing the groove…</span></div>
     <aside id="sleeve-detail" class="sleeve-detail glass" hidden aria-label="Selected sleeve">
@@ -31,16 +31,17 @@ use_container: false
       <label>Tracking force <output id="force-value">1.80 g</output><input id="force" type="range" min=".5" max="3" step=".05" value="1.8"></label>
       <label>Anti-skate <output id="skate-value">1.80 g</output><input id="skate" type="range" min="0" max="3" step=".05" value="1.8"></label>
       <label>Stylus<select id="stylus-type"><option value="elliptical">Elliptical</option><option value="conical">Conical</option><option value="microline">Micro-line</option></select></label>
-      <label>Volume <output id="volume-value">45%</output><input id="volume" type="range" min="0" max="100" value="45"></label>
+
       <label>Record condition<select id="condition"><option value="clean">Clean pressing</option><option value="played">Well played</option><option value="worn">Dust &amp; scratches</option></select></label>
       <button id="press-again">Press this side again</button><p class="small">Condition changes the groove geometry. Re-pressing lifts the needle and stops the motor.</p>
-      <button id="bump">Knock the table</button>
+      <p class="small">Tracking force loads both groove walls. Anti-skate balances their loads; a clean, well-tracked record can sound similar across nearby settings.</p><p id="contact-forces" class="small">Put a record on to inspect contact forces.</p>
+      <label>Knock strength<select id="knock-strength"><option value="1">Light tap</option><option value="4" selected>Firm knock</option><option value="8">Heavy knock</option></select></label><button id="bump">Knock the table</button>
     </aside>
-    <aside id="needle-scope" class="needle-scope glass" hidden aria-label="Live groove inspection"><p class="eyebrow">Under the stylus · magnified</p><canvas id="groove-scope" width="640" height="180" aria-label="Live groove walls around the simulated stylus"></canvas><p id="groove-stats"></p></aside>
+    <aside id="needle-scope" class="needle-scope glass" hidden aria-label="Live groove inspection"><p id="scope-title" class="eyebrow">Under the stylus · magnified</p><canvas id="groove-scope" width="640" height="180" aria-label="Live groove walls around the simulated stylus"></canvas><p id="groove-stats"></p></aside>
 
     <a class="stage-exit" href="#album-catalogue">Collection ↓</a><div class="deck-strip glass"><p id="gesture-hint" class="gesture-hint">Drag empty space to look · pinch to zoom · click the scene for wheel zoom</p>
       <div class="deck-buttons" role="group" aria-label="Turntable controls"><button id="put-on" class="primary">Put it on</button><button id="motor">Start motor</button><button id="cue">Lower needle</button><button id="speed33" aria-pressed="true">33⅓</button><button id="speed45" aria-pressed="false">45</button><button id="adjust-toggle" aria-expanded="false" aria-controls="adjustments">Adjust</button></div>
-      <div class="deck-readout"><output aria-live="off" id="rpm-value">0.00 RPM</output><span id="record-status" role="status" aria-live="polite">Cutting the house pressing…</span><button id="cancel-cut" hidden>Cancel</button></div>
+      <div class="volume-control"><label>Volume <output id="volume-value">45%</output><input id="volume" type="range" min="0" max="100" value="45"></label></div><div class="deck-readout"><output aria-live="off" id="rpm-value">0.00 RPM</output><span id="record-status" role="status" aria-live="polite">Cutting the house pressing…</span><button id="cancel-cut" hidden>Cancel</button></div>
       <div class="record-source"><button id="house-record">House pressing</button><button id="choose-files">Cut your files</button><select id="cut-track" aria-label="Track on the current pressing" disabled><option>Preparing tracks…</option></select><input type="file" id="audio-files" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden></div>
     </div>
   </section>

@@ -106,6 +106,7 @@ export class Engine {
     const t = this.tel, c = Math.max(1, t.cnt);
     const out = {
       thp: this.thp, wp: this.wp, al: this.al, zb: this.zb, ze: this.ze, xi: this.xi,
+      plinth: this.ru[8], surfaceZ: this.zs, trackingForce: this.vtfS, antiSkateForce: this.p.antiskate,
       cueUp: this.cueUp, motor: this.motor, hand: this.hOn, auto: this.auto,
       theta: t.theta, r: t.r, err: t.err, vg: t.vg, hc: t.hc, xg: t.xg,
       nIn: t.nIn / c, nOut: t.nOut / c, loss: t.loss / c, peak: t.peak,

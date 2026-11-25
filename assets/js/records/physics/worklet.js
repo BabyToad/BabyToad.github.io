@@ -63,7 +63,7 @@ class Turntable extends AudioWorkletProcessor {
       case 'platter': e.platterHand(m.on); break;
       case 'platterMove': e.platterMove(m.d); break;
       case 'bump': e.bump(m.s); break;
-      case 'view': this.view = m.on; break;
+      case 'view': this.view = m.on; this.micro = m.micro; break;
     }
   }
   process(inputs, outputs) {
@@ -78,7 +78,7 @@ class Turntable extends AudioWorkletProcessor {
       tel.t = 'tel'; tel.recSeq = this.recSeq;
       if (this.frames >= sampleRate / 2) { this.load = this.busy / 1000 / (this.frames / sampleRate); this.busy = 0; this.frames = 0; }
       tel.load = this.load;
-      if (this.view && (this.tick++ & 1)) tel.view = this.e.grooveView();
+      if (this.view && (this.tick++ & 1)) {if(this.micro){tel.surface=this.e.grooveView(5,121,60);tel.spr=this.e.rec?.spr;}else tel.view=this.e.grooveView();}
       this.port.postMessage(tel);
     }
     return true;
