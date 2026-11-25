@@ -34,7 +34,7 @@ export function createPlayback(host,report) {
       const api=await spotifyAPI();if(own!==generation)return;
       const mount=document.createElement('div');host.append(mount);
       startingTimeout(own);
-      api.createController(mount,{uri:requestedURI,width:'100%',height:352},created=>{
+      api.createController(mount,{uri:requestedURI,width:'100%',height:152},created=>{
         if(own!==generation){created.destroy();return;}controller=created;
         const frame=host.querySelector('iframe');if(frame)frame.title=`${album.title} — Spotify previews`;
         created.addListener('ready',()=>{

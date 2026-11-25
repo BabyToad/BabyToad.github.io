@@ -1,11 +1,11 @@
 // Optional surface noise, generated locally. It never processes the provider's audio.
 export function createVinylTexture() {
-  let context,source,gain,enabled=false,playing=false;
+  let context,source,gain,enabled=false,playing=false,level=.35;
   const silent=new URLSearchParams(location.search).get('mute')==='1';
   function sync() {
     if(!context)return;
     const audible=enabled&&playing&&!document.hidden&&!silent;
-    gain.gain.setTargetAtTime(audible ? .025 : 0,context.currentTime,.08);
+    gain.gain.setTargetAtTime(audible ? level*.07 : 0,context.currentTime,.08);
   }
   async function enable(value) {
     enabled=value;
@@ -27,5 +27,5 @@ export function createVinylTexture() {
     if(!value&&context?.state==='running')await context.suspend();
   }
   document.addEventListener('visibilitychange',sync);
-  return {enable,setPlaying(value){playing=value;sync();},dispose(){document.removeEventListener('visibilitychange',sync);source?.stop();context?.close();}};
+  return {enable,setLevel(value){level=Math.max(0,Math.min(1,value));sync();},setPlaying(value){playing=value;sync();},dispose(){document.removeEventListener('visibilitychange',sync);source?.stop();context?.close();}};
 }

@@ -75,3 +75,25 @@ Final muted Chromium verification on 2026-11-25:
 - Dark/light and placed/playing captures inspected. Jekyll prebuild/build, JS syntax and git whitespace checks pass.
 
 Evidence files remain local at `H:/Personal Projects/records-verification/v2/` (`playtest.json`, `extra-test.json`, `end-probe.json` and PNG captures). Verification scripts live in private vault scratch; they are not site build dependencies. Real physical-phone playback and feel remain unverified.
+
+
+## Fan desk revision (2026-11-25)
+
+Jonas requested a fan that opens and flicks through albums, glass hover information, a single listening scene, functional knobs and more realistic motion/materials. The desk now keeps navigation, transport, album/track information and settings together. The text catalogue remains a progressive-enhancement fallback. Album details and settings are glass overlays; the official streaming player remains visible in a compact dock. Portrait layout arranges the fan behind the deck instead of shrinking two side-by-side objects.
+
+The fan opens/folds, highlights sleeves on hover, and browses by horizontal swipe or horizontal/Shift-wheel. Ordinary vertical wheel remains page scrolling. Touch uses horizontal swipes and tap-to-place, with labelled buttons and ranges for precise adjustments. A press released outside the canvas is captured, preventing stale drags. Album changes return the old record before changing its label and sleeve; repeated changes keep the most recent request.
+
+The scene reports physical completion to the controller: record home, arm parked, needle down. Cueing starts the motor, lifts the arm, swings above the groove and lowers it before requesting audio. Track changes lift/park first. Returning a record waits for arm clearance. If the scene is offscreen, mechanical transitions complete without rendering so library controls cannot deadlock. Provider buffering/availability is still external; this is authored motion rather than a physics simulation or a guarantee of gapless timing.
+
+Physical controls have supported effects:
+
+- Start/cue control lowers or lifts the needle.
+- Track encoder chooses a track when a record is placed.
+- Surface knob adjusts locally generated crackle, with a matching keyboard range and opt-in checkbox.
+- 33⅓/45 buttons alter the simulated platter RPM with motor inertia. Spotify audio speed and pitch remain unchanged, explicitly stated in the UI.
+
+The model adds knurled knobs, engraved controls, layered metalwork, darker grooved vinyl and refined studio reflections. The acrylic tray supports the opened fan. The dust cover stays open; closing it is not exposed as a control. No dependency or downloaded model is added.
+
+Claude Opus 5.5 high reviewed the v3 code and captures. Codex addressed ready-state resume, outside-pointer release, offscreen settle events, record-return selection, fan support and portrait overlap. Final regression evidence is in the private local v3 verification directory. Corrections are checked by Codex; no second independent review is claimed.
+
+The v3 real-provider run passes all six albums, pause/resume, track replacement, end/replay, cancellation before connection, surface gain, Bandcamp replacement, reduced-motion playback and WebGL fallback. Direct interaction checks pass hover information, horizontal wheel/flick browsing, rotary surface level, track encoder, 45 RPM and rapid/latest-wins album replacement. Separate synthetic-provider regression checks cover autoplay-blocked ready/resume, offscreen catalogue selection and outside-canvas pointer release; they do not establish provider availability. Build, syntax and whitespace checks pass. Physical-phone performance and playback remain unverified.
