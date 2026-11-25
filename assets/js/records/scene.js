@@ -657,17 +657,24 @@ export function createTurntable(host, action, onLost, albums = []) {
   tagHit(btn45, { kind: 'speed', rpm: 45 });
   addMesh(new THREE.CylinderGeometry(0.022, 0.022, 0.016, 16), mats.led45, deck, -0.92, 0.724, 1.38, false);
 
-  // Strobe illuminator prism tower
+  // Fixed strobe lamp outside the platter well; local +X faces the speed markings.
+  // Keep the entire housing and foot clear, not just the lamp's centre point.
   const strobeTower = new THREE.Group();
-  strobeTower.position.set(-1.64, 0.715, 0.72);
-  strobeTower.rotation.y = 0.52;
+  strobeTower.name = 'strobeLamp';
+  strobeTower.position.set(-1.67, 0.715, 1.10);
+  strobeTower.rotation.y = Math.atan2(strobeTower.position.z - PLATTER_Z, PLATTER_X - strobeTower.position.x);
   deck.add(strobeTower);
-  addMesh(new THREE.CylinderGeometry(0.088, 0.108, 0.16, 24), mats.darkMetal, strobeTower, 0, 0.08, 0);
-  addMesh(new THREE.CylinderGeometry(0.080, 0.080, 0.024, 24), mats.brushedSilver, strobeTower, 0, 0.165, 0);
-  const strobeLens = addMesh(new THREE.BoxGeometry(0.075, 0.055, 0.04), mats.accentGlow, strobeTower, 0.06, 0.10, 0, false);
+  const strobeFoot = addMesh(new THREE.BoxGeometry(0.26, 0.018, 0.24), mats.darkMetal, strobeTower, 0, 0.009, 0);
+  strobeFoot.name = 'strobeFoot';
+  const strobeHousing = addMesh(new THREE.BoxGeometry(0.20, 0.15, 0.18), mats.darkMetal, strobeTower, 0, 0.093, 0);
+  strobeHousing.name = 'strobeHousing';
+  const strobeHood = addMesh(new THREE.BoxGeometry(0.235, 0.018, 0.205), mats.brushedSilver, strobeTower, 0.012, 0.177, 0);
+  strobeHood.name = 'strobeHood';
+  const strobeLens = addMesh(new THREE.BoxGeometry(0.012, 0.060, 0.125), mats.accentGlow, strobeTower, 0.103, 0.108, 0, false);
+  strobeLens.name = 'strobeLens';
   const strobeLight = new THREE.PointLight(0xffb000, 0.55, 2.3, 2);
-  strobeLight.position.set(-1.42, 0.85, 0.58);
-  deck.add(strobeLight);
+  strobeLight.position.set(0.145, 0.108, 0);
+  strobeTower.add(strobeLight);
 
   // Rotary Surface-Noise Potentiometer Knob (front-right control bay)
   const surfaceKnobGroup = new THREE.Group();
