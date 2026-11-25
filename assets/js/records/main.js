@@ -84,7 +84,7 @@ function beginCut(kind,files=null){
     if(m.t==='done'){
       const install=(park=false)=>{clearTimeout(pendingPressingTimer);pendingPressing=null;if(id!==job||!alive)return;
       state.cutting=false;$('track-current').textContent='Needle raised';state.record=m.rec;state.record.sequence=++state.sequence;if(park)state.tel=null;state.ready=false;
-      renderer?.setRecord(m.rec,m.vis);audio.install(state.record,park);
+      renderer?.setRecord(m.rec,m.vis);audio.install(state.record,park);if(park)applyParams();
       sourceKind=kind;sourceFiles=files;state.source=kind==='demo'?'House pressing':files.length===1?files[0].name.replace(/\.[^.]+$/,''):'Your local side';
       state.sourceDetail=kind==='demo'?'Synthesised Demo EP · Guillermo Rauch':`${files.length} local ${files.length===1?'file':'files'} · cut here, never uploaded`;
       $('cut-track').replaceChildren(...m.rec.tracks.map((track,i)=>Object.assign(document.createElement('option'),{value:i,textContent:`${i+1}. ${track.title}`})));
