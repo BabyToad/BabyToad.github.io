@@ -7,46 +7,246 @@ vinyl: true
 use_container: false
 ---
 <main class="records" data-records data-media-base="{{ '/' | media_url }}">
-  <header class="records-heading"><div><p class="eyebrow">Steak Knives &amp; Bagels / Listening room</p><h1>Give it a spin.</h1></div><a class="catalogue-jump" href="#album-catalogue">Ten records ↓</a></header>
+  <header class="records-heading">
+    <div>
+      <p class="eyebrow">Listening room</p>
+      <h1>Give it a spin.</h1>
+    </div>
+    <a class="catalogue-jump" href="#album-catalogue">Collection ↓</a>
+  </header>
+
   <section class="listening-desk" aria-label="Physical record player">
-    <canvas id="record-stage" tabindex="0" aria-label="3D record player. Drag empty space to orbit, pinch to zoom and pan. Equivalent controls follow." hidden></canvas>
-    <p id="scene-fallback">The album catalogue and listening links are below. The simulated player needs JavaScript, WebGL2 and Web Audio.</p>
-    <div class="view-strip glass" role="group" aria-label="Camera views">
-      <button data-view="room">Room</button><button data-view="crate">Records</button><button data-view="deck">Deck</button><button data-view="stylus">Needle</button><button id="reset-view" aria-label="Reset camera">↺</button><button id="look-only" aria-pressed="false">Look only</button>
-    </div>
-    <p id="hover-info" class="hover-info glass" hidden></p><div class="source-badge glass"><span class="eyebrow" id="record-placement">In the sleeve</span><strong id="source-title">Polygondwanaland</strong><span id="source-detail">Demo pressing · The Castle In The Air · 2:47</span><span id="track-current">Take out the record to begin</span></div>
-    <aside id="sleeve-detail" class="sleeve-detail glass" hidden aria-label="Selected sleeve">
-      <button class="close-panel" id="close-sleeve" aria-label="Close sleeve details">×</button>
-      <div class="sleeve-content"><img id="selected-cover" width="240" height="240" alt="">
-      <div><p class="eyebrow" id="selected-meta"></p><h2 id="selected-title"></h2><p id="selected-artist"></p><p id="album-context"></p></div>
-      <button id="take-record" class="primary">Take out record</button><div id="album-listening"></div>
-      <button id="sleeve-files">Cut files from my device</button>
-      <details><summary>Album track list</summary><ol id="album-tracks"></ol></details>
-      </div><div class="sleeve-nav"><button id="previous-album" aria-label="Previous album">←</button><span id="album-number"></span><button id="next-album" aria-label="Next album">→</button></div>
-    </aside>
-    <aside id="adjustments" class="adjustments glass" hidden aria-label="Physical adjustments">
-      <button class="close-panel" id="close-adjustments" aria-label="Close adjustments">×</button><p class="eyebrow">The mechanism</p>
-      <label>Pitch <output id="pitch-value">0.0%</output><input id="pitch" type="range" min="-8" max="8" step=".1" value="0"></label>
-      <label>Tracking force <output id="force-value">1.80 g</output><input id="force" type="range" min=".5" max="3" step=".05" value="1.8"></label>
-      <label>Anti-skate <output id="skate-value">1.80 g</output><input id="skate" type="range" min="0" max="3" step=".05" value="1.8"></label>
-      <label>Stylus<select id="stylus-type"><option value="elliptical">Elliptical</option><option value="conical">Conical</option><option value="microline">Micro-line</option></select></label>
+    <div class="stage-viewport">
+      <canvas id="record-stage" tabindex="0" aria-label="3D record player. Drag empty space to orbit, swipe across sleeves to browse, click controls on the deck, or use the bar below." hidden></canvas>
+      <p id="scene-fallback">The album catalogue and listening links are below. The simulated player needs JavaScript, WebGL2 and Web Audio.</p>
 
-      <label>Record condition<select id="condition"><option value="clean">Clean pressing</option><option value="played">Well played</option><option value="worn">Dust &amp; scratches</option></select></label>
-      <button id="press-again">Press this side again</button><p class="small">Condition changes the groove geometry. Re-pressing lifts the needle and stops the motor.</p>
-      <p class="small">Tracking force loads both groove walls. Anti-skate balances their loads; a clean, well-tracked record can sound similar across nearby settings.</p><p id="contact-forces" class="small">Put a record on to inspect contact forces.</p>
-      <label>Knock strength<select id="knock-strength"><option value="1">Light tap</option><option value="4" selected>Firm knock</option><option value="8">Heavy knock</option></select></label><button id="bump">Knock the table</button>
-    </aside>
-    <aside id="needle-scope" class="needle-scope glass" hidden aria-label="Live groove inspection"><p id="scope-title" class="eyebrow">Under the stylus · magnified</p><canvas id="groove-scope" width="640" height="180" aria-label="Live groove walls around the simulated stylus"></canvas><p id="groove-stats"></p></aside>
+      <div class="view-strip" role="group" aria-label="Camera views">
+        <button type="button" data-view="room">Room</button>
+        <button type="button" data-view="crate">Records</button>
+        <button type="button" data-view="deck">Deck</button>
+        <button type="button" data-view="stylus">Needle</button>
+        <span class="strip-sep" aria-hidden="true"></span>
+        <button type="button" id="reset-view" aria-label="Reset camera" title="Reset camera">↺</button>
+        <button type="button" id="look-only" aria-pressed="false" title="Drag anywhere to move the camera">Look</button>
+      </div>
 
-    <a class="stage-exit" href="#album-catalogue">Collection ↓</a><div class="deck-strip glass"><p id="gesture-hint" class="gesture-hint">Drag empty space to look · pinch to zoom · click the scene for wheel zoom</p>
-      <div class="deck-buttons" role="group" aria-label="Turntable controls"><button id="put-on" class="primary">Put it on</button><button id="motor">Start motor</button><button id="cue">Lower needle</button><button id="speed33" aria-pressed="true">33⅓</button><button id="speed45" aria-pressed="false">45</button><button id="adjust-toggle" aria-expanded="false" aria-controls="adjustments">Adjust</button></div>
-      <div class="volume-control"><label>Volume <output id="volume-value">45%</output><input id="volume" type="range" min="0" max="100" value="45"></label></div><div class="deck-readout"><output aria-live="off" id="rpm-value">0.00 RPM</output><span id="record-status" role="status" aria-live="polite">Take out the Polygondwanaland demo record.</span><button id="cancel-cut" hidden>Cancel</button></div>
-      <div class="record-source"><button id="house-record">Polygondwanaland demo</button><button id="synth-record">Synthetic test record</button><button id="choose-files">Cut your files</button><select id="cut-track" aria-label="Track on the current pressing" disabled><option>Preparing tracks…</option></select><input type="file" id="audio-files" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden></div>
+      <p id="needle-scope" class="needle-telemetry" hidden aria-label="Stylus contact telemetry">
+        <span id="groove-stats">Needle raised</span>
+      </p>
+
+      <p id="hover-info" class="hover-info" hidden aria-hidden="true"></p>
+      <a class="stage-exit" href="#album-catalogue">Collection ↓</a>
     </div>
+
+    <div class="deck-strip" role="region" aria-label="Deck controls">
+      <div class="load-progress" id="load-progress" hidden aria-hidden="true"><span id="load-progress-bar"></span></div>
+
+      <div class="dock-identity">
+        <div class="dock-title-row">
+          <strong id="source-title">Polygondwanaland</strong>
+          <span class="state-tag" id="record-placement">In sleeve</span>
+        </div>
+        <div class="dock-meta-row">
+          <output aria-live="off" id="rpm-value" hidden>0.00 RPM</output>
+          <span id="track-current" hidden></span>
+          <span id="record-status" role="status" aria-live="polite">Select a sleeve or take out Polygondwanaland.</span>
+          <button type="button" id="cancel-cut" class="ghost-btn" hidden>Cancel</button>
+        </div>
+      </div>
+
+      <div class="dock-actions">
+        <div class="crate-stepper" id="crate-stepper" role="group" aria-label="Browse sleeves">
+          <button type="button" id="dock-prev" aria-label="Previous record">←</button>
+          <span id="dock-index" aria-live="off">1 / 10</span>
+          <button type="button" id="dock-next" aria-label="Next record">→</button>
+        </div>
+
+        <button type="button" id="put-on" class="primary">Take out record</button>
+
+        <select id="cut-track" class="dock-select" aria-label="Track on the current pressing" hidden></select>
+
+        <div class="volume-control" id="volume-wrap" hidden>
+          <label aria-label="Volume">
+            <span class="vol-label">Vol</span>
+            <input id="volume" type="range" min="0" max="100" value="45">
+            <output id="volume-value">45%</output>
+          </label>
+        </div>
+
+        <div class="dock-secondary">
+          <button type="button" id="return-record" class="ghost-btn" hidden>Return</button>
+          <button type="button" id="open-sleeve" class="ghost-btn" aria-expanded="false" aria-controls="sleeve-detail">Sleeve</button>
+          <button type="button" id="press-toggle" class="ghost-btn" aria-expanded="false" aria-controls="press-panel">Press</button>
+          <button type="button" id="adjust-toggle" class="ghost-btn" aria-expanded="false" aria-controls="adjustments" hidden>Tune</button>
+        </div>
+      </div>
+    </div>
+
+    <aside id="sleeve-detail" class="stage-drawer sleeve-detail" hidden aria-label="Selected sleeve">
+      <div class="drawer-head">
+        <p class="eyebrow" id="selected-meta"></p>
+        <button type="button" class="close-panel" id="close-sleeve" aria-label="Close sleeve details">×</button>
+      </div>
+      <div class="sleeve-content">
+        <div class="sleeve-hero">
+          <img id="selected-cover" width="84" height="84" alt="">
+          <div class="sleeve-titles">
+            <h2 id="selected-title"></h2>
+            <p id="selected-artist"></p>
+          </div>
+        </div>
+        <p id="album-context" class="album-context"></p>
+
+        <div class="sleeve-physical" id="sleeve-physical" hidden>
+          <button type="button" id="take-record" class="primary">Take out record</button>
+          <button type="button" id="open-precuts" class="ghost-btn"{% unless site.records_precuts_published %} hidden{% endunless %}>Prepared vinyl tracks…</button>
+        </div>
+
+        <div id="album-listening"></div>
+
+        <details class="sleeve-tracks">
+          <summary>Track list</summary>
+          <ol id="album-tracks"></ol>
+        </details>
+      </div>
+      <div class="sleeve-nav">
+        <button type="button" id="previous-album" aria-label="Previous album">← Prev</button>
+        <span id="album-number"></span>
+        <button type="button" id="next-album" aria-label="Next album">Next →</button>
+      </div>
+    </aside>
+
+    <aside id="adjustments" class="stage-drawer adjustments" hidden aria-label="Turntable mechanism">
+      <div class="drawer-head">
+        <p class="eyebrow">The mechanism</p>
+        <button type="button" class="close-panel" id="close-adjustments" aria-label="Close adjustments">×</button>
+      </div>
+      <div class="drawer-body">
+        <section class="drawer-group">
+          <p class="group-label">Transport</p>
+          <div class="btn-grid">
+            <button type="button" id="motor">Start motor</button>
+            <button type="button" id="cue">Lower needle</button>
+            <button type="button" id="speed33" aria-pressed="true">33⅓ RPM</button>
+            <button type="button" id="speed45" aria-pressed="false">45 RPM</button>
+          </div>
+          <label class="range-field">
+            <span>Pitch <button type="button" id="pitch-reset" class="inline-reset" title="Reset pitch to 0%">0%</button></span>
+            <output id="pitch-value">0.0%</output>
+            <input id="pitch" type="range" min="-8" max="8" step=".1" value="0">
+          </label>
+        </section>
+
+        <section class="drawer-group">
+          <p class="group-label">Cartridge &amp; groove</p>
+          <label class="range-field">
+            <span>Tracking force</span>
+            <output id="force-value">1.80 g</output>
+            <input id="force" type="range" min=".5" max="3" step=".05" value="1.8">
+          </label>
+          <label class="range-field">
+            <span>Anti-skate</span>
+            <output id="skate-value">1.80 g</output>
+            <input id="skate" type="range" min="0" max="3" step=".05" value="1.8">
+          </label>
+          <label class="select-field">
+            <span>Stylus</span>
+            <select id="stylus-type">
+              <option value="elliptical">Elliptical</option>
+              <option value="conical">Conical</option>
+              <option value="microline">Micro-line</option>
+            </select>
+          </label>
+          <label class="select-field">
+            <span>Condition</span>
+            <select id="condition">
+              <option value="clean">Clean pressing</option>
+              <option value="played">Well played</option>
+              <option value="worn">Dust &amp; scratches</option>
+            </select>
+          </label>
+          <button type="button" id="press-again" class="full-btn">Re-press this side</button>
+          <p id="contact-forces" class="small">Put a record on to inspect groove contact.</p>
+        </section>
+
+        <section class="drawer-group">
+          <p class="group-label">Table</p>
+          <div class="inline-pair">
+            <select id="knock-strength" aria-label="Knock strength">
+              <option value="1">Light tap</option>
+              <option value="4" selected>Firm knock</option>
+              <option value="8">Heavy knock</option>
+            </select>
+            <button type="button" id="bump">Knock</button>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <aside id="press-panel" class="stage-drawer press-panel" hidden aria-label="Physical pressings">
+      <div class="drawer-head">
+        <p class="eyebrow">Cut a record</p>
+        <button type="button" class="close-panel" id="close-press" aria-label="Close pressings">×</button>
+      </div>
+      <div class="drawer-body">
+        <section class="drawer-group precut-library"{% unless site.records_precuts_published %} hidden{% endunless %}>
+          <p class="group-label">Polygondwanaland · prepared tracks</p>
+          <p class="small">Complete lossless grooves cut in advance. Large downloads; replacing a track briefly holds both pressings in memory.</p>
+          <select id="precut-track" aria-label="Prepared album track"></select>
+          <p id="precut-info" class="small" role="status"></p>
+          <div class="press-actions">
+            <button type="button" id="load-precut" class="primary">Take out prepared track</button>
+            <button type="button" id="precut-native-fallback" class="ghost-btn" hidden>Play full recording instead</button>
+          </div>
+        </section>
+
+        <section class="drawer-group">
+          <p class="group-label">Quick demo</p>
+          <p class="small"><em>The Castle In The Air</em> (2:47, 6.9 MB MP3) cut directly in your browser.</p>
+          <button type="button" id="house-record" class="full-btn">Take out Polygondwanaland demo</button>
+        </section>
+
+        <section class="drawer-group">
+          <p class="group-label">Your audio files</p>
+          <p class="small" id="local-limit-note">Cut WAV, MP3, FLAC, M4A or OGG locally—never uploaded.</p>
+          <button type="button" id="choose-files" class="full-btn">Choose files from device</button>
+          <input type="file" id="audio-files" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden>
+        </section>
+
+        <section class="drawer-group">
+          <p class="group-label">Test pressing</p>
+          <p class="small">Three-track synthesised calibration EP from the upstream engine.</p>
+          <button type="button" id="synth-record" class="full-btn">Cut synthetic test record</button>
+        </section>
+      </div>
+    </aside>
   </section>
-  <details class="precut-library"{% unless site.records_precuts_published %} hidden{% endunless %}><summary>Polygondwanaland · prepared vinyl tracks</summary><p>Complete tracks, cut in advance. Large downloads. Replacing a pressing briefly holds both tracks in memory; the size limit applies to each track. Full recording playback remains available for tracks exceeding this device’s memory limit.</p><select id="precut-track" aria-label="Prepared album track"></select><button id="load-precut">Take out prepared record</button><p id="precut-info" role="status"></p></details><script type="application/json" id="precut-data">{{ site.data.records-precuts | jsonify }}</script>
-  <p class="room-note">The default physical demo is The Castle In The Air from Polygondwanaland. Click its sleeve to take out the record, then click the platter to place it. The complete album plays through its recording player. A synthetic test record is also available. Your files are cut and played in this browser, never uploaded. Local sides are limited to 3 minutes on small screens and 10 minutes on larger screens to limit memory use. Open a sleeve to choose a service player. Polygondwanaland also has full artist-authorized recordings; eligible tracks can be cut onto the physical deck.</p>
-  <details class="record-catalogue" id="album-catalogue" open><summary>The collection <span>{{ site.data.records.size }} records</span></summary><ol class="record-shelves">{% for record in site.data.records %}<li><button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-label="Inspect {{ record.artist | escape }}: {{ record.title | escape }}" disabled><img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} cover" width="320" height="320"></button><div><h2><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a></h2><p>{{ record.artist | escape }} · {{ record.year }}</p><p>{{ record.context | escape }}</p><details><summary>Track list</summary><ol>{% for track in record.tracks %}<li>{{ track.title | escape }}</li>{% endfor %}</ol></details></div></li>{% endfor %}</ol></details>
-  <p class="simulation-credit">Groove simulation adapted from <a href="https://github.com/rauchg/vinyl">vinyl by Guillermo Rauch</a> · <a href="{{ '/assets/js/records/physics/LICENSE.txt' | relative_url }}">MIT licence</a>. Interface and collection adapted for this site. A physical model, not a reconstruction of an original vinyl master.</p>
+
+  <p class="room-note">Swipe across the sleeves to browse, drag empty space to orbit, or operate the deck controls directly. <em>Polygondwanaland</em> is available as both browser-cut and prepared physical pressings plus full native audio; other sleeves connect to their official players on request. Local audio files stay in this browser.</p>
+
+  <details class="record-catalogue" id="album-catalogue" open>
+    <summary>The collection <span>{{ site.data.records.size }} records</span></summary>
+    <ol class="record-shelves">
+      {% for record in site.data.records %}
+      <li>
+        <button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-label="Inspect {{ record.artist | escape }}: {{ record.title | escape }}" disabled>
+          <img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} cover" width="320" height="320">
+        </button>
+        <div>
+          <h2><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a></h2>
+          <p class="shelf-meta">{{ record.artist | escape }} · {{ record.year }}</p>
+          <p>{{ record.context | escape }}</p>
+          <details>
+            <summary>Track list</summary>
+            <ol>{% for track in record.tracks %}<li>{{ track.title | escape }}</li>{% endfor %}</ol>
+          </details>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </details>
+
+  <p class="simulation-credit">Groove simulation adapted from <a href="https://github.com/rauchg/vinyl">vinyl by Guillermo Rauch</a> · <a href="{{ '/assets/js/records/physics/LICENSE.txt' | relative_url }}">MIT licence</a>. A physical model, not a reconstruction of an original vinyl master.</p>
 </main>
+<script type="application/json" id="precut-data">{{ site.data.records-precuts | jsonify }}</script>
 <script type="application/json" id="records-data">{{ site.data.records | jsonify | replace: '</', '<\/' }}</script>

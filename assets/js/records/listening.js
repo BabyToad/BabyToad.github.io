@@ -283,6 +283,7 @@ export function createListeningPanel(container, {beforePlay = () => {}, onStatus
     selectAlbum,
     stop,
     transport,
+    startRecording(index=0){if(!buttons.has('Recording'))return Promise.resolve(false);selectedTrack=Math.max(0,Math.min(tracks.length-1,Number.isInteger(index)?index:0));updateTrack();return buttons.get('Recording').onclick();},
     startPreferred(){const source=['Recording','YouTube','Spotify','Bandcamp'].find(name=>buttons.has(name));return source?buttons.get(source).onclick():Promise.resolve(false);},
     get playback(){return {...playback,capabilities:{...playback.capabilities}};},
     get active() { return provider; },
