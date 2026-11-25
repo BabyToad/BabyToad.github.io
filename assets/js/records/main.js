@@ -1,3 +1,4 @@
+import {RecordPlacement} from './placement.js';
 import {createListeningPanel} from './listening.js';
 import {GrooveSurface} from './micro-surface.js';
 import {Renderer} from './physics/render.js';
@@ -12,7 +13,9 @@ const albums=JSON.parse($('records-data').textContent),canvas=$('record-stage');
 const mediaBase=new URL(root.dataset.mediaBase||'/',location.href);
 for(const album of albums)for(const track of album.audioTracks||[])track.url=new URL(track.url,mediaBase).href;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'),phone=matchMedia('(max-width:600px)');
-const state={selected:0,tel:null,received:0,record:null,sequence:0,cutting:false,ready:false,motor:false,cue:true,rpm:100/3,pitch:0,lookOnly:false,source:'House pressing',sourceDetail:'Synthesised Demo EP · Guillermo Rauch'};
+const defaultAlbum=albums.find(a=>a.id==='polygondwanaland'),placement=new RecordPlacement();
+let pressingAlbum=null,handlingRequest=0;
+const state={selected:0,tel:null,received:0,record:null,sequence:0,cutting:false,ready:false,motor:false,cue:true,rpm:100/3,pitch:0,lookOnly:false,source:'Polygondwanaland',sourceDetail:'Demo pressing · The Castle In The Air · 2:47'};
 const camera={az:-.38,el:.72,distance:1.50,focus:[-.22,.03,-.07],follow:false,target:null};
 let renderer,fan,worker,job=0,renderFrame=0,lastFrame=0,alive=true,shown=true,gestureCleanup;
 let microscope,microSample=null;
@@ -31,24 +34,48 @@ const listening=createListeningPanel($('album-listening'),{
   maxCutSeconds:()=>phone.matches?180:600,
   beforePlay:async({provider})=>{
     cancelDownload();if(state.cutting)cancelCut();gestureCleanup?.();await audio.silence();
-    state.tel=null;state.ready=false;state.motor=false;state.cue=true;status('Deck paused. Use the '+provider+' player in the sleeve.');update();invalidate();
+    state.tel=null;state.ready=false;state.motor=false;state.cue=true;$('rpm-value').textContent='0.00 RPM';$('track-current').textContent='Needle raised';status('Deck paused. Use the '+provider+' player in the sleeve.');update();invalidate();
   },
   onStop:()=>{status('Album player closed. Put it on resumes the physical pressing.');update();invalidate();},
   onCut:cutOfficialTrack
 });
+function sleeveHome(){const i=state.selected;return [-.60,.08+i*.014-.075-.003,.068,Math.PI/2];}
+function recordControls(){
+ const a=albums[state.selected],available=!!a.audioTracks?.length;
+ $('take-record').hidden=!available;$('take-record').disabled=state.cutting||placement.moving||unavailable;
+ $('take-record').textContent=placement.placed&&pressingAlbum===a.id?'Return record to sleeve':placement.phase==='held'?'Place record on platter':'Take out record';
+ $('record-placement').textContent=placement.phase==='held'?'Record in hand · click the platter to place it':placement.placed?'On the platter':state.cutting?'Preparing the pressing…':'In the sleeve';
+}
+async function takeRecord(){
+ if(unavailable||state.cutting||placement.moving)return;
+ if(placement.phase==='held')return placeRecord();
+ const a=albums[state.selected];if(!a.audioTracks?.length)return;
+ listening.stop();$('sleeve-detail').hidden=true;setView('room');
+ const request=++handlingRequest;await audio.silence();if(request!==handlingRequest||!alive)return;
+ state.tel=null;state.ready=false;state.motor=false;state.cue=true;$('rpm-value').textContent='0.00 RPM';$('track-current').textContent='Needle raised';
+ if(state.record&&pressingAlbum===a.id){
+  if(placement.placed)placement.return();else placement.extract(sleeveHome());
+  status(placement.phase==='returning'?'Returning the record to its sleeve.':'Click the platter to place the record.');update();invalidate();return;
+ }
+ const track=a.audioTracks.find(t=>t.title==='The Castle In The Air')||a.audioTracks.find(t=>t.durationSec<=(phone.matches?180:600));
+ if(!track)return status('Use the full recording player; these tracks exceed this device’s cutting limit.');
+ try{await cutOfficialTrack({album:a,track,handling:true});}catch(error){status(error.message);}
+}
+function placeRecord(){if(placement.phase!=='held'||state.cutting)return;placement.place();setView('deck');status('Lowering the record onto the spindle…');update();invalidate();}
+function sceneAlbum(index,inspect=true){selectAlbum(index,false);if(inspect){if(albums[index].audioTracks?.length)takeRecord();else selectAlbum(index,true);}}
 function cancelDownload(){downloadJob++;if(downloadAbort){downloadAbort.abort();downloadAbort=null;state.cutting=false;}}
-async function cutOfficialTrack({album,track}){
+async function cutOfficialTrack({album,track,handling=false}){
   if(unavailable)throw new Error('The vinyl simulation is unavailable. You can still play the full recording here.');
   cancelCut();const id=downloadJob,controller=downloadAbort=new AbortController();
   await audio.silence();if(id!==downloadJob)return false;
-  state.tel=null;state.ready=false;state.motor=false;state.cue=true;state.cutting=true;update();
+  state.tel=null;state.ready=false;state.motor=false;state.cue=true;$('rpm-value').textContent='0.00 RPM';$('track-current').textContent='Needle raised';state.cutting=true;update();
   status('Downloading '+track.title+' ('+(track.sizeBytes/1048576).toFixed(1)+' MB)…');
   try{
     const response=await fetch(track.url,{signal:controller.signal});if(!response.ok)throw new Error('The recording could not download. Try full playback or a service link.');
     const blob=await response.blob();if(id!==downloadJob||!alive)return false;
     if(blob.size!==track.sizeBytes)throw new Error('The download was incomplete. Try again or play the full recording.');
     const file=new File([blob],track.title+'.mp3',{type:'audio/mpeg'});file.recordCredit={title:album.title,artist:album.artist};
-    downloadAbort=null;state.cutting=false;$('sleeve-detail').hidden=true;setView('deck');beginCut('official',[file]);return true;
+    downloadAbort=null;state.cutting=false;$('sleeve-detail').hidden=true;setView(handling?'room':'deck');beginCut('official',[file],handling?{albumId:album.id,home:sleeveHome()}:null);return true;
   }catch(error){if(id!==downloadJob||error.name==='AbortError')return false;downloadAbort=null;state.cutting=false;const message=error.message==='The download was incomplete. Try again or play the full recording.'?error.message:'The recording could not download. Try full playback or a service link.';status(message);update();throw new Error(message);}
 }
 
@@ -77,26 +104,29 @@ function selectAlbum(index,inspect=true){
   update();invalidate();
 }
 function update(){
-  const enabled=!!state.record&&!state.cutting&&!unavailable;
+  const enabled=!!state.record&&placement.placed&&!state.cutting&&!unavailable;
   document.querySelector('[data-view=grooves]').disabled=!state.ready||state.cutting||unavailable;
   for(const id of ['put-on','motor','cue','cut-track','press-again'])$(id).disabled=!enabled||audioPending;
   $('cut-track').disabled=!enabled||!audio.ready||audioPending;
-  $('put-on').textContent=listening.active?'Restart physical record':audioPending?'Starting…':'Put it on';
+  $('put-on').disabled=state.cutting||placement.moving||unavailable||audioPending;
+  $('put-on').textContent=!placement.visible?'Take out demo record':placement.phase==='held'?'Place on platter':placement.moving?'Moving record…':listening.active?'Restart physical record':audioPending?'Starting…':'Put it on';
   for(const id of ['speed33','speed45','adjust-toggle'])$(id).disabled=unavailable;
   for(const id of ['motor','cue','cut-track','press-again','speed33','speed45','adjust-toggle'])if(listening.active)$(id).disabled=true;
   root.classList.toggle('service-listening',!!listening.active);
   $('motor').textContent=state.motor?'Stop motor':'Start motor';$('cue').textContent=state.cue?'Lower needle':'Lift needle';
   $('speed33').setAttribute('aria-pressed',String(state.rpm<40));$('speed45').setAttribute('aria-pressed',String(state.rpm>40));
   $('cancel-cut').hidden=!state.cutting;
-  $('source-title').textContent=state.source;$('source-detail').textContent=state.sourceDetail;
+  recordControls();$('source-title').textContent=state.source;$('source-detail').textContent=state.sourceDetail;
 }
 async function readyAction(fn){
-  if(!state.record||state.cutting||unavailable||audioPending)return;
+  if(!state.record||!placement.placed||state.cutting||unavailable||audioPending)return;
   listening.stop();const actionJob=job;audioPending=true;status('Warming the cartridge…');update();
   try{await audio.unlock();if(!alive)return;audioPending=false;if(state.cutting||actionJob!==job){update();return;}state.ready=true;applyParams();audio.send({t:'view',on:camera.micro,micro:camera.micro});fn();status('The deck is yours.');}
   catch(error){failure(error.message);}update();invalidate();
 }
 function command(action,data={}){
+  if(action==='placeRecord')return placeRecord();
+  if(!placement.placed&&!['volume','speed33','speed45','pitch','skate'].includes(action))return;
   if(listening.active)return status('Use the album player, or choose Return to physical deck.');
   if(action==='motor')return readyAction(()=>{state.motor=!state.motor;audio.send({t:'motor',on:state.motor});});
   if(unavailable)return;
@@ -112,7 +142,7 @@ function applyParams(){
   audio.send({t:'set',volume:+$('volume').value/100*.78,vtf:+$('force').value,antiskate:+$('skate').value,stylus:$('stylus-type').value,hum:0});
   audio.send({t:'speed',rpm:state.rpm*(1+state.pitch/100)});
 }
-function beginCut(kind,files=null){
+function beginCut(kind,files=null,handling=null){
   if(unavailable)return;
   listening.stop();cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);const id=++job;gestureCleanup?.();worker?.terminate();worker=null;state.cutting=true;audio.send({t:'cue',up:true});audio.send({t:'motor',on:false});state.motor=false;state.cue=true;update();
   const w=worker=new Worker(new URL('./physics/master-worker.js',import.meta.url),{type:'module'});
@@ -124,11 +154,13 @@ function beginCut(kind,files=null){
     if(m.t==='done'){
       const install=(park=false)=>{clearTimeout(pendingPressingTimer);pendingPressing=null;if(id!==job||!alive)return;
       microSample=null;if(camera.micro)setView('stylus');$('groove-stats').textContent='Needle raised · new pressing ready.';state.cutting=false;$('track-current').textContent='Needle raised';state.record=m.rec;state.record.sequence=++state.sequence;if(park)state.tel=null;state.ready=false;
+      pressingAlbum=kind==='official'?(handling?.albumId||defaultAlbum.id):null;
+      if(handling)placement.extract(handling.home);else placement.reset();
       renderer?.setRecord(m.rec,m.vis);audio.install(state.record,park);if(park)applyParams();
       sourceKind=kind;sourceFiles=files;state.source=kind==='demo'?'House pressing':files.length===1?files[0].name.replace(/\.[^.]+$/,''):'Your local side';
       state.sourceDetail=kind==='demo'?'Synthesised Demo EP · Guillermo Rauch':kind==='official'?files[0].recordCredit.artist+' · artist-authorized master, cut here':`${files.length} local ${files.length===1?'file':'files'} · cut here, never uploaded`;
       $('cut-track').replaceChildren(...m.rec.tracks.map((track,i)=>Object.assign(document.createElement('option'),{value:i,textContent:`${i+1}. ${track.title}`})));
-      status(m.rec.truncated?'This side was cut short to fit. Choose fewer tracks to hear the full files.':'Ready. Put it on, or start the motor and cue by hand.');
+      status(handling?'Record ready. Click the platter to place it.':m.rec.truncated?'This side was cut short to fit. Choose fewer tracks to hear the full files.':'Ready. Put it on, or start the motor and cue by hand.');
       update();invalidate();w.terminate();worker=null;};
       if(audio.ready&&audio.context?.state==='running'&&state.tel&&(Math.abs(state.tel.wp)>.01||state.tel.hc<.001)){pendingPressing=install;pendingPressingTimer=setTimeout(()=>{if(id===job&&pendingPressing)install(true);},12000);status('Waiting for the platter to stop and the needle to clear…');}else install(audio.ready&&audio.context?.state!=='running');
     }
@@ -181,12 +213,13 @@ let displayTime=0;
 function frame(now){
   renderFrame=0;if(!alive||!shown||document.hidden)return;
   const dt=Math.min(.05,(now-(lastFrame||now))/1000);lastFrame=now;
+  const wasMoving=placement.moving;placement.tick(dt,reduced.matches);if(wasMoving&&!placement.moving){status(placement.placed?'Record placed. Put it on to start the motor and lower the needle.':placement.phase==='held'?'Click the platter to place the record.':'Record returned to its sleeve.');update();}
   if(camera.target){const target=camera.target,k=1-Math.exp(-dt*8);let delta=0;for(const key of ['az','el','distance']){delta+=Math.abs(target[key]-camera[key]);camera[key]+=(target[key]-camera[key])*k;}for(let i=0;i<3;i++){delta+=Math.abs(target.focus[i]-camera.focus[i]);camera.focus[i]+=(target.focus[i]-camera.focus[i])*k;}if(delta<.0001){Object.assign(camera,target);camera.target=null;}}
   const t=state.tel,lag=t?Math.min(.05,(now-state.received)/1000):0;
   if(camera.follow&&!camera.target&&t)camera.focus=[...stylusXY(t.al),.002];
   try{
     if(camera.micro){const box=canvas.getBoundingClientRect(),top=Math.max(0,$('needle-scope').getBoundingClientRect().bottom-box.top+12),bottom=Math.max(0,box.bottom-document.querySelector('.deck-strip').getBoundingClientRect().top+12);microscope.draw(microSample,camera,canvas.width,canvas.height,document.documentElement.dataset.theme==='light',{top,bottom});}
-    else renderer.draw({plinth:t?.plinth||0,volume:+$('volume').value/100,thp:t?t.thp+t.wp*lag:0,al:t?.al??ALPHA_REST,zt:t?t.zb+t.ze:.005,zoom:0,az:camera.az,el:camera.el,at:camera.focus,dist:camera.distance,motor:state.motor,rpm:state.rpm,pitch:state.pitch,cue:state.cue,force:+$('force').value,skate:+$('skate').value,light:document.documentElement.dataset.theme==='light'});
+    else renderer.draw({recordVisible:placement.visible,recordMatrix:placement.placed?null:placement.matrix,plinth:t?.plinth||0,volume:+$('volume').value/100,thp:t?t.thp+t.wp*lag:0,al:t?.al??ALPHA_REST,zt:t?t.zb+t.ze:.005,zoom:0,az:camera.az,el:camera.el,at:camera.focus,dist:camera.distance,motor:state.motor,rpm:state.rpm,pitch:state.pitch,cue:state.cue,force:+$('force').value,skate:+$('skate').value,light:document.documentElement.dataset.theme==='light'});
     if(!camera.micro)fan.draw(state.selected,dt,reduced.matches);
     if(t&&now-displayTime>120){displayTime=now;$('rpm-value').textContent=(t.wp*60/TAU).toFixed(2)+' RPM';
       const track=state.record?.tracks.find(k=>t.theta>=k.theta0&&t.theta<k.theta1);
@@ -196,31 +229,32 @@ function frame(now){
       $('contact-forces').textContent=contactText(t);
     }
   }catch(error){failure('The 3D view could not draw. The catalogue links still work.');console.error(error);return;}
-  const moving=!!camera.target||state.cutting||Math.abs(fan.amount-state.selected)>.001||state.ready&&(Math.abs(t?.wp||0)>.02||t?.auto);
+  const moving=placement.moving||!!camera.target||state.cutting||Math.abs(fan.amount-state.selected)>.001||state.ready&&(Math.abs(t?.wp||0)>.02||t?.auto);
   if(moving)invalidate();
 }
 
 try{
   renderer=new Renderer(canvas);microscope=new GrooveSurface(renderer.gl);fan=new AlbumFan(renderer,albums,invalidate);canvas.hidden=false;$('scene-fallback').hidden=true;
-  gestureCleanup=connectGestures({canvas,renderer,fan,camera,getState:()=>({...state,skate:+$('skate').value,volume:+$('volume').value,al:state.tel?.al??ALPHA_REST}),command,select:selectAlbum,hover:index=>{if(fan.hover===index)return;fan.hover=index;$('hover-info').hidden=index===null;if(index!==null){const a=albums[index];$('hover-info').textContent=a.title+' · '+a.artist+' · '+a.year+' · '+a.tracks.length+' tracks';}invalidate();},invalidate});
+  gestureCleanup=connectGestures({canvas,renderer,fan,camera,getState:()=>({...state,ready:state.ready&&placement.placed,recordHeld:placement.phase==='held',skate:+$('skate').value,volume:+$('volume').value,al:state.tel?.al??ALPHA_REST}),command,select:sceneAlbum,hover:index=>{if(fan.hover===index)return;fan.hover=index;$('hover-info').hidden=index===null;if(index!==null){const a=albums[index];$('hover-info').textContent=a.title+' · '+a.artist+' · '+a.year+' · '+a.tracks.length+' tracks';}invalidate();},invalidate});
 
   new ResizeObserver(invalidate).observe(canvas);new MutationObserver(invalidate).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   new IntersectionObserver(entries=>{shown=entries[0].isIntersecting;if(shown)invalidate();}).observe(canvas);
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();unavailable=true;gestureCleanup?.();audio.silence();update();shown=false;canvas.hidden=true;$('scene-fallback').hidden=false;$('scene-fallback').textContent='The 3D view lost its graphics context. Reload to restart the player; the catalogue links still work.';status('Player stopped. Reload to restore the 3D view.');});
-  setView(phone.matches?'deck':'room');selectAlbum(0,false);beginCut('demo');
+  setView(phone.matches?'deck':'room');selectAlbum(0,false);status('Polygondwanaland is first. Take out the demo record to begin.');update();
 }catch(error){unavailable=true;console.error(error);$('scene-fallback').textContent='The 3D player is unavailable in this browser. The complete collection and listening links are below.';status('The 3D player is unavailable.');for(const b of root.querySelectorAll('.deck-strip button,.view-strip button'))b.disabled=true;}
   document.querySelectorAll('[data-record]').forEach(button=>{button.disabled=false;button.addEventListener('click',()=>{selectAlbum(albums.findIndex(a=>a.id===button.dataset.record));document.querySelector('.listening-desk').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'});});});
 if(unavailable)selectAlbum(0,false);
 document.querySelectorAll('[data-view]').forEach(button=>button.addEventListener('click',()=>{setView(button.dataset.view);if(button.dataset.view!=='crate'&&!listening.active)$('sleeve-detail').hidden=true;}));
 $('reset-view').onclick=()=>setView(phone.matches?'deck':'room');
 $('look-only').onclick=()=>{state.lookOnly=!state.lookOnly;$('look-only').setAttribute('aria-pressed',String(state.lookOnly));$('gesture-hint').textContent=state.lookOnly?'Drag anywhere to look · pinch or scroll to zoom':gestureHint();};
-$('put-on').onclick=()=>readyAction(()=>{state.motor=true;audio.send({t:'motor',on:true});audio.send({t:'cueTo',al:alphaForRadius(R_LEADIN-.0012)});});
+$('take-record').onclick=takeRecord;
+$('put-on').onclick=()=>!placement.visible?(selectAlbum(albums.indexOf(defaultAlbum),false),takeRecord()):placement.phase==='held'?placeRecord():readyAction(()=>{state.motor=true;audio.send({t:'motor',on:true});audio.send({t:'cueTo',al:alphaForRadius(R_LEADIN-.0012)});});
 $('motor').onclick=()=>command('motor');$('cue').onclick=()=>command('cue');$('speed33').onclick=()=>command('speed33');$('speed45').onclick=()=>command('speed45');
 $('adjust-toggle').onclick=()=>{listening.stop();const open=$('adjustments').hidden;$('adjustments').hidden=!open;$('sleeve-detail').hidden=true;$('adjust-toggle').setAttribute('aria-expanded',String(open));};
 $('close-adjustments').onclick=()=>{$('adjustments').hidden=true;$('adjust-toggle').setAttribute('aria-expanded','false');};$('close-sleeve').onclick=()=>{listening.stop();$('sleeve-detail').hidden=true;};
 $('previous-album').onclick=()=>selectAlbum(state.selected-1);$('next-album').onclick=()=>selectAlbum(state.selected+1);
 for(const id of ['choose-files','sleeve-files'])$(id).onclick=()=>{$('audio-files').value='';$('audio-files').click();};
-$('audio-files').onchange=e=>cutFiles(e.target.files);$('house-record').onclick=()=>beginCut('demo');$('cancel-cut').onclick=cancelCut;
+$('audio-files').onchange=e=>cutFiles(e.target.files);$('house-record').onclick=()=>{selectAlbum(albums.indexOf(defaultAlbum),false);takeRecord();};$('synth-record').onclick=()=>beginCut('demo');$('cancel-cut').onclick=cancelCut;
 $('press-again').onclick=()=>{condition=$('condition').value;beginCut(sourceKind,sourceFiles);};
 $('bump').onclick=()=>readyAction(()=>audio.send({t:'bump',s:+$('knock-strength').value}));
 $('pitch').oninput=e=>command('pitch',{value:+e.target.value});

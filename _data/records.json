@@ -1,5 +1,143 @@
 [
   {
+    "id": "polygondwanaland",
+    "title": "Polygondwanaland",
+    "artist": "King Gizzard & The Lizard Wizard",
+    "year": "2017",
+    "cover": "/assets/images/records/polygondwanaland.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_WXwA2ka0TD3",
+    "note": "",
+    "tracks": [
+      {
+        "number": 1,
+        "title": "Crumbling Castle",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 644256
+      },
+      {
+        "number": 2,
+        "title": "Polygondwanaland",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 212966
+      },
+      {
+        "number": 3,
+        "title": "The Castle In The Air",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 167674
+      },
+      {
+        "number": 4,
+        "title": "Deserted Dunes Welcome Weary Feet",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 213925
+      },
+      {
+        "number": 5,
+        "title": "Inner Cell",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 235711
+      },
+      {
+        "number": 6,
+        "title": "Loyalty",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 218868
+      },
+      {
+        "number": 7,
+        "title": "Horology",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 172211
+      },
+      {
+        "number": 8,
+        "title": "Tetrachromacy",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 210742
+      },
+      {
+        "number": 9,
+        "title": "Searching...",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 183546
+      },
+      {
+        "number": 10,
+        "title": "The Fourth Colour",
+        "artist": "King Gizzard & The Lizard Wizard",
+        "durationMs": 372444
+      }
+    ],
+    "context": "10 tracks, from Crumbling Castle to The Fourth Colour.",
+    "metadataSource": "https://music.apple.com/us/album/polygondwanaland/1876027939?uo=4",
+    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c0/3a/d0/c03ad0de-7e4b-8398-adc8-7aa396a15ca5/116.jpg/512x512bb.jpg",
+    "audioProvenanceUrl": "https://kinggizzardandthelizardwizard.com/polygondwanaland",
+    "audioCredit": "King Gizzard & The Lizard Wizard · official 320 kbps digital masters · shared with the band’s permission",
+    "audioTracks": [
+      {
+        "title": "Crumbling Castle",
+        "url": "/assets/audio/records/polygondwanaland/01-41a42634fb84.mp3",
+        "durationSec": 643.7565,
+        "sizeBytes": 26266672
+      },
+      {
+        "title": "Polygondwanaland",
+        "url": "/assets/audio/records/polygondwanaland/02-f4a7cd5052e4.mp3",
+        "durationSec": 212.8455,
+        "sizeBytes": 9030232
+      },
+      {
+        "title": "The Castle In The Air",
+        "url": "/assets/audio/records/polygondwanaland/03-525f4d387db1.mp3",
+        "durationSec": 167.5881,
+        "sizeBytes": 7219941
+      },
+      {
+        "title": "Deserted Dunes Welcome Weary Feet",
+        "url": "/assets/audio/records/polygondwanaland/04-4844d8042193.mp3",
+        "durationSec": 213.8112,
+        "sizeBytes": 9068877
+      },
+      {
+        "title": "Inner Cell",
+        "url": "/assets/audio/records/polygondwanaland/05-9934172ca285.mp3",
+        "durationSec": 235.5786,
+        "sizeBytes": 9939550
+      },
+      {
+        "title": "Loyalty",
+        "url": "/assets/audio/records/polygondwanaland/06-4b9e5018f429.mp3",
+        "durationSec": 218.7441,
+        "sizeBytes": 9266167
+      },
+      {
+        "title": "Horology",
+        "url": "/assets/audio/records/polygondwanaland/07-73952d13afd9.mp3",
+        "durationSec": 172.1295,
+        "sizeBytes": 7401584
+      },
+      {
+        "title": "Tetrachromacy",
+        "url": "/assets/audio/records/polygondwanaland/08-871fa00a5465.mp3",
+        "durationSec": 210.627,
+        "sizeBytes": 8941489
+      },
+      {
+        "title": "Searching...",
+        "url": "/assets/audio/records/polygondwanaland/09-d0bf928fbdf3.mp3",
+        "durationSec": 183.4569,
+        "sizeBytes": 7854684
+      },
+      {
+        "title": "The Fourth Colour",
+        "url": "/assets/audio/records/polygondwanaland/10-359055bd6369.mp3",
+        "durationSec": 372.186,
+        "sizeBytes": 15403853
+      }
+    ]
+  },
+  {
     "id": "excitable-boy",
     "title": "Excitable Boy",
     "artist": "Warren Zevon",
@@ -735,143 +873,5 @@
     "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music/7f/9f/d6/mzi.vtnaewef.jpg/512x512bb.jpg",
     "spotifyId": "1weenld61qoidwYuZ1GESA",
     "playbackProvenance": "https://open.spotify.com/album/1weenld61qoidwYuZ1GESA"
-  },
-  {
-    "id": "polygondwanaland",
-    "title": "Polygondwanaland",
-    "artist": "King Gizzard & The Lizard Wizard",
-    "year": "2017",
-    "cover": "/assets/images/records/polygondwanaland.jpg",
-    "url": "https://music.youtube.com/browse/MPREb_WXwA2ka0TD3",
-    "note": "",
-    "tracks": [
-      {
-        "number": 1,
-        "title": "Crumbling Castle",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 644256
-      },
-      {
-        "number": 2,
-        "title": "Polygondwanaland",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 212966
-      },
-      {
-        "number": 3,
-        "title": "The Castle In The Air",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 167674
-      },
-      {
-        "number": 4,
-        "title": "Deserted Dunes Welcome Weary Feet",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 213925
-      },
-      {
-        "number": 5,
-        "title": "Inner Cell",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 235711
-      },
-      {
-        "number": 6,
-        "title": "Loyalty",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 218868
-      },
-      {
-        "number": 7,
-        "title": "Horology",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 172211
-      },
-      {
-        "number": 8,
-        "title": "Tetrachromacy",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 210742
-      },
-      {
-        "number": 9,
-        "title": "Searching...",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 183546
-      },
-      {
-        "number": 10,
-        "title": "The Fourth Colour",
-        "artist": "King Gizzard & The Lizard Wizard",
-        "durationMs": 372444
-      }
-    ],
-    "context": "10 tracks, from Crumbling Castle to The Fourth Colour.",
-    "metadataSource": "https://music.apple.com/us/album/polygondwanaland/1876027939?uo=4",
-    "coverSource": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c0/3a/d0/c03ad0de-7e4b-8398-adc8-7aa396a15ca5/116.jpg/512x512bb.jpg",
-    "audioProvenanceUrl": "https://kinggizzardandthelizardwizard.com/polygondwanaland",
-    "audioCredit": "King Gizzard & The Lizard Wizard · official 320 kbps digital masters · shared with the band’s permission",
-    "audioTracks": [
-      {
-        "title": "Crumbling Castle",
-        "url": "/assets/audio/records/polygondwanaland/01-41a42634fb84.mp3",
-        "durationSec": 643.7565,
-        "sizeBytes": 26266672
-      },
-      {
-        "title": "Polygondwanaland",
-        "url": "/assets/audio/records/polygondwanaland/02-f4a7cd5052e4.mp3",
-        "durationSec": 212.8455,
-        "sizeBytes": 9030232
-      },
-      {
-        "title": "The Castle In The Air",
-        "url": "/assets/audio/records/polygondwanaland/03-525f4d387db1.mp3",
-        "durationSec": 167.5881,
-        "sizeBytes": 7219941
-      },
-      {
-        "title": "Deserted Dunes Welcome Weary Feet",
-        "url": "/assets/audio/records/polygondwanaland/04-4844d8042193.mp3",
-        "durationSec": 213.8112,
-        "sizeBytes": 9068877
-      },
-      {
-        "title": "Inner Cell",
-        "url": "/assets/audio/records/polygondwanaland/05-9934172ca285.mp3",
-        "durationSec": 235.5786,
-        "sizeBytes": 9939550
-      },
-      {
-        "title": "Loyalty",
-        "url": "/assets/audio/records/polygondwanaland/06-4b9e5018f429.mp3",
-        "durationSec": 218.7441,
-        "sizeBytes": 9266167
-      },
-      {
-        "title": "Horology",
-        "url": "/assets/audio/records/polygondwanaland/07-73952d13afd9.mp3",
-        "durationSec": 172.1295,
-        "sizeBytes": 7401584
-      },
-      {
-        "title": "Tetrachromacy",
-        "url": "/assets/audio/records/polygondwanaland/08-871fa00a5465.mp3",
-        "durationSec": 210.627,
-        "sizeBytes": 8941489
-      },
-      {
-        "title": "Searching...",
-        "url": "/assets/audio/records/polygondwanaland/09-d0bf928fbdf3.mp3",
-        "durationSec": 183.4569,
-        "sizeBytes": 7854684
-      },
-      {
-        "title": "The Fourth Colour",
-        "url": "/assets/audio/records/polygondwanaland/10-359055bd6369.mp3",
-        "durationSec": 372.186,
-        "sizeBytes": 15403853
-      }
-    ]
   }
 ]

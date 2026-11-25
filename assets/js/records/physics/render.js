@@ -161,7 +161,7 @@ export class Renderer {
     if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
     const cam = this.camera(st);
     const vibration=G.T(-.5*(st.plinth||0),0,st.plinth||0);
-    const spin = G.Rz(-st.thp), discM = G.chain(vibration,spin,G.T(ecc[0],ecc[1],0));
+    const spin = G.Rz(-st.thp), discM = st.recordMatrix||G.chain(vibration,spin,G.T(ecc[0],ecc[1],0));
     const arm = G.chain(G.T(PIVOT_X, PIVOT_Y, PIVOT_H), G.Rz(st.al), G.Ry(-Math.asin(Math.max(-0.2, Math.min(0.2, st.zt / ARM_LE)))));
     const head = G.chain(arm, G.T(ARM_LE, 0, 0), G.Rz(-ARM_BETA));
     // Keep the modelled diamond at the engine's exact contact point while the arm tilts.
@@ -190,7 +190,7 @@ export class Renderer {
     items.push([m.volumeMark,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),CHROME,.3,.4,0,off]);
     // Plinth vibration is measured by the solver, never a cosmetic shake.
     for(const item of items)if([m.body,m.plate,m.platter,m.mat,m.spindle].includes(item[0]))item[1]=G.mul(vibration,item[1]);
-    if (info) items.push([m.edge, discM, [0.008, 0.008, 0.008], 0.22, 0, 0, off]);
+    if (info && st.recordVisible!==false) items.push([m.edge, discM, [0.008, 0.008, 0.008], 0.22, 0, 0, off]);
 
     // 1. shadow map from the key light
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo); gl.viewport(0, 0, SHADOW, SHADOW); gl.clear(gl.DEPTH_BUFFER_BIT);
@@ -216,7 +216,7 @@ export class Renderer {
       gl.bindVertexArray(mesh.vao); gl.drawArrays(gl.TRIANGLES, 0, mesh.count);
     }
     this.markings.draw(cam.vp);
-    if (!info) return;
+    if (!info || st.recordVisible===false) return;
     u = this.rec.u;
     gl.useProgram(this.rec.p); common(u); gl.uniformMatrix4fv(u.uM, false, discM);
     gl.uniform3fv(u.uWarp, info.warp); gl.uniform4fv(u.uScr, info.scr); gl.uniform1i(u.uNScr, info.nScr);

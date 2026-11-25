@@ -25,7 +25,8 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
     if(pan)kind='pan';
     else if(!camera.micro&&!state.lookOnly&&index!==null){kind='fan';extra={index,selection:state.selected};}
     else if(!camera.micro&&!state.lookOnly){
-      if(inBox(deck,-.144,-.19,-.092,-.151)){kind='control';extra.action='motor';}
+      if(state.recordHeld&&p&&Math.hypot(...p)<.175){kind='control';extra.action='placeRecord';}
+      else if(inBox(deck,-.144,-.19,-.092,-.151)){kind='control';extra.action='motor';}
       else if(inBox(deck,-.094,-.193,-.063,-.168)){kind='control';extra.action='speed33';}
       else if(inBox(deck,-.063,-.193,-.032,-.168)){kind='control';extra.action='speed45';}
       else if(knob&&Math.hypot(knob[0]-.17,knob[1]+.15)<.020){kind='volume';extra.value=state.volume;}
@@ -66,7 +67,7 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
     if(drag.kind==='pinch'){free(true);return;}
     if(drag.id!==e.pointerId)return;
     if(drag.moved<8){
-      if(drag.kind==='fan')pendingTap=()=>select(drag.index,true);
+      if(drag.kind==='fan'){const index=drag.index;pendingTap=()=>select(index,true);}
       if(drag.kind==='control'){const action=drag.action;pendingTap=()=>command(action);}
       if(drag.kind==='platter'&&Math.hypot(...drag.point)>R_LABEL){const al=alphaForRadius(Math.hypot(...drag.point));pendingTap=()=>command('cueTo',{al});}
     }free(false);
