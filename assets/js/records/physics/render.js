@@ -143,6 +143,17 @@ export class Renderer {
     return [cam.eye[0] + k * d[0], cam.eye[1] + k * d[1]];
   }
 
+  // Ray against the displayed record plane; return view depth for occlusion.
+  pickDisc(clientX,clientY,matrix){
+    const cam=this.cam;if(!cam||!matrix)return null;
+    const b=this.canvas.getBoundingClientRect(),t=Math.tan(FOV/2),nx=((clientX-b.left)/b.width*2-1)*t*cam.asp,ny=(1-(clientY-b.top)/b.height*2)*t;
+    const d=[0,1,2].map(i=>cam.fwd[i]+nx*cam.right[i]+ny*cam.up[i]),n=[matrix[8],matrix[9],matrix[10]],c=[matrix[12],matrix[13],matrix[14]];
+    const den=d.reduce((v,x,i)=>v+x*n[i],0);if(Math.abs(den)<1e-8)return null;
+    const k=c.reduce((v,x,i)=>v+(x-cam.eye[i])*n[i],0)/den;if(k<=0)return null;
+    const q=d.map((v,i)=>cam.eye[i]+k*v-c[i]);if(Math.hypot(...q)>R_DISC)return null;
+    return k*d.reduce((v,x,i)=>v+x*cam.fwd[i],0);
+  }
+
   // distance (m) from a point on the arm's plane to the tonearm (tube or headshell), for grabbing it
   armDistance(p, al) {
     const ca = Math.cos(al), sa = Math.sin(al), [sx, sy] = stylusXY(al);

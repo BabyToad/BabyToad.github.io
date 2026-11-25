@@ -5,7 +5,7 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
   const angle=p=>{const a=Math.atan2(p[1]-PIVOT_Y,p[0]-PIVOT_X);return a<0?a+TAU:a;};
   const inBox=(p,x0,y0,x1,y1)=>p&&p[0]>=x0&&p[0]<=x1&&p[1]>=y0&&p[1]<=y1;
   function pickSleeve(x,y){
-    const cam=renderer.cam;if(!cam)return null;let depth=Infinity;
+    const cam=renderer.cam;if(!cam)return null;let depth=renderer.pickDisc(x,y,getState().recordMatrix)??Infinity;
     for(const z of [0,-.019,.018]){const p=renderer.pick(x,y,z);if(!p)continue;
       const blocked=z===0?Math.hypot(...p)<.1645:z===-.019?inBox(p,-.185,-.19,.27,.19):renderer.armDistance(p,getState().al)<.014;
       if(blocked)depth=Math.min(depth,(p[0]-cam.eye[0])*cam.fwd[0]+(p[1]-cam.eye[1])*cam.fwd[1]+(z-cam.eye[2])*cam.fwd[2]);
@@ -23,6 +23,7 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
     const pan=e.button===2||e.shiftKey;
     let kind='orbit',extra={};
     if(pan)kind='pan';
+    else if(!camera.micro&&!state.lookOnly&&state.recordMatrix&&renderer.pickDisc(e.clientX,e.clientY,state.recordMatrix)!==null){kind='control';extra.action=state.recordHeld?'placeRecord':'recordMoving';}
     else if(!camera.micro&&!state.lookOnly&&index!==null){kind='fan';extra={index,selection:state.selected};}
     else if(!camera.micro&&!state.lookOnly){
       if(state.recordHeld&&p&&Math.hypot(...p)<.175){kind='control';extra.action='placeRecord';}

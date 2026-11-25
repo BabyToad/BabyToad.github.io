@@ -14,7 +14,7 @@ const mediaBase=new URL(root.dataset.mediaBase||'/',location.href);
 for(const album of albums)for(const track of album.audioTracks||[])track.url=new URL(track.url,mediaBase).href;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'),phone=matchMedia('(max-width:600px)');
 const defaultAlbum=albums.find(a=>a.id==='polygondwanaland'),placement=new RecordPlacement();
-let pressingAlbum=null,handlingRequest=0;
+let pressingAlbum=null,handlingRequest=0,handlingCut=false;
 const state={selected:0,tel:null,received:0,record:null,sequence:0,cutting:false,ready:false,motor:false,cue:true,rpm:100/3,pitch:0,lookOnly:false,source:'Polygondwanaland',sourceDetail:'Demo pressing · The Castle In The Air · 2:47'};
 const camera={az:-.38,el:.72,distance:1.50,focus:[-.22,.03,-.07],follow:false,target:null};
 let renderer,fan,worker,job=0,renderFrame=0,lastFrame=0,alive=true,shown=true,gestureCleanup;
@@ -39,7 +39,7 @@ const listening=createListeningPanel($('album-listening'),{
   onStop:()=>{status('Album player closed. Put it on resumes the physical pressing.');update();invalidate();},
   onCut:cutOfficialTrack
 });
-function sleeveHome(){const i=state.selected;return [-.60,.08+i*.014-.075-.003,.068,Math.PI/2];}
+function sleeveHome(){fan.frozen=true;return fan.recordHome(state.selected,state.selected);}
 function recordControls(){
  const a=albums[state.selected],available=!!a.audioTracks?.length;
  $('take-record').hidden=!available;$('take-record').disabled=state.cutting||placement.moving||unavailable;
@@ -54,7 +54,7 @@ async function takeRecord(){
  const request=++handlingRequest;await audio.silence();if(request!==handlingRequest||!alive)return;
  state.tel=null;state.ready=false;state.motor=false;state.cue=true;$('rpm-value').textContent='0.00 RPM';$('track-current').textContent='Needle raised';
  if(state.record&&pressingAlbum===a.id){
-  if(placement.placed)placement.return();else placement.extract(sleeveHome());
+  if(placement.placed)placement.return(sleeveHome());else placement.extract(sleeveHome());
   status(placement.phase==='returning'?'Returning the record to its sleeve.':'Click the platter to place the record.');update();invalidate();return;
  }
  const track=a.audioTracks.find(t=>t.title==='The Castle In The Air')||a.audioTracks.find(t=>t.durationSec<=(phone.matches?180:600));
@@ -62,8 +62,8 @@ async function takeRecord(){
  try{await cutOfficialTrack({album:a,track,handling:true});}catch(error){status(error.message);}
 }
 function placeRecord(){if(placement.phase!=='held'||state.cutting)return;placement.place();setView('deck');status('Lowering the record onto the spindle…');update();invalidate();}
-function sceneAlbum(index,inspect=true){selectAlbum(index,false);if(inspect){if(albums[index].audioTracks?.length)takeRecord();else selectAlbum(index,true);}}
-function cancelDownload(){downloadJob++;if(downloadAbort){downloadAbort.abort();downloadAbort=null;state.cutting=false;}}
+function sceneAlbum(index,inspect=true){if(placement.moving)return;selectAlbum(index,false);if(inspect){if(albums[index].audioTracks?.length&&!placement.visible)takeRecord();else selectAlbum(index,true);}}
+function cancelDownload(){downloadJob++;if(downloadAbort){downloadAbort.abort();downloadAbort=null;state.cutting=false;status('Download cancelled. Choose a record or listening source.');}}
 async function cutOfficialTrack({album,track,handling=false}){
   if(unavailable)throw new Error('The vinyl simulation is unavailable. You can still play the full recording here.');
   cancelCut();const id=downloadJob,controller=downloadAbort=new AbortController();
@@ -75,7 +75,7 @@ async function cutOfficialTrack({album,track,handling=false}){
     const blob=await response.blob();if(id!==downloadJob||!alive)return false;
     if(blob.size!==track.sizeBytes)throw new Error('The download was incomplete. Try again or play the full recording.');
     const file=new File([blob],track.title+'.mp3',{type:'audio/mpeg'});file.recordCredit={title:album.title,artist:album.artist};
-    downloadAbort=null;state.cutting=false;$('sleeve-detail').hidden=true;setView(handling?'room':'deck');beginCut('official',[file],handling?{albumId:album.id,home:sleeveHome()}:null);return true;
+    downloadAbort=null;state.cutting=false;$('sleeve-detail').hidden=true;setView(handling?'room':'deck');beginCut('official',[file],handling?{albumId:album.id}:null);return true;
   }catch(error){if(id!==downloadJob||error.name==='AbortError')return false;downloadAbort=null;state.cutting=false;const message=error.message==='The download was incomplete. Try again or play the full recording.'?error.message:'The recording could not download. Try full playback or a service link.';status(message);update();throw new Error(message);}
 }
 
@@ -92,6 +92,7 @@ function setView(name){
   invalidate();
 }
 function selectAlbum(index,inspect=true){
+  if(placement.moving)return;handlingRequest++;if(handlingCut&&index!==state.selected)cancelCut();
   cancelDownload();state.selected=Math.max(0,Math.min(albums.length-1,index));const a=albums[state.selected];
   $('selected-title').textContent=a.title;$('selected-artist').textContent=a.artist;$('selected-meta').textContent=`${a.year} · ${a.tracks.length} tracks`;
   $('selected-cover').src=a.cover;$('selected-cover').alt=a.title+' cover';$('album-context').textContent=a.context;
@@ -143,7 +144,7 @@ function applyParams(){
   audio.send({t:'speed',rpm:state.rpm*(1+state.pitch/100)});
 }
 function beginCut(kind,files=null,handling=null){
-  if(unavailable)return;
+  if(unavailable)return;handlingCut=!!handling;
   listening.stop();cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);const id=++job;gestureCleanup?.();worker?.terminate();worker=null;state.cutting=true;audio.send({t:'cue',up:true});audio.send({t:'motor',on:false});state.motor=false;state.cue=true;update();
   const w=worker=new Worker(new URL('./physics/master-worker.js',import.meta.url),{type:'module'});
   w.onerror=e=>{if(id===job){state.cutting=false;failure('Could not cut this side. Try a shorter file.');}w.terminate();};
@@ -155,7 +156,7 @@ function beginCut(kind,files=null,handling=null){
       const install=(park=false)=>{clearTimeout(pendingPressingTimer);pendingPressing=null;if(id!==job||!alive)return;
       microSample=null;if(camera.micro)setView('stylus');$('groove-stats').textContent='Needle raised · new pressing ready.';state.cutting=false;$('track-current').textContent='Needle raised';state.record=m.rec;state.record.sequence=++state.sequence;if(park)state.tel=null;state.ready=false;
       pressingAlbum=kind==='official'?(handling?.albumId||defaultAlbum.id):null;
-      if(handling)placement.extract(handling.home);else placement.reset();
+      handlingCut=false;if(handling)placement.extract(sleeveHome());else placement.reset();
       renderer?.setRecord(m.rec,m.vis);audio.install(state.record,park);if(park)applyParams();
       sourceKind=kind;sourceFiles=files;state.source=kind==='demo'?'House pressing':files.length===1?files[0].name.replace(/\.[^.]+$/,''):'Your local side';
       state.sourceDetail=kind==='demo'?'Synthesised Demo EP · Guillermo Rauch':kind==='official'?files[0].recordCredit.artist+' · artist-authorized master, cut here':`${files.length} local ${files.length===1?'file':'files'} · cut here, never uploaded`;
@@ -198,7 +199,7 @@ function cutFiles(fileList){
   if(files.reduce((sum,f)=>sum+f.size,0)>maxMB*1024*1024)return status(`Choose files totaling under ${maxMB} MB on this device.`);
   $('sleeve-detail').hidden=true;setView('deck');beginCut('files',files);
 }
-function cancelCut(){cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);job++;worker?.terminate();worker=null;state.cutting=false;status(state.record?'Cut cancelled. The previous pressing is still on the deck.':'Cut cancelled. Choose House pressing or a local file.');update();}
+function cancelCut(){handlingCut=false;cancelDownload();pendingPressing=null;clearTimeout(pendingPressingTimer);job++;worker?.terminate();worker=null;state.cutting=false;status(state.record?'Cut cancelled. The previous pressing is still on the deck.':'Cut cancelled. Choose House pressing or a local file.');update();}
 function drawScope(t){
   const scope=$('groove-scope'),ctx=scope.getContext('2d'),v=t.view;if(!v)return;
   const styles=getComputedStyle(root),w=scope.width,h=scope.height;ctx.fillStyle=styles.getPropertyValue('--bg-dip');ctx.fillRect(0,0,w,h);ctx.strokeStyle=styles.getPropertyValue('--ink-soft');ctx.lineWidth=1.5;
@@ -213,7 +214,7 @@ let displayTime=0;
 function frame(now){
   renderFrame=0;if(!alive||!shown||document.hidden)return;
   const dt=Math.min(.05,(now-(lastFrame||now))/1000);lastFrame=now;
-  const wasMoving=placement.moving;placement.tick(dt,reduced.matches);if(wasMoving&&!placement.moving){status(placement.placed?'Record placed. Put it on to start the motor and lower the needle.':placement.phase==='held'?'Click the platter to place the record.':'Record returned to its sleeve.');update();}
+  const wasMoving=placement.moving;placement.tick(dt,reduced.matches);if(wasMoving&&!placement.moving){fan.frozen=false;status(placement.placed?'Record placed. Put it on to start the motor and lower the needle.':placement.phase==='held'?'Click the platter to place the record.':'Record returned to its sleeve.');update();}
   if(camera.target){const target=camera.target,k=1-Math.exp(-dt*8);let delta=0;for(const key of ['az','el','distance']){delta+=Math.abs(target[key]-camera[key]);camera[key]+=(target[key]-camera[key])*k;}for(let i=0;i<3;i++){delta+=Math.abs(target.focus[i]-camera.focus[i]);camera.focus[i]+=(target.focus[i]-camera.focus[i])*k;}if(delta<.0001){Object.assign(camera,target);camera.target=null;}}
   const t=state.tel,lag=t?Math.min(.05,(now-state.received)/1000):0;
   if(camera.follow&&!camera.target&&t)camera.focus=[...stylusXY(t.al),.002];
@@ -235,7 +236,7 @@ function frame(now){
 
 try{
   renderer=new Renderer(canvas);microscope=new GrooveSurface(renderer.gl);fan=new AlbumFan(renderer,albums,invalidate);canvas.hidden=false;$('scene-fallback').hidden=true;
-  gestureCleanup=connectGestures({canvas,renderer,fan,camera,getState:()=>({...state,ready:state.ready&&placement.placed,recordHeld:placement.phase==='held',skate:+$('skate').value,volume:+$('volume').value,al:state.tel?.al??ALPHA_REST}),command,select:sceneAlbum,hover:index=>{if(fan.hover===index)return;fan.hover=index;$('hover-info').hidden=index===null;if(index!==null){const a=albums[index];$('hover-info').textContent=a.title+' · '+a.artist+' · '+a.year+' · '+a.tracks.length+' tracks';}invalidate();},invalidate});
+  gestureCleanup=connectGestures({canvas,renderer,fan,camera,getState:()=>({...state,ready:state.ready&&placement.placed,recordHeld:placement.phase==='held',recordMatrix:placement.visible&&!placement.placed?placement.matrix:null,skate:+$('skate').value,volume:+$('volume').value,al:state.tel?.al??ALPHA_REST}),command,select:sceneAlbum,hover:index=>{if(fan.hover===index)return;fan.hover=index;$('hover-info').hidden=index===null;if(index!==null){const a=albums[index];$('hover-info').textContent=a.title+' · '+a.artist+' · '+a.year+' · '+a.tracks.length+' tracks';}invalidate();},invalidate});
 
   new ResizeObserver(invalidate).observe(canvas);new MutationObserver(invalidate).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   new IntersectionObserver(entries=>{shown=entries[0].isIntersecting;if(shown)invalidate();}).observe(canvas);
