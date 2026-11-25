@@ -35,10 +35,14 @@ export class AlbumFan{
   }
   gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.depthMask(false);draw(this.tray,G.ident(),2);gl.depthMask(true);gl.disable(gl.BLEND);
  }
- pick(x,y){
-  const b=this.renderer.canvas.getBoundingClientRect(),p=[(x-b.left)/b.width,(y-b.top)/b.height];let hit=null,depth=Infinity;
+ pick(x,y,occluderDepth=Infinity){
+  const b=this.renderer.canvas.getBoundingClientRect(),p=[(x-b.left)/b.width,(y-b.top)/b.height];let hit=null,depth=occluderDepth;
   for(const card of this.cards){if(card.pts.some(v=>v[2]<=0))continue;let inside=false;for(let i=0,j=3;i<4;j=i++){const a=card.pts[i],b=card.pts[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;}
-   const z=card.pts.reduce((s,v)=>s+v[2],0)/4;if(inside&&z<depth){hit=card.i;depth=z;}
+   if(!inside)continue;
+   for(const ids of [[0,1,2],[0,2,3]]){const [a,b,c]=ids.map(i=>card.pts[i]),den=(b[1]-c[1])*(a[0]-c[0])+(c[0]-b[0])*(a[1]-c[1]);if(Math.abs(den)<1e-10)continue;
+    const l=((b[1]-c[1])*(p[0]-c[0])+(c[0]-b[0])*(p[1]-c[1]))/den,m=((c[1]-a[1])*(p[0]-c[0])+(a[0]-c[0])*(p[1]-c[1]))/den,n=1-l-m;
+    if(Math.min(l,m,n)<-1e-7)continue;const z=1/(l/a[2]+m/b[2]+n/c[2]);if(z<depth){hit=card.i;depth=z;}
+   }
   }return hit;
  }
  dispose(){for(const t of [...this.textures,...this.backs])this.gl.deleteTexture(t);this.gl.deleteProgram(this.program.p);}

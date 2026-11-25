@@ -5,7 +5,7 @@ export function createPhysicalAudio(onTelemetry, onState, onError) {
   function detach(candidate){if(!candidate)return;candidate.port.onmessage=null;candidate.onprocessorerror=null;candidate.disconnect();candidate.port.close();}
   async function unlock(){
     if(disposed)throw new Error('The audio engine has closed. Reload to restart it.');
-    context ||= new AudioContext({latencyHint:'interactive'});
+    if(!context){context=new AudioContext({latencyHint:'interactive'});context.onstatechange=()=>{if(!disposed)onState(context.state);};}
     const resumed=context.resume(); // Directly inside click activation, before any await (iOS).
     initializing ||= (async()=>{
       await context.audioWorklet.addModule(new URL('./physics/worklet.js',import.meta.url));
@@ -24,7 +24,7 @@ export function createPhysicalAudio(onTelemetry, onState, onError) {
           candidate.connect(context.destination);
         });
         send({t:'set',volume:.35,hum:0});
-        if(pendingRecord)install(pendingRecord);
+        if(pendingRecord)install(pendingRecord.record,pendingRecord.park);
       }catch(error){detach(candidate);if(node===candidate)node=null;ready=false;throw error;}
     })().catch(error=>{initializing=null;throw error;});
     let resumeTimer;
@@ -33,14 +33,14 @@ export function createPhysicalAudio(onTelemetry, onState, onError) {
     if(disposed||context.state!=='running')throw new Error('Tap Put it on again to allow audio.');
     onState('running');
   }
-  function install(record){
-    pendingRecord=record;if(!ready)return;
+  function install(record,park=false){
+    pendingRecord={record,park};if(!ready)return;
     // The renderer uses the small visualization and radius table, never the wall arrays.
     // Transfer each pressing once; re-pressing cuts a new record from the original files.
     const {wallIn,wallOut}=record;
     if(!wallIn.byteLength||!wallOut.byteLength)throw new Error('This pressing has already been installed.');
     send({t:'motor',on:false});send({t:'cue',up:true});send({t:'platter',on:false});
-    node.port.postMessage({t:'record',rec:record,seq:record.sequence},[wallIn.buffer,wallOut.buffer]);
+    node.port.postMessage({t:'record',rec:record,seq:record.sequence,park},[wallIn.buffer,wallOut.buffer]);
     pendingRecord=null;
   }
   return {unlock,send,install,get ready(){return ready;},get context(){return context;},

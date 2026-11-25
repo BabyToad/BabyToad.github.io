@@ -50,7 +50,10 @@ class Turntable extends AudioWorkletProcessor {
   onMsg(m) {
     const e = this.e;
     switch (m.t) {
-      case 'record': e.setRecord(m.rec); this.recSeq = m.seq; break;   // echoed in telemetry (main.js drawStats)
+      case 'record':
+        // Recovery after interruption: swap into a stopped, raised, parked mechanism.
+        if (m.park) this.e = new Engine(sampleRate);
+        this.e.setRecord(m.rec); this.recSeq = m.seq; break;   // echoed in telemetry (main.js drawStats)
       case 'set': e.set(m); break;
       case 'motor': e.setMotor(m.on); break;
       case 'speed': e.setSpeed(m.rpm); break;

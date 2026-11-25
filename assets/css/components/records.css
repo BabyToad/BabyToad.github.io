@@ -22,3 +22,5 @@
 .records .primary:hover{color:var(--accent-ink)}.hover-info{position:absolute;left:1rem;bottom:250px;max-width:340px;padding:.8rem;font:.75rem/1.5 var(--font-mono);pointer-events:none;z-index:3}@media(max-width:600px){.hover-info{display:none}}
 
 .sleeve-detail{display:flex;flex-direction:column;gap:.8rem;overflow:hidden;padding-top:1.5rem}.sleeve-content{min-height:0;overflow:auto;overscroll-behavior:contain;display:grid;grid-template-columns:90px 1fr;gap:.8rem;align-content:start;flex:1}.sleeve-content>img{width:90px;height:90px;object-fit:cover;margin-top:.4rem}.sleeve-nav{flex:none;border-top:1px solid var(--border);padding-top:.65rem}.sleeve-detail .close-panel{z-index:2}.records button{-webkit-tap-highlight-color:transparent}.record-shelves details{font:.75rem/1.6 var(--font-mono)}.record-shelves details ol{padding-left:1.5rem}@media(max-width:600px){.sleeve-content{grid-template-columns:80px 1fr}.sleeve-content>img{width:80px;height:80px}.sleeve-detail{bottom:300px}.sleeve-nav button{min-height:44px}}
+
+@media(max-width:600px){.sleeve-detail{bottom:325px}}

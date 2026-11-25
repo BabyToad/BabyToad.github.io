@@ -4,6 +4,13 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
   const pointers=new Map();let drag=null,pendingTap=null;
   const angle=p=>{const a=Math.atan2(p[1]-PIVOT_Y,p[0]-PIVOT_X);return a<0?a+TAU:a;};
   const inBox=(p,x0,y0,x1,y1)=>p&&p[0]>=x0&&p[0]<=x1&&p[1]>=y0&&p[1]<=y1;
+  function pickSleeve(x,y){
+    const cam=renderer.cam;if(!cam)return null;let depth=Infinity;
+    for(const z of [0,-.019,.018]){const p=renderer.pick(x,y,z);if(!p)continue;
+      const blocked=z===0?Math.hypot(...p)<.1645:z===-.019?inBox(p,-.185,-.19,.27,.19):renderer.armDistance(p,getState().al)<.014;
+      if(blocked)depth=Math.min(depth,(p[0]-cam.eye[0])*cam.fwd[0]+(p[1]-cam.eye[1])*cam.fwd[1]+(z-cam.eye[2])*cam.fwd[2]);
+    }return fan.pick(x,y,depth);
+  }
   function free(cancel=true){
     if(drag?.kind==='arm'){command('hand',{on:false});if(cancel)command('cue',{up:true});}
     if(drag?.kind==='platter')command('platter',{on:false});
@@ -12,7 +19,7 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
   canvas.addEventListener('pointerdown',e=>{
     if(e.button>2)return;pendingTap=null;camera.target=null;canvas.focus({preventScroll:true});canvas.setPointerCapture(e.pointerId);pointers.set(e.pointerId,[e.clientX,e.clientY]);
     if(pointers.size>=2){free(true);const [a,b]=[...pointers.values()];drag={kind:'pinch',distance:Math.hypot(a[0]-b[0],a[1]-b[1]),center:[(a[0]+b[0])/2,(a[1]+b[1])/2]};return;}
-    const state=getState(),p=renderer.pick(e.clientX,e.clientY,0),deck=renderer.pick(e.clientX,e.clientY,-.019),arm=renderer.pick(e.clientX,e.clientY,.018),index=fan.pick(e.clientX,e.clientY);
+    const state=getState(),p=renderer.pick(e.clientX,e.clientY,0),deck=renderer.pick(e.clientX,e.clientY,-.019),arm=renderer.pick(e.clientX,e.clientY,.018),index=pickSleeve(e.clientX,e.clientY);
     const pan=e.button===2||e.shiftKey;
     let kind='orbit',extra={};
     if(pan)kind='pan';
@@ -25,13 +32,13 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
       else if(inBox(deck,PIVOT_X+.032,PIVOT_Y-.065,PIVOT_X+.066,PIVOT_Y-.03)){kind='control';extra.action='cue';}
       else if(deck&&Math.hypot(deck[0]-PIVOT_X-.047,deck[1]-PIVOT_Y-.012)<.014){kind='skate';extra.value=state.skate;}
       else if(state.ready&&!state.cutting&&arm&&renderer.armDistance(arm,state.al)<(e.pointerType==='touch'?.030:.011)){kind='arm';extra.offset=state.al-angle(arm);command('hand',{on:true,al:state.al});}
-      else if(state.ready&&p&&Math.hypot(...p)<R_DISC){kind='platter';extra={angle:Math.atan2(p[1],p[0]),point:p};command('platter',{on:true});}
+      else if(state.ready&&!state.cutting&&p&&Math.hypot(...p)<R_DISC){kind='platter';extra={angle:Math.atan2(p[1],p[0]),point:p};command('platter',{on:true});}
     }
     drag={kind,id:e.pointerId,x:e.clientX,y:e.clientY,x0:e.clientX,y0:e.clientY,moved:0,...extra};canvas.style.cursor='grabbing';
   });
   canvas.addEventListener('pointermove',e=>{
     if(pointers.has(e.pointerId))pointers.set(e.pointerId,[e.clientX,e.clientY]);
-    if(!drag){hover(fan.pick(e.clientX,e.clientY));return;}
+    if(!drag){hover(pickSleeve(e.clientX,e.clientY));return;}
     if(drag.kind==='pinch'){
       const [a,b]=[...pointers.values()];if(!b)return;const distance=Math.hypot(a[0]-b[0],a[1]-b[1]),center=[(a[0]+b[0])/2,(a[1]+b[1])/2];
       camera.distance*=drag.distance/Math.max(1,distance);pan(center[0]-drag.center[0],center[1]-drag.center[1]);drag.distance=distance;drag.center=center;
