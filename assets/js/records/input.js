@@ -12,7 +12,7 @@ export function connectGestures({canvas,renderer,fan,camera,getState,command,sel
     }return fan.pick(x,y,depth);
   }
   function free(cancel=true){
-    if(drag?.kind==='arm'){command('hand',{on:false});if(cancel)command('cue',{up:true});}
+    if(drag?.kind==='arm'){command('hand',{on:false,cancel});if(cancel)command('cue',{up:true});}
     if(drag?.kind==='platter')command('platter',{on:false});
     drag=null;canvas.style.cursor='grab';
   }

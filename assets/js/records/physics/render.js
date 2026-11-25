@@ -39,6 +39,7 @@ export class Renderer {
       platter: m(L([[0, -0.0215], [0.164, -0.0215], [0.1645, -0.0205], [0.1645, -0.0072], [0.1625, -0.0045], [0.1535, -0.0036], [0.1535, -0.0025], [0, -0.0025]], 160)),
       mat: m(L([[0.1495, -0.0025], [0.1495, -0.0013], [0, -0.0013]], 96)),
       spindle: m(L([[0.0036, -0.003], [0.0036, 0.009], [0.003, 0.0108], [0.0015, 0.0115], [0, 0.0115]], 24)),
+      serviceLabel:m(G.annulus(.0036,.047,1,96)),
       edge: m(G.cyl(R_DISC, R_DISC, -0.0013, 0, 128, false)), disc: m(G.annulus(0.0036, R_DISC, 56, 192)),
       strobe: m(G.merge(at(L([[0.019, DECK_Z], [0.019, -0.006], [0.0175, -0.0045], [0, -0.0045]], 32), STROBE[0], STROBE[1]))),
       lens: m(G.box(-0.0015, -0.006, -0.018, 0.0015, 0.006, -0.008)),
@@ -65,8 +66,8 @@ export class Renderer {
       dial: m(G.alongX(L([[0.0135, -0.0605], [0.0135, -0.054], [0.0125, -0.053], [0, -0.053]], 40))),
       // headshell frame (+x = direction of groove travel, stylus tip at z = -PIVOT_H)
       collar: m(G.merge(at(G.alongX(L([[0.0042, -0.047], [0.0060, -0.047], [0.0060, -0.036], [0.0042, -0.036]], 24)), 0, 0, -0.0125),
-        at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, 0.0045), at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, -0.0045),
-        G.tube([[-0.0045, 0, -0.0270], [0, 0, -0.02982]], 0.00013, 16))),
+        at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, 0.0045), at(G.cyl(0.0014, 0.0014, -0.0122, -0.0116, 10), -0.012, -0.0045))),
+      cantilever:m(G.tube([[-0.0045,0,-0.0270],[0,0,-0.02982]],0.00013,16)),
       // Fine cantilever and a separate diamond: its seating centre is the solver point.
       diamond: m(diamondGeometry()),
       shell: m(G.merge(G.rbox(-0.037, -0.0095, 0.012, 0.0095, -0.0142, -0.0122, 0.003, 0.0005),
@@ -173,10 +174,13 @@ export class Renderer {
     const cam = this.camera(st);
     const vibration=G.T(-.5*(st.plinth||0),0,st.plinth||0);
     const spin = G.Rz(-st.thp), discM = st.recordMatrix||G.chain(vibration,spin,G.T(ecc[0],ecc[1],0));
-    const arm = G.chain(G.T(PIVOT_X, PIVOT_Y, PIVOT_H), G.Rz(st.al), G.Ry(-Math.asin(Math.max(-0.2, Math.min(0.2, st.zt / ARM_LE)))));
+    const arm = G.chain(G.T(PIVOT_X, PIVOT_Y, PIVOT_H), G.Rz(st.al), G.Ry(-Math.asin(Math.max(-0.2, Math.min(0.2, (st.zb??st.zt) / ARM_LE)))));
     const head = G.chain(arm, G.T(ARM_LE, 0, 0), G.Rz(-ARM_BETA));
     // Keep the modelled diamond at the engine's exact contact point while the arm tilts.
-    const [sx,sy]=stylusXY(st.al);head[12]=sx+PIVOT_H*head[8];head[13]=sy+PIVOT_H*head[9];head[14]=st.zt+PIVOT_H*head[10];
+    const [sx,sy]=stylusXY(st.al);head[12]=sx+PIVOT_H*head[8];head[13]=sy+PIVOT_H*head[9];head[14]=(st.zb??st.zt)+PIVOT_H*head[10];
+    const r=Math.hypot(sx,sy)||1,delta=[(st.xi||0)*sx/r,(st.xi||0)*sy/r,st.zt-(st.zb??st.zt)],tip=new Float32Array(head);for(let i=0;i<3;i++)tip[12+i]+=delta[i];
+    const local=[0,1,2].map(j=>delta.reduce((v,x,i)=>v+x*head[j*4+i],0)),bend=G.ident();for(let i=0;i<3;i++){bend[8+i]+=local[i]/(-.00282);bend[12+i]=local[i]*(-.027)/.00282;}
+    const cantilever=G.mul(head,bend);
     const lensM = G.chain(G.T(STROBE[0] + 0.7026 * 0.0185, STROBE[1] + 0.7115 * 0.0185, 0), G.Rz(0.7917));
     const on = st.motor ? 1 : 0, r33 = st.rpm < 40 || st.rpm > 70, r45 = st.rpm > 40, off = [0, 0, 0];
     const glow = (k, col = AMBER) => col.map((v) => v * 2.2 * k);
@@ -195,14 +199,15 @@ export class Renderer {
       [m.skateMark,G.chain(G.T(PIVOT_X+.047,PIVOT_Y+.012,-.0109),G.Rz((st.skate||0)*1.4)),CHROME,.25,1,0,off],
       [m.tower, I, [0.020, 0.020, 0.022], 0.38, 0.6, 0, off], [m.towerCap, I, CHROME, 0.16, 1, 0, off],
       [m.tube, arm, [0.30, 0.30, 0.32], 0.16, 1, 0, off], [m.weight, G.chain(arm,G.T((1.8-(st.force??1.8))*.003,0,0)), [0.022, 0.022, 0.024], 0.42, 0.7, 0, off], [m.dial, arm, CHROME, 0.28, 1, 0, off],
-      [m.collar, head, CHROME, 0.2, 1, 0, off], [m.diamond, head, [0.65,0.70,0.74], 0.14, 0.15, 0, off], [m.shell, head, [0.014, 0.014, 0.015], 0.4, 0.2, 0, off], [m.holder, head, [0.80, 0.36, 0.05], 0.42, 0, 0, off],
+      [m.collar, head, CHROME, 0.2, 1, 0, off], [m.cantilever,cantilever,CHROME,.2,1,0,off], [m.diamond, tip, [0.65,0.70,0.74], 0.14, 0.15, 0, off], [m.shell, head, [0.014, 0.014, 0.015], 0.4, 0.2, 0, off], [m.holder, head, [0.80, 0.36, 0.05], 0.42, 0, 0, off],
     ];
     items.push([m.volume,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),BLACK,.32,.65,0,off]);
     items.push([m.volumeMark,G.chain(G.T(.17,-.15,0),G.Rz((.5-(st.volume??.45))*4.7)),CHROME,.3,.4,0,off]);
     // Plinth vibration is measured by the solver, never a cosmetic shake.
     for(const item of items)if([m.body,m.plate,m.platter,m.mat,m.spindle].includes(item[0]))item[1]=G.mul(vibration,item[1]);
-    if (info && st.recordVisible!==false) items.push([m.edge, discM, [0.008, 0.008, 0.008], 0.22, 0, 0, off]);
+    if ((info||st.service) && st.recordVisible!==false) items.push([m.edge, discM, [0.008, 0.008, 0.008], 0.22, 0, 0, off]);
 
+    if(st.service){items.push([m.disc,discM,BLACK,.3,0,0,off],[m.serviceLabel,G.mul(discM,G.T(0,0,.0001)),AMBER,.65,0,0,off]);}
     // 1. shadow map from the key light
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo); gl.viewport(0, 0, SHADOW, SHADOW); gl.clear(gl.DEPTH_BUFFER_BIT);
     gl.useProgram(this.dep.p); gl.uniformMatrix4fv(this.dep.u.uVP, false, this.lvp);
@@ -227,12 +232,12 @@ export class Renderer {
       gl.bindVertexArray(mesh.vao); gl.drawArrays(gl.TRIANGLES, 0, mesh.count);
     }
     this.markings.draw(cam.vp);
-    if (!info || st.recordVisible===false) return;
+    if (st.service || !info || st.recordVisible===false) return;
     u = this.rec.u;
     gl.useProgram(this.rec.p); common(u); gl.uniformMatrix4fv(u.uM, false, discM);
     gl.uniform3fv(u.uWarp, info.warp); gl.uniform4fv(u.uScr, info.scr); gl.uniform1i(u.uNScr, info.nScr);
     gl.uniform1f(u.uRLo, info.rLo); gl.uniform1f(u.uRHi, info.rHi); gl.uniform1f(u.uRows, info.rows);
-    gl.uniform3f(u.uStylus, sx, sy, st.zt);
+    gl.uniform3f(u.uStylus, sx+delta[0], sy+delta[1], st.zt);
     gl.uniform1f(u.uRevEnd, info.revEnd); gl.uniform1f(u.uW, GROOVE_W); gl.uniform1f(u.uDust, info.dust);
     [['uLut', this.tex.lut], ['uVis', this.tex.vis], ['uLabel', this.tex.label]].forEach(([name, tex], i) => {
       gl.activeTexture(gl.TEXTURE0 + i); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(u[name], i);

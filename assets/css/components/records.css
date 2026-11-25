@@ -37,3 +37,12 @@
 .service-listening #album-context{display:none}.listening-links{font:.72rem/1.6 var(--font-mono)}
 
 .service-listening .volume-control{display:none}.listening-cut-details summary{padding:.5rem 0}.listening-cut-details[open]{display:grid;gap:.5rem}.listening-cut-details .listening-cut{width:100%}
+
+.precut-library{margin:1rem auto;max-width:900px;padding:1rem;border:1px solid var(--border);font:.8rem var(--font-mono)}.precut-library select{max-width:100%;padding:.6rem}.service-listening.service-volume .volume-control{display:block;opacity:1;pointer-events:auto}.service-listening.service-volume #volume{visibility:visible}
+@media(max-width:600px){.service-listening .listening-desk{height:calc(100svh + 700px)}.service-listening #record-stage{height:calc(100svh - 145px)}.service-listening .sleeve-detail{top:calc(100svh - 130px);bottom:auto;height:700px}.service-listening .deck-strip{visibility:visible;top:calc(100svh - 420px);bottom:auto}.service-listening .source-badge{max-width:85%}}
+
+.service-listening .record-source{display:none}
+
+.service-listening #motor,.service-listening #cue{display:none}
+
+.service-listening #speed33,.service-listening #speed45,.service-listening #adjust-toggle{display:none}
