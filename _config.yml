@@ -5,6 +5,8 @@ baseurl: ""
 url: "https://www.allknivesnobagel.com"
 # Public R2 media host; keep this URL without a trailing slash.
 media_base: "https://media.allknivesnobagel.com"
+# All ten prepared groove assets verified on the public host.
+records_precuts_published: true
 
 # Collections
 collections:
