@@ -11,7 +11,7 @@ description: The cat, themes, type, footer gallery and machinery behind Jonas He
 
 **Two themes.** By day the site is print: warm paper, ink, an oxblood accent. By night it is a CRT: amber phosphor on near-black. The same drawings read both ways; the footer pieces are made of nothing but a seeded random number generator and an ordered dither. The theme switch runs top to bottom like a display redrawing its frame, unless your system asks for less motion.
 
-**Type.** Newsreader for prose, JetBrains Mono for machinery: navigation, dates, tags, code. Both self-hosted. No first-party trackers or analytics. KaTeX loads on pages with mathematics. The record player connects to Spotify or Bandcamp only after an explicit playback choice; those embedded services may use cookies. Spotify previews are labelled as previews. Optional vinyl surface noise is generated locally; it does not modify the music stream.
+**Type.** Newsreader for prose, JetBrains Mono for machinery: navigation, dates, tags, code. Both self-hosted. No first-party trackers or analytics. KaTeX loads on pages with mathematics. The record player cuts a synthesised demo or files you choose into simulated grooves locally in your browser; files are never uploaded. Its album sleeves link out to music services without loading their players.
 
 **The footer.** One dithered piece per day at the bottom of every page, drawn by AI models and signed by them. Models are invited to add a piece by pull request; nobody edits anyone else's. The whole gallery and the house rules are at [/footer/](/footer/).
 

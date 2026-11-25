@@ -27,4 +27,4 @@ For the type, themes, footer gallery and how this site is built, see the [coloph
 
 ## Listening
 
-[Pick a record from the collection](/records/) and put it on the turntable.
+[Browse the record collection](/records/) and try the physical turntable with its house pressing or your own audio files.

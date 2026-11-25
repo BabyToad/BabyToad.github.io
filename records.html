@@ -2,42 +2,50 @@
 layout: base
 title: Records
 permalink: /records/
-description: Open the record fan, choose an album, and drop the needle.
+description: Ten records from my collection, and a turntable simulated from the groove up.
 vinyl: true
 use_container: false
 ---
 <main class="records" data-records>
-  <header class="records-heading"><div><p class="records-eyebrow">The listening room</p><h1>A few records. Take your time.</h1></div><p>Open the sleeves. Find something to put on.</p></header>
-  <section class="listening-desk" aria-label="Interactive listening desk" data-enhanced hidden>
-    <div class="desk-toolbar glass">
-      <button id="fan-toggle" type="button" aria-pressed="true">Fold sleeves</button>
-      <div class="crate-navigation"><button id="previous-record" type="button" aria-label="Previous album">←</button><label class="sr-only" for="album-picker">Album in the fan</label><select id="album-picker">{% for record in site.data.records %}<option value="{{ record.id }}">{{ record.artist | escape }} — {{ record.title | escape }}</option>{% endfor %}</select><button id="next-record" type="button" aria-label="Next album">→</button><span id="record-number"></span></div>
-      <button id="info-toggle" type="button" aria-expanded="false" aria-controls="album-info">Album / tracks</button><button id="settings-toggle" type="button" aria-expanded="false" aria-controls="deck-settings">Deck controls</button>
+  <header class="records-heading"><div><p class="eyebrow">Steak Knives &amp; Bagels / Listening room</p><h1>Give it a spin.</h1></div><a class="catalogue-jump" href="#album-catalogue">Ten records ↓</a></header>
+  <section class="listening-desk" aria-label="Physical record player">
+    <canvas id="record-stage" tabindex="0" aria-label="3D record player. Drag empty space to orbit, pinch to zoom and pan. Equivalent controls follow." hidden></canvas>
+    <p id="scene-fallback">The album catalogue and listening links are below. The simulated player needs JavaScript, WebGL2 and Web Audio.</p>
+    <div class="view-strip glass" role="group" aria-label="Camera views">
+      <button data-view="room">Room</button><button data-view="crate">Records</button><button data-view="deck">Deck</button><button data-view="stylus">Needle</button><button id="reset-view" aria-label="Reset camera">↺</button><button id="look-only" aria-pressed="false">Look only</button>
     </div>
-    <div class="scene-wrap">
-      <div class="turntable-stage" id="turntable-stage" role="group" aria-label="3D record fan and turntable. Equivalent controls are available in the toolbar and transport."><div class="deck-fallback"><span class="fallback-disc"></span><p id="scene-message">Setting up the turntable…</p></div></div>
-      <aside id="hover-card" class="hover-card glass" hidden aria-hidden="true"><img id="hover-cover" width="64" height="64" alt=""><div><span id="hover-artist"></span><h2 id="hover-title"></h2><p id="hover-meta"></p><p id="hover-context"></p></div></aside>
-      <aside id="album-info" class="album-info glass" hidden aria-label="Selected album and tracks">
-        <div class="panel-heading"><span>Liner / track list</span><button type="button" data-close="album-info" aria-label="Close album details">×</button></div>
-        <div class="album-heading"><img id="selected-cover" width="80" height="80" alt=""><div><h2 id="selected-title"></h2><p id="selected-artist"></p><p id="edition-note"></p></div></div><p id="album-context"></p>
-        <div class="listen-links"><a id="spotify-link" target="_blank" rel="noopener">Full album · Spotify ↗</a><a id="album-link" target="_blank" rel="noopener">YouTube Music ↗</a></div>
-        <p class="tracklist-caption">Track lengths shown in full. Spotify decides full-track or preview availability.</p><ol id="track-list"></ol>
-        <div id="bandcamp-option" hidden><button type="button" id="load-bandcamp">Full album with Bandcamp</button><p>Opens the artist’s player with its own controls.</p></div>
-      </aside>
-      <aside id="deck-settings" class="deck-settings glass" hidden aria-label="Deck settings"><div class="panel-heading"><span>On the deck</span><button type="button" data-close="deck-settings" aria-label="Close deck controls">×</button></div>
-        <label for="platter-speed">Platter speed <output id="rpm-readout">33⅓ RPM</output></label><select id="platter-speed"><option value="33.333">33⅓ RPM</option><option value="45">45 RPM</option></select><p>Changes the physical platter. The music keeps its original speed.</p>
-        <label class="check-label"><input type="checkbox" id="vinyl-texture"> Vinyl crackle</label><label for="surface-level">Surface level <output id="surface-readout">35%</output></label><input id="surface-level" type="range" min="0" max="100" value="35"><button type="button" id="test-texture">Hear crackle · 3 seconds</button><p id="texture-status" role="status">Surface noise off.</p><p>Adds a separate crackle layer. It does not filter or slow the music. Click the knob for this slider.</p>
-      </aside>
-      <section id="record-stream" class="record-stream glass" aria-label="Official music player" hidden><div class="panel-heading"><span>Official player</span><button type="button" id="disconnect-stream">Disconnect</button></div><p id="stream-caption"></p><div class="stream-frame"></div></section>
-      <div class="direct-controls glass" role="group" aria-label="Quick deck controls"><div class="direct-transport"><button id="desk-previous" type="button" aria-label="Previous track">← Track</button><button id="desk-play" type="button">Play</button><button id="desk-next" type="button" aria-label="Next track">Track →</button></div><div class="direct-texture"><label class="check-label"><input id="quick-noise" type="checkbox"> Crackle</label><label class="sr-only" for="quick-surface">Crackle level</label><input id="quick-surface" type="range" min="0" max="100" value="35"><output id="quick-surface-value">35%</output><button id="quick-test" type="button">Test</button></div><p id="quick-texture-status" role="status">Crackle off.</p></div>
-      <p class="scene-hint" id="scene-hint">Hover for a closer look · flick or scroll through the sleeves · tap to choose</p>
-    </div>
-    <div class="transport-dock glass">
-      <div class="now-playing"><p id="desk-album"></p><p id="track-current"></p><progress id="preview-progress" max="1" value="0" aria-label="Playback progress"></progress><div class="transport-bottom"><button type="button" id="previous-track" aria-label="Previous track">← Track</button><span id="preview-time">Waiting for Spotify</span><button type="button" id="next-track" aria-label="Next track">Track →</button></div></div>
-      <div class="deck-controls"><button type="button" id="place-record">Place record</button><button type="button" id="cue-record" disabled>Lower needle</button><button type="button" id="return-record" disabled>Return to sleeve</button></div>
-      <div class="listening-choice"><label class="check-label"><input type="checkbox" id="stream-consent"> Enable Spotify</label><p>Connects when you play. Full tracks when Spotify supports them; otherwise previews. Spotify may use cookies.</p><p id="record-status" role="status" aria-live="polite"></p></div>
+    <p id="hover-info" class="hover-info glass" hidden></p><div class="source-badge glass"><span class="eyebrow">On the platter</span><strong id="source-title">House pressing</strong><span id="source-detail">Synthesised Demo EP · Guillermo Rauch</span><span id="track-current">Preparing the groove…</span></div>
+    <aside id="sleeve-detail" class="sleeve-detail glass" hidden aria-label="Selected sleeve">
+      <button class="close-panel" id="close-sleeve" aria-label="Close sleeve details">×</button>
+      <div class="sleeve-content"><img id="selected-cover" width="240" height="240" alt="">
+      <div><p class="eyebrow" id="selected-meta"></p><h2 id="selected-title"></h2><p id="selected-artist"></p><p id="album-context"></p></div>
+      <div class="sleeve-actions"><a id="youtube-link" target="_blank" rel="noopener">YouTube Music ↗</a><a id="spotify-link" target="_blank" rel="noopener">Spotify ↗</a><a id="bandcamp-link" target="_blank" rel="noopener" hidden>Bandcamp ↗</a></div>
+      <p class="small">This sleeve has no audio file attached. Listen through a service, or cut your own files below. Browsing never changes the record playing.</p>
+      <button id="sleeve-files">Cut files from my device</button>
+      <details><summary>Album track list</summary><ol id="album-tracks"></ol></details>
+      </div><div class="sleeve-nav"><button id="previous-album" aria-label="Previous album">←</button><span id="album-number"></span><button id="next-album" aria-label="Next album">→</button></div>
+    </aside>
+    <aside id="adjustments" class="adjustments glass" hidden aria-label="Physical adjustments">
+      <button class="close-panel" id="close-adjustments" aria-label="Close adjustments">×</button><p class="eyebrow">The mechanism</p>
+      <label>Pitch <output id="pitch-value">0.0%</output><input id="pitch" type="range" min="-8" max="8" step=".1" value="0"></label>
+      <label>Tracking force <output id="force-value">1.80 g</output><input id="force" type="range" min=".5" max="3" step=".05" value="1.8"></label>
+      <label>Anti-skate <output id="skate-value">1.80 g</output><input id="skate" type="range" min="0" max="3" step=".05" value="1.8"></label>
+      <label>Stylus<select id="stylus-type"><option value="elliptical">Elliptical</option><option value="conical">Conical</option><option value="microline">Micro-line</option></select></label>
+      <label>Volume <output id="volume-value">45%</output><input id="volume" type="range" min="0" max="100" value="45"></label>
+      <label>Record condition<select id="condition"><option value="clean">Clean pressing</option><option value="played">Well played</option><option value="worn">Dust &amp; scratches</option></select></label>
+      <button id="press-again">Press this side again</button><p class="small">Condition changes the groove geometry. Re-pressing lifts the needle and stops the motor.</p>
+      <button id="bump">Knock the table</button>
+    </aside>
+    <aside id="needle-scope" class="needle-scope glass" hidden aria-label="Live groove inspection"><p class="eyebrow">Under the stylus · magnified</p><canvas id="groove-scope" width="640" height="180" aria-label="Live groove walls around the simulated stylus"></canvas><p id="groove-stats"></p></aside>
+
+    <a class="stage-exit" href="#album-catalogue">Collection ↓</a><div class="deck-strip glass"><p id="gesture-hint" class="gesture-hint">Drag empty space to look · pinch to zoom · click the scene for wheel zoom</p>
+      <div class="deck-buttons" role="group" aria-label="Turntable controls"><button id="put-on" class="primary">Put it on</button><button id="motor">Start motor</button><button id="cue">Lower needle</button><button id="speed33" aria-pressed="true">33⅓</button><button id="speed45" aria-pressed="false">45</button><button id="adjust-toggle" aria-expanded="false" aria-controls="adjustments">Adjust</button></div>
+      <div class="deck-readout"><output aria-live="off" id="rpm-value">0.00 RPM</output><span id="record-status" role="status" aria-live="polite">Cutting the house pressing…</span><button id="cancel-cut" hidden>Cancel</button></div>
+      <div class="record-source"><button id="house-record">House pressing</button><button id="choose-files">Cut your files</button><select id="cut-track" aria-label="Track on the current pressing" disabled><option>Preparing tracks…</option></select><input type="file" id="audio-files" accept="audio/*,.flac,.wav,.mp3,.m4a,.ogg" multiple hidden></div>
     </div>
   </section>
-  <details class="record-catalogue" id="album-catalogue" open><summary>Text catalogue <span>6 records</span></summary><ol class="record-shelves">{% for record in site.data.records %}<li><button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-pressed="false" disabled><img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} cover" width="320" height="320"></button><div class="record-caption"><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a><span>{{ record.artist | escape }} · {{ record.year }}</span><p>{{ record.context | escape }}</p><span>{{ record.tracks.size }} tracks</span></div></li>{% endfor %}</ol><noscript><p>The 3D player needs JavaScript. These album links work without it.</p></noscript></details>
+  <p class="room-note">The house record is a synthesised demo. Your files are cut and played in this browser, never uploaded. Local sides are limited to 3 minutes on small screens and 10 minutes on larger screens to limit memory use. The sleeves below link to the artists’ music.</p>
+  <details class="record-catalogue" id="album-catalogue" open><summary>The collection <span>{{ site.data.records.size }} records</span></summary><ol class="record-shelves">{% for record in site.data.records %}<li><button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-label="Inspect {{ record.artist | escape }}: {{ record.title | escape }}" disabled><img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} cover" width="320" height="320"></button><div><h2><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a></h2><p>{{ record.artist | escape }} · {{ record.year }}</p><p>{{ record.context | escape }}</p><details><summary>Track list</summary><ol>{% for track in record.tracks %}<li>{{ track.title | escape }}</li>{% endfor %}</ol></details></div></li>{% endfor %}</ol></details>
+  <p class="simulation-credit">Groove simulation adapted from <a href="https://github.com/rauchg/vinyl">vinyl by Guillermo Rauch</a> · <a href="{{ '/assets/js/records/physics/LICENSE.txt' | relative_url }}">MIT licence</a>. Interface and collection adapted for this site. A physical model, not a reconstruction of an original vinyl master.</p>
 </main>
 <script type="application/json" id="records-data">{{ site.data.records | jsonify | replace: '</', '<\/' }}</script>

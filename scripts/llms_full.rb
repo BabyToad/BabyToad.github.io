@@ -9,6 +9,7 @@
 # `ruby scripts/llms_full.rb && head llms-full.txt`.
 require 'yaml'
 require 'date'
+require 'json'
 require 'fileutils'
 
 ROOT = File.expand_path('..', __dir__)
@@ -110,6 +111,18 @@ projects.each { |d| entry(out, d, url_for(d, "/projects/#{d[:slug]}.html")) }
 out << '' << '## For Want of Fuel'
 fwof.each { |d| u = url_for(d, "/for-want-of-fuel/#{d[:slug].tr('_', '-')}/"); entry(out, d, u); sibling(d, u) unless d[:slug] == 'index' }
 out << ''
+
+records_path = File.join(ROOT, '_data/records.json')
+if File.exist?(records_path)
+  out << '## Records' << '' << "Source: #{BASE}/records/" << ''
+  out << 'A curated collection with external listening links. In-page physical playback uses a synthesised house pressing or local files supplied by the visitor.' << ''
+  JSON.parse(File.read(records_path, encoding: 'utf-8')).each do |record|
+    out << "### #{record['artist']} — #{record['title']} (#{record['year']})" << ''
+    out << record['context'].to_s << '' << "Listen: #{record['url']}" << ''
+    record.fetch('tracks', []).each_with_index { |track, i| out << "#{i + 1}. #{track['title']}" }
+    out << ''
+  end
+end
 
 File.write(File.join(ROOT, 'llms-full.txt'), out.join("\n") + "\n", encoding: 'utf-8')
 puts "llms-full.txt: #{out.join("\n").bytesize} bytes, #{out.count { |l| l.start_with?('### ') }} entries"

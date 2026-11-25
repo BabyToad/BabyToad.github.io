@@ -1,129 +1,49 @@
-# Records: implementation and verification
+# Records: physical player
 
-Six starter records from albums and artists Jonas named. Aja and Lifeforce are representative choices from named artists, not an inferred ranking. The private library is not shipped and personal liner notes remain unwritten. Album context is factual, not ghostwritten memories.
+This version replaces the earlier provider-driven turntable with a local groove simulation adapted from [Guillermo Rauch's vinyl](https://github.com/rauchg/vinyl), pinned at `bcc9264509d78ccbf4a449618f19c1cc3104b49c`. One renderer and one physical engine share metre-scale geometry. There is no second decorative deck or provider playback underneath it.
 
-## Current design
+## Listening contract
 
-Jonas's feedback on 2026-11-25 asks for a browsable glassy 3D catalogue, a realistic turntable, album and track context, and optional vinyl sound. This supersedes the earlier proposal for a simplified engraved deck. Neon built the acrylic crate, open dust cover, detailed tonearm, machined platter, strobe, controls and feet; Codex integrated playback and the interface.
+The house pressing is a three-track synthesised demo from the upstream MIT-licensed code. It is cut in a worker on page load; audio starts only after a visitor's gesture. Local audio files are decoded, cut into a stereo groove and passed to an AudioWorklet. They are never uploaded, persisted or associated silently with a commercial album. The label and source badge use the files' own names.
 
-Sleeves can be selected directly or with the labelled album selector and previous/next buttons. Place by tap, drag into the platter snap zone, or button. Cue the arm by tap/drag or button. Invalid drops return to the sleeve. Both themes use site tokens; materials also use physical metal/rubber/glass values. Idle/offscreen rendering stops; reduced motion removes continuous rotation. No new dependency or build pipeline.
+Ten curated sleeves contain cover art, factual context, numbered track lists and outbound listening links. They do not supply recordings. Browsing a sleeve leaves the current physical pressing alone, and the source badge remains explicit about what is on the platter. Spotify, YouTube and Bandcamp scripts/frames are not loaded. The old additive crackle, previews and provider adapters are removed.
 
-## Playback contract
+Groove wall displacement drives the stylus/contact model, cartridge and playback equalization. Motor speed, pitch, cue lift, hand contact, tracking force, anti-skate and record condition affect this model. Dust and scratches alter groove geometry; they are not an unrelated noise overlay. This is a newly simulated pressing from a digital source, not a reconstruction of an original vinyl master or a laboratory-validated model of a particular deck.
 
-The first YouTube integration returned error 150 for all six music playlists in a clean browser. That failure is reproduced, not assumed universal. YouTube Music remains an outbound full-listening link.
+## Interaction and visual design
 
-The current integration uses the visible official Spotify embed and its [iframe API](https://developer.spotify.com/documentation/embeds/references/iframe-api). In the tested signed-out session these are roughly 30-second previews, clearly labelled in the controls and progress display. The album links open full listening on the provider. The native player remains visible for browser gesture requirements and provider errors. Playback availability can vary by browser, region and account.
+The camera freely orbits, pans and zooms. Room, Records, Deck and Needle offer smooth focus moves; Reset recovers the starting view. Reduced motion makes preset moves and sleeve selection immediate. The platter still reflects the physical audio source while playing.
 
-No provider script/frame loads until consent plus a playback action. The checkbox alone makes no connection. Album changes, return, disconnect and provider replacement destroy the previous frame. Confirmed playback events drive status, track selection, preview time, record rotation and needle position. Full track durations are separate from preview duration. Generation checks discard stale connections. A failed script can be retried.
+Objects are handled; empty space moves the camera. Mouse/touch drags handle the arm, platter, pitch slider and anti-skate dial. Two fingers always control the camera, safely releasing any object hold. A sleeve tap opens its details, and a horizontal fan drag browses without wrapping at either end. Previous/next buttons also browse. The Look only button lets any one-finger drag move the camera. Wheel zoom requires the focused canvas or Ctrl/Meta; ordinary unfocused scrolling remains page scrolling. A visible Collection link exits the touch surface.
 
-Natural Light also offers the artist's full [Bandcamp album](https://danmangan.bandcamp.com/album/natural-light). Its native controls own playback. The page explicitly states that the deck and surface-noise effect do not follow Bandcamp; there is no fabricated external progress.
+DOM controls provide motor, cue, speed, automatic placement, track cueing and adjustments. The canvas has keyboard orbit/zoom controls; all listening and album information has an HTML alternative. Cover textures remain full colour; interface typography and colors use the site's print/CRT design. Materials use physical metal, paper and acrylic values.
 
-Optional surface noise is generated locally with Web Audio, off by default. It accompanies confirmed Spotify playback, stops on pause/disconnect/hidden page, and never filters or downloads the commercial stream. Agent browser launches use --mute-audio; ?mute=1 additionally suppresses local noise.
+The rendered diamond's contact point is pinned to the engine's `stylusXY` and contact height. The pitch cap, cue lever and counterweight move with their controls. The record shader reads visualization data from the actual cut. New pressings wait for the motor to coast down and the needle to clear before replacing the disc. Idle GPU rendering stops after mechanical motion settles; audio simulation continues while its context is active. Offscreen/hidden stages do not render, and hiding releases held objects.
 
-## Data and architecture
+## Architecture and data
 
-`_data/records.json` feeds the HTML catalogue, scene and public `/records.json`. It contains six albums and 66 numbered tracks with provider URIs, streaming-edition durations and factual context. Spotify metadata was inspected in the public official embeds on 2026-11-25:
+Jekyll remains the only site build. `vinyl: true` gates the page stylesheet and native ES module. No package dependencies or framework are added.
 
-| Album | Spotify album ID | Tracks |
-| --- | --- | ---: |
-| Excitable Boy | 03WJAI8NnJHvCNqnlLw8kg | 13 |
-| The Overload | 7KWBJQVkPOkkyC4A3EaNA6 | 11 |
-| American Head | 2s79HMasjZVNXwoqXTe1X2 | 13 |
-| Natural Light | 5mbEX4VVc8PY11n3RPqrGT | 13 |
-| Aja | 1hOK2ey9W76x9GnftSRgrw | 7 |
-| Trust in the Lifeforce of the Deep Mystery | 2mvz0NPBCPTbSEgRViuDLK | 9 |
+- `main.js`: page state, mastering lifecycle, controls and telemetry/render bridge.
+- `audio.js`: gesture activation, worklet lifecycle and one-time transfer of groove walls.
+- `input.js`: object/camera gesture ownership and equivalent pointer behavior.
+- `fan.js`, `deck-markings.js`: sleeves, back-cover track lists and physical control markings.
+- `physics/`: pinned MIT engine, renderer, DSP, mastering worker and demo; provenance and local changes are listed in its README.
 
-Excitable Boy includes four bonus recordings in this streaming edition. The catalogue is not a physical pressing track map. Groove movement is expressive playback feedback, not precise audio seeking.
+`_data/records.json` feeds the page, `/records.json` and the full-text export. Ten albums, 100 tracks. The first six retain their previously inspected streaming editions; *Excitable Boy* includes four bonus tracks. Four additions were chosen from Jonas's backlog under his instruction: *Dying Surfer Meets His Maker*, *Masana Temples*, *Kind of Blue* (five-track edition), and *Polygondwanaland*. Apple catalogue metadata and covers were retrieved with his explicit permission. Provenance URLs are stored alongside those entries. No private inventory, agent ranking or invented personal memories are published.
 
-`vinyl: true` gates page CSS and ES modules. `main.js` owns selection and controls, `playback.js` provider lifecycle, `texture.js` local sound, `scene.js` the procedural view and gestures. The renderer reuses `six-springs/lib/three.module.js` and its existing license. Covers are local. No-JS has the HTML catalogue and links; WebGL failure retains every DOM playback control.
+Local cutting is capped at 3 minutes/20 MB on small screens and 10 minutes/80 MB on larger screens. File metadata is checked before full decoding, then decoded duration is checked again. These are conservative input limits, not a mobile-memory guarantee. Cancellation invalidates unfinished jobs; the prior pressing remains available. Worklet wall arrays are transferred, not duplicated. A fresh cut is made when re-pressing.
 
-## Verification and remaining acceptance
+## Validation
 
-Use the standard Ruby prebuild scripts and Jekyll build. On this Windows setup the missing executable shim is handled by `bundle exec ruby -e "load Gem.bin_path('jekyll', 'jekyll')" -- build`.
+Build with the two Ruby prebuild scripts and Jekyll. On this Windows setup: `bundle exec ruby -e "load Gem.bin_path('jekyll', 'jekyll')" -- build`.
 
-Real browser tests are run with muted Chromium, not synthetic provider success. All six opening tracks and the selected-track controls have been heard by the browser audio pipeline (non-paused media, advancing currentTime), and Bandcamp's Play control starts real audio. Captures cover dark/light, placed, and 390px layouts. Detailed final regression evidence is recorded with this PR.
+Development verification is outside the shipped site in `H:/Personal Projects/records-verification/v5/`. Browser instrumentation and mute settings exist only in the test harness. Product code contains no agent mute flags or test globals.
 
-Real mobile Safari/Android device playback, regional availability, and Jonas's assessment of feel remain acceptance checks. Keep the PR a draft; do not merge or deploy without Jonas.
+The muted desktop Chromium flow checks real AudioWorklet output, nominal/45 RPM, track cueing, needle lift, stopped idle rendering, the drawn Start button, pitch dragging, sleeve selection, local WAV cutting and playback, re-pressing, cancellation, and absence of external requests/page errors. Captures include both themes, playing, sleeve inspection, needle close-up, overhead, rear and side views. Touch-emulated Chromium additionally covers small-screen layout and gestures, history recovery and no-JS/WebGL fallbacks. Test evidence and any outstanding findings are recorded on PR #25.
 
-## Sources
+Real iPhone/Safari audio activation and real mid-range-phone memory/performance still need hardware acceptance. Emulation is not evidence of those properties. Keep the PR draft until Jonas reviews the result. Nothing in this work authorizes merging or deployment.
 
-Album metadata, official playlist IDs and cover artwork resolved from these public YouTube Music album pages on 2026-11-25. Artwork remains credited to the respective artists/labels; used only to identify the records, not licensed as original site art.
-- Warren Zevon — Excitable Boy: https://music.youtube.com/browse/MPREb_TNptpDKdduK
-  Cover source: https://yt3.googleusercontent.com/vwFRcTWk2B3WfcLLUXXURyCdWgQ91ziCXQ3HfuWl6kxNa_Ssu2x0k8cDU4eY4JWVnYviDR-YAOMhmLfA=w544-h544-s-l90-rj
-- Steely Dan — Aja: https://music.youtube.com/browse/MPREb_jSbekZ09Zov
-  Cover source: https://yt3.googleusercontent.com/ri7MwyQD1jpyC1cC67xXqyMtu0awjpCkSGbYuJaoNvMQnsNPXkQqTaJ_6o5mIJ3Do27hiyVrvOn-bKo=w544-h544-l90-rj
-- Yard Act — The Overload: https://music.youtube.com/browse/MPREb_wmYbXhR7eBE
-  Cover source: https://yt3.googleusercontent.com/LkLUAPEyUU5BwUvkvrwchQEbVKxeJS1gEtERxjLh2YKNxe6O1c_8qjW5TFBMM8phe1HpRwsjqHIPKgMIVQ=w544-h544-l90-rj
-- Dan Mangan — Natural Light: https://music.youtube.com/browse/MPREb_79GGmG52a5o
-  Cover source: https://yt3.googleusercontent.com/mvQ7fUg-LFB73MMpu8KD6A8R6TjOaIqask7Js0Bmz-1920Bv6rP1MdyQ4Tl1LR95gBaV5BOGsdlozVTV=w544-h544-l90-rj
-- The Comet Is Coming — Trust In The Lifeforce Of The Deep Mystery: https://music.youtube.com/browse/MPREb_fV3VWgik6b7
-  Cover source: https://yt3.googleusercontent.com/45p1L8JbsEl_pcLRmMpbl9Wqh2enVvMnYGZfuoyUdl85WqRFOhP28KeyQPmQ7vyYC7_fD_a-XvcDiR4c=w544-h544-l90-rj
-- The Flaming Lips — American Head: https://music.youtube.com/browse/MPREb_aFh9iLCBCs9
-  Cover source: https://yt3.googleusercontent.com/0BcFKYMgnY_dZMC2MpHFITtDBYF3nOssm1Y0PNMy9hid0eYkeqSbCM4OEXZxAuBF1wcIhTe2HpDCyfc=w544-h544-l90-rj
+## Earlier versions
 
-## V2 review and final regression evidence
-
-Claude Opus 5.5 (high, 8% weekly quota remaining) reviewed the v2 code and placed/phone captures. Codex applied the findings: preserve the cued arm during connection; expose retry when controller creation times out; handle paused-at-zero and actual terminal-position events; ignore previous-track updates during a track switch; use single-track previews consistently; map groove feedback into cumulative album duration; suspend disabled local audio; capture sleeve pointers so outside release clears selection; tighten phone framing and increase helper text. These corrections were checked by Codex and have not had a second independent review.
-
-Final muted Chromium verification on 2026-11-25:
-
-- Six real opening previews, with non-paused audio and advancing currentTime; real selected-track changes, pause and resume.
-- Consent alone makes no provider request. Album replacement, return and disconnect remove the iframe. Bandcamp plays real audio and enabling Spotify replaces it cleanly.
-- Direct 3D sleeve selection, rejected off-platter drag, successful record drop and arm tap that starts real audio.
-- A complete preview, final status after the provider's last update, replay, and blocked-script recovery into real playback. The observed Spotify terminal update has position equal to duration while isPaused is still false; the adapter explicitly handles this.
-- Optional surface-noise gain on/off and pause behaviour; zero application JavaScript errors; no-JS six-album links; 390px reduced-motion layout without horizontal overflow.
-- Dark/light and placed/playing captures inspected. Jekyll prebuild/build, JS syntax and git whitespace checks pass.
-
-Evidence files remain local at `H:/Personal Projects/records-verification/v2/` (`playtest.json`, `extra-test.json`, `end-probe.json` and PNG captures). Verification scripts live in private vault scratch; they are not site build dependencies. Real physical-phone playback and feel remain unverified.
-
-
-## Fan desk revision (2026-11-25)
-
-Jonas requested a fan that opens and flicks through albums, glass hover information, a single listening scene, functional knobs and more realistic motion/materials. The desk now keeps navigation, transport, album/track information and settings together. The text catalogue remains a progressive-enhancement fallback. Album details and settings are glass overlays; the official streaming player remains visible in a compact dock. Portrait layout arranges the fan behind the deck instead of shrinking two side-by-side objects.
-
-The fan opens/folds, highlights sleeves on hover, and browses by horizontal swipe or horizontal/Shift-wheel. Ordinary vertical wheel remains page scrolling. Touch uses horizontal swipes and tap-to-place, with labelled buttons and ranges for precise adjustments. A press released outside the canvas is captured, preventing stale drags. Album changes return the old record before changing its label and sleeve; repeated changes keep the most recent request.
-
-The scene reports physical completion to the controller: record home, arm parked, needle down. Cueing starts the motor, lifts the arm, swings above the groove and lowers it before requesting audio. Track changes lift/park first. Returning a record waits for arm clearance. If the scene is offscreen, mechanical transitions complete without rendering so library controls cannot deadlock. Provider buffering/availability is still external; this is authored motion rather than a physics simulation or a guarantee of gapless timing.
-
-Physical controls have supported effects:
-
-- Start/cue control lowers or lifts the needle.
-- Track encoder chooses a track when a record is placed.
-- Surface knob adjusts locally generated crackle, with a matching keyboard range and opt-in checkbox.
-- 33⅓/45 buttons alter the simulated platter RPM with motor inertia. Spotify audio speed and pitch remain unchanged, explicitly stated in the UI.
-
-The model adds knurled knobs, engraved controls, layered metalwork, darker grooved vinyl and refined studio reflections. The acrylic tray supports the opened fan. The dust cover stays open; closing it is not exposed as a control. No dependency or downloaded model is added.
-
-Claude Opus 5.5 high reviewed the v3 code and captures. Codex addressed ready-state resume, outside-pointer release, offscreen settle events, record-return selection, fan support and portrait overlap. Final regression evidence is in the private local v3 verification directory. Corrections are checked by Codex; no second independent review is claimed.
-
-The v3 real-provider run passes all six albums, pause/resume, track replacement, end/replay, cancellation before connection, surface gain, Bandcamp replacement, reduced-motion playback and WebGL fallback. Direct interaction checks pass hover information, horizontal wheel/flick browsing, rotary surface level, track encoder, 45 RPM and rapid/latest-wins album replacement. Separate synthetic-provider regression checks cover autoplay-blocked ready/resume, offscreen catalogue selection and outside-canvas pointer release; they do not establish provider availability. Build, syntax and whitespace checks pass. Physical-phone performance and playback remain unverified.
-
-
-## Control visibility and clearance revision (2026-11-25)
-
-This revision supersedes the v3 park-between-tracks behaviour. Track changes now lift the stylus, move directly to the target groove, and lower before loading the next URI in the existing Spotify controller. Pausing holds the lifted arm over the record. Return/disconnect still parks it. The scene ignores old provider updates while a new physical cue is pending.
-
-A visible glass control strip offers Play/Pause, previous/next track, a crackle checkbox, level slider and three-second audition. Clicking the physical knobs opens the track list or precise slider. Track-knob drags commit once on release rather than repeatedly interrupting playback. The locally generated crackle buffer is normalized and its level raised; inactive audio suspends. This is an added sound layer, not EQ, pitch modulation or processing of Spotify/Bandcamp streams.
-
-The 33/45 buttons were partly inside the platter footprint. A dedicated front apron now carries them clear of the rim. The acrylic tray's front lip is lower, and the presentation camera is higher. Actual browser mesh geometry was exported into an isolated Blender scene, with 28 arm poses, and inspected from low front, side, top (lid hidden for inspection) and three-quarter views. Triangle tests cover the arm and button solids against platter/record/lid/knobs; they are a bounded clearance check, not proof that every mesh pairing is collision-free. The first arm-only audit missed the fixed-button collision, which Jonas identified in a screenshot. Source geometry remains procedural Three.js; the Blender file is an inspection copy.
-
-Spotify duration labels now distinguish a returned preview duration from a full track rather than assuming every session is limited to 30 seconds. The official iframe retains encrypted-media permission. Full-track access depends on Spotify's session/browser support; a separate Web Playback SDK integration would require Premium authorization. No account integration was added.
-
-The Throne and Wheel mixtape uses individual YouTube video IDs, the IFrame API, youtube-nocookie.com and an explicit origin. Its error handler skips failed videos. A same-browser comparison with those settings played The HU's Wolf Totem (396.625s) and Google's API example, while the mixtape's Wu-Tang and Khruangbin IDs and a Records probe returned 150/auth. There is no YouTube Music login mechanism in that implementation. This verifies upload-specific availability differences, not a guaranteed full-album route.
-
-Validation: all six actual Spotify opening previews, selected-track playback, pause/resume, end/replay, Bandcamp, reduced motion and WebGL failure pass in muted Chromium. Focused tests verify the three-second crackle audition produces signal and then suspends, track changes retain the same iframe and keep the arm over the record while lifting, and pause/return move as described. Both theme and mobile captures inspected. Real signed-in Spotify full-track playback and real mobile hardware remain unverified.
-
-Private evidence: `H:/Personal Projects/records-verification/v4/`, including `flow.json`, `extra.json`, `youtube-compare.json`, `clearance.json`, `turntable-clearance.blend` and browser/Blender captures. No private library data is included in the website.
-
-Primary provider references: [Spotify embed troubleshooting](https://developer.spotify.com/documentation/embeds/tutorials/troubleshooting), [Spotify SDK requirements](https://developer.spotify.com/documentation/web-playback-sdk/reference), [YouTube IFrame API](https://developers.google.com/youtube/iframe_api_reference).
-
-
-Gemini 4 Neon (high) reviewed v4 code and the multi-angle captures. Its findings were corrected: canceling a groove transfer clears the seek latch; the canvas reservation sits outside the render box; the extended apron grows forward with matching cover depth and clear corner screws; crackle test feedback is visible and resets, with an explicit zero-level message; rapid skips and replay reuse the connected player and reset progress; captured knob drags commit outside the canvas and preserve multiple detents; paused arm drag can park; returned URI determines expected duration; disposed audio ignores late continuations. The invisible arm hit volume also no longer masks the track knob, verified with actual pointer clicks. Agent audio muting is applied only at browser launch.
-
-Review corrections were tested directly, without a second delegate review. Synthetic-provider regression tests exercise full-duration labels, rapid skip/replay reuse, cancel/return/consent/album change during transfer, equal canvas pixel scaling on desktop/mobile, and crackle status completion. Actual-provider checks cover short arm transfers, pause position, iframe reuse and audible audition; actual pointer tests cover both speed buttons, knob disclosure/focus, and release-only selection. These checks complement the complete six-album real-playback suite; they do not establish signed-in full-track availability or real-phone acceptance.
-
-### Strobe lamp clearance correction
-
-The fixed strobe lamp was intersecting the platter rim. Its complete assembly now sits outside the platter well at deck coordinates (-1.67, 0.715, 1.10), with a rectangular hood and an amber window aimed radially at the speed markings. The base remains on the top plate and clear of Start/Stop. Named lamp meshes make it explicit in future geometry audits.
-
-Validation: Jekyll build, JavaScript syntax and diff checks pass. The current browser meshes were exported and inspected in Blender from low-front, lamp-face and overhead views. A static BVH check found no lamp intersections with any other exported visible deck mesh. The inner foot edge has 0.0404 scene units clearance from the platter well and 0.0994 from the rotating skirt. This small geometry-only correction was directly checked, without a new independent review; playback behavior is unchanged.
+The v1–v4 provider integrations and procedural Three.js deck are preserved in Git history through `bf48d0b`. Their Spotify preview tests and Blender clearance checks describe that retired implementation, not this version. The current physical renderer is the adapted upstream WebGL2 model; both the engine and rendered contact point now use the same geometry.
