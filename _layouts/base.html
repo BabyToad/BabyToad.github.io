@@ -28,6 +28,10 @@
     {% if page.image_alternates or layout.image_alternates %}
     <link rel="stylesheet" href="{{ '/assets/css/components/image-alternates.css' | relative_url }}?v={{ '/assets/css/components/image-alternates.css' | asset_version }}">
     {% endif %}
+    {% if page.vinyl or layout.vinyl %}
+    <link rel="stylesheet" href="{{ '/assets/css/components/records.css' | relative_url }}?v={{ '/assets/css/components/records.css' | asset_version }}">
+    <script type="module" src="{{ '/assets/js/records/main.js' | relative_url }}?v={{ '/assets/js/records/main.js' | asset_version }}"></script>
+    {% endif %}
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
     <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
     {% seo title=false %}

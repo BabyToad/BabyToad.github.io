@@ -1,0 +1,69 @@
+---
+layout: base
+title: Records
+permalink: /records/
+description: A small record collection. Pick a sleeve, put a record on, and listen.
+vinyl: true
+use_container: false
+---
+<main class="records" data-records>
+  <div class="records-heading">
+    <p class="records-eyebrow">The listening corner <span>Vol. 01 / Six records</span></p>
+    <h1>Put a record on.</h1>
+    <p class="records-intro">A few favorites from Jonas’s collection. Choose a sleeve, set it on the turntable, and lower the needle.</p>
+  </div>
+  <section class="record-crate" aria-labelledby="crate-title">
+    <div class="records-section-label"><h2 id="crate-title">From the crate</h2><span>Pick something to sit with.</span></div>
+    <ol class="record-shelves">
+      {% for record in site.data.records %}
+      <li class="record-slot">
+        <button class="record-sleeve" type="button" data-record="{{ record.id }}" aria-pressed="false" disabled>
+          <img src="{{ record.cover | relative_url }}" alt="{{ record.title | escape }} album cover" width="320" height="320">
+          <span class="record-index">{{ forloop.index | prepend: '0' }}</span>
+          <span class="record-spine">{{ record.artist | escape }}</span>
+        </button>
+        <div class="record-caption"><a href="{{ record.url }}" target="_blank" rel="noopener">{{ record.title | escape }}</a><span>{{ record.artist | escape }} · {{ record.year }}</span></div>
+      </li>
+      {% endfor %}
+    </ol>
+    <noscript><p>The turntable needs JavaScript. Every album above links directly to YouTube Music.</p></noscript>
+  </section>
+  <section class="listening-desk" aria-label="Record player" hidden>
+    <div class="deck-panel">
+      <div class="deck-topline"><span>AKNB / Stereo</span><span>33⅓ RPM</span></div>
+      <div class="turntable-stage" id="turntable-stage" aria-label="Interactive turntable. Equivalent controls are below.">
+        <div class="deck-fallback"><span class="fallback-disc"></span><p id="scene-message">Setting up the turntable…</p></div>
+      </div>
+      <p class="deck-hint">Drag or tap the record to place it, then the arm to listen. The buttons do the same.</p>
+      <div class="deck-controls">
+        <button type="button" id="place-record">Place record</button>
+        <button type="button" id="cue-record" disabled>Lower needle</button>
+        <button type="button" id="return-record" disabled>Return to sleeve</button>
+      </div>
+    </div>
+    <aside class="liner-card" aria-labelledby="selected-title">
+      <p class="records-eyebrow">On the desk <span id="record-number">01 / 06</span></p>
+      <h2 id="selected-title"></h2>
+      <p id="selected-artist"></p>
+      <div class="liner-rule"></div>
+      <p id="record-status" role="status" aria-live="polite">Choose a record.</p>
+      <p class="liner-note" id="liner-note"></p>
+      <a id="album-link" class="record-outbound" target="_blank" rel="noopener">Open album in YouTube Music ↗</a>
+      <div class="stream-permission">
+        <label><input type="checkbox" id="youtube-consent"> Connect to YouTube for playback</label>
+        <p>Loads an external player. YouTube may use cookies and show ads. Nothing connects until you choose to listen.</p>
+      </div>
+      <div class="bandcamp-option" id="bandcamp-option" hidden>
+        <button type="button" id="load-bandcamp">Listen with Bandcamp</button>
+        <p>Loads the artist’s external player. Use its Play button and track controls.</p>
+      </div>
+    </aside>
+  </section>
+  <section class="record-stream" id="record-stream" aria-labelledby="stream-title" hidden>
+    <div class="records-section-label"><h2 id="stream-title">The music</h2><button type="button" id="disconnect-stream">Disconnect player</button></div>
+    <p id="stream-caption">Use the YouTube controls to choose tracks or adjust volume.</p>
+    <div class="stream-frame"><div id="youtube-player"></div></div>
+  </section>
+  <div class="records-endnote"><span>⁂</span><p>Six records to start with. No shuffle required.</p><a href="{{ '/about' | relative_url }}">Back to About ↗</a></div>
+</main>
+<script type="application/json" id="records-data">{{ site.data.records | jsonify | replace: '</', '<\/' }}</script>

@@ -61,3 +61,8 @@ Find these below the project grid on [Projects]({{ site.url }}/projects/#experim
 - [Impressum]({{ site.url }}/impressum.html)
 - [PlayInsight Studios](https://playinsightstudios.com/)
 - [ProLudens](https://proludens.com/)
+
+## Music
+
+- [Records]({{ site.url }}/records/): Interactive record collection.
+- [Record metadata]({{ site.url }}/records.json): The public album selection, artist names and listening links.

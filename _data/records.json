@@ -1,0 +1,64 @@
+[
+  {
+    "id": "excitable-boy",
+    "title": "Excitable Boy",
+    "artist": "Warren Zevon",
+    "year": "1978",
+    "cover": "/assets/images/records/excitable-boy.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_TNptpDKdduK",
+    "playlist": "OLAK5uy_k7Xox2EnOUA9i45oHs1r0juhQRkYBvWK0",
+    "note": ""
+  },
+  {
+    "id": "the-overload",
+    "title": "The Overload",
+    "artist": "Yard Act",
+    "year": "2022",
+    "cover": "/assets/images/records/the-overload.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_wmYbXhR7eBE",
+    "playlist": "OLAK5uy_mM83ZC4cnISxwKBgorzAYxuPFD3EyYOsE",
+    "note": ""
+  },
+  {
+    "id": "american-head",
+    "title": "American Head",
+    "artist": "The Flaming Lips",
+    "year": "2020",
+    "cover": "/assets/images/records/american-head.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_aFh9iLCBCs9",
+    "playlist": "OLAK5uy_mZqdjzFFYtbbAMjGzjfyRBtuloEtToOLk",
+    "note": ""
+  },
+  {
+    "id": "natural-light",
+    "title": "Natural Light",
+    "artist": "Dan Mangan",
+    "year": "2025",
+    "cover": "/assets/images/records/natural-light.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_79GGmG52a5o",
+    "playlist": "OLAK5uy_kGLZj_87DM7tJCEjdzCU2DT7JeS8M38yk",
+    "note": "",
+    "bandcampId": 2684530334,
+    "bandcampUrl": "https://danmangan.bandcamp.com/album/natural-light"
+  },
+  {
+    "id": "aja",
+    "title": "Aja",
+    "artist": "Steely Dan",
+    "year": "1977",
+    "cover": "/assets/images/records/aja.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_jSbekZ09Zov",
+    "playlist": "OLAK5uy_ns_zqCLjZ6CXF0cji36OJNwTjH1YRYO_4",
+    "note": ""
+  },
+  {
+    "id": "lifeforce",
+    "title": "Trust In The Lifeforce Of The Deep Mystery",
+    "artist": "The Comet Is Coming",
+    "year": "2019",
+    "cover": "/assets/images/records/lifeforce.jpg",
+    "url": "https://music.youtube.com/browse/MPREb_fV3VWgik6b7",
+    "playlist": "OLAK5uy_lnMW3h8SsIRc24tu0T9nInF1V-SFrdbMQ",
+    "note": ""
+  }
+]

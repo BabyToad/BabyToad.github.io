@@ -24,3 +24,7 @@ Feel free to reach out to me at [heinke.jonas@googlemail.com](mailto:heinke.jona
 {% include contact.html %}
 
 For the type, themes, footer gallery and how this site is built, see the [colophon](/colophon/).
+
+## Listening
+
+[Pick a record from the collection](/records/) and put it on the turntable.
