@@ -11,7 +11,7 @@ Jede Seite gibt es als Markdown: `.md` an den Pfad hängen (z. B. /days/01.md, /
 - [Tag 1: Was macht eine Engine?](https://www.allknivesnobagel.com/teaching/gec1/days/01.md): 09.10.2026. Die Spielschleife, unsere Arbeitsweise und das erste Objekt, das sich bewegt.
 - [Tag 2: Pitch und Blockout](https://www.allknivesnobagel.com/teaching/gec1/days/02.md): 23.10.2026. Zwei Minuten für die Idee, dann eine graue Welt, durch die man laufen kann.
 - [Tag 3: Schlüssel, Tür und Kiste](https://www.allknivesnobagel.com/teaching/gec1/days/03.md): 20.11.2026. Die erste Logik als Komponente auf dem Objekt, ein Graph aus Auslöser, Variable, Bedingung und Aktion, dazu Kräfte, die Dinge in Bewegung setzen.
-- [Tag 4: Vertical Slice: spielen lassen](https://www.allknivesnobagel.com/teaching/gec1/days/04.md): 27.11.2026. Andere spielen euer Spiel, ihr schaut zu. Danach bekommt eure Welt ihre erste eigene Animation.
+- [Tag 4: Spielen lassen](https://www.allknivesnobagel.com/teaching/gec1/days/04.md): 27.11.2026. Wie man testen lässt, was Rückmeldung trägt und wie ein Look entsteht.
 - [Tag 5: Look, Ton, Oberfläche](https://www.allknivesnobagel.com/teaching/gec1/days/05.md): 11.12.2026. Feature Freeze, dann Licht, Material, UI, Ton und ein getesteter Windows-Build.
 - [Tag 6: Ship](https://www.allknivesnobagel.com/teaching/gec1/days/06.md): 08.01.2027. Was die Dokumentation zeigen muss, ein Abgabe-Check zu zweit, dann spielen alle die Builds der anderen.
 
