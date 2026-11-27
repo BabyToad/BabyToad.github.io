@@ -29,6 +29,7 @@ or its layout sets the corresponding flag:
 | `fuel` | `components/for-want-of-fuel.css` | For Want of Fuel layout |
 | `srs` | `components/srs.css` | Learn page |
 | `player` | `components/player.css` | Bagel post and Thoughts timeline |
+| `vinyl` | `components/records.css` | Records crate and turntable |
 | `rpg_notetaker_bench` | `components/rpg-notetaker-bench.css` | RPG Notetaker Bench project |
 
 Flags for individual documents live in their own front matter: `player: true`

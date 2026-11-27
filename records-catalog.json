@@ -1,0 +1,6 @@
+---
+layout: null
+permalink: /records.json
+sitemap: false
+---
+{{ site.data.records | jsonify }}
